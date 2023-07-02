@@ -19,3 +19,15 @@ buildscript {
         classpath("com.facebook.react:react-native-gradle-plugin")
     }
 }
+
+allprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
+        google()
+        maven { url 'https://www.jitpack.io' }
+    }
+}
