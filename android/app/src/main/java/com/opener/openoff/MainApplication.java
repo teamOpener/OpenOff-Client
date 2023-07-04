@@ -1,4 +1,4 @@
-package com.openoff;
+package com.opener.openoff;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

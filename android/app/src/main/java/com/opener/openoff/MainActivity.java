@@ -1,4 +1,4 @@
-package com.openoff;
+package com.opener.openoff;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
