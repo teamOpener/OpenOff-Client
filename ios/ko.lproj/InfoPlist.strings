@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  OpenOff
+
+  Created by 조연주 on 2023/07/05.
+  
+*/
+"CFBundleDisplayName" = "OpenOff";
+NSCameraUsageDescription = "QR 스캔을 통한 티켓 인증 서비스 제공을 위해 권한이 필요합니다.";
+NSLocation = "지도에서 내 위치를 확인하여 위치 기반 장소 기능을 제공하기 위해 권한이 필요합니다.";

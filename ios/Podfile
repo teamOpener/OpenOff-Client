@@ -43,6 +43,8 @@ target 'OpenOff' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'NMapsMap', '3.16.0'
+
   target 'OpenOffTests' do
     inherit! :complete
     # Pods for testing

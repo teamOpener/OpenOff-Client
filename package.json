@@ -13,7 +13,8 @@
     "storybook-watcher": "sb-rn-watcher --config-path .ondevice",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "commit": "./node_modules/cz-customizable/standalone.js"
+    "commit": "./node_modules/cz-customizable/standalone.js",
+    "postinstall": "react-native setup-ios-permissions && pod-install"
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
@@ -93,7 +94,8 @@
     "prettier": "^2.4.1",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "18.2.0",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "pod-install": "0.1.38"
   },
   "jest": {
     "preset": "react-native"
@@ -101,6 +103,16 @@
   "config": {
     "cz-customizable": {
       "config": "cz-config.js"
+    },
+    "setup-ios-permissions": {
+      "config": "reactNativePermissionsIOS.json"
     }
-  }
+  },
+  "reactNativePermissionsIOS": [
+    "Camera",
+    "LocationAccuracy",
+    "LocationAlways",
+    "LocationWhenInUse",
+    "Notifications"
+  ]
 }
