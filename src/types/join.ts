@@ -1,6 +1,6 @@
 interface Action {
   type: string;
-  value: string | string[];
+  value: string | (string | undefined)[];
 }
 
 interface JoinInfo {
@@ -9,9 +9,10 @@ interface JoinInfo {
   agreeToTerm: string;
   phoneNumber: string;
   gender: string;
+  nickname: string;
   emailAddress: string;
   password: string;
-  interestField: string[];
+  interestField: (string | undefined)[];
 }
 
 export type { Action, JoinInfo };
