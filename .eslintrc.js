@@ -33,5 +33,11 @@ module.exports = {
       2,
       { namedComponents: ['arrow-function', 'function-declaration'] },
     ],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
