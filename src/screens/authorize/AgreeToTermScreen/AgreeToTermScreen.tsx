@@ -1,0 +1,108 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
+import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
+import UserInfoStatus from 'constants/join';
+import { AuthorizeMenu } from 'constants/menu';
+import { Dispatch, useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { RootStackParamList } from 'types/apps/menu';
+import { Action } from 'types/join';
+import agreeToTermScreenStyles from './AgreeToTermScreen.style';
+
+interface AgreeList {
+  [key: string]: boolean;
+}
+
+interface Props {
+  dispatch: Dispatch<Action>;
+}
+
+const AgreeToTermScreen = ({ dispatch }: Props) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const [term, setTerm] = useState<AgreeList>({
+    allAgree: false,
+    termToTeenager: false,
+    termToUse: false,
+    termToPrivacy: false,
+    termToMarketing: false,
+  });
+  const handleSingleTerm = (key: string) => {
+    setTerm((checkTerm) => {
+      return { ...checkTerm, [key]: !checkTerm[key] };
+    });
+  };
+  useEffect(() => {
+    if (
+      term.termToMarketing &&
+      term.termToPrivacy &&
+      term.termToTeenager &&
+      term.termToUse
+    ) {
+      setTerm((checkTerm) => {
+        return { ...checkTerm, allAgree: true };
+      });
+    } else {
+      setTerm((checkTerm) => {
+        return { ...checkTerm, allAgree: false };
+      });
+    }
+  }, [
+    term.termToMarketing,
+    term.termToPrivacy,
+    term.termToTeenager,
+    term.termToUse,
+  ]);
+  const isActive = term.termToPrivacy && term.termToTeenager && term.termToUse;
+  return (
+    <View style={agreeToTermScreenStyles.container}>
+      <Text style={agreeToTermScreenStyles.titleText}>
+        서비스 이용 약관에 동의해 주세요.
+      </Text>
+      <View>
+        <CheckButton
+          value={term.allAgree}
+          handlePress={() => {
+            setTerm({
+              allAgree: !term.allAgree,
+              termToTeenager: !term.allAgree,
+              termToUse: !term.allAgree,
+              termToPrivacy: !term.allAgree,
+              termToMarketing: !term.allAgree,
+            });
+          }}
+          label="네, 모두 동의합니다."
+        />
+        <CheckButton
+          value={term.termToTeenager}
+          handlePress={() => handleSingleTerm('termToTeenager')}
+          label="(필수) 만 14세 이상입니다."
+        />
+        <CheckButton
+          value={term.termToUse}
+          handlePress={() => handleSingleTerm('termToUse')}
+          label="(필수) 서비스 이용약관"
+        />
+        <CheckButton
+          value={term.termToPrivacy}
+          handlePress={() => handleSingleTerm('termToPrivacy')}
+          label="(필수) 개인정보 수집 이용"
+        />
+        <CheckButton
+          value={term.termToMarketing}
+          handlePress={() => handleSingleTerm('termToMarketing')}
+          label="(선택) 마케팅 정보 수신동의"
+        />
+      </View>
+      <AuthorizeFlowButton
+        handlePress={() => {
+          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, value: 'Y' });
+          navigation.navigate(AuthorizeMenu.PhoneCertification);
+        }}
+        label="확인"
+        isActive={isActive}
+      />
+    </View>
+  );
+};
+
+export default AgreeToTermScreen;
