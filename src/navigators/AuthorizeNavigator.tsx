@@ -1,4 +1,7 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import React, { Reducer, useReducer } from 'react';
@@ -61,32 +64,37 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
     userInfoReducer,
     initialState,
   );
+  const authorizeScreenOption = {
+    ...TransitionPresets.SlideFromRightIOS,
+    cardStyle: {
+      backgroundColor: colors.background,
+    },
+    headerTitle: '',
+    headerStyle: {
+      ...Platform.select({
+        ios: {
+          shadowColor: colors.background,
+          shadowOffset: {
+            width: 0,
+            height: 0,
+          },
+          shadowOpacity: 0.2,
+        },
+        android: {
+          elevation: 0,
+        },
+      }),
+      backgroundColor: colors.background,
+    },
+    headerTintColor: colors.white,
+  };
   return (
     <Stack.Navigator
       initialRouteName={AuthorizeMenu.Login}
-      screenOptions={{
-        headerTitle: '',
-        headerStyle: {
-          ...Platform.select({
-            ios: {
-              shadowColor: colors.background,
-              shadowOffset: {
-                width: 0,
-                height: 0,
-              },
-              shadowOpacity: 0.2,
-            },
-            android: {
-              elevation: 0,
-            },
-          }),
-          backgroundColor: colors.background,
-        },
-        headerTintColor: colors.white,
-      }}
+      screenOptions={authorizeScreenOption}
     >
       <Stack.Screen name={AuthorizeMenu.Login}>
-        {() => <LoginScreen />}
+        {() => <LoginScreen setIsLogin={setIsLogin} />}
       </Stack.Screen>
       <Stack.Screen name={AuthorizeMenu.AgreeToTerm}>
         {() => <AgreeToTermScreen dispatch={dispatch} />}

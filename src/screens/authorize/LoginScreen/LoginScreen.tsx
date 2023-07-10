@@ -2,13 +2,18 @@ import JoinButton from 'components/authorize/buttons/JoinButton/JoinButton';
 import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
 import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButtonGroup/SocialLoginButtonGroup';
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
+import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { validateEmail, validatePassword } from 'utils/validate';
 import Text from '../../../components/common/Text/Text';
 import loginScreenStyles from './LoginScreen.style';
 
-const LoginScreen = () => {
+interface Props {
+  setIsLogin: Dispatch<SetStateAction<boolean>>;
+}
+
+const LoginScreen = ({ setIsLogin }: Props) => {
   const {
     handleSubmit,
     control,
@@ -37,7 +42,11 @@ const LoginScreen = () => {
         errors={errors}
         control={control}
       />
-      <LoginButton handlePress={handleSubmit((data) => console.log(data))} />
+      <LoginButton
+        handlePress={handleSubmit(() => {
+          setIsLogin(true);
+        })}
+      />
       <Text variant="caption" style={loginScreenStyles.middleText}>
         또는
       </Text>
