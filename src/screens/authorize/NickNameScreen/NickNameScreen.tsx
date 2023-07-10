@@ -34,7 +34,7 @@ const NickNameScreen = ({ dispatch }: Props) => {
       />
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, value: 'Y' });
+          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
           navigation.navigate(AuthorizeMenu.UserInfo);
         }}
         label="확인"

@@ -23,29 +23,23 @@ interface Props {
 const userInfoReducer = (state: JoinInfo, action: Action): JoinInfo => {
   switch (action.type) {
     case UserInfoStatus.SET_NAME:
-      if (typeof action.value === 'object') return state;
-      return { ...state, name: action.value };
+      return { ...state, name: action.name };
     case UserInfoStatus.SET_BIRTH:
-      if (typeof action.value === 'object') return state;
-      return { ...state, birth: action.value };
+      return { ...state, birth: action.birth };
     case UserInfoStatus.SET_AGREE_TO_TERM:
-      if (typeof action.value === 'object') return state;
-      return { ...state, agreeToTerm: action.value };
+      return { ...state, agreeToTerm: action.term };
     case UserInfoStatus.SET_PHONE_NUMBER:
-      if (typeof action.value === 'object') return state;
-      return { ...state, phoneNumber: action.value };
+      return { ...state, phoneNumber: action.phoneNumber };
     case UserInfoStatus.SET_GENDER:
-      if (typeof action.value === 'object') return state;
-      return { ...state, gender: action.value };
-    case UserInfoStatus.SET_EMAIL_ADDRESS:
-      if (typeof action.value === 'object') return state;
-      return { ...state, emailAddress: action.value };
-    case UserInfoStatus.SET_PASSWORD:
-      if (typeof action.value === 'object') return state;
-      return { ...state, password: action.value };
+      return { ...state, gender: action.gender };
+    case UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD:
+      return {
+        ...state,
+        emailAddress: action.emailPassword.email,
+        password: action.emailPassword.password,
+      };
     case UserInfoStatus.SET_INTEREST_FIELD:
-      if (typeof action.value === 'string') return state;
-      return { ...state, interestField: action.value };
+      return { ...state, interestField: action.interestField };
     default:
       return state;
   }
