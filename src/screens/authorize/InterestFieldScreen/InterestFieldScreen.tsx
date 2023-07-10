@@ -1,14 +1,14 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
+import UserInfoStatus from 'constants/join';
+import { AuthorizeMenu } from 'constants/menu';
 import interestField from 'data/lists/interestField';
 import { Dispatch, useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
 import { Field } from 'types/apps/group';
-import { Action } from 'types/join';
-import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
-import UserInfoStatus from 'constants/join';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from 'types/apps/menu';
-import { AuthorizeMenu } from 'constants/menu';
+import { Action } from 'types/join';
 import interestFieldScreenStyles from './InterestFieldScreen.style';
 
 interface Props {
@@ -47,7 +47,7 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
       />
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, value: 'Y' });
+          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
           navigation.navigate(AuthorizeMenu.JoinComplete);
         }}
         label="확인"

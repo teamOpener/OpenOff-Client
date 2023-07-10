@@ -1,5 +1,6 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
+import PhoneAuthButton from 'components/authorize/buttons/PhoneAuthButton/PhoneAuthButton';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
@@ -8,7 +9,6 @@ import { Text, View } from 'react-native';
 import { RootStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateAuthNumber, validatePhoneNumber } from 'utils/validate';
-import PhoneAuthButton from 'components/authorize/buttons/PhoneAuthButton/PhoneAuthButton';
 import phoneCertificationScreenStyles from './PhoneCertificationScreen.style';
 
 interface Props {
@@ -56,7 +56,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
       />
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, value: 'Y' });
+          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
           navigation.navigate(AuthorizeMenu.EmailPassword);
         }}
         label="확인"

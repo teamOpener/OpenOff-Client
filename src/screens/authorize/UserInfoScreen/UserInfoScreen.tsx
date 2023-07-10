@@ -48,7 +48,7 @@ const UserInfoScreen = ({ dispatch }: Props) => {
       </View>
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, value: 'Y' });
+          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
           navigation.navigate(AuthorizeMenu.InterestField);
         }}
         label="확인"
