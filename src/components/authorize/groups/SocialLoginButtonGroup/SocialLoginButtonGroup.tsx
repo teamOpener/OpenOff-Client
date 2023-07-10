@@ -2,37 +2,33 @@ import SocialLoginButton from 'components/authorize/buttons/SocialLoginButton/So
 import { View } from 'react-native';
 import socialLoginButtonGroupStyles from './SocialLoginButtonGroup.style';
 
-const SocialLoginButtonGroup = () => {
+interface Props {
+  kakaoLogin: () => void;
+  naverLogin: () => void;
+  googleLogin: () => void;
+  appleLogin: () => void;
+}
+
+const SocialLoginButtonGroup = ({
+  kakaoLogin,
+  naverLogin,
+  googleLogin,
+  appleLogin,
+}: Props) => {
   return (
     <View style={socialLoginButtonGroupStyles.container}>
       <SocialLoginButton
         label="kakao"
         color="#FDE500"
-        handlePress={() => {
-          return false;
-        }}
+        handlePress={kakaoLogin}
       />
       <SocialLoginButton
         label="naver"
         color="#1EC800"
-        handlePress={() => {
-          return false;
-        }}
+        handlePress={naverLogin}
       />
-      <SocialLoginButton
-        label="apple"
-        color="#FFF"
-        handlePress={() => {
-          return false;
-        }}
-      />
-      <SocialLoginButton
-        label="google"
-        color="#FFF"
-        handlePress={() => {
-          return false;
-        }}
-      />
+      <SocialLoginButton label="apple" color="#FFF" handlePress={googleLogin} />
+      <SocialLoginButton label="google" color="#FFF" handlePress={appleLogin} />
     </View>
   );
 };

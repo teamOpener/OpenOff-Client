@@ -1,3 +1,4 @@
+import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
 import JoinButton from 'components/authorize/buttons/JoinButton/JoinButton';
 import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
 import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButtonGroup/SocialLoginButtonGroup';
@@ -19,6 +20,16 @@ const LoginScreen = ({ setIsLogin }: Props) => {
     control,
     formState: { errors },
   } = useForm();
+  const kakaoLogin = () => {
+    loginWithKakaoAccount()
+      .then((result) => {
+        console.log('Login Success', JSON.stringify(result));
+        setIsLogin(true);
+      })
+      .catch(() => {
+        return false;
+      });
+  };
   return (
     <View style={loginScreenStyles.container}>
       <Image
@@ -50,7 +61,18 @@ const LoginScreen = ({ setIsLogin }: Props) => {
       <Text variant="caption" style={loginScreenStyles.middleText}>
         또는
       </Text>
-      <SocialLoginButtonGroup />
+      <SocialLoginButtonGroup
+        kakaoLogin={kakaoLogin}
+        naverLogin={() => {
+          return false;
+        }}
+        googleLogin={() => {
+          return false;
+        }}
+        appleLogin={() => {
+          return false;
+        }}
+      />
       <JoinButton />
     </View>
   );
