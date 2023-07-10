@@ -19,12 +19,14 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [phonenumber, setPhonenumber] = useState<string>('');
   const [authnumber, setAuthnumber] = useState<string>('');
+  const [retry, setRetry] = useState<boolean>(false);
   const isActive =
     !validatePhoneNumber(phonenumber) &&
     phonenumber.length > 1 &&
     authnumber.length > 1 &&
     !validateAuthNumber(authnumber);
   const handlePress = () => {
+    setRetry(true);
     console.log(phonenumber);
   };
   return (
@@ -41,7 +43,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
         type="phonenumber"
       >
         <PhoneAuthButton
-          label="인증받기"
+          label={retry ? '재발송' : '인증받기'}
           active={!(validatePhoneNumber(phonenumber) || phonenumber.length < 2)}
           handlePress={handlePress}
         />
