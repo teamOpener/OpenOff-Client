@@ -11,10 +11,10 @@ import {
 global.STORIES = [
   {
     titlePrefix: "",
-    directory: "./components",
+    directory: "./src",
     files: "**/*.stories.?(ts|tsx|js|jsx)",
     importPathMatcher:
-      "^\\.[\\\\/](?:components(?:[\\\\/](?!\\.)(?:(?:(?!(?:^|[\\\\/])\\.).)*?)[\\\\/]|[\\\\/]|$)(?!\\.)(?=.)[^\\\\/]*?\\.stories\\.(?:ts|tsx|js|jsx)?)$",
+      "^\\.[\\\\/](?:src(?:[\\\\/](?!\\.)(?:(?:(?!(?:^|[\\\\/])\\.).)*?)[\\\\/]|[\\\\/]|$)(?!\\.)(?=.)[^\\\\/]*?\\.stories\\.(?:ts|tsx|js|jsx)?)$",
   },
 ];
 
@@ -49,7 +49,12 @@ try {
 
 const getStories = () => {
   return {
-    "./components/Button/Button.stories.tsx": require("../components/Button/Button.stories.tsx"),
+    "./src/components/common/Icon/Icon.stories.tsx": require("../src/components/common/Icon/Icon.stories.tsx"),
+    "./src/components/common/Text/Text.stories.tsx": require("../src/components/common/Text/Text.stories.tsx"),
+    "./src/navigators/BottomTabNavigator.stories.tsx": require("../src/navigators/BottomTabNavigator.stories.tsx"),
+    "./src/screens/authorize/InterestFieldScreen/InterestFieldScreen.stories.tsx": require("../src/screens/authorize/InterestFieldScreen/InterestFieldScreen.stories.tsx"),
+    "./src/screens/authorize/UserInfoScreen/UserInfoScreen.stories.tsx": require("../src/screens/authorize/UserInfoScreen/UserInfoScreen.stories.tsx"),
+    "./src/screens/EventMapScreen/EventMapScreen.stories.tsx": require("../src/screens/EventMapScreen/EventMapScreen.stories.tsx"),
   };
 };
 
