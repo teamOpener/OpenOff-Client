@@ -4,6 +4,7 @@ export const enum StackMenu {
 
 export const enum BottomTabMenu {
   Home = 'Home',
+  EventMap = 'EventMap',
   My = 'My',
 }
 
