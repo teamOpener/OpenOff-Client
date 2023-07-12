@@ -1,6 +1,6 @@
+import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Text from 'components/common/Text/Text';
-import React, { useId } from 'react';
-import { ScrollView, View, Image } from 'react-native';
+import { Image, View } from 'react-native';
 import { Event } from 'types/event';
 import mapEventCardStyles from './MapEventCard.style';
 
@@ -9,7 +9,6 @@ interface Props {
 }
 
 const MapEventCard = ({ event }: Props) => {
-  const imageId = useId();
   return (
     <View style={mapEventCardStyles.container}>
       <View style={mapEventCardStyles.textContainer}>
@@ -32,10 +31,10 @@ const MapEventCard = ({ event }: Props) => {
           {event.place}
         </Text>
       </View>
-      <ScrollView
+      <BottomSheetScrollView
+        style={mapEventCardStyles.imageContainer}
         horizontal
         showsHorizontalScrollIndicator={false}
-        nestedScrollEnabled
       >
         {event.images.map((image) => (
           <Image
@@ -44,7 +43,7 @@ const MapEventCard = ({ event }: Props) => {
             source={{ uri: image }}
           />
         ))}
-      </ScrollView>
+      </BottomSheetScrollView>
     </View>
   );
 };
