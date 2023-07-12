@@ -7,7 +7,7 @@ import interestField from 'data/lists/interestField';
 import { Dispatch, useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
 import { Field } from 'types/apps/group';
-import { RootStackParamList } from 'types/apps/menu';
+import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import interestFieldScreenStyles from './InterestFieldScreen.style';
 
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const InterestFieldScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [fields, setFields] = useState<Field[]>(interestField);
   useEffect(() => {
     setFields(interestField);

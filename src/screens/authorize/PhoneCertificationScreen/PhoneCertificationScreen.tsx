@@ -7,7 +7,7 @@ import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
 import { Text, View } from 'react-native';
-import { RootStackParamList } from 'types/apps/menu';
+import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateAuthNumber, validatePhoneNumber } from 'utils/validate';
 import phoneCertificationScreenStyles from './PhoneCertificationScreen.style';
@@ -22,7 +22,7 @@ interface Trigger {
 }
 
 const PhoneCertificationScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [phonenumber, setPhonenumber] = useState<string>('');
   const [authnumber, setAuthnumber] = useState<string>('');
   const [retry, setRetry] = useState<boolean>(false);

@@ -5,7 +5,7 @@ import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import { RootStackParamList } from 'types/apps/menu';
+import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import agreeToTermScreenStyles from './AgreeToTermScreen.style';
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const AgreeToTermScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [term, setTerm] = useState<AgreeList>({
     allAgree: false,
     termToTeenager: false,

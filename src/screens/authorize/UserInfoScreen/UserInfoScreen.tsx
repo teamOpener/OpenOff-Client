@@ -6,7 +6,7 @@ import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
 import { Text, View } from 'react-native';
-import { RootStackParamList } from 'types/apps/menu';
+import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateBirthday, validateName } from 'utils/validate';
 import userInfoScreenStyles from './UserInfoScreen.style';
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const UserInfoScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [name, setName] = useState<string>('');
   const [birth, setBirth] = useState<string>('2000-00-00');
   const [gender, setGender] = useState<'남' | '여'>('남');
