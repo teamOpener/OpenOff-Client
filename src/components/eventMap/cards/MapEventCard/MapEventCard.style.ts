@@ -6,6 +6,7 @@ const mapEventCardStyles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     margin: 20,
+    zIndex: 1,
   },
   textMargin: {
     marginRight: 10,
@@ -16,10 +17,13 @@ const mapEventCardStyles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  imageContainer: {
+    marginTop: 5,
+  },
   eventImage: {
     width: 114,
     height: 114,
-    marginRight: 2,
+    marginRight: 10,
   },
 });
 
