@@ -3,7 +3,7 @@ import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButto
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
-import interestField from 'data/lists/field';
+import field from 'data/lists/field';
 import { Dispatch, useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
 import { Field } from 'types/apps/group';
@@ -17,13 +17,13 @@ interface Props {
 
 const InterestFieldScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
-  const [fields, setFields] = useState<Field[]>(interestField);
+  const [interestField, setInterestField] = useState<Field[]>(field);
   useEffect(() => {
-    setFields(interestField);
-  }, []);
+    setInterestField(interestField);
+  }, [interestField]);
   const computedCount = () => {
     let count = 0;
-    fields.forEach((mappingField) => {
+    interestField.forEach((mappingField) => {
       if (mappingField.isActive) {
         count += 1;
       }
@@ -41,8 +41,8 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
         source={require('../../../assets/images/joinInformation.png')}
       />
       <FieldButtonGroup
-        fields={fields}
-        setFields={setFields}
+        fields={interestField}
+        setFields={setInterestField}
         computedCount={computedCount()}
       />
       <AuthorizeFlowButton
