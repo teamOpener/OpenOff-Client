@@ -1,4 +1,6 @@
+export { default as IconArrowDown } from './IconArrowDown.svg';
 export { default as IconArrowLeft } from './IconArrowLeft.svg';
+export { default as IconArrowUp } from './IconArrowUp.svg';
 export { default as IconBookmark } from './IconBookmark.svg';
 export { default as IconCalendar } from './IconCalendar.svg';
 export { default as IconCheck } from './IconCheck.svg';
