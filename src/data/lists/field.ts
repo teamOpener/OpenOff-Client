@@ -1,36 +1,42 @@
+import FieldCode from 'constants/code';
 import { Field } from 'types/apps/group';
 
-const interestField: Field[] = [
+const field: Field[] = [
   {
-    value: 'lecture',
+    value: FieldCode.LCS,
     isActive: false,
     label: '강연/세미나/컨퍼런스',
   },
   {
-    value: 'exhibition',
+    value: FieldCode.EE,
     isActive: false,
     label: '전시/박람회',
   },
   {
-    value: 'performance',
+    value: FieldCode.S,
     isActive: false,
     label: '공연',
   },
   {
-    value: 'exercise',
+    value: FieldCode.EA,
     isActive: false,
     label: '운동/액티비티',
   },
   {
-    value: 'food',
+    value: FieldCode.FD,
     isActive: false,
     label: '푸드/드링크',
   },
   {
-    value: 'party',
+    value: FieldCode.PF,
     isActive: false,
     label: '파티/페스티벌',
   },
+  {
+    value: FieldCode.FSDH,
+    isActive: false,
+    label: '친목/일일호프',
+  },
 ];
 
-export default interestField;
+export default field;

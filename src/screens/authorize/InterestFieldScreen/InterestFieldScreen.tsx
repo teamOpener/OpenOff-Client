@@ -3,7 +3,7 @@ import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButto
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
-import interestField from 'data/lists/interestField';
+import interestField from 'data/lists/field';
 import { Dispatch, useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
 import { Field } from 'types/apps/group';
