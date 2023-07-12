@@ -1,15 +1,33 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { ScrollView, Text, TextInput, View } from 'react-native';
-import NaverMapView from 'react-native-nmap';
-import { colors } from 'styles/theme';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import Text from 'components/common/Text/Text';
+import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
+import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
+import SingleSelectBox from 'components/eventMap/selectboxes/SingleSelectBox/SingleSelectBox';
+import { StackMenu } from 'constants/menu';
 import eventList from 'data/lists/eventList';
-import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
+import { useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import NaverMapView from 'react-native-nmap';
+import { colors } from 'styles/theme';
+import { RootStackParamList } from 'types/apps/menu';
+import Option from 'types/apps/selectbox';
 import eventMapScreenStyles from './EventMapScreen.style';
+
+interface SortInfo {
+  dialog: boolean;
+  value: string;
+}
 
 const EventMapScreen = () => {
   const P0 = { latitude: 37.564362, longitude: 126.977011 };
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const [sort, setSort] = useState<SortInfo>({
+    dialog: false,
+    value: 'relevance',
+  });
   const getFieldEvent = (value: string) => {
     console.log(value);
   };
@@ -17,7 +35,7 @@ const EventMapScreen = () => {
     return false;
   };
   const handleShowCalendar = () => {
-    return false;
+    navigation.navigate(StackMenu.DatePick);
   };
   return (
     <View style={eventMapScreenStyles.container}>
@@ -39,6 +57,43 @@ const EventMapScreen = () => {
           backgroundColor: colors.white,
         }}
       >
+        <View style={eventMapScreenStyles.selectContainer}>
+          <SingleSelectBox
+            options={[
+              {
+                label: '전체',
+                value: 'all',
+              },
+              {
+                label: '전체',
+                value: 'test',
+              },
+            ]}
+            label="비용"
+            select={(option: Option) => {
+              return false;
+            }}
+          />
+          <SingleSelectBox
+            options={[
+              {
+                label: '전체',
+                value: 'all',
+              },
+            ]}
+            label="비용"
+            select={(option: Option) => {
+              return false;
+            }}
+          />
+        </View>
+        <View style={eventMapScreenStyles.sortButton}>
+          <TouchableOpacity onPress={() => setSort({ ...sort, dialog: true })}>
+            <Text variant="body2" color="white">
+              {sort.value === 'distance' ? '거리순' : '관련도순'}
+            </Text>
+          </TouchableOpacity>
+        </View>
         <BottomSheetScrollView
           style={eventMapScreenStyles.bottomSheetContainer}
         >
@@ -47,6 +102,20 @@ const EventMapScreen = () => {
           ))}
         </BottomSheetScrollView>
       </BottomSheet>
+      <SortDialog
+        dialogShow={sort.dialog}
+        value={sort.value}
+        setValue={(value: string) =>
+          setSort((sort) => {
+            return { ...sort, value };
+          })
+        }
+        handleDialog={() =>
+          setSort((sort) => {
+            return { ...sort, dialog: false };
+          })
+        }
+      />
     </View>
   );
 };
