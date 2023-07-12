@@ -1,6 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
-import React, { useState } from 'react';
-import { TextInput, View, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import eventSearchInput from './EventSearchInput.style';
 
@@ -21,13 +21,13 @@ const EventSearchInput = ({ handleSearch, handleCalendar }: Props) => {
           placeholderTextColor={colors.grey}
         />
         <TouchableOpacity
-          onPress={() => handleSearch(searchValue)}
+          onPress={handleCalendar}
           style={eventSearchInput.calendarButton}
         >
           <Icon name="IconCalendar" size={18} fill="background" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleCalendar}
+          onPress={() => handleSearch(searchValue)}
           style={eventSearchInput.searchButton}
         >
           <Icon name="IconSearch" size={21} fill="background" />
