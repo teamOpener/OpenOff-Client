@@ -1,4 +1,4 @@
-export type RootStackParamList = {
+export type AuthStackParamList = {
   Login: undefined;
   AgreeToTerm: undefined;
   JoinComplete: undefined;
@@ -8,4 +8,9 @@ export type RootStackParamList = {
   UserInfo: undefined;
   BirthDay: undefined;
   InterestField: undefined;
+};
+
+export type RootStackParamList = {
+  BottomTabNavigator: undefined;
+  DatePick: undefined;
 };

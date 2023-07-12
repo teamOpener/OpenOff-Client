@@ -5,7 +5,7 @@ import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
 import { Text, View } from 'react-native';
-import { RootStackParamList } from 'types/apps/menu';
+import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateEmail, validatePassword } from 'utils/validate';
 import emailPasswordScreenStyles from './EmailPasswordScreen.style';
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const EmailPasswordScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const isActive =

@@ -5,7 +5,7 @@ import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
 import { Text, View } from 'react-native';
-import { RootStackParamList } from 'types/apps/menu';
+import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateNickName } from 'utils/validate';
 import nickNameScreenStyles from './NickNameScreen.style';
@@ -15,9 +15,9 @@ interface Props {
 }
 
 const NickNameScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const [nickName, setNickName] = useState<string>('');
-  const isActive = !validateNickName(nickName) && nickName.length > 1;
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const [nickname, setNickname] = useState<string>('');
+  const isActive = !validateNickName(nickname) && nickname.length > 1;
   return (
     <View style={nickNameScreenStyles.container}>
       <View style={nickNameScreenStyles.titleContainer}>
