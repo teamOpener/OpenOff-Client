@@ -25,7 +25,7 @@ const EssentialInput = ({
   maxLength = 20,
   ...rest
 }: Props) => {
-  const clacWidth = children ? 260 : 350;
+  const clacWidth = children && type === 'phonenumber' ? 260 : 350;
   const handleChangeText = (
     textValue: string,
     onChange: Dispatch<SetStateAction<string>>,
@@ -64,7 +64,9 @@ const EssentialInput = ({
             }
             {...rest}
           />
-          <ErrorText width={clacWidth} validation={validation} value={value} />
+          <View style={{ width: clacWidth }}>
+            <ErrorText validation={validation} value={value} />
+          </View>
         </View>
       </View>
       {children}
