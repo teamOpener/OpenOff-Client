@@ -1,6 +1,7 @@
 export const enum StackMenu {
   BottomTabNavigator = 'BottomTabNavigator',
   DatePick = 'DatePick',
+  FieldEventMap = 'FieldEventMap',
 }
 
 export const enum BottomTabMenu {
