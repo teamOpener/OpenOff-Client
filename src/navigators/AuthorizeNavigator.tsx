@@ -96,14 +96,14 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen name={AuthorizeMenu.Login}>
         {() => <LoginScreen setIsLogin={setIsLogin} />}
       </Stack.Screen>
+      <Stack.Screen name={AuthorizeMenu.EmailPassword}>
+        {() => <EmailPasswordScreen dispatch={dispatch} />}
+      </Stack.Screen>
       <Stack.Screen name={AuthorizeMenu.AgreeToTerm}>
         {() => <AgreeToTermScreen dispatch={dispatch} />}
       </Stack.Screen>
       <Stack.Screen name={AuthorizeMenu.PhoneCertification}>
         {() => <PhoneCertificationScreen dispatch={dispatch} />}
-      </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.EmailPassword}>
-        {() => <EmailPasswordScreen dispatch={dispatch} />}
       </Stack.Screen>
       <Stack.Screen name={AuthorizeMenu.NickName}>
         {() => <NickNameScreen dispatch={dispatch} />}
