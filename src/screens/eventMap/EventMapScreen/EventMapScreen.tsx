@@ -8,12 +8,18 @@ import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventS
 import SingleSelectBox from 'components/eventMap/selectboxes/SingleSelectBox/SingleSelectBox';
 import { StackMenu } from 'constants/menu';
 import eventList from 'data/lists/eventList';
+import {
+  applicationAbleOption,
+  participantOptions,
+  payOptions,
+} from 'data/selectData';
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import NaverMapView from 'react-native-nmap';
 import { colors } from 'styles/theme';
 import { RootStackParamList } from 'types/apps/menu';
 import Option from 'types/apps/selectbox';
+import { Coordinate } from 'types/event';
 import eventMapScreenStyles from './EventMapScreen.style';
 
 interface SortInfo {
@@ -22,8 +28,12 @@ interface SortInfo {
 }
 
 const EventMapScreen = () => {
-  const P0 = { latitude: 37.564362, longitude: 126.977011 };
+  const P0 = { latitude: 37.56278008163968, longitude: 126.98795373156224 };
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const [currentCoordinate, setCurrentCoordinate] = useState<Coordinate>({
+    latitude: 0,
+    longitude: 0,
+  });
   const [sort, setSort] = useState<SortInfo>({
     dialog: false,
     value: 'relevance',
@@ -47,6 +57,13 @@ const EventMapScreen = () => {
       <NaverMapView
         style={eventMapScreenStyles.mapContainer}
         center={{ ...P0, zoom: 16 }}
+        onCameraChange={(event) => {
+          setCurrentCoordinate({
+            latitude: event.latitude,
+            longitude: event.longitude,
+          });
+          console.log(event.latitude, event.longitude);
+        }}
       />
       <BottomSheet
         index={0}
@@ -59,29 +76,22 @@ const EventMapScreen = () => {
       >
         <View style={eventMapScreenStyles.selectContainer}>
           <SingleSelectBox
-            options={[
-              {
-                label: '전체',
-                value: 'all',
-              },
-              {
-                label: '전체',
-                value: 'test',
-              },
-            ]}
+            options={payOptions}
             label="비용"
             select={(option: Option) => {
               return false;
             }}
           />
           <SingleSelectBox
-            options={[
-              {
-                label: '전체',
-                value: 'all',
-              },
-            ]}
-            label="비용"
+            options={participantOptions}
+            label="참여 인원"
+            select={(option: Option) => {
+              return false;
+            }}
+          />
+          <SingleSelectBox
+            options={applicationAbleOption}
+            label="신청 현황"
             select={(option: Option) => {
               return false;
             }}
