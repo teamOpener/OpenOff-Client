@@ -16,8 +16,8 @@ interface Props {
 
 const NickNameScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
-  const [nickname, setNickname] = useState<string>('');
-  const isActive = !validateNickName(nickname) && nickname.length > 1;
+  const [nickName, setNickname] = useState<string>('');
+  const isActive = !validateNickName(nickName) && nickName.length > 1;
   return (
     <View style={nickNameScreenStyles.container}>
       <View style={nickNameScreenStyles.titleContainer}>
@@ -29,7 +29,7 @@ const NickNameScreen = ({ dispatch }: Props) => {
         label="닉네임"
         maxLength={5}
         value={nickName}
-        setValue={setNickName}
+        setValue={setNickname}
         type="nickname"
       />
       <AuthorizeFlowButton

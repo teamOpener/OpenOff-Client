@@ -35,6 +35,8 @@ const userInfoReducer = (state: JoinInfo, action: Action): JoinInfo => {
       return { ...state, phoneNumber: action.phoneNumber };
     case UserInfoStatus.SET_GENDER:
       return { ...state, gender: action.gender };
+    case UserInfoStatus.SET_NICK_NAME:
+      return { ...state, nickName: action.nickName };
     case UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD:
       return {
         ...state,

@@ -24,7 +24,7 @@ interface JoinInfo {
   agreeToTerm: string;
   phoneNumber: string;
   gender: string;
-  nickname: string;
+  nickName: string;
   emailAddress: string;
   password: string;
   interestField: Field[];

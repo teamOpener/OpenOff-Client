@@ -14,7 +14,7 @@ const JoinCompleteScreen = ({ state, setIsLogin }: Props) => {
     <View style={joinCompleteScreenStyles.container}>
       <View style={joinCompleteScreenStyles.titleContainer}>
         <Text style={joinCompleteScreenStyles.title}>
-          {`'${state.nickname}'님`}
+          {`'${state.nickName}'님`}
         </Text>
         <Text style={joinCompleteScreenStyles.title}>
           회원가입을 축하합니다!
