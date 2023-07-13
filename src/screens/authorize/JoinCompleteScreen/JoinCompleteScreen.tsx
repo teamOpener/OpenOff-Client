@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { JoinInfo } from 'types/join';
 import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
+import React from 'react';
+import { Text, View } from 'react-native';
+import { JoinInfo } from 'types/join';
 import joinCompleteScreenStyles from './JoinCompleteScreen.style';
 
 interface Props {
@@ -24,8 +24,8 @@ const JoinCompleteScreen = ({ state, setIsLogin }: Props) => {
       <View style={joinCompleteScreenStyles.myFieldContainer}>
         {state.interestField.map((field) =>
           field ? (
-            <Text key={field} style={joinCompleteScreenStyles.myField}>
-              #{field}
+            <Text key={field.value} style={joinCompleteScreenStyles.myField}>
+              #{field.label}
             </Text>
           ) : null,
         )}
