@@ -24,9 +24,6 @@ const essentialInputStyles = StyleSheet.create({
     color: '#B9B9B9',
     marginBottom: 4,
   },
-  errorText: {
-    color: 'red',
-  },
 });
 
 export default essentialInputStyles;
