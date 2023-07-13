@@ -10,6 +10,7 @@ export { default as IconExitCircle } from './IconExitCircle.svg';
 export { default as IconHeart } from './IconHeart.svg';
 export { default as IconHome } from './IconHome.svg';
 export { default as IconMap } from './IconMap.svg';
+export { default as IconMyCoordinate } from './IconMyCoordinate.svg';
 export { default as IconSearch } from './IconSearch.svg';
 export { default as IconSend } from './IconSend.svg';
 export { default as IconSetting } from './IconSetting.svg';
