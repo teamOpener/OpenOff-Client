@@ -37,7 +37,6 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
       </Text>
       <Image
         style={interestFieldScreenStyles.fieldInfomation}
-        // eslint-disable-next-line global-require
         source={require('../../../assets/images/joinInformation.png')}
       />
       <FieldButtonGroup
@@ -49,7 +48,9 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
         handlePress={() => {
           dispatch({
             type: UserInfoStatus.SET_INTEREST_FIELD,
-            interestField: fields.filter((field) => field.isActive),
+            interestField: interestField.filter(
+              (fieldElement) => fieldElement.isActive,
+            ),
           });
           navigation.navigate(AuthorizeMenu.JoinComplete);
         }}
