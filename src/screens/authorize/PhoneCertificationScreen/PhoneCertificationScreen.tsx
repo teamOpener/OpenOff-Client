@@ -59,7 +59,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
       <AuthorizeFlowButton
         handlePress={() => {
           dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
-          navigation.navigate(AuthorizeMenu.EmailPassword);
+          navigation.navigate(AuthorizeMenu.NickName);
         }}
         label="확인"
         isActive={isActive}

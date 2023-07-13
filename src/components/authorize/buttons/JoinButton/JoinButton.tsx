@@ -12,7 +12,7 @@ const JoinButton = () => {
     <View>
       <TouchableOpacity
         style={joinButtonStyle.container}
-        onPress={() => navigation.navigate(AuthorizeMenu.AgreeToTerm)}
+        onPress={() => navigation.navigate(AuthorizeMenu.EmailPassword)}
       >
         <Text variant="caption" color="white">
           회원가입

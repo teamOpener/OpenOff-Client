@@ -45,7 +45,7 @@ const EmailPasswordScreen = ({ dispatch }: Props) => {
       <AuthorizeFlowButton
         handlePress={() => {
           dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
-          navigation.navigate(AuthorizeMenu.NickName);
+          navigation.navigate(AuthorizeMenu.AgreeToTerm);
         }}
         label="확인"
         isActive={isActive}
