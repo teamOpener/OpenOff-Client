@@ -6,12 +6,12 @@ import Text from '../../../common/Text/Text';
 import genderInputStyles from './GenderInput.style';
 
 interface Props {
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  value: '남' | '여';
+  setValue: Dispatch<SetStateAction<'남' | '여'>>;
 }
 
 const GenderInput = ({ value, setValue }: Props) => {
-  const computedGenderStyle = (compareGender: string) => {
+  const computedGenderStyle = (compareGender: '남' | '여') => {
     return {
       handlePress:
         value === compareGender
