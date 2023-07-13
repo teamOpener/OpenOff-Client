@@ -23,7 +23,15 @@ const SingleSelectBox = ({ options, label, select }: Props) => {
         handlePress={handleOpenOption}
         isActive={isActive}
       />
-      {isActive && <SingleOptionGroup options={options} select={select} />}
+      {isActive && (
+        <SingleOptionGroup
+          options={options}
+          select={(option: Option) => {
+            select(option);
+            setIsActive(!isActive);
+          }}
+        />
+      )}
     </View>
   );
 };
