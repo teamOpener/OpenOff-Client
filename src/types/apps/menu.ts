@@ -1,3 +1,6 @@
+import { Coordinate } from 'types/event';
+import { Field } from './group';
+
 export type AuthStackParamList = {
   Login: undefined;
   AgreeToTerm: undefined;
@@ -13,4 +16,9 @@ export type AuthStackParamList = {
 export type RootStackParamList = {
   BottomTabNavigator: undefined;
   DatePick: undefined;
+  FieldEventMap: {
+    saveScreenCoordinate: (coordinate: Coordinate) => void;
+    field: Field;
+    coordinate: Coordinate;
+  };
 };
