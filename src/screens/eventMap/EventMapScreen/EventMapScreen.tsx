@@ -1,6 +1,7 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Text from 'components/common/Text/Text';
+import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
 import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
 import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
@@ -13,13 +14,13 @@ import {
   participantOptions,
   payOptions,
 } from 'data/selectData';
-import { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import NaverMapView from 'react-native-nmap';
+import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
+import { useRef, useState } from 'react';
+import { Dimensions, TouchableOpacity, View } from 'react-native';
+import NaverMapView, { Marker } from 'react-native-nmap';
 import { colors } from 'styles/theme';
 import { RootStackParamList } from 'types/apps/menu';
 import Option from 'types/apps/selectbox';
-import { Coordinate } from 'types/event';
 import eventMapScreenStyles from './EventMapScreen.style';
 
 interface SortInfo {
@@ -28,12 +29,16 @@ interface SortInfo {
 }
 
 const EventMapScreen = () => {
-  const P0 = { latitude: 37.56278008163968, longitude: 126.98795373156224 };
+  const {
+    screenCoordinate,
+    setScreenCoordinate,
+    mapFocusCoordinate,
+    setMapFocusCoordinate,
+    currentCoordinate,
+    setCurrentCoordinate,
+  } = useMapCoordinateInfo();
+  const naverMapRef = useRef<NaverMapView>(null);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const [currentCoordinate, setCurrentCoordinate] = useState<Coordinate>({
-    latitude: 0,
-    longitude: 0,
-  });
   const [sort, setSort] = useState<SortInfo>({
     dialog: false,
     value: 'relevance',
@@ -47,6 +52,9 @@ const EventMapScreen = () => {
   const handleShowCalendar = () => {
     navigation.navigate(StackMenu.DatePick);
   };
+  const handleMoveCurrentCoordinate = () => {
+    naverMapRef.current?.animateToCoordinate(currentCoordinate);
+  };
   return (
     <View style={eventMapScreenStyles.container}>
       <EventSearchInput
@@ -54,20 +62,33 @@ const EventMapScreen = () => {
         handleCalendar={handleShowCalendar}
       />
       <MapFieldButtonGroup getFieldEvent={getFieldEvent} />
-      <NaverMapView
-        style={eventMapScreenStyles.mapContainer}
-        center={{ ...P0, zoom: 16 }}
-        onCameraChange={(event) => {
-          setCurrentCoordinate({
-            latitude: event.latitude,
-            longitude: event.longitude,
-          });
-          console.log(event.latitude, event.longitude);
-        }}
-      />
+      <View style={eventMapScreenStyles.mapContainer}>
+        <NaverMapView
+          ref={naverMapRef}
+          showsMyLocationButton={false}
+          style={eventMapScreenStyles.map}
+          center={{ ...mapFocusCoordinate, zoom: 16 }}
+          onCameraChange={(event) => {
+            setScreenCoordinate({
+              latitude: event.latitude,
+              longitude: event.longitude,
+            });
+            console.log(event.latitude, event.longitude);
+          }}
+        >
+          <Marker
+            image={require('../../../assets/images/currentCoordinate.png')}
+            width={50}
+            height={50}
+            coordinate={currentCoordinate}
+            pinColor="blue"
+          />
+        </NaverMapView>
+        <MyCoordinateButton handlePress={handleMoveCurrentCoordinate} />
+      </View>
       <BottomSheet
         index={0}
-        snapPoints={[50, 450]}
+        snapPoints={[50, (2 / 3) * Dimensions.get('window').height]}
         animateOnMount
         backgroundStyle={{ backgroundColor: colors.background }}
         handleIndicatorStyle={{
