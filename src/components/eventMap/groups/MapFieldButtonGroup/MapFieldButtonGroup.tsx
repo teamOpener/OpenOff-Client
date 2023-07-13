@@ -1,10 +1,11 @@
 import MapFieldButton from 'components/eventMap/buttons/MapFieldButton/MapFieldButton';
 import fields from 'data/lists/field';
 import { ScrollView } from 'react-native';
+import { Field } from 'types/apps/group';
 import mapFieldButtonGroup from './MapFieldButtonGroup.style';
 
 interface Props {
-  getFieldEvent: (value: string) => void;
+  getFieldEvent: (field: Field) => void;
 }
 
 const MapFieldButtonGroup = ({ getFieldEvent }: Props) => {

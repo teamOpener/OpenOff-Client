@@ -6,14 +6,14 @@ import mapFieldButtonStyles from './MapFieldButton.style';
 
 interface Props {
   field: Field;
-  handlePress: (value: string) => void;
+  handlePress: (field: Field) => void;
 }
 
 const MapFieldButton = ({ field, handlePress }: Props) => {
   return (
     <TouchableOpacity
       style={mapFieldButtonStyles.container}
-      onPress={() => handlePress(field.value)}
+      onPress={() => handlePress(field)}
     >
       <Text variant="body1" color="main">
         {field.label}
