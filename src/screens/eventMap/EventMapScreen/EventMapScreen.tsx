@@ -21,6 +21,9 @@ import NaverMapView, { Marker } from 'react-native-nmap';
 import { colors } from 'styles/theme';
 import { RootStackParamList } from 'types/apps/menu';
 import Option from 'types/apps/selectbox';
+import SelectBoxGroup from 'components/eventMap/groups/SelectBoxGroup/SelectBoxGroup';
+import { Field } from 'types/apps/group';
+import { Coordinate } from 'types/event';
 import eventMapScreenStyles from './EventMapScreen.style';
 
 interface SortInfo {
@@ -43,8 +46,15 @@ const EventMapScreen = () => {
     dialog: false,
     value: 'relevance',
   });
-  const getFieldEvent = (value: string) => {
-    console.log(value);
+  const saveScreenCoordinate = (coordinate: Coordinate) => {
+    naverMapRef.current?.animateToCoordinate(coordinate);
+  };
+  const getFieldEvent = (field: Field) => {
+    navigation.navigate(StackMenu.FieldEventMap, {
+      saveScreenCoordinate,
+      field,
+      coordinate: screenCoordinate,
+    });
   };
   const handleEventSearch = (value: string) => {
     return false;
@@ -95,29 +105,17 @@ const EventMapScreen = () => {
           backgroundColor: colors.white,
         }}
       >
-        <View style={eventMapScreenStyles.selectContainer}>
-          <SingleSelectBox
-            options={payOptions}
-            label="비용"
-            select={(option: Option) => {
-              return false;
-            }}
-          />
-          <SingleSelectBox
-            options={participantOptions}
-            label="참여 인원"
-            select={(option: Option) => {
-              return false;
-            }}
-          />
-          <SingleSelectBox
-            options={applicationAbleOption}
-            label="신청 현황"
-            select={(option: Option) => {
-              return false;
-            }}
-          />
-        </View>
+        <SelectBoxGroup
+          selectPay={(option: Option) => {
+            return false;
+          }}
+          selectParticipant={(option: Option) => {
+            return false;
+          }}
+          selectApplication={(option: Option) => {
+            return false;
+          }}
+        />
         <View style={eventMapScreenStyles.sortButton}>
           <TouchableOpacity onPress={() => setSort({ ...sort, dialog: true })}>
             <Text variant="body2" color="white">
