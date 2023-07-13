@@ -2,6 +2,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
 import PhoneAuthButton from 'components/authorize/buttons/PhoneAuthButton/PhoneAuthButton';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
+import TimerText from 'components/authorize/texts/TimerText/TimerText';
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
@@ -15,11 +16,20 @@ interface Props {
   dispatch: Dispatch<Action>;
 }
 
+interface Trigger {
+  active: boolean;
+  reactive: boolean;
+}
+
 const PhoneCertificationScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [phonenumber, setPhonenumber] = useState<string>('');
   const [authnumber, setAuthnumber] = useState<string>('');
   const [retry, setRetry] = useState<boolean>(false);
+  const [timerTrigger, setTimerTrigger] = useState<Trigger>({
+    active: false,
+    reactive: false,
+  });
   const isActive =
     !validatePhoneNumber(phonenumber) &&
     phonenumber.length > 1 &&
@@ -27,6 +37,11 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
     !validateAuthNumber(authnumber);
   const handlePress = () => {
     setRetry(true);
+    if (!timerTrigger.active) {
+      setTimerTrigger({ ...timerTrigger, active: true });
+      return;
+    }
+    setTimerTrigger({ ...timerTrigger, reactive: !timerTrigger.reactive });
     console.log(phonenumber);
   };
   return (
@@ -55,10 +70,23 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
         value={authnumber}
         setValue={setAuthnumber}
         type="authnumber"
-      />
+      >
+        {timerTrigger.active && (
+          <TimerText
+            timerTrigger={timerTrigger}
+            setTimerTrigger={setTimerTrigger}
+          />
+        )}
+      </EssentialInput>
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+          setTimerTrigger(() => {
+            return { reactive: false, active: false };
+          });
+          dispatch({
+            type: UserInfoStatus.SET_PHONE_NUMBER,
+            phoneNumber: phonenumber,
+          });
           navigation.navigate(AuthorizeMenu.NickName);
         }}
         label="확인"
