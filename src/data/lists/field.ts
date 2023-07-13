@@ -3,11 +3,6 @@ import { Field } from 'types/apps/group';
 
 const field: Field[] = [
   {
-    value: FieldCode.LCS,
-    isActive: false,
-    label: '강연/세미나/컨퍼런스',
-  },
-  {
     value: FieldCode.EE,
     isActive: false,
     label: '전시/박람회',
