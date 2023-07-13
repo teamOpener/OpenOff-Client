@@ -19,8 +19,9 @@ const UserInfoScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [name, setName] = useState<string>('');
   const [birth, setBirth] = useState<string>('2000-00-00');
-  const [gender, setGender] = useState<string>('남');
-  const isActive = !validateName(name) && name.length > 1;
+  const [gender, setGender] = useState<'남' | '여'>('남');
+  const isActive =
+    !validateName(name) && !validateBirthday(birth) && name.length > 1;
   return (
     <View style={userInfoScreenStyles.container}>
       <View style={userInfoScreenStyles.titleContainer}>
@@ -48,7 +49,9 @@ const UserInfoScreen = ({ dispatch }: Props) => {
       </View>
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+          dispatch({ type: UserInfoStatus.SET_NAME, name });
+          dispatch({ type: UserInfoStatus.SET_GENDER, gender });
+          dispatch({ type: UserInfoStatus.SET_BIRTH, birth });
           navigation.navigate(AuthorizeMenu.InterestField);
         }}
         label="확인"

@@ -47,7 +47,10 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
       />
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+          dispatch({
+            type: UserInfoStatus.SET_INTEREST_FIELD,
+            interestField: fields.filter((field) => field.isActive),
+          });
           navigation.navigate(AuthorizeMenu.JoinComplete);
         }}
         label="확인"

@@ -16,8 +16,8 @@ interface Props {
 
 const NickNameScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const [nickname, setNickname] = useState<string>('');
-  const isActive = !validateNickName(nickname) && nickname.length > 1;
+  const [nickName, setNickName] = useState<string>('');
+  const isActive = !validateNickName(nickName) && nickName.length > 1;
   return (
     <View style={nickNameScreenStyles.container}>
       <View style={nickNameScreenStyles.titleContainer}>
@@ -28,13 +28,13 @@ const NickNameScreen = ({ dispatch }: Props) => {
         validation={validateNickName}
         label="닉네임"
         maxLength={5}
-        value={nickname}
-        setValue={setNickname}
+        value={nickName}
+        setValue={setNickName}
         type="nickname"
       />
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+          dispatch({ type: UserInfoStatus.SET_NICK_NAME, nickName });
           navigation.navigate(AuthorizeMenu.UserInfo);
         }}
         label="확인"
