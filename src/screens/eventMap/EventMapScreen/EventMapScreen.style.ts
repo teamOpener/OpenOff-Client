@@ -7,11 +7,16 @@ const eventMapScreenStyles = StyleSheet.create({
     position: 'relative',
   },
   mapContainer: {
+    flex: 1,
+    position: 'relative',
+  },
+  map: {
     width: '100%',
     height: '100%',
   },
   selectContainer: {
     flexDirection: 'row',
+    marginTop: 20,
     zIndex: 1,
   },
   sortButton: {
