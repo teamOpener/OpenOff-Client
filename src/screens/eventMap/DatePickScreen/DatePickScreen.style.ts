@@ -31,6 +31,9 @@ const datePickScreenStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  controlButtonContainer: {
+    flexDirection: 'row',
+  },
 });
 
 export default datePickScreenStyles;
