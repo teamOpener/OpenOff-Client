@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
+import NaverMapView from 'react-native-nmap';
 import { PERMISSIONS } from 'react-native-permissions';
 import { Coordinate } from 'types/event';
 import { requestSinglePermisson } from 'utils/permission';
 
 const useMapCoordinateInfo = () => {
+  const naverMapRef = useRef<NaverMapView>(null);
   // 사용자의 스크린 위치정보
-  const [screenCoordinate, setScreenCoordinate] = useState<Coordinate>({
+  const screenCoordinate = useRef<Coordinate>({
     latitude: 126.98795373156224,
     longitude: 37.56278008163968,
   });
-  // 지도초기 위치정보
+  // 지도초기 위치정보(1회성 값)
   const [mapFocusCoordinate, setMapFocusCoordinate] = useState<Coordinate>({
     latitude: 126.98795373156224,
     longitude: 37.56278008163968,
@@ -22,12 +24,20 @@ const useMapCoordinateInfo = () => {
     longitude: 0,
   });
   const getFirstCoordinate = () => {
-    Geolocation.getCurrentPosition((position) => {
-      setMapFocusCoordinate({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
-    });
+    Geolocation.getCurrentPosition(
+      (position) => {
+        setMapFocusCoordinate({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.warn('Location error:', error.message);
+      },
+      {
+        enableHighAccuracy: true,
+      },
+    );
   };
   const setGPSCoordinate = () => {
     const watchOptions: GeoWatchOptions = {
@@ -77,11 +87,11 @@ const useMapCoordinateInfo = () => {
   }, []);
   return {
     screenCoordinate,
-    setScreenCoordinate,
     mapFocusCoordinate,
     setMapFocusCoordinate,
     currentCoordinate,
     setCurrentCoordinate,
+    naverMapRef,
   };
 };
 
