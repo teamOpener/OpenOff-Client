@@ -8,14 +8,17 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
 import eventList from 'data/lists/eventList';
 import useMapBottomSheet from 'hooks/eventMap/useMapBottomSheet';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BackHandler, Dimensions, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
 import { useAppStore } from 'stores/app';
 import { Field } from 'types/apps/group';
+import { Coordinate } from 'types/event';
+import getDistanceCoordinate from 'utils/coordinate';
 import eventMapScreenStyles from '../EventMapScreen/EventMapScreen.style';
 
 type ParamList = {
@@ -32,6 +35,10 @@ const FieldEventMapScreen = () => {
   const { renderBottomSheet } = useMapBottomSheet(eventList);
   const navigation = useNavigation<NavigationProp<ParamList>>();
   const { params } = useRoute<RouteProp<ParamList, 'mapData'>>();
+  const [focusCoordinate, setFocusCoordinate] = useState<Coordinate>(
+    params.coordinate,
+  );
+  const [isFindActive, setIsFindActive] = useState<boolean>(false);
   const { callbackCoordinate } = useAppStore();
   const { screenCoordinate, currentCoordinate, naverMapRef } =
     useMapCoordinateInfo();
@@ -65,6 +72,13 @@ const FieldEventMapScreen = () => {
   return (
     <View style={eventMapScreenStyles.container}>
       <View style={eventMapScreenStyles.mapContainer}>
+        <CurrentFindButton
+          handlePress={() => {
+            setIsFindActive(false);
+            setFocusCoordinate(screenCoordinate.current);
+          }}
+          isFindActive={isFindActive}
+        />
         <NaverMapView
           ref={naverMapRef}
           showsMyLocationButton={false}
@@ -75,6 +89,10 @@ const FieldEventMapScreen = () => {
               latitude: event.latitude,
               longitude: event.longitude,
             };
+            setIsFindActive(
+              getDistanceCoordinate(focusCoordinate, screenCoordinate.current) >
+                1.5,
+            );
           }}
         >
           <Marker
