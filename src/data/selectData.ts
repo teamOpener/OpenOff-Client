@@ -17,6 +17,10 @@ const payOptions: Option[] = [
 
 const participantOptions: Option[] = [
   {
+    label: '전체',
+    value: 'all',
+  },
+  {
     label: '20인 미만',
     value: '20',
   },
@@ -35,6 +39,10 @@ const participantOptions: Option[] = [
 ];
 
 const applicationAbleOption: Option[] = [
+  {
+    label: '전체',
+    value: 'all',
+  },
   {
     label: '신청중',
     value: 'applying',
