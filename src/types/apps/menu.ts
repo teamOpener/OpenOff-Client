@@ -17,7 +17,6 @@ export type RootStackParamList = {
   BottomTabNavigator: undefined;
   DatePick: undefined;
   FieldEventMap: {
-    saveScreenCoordinate: (coordinate: Coordinate) => void;
     field: Field;
     coordinate: Coordinate;
   };
