@@ -1,5 +1,6 @@
 import MapFieldButton from 'components/eventMap/buttons/MapFieldButton/MapFieldButton';
 import fields from 'data/lists/field';
+import { memo } from 'react';
 import { ScrollView } from 'react-native';
 import { Field } from 'types/apps/group';
 import mapFieldButtonGroup from './MapFieldButtonGroup.style';
@@ -26,4 +27,4 @@ const MapFieldButtonGroup = ({ getFieldEvent }: Props) => {
   );
 };
 
-export default MapFieldButtonGroup;
+export default memo(MapFieldButtonGroup);

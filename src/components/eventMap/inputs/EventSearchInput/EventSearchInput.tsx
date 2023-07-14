@@ -1,5 +1,5 @@
 import Icon from 'components/common/Icon/Icon';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import eventSearchInput from './EventSearchInput.style';
@@ -37,4 +37,4 @@ const EventSearchInput = ({ handleSearch, handleCalendar }: Props) => {
   );
 };
 
-export default EventSearchInput;
+export default memo(EventSearchInput);
