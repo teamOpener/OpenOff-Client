@@ -1,28 +1,17 @@
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import Text from 'components/common/Text/Text';
 import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
-import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
-import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
-import SingleSelectBox from 'components/eventMap/selectboxes/SingleSelectBox/SingleSelectBox';
 import { StackMenu } from 'constants/menu';
 import eventList from 'data/lists/eventList';
-import {
-  applicationAbleOption,
-  participantOptions,
-  payOptions,
-} from 'data/selectData';
+import useMapBottomSheet from 'hooks/eventMap/useMapBottomSheet';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import { useRef, useState } from 'react';
-import { Dimensions, TouchableOpacity, View } from 'react-native';
+import { useCallback } from 'react';
+import { Dimensions, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
-import { colors } from 'styles/theme';
-import { RootStackParamList } from 'types/apps/menu';
-import Option from 'types/apps/selectbox';
-import SelectBoxGroup from 'components/eventMap/groups/SelectBoxGroup/SelectBoxGroup';
+import { useAppStore } from 'stores/app';
 import { Field } from 'types/apps/group';
+import { RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
 import eventMapScreenStyles from './EventMapScreen.style';
 
@@ -34,34 +23,35 @@ interface SortInfo {
 const EventMapScreen = () => {
   const {
     screenCoordinate,
-    setScreenCoordinate,
-    mapFocusCoordinate,
-    setMapFocusCoordinate,
     currentCoordinate,
-    setCurrentCoordinate,
+    mapFocusCoordinate,
+    naverMapRef,
   } = useMapCoordinateInfo();
-  const naverMapRef = useRef<NaverMapView>(null);
+  const { setCallbackCoordinate } = useAppStore();
+  const { renderBottomSheet } = useMapBottomSheet(eventList);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const [sort, setSort] = useState<SortInfo>({
-    dialog: false,
-    value: 'relevance',
-  });
-  const saveScreenCoordinate = (coordinate: Coordinate) => {
-    naverMapRef.current?.animateToCoordinate(coordinate);
-  };
-  const getFieldEvent = (field: Field) => {
-    navigation.navigate(StackMenu.FieldEventMap, {
-      saveScreenCoordinate,
-      field,
-      coordinate: screenCoordinate,
-    });
-  };
-  const handleEventSearch = (value: string) => {
+  const saveScreenCoordinate = useCallback(
+    (coordinate: Coordinate) => {
+      naverMapRef.current?.animateToCoordinate(coordinate);
+    },
+    [naverMapRef],
+  );
+  const getFieldEvent = useCallback(
+    (field: Field) => {
+      setCallbackCoordinate(saveScreenCoordinate);
+      navigation.navigate(StackMenu.FieldEventMap, {
+        field,
+        coordinate: screenCoordinate.current,
+      });
+    },
+    [navigation, saveScreenCoordinate, screenCoordinate, setCallbackCoordinate],
+  );
+  const handleEventSearch = useCallback((value: string) => {
     return false;
-  };
-  const handleShowCalendar = () => {
+  }, []);
+  const handleShowCalendar = useCallback(() => {
     navigation.navigate(StackMenu.DatePick);
-  };
+  }, [navigation]);
   const handleMoveCurrentCoordinate = () => {
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
   };
@@ -79,11 +69,10 @@ const EventMapScreen = () => {
           style={eventMapScreenStyles.map}
           center={{ ...mapFocusCoordinate, zoom: 16 }}
           onCameraChange={(event) => {
-            setScreenCoordinate({
+            screenCoordinate.current = {
               latitude: event.latitude,
               longitude: event.longitude,
-            });
-            console.log(event.latitude, event.longitude);
+            };
           }}
         >
           <Marker
@@ -96,55 +85,7 @@ const EventMapScreen = () => {
         </NaverMapView>
         <MyCoordinateButton handlePress={handleMoveCurrentCoordinate} />
       </View>
-      <BottomSheet
-        index={0}
-        snapPoints={[50, (2 / 3) * Dimensions.get('window').height]}
-        animateOnMount
-        backgroundStyle={{ backgroundColor: colors.background }}
-        handleIndicatorStyle={{
-          backgroundColor: colors.white,
-        }}
-      >
-        <SelectBoxGroup
-          selectPay={(option: Option) => {
-            return false;
-          }}
-          selectParticipant={(option: Option) => {
-            return false;
-          }}
-          selectApplication={(option: Option) => {
-            return false;
-          }}
-        />
-        <View style={eventMapScreenStyles.sortButton}>
-          <TouchableOpacity onPress={() => setSort({ ...sort, dialog: true })}>
-            <Text variant="body2" color="white">
-              {sort.value === 'distance' ? '거리순' : '관련도순'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <BottomSheetScrollView
-          style={eventMapScreenStyles.bottomSheetContainer}
-        >
-          {eventList.map((event) => (
-            <MapEventCard key={event.id} event={event} />
-          ))}
-        </BottomSheetScrollView>
-      </BottomSheet>
-      <SortDialog
-        dialogShow={sort.dialog}
-        value={sort.value}
-        setValue={(value: string) =>
-          setSort((sort) => {
-            return { ...sort, value };
-          })
-        }
-        handleDialog={() =>
-          setSort((sort) => {
-            return { ...sort, dialog: false };
-          })
-        }
-      />
+      {renderBottomSheet(50, (2 / 3) * Dimensions.get('window').height)}
     </View>
   );
 };
