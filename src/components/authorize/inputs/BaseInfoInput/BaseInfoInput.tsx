@@ -10,6 +10,7 @@ import {
 import DatePicker from 'react-native-date-picker';
 import { TextInput } from 'react-native-gesture-handler';
 import { colors } from 'styles/theme';
+import { dateFormatter } from 'utils/date';
 import baseInfoInputStyles from './BaseInfoInput.style';
 
 interface Props {
@@ -33,18 +34,6 @@ const BaseInfoInput = ({
   const resetValue = (event: GestureResponderEvent) => {
     event.stopPropagation();
     setValue(focusMode ? '2000-00-00' : '');
-  };
-  const calcDay = (dayValue: number) => {
-    if (dayValue >= 10) {
-      return dayValue;
-    }
-    return `0${dayValue}`;
-  };
-
-  const dateFormatter = (date: Date) => {
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${date.getFullYear()}-${calcDay(month)}-${calcDay(day)}`;
   };
   return (
     <>
@@ -77,7 +66,6 @@ const BaseInfoInput = ({
           <TouchableOpacity onPress={resetValue}>
             <Image
               style={baseInfoInputStyles.resetImage}
-              // eslint-disable-next-line global-require
               source={require('../../../../assets/images/xbutton.png')}
             />
           </TouchableOpacity>
