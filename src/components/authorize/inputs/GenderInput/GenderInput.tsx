@@ -29,7 +29,7 @@ const GenderInput = ({ value, setValue }: Props) => {
   };
   return (
     <View style={genderInputStyles.container}>
-      <Text variant="h4" color="white">
+      <Text variant="h4" color="white" style={genderInputStyles.title}>
         성별
       </Text>
       <View style={genderInputStyles.genderButtonContainer}>
@@ -45,7 +45,7 @@ const GenderInput = ({ value, setValue }: Props) => {
           label="여"
           color={computedGenderStyle('여').color}
           marginRight={10}
-          borderColor={computedGenderStyle('남').borderColor}
+          borderColor={computedGenderStyle('여').borderColor}
           backgroundColor={computedGenderStyle('여').backgroundColor}
           handleClick={computedGenderStyle('여').handlePress}
         />

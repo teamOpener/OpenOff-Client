@@ -1,6 +1,7 @@
 import ErrorText from 'components/authorize/texts/ErrorText/ErrorText';
 import React, { Dispatch, ReactNode, SetStateAction } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
+import Text from 'components/common/Text/Text';
 import { colors } from 'styles/theme';
 import essentialInputStyles from './EssentialInput.style';
 
@@ -25,7 +26,7 @@ const EssentialInput = ({
   maxLength = 20,
   ...rest
 }: Props) => {
-  const clacWidth = children && type === 'phonenumber' ? 260 : 350;
+  const clacWidth = children && type === 'phonenumber' ? 275 : 365;
   const handleChangeText = (
     textValue: string,
     onChange: Dispatch<SetStateAction<string>>,
@@ -44,7 +45,11 @@ const EssentialInput = ({
   return (
     <View style={essentialInputStyles.container}>
       <View style={essentialInputStyles.phoneInputContainer}>
-        <Text style={{ ...essentialInputStyles.label, width: clacWidth }}>
+        <Text
+          variant="h4"
+          color="white"
+          style={{ ...essentialInputStyles.label, width: clacWidth }}
+        >
           {label}
         </Text>
         <View>
