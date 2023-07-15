@@ -3,7 +3,6 @@ import { colors } from 'styles/theme';
 
 const loginButtonStyles = StyleSheet.create({
   container: {
-    backgroundColor: colors.darkGrey,
     borderRadius: 27.5,
     marginTop: 40,
     width: 350,
