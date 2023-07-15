@@ -9,13 +9,23 @@ import joinButtonStyle from './JoinButton.style';
 const JoinButton = () => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   return (
-    <View>
+    <View style={joinButtonStyle.container}>
       <TouchableOpacity
-        style={joinButtonStyle.container}
+        style={joinButtonStyle.buttonContainer}
         onPress={() => navigation.navigate(AuthorizeMenu.EmailPassword)}
       >
         <Text variant="caption" color="white">
           회원가입
+        </Text>
+      </TouchableOpacity>
+      <Text variant="caption" color="white">{`   |   `}</Text>
+      <TouchableOpacity>
+        <Text
+          variant="caption"
+          color="white"
+          onPress={() => navigation.navigate(AuthorizeMenu.EmailPasswordFind)}
+        >
+          아이디/비밀번호 찾기
         </Text>
       </TouchableOpacity>
     </View>
