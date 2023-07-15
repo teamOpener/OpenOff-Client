@@ -89,10 +89,14 @@ const FieldEventMapScreen = () => {
               latitude: event.latitude,
               longitude: event.longitude,
             };
-            setIsFindActive(
-              getDistanceCoordinate(focusCoordinate, screenCoordinate.current) >
-                1.5,
-            );
+            setIsFindActive(() => {
+              return (
+                getDistanceCoordinate(focusCoordinate, {
+                  latitude: event.latitude,
+                  longitude: event.longitude,
+                }) > 0.1
+              );
+            });
           }}
         >
           <Marker
