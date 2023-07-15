@@ -29,16 +29,16 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
           </Text>
           <TouchableOpacity
             style={sortDialogStyles.buttonContainer}
-            onPress={() => handlePress('relevance')}
+            onPress={() => handlePress('date')}
           >
             <Text
               style={sortDialogStyles.textContainer}
-              color={value === 'relevance' ? 'main' : 'white'}
+              color={value === 'date' ? 'main' : 'white'}
               variant="body1"
             >
-              관련도순
+              날짜순
             </Text>
-            {value === 'relevance' && (
+            {value === 'date' && (
               <Icon
                 style={sortDialogStyles.checkIcon}
                 size={15}
