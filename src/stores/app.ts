@@ -7,14 +7,14 @@ interface StartEndDate {
 }
 
 export interface AppStore {
-  date: StartEndDate;
+  startEndDate: StartEndDate;
   callbackCoordinate: (coordinate: Coordinate) => void;
   setCallbackCoordinate: (callback: (coordinate: Coordinate) => void) => void;
   setStartEndDate: (date: StartEndDate) => void;
 }
 
 const initApp = {
-  date: {
+  startEndDate: {
     startDay: '',
     endDay: '',
   },
@@ -27,5 +27,12 @@ export const useAppStore = create<AppStore>((set) => ({
   ...initApp,
   setCallbackCoordinate: (payload: (callback: Coordinate) => void) =>
     set((state) => ({ ...state, callbackCoordinate: payload })),
-  setStartEndDate: (payload) => set((state) => ({ ...state, payload })),
+  setStartEndDate: (payload) =>
+    set((state) => ({
+      ...state,
+      startEndDate: {
+        startDay: payload.startDay,
+        endDay: payload.endDay,
+      },
+    })),
 }));

@@ -15,11 +15,6 @@ import { RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
 import eventMapScreenStyles from './EventMapScreen.style';
 
-interface SortInfo {
-  dialog: boolean;
-  value: string;
-}
-
 const EventMapScreen = () => {
   const {
     screenCoordinate,
