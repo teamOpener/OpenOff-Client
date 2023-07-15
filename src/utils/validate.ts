@@ -8,7 +8,7 @@ const validatePassword = (password: string) => {
       return item.type.test(password);
     }).length;
     return patternCnt < 3
-      ? '비밀번호는 영문, 특수문자, 숫자를 포함한 9 ~ 16자리를 입력해야합니다.'
+      ? '비밀번호는 영문, 특수문자, 숫자를 9 ~ 16자리로 입력해주세요.'
       : undefined;
   }
   return undefined;

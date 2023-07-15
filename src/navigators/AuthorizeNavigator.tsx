@@ -56,7 +56,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
     birth: '',
     agreeToTerm: '',
     phoneNumber: '',
-    nickname: '',
+    nickName: '',
     gender: '',
     emailAddress: '',
     password: '',
