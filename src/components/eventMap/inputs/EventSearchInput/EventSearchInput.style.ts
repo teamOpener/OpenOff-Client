@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { StyleSheet, Dimensions } from 'react-native';
+import { colors, fonts } from 'styles/theme';
 
 const eventSearchInput = StyleSheet.create({
   absoluteContainer: {
@@ -12,13 +12,14 @@ const eventSearchInput = StyleSheet.create({
     position: 'relative',
     backgroundColor: colors.white,
     height: 59,
-    width: 359,
+    width: Dimensions.get('window').width - 40,
     borderRadius: 27.5,
   },
   searchInput: {
     position: 'absolute',
     left: 10,
     top: 5,
+    width: Dimensions.get('window').width - 150,
     paddingLeft: 40,
     zIndex: 11,
   },
@@ -39,6 +40,21 @@ const eventSearchInput = StyleSheet.create({
     height: 39,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  textContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    position: 'absolute',
+    zIndex: 99,
+    top: 8,
+    right: 60,
+  },
+  calendarText: {
+    color: colors.background,
+    fontSize: 10,
+    lineHeight: 14,
+    fontFamily: fonts.regular,
   },
 });
 
