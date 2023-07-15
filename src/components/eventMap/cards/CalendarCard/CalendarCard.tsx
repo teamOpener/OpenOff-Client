@@ -2,13 +2,16 @@ import moment from 'moment';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Calendar, DateData, LocaleConfig } from 'react-native-calendars';
 import { colors } from 'styles/theme';
+import { MarkedDates } from 'react-native-calendars/src/types';
 import calendarCardStyles from './CalendarCard.style';
 
 interface Props {
   startDay: string;
   endDay: string;
+  markedDates: MarkedDates | undefined;
   setEndDay: Dispatch<SetStateAction<string>>;
   setStartDay: Dispatch<SetStateAction<string>>;
+  setMarkedDates: Dispatch<SetStateAction<MarkedDates>>;
 }
 LocaleConfig.locales.kr = {
   monthNames: [
@@ -56,8 +59,14 @@ interface DayForm {
   [key: string]: any;
 }
 
-const CalendarCard = ({ startDay, endDay, setEndDay, setStartDay }: Props) => {
-  const [markedDates, setMarkedDates] = useState({});
+const CalendarCard = ({
+  startDay,
+  endDay,
+  markedDates,
+  setEndDay,
+  setStartDay,
+  setMarkedDates,
+}: Props) => {
   const handleDayPress = (day: DateData) => {
     if (startDay && !endDay) {
       const date: DayForm = {
