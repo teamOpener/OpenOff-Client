@@ -17,6 +17,7 @@ import PhoneCertificationScreen from 'screens/authorize/joins/PhoneCertification
 import UserInfoScreen from 'screens/authorize/joins/UserInfoScreen/UserInfoScreen';
 import { colors } from 'styles/theme';
 import { Action, JoinInfo } from 'types/join';
+import textStyles from 'styles/textStyles';
 
 const Stack = createStackNavigator();
 
@@ -72,7 +73,6 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
     cardStyle: {
       backgroundColor: colors.background,
     },
-    headerTitle: '',
     headerStyle: {
       ...Platform.select({
         ios: {
@@ -96,31 +96,97 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       initialRouteName={AuthorizeMenu.Login}
       screenOptions={authorizeScreenOption}
     >
-      <Stack.Screen name={AuthorizeMenu.Login}>
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+        }}
+        name={AuthorizeMenu.Login}
+      >
         {() => <LoginScreen setIsLogin={setIsLogin} />}
       </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.EmailPassword}>
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+        }}
+        name={AuthorizeMenu.EmailPassword}
+      >
         {() => <EmailPasswordScreen dispatch={dispatch} />}
       </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.AgreeToTerm}>
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+        }}
+        name={AuthorizeMenu.AgreeToTerm}
+      >
         {() => <AgreeToTermScreen dispatch={dispatch} />}
       </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.PhoneCertification}>
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+        }}
+        name={AuthorizeMenu.PhoneCertification}
+      >
         {() => <PhoneCertificationScreen dispatch={dispatch} />}
       </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.NickName}>
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+        }}
+        name={AuthorizeMenu.NickName}
+      >
         {() => <NickNameScreen dispatch={dispatch} />}
       </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.UserInfo}>
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+        }}
+        name={AuthorizeMenu.UserInfo}
+      >
         {() => <UserInfoScreen dispatch={dispatch} />}
       </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.InterestField}>
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+        }}
+        name={AuthorizeMenu.InterestField}
+      >
         {() => <InterestFieldScreen dispatch={dispatch} />}
       </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.JoinComplete}>
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+        }}
+        name={AuthorizeMenu.JoinComplete}
+      >
         {() => <JoinCompleteScreen state={state} setIsLogin={setIsLogin} />}
       </Stack.Screen>
-      <Stack.Screen name={AuthorizeMenu.EmailPasswordFind}>
+      <Stack.Screen
+        name={AuthorizeMenu.EmailPasswordFind}
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+            ...Platform.select({
+              ios: {
+                shadowColor: colors.background,
+                shadowOffset: {
+                  width: 0,
+                  height: 0,
+                },
+                shadowOpacity: 0.2,
+              },
+              android: {
+                elevation: 0,
+              },
+            }),
+          },
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            ...textStyles.h3,
+            color: colors.white,
+          },
+        }}
+      >
         {() => <EmailPasswordFindScreen />}
       </Stack.Screen>
     </Stack.Navigator>

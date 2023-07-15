@@ -1,19 +1,26 @@
 import Text from 'components/common/Text/Text';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import EmailFindScreen from '../EmailFindScreen/EmailFindScreen';
 import emailPasswordFindScreenStyles from './EmailPasswordFindScreen.style';
+import PasswordFindScreen from '../PasswordFindScreen/PasswordFindScreen';
+
+type ParamList = {
+  passwordFind: undefined;
+};
 
 const EmailPasswordFindScreen = () => {
+  const navigation = useNavigation<NavigationProp<ParamList>>();
   const [screenMode, setScreenMode] = useState<'id' | 'password'>('id');
+  useEffect(() => {
+    navigation.setOptions({
+      title: screenMode === 'id' ? '아이디 찾기' : '비밀번호 찾기',
+    });
+  }, [navigation, screenMode]);
   return (
     <View style={emailPasswordFindScreenStyles.container}>
-      <View style={emailPasswordFindScreenStyles.titleContainer}>
-        <Text variant="h3" color="white">
-          {screenMode === 'id' ? '아이디 찾기' : '비밀번호 찾기'}
-        </Text>
-      </View>
       <View style={emailPasswordFindScreenStyles.findController}>
         <TouchableOpacity
           style={emailPasswordFindScreenStyles.button}
@@ -46,7 +53,7 @@ const EmailPasswordFindScreen = () => {
           />
         </TouchableOpacity>
       </View>
-      {screenMode === 'id' ? <EmailFindScreen /> : <View />}
+      {screenMode === 'id' ? <EmailFindScreen /> : <PasswordFindScreen />}
     </View>
   );
 };
