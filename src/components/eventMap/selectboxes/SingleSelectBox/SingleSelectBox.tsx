@@ -1,6 +1,6 @@
 import SelectBoxButton from 'components/eventMap/buttons/SelectBoxButton/SelectBoxButton';
 import SingleOptionGroup from 'components/eventMap/groups/SingleOptionGroup/SingleOptionGroup';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { View } from 'react-native';
 import Option from 'types/apps/selectbox';
 import singleSelectBoxStyles from './SingleSelectBox.style';
@@ -13,13 +13,21 @@ interface Props {
 
 const SingleSelectBox = ({ options, label, select }: Props) => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const currentOption = useRef<Option>({
+    label: '전체',
+    value: 'all',
+  });
   const handleOpenOption = () => {
     setIsActive(!isActive);
   };
   return (
     <View style={singleSelectBoxStyles.container}>
       <SelectBoxButton
-        label={label}
+        label={
+          currentOption.current.value === 'all'
+            ? label
+            : currentOption.current.label
+        }
         handlePress={handleOpenOption}
         isActive={isActive}
       />
@@ -27,6 +35,7 @@ const SingleSelectBox = ({ options, label, select }: Props) => {
         <SingleOptionGroup
           options={options}
           select={(option: Option) => {
+            currentOption.current = option;
             select(option);
             setIsActive(!isActive);
           }}
