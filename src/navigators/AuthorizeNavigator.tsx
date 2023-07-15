@@ -6,14 +6,15 @@ import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import React, { Reducer, useReducer } from 'react';
 import { Platform } from 'react-native';
-import AgreeToTermScreen from 'screens/authorize/AgreeToTermScreen/AgreeToTermScreen';
-import EmailPasswordScreen from 'screens/authorize/EmailPasswordScreen/EmailPasswordScreen';
-import InterestFieldScreen from 'screens/authorize/InterestFieldScreen/InterestFieldScreen';
-import JoinCompleteScreen from 'screens/authorize/JoinCompleteScreen/JoinCompleteScreen';
-import LoginScreen from 'screens/authorize/LoginScreen/LoginScreen';
-import NickNameScreen from 'screens/authorize/NickNameScreen/NickNameScreen';
-import PhoneCertificationScreen from 'screens/authorize/PhoneCertificationScreen/PhoneCertificationScreen';
-import UserInfoScreen from 'screens/authorize/UserInfoScreen/UserInfoScreen';
+import AgreeToTermScreen from 'screens/authorize/joins/AgreeToTermScreen/AgreeToTermScreen';
+import EmailPasswordFindScreen from 'screens/authorize/finds/EmailPasswordFindScreen/EmailPasswordFindScreen';
+import EmailPasswordScreen from 'screens/authorize/joins/EmailPasswordScreen/EmailPasswordScreen';
+import InterestFieldScreen from 'screens/authorize/joins/InterestFieldScreen/InterestFieldScreen';
+import JoinCompleteScreen from 'screens/authorize/joins/JoinCompleteScreen/JoinCompleteScreen';
+import LoginScreen from 'screens/authorize/logins/LoginScreen/LoginScreen';
+import NickNameScreen from 'screens/authorize/joins/NickNameScreen/NickNameScreen';
+import PhoneCertificationScreen from 'screens/authorize/joins/PhoneCertificationScreen/PhoneCertificationScreen';
+import UserInfoScreen from 'screens/authorize/joins/UserInfoScreen/UserInfoScreen';
 import { colors } from 'styles/theme';
 import { Action, JoinInfo } from 'types/join';
 
@@ -118,6 +119,9 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       </Stack.Screen>
       <Stack.Screen name={AuthorizeMenu.JoinComplete}>
         {() => <JoinCompleteScreen state={state} setIsLogin={setIsLogin} />}
+      </Stack.Screen>
+      <Stack.Screen name={AuthorizeMenu.EmailPasswordFind}>
+        {() => <EmailPasswordFindScreen />}
       </Stack.Screen>
     </Stack.Navigator>
   );
