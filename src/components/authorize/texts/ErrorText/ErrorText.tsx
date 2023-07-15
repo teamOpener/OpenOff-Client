@@ -1,4 +1,5 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import Text from 'components/common/Text/Text';
 import errorTextStyles from './ErrorText.style';
 
 interface Props {
@@ -11,7 +12,11 @@ const ErrorText = ({ validation, value, width = 350 }: Props) => {
   return (
     <View>
       {validation(value) ? (
-        <Text style={{ ...errorTextStyles.text, width }}>
+        <Text
+          color="error"
+          variant="caption"
+          style={{ ...errorTextStyles.text, width }}
+        >
           {validation(value)}
         </Text>
       ) : null}
