@@ -14,7 +14,7 @@ const fieldButtonGroupStyles = StyleSheet.create({
     fontSize: 12,
     color: '#FFF',
     width: 360,
-    marginBottom: 2,
+    marginBottom: 7,
   },
 });
 
