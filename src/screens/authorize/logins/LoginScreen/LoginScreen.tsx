@@ -33,7 +33,7 @@ const LoginScreen = ({ setIsLogin }: Props) => {
       });
   };
   const handleCommonLogin = () => {
-    if (isActive) return;
+    if (!isActive) return;
     setIsLogin(true);
   };
   return (
