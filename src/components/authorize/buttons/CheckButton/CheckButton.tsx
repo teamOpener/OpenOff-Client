@@ -1,15 +1,22 @@
-import { Image, Text, View, TouchableOpacity } from 'react-native';
+import { Image, View, TouchableOpacity } from 'react-native';
+import Text from 'components/common/Text/Text';
 import checkButtonStyles from './CheckButton.style';
 
 interface Props {
   value: boolean;
   handlePress: () => void;
   label: string;
+  marginBottom?: number;
 }
 
-const CheckButton = ({ value, handlePress, label }: Props) => {
+const CheckButton = ({
+  value,
+  handlePress,
+  label,
+  marginBottom = 0,
+}: Props) => {
   return (
-    <View style={checkButtonStyles.container}>
+    <View style={{ ...checkButtonStyles.container, marginBottom }}>
       <TouchableOpacity
         style={checkButtonStyles.checkContainer}
         onPress={() => {
@@ -20,14 +27,14 @@ const CheckButton = ({ value, handlePress, label }: Props) => {
           style={checkButtonStyles.check}
           source={
             value
-              ? // eslint-disable-next-line global-require
-                require('../../../../assets/images/check.png')
-              : // eslint-disable-next-line global-require
-                require('../../../../assets/images/nonCheck.png')
+              ? require('../../../../assets/images/check.png')
+              : require('../../../../assets/images/nonCheck.png')
           }
         />
       </TouchableOpacity>
-      <Text style={checkButtonStyles.checkButtonLabel}>{label}</Text>
+      <Text variant="h4" color="white">
+        {label}
+      </Text>
     </View>
   );
 };
