@@ -28,7 +28,7 @@ const mapBottomSheetStyles = StyleSheet.create({
 const useMapBottomSheet = (eventList: Event[]) => {
   const [sort, setSort] = useState<SortInfo>({
     dialog: false,
-    value: 'relevance',
+    value: 'date',
   });
   const [payOption, setPayOption] = useState<Option>({
     label: '전체',
@@ -67,7 +67,7 @@ const useMapBottomSheet = (eventList: Event[]) => {
               onPress={() => setSort({ ...sort, dialog: true })}
             >
               <Text variant="body2" color="white">
-                {sort.value === 'distance' ? '거리순' : '관련도순'}
+                {sort.value === 'distance' ? '거리순' : '날짜순'}
               </Text>
             </TouchableOpacity>
           </View>
