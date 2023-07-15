@@ -3,7 +3,7 @@ import JoinButton from 'components/authorize/buttons/JoinButton/JoinButton';
 import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
 import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButtonGroup/SocialLoginButtonGroup';
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { validateEmail, validatePassword } from 'utils/validate';
@@ -15,11 +15,13 @@ interface Props {
 }
 
 const LoginScreen = ({ setIsLogin }: Props) => {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm();
+  const [emailAddress, setEmailAddress] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const isActive =
+    !validateEmail(emailAddress) &&
+    !validatePassword(password) &&
+    emailAddress.length >= 1 &&
+    password.length >= 1;
   const kakaoLogin = () => {
     loginWithKakaoAccount()
       .then((result) => {
@@ -30,6 +32,10 @@ const LoginScreen = ({ setIsLogin }: Props) => {
         return false;
       });
   };
+  const handleCommonLogin = () => {
+    if (isActive) return;
+    setIsLogin(true);
+  };
   return (
     <View style={loginScreenStyles.container}>
       <Image
@@ -38,25 +44,19 @@ const LoginScreen = ({ setIsLogin }: Props) => {
       />
       <LoginInput
         label="이메일"
-        name="emailAddress"
+        value={emailAddress}
         type="emailAddress"
         validation={validateEmail}
-        errors={errors}
-        control={control}
+        setValue={setEmailAddress}
       />
       <LoginInput
         label="비밀번호"
-        name="password"
+        value={password}
         type="password"
+        setValue={setPassword}
         validation={validatePassword}
-        errors={errors}
-        control={control}
       />
-      <LoginButton
-        handlePress={handleSubmit(() => {
-          setIsLogin(true);
-        })}
-      />
+      <LoginButton isActive={isActive} handlePress={handleCommonLogin} />
       <Text variant="caption" style={loginScreenStyles.middleText}>
         또는
       </Text>
