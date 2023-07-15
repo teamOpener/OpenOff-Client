@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 const authorizeFlowButtonStyles = StyleSheet.create({
   absolutePosition: {
     position: 'absolute',
-    bottom: 45,
+    bottom: 25,
     left: Dimensions.get('window').width - 370,
   },
   container: {
