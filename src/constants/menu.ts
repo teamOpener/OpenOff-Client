@@ -20,4 +20,5 @@ export const enum AuthorizeMenu {
   UserInfo = 'UserInfo',
   InterestField = 'InterestField',
   JoinComplete = 'JoinComplete',
+  EmailPasswordFind = 'EmailPasswordFind',
 }

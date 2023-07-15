@@ -38,7 +38,7 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
       </Text>
       <Image
         style={interestFieldScreenStyles.fieldInfomation}
-        source={require('../../../assets/images/joinInformation.png')}
+        source={require('../../../../assets/images/joinInformation.png')}
       />
       <FieldButtonGroup
         fields={interestField}

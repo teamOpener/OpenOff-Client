@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { validateEmail, validatePassword } from 'utils/validate';
-import Text from '../../../components/common/Text/Text';
+import Text from '../../../../components/common/Text/Text';
 import loginScreenStyles from './LoginScreen.style';
 
 interface Props {
@@ -40,7 +40,7 @@ const LoginScreen = ({ setIsLogin }: Props) => {
     <View style={loginScreenStyles.container}>
       <Image
         style={loginScreenStyles.logo}
-        source={require('../../../assets/images/logo.png')}
+        source={require('../../../../assets/images/logo.png')}
       />
       <LoginInput
         label="이메일"
