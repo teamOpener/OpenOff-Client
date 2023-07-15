@@ -1,7 +1,8 @@
 import Icon from 'components/common/Icon/Icon';
 import { memo, useState } from 'react';
-import { TextInput, TouchableOpacity, View } from 'react-native';
+import { TextInput, TouchableOpacity, View, Text } from 'react-native';
 import { colors } from 'styles/theme';
+import { useAppStore } from 'stores/app';
 import eventSearchInput from './EventSearchInput.style';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const EventSearchInput = ({ handleSearch, handleCalendar }: Props) => {
+  const { startEndDate } = useAppStore();
   const [searchValue, setSearchValue] = useState<string>('');
   return (
     <View style={eventSearchInput.absoluteContainer}>
@@ -32,6 +34,25 @@ const EventSearchInput = ({ handleSearch, handleCalendar }: Props) => {
         >
           <Icon name="IconSearch" size={21} fill="background" />
         </TouchableOpacity>
+        {startEndDate.endDay && startEndDate.startDay && (
+          <View style={eventSearchInput.textContainer}>
+            <Text style={eventSearchInput.calendarText}>{`${parseInt(
+              startEndDate.startDay.substring(6, 8),
+              10,
+            )}월 ${parseInt(
+              startEndDate.startDay.substring(8, 10),
+              10,
+            )}일`}</Text>
+            <Text style={eventSearchInput.calendarText}>-</Text>
+            <Text style={eventSearchInput.calendarText}>{`${parseInt(
+              startEndDate.endDay.substring(6, 8),
+              10,
+            )}월 ${parseInt(
+              startEndDate.endDay.substring(8, 10),
+              10,
+            )}일`}</Text>
+          </View>
+        )}
       </View>
     </View>
   );
