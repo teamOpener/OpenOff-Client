@@ -38,6 +38,7 @@ const LoginInput = ({
             placeholder={`${
               type === 'password' ? '비밀번호' : '이메일'
             }을 입력해주세요.`}
+            placeholderTextColor={colors.grey}
             style={{
               ...loginInputStyles.input,
               color: errors[name] ? colors.error : colors.grey,

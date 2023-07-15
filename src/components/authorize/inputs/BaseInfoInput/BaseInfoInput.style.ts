@@ -7,7 +7,7 @@ const baseInfoInputStyles = StyleSheet.create({
     position: 'relative',
   },
   input: {
-    width: 350,
+    width: 365,
     fontSize: 18,
     borderBottomWidth: 1,
     backgroundColor: 'transparent',
@@ -15,7 +15,7 @@ const baseInfoInputStyles = StyleSheet.create({
   inputTitle: {
     color: 'white',
     fontSize: 18,
-    marginBottom: 2,
+    marginBottom: 12,
     fontWeight: '600',
   },
   resetPosition: {

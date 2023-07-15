@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const essentialInputStyles = StyleSheet.create({
   container: {
-    width: 350,
+    width: 365,
     flexDirection: 'row',
     marginBottom: 20,
   },
@@ -19,9 +19,6 @@ const essentialInputStyles = StyleSheet.create({
   label: {
     alignItems: 'flex-start',
     marginLeft: 10,
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#B9B9B9',
     marginBottom: 4,
   },
 });
