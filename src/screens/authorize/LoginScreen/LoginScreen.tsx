@@ -34,7 +34,6 @@ const LoginScreen = ({ setIsLogin }: Props) => {
     <View style={loginScreenStyles.container}>
       <Image
         style={loginScreenStyles.logo}
-        // eslint-disable-next-line global-require
         source={require('../../../assets/images/logo.png')}
       />
       <LoginInput
@@ -73,7 +72,9 @@ const LoginScreen = ({ setIsLogin }: Props) => {
           return false;
         }}
       />
-      <JoinButton />
+      <View style={loginScreenStyles.joinAndFindContainer}>
+        <JoinButton />
+      </View>
     </View>
   );
 };

@@ -4,7 +4,8 @@ import EssentialInput from 'components/authorize/inputs/EssentialInput/Essential
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
-import { Text, View } from 'react-native';
+import Text from 'components/common/Text/Text';
+import { View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateEmail, validatePassword } from 'utils/validate';
@@ -25,9 +26,14 @@ const EmailPasswordScreen = ({ dispatch }: Props) => {
     password.length > 1;
   return (
     <View style={emailPasswordScreenStyles.container}>
-      <Text style={emailPasswordScreenStyles.title}>
-        이메일과 비밀번호를 입력해주세요.
-      </Text>
+      <View style={emailPasswordScreenStyles.titleContainer}>
+        <Text color="white" variant="h1">
+          이메일과 비밀번호를
+        </Text>
+        <Text color="white" variant="h1">
+          입력해주세요.
+        </Text>
+      </View>
       <EssentialInput
         validation={validateEmail}
         label="이메일 주소"

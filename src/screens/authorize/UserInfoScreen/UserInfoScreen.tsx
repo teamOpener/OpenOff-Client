@@ -5,7 +5,8 @@ import GenderInput from 'components/authorize/inputs/GenderInput/GenderInput';
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
-import { Text, View } from 'react-native';
+import Text from 'components/common/Text/Text';
+import { View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateBirthday, validateName } from 'utils/validate';
@@ -25,7 +26,7 @@ const UserInfoScreen = ({ dispatch }: Props) => {
   return (
     <View style={userInfoScreenStyles.container}>
       <View style={userInfoScreenStyles.titleContainer}>
-        <Text style={userInfoScreenStyles.title}>
+        <Text variant="h1" color="white" style={userInfoScreenStyles.title}>
           오픈오프 이용을 위해 정보를 입력해주세요.
         </Text>
       </View>

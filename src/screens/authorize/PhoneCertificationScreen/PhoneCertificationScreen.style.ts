@@ -10,12 +10,10 @@ const phoneCertificationScreenStyles = StyleSheet.create({
     position: 'relative',
   },
   title: {
-    color: colors.white,
-    fontSize: 25,
-    fontWeight: '600',
+    width: 350,
     height: 50,
     marginTop: 20,
-    marginBottom: 45,
+    marginBottom: 25,
   },
 });
 

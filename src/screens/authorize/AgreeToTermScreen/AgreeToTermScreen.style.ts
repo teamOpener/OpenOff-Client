@@ -4,18 +4,21 @@ import { colors } from 'styles/theme';
 const agreeToTermScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
     backgroundColor: colors.background,
     position: 'relative',
   },
-  titleText: {
-    width: 300,
-    height: 90,
-    fontSize: 25,
-    color: '#FFF',
-    marginBottom: 40,
+  checkButtonContainer: {
+    flexDirection: 'column',
+    width: 350,
+  },
+  titleContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    width: 350,
+    marginBottom: 20,
+    marginTop: 20,
   },
 });
 

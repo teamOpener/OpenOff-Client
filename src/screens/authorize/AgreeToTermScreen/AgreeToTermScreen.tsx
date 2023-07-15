@@ -4,7 +4,8 @@ import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import Text from 'components/common/Text/Text';
+import { View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import agreeToTermScreenStyles from './AgreeToTermScreen.style';
@@ -55,10 +56,15 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
   const isActive = term.termToPrivacy && term.termToTeenager && term.termToUse;
   return (
     <View style={agreeToTermScreenStyles.container}>
-      <Text style={agreeToTermScreenStyles.titleText}>
-        서비스 이용 약관에 동의해 주세요.
-      </Text>
-      <View>
+      <View style={agreeToTermScreenStyles.titleContainer}>
+        <Text variant="h1" color="white">
+          서비스 이용 약관에
+        </Text>
+        <Text variant="h1" color="white">
+          동의해 주세요.
+        </Text>
+      </View>
+      <View style={agreeToTermScreenStyles.checkButtonContainer}>
         <CheckButton
           value={term.allAgree}
           handlePress={() => {
@@ -70,6 +76,7 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
               termToMarketing: !term.allAgree,
             });
           }}
+          marginBottom={30}
           label="네, 모두 동의합니다."
         />
         <CheckButton

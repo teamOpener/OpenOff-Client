@@ -15,7 +15,8 @@ const nickNameScreenStyles = StyleSheet.create({
     width: 350,
   },
   titleContainer: {
-    marginVertical: 40,
+    marginBottom: 40,
+    marginTop: 20,
   },
 });
 

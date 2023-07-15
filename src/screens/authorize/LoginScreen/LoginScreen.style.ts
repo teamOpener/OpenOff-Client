@@ -5,17 +5,20 @@ const loginScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   logo: {
-    marginTop: 73,
+    marginTop: 13,
     marginBottom: 62,
     width: 110,
     height: 102,
   },
   middleText: {
-    margin: 30,
+    marginTop: 30,
+    marginBottom: 10,
+  },
+  joinAndFindContainer: {
+    marginTop: 40,
   },
 });
 

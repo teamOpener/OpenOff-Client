@@ -7,13 +7,11 @@ const emailPasswordScreenStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.background,
   },
-  title: {
-    marginTop: 40,
-    marginBottom: 100,
-    color: 'white',
-    fontSize: 25,
-    height: 35,
+  titleContainer: {
     width: 350,
+    height: 70,
+    marginTop: 20,
+    marginBottom: 50,
   },
 });
 
