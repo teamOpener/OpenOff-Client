@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useAppStore } from 'stores/app';
 import { colors } from 'styles/theme';
+import { dateFormatter } from 'utils/date';
+import { MarkedDates } from 'react-native-calendars/src/types';
 import datePickScreenStyles from './DatePickScreen.style';
 
 type ParamList = {
@@ -18,20 +20,45 @@ const DatePickScreen = () => {
   const navigation = useNavigation<NavigationProp<ParamList>>();
   const [startDay, setStartDay] = useState<string>('');
   const [endDay, setEndDay] = useState<string>('');
+  const [markedDates, setMarkedDates] = useState<MarkedDates>({});
   const [active, setActive] = useState<'direct' | 'thisWeek' | 'nextWeek'>(
     'direct',
   );
   const handleInitialize = () => {
+    setMarkedDates({});
     setStartEndDate({
       startDay: '',
       endDay: '',
     });
-    navigation.goBack();
   };
   const handleApply = () => {
     setStartEndDate({
       startDay,
       endDay,
+    });
+    navigation.goBack();
+  };
+  const handleWeek = (
+    startNumber: number,
+    endNumber: number,
+    type: 'direct' | 'thisWeek' | 'nextWeek',
+  ) => {
+    const today = new Date();
+    setActive(type);
+    const monday = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() + (startNumber - today.getDay()),
+    );
+    const sunday = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() + (endNumber - today.getDay()),
+    );
+    console.log(dateFormatter(monday));
+    setStartEndDate({
+      startDay: dateFormatter(monday),
+      endDay: dateFormatter(sunday),
     });
     navigation.goBack();
   };
@@ -44,7 +71,7 @@ const DatePickScreen = () => {
             backgroundColor:
               active === 'thisWeek' ? colors.main : 'transparent',
           }}
-          onPress={() => setActive('thisWeek')}
+          onPress={() => handleWeek(0, 6, 'thisWeek')}
         >
           <Text variant="body2" color="white">
             이번 주
@@ -56,7 +83,7 @@ const DatePickScreen = () => {
             backgroundColor:
               active === 'nextWeek' ? colors.main : 'transparent',
           }}
-          onPress={() => setActive('nextWeek')}
+          onPress={() => handleWeek(7, 13, 'nextWeek')}
         >
           <Text variant="body2" color="white">
             다음 주
@@ -77,8 +104,10 @@ const DatePickScreen = () => {
       <CalendarCard
         startDay={startDay}
         endDay={endDay}
+        markedDates={markedDates}
         setEndDay={setEndDay}
         setStartDay={setStartDay}
+        setMarkedDates={setMarkedDates}
       />
       <View style={datePickScreenStyles.controlButtonContainer}>
         <CalendarButton
