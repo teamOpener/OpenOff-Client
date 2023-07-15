@@ -14,19 +14,6 @@ const eventMapScreenStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  selectContainer: {
-    flexDirection: 'row',
-    marginTop: 20,
-    zIndex: 1,
-  },
-  sortButton: {
-    marginTop: 18,
-    marginLeft: 18,
-  },
-  bottomSheetContainer: {
-    backgroundColor: colors.background,
-    flexDirection: 'column',
-  },
 });
 
 export default eventMapScreenStyles;

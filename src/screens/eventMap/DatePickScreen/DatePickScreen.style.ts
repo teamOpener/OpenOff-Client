@@ -14,6 +14,7 @@ const datePickScreenStyles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 7,
     flexDirection: 'row',
+    overflow: 'hidden',
   },
   button: {
     width: 116,
