@@ -1,5 +1,5 @@
 import SocialLoginButton from 'components/authorize/buttons/SocialLoginButton/SocialLoginButton';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import socialLoginButtonGroupStyles from './SocialLoginButtonGroup.style';
 
 interface Props {
@@ -17,18 +17,30 @@ const SocialLoginButtonGroup = ({
 }: Props) => {
   return (
     <View style={socialLoginButtonGroupStyles.container}>
-      <SocialLoginButton
-        label="kakao"
-        color="#FDE500"
-        handlePress={kakaoLogin}
-      />
-      <SocialLoginButton
-        label="naver"
-        color="#1EC800"
-        handlePress={naverLogin}
-      />
-      <SocialLoginButton label="apple" color="#FFF" handlePress={googleLogin} />
-      <SocialLoginButton label="google" color="#FFF" handlePress={appleLogin} />
+      <SocialLoginButton color="#FDE500" handlePress={kakaoLogin}>
+        <Image
+          style={socialLoginButtonGroupStyles.socialLogo}
+          source={require('../../../../assets/images/kakao.png')}
+        />
+      </SocialLoginButton>
+      <SocialLoginButton color="#1EC800" handlePress={naverLogin}>
+        <Image
+          style={socialLoginButtonGroupStyles.socialLogo}
+          source={require('../../../../assets/images/naver.png')}
+        />
+      </SocialLoginButton>
+      <SocialLoginButton color="#FFF" handlePress={googleLogin}>
+        <Image
+          style={socialLoginButtonGroupStyles.socialLogo}
+          source={require('../../../../assets/images/apple.png')}
+        />
+      </SocialLoginButton>
+      <SocialLoginButton color="#FFF" handlePress={appleLogin}>
+        <Image
+          style={socialLoginButtonGroupStyles.socialLogo}
+          source={require('../../../../assets/images/google.png')}
+        />
+      </SocialLoginButton>
     </View>
   );
 };

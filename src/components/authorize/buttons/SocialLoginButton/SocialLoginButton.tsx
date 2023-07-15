@@ -1,24 +1,19 @@
 import { TouchableOpacity } from 'react-native';
-import { colors } from 'styles/theme';
-import Text from '../../../common/Text/Text';
+import React from 'react';
 import socialLoginButtonStyles from './SocialLoginButton.style';
 
-interface Props {
-  label: string;
+interface Props extends React.ComponentProps<typeof TouchableOpacity> {
   color: string;
   handlePress: () => void;
 }
 
-const SocialLoginButton = ({ label, color, handlePress }: Props) => {
+const SocialLoginButton = ({ color, handlePress, ...props }: Props) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
       style={{ ...socialLoginButtonStyles.container, backgroundColor: color }}
-    >
-      <Text color="black" style={{ fontSize: 8 }} variant="caption">
-        {label}
-      </Text>
-    </TouchableOpacity>
+      {...props}
+    />
   );
 };
 
