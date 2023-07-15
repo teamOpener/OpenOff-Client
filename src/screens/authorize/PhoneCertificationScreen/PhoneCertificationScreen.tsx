@@ -6,7 +6,8 @@ import TimerText from 'components/authorize/texts/TimerText/TimerText';
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import Text from 'components/common/Text/Text';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateAuthNumber, validatePhoneNumber } from 'utils/validate';
@@ -46,7 +47,11 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
   };
   return (
     <View style={phoneCertificationScreenStyles.container}>
-      <Text style={phoneCertificationScreenStyles.title}>
+      <Text
+        variant="h1"
+        color="white"
+        style={phoneCertificationScreenStyles.title}
+      >
         휴대폰 인증을 해주세요.
       </Text>
       <EssentialInput

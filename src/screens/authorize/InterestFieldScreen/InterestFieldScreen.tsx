@@ -5,7 +5,8 @@ import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import field from 'data/lists/field';
 import { Dispatch, useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import Text from 'components/common/Text/Text';
+import { Image, View } from 'react-native';
 import { Field } from 'types/apps/group';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
@@ -32,7 +33,7 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
   };
   return (
     <View style={interestFieldScreenStyles.container}>
-      <Text style={interestFieldScreenStyles.title}>
+      <Text variant="h1" color="white" style={interestFieldScreenStyles.title}>
         관심 분야를 설정해주세요.
       </Text>
       <Image

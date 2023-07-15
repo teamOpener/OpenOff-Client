@@ -4,7 +4,8 @@ import EssentialInput from 'components/authorize/inputs/EssentialInput/Essential
 import UserInfoStatus from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
-import { Text, View } from 'react-native';
+import Text from 'components/common/Text/Text';
+import { View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateNickName } from 'utils/validate';
@@ -21,8 +22,12 @@ const NickNameScreen = ({ dispatch }: Props) => {
   return (
     <View style={nickNameScreenStyles.container}>
       <View style={nickNameScreenStyles.titleContainer}>
-        <Text style={nickNameScreenStyles.title}>오픈오프에서 사용할</Text>
-        <Text style={nickNameScreenStyles.title}>닉네임을 입력해주세요.</Text>
+        <Text variant="h1" style={nickNameScreenStyles.title}>
+          오픈오프에서 사용할
+        </Text>
+        <Text variant="h1" style={nickNameScreenStyles.title}>
+          닉네임을 입력해주세요.
+        </Text>
       </View>
       <EssentialInput
         validation={validateNickName}
