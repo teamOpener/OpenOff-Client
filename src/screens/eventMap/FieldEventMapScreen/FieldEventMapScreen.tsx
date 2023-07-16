@@ -19,6 +19,7 @@ import { useAppStore } from 'stores/app';
 import { Field } from 'types/apps/group';
 import { Coordinate } from 'types/event';
 import getDistanceCoordinate from 'utils/coordinate';
+import { colors } from 'styles/theme';
 import eventMapScreenStyles from '../EventMapScreen/EventMapScreen.style';
 
 type ParamList = {
@@ -106,6 +107,19 @@ const FieldEventMapScreen = () => {
             coordinate={currentCoordinate}
             pinColor="blue"
           />
+          {eventList.map((event) => (
+            <Marker
+              key={event.id}
+              image={require('../../../assets/images/eventCoordinate.png')}
+              width={50}
+              height={50}
+              coordinate={{
+                latitude: event.coordinate.latitude,
+                longitude: event.coordinate.longitude,
+              }}
+              pinColor={colors.background}
+            />
+          ))}
         </NaverMapView>
       </View>
       {renderBottomSheet(

@@ -16,8 +16,8 @@ const eventList: Event[] = [
     place: '경기도 안양시 동안구',
     participant: 23,
     coordinate: {
-      latitude: 37.564362,
-      longitude: 126.977011,
+      latitude: 37.422000101483164,
+      longitude: -122.08526178818573,
     },
   },
   {
@@ -35,8 +35,8 @@ const eventList: Event[] = [
     place: '경기도 안양시 동안구',
     participant: 23,
     coordinate: {
-      latitude: 37.564362,
-      longitude: 126.977011,
+      latitude: 37.42336920884583,
+      longitude: -122.0829487020396,
     },
   },
   {
@@ -54,8 +54,8 @@ const eventList: Event[] = [
     place: '경기도 안양시 동안구',
     participant: 23,
     coordinate: {
-      latitude: 37.564362,
-      longitude: 126.977011,
+      latitude: 37.42032729688418,
+      longitude: -122.08397291859353,
     },
   },
 ];
