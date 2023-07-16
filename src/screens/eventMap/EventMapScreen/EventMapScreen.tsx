@@ -13,6 +13,7 @@ import { useAppStore } from 'stores/app';
 import { Field } from 'types/apps/group';
 import { RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
+import { colors } from 'styles/theme';
 import eventMapScreenStyles from './EventMapScreen.style';
 
 const EventMapScreen = () => {
@@ -77,6 +78,19 @@ const EventMapScreen = () => {
             coordinate={currentCoordinate}
             pinColor="blue"
           />
+          {eventList.map((event) => (
+            <Marker
+              key={event.id}
+              image={require('../../../assets/images/eventCoordinate.png')}
+              width={50}
+              height={50}
+              coordinate={{
+                latitude: event.coordinate.latitude,
+                longitude: event.coordinate.longitude,
+              }}
+              pinColor={colors.background}
+            />
+          ))}
         </NaverMapView>
         <MyCoordinateButton handlePress={handleMoveCurrentCoordinate} />
       </View>
