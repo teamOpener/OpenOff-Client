@@ -5,7 +5,7 @@ const field: Field[] = [
   {
     value: FieldCode.EE,
     isActive: false,
-    label: '전시/박람회',
+    label: '전시회/플리마켓',
   },
   {
     value: FieldCode.S,
