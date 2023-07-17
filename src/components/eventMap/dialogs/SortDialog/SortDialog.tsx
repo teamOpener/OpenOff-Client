@@ -1,6 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { Modal, TouchableOpacity, View } from 'react-native';
+import { Modal, Pressable, TouchableOpacity, View } from 'react-native';
 import sortDialogStyles from './SortDialog.style';
 
 interface Props {
@@ -22,7 +22,10 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
       transparent
       visible={dialogShow}
     >
-      <View style={sortDialogStyles.modalBackground}>
+      <Pressable
+        style={sortDialogStyles.modalBackground}
+        onPress={handleDialog}
+      >
         <View style={sortDialogStyles.modalContainer}>
           <Text style={sortDialogStyles.title} color="white" variant="h3">
             정렬 기준
@@ -75,7 +78,7 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </Pressable>
     </Modal>
   );
 };
