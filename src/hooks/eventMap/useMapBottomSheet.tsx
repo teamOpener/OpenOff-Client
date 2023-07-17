@@ -3,6 +3,7 @@ import Text from 'components/common/Text/Text';
 import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
 import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
 import SelectBoxGroup from 'components/eventMap/groups/SelectBoxGroup/SelectBoxGroup';
+import SelectDetailGroup from 'components/eventMap/groups/SelectDetailGroup/SelectDetailGroup';
 import { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
@@ -26,6 +27,7 @@ const mapBottomSheetStyles = StyleSheet.create({
 });
 
 const useMapBottomSheet = (eventList: Event[]) => {
+  const [isDetail, setIsDetail] = useState<boolean>(false);
   const [sort, setSort] = useState<SortInfo>({
     dialog: false,
     value: 'date',
@@ -38,11 +40,10 @@ const useMapBottomSheet = (eventList: Event[]) => {
     label: '전체',
     value: 'all',
   });
-  const [applicationAbleOption, setApplicationAbleOptionOption] =
-    useState<Option>({
-      label: '전체',
-      value: 'all',
-    });
+  const [applicationAbleOption, setApplicationAbleOption] = useState<Option>({
+    label: '전체',
+    value: 'all',
+  });
   const renderBottomSheet = (snapTop: number, snapBottom: number) => {
     return (
       <>
@@ -55,29 +56,61 @@ const useMapBottomSheet = (eventList: Event[]) => {
             backgroundColor: colors.white,
           }}
         >
-          <SelectBoxGroup
-            selectPay={(option: Option) => setPayOption(option)}
-            selectParticipant={(option: Option) => setParticipantOption(option)}
-            selectApplication={(option: Option) =>
-              setApplicationAbleOptionOption(option)
-            }
-          />
-          <View style={mapBottomSheetStyles.sortButton}>
-            <TouchableOpacity
-              onPress={() => setSort({ ...sort, dialog: true })}
+          {!isDetail ? (
+            <>
+              <SelectBoxGroup
+                payOption={payOption}
+                selectPay={(option: Option) => setPayOption(option)}
+                participantOption={participantOption}
+                selectParticipant={(option: Option) =>
+                  setParticipantOption(option)
+                }
+                applicationAbleOption={applicationAbleOption}
+                selectApplication={(option: Option) =>
+                  setApplicationAbleOption(option)
+                }
+                openDetailGroup={() => {
+                  setIsDetail(true);
+                }}
+              />
+              <View style={mapBottomSheetStyles.sortButton}>
+                <TouchableOpacity
+                  onPress={() => setSort({ ...sort, dialog: true })}
+                >
+                  <Text variant="body2" color="white">
+                    {sort.value === 'distance' ? '거리순' : '날짜순'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <BottomSheetScrollView
+                style={mapBottomSheetStyles.bottomSheetContainer}
+              >
+                {eventList.map((event) => (
+                  <MapEventCard key={event.id} event={event} />
+                ))}
+              </BottomSheetScrollView>
+            </>
+          ) : (
+            <BottomSheetScrollView
+              style={mapBottomSheetStyles.bottomSheetContainer}
             >
-              <Text variant="body2" color="white">
-                {sort.value === 'distance' ? '거리순' : '날짜순'}
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <BottomSheetScrollView
-            style={mapBottomSheetStyles.bottomSheetContainer}
-          >
-            {eventList.map((event) => (
-              <MapEventCard key={event.id} event={event} />
-            ))}
-          </BottomSheetScrollView>
+              <SelectDetailGroup
+                payOption={payOption}
+                selectPay={(option: Option) => setPayOption(option)}
+                participantOption={participantOption}
+                selectParticipant={(option: Option) =>
+                  setParticipantOption(option)
+                }
+                applicationAbleOption={applicationAbleOption}
+                selectApplication={(option: Option) =>
+                  setApplicationAbleOption(option)
+                }
+                closeDetailGroup={() => {
+                  setIsDetail(false);
+                }}
+              />
+            </BottomSheetScrollView>
+          )}
         </BottomSheet>
         <SortDialog
           dialogShow={sort.dialog}
