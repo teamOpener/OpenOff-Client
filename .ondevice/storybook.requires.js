@@ -52,8 +52,8 @@ const getStories = () => {
     "./src/components/common/Icon/Icon.stories.tsx": require("../src/components/common/Icon/Icon.stories.tsx"),
     "./src/components/common/Text/Text.stories.tsx": require("../src/components/common/Text/Text.stories.tsx"),
     "./src/navigators/BottomTabNavigator.stories.tsx": require("../src/navigators/BottomTabNavigator.stories.tsx"),
-    "./src/screens/authorize/InterestFieldScreen/InterestFieldScreen.stories.tsx": require("../src/screens/authorize/InterestFieldScreen/InterestFieldScreen.stories.tsx"),
-    "./src/screens/authorize/UserInfoScreen/UserInfoScreen.stories.tsx": require("../src/screens/authorize/UserInfoScreen/UserInfoScreen.stories.tsx"),
+    "./src/screens/authorize/joins/InterestFieldScreen/InterestFieldScreen.stories.tsx": require("../src/screens/authorize/joins/InterestFieldScreen/InterestFieldScreen.stories.tsx"),
+    "./src/screens/authorize/joins/UserInfoScreen/UserInfoScreen.stories.tsx": require("../src/screens/authorize/joins/UserInfoScreen/UserInfoScreen.stories.tsx"),
     "./src/screens/eventMap/EventMapScreen/EventMapScreen.stories.tsx": require("../src/screens/eventMap/EventMapScreen/EventMapScreen.stories.tsx"),
   };
 };
