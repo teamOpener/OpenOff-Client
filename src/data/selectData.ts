@@ -38,7 +38,7 @@ const participantOptions: Option[] = [
   },
 ];
 
-const applicationAbleOption: Option[] = [
+const applicationAbleOptions: Option[] = [
   {
     label: '전체',
     value: 'all',
@@ -53,4 +53,4 @@ const applicationAbleOption: Option[] = [
   },
 ];
 
-export { applicationAbleOption, participantOptions, payOptions };
+export { applicationAbleOptions, participantOptions, payOptions };
