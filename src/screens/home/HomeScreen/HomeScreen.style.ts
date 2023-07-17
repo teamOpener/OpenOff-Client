@@ -17,6 +17,12 @@ const homeScreenStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  controllerContainer: {
+    flexDirection: 'row',
+  },
+  controllerButton: {
+    marginRight: 10,
+  },
 });
 
 export default homeScreenStyles;
