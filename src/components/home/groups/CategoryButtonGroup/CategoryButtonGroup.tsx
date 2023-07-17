@@ -5,6 +5,13 @@ import categoryButtonGroupStyles from './CategoryButtonGroup.style';
 const CategoryButtonGroup = () => {
   return (
     <View style={categoryButtonGroupStyles.container}>
+      <Text
+        variant="h3"
+        color="white"
+        style={categoryButtonGroupStyles.titleContainer}
+      >
+        카테고리
+      </Text>
       <View style={categoryButtonGroupStyles.groupContainer}>
         <TouchableOpacity style={categoryButtonGroupStyles.buttonContainer}>
           <ImageBackground
