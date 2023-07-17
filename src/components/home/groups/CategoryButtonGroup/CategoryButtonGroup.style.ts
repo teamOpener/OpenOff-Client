@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 const categoryButtonGroupStyles = StyleSheet.create({
+  titleContainer: {
+    width: '100%',
+  },
   container: {
     width: '100%',
     alignItems: 'center',
