@@ -5,13 +5,13 @@ const selectBoxButtonStyles = StyleSheet.create({
     borderWidth: 1,
     height: 34,
     borderRadius: 17,
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
   },
   textStyle: {
-    marginLeft: 10,
+    marginLeft: 7,
   },
   arrowContainer: {
     marginLeft: 5,
