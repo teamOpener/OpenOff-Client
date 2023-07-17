@@ -4,6 +4,7 @@ export { default as IconArrowUp } from './IconArrowUp.svg';
 export { default as IconBookmark } from './IconBookmark.svg';
 export { default as IconCalendar } from './IconCalendar.svg';
 export { default as IconCheck } from './IconCheck.svg';
+export { default as IconClose } from './IconClose.svg';
 export { default as IconComment } from './IconComment.svg';
 export { default as IconCongrates } from './IconCongrates.svg';
 export { default as IconExitCircle } from './IconExitCircle.svg';
