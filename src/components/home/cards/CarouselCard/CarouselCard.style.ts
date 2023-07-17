@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 const carouselCardStyle = StyleSheet.create({
   container: {
     backgroundColor: 'floralwhite',
-    borderRadius: 5,
-    height: 250,
+    borderRadius: 13,
+    height: 237,
     padding: 50,
   },
   titleText: {
