@@ -26,7 +26,7 @@ const BottomTabNavigator = () => {
         name={BottomTabMenu.Home}
         component={HomeScreen}
         options={{
-          headerShown: true,
+          headerShown: false,
           tabBarLabel: '홈',
           tabBarLabelStyle: {
             ...textStyles.caption,
