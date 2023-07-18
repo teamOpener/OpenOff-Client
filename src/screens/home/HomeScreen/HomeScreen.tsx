@@ -32,6 +32,11 @@ const HomeScreen = () => {
         title="맞춤 이벤트 추천"
         subTitle="#공연 #파티"
       />
+      <EventCardGroup
+        events={eventList}
+        title="인기 이벤트"
+        subTitle="지금 핫한 인기 이벤트를 둘러보세요."
+      />
     </ScrollView>
   );
 };

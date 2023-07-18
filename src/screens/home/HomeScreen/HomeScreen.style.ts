@@ -6,7 +6,7 @@ const homeScreenStyles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
     flexDirection: 'column',
-    padding: 25,
+    paddingLeft: 25,
   },
   logo: {
     width: 50,
@@ -16,6 +16,8 @@ const homeScreenStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginRight: 25,
+    marginTop: 20,
   },
   controllerContainer: {
     flexDirection: 'row',
