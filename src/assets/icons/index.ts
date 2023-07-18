@@ -9,6 +9,7 @@ export { default as IconClose } from './IconClose.svg';
 export { default as IconComment } from './IconComment.svg';
 export { default as IconCongrates } from './IconCongrates.svg';
 export { default as IconExitCircle } from './IconExitCircle.svg';
+export { default as IconFillHeart } from './IconFillHeart.svg';
 export { default as IconHeart } from './IconHeart.svg';
 export { default as IconHome } from './IconHome.svg';
 export { default as IconMap } from './IconMap.svg';
