@@ -1,10 +1,10 @@
 import Icon from 'components/common/Icon/Icon';
 import CommonCarousel from 'components/home/carousels/CommonCarousel/CommonCarousel';
 import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/CategoryButtonGroup';
-import attentionEvent from 'data/events/attentionEvent';
-import { Image, View, TouchableOpacity, ScrollView } from 'react-native';
 import EventCardGroup from 'components/home/groups/EventCardGroup/EventCardGroup';
+import attentionEvent from 'data/events/attentionEvent';
 import eventList from 'data/lists/eventList';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import homeScreenStyles from './HomeScreen.style';
 
 const HomeScreen = () => {
@@ -27,7 +27,11 @@ const HomeScreen = () => {
       </View>
       <CommonCarousel carouselData={attentionEvent} />
       <CategoryButtonGroup />
-      <EventCardGroup events={eventList} />
+      <EventCardGroup
+        events={eventList}
+        title="맞춤 이벤트 추천"
+        subTitle="#공연 #파티"
+      />
     </ScrollView>
   );
 };
