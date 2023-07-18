@@ -4,6 +4,7 @@ const carouselCardStyle = StyleSheet.create({
   container: {
     backgroundColor: 'floralwhite',
     borderRadius: 13,
+    marginRight: 20,
     height: 237,
     padding: 50,
   },
