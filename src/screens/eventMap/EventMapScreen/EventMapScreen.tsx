@@ -5,7 +5,7 @@ import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventS
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import { StackMenu } from 'constants/menu';
 import eventList from 'data/lists/eventList';
-import useMapBottomSheet from 'hooks/eventMap/useMapBottomSheet';
+import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
 import { useCallback } from 'react';
 import { Dimensions, View } from 'react-native';
@@ -25,7 +25,8 @@ const EventMapScreen = () => {
     naverMapRef,
   } = useMapCoordinateInfo();
   const { setCallbackCoordinate } = useAppStore();
-  const { sort, setSort, selectState, dispatch } = useMapBottomSheet(eventList);
+  const { sort, setSort, selectState, dispatch } =
+    useEventMapSelector(eventList);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const saveScreenCoordinate = useCallback(
     (coordinate: Coordinate) => {

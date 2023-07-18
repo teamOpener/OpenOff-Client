@@ -37,7 +37,7 @@ const selectReducer = (state: SelectBox, action: Action): SelectBox => {
       return state;
   }
 };
-const useMapBottomSheet = (eventList: Event[]) => {
+const useEventMapSelector = (eventList: Event[]) => {
   const [sort, setSort] = useState<SortInfo>({
     dialog: false,
     value: 'date',
@@ -54,4 +54,4 @@ const useMapBottomSheet = (eventList: Event[]) => {
   };
 };
 
-export default useMapBottomSheet;
+export default useEventMapSelector;
