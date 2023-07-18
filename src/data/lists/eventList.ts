@@ -15,6 +15,7 @@ const eventList: Event[] = [
     name: '소주대회',
     place: '경기도 안양시 동안구',
     participant: 23,
+    like: false,
     coordinate: {
       latitude: 37.422000101483164,
       longitude: -122.08526178818573,
@@ -34,6 +35,7 @@ const eventList: Event[] = [
     name: '나니아 연대기',
     place: '경기도 안양시 동안구',
     participant: 23,
+    like: true,
     coordinate: {
       latitude: 37.42336920884583,
       longitude: -122.0829487020396,
@@ -53,6 +55,7 @@ const eventList: Event[] = [
     name: '달리기 대회',
     place: '경기도 안양시 동안구',
     participant: 23,
+    like: false,
     coordinate: {
       latitude: 37.42032729688418,
       longitude: -122.08397291859353,
