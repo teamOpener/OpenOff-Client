@@ -9,6 +9,7 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
+import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import eventList from 'data/lists/eventList';
 import useMapBottomSheet from 'hooks/eventMap/useMapBottomSheet';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
@@ -16,10 +17,10 @@ import { useEffect, useState } from 'react';
 import { BackHandler, Dimensions, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
 import { useAppStore } from 'stores/app';
+import { colors } from 'styles/theme';
 import { Field } from 'types/apps/group';
 import { Coordinate } from 'types/event';
 import getDistanceCoordinate from 'utils/coordinate';
-import { colors } from 'styles/theme';
 import eventMapScreenStyles from '../EventMapScreen/EventMapScreen.style';
 
 type ParamList = {
@@ -33,7 +34,7 @@ type ParamList = {
 };
 
 const FieldEventMapScreen = () => {
-  const { renderBottomSheet } = useMapBottomSheet(eventList);
+  const { sort, setSort, selectState, dispatch } = useMapBottomSheet(eventList);
   const navigation = useNavigation<NavigationProp<ParamList>>();
   const { params } = useRoute<RouteProp<ParamList, 'mapData'>>();
   const [focusCoordinate, setFocusCoordinate] = useState<Coordinate>(
@@ -122,10 +123,15 @@ const FieldEventMapScreen = () => {
           ))}
         </NaverMapView>
       </View>
-      {renderBottomSheet(
-        (1 / 3) * Dimensions.get('window').height,
-        Dimensions.get('window').height,
-      )}
+      <MapBottomSheet
+        snapTop={(1 / 3) * Dimensions.get('window').height}
+        snapBottom={Dimensions.get('window').height}
+        sort={sort}
+        setSort={setSort}
+        selectState={selectState}
+        dispatch={dispatch}
+        eventList={eventList}
+      />
     </View>
   );
 };

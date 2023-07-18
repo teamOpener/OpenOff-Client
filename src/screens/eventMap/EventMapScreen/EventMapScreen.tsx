@@ -2,6 +2,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
+import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import { StackMenu } from 'constants/menu';
 import eventList from 'data/lists/eventList';
 import useMapBottomSheet from 'hooks/eventMap/useMapBottomSheet';
@@ -10,10 +11,10 @@ import { useCallback } from 'react';
 import { Dimensions, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
 import { useAppStore } from 'stores/app';
+import { colors } from 'styles/theme';
 import { Field } from 'types/apps/group';
 import { RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
-import { colors } from 'styles/theme';
 import eventMapScreenStyles from './EventMapScreen.style';
 
 const EventMapScreen = () => {
@@ -24,7 +25,7 @@ const EventMapScreen = () => {
     naverMapRef,
   } = useMapCoordinateInfo();
   const { setCallbackCoordinate } = useAppStore();
-  const { renderBottomSheet } = useMapBottomSheet(eventList);
+  const { sort, setSort, selectState, dispatch } = useMapBottomSheet(eventList);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const saveScreenCoordinate = useCallback(
     (coordinate: Coordinate) => {
@@ -94,7 +95,15 @@ const EventMapScreen = () => {
         </NaverMapView>
         <MyCoordinateButton handlePress={handleMoveCurrentCoordinate} />
       </View>
-      {renderBottomSheet(50, (2 / 3) * Dimensions.get('window').height)}
+      <MapBottomSheet
+        snapTop={50}
+        snapBottom={(2 / 3) * Dimensions.get('window').height}
+        sort={sort}
+        setSort={setSort}
+        selectState={selectState}
+        dispatch={dispatch}
+        eventList={eventList}
+      />
     </View>
   );
 };
