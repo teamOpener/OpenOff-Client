@@ -11,7 +11,7 @@ import {
 import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import eventList from 'data/lists/eventList';
-import useMapBottomSheet from 'hooks/eventMap/useMapBottomSheet';
+import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
 import { useEffect, useState } from 'react';
 import { BackHandler, Dimensions, View } from 'react-native';
@@ -34,7 +34,8 @@ type ParamList = {
 };
 
 const FieldEventMapScreen = () => {
-  const { sort, setSort, selectState, dispatch } = useMapBottomSheet(eventList);
+  const { sort, setSort, selectState, dispatch } =
+    useEventMapSelector(eventList);
   const navigation = useNavigation<NavigationProp<ParamList>>();
   const { params } = useRoute<RouteProp<ParamList, 'mapData'>>();
   const [focusCoordinate, setFocusCoordinate] = useState<Coordinate>(
