@@ -2,48 +2,31 @@ import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SelectControlButton from 'components/eventMap/buttons/SelectControlButton/SelectControlButton';
 import SelectDetailBox from 'components/eventMap/selectboxes/SelectDetailBox/SelectDetailBox';
+import SelectStatus from 'constants/selectBox';
 import {
   applicationAbleOptions,
   participantOptions,
   payOptions,
 } from 'data/selectData';
+import { Dispatch } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
-import Option from 'types/apps/selectbox';
+import { Action, Option, SelectBox } from 'types/apps/selectbox';
 import selectDetailGroupStyles from './SelectDetailGroup.style';
 
 interface Props {
-  payOption: Option;
-  selectPay: (option: Option) => void;
-  participantOption: Option;
-  selectParticipant: (option: Option) => void;
-  applicationAbleOption: Option;
-  selectApplication: (option: Option) => void;
+  selectState: SelectBox;
+  dispatch: Dispatch<Action>;
   closeDetailGroup: () => void;
 }
 
 const SelectDetailGroup = ({
-  payOption,
-  selectPay,
-  participantOption,
-  selectParticipant,
-  applicationAbleOption,
-  selectApplication,
+  selectState,
+  dispatch,
   closeDetailGroup,
 }: Props) => {
   const initializeSelect = () => {
-    selectPay({
-      value: 'all',
-      label: '전체',
-    });
-    selectParticipant({
-      value: 'all',
-      label: '전체',
-    });
-    selectApplication({
-      value: 'all',
-      label: '전체',
-    });
+    dispatch({ type: SelectStatus.RESET_SELECT });
     closeDetailGroup();
   };
   const applySelect = () => {
@@ -61,24 +44,39 @@ const SelectDetailGroup = ({
         </TouchableOpacity>
       </View>
       <SelectDetailBox
-        currentOption={payOption}
+        currentOption={selectState.payOption}
         options={payOptions}
         label="비용"
-        select={selectPay}
+        select={(option: Option) => {
+          dispatch({
+            type: SelectStatus.SET_PAY_OPTION,
+            option,
+          });
+        }}
       />
       <View style={selectDetailGroupStyles.boxLine} />
       <SelectDetailBox
-        currentOption={participantOption}
+        currentOption={selectState.participantOption}
         options={participantOptions}
         label="참여 인원"
-        select={selectParticipant}
+        select={(option: Option) => {
+          dispatch({
+            type: SelectStatus.SET_PARTICIPANT_OPTION,
+            option,
+          });
+        }}
       />
       <View style={selectDetailGroupStyles.boxLine} />
       <SelectDetailBox
-        currentOption={applicationAbleOption}
+        currentOption={selectState.applicationAbleOption}
         options={applicationAbleOptions}
         label="신청 현황"
-        select={selectApplication}
+        select={(option: Option) => {
+          dispatch({
+            type: SelectStatus.SET_APPLICATION_ABLE_OPTION,
+            option,
+          });
+        }}
       />
       <View style={selectDetailGroupStyles.controlContainer}>
         <SelectControlButton

@@ -1,6 +1,6 @@
 import OptionButton from 'components/eventMap/buttons/OptionButton/OptionButton';
 import { View } from 'react-native';
-import Option from 'types/apps/selectbox';
+import { Option } from 'types/apps/selectbox';
 import singleOptionGroupStyles from './SingleOptionGroup.style';
 
 interface Props {

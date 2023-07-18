@@ -2,7 +2,7 @@ import SelectBoxButton from 'components/eventMap/buttons/SelectBoxButton/SelectB
 import SingleOptionGroup from 'components/eventMap/groups/SingleOptionGroup/SingleOptionGroup';
 import { useState } from 'react';
 import { View } from 'react-native';
-import Option from 'types/apps/selectbox';
+import { Option } from 'types/apps/selectbox';
 import singleSelectBoxStyles from './SingleSelectBox.style';
 
 interface Props {

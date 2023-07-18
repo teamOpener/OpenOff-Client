@@ -1,7 +1,7 @@
 import Text from 'components/common/Text/Text';
 import SelectDetailButton from 'components/eventMap/buttons/SelectDetailButton/SelectDetailButton';
 import { View } from 'react-native';
-import Option from 'types/apps/selectbox';
+import { Option } from 'types/apps/selectbox';
 import selectDetailBoxStyles from './SelectDetailBox.style';
 
 interface Props {
