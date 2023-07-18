@@ -5,11 +5,11 @@ const categoryButtonGroupStyles = StyleSheet.create({
     width: '100%',
   },
   container: {
-    width: '100%',
     alignItems: 'center',
   },
   groupContainer: {
     width: 285,
+    marginRight: 25,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
