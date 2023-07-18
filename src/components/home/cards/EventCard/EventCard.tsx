@@ -1,7 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { Event } from 'types/event';
 import eventCardStyles from './EventCard.style';
 
@@ -34,6 +33,13 @@ const EventCard = ({ event, handlePress }: Props) => {
           {event.participant}명 참여중
         </Text>
       </View>
+      <TouchableOpacity style={eventCardStyles.likeButton}>
+        {event.like ? (
+          <Icon name="IconFillHeart" size={20} fill="main" />
+        ) : (
+          <Icon name="IconHeart" size={20} />
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
