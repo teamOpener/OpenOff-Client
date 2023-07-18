@@ -1,7 +1,7 @@
 import Text from 'components/common/Text/Text';
 import { TouchableOpacity } from 'react-native';
 import { colors } from 'styles/theme';
-import Option from 'types/apps/selectbox';
+import { Option } from 'types/apps/selectbox';
 import selectDetailButtonStyles from './SelectDetailButton.style';
 
 interface Props {
