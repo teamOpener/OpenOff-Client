@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const eventCardStyles = StyleSheet.create({
   container: {
+    position: 'relative',
     flexDirection: 'column',
     marginRight: 20,
     justifyContent: 'flex-start',
@@ -15,6 +16,13 @@ const eventCardStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  likeButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
   },
 });
 
