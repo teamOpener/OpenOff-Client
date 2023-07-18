@@ -11,7 +11,8 @@ interface Event {
   name: string;
   place: string;
   participant: number;
+  like: boolean;
   coordinate: Coordinate;
 }
 
-export type { Event, Coordinate };
+export type { Coordinate, Event };
