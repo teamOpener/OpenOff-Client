@@ -1,8 +1,8 @@
 import Icon from 'components/common/Icon/Icon';
-import CommonCarousel from 'components/home/carousels/CommonCarousel/CommonCarousel';
+import AdvertisementCarousel from 'components/home/carousels/AdvertisementCarousel/AdvertisementCarousel';
 import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/CategoryButtonGroup';
 import EventCardGroup from 'components/home/groups/EventCardGroup/EventCardGroup';
-import attentionEvent from 'data/events/attentionEvent';
+import advertisementList from 'data/lists/advertisementList';
 import eventList from 'data/lists/eventList';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import homeScreenStyles from './HomeScreen.style';
@@ -25,7 +25,7 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <CommonCarousel carouselData={attentionEvent} />
+      <AdvertisementCarousel carouselData={advertisementList} />
       <CategoryButtonGroup />
       <EventCardGroup
         events={eventList}
