@@ -2,7 +2,7 @@ import CarouselCard from 'components/home/cards/CarouselCard/CarouselCard';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { Advertisement } from 'types/apps/advertisement';
-import commonCarouselStyles from './AdvertisementCarousel.style';
+import advertisementCarouselStyles from './AdvertisementCarousel.style';
 
 interface Props<T> {
   carouselData: T[];
@@ -16,7 +16,7 @@ const AdvertisementCarousel = <T extends Advertisement>({
       loop
       autoPlay
       autoPlayInterval={2000}
-      style={commonCarouselStyles.container}
+      style={advertisementCarouselStyles.container}
       width={Dimensions.get('window').width - 25}
       height={300}
       vertical={false}
