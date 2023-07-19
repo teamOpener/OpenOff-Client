@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from 'styles/theme';
 
 const carouselCardStyle = StyleSheet.create({
   container: {
@@ -6,11 +7,39 @@ const carouselCardStyle = StyleSheet.create({
     borderRadius: 13,
     marginRight: 20,
     height: 237,
-    padding: 50,
+    overflow: 'hidden',
   },
-  titleText: {
-    color: 'black',
-    fontSize: 30,
+  carouselInfo: {
+    width: '100%',
+    marginTop: 100,
+    height: 137,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    position: 'relative',
+  },
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
+  },
+  fieldContainer: {
+    marginTop: 10,
+    height: 26,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 15.5,
+    borderColor: colors.white,
+  },
+  pageInfo: {
+    height: 16,
+    width: 30,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 5,
+    right: 5,
+    borderRadius: 8,
+    backgroundColor: colors.darkGrey,
   },
 });
 
