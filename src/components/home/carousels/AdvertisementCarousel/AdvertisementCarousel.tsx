@@ -1,14 +1,14 @@
 import CarouselCard from 'components/home/cards/CarouselCard/CarouselCard';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { CarouselElement } from 'types/apps/carousel';
-import commonCarouselStyles from './CommonCarousel.style';
+import { Advertisement } from 'types/apps/advertisement';
+import commonCarouselStyles from './AdvertisementCarousel.style';
 
 interface Props<T> {
   carouselData: T[];
 }
 
-const CommonCarousel = <T extends CarouselElement>({
+const AdvertisementCarousel = <T extends Advertisement>({
   carouselData,
 }: Props<T>) => {
   return (
@@ -22,10 +22,15 @@ const CommonCarousel = <T extends CarouselElement>({
       vertical={false}
       data={carouselData}
       renderItem={({ item, index }) => (
-        <CarouselCard<T> key={index} item={item} index={index} />
+        <CarouselCard<T>
+          key={index}
+          item={item}
+          index={index}
+          length={carouselData.length}
+        />
       )}
     />
   );
 };
 
-export default CommonCarousel;
+export default AdvertisementCarousel;
