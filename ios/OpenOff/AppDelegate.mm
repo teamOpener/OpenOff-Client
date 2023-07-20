@@ -2,6 +2,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 
+#import <RNKakaoLogins.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -31,6 +33,19 @@
 - (BOOL)concurrentRootEnabled
 {
   return true;
+}
+
+- (BOOL)application:(UIApplication *)app
+     openURL:(NSURL *)url
+     options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+      dispatch_async(dispatch_get_main_queue(), ^(void){
+        if ([RNKakaoLogins isKakaoTalkLoginUrl:url]) {
+          [RNKakaoLogins handleOpenUrl: url];
+        }
+      });
+  });
+   return NO;
 }
 
 @end

@@ -13,7 +13,12 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		363ABCE12A54A25900EADEDA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 363ABCE32A54A25900EADEDA /* InfoPlist.strings */; };
-		36C13E3D2A5602DE004C1B11 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 36C13E3C2A5602DE004C1B11 /* Fonts */; };
+		36C4EF4B2A66D5480043E332 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4A2A66D5480043E332 /* Pretendard-Bold.ttf */; };
+		36C4EF502A66D5550043E332 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4C2A66D5550043E332 /* Pretendard-Regular.ttf */; };
+		36C4EF512A66D5550043E332 /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4D2A66D5550043E332 /* Pretendard-Light.ttf */; };
+		36C4EF522A66D5550043E332 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4E2A66D5550043E332 /* Pretendard-SemiBold.ttf */; };
+		36C4EF532A66D5550043E332 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4F2A66D5550043E332 /* Pretendard-Medium.ttf */; };
+		36C4EF562A68FE250043E332 /* SwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4EF552A68FE250043E332 /* SwiftBridge.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B2C4BE51366C320A160B62EF /* libPods-OpenOff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A18D632FE32C47F38363C57A /* libPods-OpenOff.a */; };
 /* End PBXBuildFile section */
@@ -41,6 +46,14 @@
 		363ABCE22A54A25900EADEDA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		363ABCE42A54A25F00EADEDA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		36C13E3C2A5602DE004C1B11 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		36C4EF332A66BABE0043E332 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		36C4EF4A2A66D5480043E332 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Bold.ttf"; path = "Fonts/Pretendard-Bold.ttf"; sourceTree = "<group>"; };
+		36C4EF4C2A66D5550043E332 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Regular.ttf"; path = "Fonts/Pretendard-Regular.ttf"; sourceTree = "<group>"; };
+		36C4EF4D2A66D5550043E332 /* Pretendard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Light.ttf"; path = "Fonts/Pretendard-Light.ttf"; sourceTree = "<group>"; };
+		36C4EF4E2A66D5550043E332 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-SemiBold.ttf"; path = "Fonts/Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
+		36C4EF4F2A66D5550043E332 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Medium.ttf"; path = "Fonts/Pretendard-Medium.ttf"; sourceTree = "<group>"; };
+		36C4EF542A68FE250043E332 /* OpenOff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenOff-Bridging-Header.h"; sourceTree = "<group>"; };
+		36C4EF552A68FE250043E332 /* SwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBridge.swift; sourceTree = "<group>"; };
 		45009098E0E7D76B85595F2D /* Pods-OpenOff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenOff.debug.xcconfig"; path = "Target Support Files/Pods-OpenOff/Pods-OpenOff.debug.xcconfig"; sourceTree = "<group>"; };
 		7B40E0EED1298484E935F9E9 /* Pods-OpenOff-OpenOffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenOff-OpenOffTests.debug.xcconfig"; path = "Target Support Files/Pods-OpenOff-OpenOffTests/Pods-OpenOff-OpenOffTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7C5FF8AB27631643AC3A1A58 /* Pods-OpenOff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenOff.release.xcconfig"; path = "Target Support Files/Pods-OpenOff/Pods-OpenOff.release.xcconfig"; sourceTree = "<group>"; };
@@ -97,6 +110,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				36C4EF552A68FE250043E332 /* SwiftBridge.swift */,
+				36C4EF542A68FE250043E332 /* OpenOff-Bridging-Header.h */,
 			);
 			name = OpenOff;
 			sourceTree = "<group>";
@@ -121,6 +136,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				36C4EF4D2A66D5550043E332 /* Pretendard-Light.ttf */,
+				36C4EF4F2A66D5550043E332 /* Pretendard-Medium.ttf */,
+				36C4EF4C2A66D5550043E332 /* Pretendard-Regular.ttf */,
+				36C4EF4E2A66D5550043E332 /* Pretendard-SemiBold.ttf */,
+				36C4EF4A2A66D5480043E332 /* Pretendard-Bold.ttf */,
+				36C4EF332A66BABE0043E332 /* Config.xcconfig */,
 				36C13E3C2A5602DE004C1B11 /* Fonts */,
 				363ABCE32A54A25900EADEDA /* InfoPlist.strings */,
 				13B07FAE1A68108700A75B9A /* OpenOff */,
@@ -214,7 +235,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -250,10 +271,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36C4EF502A66D5550043E332 /* Pretendard-Regular.ttf in Resources */,
+				36C4EF512A66D5550043E332 /* Pretendard-Light.ttf in Resources */,
+				36C4EF522A66D5550043E332 /* Pretendard-SemiBold.ttf in Resources */,
+				36C4EF532A66D5550043E332 /* Pretendard-Medium.ttf in Resources */,
+				36C4EF4B2A66D5480043E332 /* Pretendard-Bold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				363ABCE12A54A25900EADEDA /* InfoPlist.strings in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				36C13E3D2A5602DE004C1B11 /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +449,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				36C4EF562A68FE250043E332 /* SwiftBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +480,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7B40E0EED1298484E935F9E9 /* Pods-OpenOff-OpenOffTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -481,6 +508,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A81A0F345566275E10AD3DFE /* Pods-OpenOff-OpenOffTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = OpenOffTests/Info.plist;
@@ -523,6 +551,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.opener.openoff;
 				PRODUCT_NAME = OpenOff;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenOff-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -550,6 +579,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.opener.openoff;
 				PRODUCT_NAME = OpenOff;
+				SWIFT_OBJC_BRIDGING_HEADER = "OpenOff-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -557,6 +587,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36C4EF332A66BABE0043E332 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -629,6 +660,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36C4EF332A66BABE0043E332 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
