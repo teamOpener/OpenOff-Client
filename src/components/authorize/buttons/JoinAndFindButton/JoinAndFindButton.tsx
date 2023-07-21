@@ -4,14 +4,14 @@ import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthStackParamList } from 'types/apps/menu';
 import Text from '../../../common/Text/Text';
-import joinButtonStyle from './JoinButton.style';
+import joinAndFindButtonStyle from './JoinAndFindButton.style';
 
-const JoinButton = () => {
+const JoinAndFindButton = () => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   return (
-    <View style={joinButtonStyle.container}>
+    <View style={joinAndFindButtonStyle.container}>
       <TouchableOpacity
-        style={joinButtonStyle.buttonContainer}
+        style={joinAndFindButtonStyle.buttonContainer}
         onPress={() => navigation.navigate(AuthorizeMenu.EmailPassword)}
       >
         <Text variant="caption" color="white">
@@ -32,4 +32,4 @@ const JoinButton = () => {
   );
 };
 
-export default JoinButton;
+export default JoinAndFindButton;

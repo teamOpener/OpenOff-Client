@@ -1,6 +1,6 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const joinButtonStyle = StyleSheet.create({
+const joinAndFindButtonStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
   },
@@ -10,4 +10,4 @@ const joinButtonStyle = StyleSheet.create({
   },
 });
 
-export default joinButtonStyle;
+export default joinAndFindButtonStyle;
