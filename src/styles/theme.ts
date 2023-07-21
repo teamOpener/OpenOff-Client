@@ -7,6 +7,7 @@ export const colors = {
   main: '#9b84f7',
   point: '#8c70ff',
   error: '#f34f45',
+  green: '#5FA65E',
 };
 
 export const fonts = {
