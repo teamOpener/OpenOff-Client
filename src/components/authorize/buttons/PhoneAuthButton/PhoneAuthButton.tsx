@@ -10,24 +10,26 @@ interface Props {
 }
 
 const PhoneAuthButton = ({ label, active, handlePress }: Props) => {
+  const hadleAuthPress = () => {
+    if (!active) return;
+    handlePress();
+  };
   return (
     <View style={phoneAuthButtonStyles.container}>
-      {active ? (
-        <TouchableOpacity
-          style={phoneAuthButtonStyles.activeButton}
-          onPress={handlePress}
-        >
-          <Text variant="caption" color="white">
-            {label}
-          </Text>
-        </TouchableOpacity>
-      ) : (
-        <View style={phoneAuthButtonStyles.nonActiveButton}>
-          <Text variant="caption" color="grey">
-            {label}
-          </Text>
-        </View>
-      )}
+      (
+      <TouchableOpacity
+        style={
+          active
+            ? phoneAuthButtonStyles.activeButton
+            : phoneAuthButtonStyles.nonActiveButton
+        }
+        onPress={hadleAuthPress}
+      >
+        <Text variant="caption" color={active ? 'white' : 'grey'}>
+          {label}
+        </Text>
+      </TouchableOpacity>
+      )
     </View>
   );
 };
