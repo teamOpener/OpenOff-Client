@@ -1,10 +1,10 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
-import UserInfoStatus from 'constants/join';
+import Text from 'components/common/Text/Text';
+import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
-import Text from 'components/common/Text/Text';
 import { View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
@@ -50,7 +50,10 @@ const EmailPasswordScreen = ({ dispatch }: Props) => {
       />
       <AuthorizeFlowButton
         handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+          dispatch({
+            type: UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD,
+            emailPassword: { email, password },
+          });
           navigation.navigate(AuthorizeMenu.AgreeToTerm);
         }}
         label="확인"
