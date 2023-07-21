@@ -5,7 +5,7 @@ const calendarButtonStyles = StyleSheet.create({
     maxWidth: 300,
     minWidth: 80,
     height: 54,
-    borderRadius: 20,
+    borderRadius: 27.5,
     paddingHorizontal: 10,
     justifyContent: 'center',
     alignItems: 'center',
