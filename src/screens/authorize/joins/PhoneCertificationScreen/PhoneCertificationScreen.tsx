@@ -1,12 +1,12 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import UserInfoStatus from 'constants/join';
+import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
+import Text from 'components/common/Text/Text';
+import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
 import { View } from 'react-native';
-import Text from 'components/common/Text/Text';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
-import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import phoneCertificationScreenStyles from './PhoneCertificationScreen.style';
 
 interface Props {
@@ -25,7 +25,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
       type: UserInfoStatus.SET_PHONE_NUMBER,
       phoneNumber: phonenumber,
     });
-    navigation.navigate(AuthorizeMenu.NickName);
+    navigation.navigate(AuthorizeMenu.Nickname);
   };
   return (
     <View style={phoneCertificationScreenStyles.container}>

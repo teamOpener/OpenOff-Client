@@ -1,10 +1,9 @@
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
-import JoinButton from 'components/authorize/buttons/JoinButton/JoinButton';
+import JoinButton from 'components/authorize/buttons/JoinAndFindButton/JoinAndFindButton';
 import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
 import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButtonGroup/SocialLoginButtonGroup';
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { validateEmail, validatePassword } from 'utils/validate';
 import Text from '../../../../components/common/Text/Text';

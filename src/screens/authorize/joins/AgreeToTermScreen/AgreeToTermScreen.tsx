@@ -1,10 +1,10 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
 import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
-import UserInfoStatus from 'constants/join';
+import Text from 'components/common/Text/Text';
+import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useEffect, useState } from 'react';
-import Text from 'components/common/Text/Text';
 import { View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
