@@ -51,7 +51,7 @@ const validateName = (name: string) => {
   return undefined;
 };
 
-const validateNickName = (name: string) => {
+const validateNickname = (name: string) => {
   if (name) {
     const patternCnt = [
       { type: /^(?=.*?[가-힣])/ },
@@ -94,8 +94,8 @@ export {
   validateCount,
   validateEmail,
   validateName,
+  validateNickname,
   validatePassword,
   validatePasswordCheck,
   validatePhoneNumber,
-  validateNickName,
 };

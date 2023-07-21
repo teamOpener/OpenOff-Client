@@ -2,22 +2,22 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
-import UserInfoStatus from 'constants/join';
+import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import React, { Reducer, useReducer } from 'react';
 import { Platform } from 'react-native';
-import AgreeToTermScreen from 'screens/authorize/joins/AgreeToTermScreen/AgreeToTermScreen';
 import EmailPasswordFindScreen from 'screens/authorize/finds/EmailPasswordFindScreen/EmailPasswordFindScreen';
+import AgreeToTermScreen from 'screens/authorize/joins/AgreeToTermScreen/AgreeToTermScreen';
 import EmailPasswordScreen from 'screens/authorize/joins/EmailPasswordScreen/EmailPasswordScreen';
 import InterestFieldScreen from 'screens/authorize/joins/InterestFieldScreen/InterestFieldScreen';
 import JoinCompleteScreen from 'screens/authorize/joins/JoinCompleteScreen/JoinCompleteScreen';
-import LoginScreen from 'screens/authorize/logins/LoginScreen/LoginScreen';
-import NickNameScreen from 'screens/authorize/joins/NickNameScreen/NickNameScreen';
+import NicknameScreen from 'screens/authorize/joins/NickNameScreen/NickNameScreen';
 import PhoneCertificationScreen from 'screens/authorize/joins/PhoneCertificationScreen/PhoneCertificationScreen';
 import UserInfoScreen from 'screens/authorize/joins/UserInfoScreen/UserInfoScreen';
+import LoginScreen from 'screens/authorize/logins/LoginScreen/LoginScreen';
+import textStyles from 'styles/textStyles';
 import { colors } from 'styles/theme';
 import { Action, JoinInfo } from 'types/join';
-import textStyles from 'styles/textStyles';
 
 const Stack = createStackNavigator();
 
@@ -38,7 +38,7 @@ const userInfoReducer = (state: JoinInfo, action: Action): JoinInfo => {
     case UserInfoStatus.SET_GENDER:
       return { ...state, gender: action.gender };
     case UserInfoStatus.SET_NICK_NAME:
-      return { ...state, nickName: action.nickName };
+      return { ...state, nickname: action.nickname };
     case UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD:
       return {
         ...state,
@@ -58,7 +58,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
     birth: '',
     agreeToTerm: '',
     phoneNumber: '',
-    nickName: '',
+    nickname: '',
     gender: '',
     emailAddress: '',
     password: '',
@@ -132,9 +132,9 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
         options={{
           headerTitle: '',
         }}
-        name={AuthorizeMenu.NickName}
+        name={AuthorizeMenu.Nickname}
       >
-        {() => <NickNameScreen dispatch={dispatch} />}
+        {() => <NicknameScreen dispatch={dispatch} />}
       </Stack.Screen>
       <Stack.Screen
         options={{
