@@ -83,6 +83,8 @@ const BaseInfoInput = ({
           theme="dark"
           open={open}
           date={new Date(value)}
+          confirmText="적용"
+          cancelText="닫기"
           onConfirm={(date) => {
             setOpen(false);
             setValue(dateFormatter(date));
