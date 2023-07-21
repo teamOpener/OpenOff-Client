@@ -5,10 +5,10 @@ import CalendarButton from 'components/eventMap/buttons/CalendarButton/CalendarB
 import CalendarCard from 'components/eventMap/cards/CalendarCard/CalendarCard';
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import { MarkedDates } from 'react-native-calendars/src/types';
 import { useAppStore } from 'stores/app';
 import { colors } from 'styles/theme';
 import { dateFormatter } from 'utils/date';
-import { MarkedDates } from 'react-native-calendars/src/types';
 import datePickScreenStyles from './DatePickScreen.style';
 
 type ParamList = {
@@ -115,7 +115,6 @@ const DatePickScreen = () => {
           backgroundColor="transparent"
           color="grey"
           borderColor={colors.grey}
-          marginLeft={10}
           handleClick={handleInitialize}
           width={130}
         />
@@ -123,6 +122,7 @@ const DatePickScreen = () => {
           label="적용"
           backgroundColor={colors.main}
           color="white"
+          marginLeft={10}
           handleClick={handleApply}
           width={210}
         />
