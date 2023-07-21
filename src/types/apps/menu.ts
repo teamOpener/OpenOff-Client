@@ -8,7 +8,7 @@ export type AuthStackParamList = {
   PhoneCertification: undefined;
   EmailPassword: undefined;
   EmailPasswordFind: undefined;
-  NickName: undefined;
+  Nickname: undefined;
   UserInfo: undefined;
   BirthDay: undefined;
   InterestField: undefined;

@@ -16,7 +16,7 @@ export const enum AuthorizeMenu {
   AgreeToTerm = 'AgreeToTerm',
   PhoneCertification = 'PhoneCertification',
   EmailPassword = 'EmailPassword',
-  NickName = 'NickName',
+  Nickname = 'Nickname',
   UserInfo = 'UserInfo',
   InterestField = 'InterestField',
   JoinComplete = 'JoinComplete',
