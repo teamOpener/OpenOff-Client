@@ -1,17 +1,19 @@
 import ColorButton from 'components/authorize/buttons/ColorButton/ColorButton';
+import { GenderType } from 'constants/join';
 import { Dispatch, SetStateAction } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
+import { Gender } from 'types/join';
 import Text from '../../../common/Text/Text';
 import genderInputStyles from './GenderInput.style';
 
 interface Props {
-  value: '남' | '여';
-  setValue: Dispatch<SetStateAction<'남' | '여'>>;
+  value: Gender;
+  setValue: Dispatch<SetStateAction<Gender>>;
 }
 
 const GenderInput = ({ value, setValue }: Props) => {
-  const computedGenderStyle = (compareGender: '남' | '여') => {
+  const computedGenderAction = (compareGender: Gender) => {
     return {
       handlePress:
         value === compareGender
@@ -34,20 +36,22 @@ const GenderInput = ({ value, setValue }: Props) => {
       </Text>
       <View style={genderInputStyles.genderButtonContainer}>
         <ColorButton
-          label="남"
-          color={computedGenderStyle('남').color}
+          label={GenderType.MAN}
+          color={computedGenderAction(GenderType.MAN).color}
           marginRight={10}
-          borderColor={computedGenderStyle('남').borderColor}
-          backgroundColor={computedGenderStyle('남').backgroundColor}
-          handleClick={computedGenderStyle('남').handlePress}
+          borderColor={computedGenderAction(GenderType.MAN).borderColor}
+          backgroundColor={computedGenderAction(GenderType.MAN).backgroundColor}
+          handleClick={computedGenderAction(GenderType.MAN).handlePress}
         />
         <ColorButton
-          label="여"
-          color={computedGenderStyle('여').color}
+          label={GenderType.WOMAN}
+          color={computedGenderAction(GenderType.WOMAN).color}
           marginRight={10}
-          borderColor={computedGenderStyle('여').borderColor}
-          backgroundColor={computedGenderStyle('여').backgroundColor}
-          handleClick={computedGenderStyle('여').handlePress}
+          borderColor={computedGenderAction(GenderType.WOMAN).borderColor}
+          backgroundColor={
+            computedGenderAction(GenderType.WOMAN).backgroundColor
+          }
+          handleClick={computedGenderAction(GenderType.WOMAN).handlePress}
         />
       </View>
     </View>
