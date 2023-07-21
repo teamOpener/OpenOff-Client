@@ -1,7 +1,8 @@
 import ErrorText from 'components/authorize/texts/ErrorText/ErrorText';
+import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
 import React, { Dispatch, ReactNode, SetStateAction } from 'react';
 import { TextInput, View } from 'react-native';
-import Text from 'components/common/Text/Text';
 import { colors } from 'styles/theme';
 import essentialInputStyles from './EssentialInput.style';
 
@@ -69,6 +70,18 @@ const EssentialInput = ({
             }
             {...rest}
           />
+          <View style={essentialInputStyles.validateStatus}>
+            {validation(value) && value.length > 0 && type !== 'authnumber' && (
+              <Text variant="body1" color="error">
+                !
+              </Text>
+            )}
+            {!validation(value) &&
+              value.length > 0 &&
+              type !== 'authnumber' && (
+                <Icon name="IconCheck" size={20} fill="green" />
+              )}
+          </View>
           <View style={{ width: clacWidth }}>
             <ErrorText validation={validation} value={value} />
           </View>

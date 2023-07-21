@@ -21,6 +21,11 @@ const essentialInputStyles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 4,
   },
+  validateStatus: {
+    position: 'absolute',
+    top: 15,
+    right: 10,
+  },
 });
 
 export default essentialInputStyles;
