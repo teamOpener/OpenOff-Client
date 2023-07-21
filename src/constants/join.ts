@@ -10,4 +10,9 @@ const enum UserInfoStatus {
   SET_INTEREST_FIELD = 'SET_INTEREST_FIELD',
 }
 
-export default UserInfoStatus;
+const enum GenderType {
+  MAN = '남',
+  WOMAN = '여',
+}
+
+export { GenderType, UserInfoStatus };
