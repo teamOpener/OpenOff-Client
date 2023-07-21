@@ -1,11 +1,11 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
-import UserInfoStatus from 'constants/join';
+import Text from 'components/common/Text/Text';
+import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import field from 'data/lists/field';
 import { Dispatch, useEffect, useState } from 'react';
-import Text from 'components/common/Text/Text';
 import { Image, View } from 'react-native';
 import { Field } from 'types/apps/group';
 import { AuthStackParamList } from 'types/apps/menu';
@@ -38,7 +38,7 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
       </Text>
       <Image
         style={interestFieldScreenStyles.fieldInfomation}
-        source={require('../../../../assets/images/joinInformation.png')}
+        source={require('../../../../assets/images/interestFieldInfo.png')}
       />
       <FieldButtonGroup
         fields={interestField}
