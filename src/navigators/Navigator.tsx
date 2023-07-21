@@ -23,6 +23,7 @@ const Navigator = () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
+          headerTitle: '날짜 선택',
           headerTitleAlign: 'center',
           headerTintColor: '#fff',
           headerTitleStyle: {
