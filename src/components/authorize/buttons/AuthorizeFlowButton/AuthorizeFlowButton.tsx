@@ -14,8 +14,8 @@ const AuthorizeFlowButton = ({ label, isActive, handlePress }: Props) => {
     return false;
   };
   const computedButtonStyle = {
-    backgroundColor: isActive ? colors.main : colors.grey,
-    fontColor: isActive ? colors.white : colors.darkGrey,
+    backgroundColor: isActive ? colors.main : colors.darkGrey,
+    fontColor: isActive ? colors.white : colors.grey,
   };
   return (
     <View style={authorizeFlowButtonStyles.absolutePosition}>
