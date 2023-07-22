@@ -4,6 +4,8 @@ import DatePickScreen from 'screens/eventMap/DatePickScreen/DatePickScreen';
 import FieldEventMapScreen from 'screens/eventMap/FieldEventMapScreen/FieldEventMapScreen';
 import textStyles from 'styles/textStyles';
 import { colors } from 'styles/theme';
+import AddEventScreen from 'screens/home/AddEventScreen/AddEventScreen';
+import BackButton from 'components/navigator/BackButton';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -18,6 +20,22 @@ const Navigator = () => {
           headerShown: false,
         }}
       />
+      {/* home */}
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.white,
+          headerTitleStyle: {
+            color: 'transparent',
+          },
+          headerLeft: BackButton,
+        }}
+        name={StackMenu.AddEvent}
+        component={AddEventScreen}
+      />
+      {/* map */}
       <Stack.Screen
         options={{
           headerStyle: {
