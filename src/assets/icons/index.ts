@@ -15,6 +15,7 @@ export { default as IconHome } from './IconHome.svg';
 export { default as IconMap } from './IconMap.svg';
 export { default as IconMyCoordinate } from './IconMyCoordinate.svg';
 export { default as IconPlace } from './IconPlace.svg';
+export { default as IconPlusCircle } from './IconPlusCircle.svg';
 export { default as IconSearch } from './IconSearch.svg';
 export { default as IconSend } from './IconSend.svg';
 export { default as IconSetting } from './IconSetting.svg';
