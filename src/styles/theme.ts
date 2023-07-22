@@ -25,5 +25,6 @@ export const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     background: colors.background,
+    border: 'transparent',
   },
 };
