@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { colors } from 'styles/theme';
 
 const homeScreenStyles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
   container: {
     backgroundColor: colors.background,
     flex: 1,
