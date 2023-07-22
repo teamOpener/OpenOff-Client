@@ -19,6 +19,19 @@ const BottomTabNavigator = () => {
         tabBarInactiveTintColor: colors.darkGrey,
         tabBarStyle: {
           backgroundColor: colors.background,
+          borderTopColor: colors.darkGrey,
+          borderLeftColor: colors.darkGrey,
+          borderRightColor: colors.darkGrey,
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+          borderLeftWidth: 1,
+          borderRightWidth: 1,
+          overflow: 'hidden',
+          position: 'absolute',
+          bottom: 0,
+          left: -1,
+          right: -1,
+          paddingTop: 6,
         },
       }}
     >
