@@ -153,6 +153,7 @@ dependencies {
     implementation("com.facebook.react:react-android")
     implementation("com.naver.maps:map-sdk:3.12.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+    implementation project(':react-native-splash-screen')
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
