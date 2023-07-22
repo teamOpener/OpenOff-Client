@@ -1,3 +1,5 @@
+import { DefaultTheme } from '@react-navigation/native';
+
 export const colors = {
   background: '#191919',
   white: '#ffffff',
@@ -16,4 +18,12 @@ export const fonts = {
   medium: 'Pretendard-Medium',
   regular: 'Pretendard-Regular',
   light: 'Pretendard-Light',
+};
+
+export const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: colors.background,
+  },
 };

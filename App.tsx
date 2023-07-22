@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
-import { colors } from 'styles/theme';
+import { colors, MyTheme } from 'styles/theme';
 
 const appStyles = StyleSheet.create({
   gestureContainer: {
@@ -33,7 +33,7 @@ const App = () => {
   return (
     <SafeAreaView style={appStyles.safeAreaContainer}>
       <GestureHandlerRootView style={appStyles.gestureContainer}>
-        <NavigationContainer>
+        <NavigationContainer theme={MyTheme}>
           {isLogin ? (
             <Navigator />
           ) : (
