@@ -12,6 +12,7 @@ const essentialInputStyles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1.5,
     fontSize: 15,
+    paddingLeft: 20,
     fontFamily: fonts.semibold,
   },
   phoneInputContainer: {
