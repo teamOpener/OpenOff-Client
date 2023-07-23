@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { fonts } from 'styles/theme';
 
 const essentialInputStyles = StyleSheet.create({
   container: {
@@ -10,6 +11,8 @@ const essentialInputStyles = StyleSheet.create({
     height: 54,
     borderRadius: 8,
     borderWidth: 1.5,
+    fontSize: 15,
+    fontFamily: fonts.semibold,
   },
   phoneInputContainer: {
     justifyContent: 'center',

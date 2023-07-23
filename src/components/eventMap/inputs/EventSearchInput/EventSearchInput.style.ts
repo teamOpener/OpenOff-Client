@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
+import textStyles from 'styles/textStyles';
 import { colors, fonts } from 'styles/theme';
 
 const eventSearchInput = StyleSheet.create({
@@ -16,9 +17,10 @@ const eventSearchInput = StyleSheet.create({
     borderRadius: 27.5,
   },
   searchInput: {
+    ...textStyles.body2,
     position: 'absolute',
     left: 10,
-    top: 5,
+    top: Platform.OS === 'android' ? 5 : 17,
     width: Dimensions.get('window').width - 150,
     paddingLeft: 40,
     zIndex: 11,

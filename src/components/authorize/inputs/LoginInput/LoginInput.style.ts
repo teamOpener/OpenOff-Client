@@ -1,21 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
+import textStyles from 'styles/textStyles';
 
 const loginInputStyles = StyleSheet.create({
   container: {
-    margin: 7,
+    margin: Platform.OS === 'android' ? 7 : 15,
     flexDirection: 'column',
   },
   input: {
     width: 350,
-    fontSize: 15,
     borderBottomWidth: 2,
     backgroundColor: 'transparent',
+    ...textStyles.body2,
   },
   inputTitle: {
     color: 'white',
-    fontSize: 17,
-    marginBottom: 2,
-    fontWeight: '800',
+    marginBottom: Platform.OS === 'android' ? 2 : 20,
   },
   errorText: {
     color: 'red',
