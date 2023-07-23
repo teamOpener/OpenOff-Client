@@ -39,7 +39,7 @@ const CalendarButton = ({
       }}
       onPress={handleClick}
     >
-      <Text variant="body2" color={color}>
+      <Text variant="h4" color={color}>
         {label}
       </Text>
     </TouchableOpacity>
