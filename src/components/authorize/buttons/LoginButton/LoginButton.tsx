@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 import { colors } from 'styles/theme';
 import Text from '../../../common/Text/Text';
 import loginButtonStyles from './LoginButton.style';
@@ -16,7 +16,6 @@ const LoginButton = ({ handlePress, isActive }: Props) => {
         ...loginButtonStyles.container,
         backgroundColor: isActive ? colors.main : colors.darkGrey,
       }}
-      hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
     >
       <Text color={isActive ? 'white' : 'grey'} variant="h4">
         로그인
