@@ -21,8 +21,10 @@ const loginInputStyles = StyleSheet.create({
     color: 'white',
     marginBottom: Platform.OS === 'android' ? 2 : 20,
   },
-  errorText: {
-    color: 'red',
+  validateStatus: {
+    position: 'absolute',
+    top: 15,
+    right: 10,
   },
 });
 
