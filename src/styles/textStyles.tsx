@@ -28,14 +28,12 @@ const textStyles = StyleSheet.create({
     lineHeight: 22.4,
   } as TextStyle,
   body2: {
-    fontFamily: fonts.bold,
-    fontSize: 14,
-    lineHeight: 19.6,
+    fontFamily: fonts.regular,
+    fontSize: 15,
   } as TextStyle,
   body3: {
     fontFamily: fonts.regular,
     fontSize: 12,
-    lineHeight: 16.8,
   } as TextStyle,
   caption: {
     fontFamily: fonts.bold,
