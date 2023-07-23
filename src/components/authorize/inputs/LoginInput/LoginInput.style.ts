@@ -11,6 +11,11 @@ const loginInputStyles = StyleSheet.create({
     borderBottomWidth: 2,
     backgroundColor: 'transparent',
     ...textStyles.body2,
+    ...Platform.select({
+      ios: {
+        height: 50,
+      },
+    }),
   },
   inputTitle: {
     color: 'white',
