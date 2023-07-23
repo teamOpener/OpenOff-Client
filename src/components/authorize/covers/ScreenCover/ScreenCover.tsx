@@ -34,25 +34,12 @@ const ScreenCover = ({ children, authorizeButton }: Props) => {
       keyboardVerticalOffset={statusBarHeight + 40}
       style={screenCoverStyles.scrollContainer}
     >
-      {Platform.OS === 'ios' ? (
-        <ScrollView>{children}</ScrollView>
-      ) : (
-        <>
-          {children}
-          <AuthorizeFlowButton
-            handlePress={authorizeButton.handlePress}
-            label={authorizeButton.label}
-            isActive={authorizeButton.isActive}
-          />
-        </>
-      )}
-      {Platform.OS === 'ios' && (
-        <AuthorizeFlowButton
-          handlePress={authorizeButton.handlePress}
-          label={authorizeButton.label}
-          isActive={authorizeButton.isActive}
-        />
-      )}
+      {Platform.OS === 'ios' ? <ScrollView>{children}</ScrollView> : children}
+      <AuthorizeFlowButton
+        handlePress={authorizeButton.handlePress}
+        label={authorizeButton.label}
+        isActive={authorizeButton.isActive}
+      />
     </KeyboardAvoidingView>
   );
 };
