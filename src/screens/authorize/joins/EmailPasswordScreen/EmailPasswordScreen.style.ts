@@ -4,7 +4,6 @@ import { colors } from 'styles/theme';
 const emailPasswordScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: colors.background,
   },
   titleContainer: {

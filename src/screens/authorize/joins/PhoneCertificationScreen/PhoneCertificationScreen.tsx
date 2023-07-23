@@ -1,12 +1,13 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import Text from 'components/common/Text/Text';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
-import { View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
+import { validateAuthNumber, validatePhoneNumber } from 'utils/validate';
 import phoneCertificationScreenStyles from './PhoneCertificationScreen.style';
 
 interface Props {
@@ -27,8 +28,19 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
     });
     navigation.navigate(AuthorizeMenu.Nickname);
   };
+  const isActive =
+    !validatePhoneNumber(phonenumber) &&
+    phonenumber.length > 1 &&
+    !validateAuthNumber(authnumber) &&
+    authnumber.length > 1;
   return (
-    <View style={phoneCertificationScreenStyles.container}>
+    <ScreenCover
+      authorizeButton={{
+        handlePress: handleAuthorizeFlow,
+        label: '다음',
+        isActive,
+      }}
+    >
       <Text
         variant="h1"
         color="white"
@@ -38,13 +50,12 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
       </Text>
       <PhoneCertificationForm
         handleCertification={handleCertification}
-        handleAuthorizeFlow={handleAuthorizeFlow}
         phonenumber={phonenumber}
         setPhonenumber={setPhonenumber}
         authnumber={authnumber}
         setAuthnumber={setAuthnumber}
       />
-    </View>
+    </ScreenCover>
   );
 };
 
