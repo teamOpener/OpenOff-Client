@@ -1,6 +1,7 @@
 import ErrorText from 'components/authorize/texts/ErrorText/ErrorText';
+import Text from 'components/common/Text/Text';
 import { Dispatch, SetStateAction } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { colors } from 'styles/theme';
 import loginInputStyles from './LoginInput.style';
 
@@ -17,7 +18,9 @@ const LoginInput = ({ label, value, setValue, type, validation }: Props) => {
   const EMAIL = '이메일을';
   return (
     <View style={loginInputStyles.container}>
-      <Text style={loginInputStyles.inputTitle}>{label}</Text>
+      <Text variant="h4" style={loginInputStyles.inputTitle}>
+        {label}
+      </Text>
       <TextInput
         value={value}
         placeholder={`${type === 'password' ? PASSWORD : EMAIL} 입력해주세요.`}
