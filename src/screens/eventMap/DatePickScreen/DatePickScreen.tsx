@@ -64,6 +64,9 @@ const DatePickScreen = () => {
   };
   return (
     <View style={datePickScreenStyles.container}>
+      <Text variant="h3" color="white" style={datePickScreenStyles.dateTitle}>
+        기간
+      </Text>
       <View style={datePickScreenStyles.buttonContainer}>
         <TouchableOpacity
           style={{
