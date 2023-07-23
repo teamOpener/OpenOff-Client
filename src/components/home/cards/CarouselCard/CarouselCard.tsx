@@ -38,7 +38,7 @@ const CarouselCard = <T extends Advertisement>({
               </Text>
             </View>
             <View style={carouselCardStyle.pageInfo}>
-              <Text variant="body3" color="white">
+              <Text style={carouselCardStyle.pageText} color="white">
                 {index + 1}/{length}
               </Text>
             </View>
