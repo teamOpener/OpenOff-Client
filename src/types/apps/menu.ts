@@ -37,7 +37,7 @@ export type RootStackParamList = {
     field: Field;
     coordinate: Coordinate;
   };
-  AddEvent: undefined;
+  OpenEvent: undefined;
 };
 
 export type RootStackNavigationProp =
