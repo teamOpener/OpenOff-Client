@@ -15,6 +15,7 @@ interface Props {
   authnumber: string;
   setAuthnumber: Dispatch<SetStateAction<string>>;
   handleCertification: () => void;
+  retry: boolean;
 }
 
 const PhoneCertificationForm = ({
@@ -23,8 +24,8 @@ const PhoneCertificationForm = ({
   setPhonenumber,
   authnumber,
   setAuthnumber,
+  retry,
 }: Props) => {
-  const [retry, setRetry] = useState<boolean>(false);
   const [timerTrigger, setTimerTrigger] = useState<Trigger>({
     active: false,
     reactive: false,
@@ -43,15 +44,14 @@ const PhoneCertificationForm = ({
           label={retry ? '재발송' : '인증받기'}
           active={!(validatePhoneNumber(phonenumber) || phonenumber.length < 2)}
           handlePress={() => {
-            setRetry(true);
             if (!timerTrigger.active) {
               setTimerTrigger({ ...timerTrigger, active: true });
-              return;
+            } else {
+              setTimerTrigger({
+                ...timerTrigger,
+                reactive: !timerTrigger.reactive,
+              });
             }
-            setTimerTrigger({
-              ...timerTrigger,
-              reactive: !timerTrigger.reactive,
-            });
             handleCertification();
           }}
         />

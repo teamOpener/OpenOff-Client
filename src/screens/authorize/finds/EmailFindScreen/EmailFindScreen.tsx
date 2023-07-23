@@ -9,8 +9,9 @@ const EmailFindScreen = () => {
   const [phonenumber, setPhonenumber] = useState<string>('');
   const [authnumber, setAuthnumber] = useState<string>('');
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
+  const [retry, setRetry] = useState<boolean>(false);
   const handleCertification = () => {
-    console.log(phonenumber);
+    setRetry(true);
   };
   const handleAuthorizeFlow = () => {
     setIsAuthorize(true);
@@ -19,7 +20,8 @@ const EmailFindScreen = () => {
     !validatePhoneNumber(phonenumber) &&
     phonenumber.length > 1 &&
     !validateAuthNumber(authnumber) &&
-    authnumber.length > 1;
+    authnumber.length > 1 &&
+    retry;
   return (
     <View style={emailFindScreenStyles.container}>
       {!isAuthorize ? (
@@ -31,6 +33,7 @@ const EmailFindScreen = () => {
           }}
         >
           <PhoneCertificationForm
+            retry={retry}
             phonenumber={phonenumber}
             setPhonenumber={setPhonenumber}
             authnumber={authnumber}
