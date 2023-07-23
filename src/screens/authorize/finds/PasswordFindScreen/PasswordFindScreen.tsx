@@ -37,7 +37,8 @@ const PasswordFindScreen = () => {
     !validatePhoneNumber(phonenumber) &&
     phonenumber.length > 1 &&
     !validateAuthNumber(authnumber) &&
-    authnumber.length > 1;
+    authnumber.length > 1 &&
+    retry;
   const isConfirmPassword =
     !validatePassword(password) &&
     password.length > 1 &&

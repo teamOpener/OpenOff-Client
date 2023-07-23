@@ -18,8 +18,9 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [phonenumber, setPhonenumber] = useState<string>('');
   const [authnumber, setAuthnumber] = useState<string>('');
+  const [retry, setRetry] = useState<boolean>(false);
   const handleCertification = () => {
-    console.log(phonenumber);
+    setRetry(true);
   };
   const handleAuthorizeFlow = () => {
     dispatch({
@@ -32,7 +33,8 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
     !validatePhoneNumber(phonenumber) &&
     phonenumber.length > 1 &&
     !validateAuthNumber(authnumber) &&
-    authnumber.length > 1;
+    authnumber.length > 1 &&
+    retry;
   return (
     <ScreenCover
       authorizeButton={{
@@ -49,6 +51,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
         휴대폰 인증을 해주세요.
       </Text>
       <PhoneCertificationForm
+        retry={retry}
         handleCertification={handleCertification}
         phonenumber={phonenumber}
         setPhonenumber={setPhonenumber}
