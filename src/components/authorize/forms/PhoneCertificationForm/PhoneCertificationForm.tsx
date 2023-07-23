@@ -1,4 +1,3 @@
-import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
 import PhoneAuthButton from 'components/authorize/buttons/PhoneAuthButton/PhoneAuthButton';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import TimerText from 'components/authorize/texts/TimerText/TimerText';
@@ -16,12 +15,10 @@ interface Props {
   authnumber: string;
   setAuthnumber: Dispatch<SetStateAction<string>>;
   handleCertification: () => void;
-  handleAuthorizeFlow: () => void;
 }
 
 const PhoneCertificationForm = ({
   handleCertification,
-  handleAuthorizeFlow,
   phonenumber,
   setPhonenumber,
   authnumber,
@@ -32,11 +29,6 @@ const PhoneCertificationForm = ({
     active: false,
     reactive: false,
   });
-  const isActive =
-    !validatePhoneNumber(phonenumber) &&
-    phonenumber.length > 1 &&
-    !validateAuthNumber(authnumber) &&
-    authnumber.length > 1;
   return (
     <>
       <EssentialInput
@@ -79,16 +71,6 @@ const PhoneCertificationForm = ({
           />
         )}
       </EssentialInput>
-      <AuthorizeFlowButton
-        handlePress={() => {
-          setTimerTrigger(() => {
-            return { reactive: false, active: false };
-          });
-          handleAuthorizeFlow();
-        }}
-        label="확인"
-        isActive={isActive}
-      />
     </>
   );
 };

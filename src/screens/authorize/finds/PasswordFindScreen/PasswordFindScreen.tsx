@@ -1,10 +1,10 @@
-import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
 import PhoneAuthButton from 'components/authorize/buttons/PhoneAuthButton/PhoneAuthButton';
+import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import TimerText from 'components/authorize/texts/TimerText/TimerText';
-import React, { useState } from 'react';
-import { View } from 'react-native';
 import Text from 'components/common/Text/Text';
+import { useState } from 'react';
+import { View } from 'react-native';
 import {
   validateAuthNumber,
   validateEmail,
@@ -67,7 +67,13 @@ const PasswordFindScreen = () => {
   return (
     <View style={passwordFindScreenStyles.container}>
       {!isAuthorize ? (
-        <>
+        <ScreenCover
+          authorizeButton={{
+            handlePress: handleAuthorizeFlow,
+            label: '다음',
+            isActive,
+          }}
+        >
           <EssentialInput
             validation={validateEmail}
             label="이메일"
@@ -107,14 +113,15 @@ const PasswordFindScreen = () => {
               />
             )}
           </EssentialInput>
-          <AuthorizeFlowButton
-            handlePress={handleAuthorizeFlow}
-            label="다음"
-            isActive={isActive}
-          />
-        </>
+        </ScreenCover>
       ) : (
-        <>
+        <ScreenCover
+          authorizeButton={{
+            handlePress: handleChangePassword,
+            label: '다음',
+            isActive: isConfirmPassword,
+          }}
+        >
           <View>
             <Text variant="h3" color="white">
               비밀번호를 재설정해주세요.
@@ -136,12 +143,7 @@ const PasswordFindScreen = () => {
             setValue={setPasswordCheck}
             type="password"
           />
-          <AuthorizeFlowButton
-            handlePress={handleChangePassword}
-            label="다음"
-            isActive={isConfirmPassword}
-          />
-        </>
+        </ScreenCover>
       )}
     </View>
   );

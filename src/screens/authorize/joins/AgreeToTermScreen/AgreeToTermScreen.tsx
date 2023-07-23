@@ -1,6 +1,6 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import AuthorizeFlowButton from 'components/authorize/buttons/AuthorizeFlowButton/AuthorizeFlowButton';
 import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
+import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
@@ -55,7 +55,16 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
   ]);
   const isActive = term.termToPrivacy && term.termToTeenager && term.termToUse;
   return (
-    <View style={agreeToTermScreenStyles.container}>
+    <ScreenCover
+      authorizeButton={{
+        handlePress: () => {
+          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+          navigation.navigate(AuthorizeMenu.PhoneCertification);
+        },
+        label: '확인',
+        isActive,
+      }}
+    >
       <View style={agreeToTermScreenStyles.titleContainer}>
         <Text variant="h1" color="white">
           서비스 이용 약관에
@@ -100,15 +109,7 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
           label="(선택) 마케팅 정보 수신동의"
         />
       </View>
-      <AuthorizeFlowButton
-        handlePress={() => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
-          navigation.navigate(AuthorizeMenu.PhoneCertification);
-        }}
-        label="확인"
-        isActive={isActive}
-      />
-    </View>
+    </ScreenCover>
   );
 };
 

@@ -5,14 +5,12 @@ const phoneCertificationScreenStyles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    position: 'relative',
   },
   title: {
     width: 350,
     height: 50,
     marginTop: 20,
+    marginLeft: 10,
     marginBottom: 25,
   },
 });

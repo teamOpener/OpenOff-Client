@@ -9,6 +9,9 @@ const agreeToTermScreenStyles = StyleSheet.create({
     backgroundColor: colors.background,
     position: 'relative',
   },
+  scrollContainer: {
+    flex: 1,
+  },
   checkButtonContainer: {
     flexDirection: 'column',
     width: 350,
