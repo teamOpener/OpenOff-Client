@@ -16,7 +16,6 @@ const PhoneAuthButton = ({ label, active, handlePress }: Props) => {
   };
   return (
     <View style={phoneAuthButtonStyles.container}>
-      (
       <TouchableOpacity
         style={
           active
@@ -29,7 +28,6 @@ const PhoneAuthButton = ({ label, active, handlePress }: Props) => {
           {label}
         </Text>
       </TouchableOpacity>
-      )
     </View>
   );
 };
