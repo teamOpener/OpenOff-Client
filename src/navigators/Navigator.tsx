@@ -4,7 +4,7 @@ import DatePickScreen from 'screens/eventMap/DatePickScreen/DatePickScreen';
 import FieldEventMapScreen from 'screens/eventMap/FieldEventMapScreen/FieldEventMapScreen';
 import textStyles from 'styles/textStyles';
 import { colors } from 'styles/theme';
-import AddEventScreen from 'screens/home/AddEventScreen/AddEventScreen';
+import AddEventScreen from 'screens/home/OpenEventScreen/OpenEventScreen';
 import BackButton from 'components/navigator/BackButton';
 import BottomTabNavigator from './BottomTabNavigator';
 
@@ -32,7 +32,7 @@ const Navigator = () => {
           },
           headerLeft: BackButton,
         }}
-        name={StackMenu.AddEvent}
+        name={StackMenu.OpenEvent}
         component={AddEventScreen}
       />
       {/* map */}

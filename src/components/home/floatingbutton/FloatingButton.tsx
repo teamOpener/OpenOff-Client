@@ -9,7 +9,7 @@ const FloatingButton = () => {
   const { stackNavigation } = useNavigator();
 
   const handlePress = useCallback(() => {
-    stackNavigation.navigate(StackMenu.AddEvent);
+    stackNavigation.navigate(StackMenu.OpenEvent);
   }, [stackNavigation]);
 
   return (
