@@ -1,43 +1,39 @@
-import { Dimensions, Platform, StyleSheet } from 'react-native';
-import textStyles from 'styles/textStyles';
+import { StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const eventSearchInput = StyleSheet.create({
   absoluteContainer: {
+    position: 'absolute',
     top: 30,
     left: 16,
+    right: 16,
     zIndex: 10,
-    position: 'absolute',
   },
   container: {
-    position: 'relative',
     backgroundColor: colors.white,
-    height: 59,
-    width: Dimensions.get('window').width - 40,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 10,
     borderRadius: 27.5,
+    paddingLeft: 22,
+    paddingRight: 9,
+    paddingVertical: 8,
   },
   searchInput: {
-    ...textStyles.body2,
-    position: 'absolute',
-    left: 10,
-    top: Platform.OS === 'android' ? 5 : 17,
-    width: Dimensions.get('window').width - 150,
-    paddingLeft: 40,
+    fontFamily: fonts.regular,
+    fontSize: 14,
     zIndex: 11,
+    flex: 1,
+    paddingVertical: 0,
   },
   searchButton: {
-    position: 'absolute',
     zIndex: 16,
-    left: 17,
-    top: 18,
   },
   calendarButton: {
-    position: 'absolute',
-    right: 12,
-    top: 8,
-    borderRadius: 300,
     borderColor: colors.background,
     borderWidth: 1,
+    borderRadius: 300,
     width: 39,
     height: 39,
     justifyContent: 'center',
@@ -46,16 +42,11 @@ const eventSearchInput = StyleSheet.create({
   textContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column',
-    position: 'absolute',
     zIndex: 99,
-    top: 8,
-    right: 60,
   },
   calendarText: {
     color: colors.background,
     fontSize: 10,
-    lineHeight: 14,
     fontFamily: fonts.regular,
   },
 });

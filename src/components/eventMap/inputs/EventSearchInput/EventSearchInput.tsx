@@ -16,24 +16,20 @@ const EventSearchInput = ({ handleSearch, handleCalendar }: Props) => {
   return (
     <View style={eventSearchInput.absoluteContainer}>
       <View style={eventSearchInput.container}>
-        <TextInput
-          onChangeText={(value) => setSearchValue(value)}
-          style={eventSearchInput.searchInput}
-          placeholder="지역, 이벤트 이름, 주최자 검색"
-          placeholderTextColor={colors.grey}
-        />
-        <TouchableOpacity
-          onPress={handleCalendar}
-          style={eventSearchInput.calendarButton}
-        >
-          <Icon name="IconCalendar" size={18} fill="background" />
-        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => handleSearch(searchValue)}
           style={eventSearchInput.searchButton}
         >
           <Icon name="IconSearch" size={21} fill="background" />
         </TouchableOpacity>
+
+        <TextInput
+          onChangeText={(value) => setSearchValue(value)}
+          style={eventSearchInput.searchInput}
+          placeholder="지역, 이벤트 이름, 주최자 검색"
+          placeholderTextColor={colors.grey}
+        />
+
         {startEndDate.endDay && startEndDate.startDay && (
           <View style={eventSearchInput.textContainer}>
             <Text style={eventSearchInput.calendarText}>{`${parseInt(
@@ -53,6 +49,13 @@ const EventSearchInput = ({ handleSearch, handleCalendar }: Props) => {
             )}일`}</Text>
           </View>
         )}
+
+        <TouchableOpacity
+          onPress={handleCalendar}
+          style={eventSearchInput.calendarButton}
+        >
+          <Icon name="IconCalendar" size={18} fill="background" />
+        </TouchableOpacity>
       </View>
     </View>
   );
