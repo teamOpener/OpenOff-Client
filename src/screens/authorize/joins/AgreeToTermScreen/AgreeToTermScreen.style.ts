@@ -14,7 +14,7 @@ const agreeToTermScreenStyles = StyleSheet.create({
   },
   checkButtonContainer: {
     flexDirection: 'column',
-    width: 350,
+    width: '100%',
   },
 });
 
