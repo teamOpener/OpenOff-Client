@@ -1,7 +1,6 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
-import Text from 'components/common/Text/Text';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useEffect, useState } from 'react';
@@ -64,15 +63,8 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
         label: '확인',
         isActive,
       }}
+      titleElements={['서비스 이용 약관에', '동의해 주세요.']}
     >
-      <View style={agreeToTermScreenStyles.titleContainer}>
-        <Text variant="h1" color="white">
-          서비스 이용 약관에
-        </Text>
-        <Text variant="h1" color="white">
-          동의해 주세요.
-        </Text>
-      </View>
       <View style={agreeToTermScreenStyles.checkButtonContainer}>
         <CheckButton
           value={term.allAgree}

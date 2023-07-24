@@ -1,14 +1,12 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
-import Text from 'components/common/Text/Text';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateAuthNumber, validatePhoneNumber } from 'utils/validate';
-import phoneCertificationScreenStyles from './PhoneCertificationScreen.style';
 
 interface Props {
   dispatch: Dispatch<Action>;
@@ -42,14 +40,8 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
         label: '다음',
         isActive,
       }}
+      titleElements={['휴대폰 인증을 해주세요.']}
     >
-      <Text
-        variant="h1"
-        color="white"
-        style={phoneCertificationScreenStyles.title}
-      >
-        휴대폰 인증을 해주세요.
-      </Text>
       <PhoneCertificationForm
         retry={retry}
         handleCertification={handleCertification}

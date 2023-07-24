@@ -16,13 +16,6 @@ const agreeToTermScreenStyles = StyleSheet.create({
     flexDirection: 'column',
     width: 350,
   },
-  titleContainer: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    width: 350,
-    marginBottom: 20,
-    marginTop: 20,
-  },
 });
 
 export default agreeToTermScreenStyles;

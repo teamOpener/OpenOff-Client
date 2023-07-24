@@ -8,18 +8,9 @@ const userInfoScreenStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.background,
   },
-  titleContainer: {
-    width: 350,
-    marginTop: 20,
-    marginBottom: 50,
-  },
-  title: {
-    width: 230,
-  },
   detailUserInfo: {
     flexDirection: 'row',
-    width: 360,
-    alignItems: 'center',
+    marginTop: 70,
   },
 });
 
