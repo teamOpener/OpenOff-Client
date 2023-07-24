@@ -14,7 +14,7 @@ const joinCompleteScreenStyles = StyleSheet.create({
     fontSize: 18,
   },
   myFieldContainer: {
-    width: 360,
+    width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
