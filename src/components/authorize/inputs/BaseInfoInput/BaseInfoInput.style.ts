@@ -3,13 +3,13 @@ import { fonts } from 'styles/theme';
 
 const baseInfoInputStyles = StyleSheet.create({
   container: {
-    margin: 7,
     flexDirection: 'column',
     position: 'relative',
   },
   input: {
-    width: 365,
+    width: '100%',
     fontSize: 15,
+    paddingVertical: 10,
     fontFamily: fonts.semibold,
     borderBottomWidth: 1,
     backgroundColor: 'transparent',
@@ -17,7 +17,7 @@ const baseInfoInputStyles = StyleSheet.create({
   inputTitle: {
     color: 'white',
     fontSize: 18,
-    marginBottom: Platform.OS === 'android' ? 12 : 27,
+    marginBottom: Platform.OS === 'android' ? 10 : 14,
     fontWeight: '600',
   },
   resetPosition: {
