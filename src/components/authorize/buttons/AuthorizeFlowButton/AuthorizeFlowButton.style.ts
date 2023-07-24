@@ -5,17 +5,17 @@ const authorizeFlowButtonStyles = StyleSheet.create({
     marginBottom: 30,
     ...Platform.select({
       ios: {
-        marginLeft: 5,
+        marginLeft: 20,
       },
       android: {
         position: 'absolute',
         bottom: 5,
-        right: 15,
+        right: 20,
       },
     }),
   },
   container: {
-    width: Dimensions.get('window').width - 30,
+    width: Dimensions.get('window').width - 40,
     height: 55,
     borderRadius: 27.5,
     justifyContent: 'center',
