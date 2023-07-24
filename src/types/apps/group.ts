@@ -1,5 +1,7 @@
+import FieldCode from 'constants/code';
+
 export interface Field {
-  value: string;
+  value: FieldCode;
   isActive: boolean;
   label: string;
 }
