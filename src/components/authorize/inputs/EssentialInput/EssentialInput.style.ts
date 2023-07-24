@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { fonts } from 'styles/theme';
 
 const essentialInputStyles = StyleSheet.create({
@@ -8,6 +8,7 @@ const essentialInputStyles = StyleSheet.create({
   },
   inputContainer: {
     paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 8,
     borderWidth: 1.5,
     fontSize: 15,
@@ -32,7 +33,7 @@ const essentialInputStyles = StyleSheet.create({
   },
   validateStatus: {
     position: 'absolute',
-    top: 15,
+    top: Platform.OS === 'android' ? 15 : 8,
     right: 10,
   },
 });
