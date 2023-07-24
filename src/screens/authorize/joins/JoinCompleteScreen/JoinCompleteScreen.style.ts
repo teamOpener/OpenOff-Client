@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { colors, fonts } from 'styles/theme';
 
 const joinCompleteScreenStyles = StyleSheet.create({
   container: {
@@ -8,17 +8,9 @@ const joinCompleteScreenStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  titleContainer: {
-    marginTop: 40,
-    marginBottom: 40,
-    flexDirection: 'column',
-  },
-  title: {
-    fontSize: 25,
-    color: '#FFF',
-  },
   myFieldTitle: {
     color: colors.white,
+    fontFamily: fonts.regular,
     fontSize: 18,
   },
   myFieldContainer: {
@@ -28,6 +20,7 @@ const joinCompleteScreenStyles = StyleSheet.create({
   },
   myField: {
     color: colors.main,
+    fontFamily: fonts.regular,
     fontSize: 18,
     marginRight: 10,
   },

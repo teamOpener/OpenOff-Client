@@ -6,13 +6,6 @@ const phoneCertificationScreenStyles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
-  title: {
-    width: 350,
-    height: 50,
-    marginTop: 20,
-    marginLeft: 10,
-    marginBottom: 25,
-  },
 });
 
 export default phoneCertificationScreenStyles;

@@ -8,9 +8,6 @@ const interestFieldScreenStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  title: {
-    marginTop: 20,
-  },
   fieldInfomation: {
     marginTop: 20,
     width: 198,

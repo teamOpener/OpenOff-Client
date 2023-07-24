@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 const screenCoverStyles = StyleSheet.create({
-  scrollContainer: {
+  container: {
     flex: 1,
-    padding: 10,
+  },
+  scrollContainer: {
+    paddingHorizontal: 25,
   },
 });
 

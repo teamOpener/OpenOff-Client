@@ -6,12 +6,6 @@ const emailPasswordScreenStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-  titleContainer: {
-    width: 350,
-    height: 70,
-    marginTop: 20,
-    marginBottom: 50,
-  },
 });
 
 export default emailPasswordScreenStyles;
