@@ -26,6 +26,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'react/prop-types': 0,
     'no-unused-vars': 1,
+    'react-hooks/exhaustive-deps': 0,
     'react/jsx-filename-extension': [
       2,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
