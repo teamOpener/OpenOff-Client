@@ -39,6 +39,7 @@ const EmailFindScreen = () => {
             authnumber={authnumber}
             setAuthnumber={setAuthnumber}
             handleCertification={handleCertification}
+            setRetry={setRetry}
           />
         </ScreenCover>
       ) : (

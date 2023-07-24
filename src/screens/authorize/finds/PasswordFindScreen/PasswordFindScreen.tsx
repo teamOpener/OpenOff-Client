@@ -111,6 +111,7 @@ const PasswordFindScreen = () => {
               <TimerText
                 timerTrigger={timerTrigger}
                 setTimerTrigger={setTimerTrigger}
+                setRetry={setRetry}
               />
             )}
           </EssentialInput>
