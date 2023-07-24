@@ -10,9 +10,10 @@ interface Trigger {
 interface Props {
   setTimerTrigger: Dispatch<SetStateAction<Trigger>>;
   timerTrigger: Trigger;
+  setRetry: Dispatch<SetStateAction<boolean>>;
 }
 
-const TimerText = memo(({ setTimerTrigger, timerTrigger }: Props) => {
+const TimerText = memo(({ setTimerTrigger, timerTrigger, setRetry }: Props) => {
   const MINUTES_IN_MS = 3 * 60 * 1000;
   const INTERVAL = 1000;
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
@@ -31,6 +32,7 @@ const TimerText = memo(({ setTimerTrigger, timerTrigger }: Props) => {
     }, INTERVAL);
 
     if (timeLeft <= 0) {
+      setRetry(false);
       clearInterval(timer);
       setTimerTrigger({ ...timerTrigger, active: !timerTrigger.active });
     }
@@ -41,7 +43,14 @@ const TimerText = memo(({ setTimerTrigger, timerTrigger }: Props) => {
     return () => {
       clearInterval(timer);
     };
-  }, [MINUTES_IN_MS, currentReactive, setTimerTrigger, timeLeft, timerTrigger]);
+  }, [
+    MINUTES_IN_MS,
+    currentReactive,
+    setTimerTrigger,
+    timeLeft,
+    timerTrigger,
+    setRetry,
+  ]);
 
   return (
     <Text variant="body3" color="error" style={timerTextStyles.textContainer}>

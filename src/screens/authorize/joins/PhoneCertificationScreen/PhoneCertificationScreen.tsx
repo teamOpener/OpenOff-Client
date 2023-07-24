@@ -44,6 +44,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
     >
       <PhoneCertificationForm
         retry={retry}
+        setRetry={setRetry}
         handleCertification={handleCertification}
         phonenumber={phonenumber}
         setPhonenumber={setPhonenumber}

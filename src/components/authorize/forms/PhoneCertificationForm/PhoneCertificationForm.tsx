@@ -16,6 +16,7 @@ interface Props {
   setAuthnumber: Dispatch<SetStateAction<string>>;
   handleCertification: () => void;
   retry: boolean;
+  setRetry: Dispatch<SetStateAction<boolean>>;
 }
 
 const PhoneCertificationForm = ({
@@ -25,6 +26,7 @@ const PhoneCertificationForm = ({
   authnumber,
   setAuthnumber,
   retry,
+  setRetry,
 }: Props) => {
   const [timerTrigger, setTimerTrigger] = useState<Trigger>({
     active: false,
@@ -68,6 +70,7 @@ const PhoneCertificationForm = ({
           <TimerText
             timerTrigger={timerTrigger}
             setTimerTrigger={setTimerTrigger}
+            setRetry={setRetry}
           />
         )}
       </EssentialInput>
