@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 import textStyles from 'styles/textStyles';
 
 const loginInputStyles = StyleSheet.create({
@@ -7,15 +7,11 @@ const loginInputStyles = StyleSheet.create({
     flexDirection: 'column',
   },
   input: {
-    width: 350,
-    borderBottomWidth: 2,
+    width: Dimensions.get('window').width - 60,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
     backgroundColor: 'transparent',
     ...textStyles.body2,
-    ...Platform.select({
-      ios: {
-        height: 50,
-      },
-    }),
   },
   inputTitle: {
     color: 'white',

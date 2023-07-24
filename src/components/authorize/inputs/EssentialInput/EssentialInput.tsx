@@ -2,7 +2,7 @@ import ErrorText from 'components/authorize/texts/ErrorText/ErrorText';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import React, { Dispatch, ReactNode, SetStateAction } from 'react';
-import { TextInput, View } from 'react-native';
+import { Dimensions, TextInput, View } from 'react-native';
 import { colors } from 'styles/theme';
 import essentialInputStyles from './EssentialInput.style';
 
@@ -27,7 +27,10 @@ const EssentialInput = ({
   maxLength = 20,
   ...rest
 }: Props) => {
-  const clacWidth = children && type === 'phonenumber' ? 275 : 365;
+  const clacWidth =
+    children && type === 'phonenumber'
+      ? Dimensions.get('window').width - 140
+      : Dimensions.get('window').width - 50;
   const handleChangeText = (
     textValue: string,
     onChange: Dispatch<SetStateAction<string>>,
@@ -46,48 +49,48 @@ const EssentialInput = ({
   return (
     <View style={essentialInputStyles.container}>
       <View style={essentialInputStyles.phoneInputContainer}>
-        <Text
-          variant="h4"
-          color="white"
-          style={{ ...essentialInputStyles.label, width: clacWidth }}
-        >
+        <Text color="grey" style={essentialInputStyles.label}>
           {label}
         </Text>
-        <View>
-          <TextInput
-            value={value}
-            maxLength={maxLength}
-            keyboardType={keyboardType}
-            secureTextEntry={type === 'password'}
-            style={{
-              ...essentialInputStyles.inputContainer,
-              width: clacWidth,
-              color: validation(value) ? colors.error : colors.grey,
-              borderColor: validation(value) ? colors.error : colors.grey,
-            }}
-            onChangeText={(textValue: string) =>
-              handleChangeText(textValue, setValue)
-            }
-            {...rest}
-          />
-          <View style={essentialInputStyles.validateStatus}>
-            {validation(value) && value.length > 0 && type !== 'authnumber' && (
-              <Text variant="body1" color="error">
-                !
-              </Text>
-            )}
-            {!validation(value) &&
-              value.length > 0 &&
-              type !== 'authnumber' && (
-                <Icon name="IconCheck" size={20} fill="green" />
-              )}
+        <View style={essentialInputStyles.phoneInputRow}>
+          <View style={essentialInputStyles.inputAbsoluteContainer}>
+            <TextInput
+              value={value}
+              maxLength={maxLength}
+              keyboardType={keyboardType}
+              secureTextEntry={type === 'password'}
+              style={{
+                ...essentialInputStyles.inputContainer,
+                width: clacWidth,
+                color: validation(value) ? colors.error : colors.grey,
+                borderColor: validation(value) ? colors.error : colors.grey,
+              }}
+              onChangeText={(textValue: string) =>
+                handleChangeText(textValue, setValue)
+              }
+              {...rest}
+            />
+            <View style={essentialInputStyles.validateStatus}>
+              {validation(value) &&
+                value.length > 0 &&
+                type !== 'authnumber' && (
+                  <Text variant="body1" color="error">
+                    !
+                  </Text>
+                )}
+              {!validation(value) &&
+                value.length > 0 &&
+                type !== 'authnumber' && (
+                  <Icon name="IconCheck" size={20} fill="green" />
+                )}
+            </View>
           </View>
-          <View style={{ width: clacWidth }}>
-            <ErrorText validation={validation} value={value} />
-          </View>
+          {children}
+        </View>
+        <View style={{ width: clacWidth }}>
+          <ErrorText validation={validation} value={value} />
         </View>
       </View>
-      {children}
     </View>
   );
 };
