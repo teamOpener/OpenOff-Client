@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-import DatePicker from 'react-native-date-picker';
+import DatePicker, { DatePickerProps } from 'react-native-date-picker';
 import MENT_OPEN_EVENT from 'constants/openEvent';
 import Icon from 'components/common/Icon/Icon';
 import { formatDateTime } from 'utils/date';
@@ -33,6 +33,14 @@ const DateTimePicker = ({
   const [openDate, setOpenDate] = useState<boolean>(false);
   const [openTime, setOpenTime] = useState<boolean>(false);
 
+  const defaultOptions: DatePickerProps = {
+    modal: true,
+    theme: 'dark',
+    date,
+    minimumDate,
+    cancelText: '취소',
+  };
+
   const onPress = () => {
     if (disabled) return;
     setOpenDate(true);
@@ -58,15 +66,11 @@ const DateTimePicker = ({
           : formatDateTime(date)}
       </Text>
       <DatePicker
-        modal
+        {...defaultOptions}
         open={openDate}
         mode="date"
-        date={date}
-        theme="dark"
-        minimumDate={minimumDate}
         title={MENT_OPEN_EVENT.DATE_PICKER_TITLE}
         confirmText="다음"
-        cancelText="취소"
         onConfirm={(date) => {
           setOpenDate(false);
           setDate(date);
@@ -77,15 +81,11 @@ const DateTimePicker = ({
         }}
       />
       <DatePicker
-        modal
+        {...defaultOptions}
         open={openTime}
         mode="time"
-        date={date}
-        theme="dark"
-        minimumDate={minimumDate}
         title={MENT_OPEN_EVENT.TIME_PICKER_TITLE}
         confirmText="확인"
-        cancelText="취소"
         onConfirm={(date) => {
           setOpenTime(false);
           setDate(date);
