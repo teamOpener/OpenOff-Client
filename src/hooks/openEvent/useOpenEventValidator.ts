@@ -1,9 +1,9 @@
 import MENT_OPEN_EVENT from 'constants/openEvent';
 import {
-  CreateEventDto,
   OpenEventErrorMessage,
   initOpenEventErrorMessage,
 } from 'stores/OpenEventStore';
+import { CreateEventDto } from 'types/apis/CreateEvent.dto';
 
 interface Props {
   openEvent: CreateEventDto;
