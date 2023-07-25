@@ -5,9 +5,10 @@ const applicationPeriodStyles = StyleSheet.create({
     gap: 5,
   },
   dateTimePickerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
     gap: 12,
+  },
+  dateTimePickerContentContainer: {
+    columnGap: 12,
   },
   dateTimePickerWrapper: {
     flexDirection: 'row',

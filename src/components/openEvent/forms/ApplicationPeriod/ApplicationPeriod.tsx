@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -62,7 +62,13 @@ const ApplicationPeriod = () => {
       <OpenEvent.Label content="이벤트 신청 기간" />
 
       <View style={applicationPeriodStyles.inputContainer}>
-        <View style={applicationPeriodStyles.dateTimePickerContainer}>
+        <ScrollView
+          horizontal
+          style={applicationPeriodStyles.dateTimePickerContainer}
+          contentContainerStyle={
+            applicationPeriodStyles.dateTimePickerContentContainer
+          }
+        >
           <View style={applicationPeriodStyles.dateTimePickerWrapper}>
             <OpenEvent.DateTimePicker
               date={startDate}
@@ -84,7 +90,7 @@ const ApplicationPeriod = () => {
             />
             <Text>까지</Text>
           </View>
-        </View>
+        </ScrollView>
 
         {hasError && (
           <HelpText
