@@ -23,7 +23,7 @@ const Title = () => {
       return;
     }
 
-    if (openEventErrorMessage.title !== null) {
+    if (!openEventErrorMessage.title) {
       setOpenEventErrorMessage({ ...openEventErrorMessage, title: null });
     }
 
