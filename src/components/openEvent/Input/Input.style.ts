@@ -4,6 +4,7 @@ import { colors, fonts } from 'styles/theme';
 const inputStyles = StyleSheet.create({
   container: {
     gap: 5,
+    flex: 1,
   },
   errorTextWrapper: {
     borderColor: colors.error,
