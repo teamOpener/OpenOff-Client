@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import MENT_OPEN_EVENT from 'constants/openEvent';
+import Icon from 'components/common/Icon/Icon';
 import { formatDateTime } from 'utils/date';
 import openEventStyles from '../OpenEvent.style';
+import dateTimePickerStyles from './DateTimePicker.style';
 
 interface Props {
   date: Date;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
+  setDate: (newDate: Date) => void;
   disabled?: boolean;
   minimumDate?: Date;
   isEmpty?: boolean;
   hasError?: boolean;
+  deletePossible?: boolean;
+  onAdd?: (newDate: Date) => void;
+  onDelete?: () => void;
 }
 
 const DateTimePicker = ({
@@ -21,6 +26,9 @@ const DateTimePicker = ({
   minimumDate = new Date(),
   isEmpty = false,
   hasError = false,
+  deletePossible = false,
+  onAdd,
+  onDelete,
 }: Props) => {
   const [openDate, setOpenDate] = useState<boolean>(false);
   const [openTime, setOpenTime] = useState<boolean>(false);
@@ -83,11 +91,24 @@ const DateTimePicker = ({
         onConfirm={(date) => {
           setOpenTime(false);
           setDate(date);
+          if (onAdd) {
+            onAdd(date);
+          }
         }}
         onCancel={() => {
           setOpenTime(false);
         }}
       />
+
+      {deletePossible && onDelete && (
+        <TouchableOpacity
+          style={[dateTimePickerStyles.exitWrapper]}
+          activeOpacity={0.6}
+          onPress={onDelete}
+        >
+          <Icon name="IconExitCircle" fill="grey" size={18} />
+        </TouchableOpacity>
+      )}
     </TouchableOpacity>
   );
 };
