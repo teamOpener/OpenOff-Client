@@ -15,7 +15,6 @@ const AuthorizeFlowTitle = ({ titleElements }: Props) => {
         <View style={authorizeFlowTitleStyles.titleContainer}>
           {titleElements.map((title, _id) => (
             <Text
-              // eslint-disable-next-line react/no-array-index-key
               key={titleId + _id}
               variant="h1"
               style={authorizeFlowTitleStyles.title}
