@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import { formatDateTime } from 'utils/date';
+import { serverDateFormatter } from 'utils/date';
 import { HelpText } from 'components/openEvent/OpenEvent';
 import StatusType from 'constants/status';
 import applicationPeriodStyles from './ApplicationPeriod.style';
@@ -39,7 +39,7 @@ const ApplicationPeriod = () => {
 
     setOpenEvent({
       ...openEvent,
-      applicationStartDate: formatDateTime(startDate),
+      applicationStartDate: serverDateFormatter(startDate),
     });
   }, [startDate]);
 
@@ -53,7 +53,7 @@ const ApplicationPeriod = () => {
 
     setOpenEvent({
       ...openEvent,
-      applicationEndDate: formatDateTime(endDate),
+      applicationEndDate: serverDateFormatter(endDate),
     });
   }, [endDate]);
 
