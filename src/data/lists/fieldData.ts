@@ -1,7 +1,7 @@
 import FieldCode from 'constants/code';
 import { Field } from 'types/apps/group';
 
-const field: Field[] = [
+const fieldData: Field[] = [
   {
     value: FieldCode.EE,
     isActive: false,
@@ -34,4 +34,4 @@ const field: Field[] = [
   },
 ];
 
-export default field;
+export default fieldData;

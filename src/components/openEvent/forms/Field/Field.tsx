@@ -5,7 +5,7 @@ import Spacing from 'components/common/Spacing/Spacing';
 import MENT_OPEN_EVENT from 'constants/openEvent';
 import StatusType from 'constants/status';
 import { Field as FieldType } from 'types/apps/group';
-import field from 'data/lists/field';
+import fieldData from 'data/lists/fieldData';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import useField from 'hooks/openEvent/useField';
 
@@ -17,7 +17,7 @@ const Field = () => {
     setOpenEventErrorMessage,
   } = useOpenEventStore();
 
-  const [eventField, setEventField] = useState<FieldType[]>(field);
+  const [eventField, setEventField] = useState<FieldType[]>(fieldData);
   const { toggleFieldIsActive, getActiveFieldCodes } = useField({
     eventField,
   });

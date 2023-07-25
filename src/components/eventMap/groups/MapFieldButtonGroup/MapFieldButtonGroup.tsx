@@ -1,5 +1,5 @@
 import MapFieldButton from 'components/eventMap/buttons/MapFieldButton/MapFieldButton';
-import fields from 'data/lists/field';
+import fieldData from 'data/lists/fieldData';
 import { memo } from 'react';
 import { ScrollView } from 'react-native';
 import { Field } from 'types/apps/group';
@@ -16,7 +16,7 @@ const MapFieldButtonGroup = ({ getFieldEvent }: Props) => {
       horizontal
       showsHorizontalScrollIndicator={false}
     >
-      {fields.map((field) => (
+      {fieldData.map((field) => (
         <MapFieldButton
           field={field}
           key={field.value}
