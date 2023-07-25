@@ -1,5 +1,5 @@
 import Text from 'components/common/Text/Text';
-import field from 'data/lists/field';
+import fieldData from 'data/lists/fieldData';
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Advertisement } from 'types/apps/advertisement';
@@ -31,7 +31,7 @@ const CarouselCard = <T extends Advertisement>({
             <View style={carouselCardStyle.fieldContainer}>
               <Text>
                 {
-                  field.find(
+                  fieldData.find(
                     (fieldElement) => fieldElement.value === item.field,
                   )?.label
                 }

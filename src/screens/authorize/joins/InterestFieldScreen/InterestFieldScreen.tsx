@@ -3,7 +3,7 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
-import field from 'data/lists/field';
+import fieldData from 'data/lists/fieldData';
 import { Dispatch, useEffect, useState } from 'react';
 import { Image } from 'react-native';
 import { Field } from 'types/apps/group';
@@ -17,7 +17,7 @@ interface Props {
 
 const InterestFieldScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
-  const [interestField, setInterestField] = useState<Field[]>(field);
+  const [interestField, setInterestField] = useState<Field[]>(fieldData);
   useEffect(() => {
     setInterestField(interestField);
   }, [interestField]);
