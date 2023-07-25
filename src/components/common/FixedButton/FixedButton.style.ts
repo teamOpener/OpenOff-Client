@@ -11,7 +11,7 @@ const fixedButtonStyles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 25,
-    marginBottom: 35,
+    marginBottom: 20,
     marginTop: 16,
     justifyContent: 'center',
     alignItems: 'center',
