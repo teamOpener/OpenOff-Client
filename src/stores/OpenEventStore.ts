@@ -1,24 +1,5 @@
 import { create } from 'zustand';
-import FieldCode from 'constants/code';
-
-interface CreateEventDto {
-  field: FieldCode[];
-  title: string | null;
-  applicationStartDate: string | null;
-  applicationEndDate: string | null;
-  eventDates: string[];
-  address: string | null;
-  cost: number;
-  recruitmentNumber: number | null;
-  description: string | null;
-  imageUrls: string[];
-  additionalInformation: string[];
-  host: {
-    name: string | null;
-    phoneNumber: string | null;
-    email: string | null;
-  };
-}
+import { CreateEventDto } from 'types/apis/CreateEvent.dto';
 
 export interface OpenEventErrorMessage {
   field: string | null;
