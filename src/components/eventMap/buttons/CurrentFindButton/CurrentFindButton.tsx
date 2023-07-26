@@ -1,5 +1,5 @@
 import Icon from 'components/common/Icon/Icon';
-import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
 import Text from '../../../common/Text/Text';
 import currentFindButtonStyles from './CurrentFindButton.style';
 
@@ -11,7 +11,7 @@ interface Props {
 const CurrentFindButton = ({ isFindActive, handlePress }: Props) => {
   return (
     isFindActive && (
-      <TouchableOpacity
+      <Pressable
         style={currentFindButtonStyles.container}
         onPress={handlePress}
       >
@@ -19,7 +19,7 @@ const CurrentFindButton = ({ isFindActive, handlePress }: Props) => {
         <Text color="main" variant="body1">
           현 지도에서 검색
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     )
   );
 };
