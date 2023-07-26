@@ -6,7 +6,7 @@ interface StartEndDate {
   endDay: string;
 }
 
-export interface AppStore {
+export interface EventMapStore {
   startEndDate: StartEndDate;
   callbackCoordinate: (coordinate: Coordinate) => void;
   setCallbackCoordinate: (callback: (coordinate: Coordinate) => void) => void;
@@ -23,7 +23,7 @@ const initApp = {
   },
 };
 
-export const useAppStore = create<AppStore>((set) => ({
+export const useEventMapStore = create<EventMapStore>((set) => ({
   ...initApp,
   setCallbackCoordinate: (payload: (callback: Coordinate) => void) =>
     set((state) => ({ ...state, callbackCoordinate: payload })),
