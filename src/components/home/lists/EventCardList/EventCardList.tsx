@@ -2,7 +2,7 @@ import Text from 'components/common/Text/Text';
 import EventCard from 'components/home/cards/EventCard/EventCard';
 import { ScrollView, View } from 'react-native';
 import { Event } from 'types/event';
-import eventCardGroupStyles from './EventCardGroup.style';
+import eventCardListStyles from './EventCardList.style';
 
 interface Props {
   title: string;
@@ -10,9 +10,9 @@ interface Props {
   events: Event[];
 }
 
-const EventCardGroup = ({ events, title, subTitle }: Props) => {
+const EventCardList = ({ events, title, subTitle }: Props) => {
   return (
-    <View style={eventCardGroupStyles.container}>
+    <View style={eventCardListStyles.container}>
       <Text variant="h3" color="white">
         {title}
       </Text>
@@ -20,7 +20,7 @@ const EventCardGroup = ({ events, title, subTitle }: Props) => {
         {subTitle}
       </Text>
       <ScrollView
-        style={eventCardGroupStyles.scrollConatiner}
+        style={eventCardListStyles.scrollConatiner}
         horizontal
         showsHorizontalScrollIndicator={false}
       >
@@ -38,4 +38,4 @@ const EventCardGroup = ({ events, title, subTitle }: Props) => {
   );
 };
 
-export default EventCardGroup;
+export default EventCardList;
