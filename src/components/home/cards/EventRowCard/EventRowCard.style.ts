@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const eventRowCardStyles = StyleSheet.create({
@@ -18,6 +18,7 @@ const eventRowCardStyles = StyleSheet.create({
     margin: 10,
   },
   eventInfo: {
+    marginHorizontal: 10,
     marginLeft: 5,
     flexDirection: 'column',
   },
@@ -26,7 +27,7 @@ const eventRowCardStyles = StyleSheet.create({
     paddingVertical: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 9,
+    borderRadius: Platform.OS === 'ios' ? 20 : 9,
     backgroundColor: colors.grey,
     alignSelf: 'flex-start',
   },

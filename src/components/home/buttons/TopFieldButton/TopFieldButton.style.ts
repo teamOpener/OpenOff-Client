@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 const topFieldButtonStyles = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ const topFieldButtonStyles = StyleSheet.create({
     marginHorizontal: 6,
   },
   delimiter: {
-    height: 5,
+    height: Platform.OS === 'android' ? 5 : 10,
     width: '100%',
     marginTop: 5,
   },
