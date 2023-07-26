@@ -1,10 +1,10 @@
-import { Coordinate } from 'types/event';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import {
   CompositeNavigationProp,
   NavigatorScreenParams,
 } from '@react-navigation/native';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Coordinate } from 'types/event';
 import { Field } from './group';
 
 export type AuthStackParamList = {
@@ -37,7 +37,11 @@ export type RootStackParamList = {
     field: Field;
     coordinate: Coordinate;
   };
-  OpenEvent: undefined;
+  CategoryEvent: {
+    fieldValue: string;
+  };
+  WishEvent: undefined;
+  PopularEvent: undefined;
 };
 
 export type RootStackNavigationProp =
