@@ -18,6 +18,11 @@ const useMapCoordinateInfo = () => {
     latitude: 126.98795373156224,
     longitude: 37.56278008163968,
   });
+  // 현 지도위치 검색을 위한 상태
+  const [focusCoordinate, setFocusCoordinate] = useState<Coordinate>({
+    latitude: 0,
+    longitude: 0,
+  });
   // 사용자 현재 위치정보
   const [currentCoordinate, setCurrentCoordinate] = useState<Coordinate>({
     latitude: 0,
@@ -92,6 +97,8 @@ const useMapCoordinateInfo = () => {
     currentCoordinate,
     setCurrentCoordinate,
     naverMapRef,
+    focusCoordinate,
+    setFocusCoordinate,
   };
 };
 
