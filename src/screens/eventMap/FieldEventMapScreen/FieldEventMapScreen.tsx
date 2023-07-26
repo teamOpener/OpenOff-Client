@@ -9,15 +9,15 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
+import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import eventList from 'data/lists/eventList';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BackHandler, Dimensions, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
-import { useAppStore } from 'stores/app';
-import { colors } from 'styles/theme';
+import { useEventMapStore } from 'stores/EventMap';
 import { Field } from 'types/apps/group';
 import { Coordinate } from 'types/event';
 import getDistanceCoordinate from 'utils/coordinate';
@@ -41,10 +41,15 @@ const FieldEventMapScreen = () => {
   const [focusCoordinate, setFocusCoordinate] = useState<Coordinate>(
     params.coordinate,
   );
+  const [clickedMarker, setClickedMarker] = useState<string | null>(null);
   const [isFindActive, setIsFindActive] = useState<boolean>(false);
-  const { callbackCoordinate } = useAppStore();
+  const { callbackCoordinate } = useEventMapStore();
   const { screenCoordinate, currentCoordinate, naverMapRef } =
     useMapCoordinateInfo();
+  const computedEventList = useMemo(() => {
+    if (!clickedMarker) return eventList;
+    return eventList.filter((event) => event.id === clickedMarker);
+  }, [clickedMarker]);
   useEffect(() => {
     const backAction = () => {
       callbackCoordinate(screenCoordinate.current);
@@ -71,7 +76,7 @@ const FieldEventMapScreen = () => {
       },
     });
     return () => backHandler.remove();
-  });
+  }, []);
   return (
     <View style={eventMapScreenStyles.container}>
       <View style={eventMapScreenStyles.mapContainer}>
@@ -87,6 +92,9 @@ const FieldEventMapScreen = () => {
           showsMyLocationButton={false}
           style={eventMapScreenStyles.map}
           center={{ ...params.coordinate, zoom: 16 }}
+          onMapClick={() => {
+            setClickedMarker(null);
+          }}
           onCameraChange={(event) => {
             screenCoordinate.current = {
               latitude: event.latitude,
@@ -110,16 +118,11 @@ const FieldEventMapScreen = () => {
             pinColor="blue"
           />
           {eventList.map((event) => (
-            <Marker
+            <EventMarker
               key={event.id}
-              image={require('../../../assets/images/eventCoordinate.png')}
-              width={50}
-              height={50}
-              coordinate={{
-                latitude: event.coordinate.latitude,
-                longitude: event.coordinate.longitude,
-              }}
-              pinColor={colors.background}
+              clickedMarker={clickedMarker}
+              setClickedMarker={setClickedMarker}
+              event={event}
             />
           ))}
         </NaverMapView>
@@ -131,7 +134,8 @@ const FieldEventMapScreen = () => {
         setSort={setSort}
         selectState={selectState}
         dispatch={dispatch}
-        eventList={eventList}
+        eventList={computedEventList}
+        clickedMarker={clickedMarker}
       />
     </View>
   );

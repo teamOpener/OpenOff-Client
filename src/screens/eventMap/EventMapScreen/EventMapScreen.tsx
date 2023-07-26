@@ -2,32 +2,38 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
+import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import { StackMenu } from 'constants/menu';
 import eventList from 'data/lists/eventList';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import { useCallback } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
-import { useAppStore } from 'stores/app';
-import { colors } from 'styles/theme';
+import { useEventMapStore } from 'stores/EventMap';
 import { Field } from 'types/apps/group';
 import { RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
 import eventMapScreenStyles from './EventMapScreen.style';
 
 const EventMapScreen = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  // 스크린 위치 & 현재 위치 & 초기 지도위치 & 네이버 맵 useRef
   const {
     screenCoordinate,
     currentCoordinate,
     mapFocusCoordinate,
     naverMapRef,
   } = useMapCoordinateInfo();
-  const { setCallbackCoordinate } = useAppStore();
+  const { setCallbackCoordinate } = useEventMapStore();
+  // 거리순, 날짜순 정렬 및 선택자(비용 & 참여인원 & 신청현황)
   const { sort, setSort, selectState, dispatch } =
     useEventMapSelector(eventList);
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  // 클릭된 마커의 아이디값
+  const [clickedMarker, setClickedMarker] = useState<string | null>(null);
+  // 검색어값
+  const searchValue = useRef<string>('');
   const saveScreenCoordinate = useCallback(
     (coordinate: Coordinate) => {
       naverMapRef.current?.animateToCoordinate(coordinate);
@@ -44,21 +50,20 @@ const EventMapScreen = () => {
     },
     [navigation, saveScreenCoordinate, screenCoordinate, setCallbackCoordinate],
   );
+  // 해당함수를 통해 search값 반영
   const handleEventSearch = useCallback((value: string) => {
-    return false;
+    searchValue.current = value;
   }, []);
-  const handleShowCalendar = useCallback(() => {
-    navigation.navigate(StackMenu.DatePick);
-  }, [navigation]);
   const handleMoveCurrentCoordinate = () => {
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
   };
+  const computedEventList = useMemo(() => {
+    if (!clickedMarker) return eventList;
+    return eventList.filter((event) => event.id === clickedMarker);
+  }, [clickedMarker]);
   return (
     <View style={eventMapScreenStyles.container}>
-      <EventSearchInput
-        handleSearch={handleEventSearch}
-        handleCalendar={handleShowCalendar}
-      />
+      <EventSearchInput handleSearch={handleEventSearch} />
       <MapFieldButtonGroup getFieldEvent={getFieldEvent} />
       <View style={eventMapScreenStyles.mapContainer}>
         <NaverMapView
@@ -72,6 +77,9 @@ const EventMapScreen = () => {
               longitude: event.longitude,
             };
           }}
+          onMapClick={() => {
+            setClickedMarker(null);
+          }}
         >
           <Marker
             image={require('../../../assets/images/currentCoordinate.png')}
@@ -81,29 +89,25 @@ const EventMapScreen = () => {
             pinColor="blue"
           />
           {eventList.map((event) => (
-            <Marker
+            <EventMarker
               key={event.id}
-              image={require('../../../assets/images/eventCoordinate.png')}
-              width={50}
-              height={50}
-              coordinate={{
-                latitude: event.coordinate.latitude,
-                longitude: event.coordinate.longitude,
-              }}
-              pinColor={colors.background}
+              clickedMarker={clickedMarker}
+              setClickedMarker={setClickedMarker}
+              event={event}
             />
           ))}
         </NaverMapView>
         <MyCoordinateButton handlePress={handleMoveCurrentCoordinate} />
       </View>
       <MapBottomSheet
-        snapTop={50}
+        snapTop={clickedMarker ? (1 / 3) * Dimensions.get('window').height : 80}
         snapBottom={(2 / 3) * Dimensions.get('window').height}
         sort={sort}
         setSort={setSort}
         selectState={selectState}
         dispatch={dispatch}
-        eventList={eventList}
+        clickedMarker={clickedMarker}
+        eventList={computedEventList}
       />
     </View>
   );
