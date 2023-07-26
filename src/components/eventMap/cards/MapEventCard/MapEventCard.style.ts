@@ -19,6 +19,7 @@ const mapEventCardStyles = StyleSheet.create({
   },
   imageContainer: {
     marginTop: 5,
+    flexDirection: 'row',
   },
   eventImage: {
     width: 114,
