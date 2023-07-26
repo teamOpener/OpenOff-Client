@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const eventCardGroupStyles = StyleSheet.create({
+const eventCardListStyles = StyleSheet.create({
   container: {
     marginTop: 23,
     marginBottom: 50,
@@ -11,4 +11,4 @@ const eventCardGroupStyles = StyleSheet.create({
   },
 });
 
-export default eventCardGroupStyles;
+export default eventCardListStyles;
