@@ -5,7 +5,7 @@ const currentFindButtonStyles = StyleSheet.create({
   container: {
     position: 'absolute',
     zIndex: 3,
-    top: 50,
+    top: 100,
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
