@@ -4,29 +4,37 @@ import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
-import { StackMenu } from 'constants/menu';
 import eventList from 'data/lists/eventList';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { Dimensions, View } from 'react-native';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { BackHandler, Dimensions, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
-import { useEventMapStore } from 'stores/EventMap';
 import { Field } from 'types/apps/group';
 import { RootStackParamList } from 'types/apps/menu';
-import { Coordinate } from 'types/event';
-import eventMapScreenStyles from './EventMapScreen.style';
+import MapHeader from 'components/eventMap/headers/MapHeader/MapHeader';
+import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
+import getDistanceCoordinate from 'utils/coordinate';
+import {
+  eventMapScreenStyles,
+  defaultTabBarStyles,
+} from './EventMapScreen.style';
 
 const EventMapScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
+    undefined,
+  );
+  const [isFindActive, setIsFindActive] = useState<boolean>(false);
   // 스크린 위치 & 현재 위치 & 초기 지도위치 & 네이버 맵 useRef
   const {
     screenCoordinate,
     currentCoordinate,
     mapFocusCoordinate,
     naverMapRef,
+    focusCoordinate,
+    setFocusCoordinate,
   } = useMapCoordinateInfo();
-  const { setCallbackCoordinate } = useEventMapStore();
   // 거리순, 날짜순 정렬 및 선택자(비용 & 참여인원 & 신청현황)
   const { sort, setSort, selectState, dispatch } =
     useEventMapSelector(eventList);
@@ -34,22 +42,6 @@ const EventMapScreen = () => {
   const [clickedMarker, setClickedMarker] = useState<string | null>(null);
   // 검색어값
   const searchValue = useRef<string>('');
-  const saveScreenCoordinate = useCallback(
-    (coordinate: Coordinate) => {
-      naverMapRef.current?.animateToCoordinate(coordinate);
-    },
-    [naverMapRef],
-  );
-  const getFieldEvent = useCallback(
-    (field: Field) => {
-      setCallbackCoordinate(saveScreenCoordinate);
-      navigation.navigate(StackMenu.FieldEventMap, {
-        field,
-        coordinate: screenCoordinate.current,
-      });
-    },
-    [navigation, saveScreenCoordinate, screenCoordinate, setCallbackCoordinate],
-  );
   // 해당함수를 통해 search값 반영
   const handleEventSearch = useCallback((value: string) => {
     searchValue.current = value;
@@ -61,11 +53,66 @@ const EventMapScreen = () => {
     if (!clickedMarker) return eventList;
     return eventList.filter((event) => event.id === clickedMarker);
   }, [clickedMarker]);
+  const recallEventMap = () => {
+    navigation.setOptions({
+      tabBarStyle: {
+        ...defaultTabBarStyles,
+        display: 'flex',
+      },
+    });
+    setFieldMapMode(() => {
+      return undefined;
+    });
+  };
+  const getFieldEvent = useCallback(
+    (field: Field) => {
+      setFieldMapMode(field);
+      navigation.setOptions({
+        tabBarStyle: {
+          ...defaultTabBarStyles,
+          display: 'none',
+        },
+      });
+    },
+    [navigation],
+  );
+  useEffect(() => {
+    const backAction = () => {
+      if (fieldMapMode) {
+        recallEventMap();
+        return true;
+      }
+      navigation.goBack();
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
   return (
     <View style={eventMapScreenStyles.container}>
-      <EventSearchInput handleSearch={handleEventSearch} />
-      <MapFieldButtonGroup getFieldEvent={getFieldEvent} />
+      {fieldMapMode ? (
+        <MapHeader title={fieldMapMode.label} backPress={recallEventMap} />
+      ) : (
+        <>
+          <EventSearchInput handleSearch={handleEventSearch} />
+          <MapFieldButtonGroup getFieldEvent={getFieldEvent} />
+        </>
+      )}
       <View style={eventMapScreenStyles.mapContainer}>
+        {fieldMapMode ? (
+          <CurrentFindButton
+            handlePress={() => {
+              setIsFindActive(false);
+              setFocusCoordinate(screenCoordinate.current);
+            }}
+            isFindActive={isFindActive}
+          />
+        ) : (
+          <MyCoordinateButton handlePress={handleMoveCurrentCoordinate} />
+        )}
         <NaverMapView
           ref={naverMapRef}
           showsMyLocationButton={false}
@@ -76,6 +123,14 @@ const EventMapScreen = () => {
               latitude: event.latitude,
               longitude: event.longitude,
             };
+            setIsFindActive(() => {
+              return (
+                getDistanceCoordinate(focusCoordinate, {
+                  latitude: event.latitude,
+                  longitude: event.longitude,
+                }) > 0.1
+              );
+            });
           }}
           onMapClick={() => {
             setClickedMarker(null);
@@ -97,7 +152,6 @@ const EventMapScreen = () => {
             />
           ))}
         </NaverMapView>
-        <MyCoordinateButton handlePress={handleMoveCurrentCoordinate} />
       </View>
       <MapBottomSheet
         snapTop={clickedMarker ? (1 / 3) * Dimensions.get('window').height : 80}
