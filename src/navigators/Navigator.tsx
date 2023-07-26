@@ -1,7 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { StackMenu } from 'constants/menu';
 import DatePickScreen from 'screens/eventMap/DatePickScreen/DatePickScreen';
-import FieldEventMapScreen from 'screens/eventMap/FieldEventMapScreen/FieldEventMapScreen';
 import textStyles from 'styles/textStyles';
 import { colors } from 'styles/theme';
 import OpenEventScreen from 'screens/home/OpenEventScreen/OpenEventScreen';
@@ -51,21 +50,6 @@ const Navigator = () => {
         }}
         name={StackMenu.DatePick}
         component={DatePickScreen}
-      />
-      <Stack.Screen
-        name={StackMenu.FieldEventMap}
-        component={FieldEventMapScreen}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            ...textStyles.h3,
-            color: colors.white,
-          },
-        }}
       />
     </Stack.Navigator>
   );
