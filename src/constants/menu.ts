@@ -3,6 +3,8 @@ export const enum StackMenu {
   DatePick = 'DatePick',
   FieldEventMap = 'FieldEventMap',
   OpenEvent = 'OpenEvent',
+  CategoryEvent = 'CategoryEvent',
+  WishEvent = 'WishEvent',
 }
 
 export const enum BottomTabMenu {
