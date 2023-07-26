@@ -5,7 +5,7 @@ const mapFieldButtonGroup = StyleSheet.create({
     flexDirection: 'row',
     position: 'absolute',
     zIndex: 999,
-    top: 101,
+    top: 121,
     width: Dimensions.get('window').width,
     right: 0,
   },
