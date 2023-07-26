@@ -1,8 +1,13 @@
 import Text from 'components/common/Text/Text';
+import FieldCode from 'constants/code';
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 import categoryButtonGroupStyles from './CategoryButtonGroup.style';
 
-const CategoryButtonGroup = () => {
+interface Props {
+  handlePress: (value: string) => void;
+}
+
+const CategoryButtonGroup = ({ handlePress }: Props) => {
   return (
     <View style={categoryButtonGroupStyles.container}>
       <Text
@@ -13,7 +18,10 @@ const CategoryButtonGroup = () => {
         카테고리
       </Text>
       <View style={categoryButtonGroupStyles.groupContainer}>
-        <TouchableOpacity style={categoryButtonGroupStyles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => handlePress(FieldCode.FD)}
+          style={categoryButtonGroupStyles.buttonContainer}
+        >
           <ImageBackground
             source={require('../../../../assets/images/field/food&drink.png')}
             resizeMode="cover"
@@ -32,7 +40,10 @@ const CategoryButtonGroup = () => {
             </View>
           </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity style={categoryButtonGroupStyles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => handlePress(FieldCode.EE)}
+          style={categoryButtonGroupStyles.buttonContainer}
+        >
           <ImageBackground
             source={require('../../../../assets/images/field/exhibition&fleaMarket.png')}
             resizeMode="cover"
@@ -51,7 +62,10 @@ const CategoryButtonGroup = () => {
             </View>
           </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity style={categoryButtonGroupStyles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => handlePress(FieldCode.S)}
+          style={categoryButtonGroupStyles.buttonContainer}
+        >
           <ImageBackground
             source={require('../../../../assets/images/field/performance.png')}
             resizeMode="cover"
@@ -64,7 +78,10 @@ const CategoryButtonGroup = () => {
             </View>
           </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity style={categoryButtonGroupStyles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => handlePress(FieldCode.PF)}
+          style={categoryButtonGroupStyles.buttonContainer}
+        >
           <ImageBackground
             source={require('../../../../assets/images/field/concert.png')}
             resizeMode="cover"
@@ -83,7 +100,10 @@ const CategoryButtonGroup = () => {
             </View>
           </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity style={categoryButtonGroupStyles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => handlePress(FieldCode.EA)}
+          style={categoryButtonGroupStyles.buttonContainer}
+        >
           <ImageBackground
             source={require('../../../../assets/images/field/exercise&activity.png')}
             resizeMode="cover"
@@ -102,7 +122,10 @@ const CategoryButtonGroup = () => {
             </View>
           </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity style={categoryButtonGroupStyles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => handlePress(FieldCode.FSDH)}
+          style={categoryButtonGroupStyles.buttonContainer}
+        >
           <ImageBackground
             source={require('../../../../assets/images/field/sociable.png')}
             resizeMode="cover"
