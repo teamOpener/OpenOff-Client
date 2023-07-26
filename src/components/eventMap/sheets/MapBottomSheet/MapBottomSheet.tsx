@@ -1,4 +1,7 @@
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetScrollView,
+} from '@gorhom/bottom-sheet';
 import Text from 'components/common/Text/Text';
 import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
 import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
@@ -24,6 +27,7 @@ interface Props {
   selectState: SelectBox;
   dispatch: Dispatch<Action>;
   eventList: Event[];
+  clickedMarker: string | null;
 }
 
 const MapBottomSheet = ({
@@ -34,6 +38,7 @@ const MapBottomSheet = ({
   selectState,
   eventList,
   dispatch,
+  clickedMarker,
 }: Props) => {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   return (
@@ -49,29 +54,33 @@ const MapBottomSheet = ({
       >
         {!isDetail ? (
           <>
-            <SelectBoxGroup
-              selectState={selectState}
-              dispatch={dispatch}
-              openDetailGroup={() => {
-                setIsDetail(true);
-              }}
-            />
-            <View style={mapBottomSheetStyles.sortButton}>
-              <TouchableOpacity
-                onPress={() => setSort({ ...sort, dialog: true })}
-              >
-                <Text variant="body2" color="white">
-                  {sort.value === 'distance' ? '거리순' : '날짜순'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <BottomSheetScrollView
+            {!clickedMarker && (
+              <>
+                <SelectBoxGroup
+                  selectState={selectState}
+                  dispatch={dispatch}
+                  openDetailGroup={() => {
+                    setIsDetail(true);
+                  }}
+                />
+                <View style={mapBottomSheetStyles.sortButton}>
+                  <TouchableOpacity
+                    onPress={() => setSort({ ...sort, dialog: true })}
+                  >
+                    <Text variant="body2" color="white">
+                      {sort.value === 'distance' ? '거리순' : '날짜순'}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
+            <BottomSheetFlatList
               style={mapBottomSheetStyles.bottomSheetContainer}
-            >
-              {eventList.map((event) => (
-                <MapEventCard key={event.id} event={event} />
-              ))}
-            </BottomSheetScrollView>
+              data={eventList}
+              renderItem={(item) => (
+                <MapEventCard key={item.item.id} event={item.item} />
+              )}
+            />
           </>
         ) : (
           <BottomSheetScrollView
