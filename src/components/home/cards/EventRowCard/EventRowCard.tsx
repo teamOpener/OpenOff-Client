@@ -18,7 +18,7 @@ const EventRowCard = ({ event }: Props) => {
       />
       <View style={eventRowCardStyles.eventInfo}>
         <View style={eventRowCardStyles.fieldBox}>
-          <Text variant="body3" color="background">
+          <Text variant="body3" color="darkGrey">
             {event.eventType}
           </Text>
         </View>

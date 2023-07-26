@@ -34,7 +34,7 @@ const eventRowCardStyles = StyleSheet.create({
   eventTitle: {
     fontFamily: fonts.semibold,
     fontSize: 15,
-    color: colors.background,
+    color: colors.black,
   },
   subInfo: {
     flexDirection: 'row',
