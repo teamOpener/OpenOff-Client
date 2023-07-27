@@ -18,13 +18,15 @@ const mapEventCardStyles = StyleSheet.create({
     flexDirection: 'row',
   },
   imageContainer: {
+    width: '100%',
     marginTop: 5,
+    justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row',
   },
   eventImage: {
     width: 114,
     height: 114,
-    marginRight: 10,
   },
 });
 
