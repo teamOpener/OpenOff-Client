@@ -25,7 +25,7 @@ const sortDialogStyles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   buttonContainer: {
-    height: 50,
+    paddingVertical: 20,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
@@ -36,16 +36,14 @@ const sortDialogStyles = StyleSheet.create({
   },
   textContainer: {
     width: 200,
-    height: 25,
+  },
+  emptySpace: {
+    width: 15,
+    height: 15,
   },
   cancelContainer: {
     width: 200,
     alignItems: 'flex-end',
-  },
-  checkIcon: {
-    position: 'absolute',
-    top: 17,
-    right: 20,
   },
 });
 

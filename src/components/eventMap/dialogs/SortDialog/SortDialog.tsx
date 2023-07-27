@@ -41,13 +41,10 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
             >
               날짜순
             </Text>
-            {value === 'date' && (
-              <Icon
-                style={sortDialogStyles.checkIcon}
-                size={15}
-                name="IconCheck"
-                fill="main"
-              />
+            {value === 'date' ? (
+              <Icon size={15} name="IconCheck" fill="main" />
+            ) : (
+              <View style={sortDialogStyles.emptySpace} />
             )}
           </TouchableOpacity>
           <TouchableOpacity
@@ -61,13 +58,10 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
             >
               거리순
             </Text>
-            {value === 'distance' && (
-              <Icon
-                style={sortDialogStyles.checkIcon}
-                size={15}
-                name="IconCheck"
-                fill="main"
-              />
+            {value === 'distance' ? (
+              <Icon size={15} name="IconCheck" fill="main" />
+            ) : (
+              <View style={sortDialogStyles.emptySpace} />
             )}
           </TouchableOpacity>
           <View style={sortDialogStyles.cancelContainer}>
