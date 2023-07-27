@@ -8,7 +8,7 @@ const mapBottomSheetStyles = StyleSheet.create({
   bottomSheetContainer: {
     backgroundColor: colors.background,
     flexDirection: 'column',
-    marginBottom: 20,
+    marginBottom: 50,
   },
 });
 
