@@ -6,7 +6,10 @@ export interface OpenEventErrorMessage {
   title: string | null;
   applicationPeriod: string | null;
   eventDates: string | null;
-  address: string | null;
+  address: {
+    roadAddress: string | null;
+    detailAddress: string | null;
+  };
   cost: string | null;
   recruitmentNumber: string | null;
   description: string | null;
@@ -25,7 +28,10 @@ const initOpenEvent: CreateEventDto = {
   applicationStartDate: null,
   applicationEndDate: null,
   eventDates: [],
-  address: null,
+  address: {
+    roadAddress: null,
+    detailAddress: null,
+  },
   cost: 0,
   recruitmentNumber: null,
   description: null,
@@ -43,7 +49,10 @@ export const initOpenEventErrorMessage: OpenEventErrorMessage = {
   title: null,
   applicationPeriod: null,
   eventDates: null,
-  address: null,
+  address: {
+    roadAddress: null,
+    detailAddress: null,
+  },
   cost: null,
   recruitmentNumber: null,
   description: null,

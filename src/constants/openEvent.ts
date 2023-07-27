@@ -21,6 +21,18 @@ const MENT_OPEN_EVENT = Object.freeze({
   ERROR_HOST_NAME: '업체(주최자)명을 입력해주세요.',
   ERROR_HOST_PHONE: '전화번호를 입력해주세요.',
   ERROR_HOST_EMAIL: '이메일을 입력해주세요.',
+
+  HEADER: {
+    SEARCH_ADDRESS: '주소를 검색해주세요.',
+  },
+
+  ERROR: {
+    // TODO
+  },
+
+  PLACEHOLDER: {
+    // TODO
+  },
 });
 
 export default MENT_OPEN_EVENT;

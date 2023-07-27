@@ -6,7 +6,10 @@ export interface CreateEventDto {
   applicationStartDate: string | null;
   applicationEndDate: string | null;
   eventDates: string[]; // 2023-07-01T00:00:00;
-  address: string | null;
+  address: {
+    roadAddress: string | null;
+    detailAddress: string | null;
+  };
   cost: number;
   recruitmentNumber: number | null;
   description: string | null;
