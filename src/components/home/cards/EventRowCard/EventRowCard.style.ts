@@ -4,32 +4,31 @@ import { colors, fonts } from 'styles/theme';
 const eventRowCardStyles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width - 50,
-    height: 95,
     borderRadius: 6,
     alignItems: 'center',
     flexDirection: 'row',
+    gap: 15,
     backgroundColor: colors.white,
     marginVertical: 5,
+    padding: 10,
   },
   image: {
     width: 75,
     height: 75,
     borderRadius: 5,
-    margin: 10,
   },
   eventInfo: {
-    marginHorizontal: 10,
-    marginLeft: 5,
-    flexDirection: 'column',
+    gap: Platform.OS === 'ios' ? 2 : 0,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   fieldBox: {
     paddingHorizontal: 6,
     paddingVertical: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: Platform.OS === 'ios' ? 20 : 9,
-    backgroundColor: colors.grey,
-    alignSelf: 'flex-start',
+    borderRadius: 10,
+    backgroundColor: '#d9d9d9',
   },
   eventTitle: {
     fontFamily: fonts.semibold,
@@ -42,6 +41,7 @@ const eventRowCardStyles = StyleSheet.create({
   subInfoText: {
     flexDirection: 'row',
     marginRight: 5,
+    gap: 3,
     alignItems: 'center',
   },
 });

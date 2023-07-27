@@ -11,7 +11,7 @@ const topFieldButtonStyles = StyleSheet.create({
     marginHorizontal: 6,
   },
   delimiter: {
-    height: Platform.OS === 'android' ? 5 : 10,
+    height: Platform.OS === 'android' ? 5 : 3,
     width: '100%',
     marginTop: 5,
   },
