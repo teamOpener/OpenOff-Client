@@ -14,6 +14,10 @@ const eventMapScreenStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  backButton: {
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+  },
 });
 
 const defaultTabBarStyles = {
@@ -33,4 +37,4 @@ const defaultTabBarStyles = {
   paddingTop: 6,
 };
 
-export { eventMapScreenStyles, defaultTabBarStyles };
+export { defaultTabBarStyles, eventMapScreenStyles };

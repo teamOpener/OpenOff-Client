@@ -1,8 +1,8 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import Icon from 'components/common/Icon/Icon';
 import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
 import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
-import MapHeader from 'components/eventMap/headers/MapHeader/MapHeader';
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
@@ -10,8 +10,9 @@ import eventList from 'data/lists/eventList';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { BackHandler, Dimensions, View } from 'react-native';
+import { BackHandler, Dimensions, Pressable, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
+import { colors } from 'styles/theme';
 import { Field } from 'types/apps/group';
 import NaverMapEvent from 'types/apps/map';
 import { RootStackParamList } from 'types/apps/menu';
@@ -26,6 +27,7 @@ const EventMapScreen = () => {
   const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
     undefined,
   );
+  // 현 위치 검색버튼 활성화 여부
   const [currentFindActive, setCurrentFindActive] = useState<boolean>(false);
   // 스크린 위치 & 현재 위치 & 초기 지도위치 & 네이버 맵 useRef
   const {
@@ -50,19 +52,6 @@ const EventMapScreen = () => {
   const handleMoveCurrentCoordinate = () => {
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
   };
-  const handleShowFieldEvent = useCallback(
-    (field: Field) => {
-      setFieldMapMode(field);
-      navigation.setOptions({
-        tabBarStyle: {
-          ...defaultTabBarStyles,
-          display: 'none',
-        },
-      });
-      setClickedMarker(null);
-    },
-    [navigation],
-  );
   const handleCameraEvent = (event: NaverMapEvent) => {
     screenCoordinate.current = {
       latitude: event.latitude,
@@ -83,10 +72,48 @@ const EventMapScreen = () => {
         ...defaultTabBarStyles,
         display: 'flex',
       },
+      headerShown: false,
     });
     setFieldMapMode(() => {
       return undefined;
     });
+  };
+  const handleShowFieldEvent = useCallback(
+    (field: Field) => {
+      setFieldMapMode(field);
+      navigation.setOptions({
+        tabBarStyle: {
+          ...defaultTabBarStyles,
+          display: 'none',
+        },
+        headerTitle: field.label,
+        headerShown: true,
+        headerTintColor: colors.white,
+        // eslint-disable-next-line react/no-unstable-nested-components
+        headerLeft: () => (
+          <Pressable
+            style={eventMapScreenStyles.backButton}
+            onPress={recallEventMap}
+          >
+            <Icon name="IconArrowLeft" fill="white" />
+          </Pressable>
+        ),
+        headerStyle: {
+          backgroundColor: colors.background,
+        },
+      });
+      setClickedMarker(null);
+    },
+    [navigation],
+  );
+  const bottomSheetLength = {
+    snapTop:
+      clickedMarker || fieldMapMode
+        ? (1 / 3) * Dimensions.get('window').height
+        : 80,
+    snapBottom: fieldMapMode
+      ? Dimensions.get('window').height
+      : (2 / 3) * Dimensions.get('window').height,
   };
   const computedEventList = useMemo(() => {
     if (!clickedMarker) return eventList;
@@ -96,7 +123,6 @@ const EventMapScreen = () => {
     const backAction = () => {
       if (fieldMapMode) {
         recallEventMap();
-        console.log('run');
         return true;
       }
       return false;
@@ -109,9 +135,7 @@ const EventMapScreen = () => {
   }, []);
   return (
     <View style={eventMapScreenStyles.container}>
-      {fieldMapMode ? (
-        <MapHeader title={fieldMapMode.label} backPress={recallEventMap} />
-      ) : (
+      {!fieldMapMode && (
         <>
           <EventSearchInput handleSearch={handleEventSearch} />
           <MapFieldButtonGroup handleShowFieldEvent={handleShowFieldEvent} />
@@ -157,8 +181,8 @@ const EventMapScreen = () => {
         </NaverMapView>
       </View>
       <MapBottomSheet
-        snapTop={clickedMarker ? (1 / 3) * Dimensions.get('window').height : 80}
-        snapBottom={(2 / 3) * Dimensions.get('window').height}
+        snapTop={bottomSheetLength.snapTop}
+        snapBottom={bottomSheetLength.snapBottom}
         sort={sort}
         setSort={setSort}
         selectState={selectState}
