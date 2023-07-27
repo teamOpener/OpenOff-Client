@@ -1,6 +1,8 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
 import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
+import MapHeader from 'components/eventMap/headers/MapHeader/MapHeader';
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
@@ -11,13 +13,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BackHandler, Dimensions, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
 import { Field } from 'types/apps/group';
+import NaverMapEvent from 'types/apps/map';
 import { RootStackParamList } from 'types/apps/menu';
-import MapHeader from 'components/eventMap/headers/MapHeader/MapHeader';
-import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
 import getDistanceCoordinate from 'utils/coordinate';
 import {
-  eventMapScreenStyles,
   defaultTabBarStyles,
+  eventMapScreenStyles,
 } from './EventMapScreen.style';
 
 const EventMapScreen = () => {
@@ -25,12 +26,12 @@ const EventMapScreen = () => {
   const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
     undefined,
   );
-  const [isFindActive, setIsFindActive] = useState<boolean>(false);
+  const [currentFindActive, setCurrentFindActive] = useState<boolean>(false);
   // 스크린 위치 & 현재 위치 & 초기 지도위치 & 네이버 맵 useRef
   const {
     screenCoordinate,
     currentCoordinate,
-    mapFocusCoordinate,
+    firstPlaceCoordinate,
     naverMapRef,
     focusCoordinate,
     setFocusCoordinate,
@@ -49,10 +50,33 @@ const EventMapScreen = () => {
   const handleMoveCurrentCoordinate = () => {
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
   };
-  const computedEventList = useMemo(() => {
-    if (!clickedMarker) return eventList;
-    return eventList.filter((event) => event.id === clickedMarker);
-  }, [clickedMarker]);
+  const handleShowFieldEvent = useCallback(
+    (field: Field) => {
+      setFieldMapMode(field);
+      navigation.setOptions({
+        tabBarStyle: {
+          ...defaultTabBarStyles,
+          display: 'none',
+        },
+      });
+      setClickedMarker(null);
+    },
+    [navigation],
+  );
+  const handleCameraEvent = (event: NaverMapEvent) => {
+    screenCoordinate.current = {
+      latitude: event.latitude,
+      longitude: event.longitude,
+    };
+    setCurrentFindActive(() => {
+      return (
+        getDistanceCoordinate(focusCoordinate, {
+          latitude: event.latitude,
+          longitude: event.longitude,
+        }) > 0.1
+      );
+    });
+  };
   const recallEventMap = () => {
     navigation.setOptions({
       tabBarStyle: {
@@ -64,26 +88,18 @@ const EventMapScreen = () => {
       return undefined;
     });
   };
-  const getFieldEvent = useCallback(
-    (field: Field) => {
-      setFieldMapMode(field);
-      navigation.setOptions({
-        tabBarStyle: {
-          ...defaultTabBarStyles,
-          display: 'none',
-        },
-      });
-    },
-    [navigation],
-  );
+  const computedEventList = useMemo(() => {
+    if (!clickedMarker) return eventList;
+    return eventList.filter((event) => event.id === clickedMarker);
+  }, [clickedMarker]);
   useEffect(() => {
     const backAction = () => {
       if (fieldMapMode) {
         recallEventMap();
+        console.log('run');
         return true;
       }
-      navigation.goBack();
-      return true;
+      return false;
     };
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
@@ -98,17 +114,17 @@ const EventMapScreen = () => {
       ) : (
         <>
           <EventSearchInput handleSearch={handleEventSearch} />
-          <MapFieldButtonGroup getFieldEvent={getFieldEvent} />
+          <MapFieldButtonGroup handleShowFieldEvent={handleShowFieldEvent} />
         </>
       )}
       <View style={eventMapScreenStyles.mapContainer}>
         {fieldMapMode ? (
           <CurrentFindButton
             handlePress={() => {
-              setIsFindActive(false);
+              setCurrentFindActive(false);
               setFocusCoordinate(screenCoordinate.current);
             }}
-            isFindActive={isFindActive}
+            isFindActive={currentFindActive}
           />
         ) : (
           <MyCoordinateButton handlePress={handleMoveCurrentCoordinate} />
@@ -117,21 +133,8 @@ const EventMapScreen = () => {
           ref={naverMapRef}
           showsMyLocationButton={false}
           style={eventMapScreenStyles.map}
-          center={{ ...mapFocusCoordinate, zoom: 16 }}
-          onCameraChange={(event) => {
-            screenCoordinate.current = {
-              latitude: event.latitude,
-              longitude: event.longitude,
-            };
-            setIsFindActive(() => {
-              return (
-                getDistanceCoordinate(focusCoordinate, {
-                  latitude: event.latitude,
-                  longitude: event.longitude,
-                }) > 0.1
-              );
-            });
-          }}
+          center={{ ...firstPlaceCoordinate, zoom: 16 }}
+          onCameraChange={handleCameraEvent}
           onMapClick={() => {
             setClickedMarker(null);
           }}
