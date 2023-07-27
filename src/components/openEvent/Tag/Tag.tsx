@@ -5,15 +5,15 @@ import tagStyles from './Tag.style';
 interface Props {
   label: string;
   isSelected: boolean;
-  handlePress: () => void;
+  onPress: () => void;
 }
 
-const Tag = ({ label, isSelected, handlePress }: Props) => {
+const Tag = ({ label, isSelected, onPress }: Props) => {
   return (
     <TouchableOpacity
       style={[tagStyles.container, isSelected && tagStyles.selectedContainer]}
       activeOpacity={0.9}
-      onPress={handlePress}
+      onPress={onPress}
     >
       <Text variant="body2" color={isSelected ? 'white' : 'main'}>
         {label}

@@ -55,7 +55,7 @@ const Field = () => {
             key={f.value}
             label={f.label}
             isSelected={f.isActive}
-            handlePress={() => handlePress(f)}
+            onPress={() => handlePress(f)}
           />
         ))}
       </OpenEvent.TagGroup>
