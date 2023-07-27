@@ -1,4 +1,8 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+  NavigationProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
 import Icon from 'components/common/Icon/Icon';
 import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
 import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
@@ -9,7 +13,7 @@ import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomS
 import eventList from 'data/lists/eventList';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { BackHandler, Dimensions, Pressable, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
 import { colors } from 'styles/theme';
@@ -29,7 +33,7 @@ const EventMapScreen = () => {
   );
   // 현 위치 검색버튼 활성화 여부
   const [currentFindActive, setCurrentFindActive] = useState<boolean>(false);
-  // 스크린 위치 & 현재 위치 & 초기 지도위치 & 네이버 맵 useRef
+  // 스크린 위치 & 현재 위치 & 초기 지도위치 & 현위치 검색 저장좌표 & 네이버 맵 useRef
   const {
     screenCoordinate,
     currentCoordinate,
@@ -119,20 +123,22 @@ const EventMapScreen = () => {
     if (!clickedMarker) return eventList;
     return eventList.filter((event) => event.id === clickedMarker);
   }, [clickedMarker]);
-  useEffect(() => {
-    const backAction = () => {
-      if (fieldMapMode) {
-        recallEventMap();
-        return true;
-      }
-      return false;
-    };
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const backAction = () => {
+        if (fieldMapMode) {
+          recallEventMap();
+          return true;
+        }
+        return false;
+      };
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction,
+      );
+      return () => backHandler.remove();
+    }, [!fieldMapMode]),
+  );
   return (
     <View style={eventMapScreenStyles.container}>
       {!fieldMapMode && (
