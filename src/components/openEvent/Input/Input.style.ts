@@ -9,6 +9,9 @@ const inputStyles = StyleSheet.create({
   errorTextWrapper: {
     borderColor: colors.error,
   },
+  disabledTextWrapper: {
+    backgroundColor: '#B9B9B930',
+  },
   text: {
     fontFamily: fonts.regular,
     fontSize: 13,

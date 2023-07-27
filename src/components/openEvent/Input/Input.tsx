@@ -7,12 +7,14 @@ import HelpText from '../HelpText/HelpText';
 interface Props extends TextInputProps {
   status?: StatusType;
   helpText?: string;
+  disabled?: boolean;
 }
 
 const Input = ({
   status = StatusType.default,
   helpText,
   style,
+  disabled = false,
   ...rest
 }: Props) => {
   return (
@@ -22,6 +24,7 @@ const Input = ({
           openEventStyles.textWrapper,
           inputStyles.text,
           status === StatusType.error && inputStyles.errorTextWrapper,
+          disabled && inputStyles.disabledTextWrapper,
           { ...(style as object) },
         ]}
         placeholderTextColor="#A4A4A4"
