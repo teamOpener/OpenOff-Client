@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { debounce } from 'lodash';
 import { OpenEvent } from 'components/openEvent';
 import MENT_OPEN_EVENT from 'constants/openEvent';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import StatusType from 'constants/status';
 import { HelpText } from 'components/openEvent/atoms';
@@ -19,15 +19,12 @@ const Description = () => {
 
   const [content, setContent] = useState<string>('');
 
-  const handleContent = useCallback(
-    debounce((value) => {
-      setOpenEvent({
-        ...openEvent,
-        description: value,
-      });
-    }, 500),
-    [],
-  );
+  const handleContent = debounce((value) => {
+    setOpenEvent({
+      ...openEvent,
+      description: value,
+    });
+  }, 500);
 
   useEffect(() => {
     if (hasError) {

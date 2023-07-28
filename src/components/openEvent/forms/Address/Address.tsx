@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { debounce } from 'lodash';
 import { OpenEvent } from 'components/openEvent';
@@ -24,18 +24,15 @@ const Address = () => {
 
   const hasError = !!openEventErrorMessage.address;
 
-  const handleDetailAddress = useCallback(
-    debounce((value) => {
-      setOpenEvent({
-        ...openEvent,
-        address: {
-          roadAddress: openEvent.address.roadAddress,
-          detailAddress: value,
-        },
-      });
-    }, 500),
-    [],
-  );
+  const handleDetailAddress = debounce((value) => {
+    setOpenEvent({
+      ...openEvent,
+      address: {
+        roadAddress: openEvent.address.roadAddress,
+        detailAddress: value,
+      },
+    });
+  }, 500);
 
   /**
    * 도로명 주소가 바뀔 경우, 상세 주소를 초기화합니다.
