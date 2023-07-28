@@ -15,19 +15,23 @@ const MENT_OPEN_EVENT = Object.freeze({
   ERROR_TITLE: '이벤트 제목을 입력해주세요.',
   ERROR_APPLICATION_DATE: '이벤트 신청 기간을 설정해주세요.',
   ERROR_DATE: '최소 1개 이상의 이벤트 일시를 등록해주세요.',
-  ERROR_ADDRESS: '이벤트 장소를 등록해주세요.',
-  ERROR_RECRUITMENT: '모집 인원를 입력해주세요.',
-  ERROR_DESCRIPTION: '이벤트 상세 내용을 입력해주세요.',
-  ERROR_HOST_NAME: '업체(주최자)명을 입력해주세요.',
-  ERROR_HOST_PHONE: '전화번호를 입력해주세요.',
-  ERROR_HOST_EMAIL: '이메일을 입력해주세요.',
 
   HEADER: {
     SEARCH_ADDRESS: '주소를 검색해주세요.',
   },
 
+  MAIN: {
+    COST: '₩ 가격을 입력해주세요.',
+    SUBMIT: '개설하기',
+  },
+
   ERROR: {
-    // TODO
+    ADDRESS: '이벤트 장소를 등록해주세요.',
+    RECRUITMENT: '모집 인원를 입력해주세요.',
+    DESCRIPTION: '이벤트 상세 내용을 입력해주세요.',
+    HOST_NAME: '업체(주최자)명을 입력해주세요.',
+    HOST_PHONE: '전화번호를 입력해주세요.',
+    HOST_EMAIL: '이메일을 입력해주세요.',
   },
 
   PLACEHOLDER: {
