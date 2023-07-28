@@ -36,6 +36,10 @@ const useOpenEventValidator = ({ openEvent }: Props) => {
     setError('address', MENT_OPEN_EVENT.ERROR.ADDRESS);
   }
 
+  if (!openEvent.recruitmentNumber) {
+    setError('recruitmentNumber', MENT_OPEN_EVENT.ERROR.RECRUITMENT);
+  }
+
   return { hasError, errorMessage };
 };
 
