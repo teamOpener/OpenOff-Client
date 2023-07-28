@@ -8,6 +8,8 @@ const imageButtonStyles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 0,
+    paddingHorizontal: 0,
   },
   cameraWrapper: {
     borderRadius: 3,
@@ -45,6 +47,13 @@ const imageButtonStyles = StyleSheet.create({
   primaryLabelText: {
     fontFamily: fonts.regular,
     fontSize: 13,
+  },
+  image: {
+    resizeMode: 'cover',
+    flex: 1,
+    width: 120,
+    height: 120,
+    borderRadius: 10,
   },
 });
 
