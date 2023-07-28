@@ -12,13 +12,14 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		363ABCE12A54A25900EADEDA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 363ABCE32A54A25900EADEDA /* InfoPlist.strings */; };
 		36C4EF4B2A66D5480043E332 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4A2A66D5480043E332 /* Pretendard-Bold.ttf */; };
 		36C4EF502A66D5550043E332 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4C2A66D5550043E332 /* Pretendard-Regular.ttf */; };
 		36C4EF512A66D5550043E332 /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4D2A66D5550043E332 /* Pretendard-Light.ttf */; };
 		36C4EF522A66D5550043E332 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4E2A66D5550043E332 /* Pretendard-SemiBold.ttf */; };
 		36C4EF532A66D5550043E332 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36C4EF4F2A66D5550043E332 /* Pretendard-Medium.ttf */; };
 		36C4EF562A68FE250043E332 /* SwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4EF552A68FE250043E332 /* SwiftBridge.swift */; };
+		36E616C22A7423AA00B51063 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36E616C42A7423AA00B51063 /* InfoPlist.strings */; };
+		36E616C72A7423DC00B51063 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36E616C92A7423DC00B51063 /* InfoPlist.strings */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B2C4BE51366C320A160B62EF /* libPods-OpenOff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A18D632FE32C47F38363C57A /* libPods-OpenOff.a */; };
 /* End PBXBuildFile section */
@@ -43,8 +44,6 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OpenOff/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = OpenOff/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OpenOff/main.m; sourceTree = "<group>"; };
-		363ABCE22A54A25900EADEDA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		363ABCE42A54A25F00EADEDA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		36C13E3C2A5602DE004C1B11 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		36C4EF332A66BABE0043E332 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		36C4EF4A2A66D5480043E332 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Bold.ttf"; path = "Fonts/Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -54,6 +53,8 @@
 		36C4EF4F2A66D5550043E332 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Medium.ttf"; path = "Fonts/Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		36C4EF542A68FE250043E332 /* OpenOff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenOff-Bridging-Header.h"; sourceTree = "<group>"; };
 		36C4EF552A68FE250043E332 /* SwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBridge.swift; sourceTree = "<group>"; };
+		36E616C32A7423AA00B51063 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		36E616C82A7423DC00B51063 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		45009098E0E7D76B85595F2D /* Pods-OpenOff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenOff.debug.xcconfig"; path = "Target Support Files/Pods-OpenOff/Pods-OpenOff.debug.xcconfig"; sourceTree = "<group>"; };
 		7B40E0EED1298484E935F9E9 /* Pods-OpenOff-OpenOffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenOff-OpenOffTests.debug.xcconfig"; path = "Target Support Files/Pods-OpenOff-OpenOffTests/Pods-OpenOff-OpenOffTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7C5FF8AB27631643AC3A1A58 /* Pods-OpenOff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenOff.release.xcconfig"; path = "Target Support Files/Pods-OpenOff/Pods-OpenOff.release.xcconfig"; sourceTree = "<group>"; };
@@ -108,10 +109,12 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				36E616C42A7423AA00B51063 /* InfoPlist.strings */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				36C4EF552A68FE250043E332 /* SwiftBridge.swift */,
 				36C4EF542A68FE250043E332 /* OpenOff-Bridging-Header.h */,
+				36E616C92A7423DC00B51063 /* InfoPlist.strings */,
 			);
 			name = OpenOff;
 			sourceTree = "<group>";
@@ -143,7 +146,6 @@
 				36C4EF4A2A66D5480043E332 /* Pretendard-Bold.ttf */,
 				36C4EF332A66BABE0043E332 /* Config.xcconfig */,
 				36C13E3C2A5602DE004C1B11 /* Fonts */,
-				363ABCE32A54A25900EADEDA /* InfoPlist.strings */,
 				13B07FAE1A68108700A75B9A /* OpenOff */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* OpenOffTests */,
@@ -277,8 +279,9 @@
 				36C4EF532A66D5550043E332 /* Pretendard-Medium.ttf in Resources */,
 				36C4EF4B2A66D5480043E332 /* Pretendard-Bold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				363ABCE12A54A25900EADEDA /* InfoPlist.strings in Resources */,
+				36E616C22A7423AA00B51063 /* InfoPlist.strings in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				36E616C72A7423DC00B51063 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,13 +467,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		363ABCE32A54A25900EADEDA /* InfoPlist.strings */ = {
+		36E616C42A7423AA00B51063 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				363ABCE22A54A25900EADEDA /* en */,
-				363ABCE42A54A25F00EADEDA /* ko */,
+				36E616C32A7423AA00B51063 /* ko */,
 			);
 			name = InfoPlist.strings;
+			path = OpenOff;
+			sourceTree = "<group>";
+		};
+		36E616C92A7423DC00B51063 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				36E616C82A7423DC00B51063 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = OpenOff;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
