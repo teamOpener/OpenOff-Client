@@ -48,6 +48,18 @@ const useOpenEventValidator = ({ openEvent }: Props) => {
     setError('imageUrls', MENT_OPEN_EVENT.HELP_TEXT.IMAGE);
   }
 
+  if (!openEvent.hostName) {
+    setError('hostName', MENT_OPEN_EVENT.ERROR.HOST_NAME);
+  }
+
+  if (!openEvent.hostPhoneNumber) {
+    setError('hostPhoneNumber', MENT_OPEN_EVENT.ERROR.HOST_PHONE);
+  }
+
+  if (!openEvent.hostEmail) {
+    setError('hostEmail', MENT_OPEN_EVENT.ERROR.HOST_EMAIL);
+  }
+
   return { hasError, errorMessage };
 };
 
