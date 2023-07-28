@@ -1,5 +1,11 @@
 import FieldCode from 'constants/code';
+import { Image } from 'react-native-image-crop-picker';
 
+export interface ImageBuilder {
+  localImage: Image;
+  uploadUrl: string | null;
+  isMain: boolean;
+}
 export interface EventBuilder {
   field: FieldCode[];
   title: string | null;
@@ -13,7 +19,7 @@ export interface EventBuilder {
   cost: number | null;
   recruitmentNumber: number | null;
   description: string | null;
-  imageUrls: string[];
+  imageBuilders: ImageBuilder[];
   additionalInformation: string[];
   hostName: string | null;
   hostPhoneNumber: string | null;

@@ -15,7 +15,7 @@ const initEventBuilder: EventBuilder = {
   cost: null,
   recruitmentNumber: null,
   description: null,
-  imageUrls: [],
+  imageBuilders: [],
   additionalInformation: [],
   hostName: null,
   hostPhoneNumber: null,
