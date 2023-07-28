@@ -1,19 +1,17 @@
 import MENT_OPEN_EVENT from 'constants/openEvent';
-import {
-  OpenEventErrorMessage,
-  initOpenEventErrorMessage,
-} from 'stores/OpenEventStore';
-import { CreateEventDto } from 'types/apis/CreateEvent.dto';
+import { initEventBuilderErrMsg } from 'stores/OpenEventStore';
+import { EventBuilder } from 'types/openEvent/EventBuilder';
+import { EventBuilderError } from 'types/openEvent/EventBuilderError';
 
 interface Props {
-  openEvent: CreateEventDto;
+  openEvent: EventBuilder;
 }
 
 const useOpenEventValidator = ({ openEvent }: Props) => {
-  let errorMessage: OpenEventErrorMessage = initOpenEventErrorMessage;
+  let errorMessage: EventBuilderError = initEventBuilderErrMsg;
   let hasError = false;
 
-  const setError = (field: keyof OpenEventErrorMessage, message: string) => {
+  const setError = (field: keyof EventBuilderError, message: string) => {
     hasError = true;
     errorMessage = { ...errorMessage, [field]: message };
   };

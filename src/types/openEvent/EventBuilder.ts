@@ -1,6 +1,6 @@
 import FieldCode from 'constants/code';
 
-export interface CreateEventDto {
+export interface EventBuilder {
   field: FieldCode[];
   title: string | null;
   applicationStartDate: string | null;
@@ -10,14 +10,12 @@ export interface CreateEventDto {
     roadAddress: string | null;
     detailAddress: string | null;
   };
-  cost: number;
+  cost: number | null;
   recruitmentNumber: number | null;
   description: string | null;
   imageUrls: string[];
   additionalInformation: string[];
-  host: {
-    name: string | null;
-    phoneNumber: string | null;
-    email: string | null;
-  };
+  hostName: string | null;
+  hostPhoneNumber: string | null;
+  hostEmail: string | null;
 }

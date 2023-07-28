@@ -1,25 +1,8 @@
 import { create } from 'zustand';
-import { CreateEventDto } from 'types/apis/CreateEvent.dto';
+import { EventBuilderError } from 'types/openEvent/EventBuilderError';
+import { EventBuilder } from 'types/openEvent/EventBuilder';
 
-export interface OpenEventErrorMessage {
-  field: string | null;
-  title: string | null;
-  applicationPeriod: string | null;
-  eventDates: string | null;
-  address: string | null;
-  cost: string | null;
-  recruitmentNumber: string | null;
-  description: string | null;
-  imageUrls: string | null;
-  additionalInformation: string | null;
-  host: {
-    name: string | null;
-    phoneNumber: string | null;
-    email: string | null;
-  };
-}
-
-const initOpenEvent: CreateEventDto = {
+const initEventBuilder: EventBuilder = {
   field: [],
   title: null,
   applicationStartDate: null,
@@ -29,19 +12,17 @@ const initOpenEvent: CreateEventDto = {
     roadAddress: null,
     detailAddress: null,
   },
-  cost: 0,
+  cost: null,
   recruitmentNumber: null,
   description: null,
   imageUrls: [],
   additionalInformation: [],
-  host: {
-    name: null,
-    phoneNumber: null,
-    email: null,
-  },
+  hostName: null,
+  hostPhoneNumber: null,
+  hostEmail: null,
 };
 
-export const initOpenEventErrorMessage: OpenEventErrorMessage = {
+export const initEventBuilderErrMsg: EventBuilderError = {
   field: null,
   title: null,
   applicationPeriod: null,
@@ -52,30 +33,28 @@ export const initOpenEventErrorMessage: OpenEventErrorMessage = {
   description: null,
   imageUrls: null,
   additionalInformation: null,
-  host: {
-    name: null,
-    phoneNumber: null,
-    email: null,
-  },
+  hostName: null,
+  hostPhoneNumber: null,
+  hostEmail: null,
 };
 
 export interface OpenEventStore {
-  openEvent: CreateEventDto;
-  openEventErrorMessage: OpenEventErrorMessage;
-  setOpenEvent: (props: CreateEventDto) => void;
-  setOpenEventErrorMessage: (props: OpenEventErrorMessage) => void;
+  openEvent: EventBuilder;
+  openEventErrorMessage: EventBuilderError;
+  setOpenEvent: (props: EventBuilder) => void;
+  setOpenEventErrorMessage: (props: EventBuilderError) => void;
   init: () => void;
 }
 
 export const useOpenEventStore = create<OpenEventStore>((set) => ({
-  openEvent: initOpenEvent,
-  openEventErrorMessage: initOpenEventErrorMessage,
+  openEvent: initEventBuilder,
+  openEventErrorMessage: initEventBuilderErrMsg,
   setOpenEvent: (openEvent) => set(() => ({ openEvent })),
   setOpenEventErrorMessage: (openEventErrorMessage) =>
     set(() => ({ openEventErrorMessage })),
   init: () =>
     set(() => ({
-      openEvent: initOpenEvent,
-      openEventErrorMessage: initOpenEventErrorMessage,
+      openEvent: initEventBuilder,
+      openEventErrorMessage: initEventBuilderErrMsg,
     })),
 }));
