@@ -6,8 +6,6 @@ const MENT_OPEN_EVENT = Object.freeze({
   TIME_PICKER_TITLE: '시간을 선택해주세요.',
   ADDRESS_PLACEHOLDER: '주소를 검색해주세요',
   ADDRESS_DETAIL_PLACEHOLDER: '상세 주소를 입력해주세요',
-  DESCRIPTION_PLACEHOLDER:
-    '다음과 같은 정보를 입력해주세요.\n\n-이벤트 상세 설명 및 소개\n-나이 제한 (신분증 지참)\n-이벤트 준비물\n-유료 이벤트의 경우 현장 결제 안내',
   IMAGE_UPLOAD_HELP_TEXT: '최소 1장의 사진을 등록해주세요.',
   ADDITIONAL_PLACEHOLDER: '추가로 수집할 정보를 입력해주세요',
 
@@ -27,6 +25,7 @@ const MENT_OPEN_EVENT = Object.freeze({
 
   ERROR: {
     ADDRESS: '이벤트 장소를 등록해주세요.',
+    COST: '가격을 입력해주세요.',
     RECRUITMENT: '모집 인원를 입력해주세요.',
     DESCRIPTION: '이벤트 상세 내용을 입력해주세요.',
     HOST_NAME: '업체(주최자)명을 입력해주세요.',
@@ -35,7 +34,8 @@ const MENT_OPEN_EVENT = Object.freeze({
   },
 
   PLACEHOLDER: {
-    // TODO
+    DESCRIPTION:
+      '다음과 같은 정보를 입력해주세요.\n\n-이벤트 상세 설명 및 소개\n-나이 제한 (신분증 지참)\n-이벤트 준비물\n-유료 이벤트의 경우 현장 결제 안내',
   },
 });
 

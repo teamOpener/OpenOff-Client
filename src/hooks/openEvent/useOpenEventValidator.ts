@@ -40,6 +40,10 @@ const useOpenEventValidator = ({ openEvent }: Props) => {
     setError('recruitmentNumber', MENT_OPEN_EVENT.ERROR.RECRUITMENT);
   }
 
+  if (!openEvent.description) {
+    setError('description', MENT_OPEN_EVENT.ERROR.DESCRIPTION);
+  }
+
   return { hasError, errorMessage };
 };
 
