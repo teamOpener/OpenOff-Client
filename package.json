@@ -52,7 +52,7 @@
     "react-native-nmap": "^0.0.66",
     "react-native-pager-view": "^6.2.0",
     "react-native-paper": "^5.9.0",
-    "react-native-permissions": "^3.8.1",
+    "react-native-permissions": "3.8.0",
     "react-native-radio-buttons-group": "^3.0.2",
     "react-native-reanimated": "2.15.0",
     "react-native-reanimated-carousel": "^3.4.0",
@@ -142,7 +142,8 @@
     "LocationAccuracy",
     "LocationAlways",
     "LocationWhenInUse",
-    "Notifications"
+    "Notifications",
+    "PhotoLibrary"
   ],
   "resolutions": {
     "react-docgen-typescript": "2.2.2"
