@@ -3,7 +3,7 @@ import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { requestSinglePermisson } from 'utils/permission';
 import { PERMISSIONS } from 'react-native-permissions';
-import { ImageBuilder } from 'types/openEvent/EventBuilder';
+import { ImageBuilder } from 'types/openEvent/EventForm';
 import imageButtonStyles from './ImageButton.style';
 import openEventStyles from '../OpenEvent.style';
 

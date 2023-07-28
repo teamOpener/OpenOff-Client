@@ -6,7 +6,7 @@ export interface ImageBuilder {
   uploadUrl: string | null;
   isMain: boolean;
 }
-export interface EventBuilder {
+export interface EventForm {
   field: FieldCode[];
   title: string | null;
   applicationStartDate: string | null;

@@ -40,20 +40,20 @@ const OpenEventScreen = () => {
         <OpenEventForm.ApplicationPeriod />
         <OpenEventForm.Period />
         {/* TODO */}
-        {/* <OpenEventForm.Address /> */}
-        {/* <OpenEventForm.Cost /> */}
-        {/* <OpenEventForm.RecruitmentNumber /> */}
-        {/* <OpenEventForm.Description /> */}
-        {/* <OpenEventForm.UploadImage /> */}
+        <OpenEventForm.Address />
+        <OpenEventForm.Cost />
+        <OpenEventForm.RecruitmentNumber />
+        <OpenEventForm.Description />
+        <OpenEventForm.UploadImage />
         {/* <OpenEventForm.AdditionalInfo /> */}
 
         <Divider height={1} color="darkGrey" />
 
         <OpenEvent.Header title={MENT_OPEN_EVENT.INFO} />
         {/* TODO */}
-        {/* <OpenEventForm.HostName />
+        <OpenEventForm.HostName />
         <OpenEventForm.HostPhoneNumber />
-        <OpenEventForm.HostEmail /> */}
+        <OpenEventForm.HostEmail />
 
         <Divider height={1} color="darkGrey" />
 
@@ -66,7 +66,7 @@ const OpenEventScreen = () => {
         <Spacing height={156} />
       </ScrollView>
 
-      <FixedButton label="개설하기" onPress={handlePress} />
+      <FixedButton label={MENT_OPEN_EVENT.MAIN.SUBMIT} onPress={handlePress} />
     </View>
   );
 };

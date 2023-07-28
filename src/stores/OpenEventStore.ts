@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-import { EventBuilderError } from 'types/openEvent/EventBuilderError';
-import { EventBuilder } from 'types/openEvent/EventBuilder';
+import { EventFormError } from 'types/openEvent/EventFormError';
+import { EventForm } from 'types/openEvent/EventForm';
 
-const initEventBuilder: EventBuilder = {
+export const initEventForm: EventForm = {
   field: [],
   title: null,
   applicationStartDate: null,
@@ -22,7 +22,7 @@ const initEventBuilder: EventBuilder = {
   hostEmail: null,
 };
 
-export const initEventBuilderErrMsg: EventBuilderError = {
+export const initEventFormErrMsg: EventFormError = {
   field: null,
   title: null,
   applicationPeriod: null,
@@ -39,22 +39,22 @@ export const initEventBuilderErrMsg: EventBuilderError = {
 };
 
 export interface OpenEventStore {
-  openEvent: EventBuilder;
-  openEventErrorMessage: EventBuilderError;
-  setOpenEvent: (props: EventBuilder) => void;
-  setOpenEventErrorMessage: (props: EventBuilderError) => void;
+  openEvent: EventForm;
+  openEventErrorMessage: EventFormError;
+  setOpenEvent: (props: EventForm) => void;
+  setOpenEventErrorMessage: (props: EventFormError) => void;
   init: () => void;
 }
 
 export const useOpenEventStore = create<OpenEventStore>((set) => ({
-  openEvent: initEventBuilder,
-  openEventErrorMessage: initEventBuilderErrMsg,
+  openEvent: initEventForm,
+  openEventErrorMessage: initEventFormErrMsg,
   setOpenEvent: (openEvent) => set(() => ({ openEvent })),
   setOpenEventErrorMessage: (openEventErrorMessage) =>
     set(() => ({ openEventErrorMessage })),
   init: () =>
     set(() => ({
-      openEvent: initEventBuilder,
-      openEventErrorMessage: initEventBuilderErrMsg,
+      openEvent: initEventForm,
+      openEventErrorMessage: initEventFormErrMsg,
     })),
 }));

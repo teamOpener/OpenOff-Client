@@ -1,4 +1,4 @@
-export interface EventBuilderError {
+export interface EventFormError {
   field: string | null;
   title: string | null;
   applicationPeriod: string | null;

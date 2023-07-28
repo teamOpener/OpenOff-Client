@@ -4,7 +4,7 @@ import { ScrollView, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { openImagePicker } from 'services/ImageCropPicker';
-import { ImageBuilder } from 'types/openEvent/EventBuilder';
+import { ImageBuilder } from 'types/openEvent/EventForm';
 import StatusType from 'constants/status';
 import uploadImageStyles from './UploadImage.style';
 
