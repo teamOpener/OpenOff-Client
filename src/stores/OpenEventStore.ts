@@ -6,10 +6,7 @@ export interface OpenEventErrorMessage {
   title: string | null;
   applicationPeriod: string | null;
   eventDates: string | null;
-  address: {
-    roadAddress: string | null;
-    detailAddress: string | null;
-  };
+  address: string | null;
   cost: string | null;
   recruitmentNumber: string | null;
   description: string | null;
@@ -49,10 +46,7 @@ export const initOpenEventErrorMessage: OpenEventErrorMessage = {
   title: null,
   applicationPeriod: null,
   eventDates: null,
-  address: {
-    roadAddress: null,
-    detailAddress: null,
-  },
+  address: null,
   cost: null,
   recruitmentNumber: null,
   description: null,

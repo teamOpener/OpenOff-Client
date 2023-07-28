@@ -34,6 +34,10 @@ const useOpenEventValidator = ({ openEvent }: Props) => {
     setError('eventDates', MENT_OPEN_EVENT.ERROR_DATE);
   }
 
+  if (!openEvent.address.roadAddress) {
+    setError('address', MENT_OPEN_EVENT.ERROR.ADDRESS);
+  }
+
   return { hasError, errorMessage };
 };
 

@@ -22,7 +22,7 @@ const Address = () => {
     stackNavigation.navigate('SearchAddress');
   };
 
-  const hasError = !!openEventErrorMessage.address.roadAddress;
+  const hasError = !!openEventErrorMessage.address;
 
   const handleDetailAddress = useCallback(
     debounce((value) => {
@@ -43,6 +43,10 @@ const Address = () => {
   useEffect(() => {
     if (!openEvent.address.detailAddress) {
       setDetailAddress('');
+      setOpenEventErrorMessage({
+        ...openEventErrorMessage,
+        address: null,
+      });
     }
   }, [openEvent.address.detailAddress]);
 
@@ -75,9 +79,14 @@ const Address = () => {
           editable={!!openEvent.address.roadAddress}
           disabled={!openEvent.address.roadAddress}
         />
-      </View>
 
-      {hasError && <HelpText content="" />}
+        {hasError && (
+          <HelpText
+            status={StatusType.error}
+            content={openEventErrorMessage.address ?? ''}
+          />
+        )}
+      </View>
     </View>
   );
 };
