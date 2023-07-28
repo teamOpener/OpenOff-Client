@@ -44,6 +44,10 @@ const useOpenEventValidator = ({ openEvent }: Props) => {
     setError('description', MENT_OPEN_EVENT.ERROR.DESCRIPTION);
   }
 
+  if (!openEvent.imageBuilders.length) {
+    setError('imageUrls', MENT_OPEN_EVENT.HELP_TEXT.IMAGE);
+  }
+
   return { hasError, errorMessage };
 };
 

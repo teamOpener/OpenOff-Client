@@ -22,7 +22,7 @@ export const openImagePicker = async (maxNumber: number): Promise<Image[]> => {
     return images;
   } catch (err) {
     // TODO: Handle error
-    console.error(err);
+    console.warn(err);
     throw err;
   }
 };
@@ -46,7 +46,7 @@ export const openImageCropper = async (
     return croppedImage;
   } catch (err) {
     // TODO: Handle error
-    console.error(err);
+    console.warn(err);
     throw err;
   }
 };

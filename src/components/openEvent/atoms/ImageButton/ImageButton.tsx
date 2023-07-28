@@ -10,6 +10,7 @@ import openEventStyles from '../OpenEvent.style';
 interface Props {
   imageBuilder?: ImageBuilder;
   isMain?: boolean;
+  hasError?: boolean;
   onPress: () => void;
   onDelete?: () => void;
 }
@@ -17,6 +18,7 @@ interface Props {
 const ImageButton = ({
   imageBuilder,
   isMain = false,
+  hasError = false,
   onPress,
   onDelete,
 }: Props) => {
@@ -38,7 +40,11 @@ const ImageButton = ({
   return (
     <View>
       <TouchableOpacity
-        style={[openEventStyles.textWrapper, imageButtonStyles.container]}
+        style={[
+          openEventStyles.textWrapper,
+          imageButtonStyles.container,
+          hasError && imageButtonStyles.errorContainer,
+        ]}
         activeOpacity={imageBuilder ? 1 : 0.6}
         onPress={() => handlePress(onPress)}
       >

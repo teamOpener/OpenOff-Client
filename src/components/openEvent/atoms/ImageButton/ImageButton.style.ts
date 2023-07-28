@@ -11,6 +11,9 @@ const imageButtonStyles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 0,
   },
+  errorContainer: {
+    borderColor: colors.error,
+  },
   cameraWrapper: {
     borderRadius: 3,
     borderWidth: 1,

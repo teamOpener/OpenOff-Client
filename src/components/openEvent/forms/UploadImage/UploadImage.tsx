@@ -5,6 +5,7 @@ import Icon from 'components/common/Icon/Icon';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { openImagePicker } from 'services/ImageCropPicker';
 import { ImageBuilder } from 'types/openEvent/EventBuilder';
+import StatusType from 'constants/status';
 import uploadImageStyles from './UploadImage.style';
 
 const UploadImage = () => {
@@ -15,9 +16,10 @@ const UploadImage = () => {
     setOpenEventErrorMessage,
   } = useOpenEventStore();
   const { imageBuilders } = openEvent;
+  const { imageUrls: hasError } = openEventErrorMessage;
 
   /**
-   * 맨 뒤에 추가
+   * 이미지 추가: 맨 뒤에 추가, Max: 3
    */
   const handlePress = async () => {
     const maxNumber = 3 - imageBuilders.length;
@@ -40,8 +42,12 @@ const UploadImage = () => {
     original.push(...imageBuildersToAdd);
 
     setOpenEvent({ ...openEvent, imageBuilders: original });
+    setOpenEventErrorMessage({ ...openEventErrorMessage, imageUrls: null });
   };
 
+  /**
+   * 이미지 삭제
+   */
   const handleDelete = (idx: number) => {
     const original = [...imageBuilders];
 
@@ -57,7 +63,10 @@ const UploadImage = () => {
         <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.IMAGE} />
         <Icon name="IconCamera" size={17} fill="grey" />
       </View>
-      <OpenEvent.HelpText content={MENT_OPEN_EVENT.HELP_TEXT.IMAGE} />
+      <OpenEvent.HelpText
+        status={hasError ? StatusType.error : StatusType.default}
+        content={MENT_OPEN_EVENT.HELP_TEXT.IMAGE}
+      />
 
       <ScrollView
         horizontal
@@ -73,7 +82,7 @@ const UploadImage = () => {
           />
         ))}
         {imageBuilders.length < 3 && (
-          <OpenEvent.ImageButton onPress={handlePress} />
+          <OpenEvent.ImageButton hasError={!!hasError} onPress={handlePress} />
         )}
       </ScrollView>
     </View>
