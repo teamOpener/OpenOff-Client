@@ -1,4 +1,5 @@
 const MENT_OPEN_EVENT = Object.freeze({
+  // TODO: 정리
   INFO: '이벤트 정보를 입력해주세요.',
   FIELD_HELP_TEXT: '여러 개의 장르 선택이 가능하고, 장르 검색시 적용됩니다.',
   DATE_PICKER_PLACEHOLDER: '날짜를 선택해주세요.',
@@ -29,6 +30,7 @@ const MENT_OPEN_EVENT = Object.freeze({
   },
 
   ERROR: {
+    MAX_FIELD: '최대 3개 장르까지 선택 가능합니다.',
     ADDRESS: '이벤트 장소를 등록해주세요.',
     COST: '가격을 입력해주세요.',
     RECRUITMENT: '모집 인원를 입력해주세요.',
