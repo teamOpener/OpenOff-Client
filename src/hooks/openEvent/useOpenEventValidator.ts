@@ -61,7 +61,7 @@ const useOpenEventValidator = ({ openEvent }: Props) => {
 
   if (!openEvent.hostEmail) {
     setError('hostEmail', MENT_OPEN_EVENT.ERROR.HOST_EMAIL);
-  } else if (!validateEmail(openEvent.hostEmail)) {
+  } else if (validateEmail(openEvent.hostEmail)) {
     setError('hostEmail', MENT_OPEN_EVENT.ERROR.INVALID_HOST_EMAIL);
   }
 
