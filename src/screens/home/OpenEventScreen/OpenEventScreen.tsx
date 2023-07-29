@@ -63,7 +63,10 @@ const OpenEventScreen = () => {
 
   useEffect(() => {
     init();
-  }, [init]);
+    return () => {
+      init();
+    };
+  }, []);
 
   return (
     <View style={openEventScreenStyles.wrapper}>

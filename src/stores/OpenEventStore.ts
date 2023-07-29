@@ -54,7 +54,7 @@ export const useOpenEventStore = create<OpenEventStore>((set) => ({
     set(() => ({ openEventErrorMessage })),
   init: () =>
     set(() => ({
-      openEvent: initEventForm,
+      openEvent: { ...initEventForm, imageBuilders: [] },
       openEventErrorMessage: initEventFormErrMsg,
     })),
 }));
