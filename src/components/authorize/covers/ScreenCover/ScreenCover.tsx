@@ -6,7 +6,6 @@ import {
   NativeModules,
   Platform,
   ScrollView,
-  View,
 } from 'react-native';
 import screenCoverStyles from './ScreenCover.style';
 
@@ -37,21 +36,14 @@ const ScreenCover = ({
   });
   return (
     <KeyboardAvoidingView
-      behavior="padding"
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={statusBarHeight + 40}
       style={screenCoverStyles.container}
     >
-      {Platform.OS === 'ios' ? (
-        <ScrollView style={screenCoverStyles.scrollContainer}>
-          <AuthorizeFlowTitle titleElements={titleElements} />
-          {children}
-        </ScrollView>
-      ) : (
-        <View style={screenCoverStyles.scrollContainer}>
-          <AuthorizeFlowTitle titleElements={titleElements} />
-          {children}
-        </View>
-      )}
+      <ScrollView style={screenCoverStyles.scrollContainer}>
+        <AuthorizeFlowTitle titleElements={titleElements} />
+        {children}
+      </ScrollView>
       <AuthorizeFlowButton
         handlePress={authorizeButton.handlePress}
         label={authorizeButton.label}
