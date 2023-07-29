@@ -1,4 +1,5 @@
-import { StyleSheet, TextStyle } from 'react-native';
+import { Platform, StyleSheet, TextStyle } from 'react-native';
+import { getPixelSize } from 'styles/styleUtils';
 import { colors, fonts } from 'styles/theme';
 
 const inputStyles = StyleSheet.create({
@@ -17,6 +18,12 @@ const inputStyles = StyleSheet.create({
     fontSize: 13,
     color: colors.white,
   } as TextStyle,
+  textInputContainer: {
+    paddingVertical: Platform.select({
+      android: getPixelSize(7),
+      ios: 7,
+    }),
+  },
 });
 
 export default inputStyles;

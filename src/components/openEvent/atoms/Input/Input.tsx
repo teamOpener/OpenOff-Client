@@ -22,6 +22,7 @@ const Input = ({
       <TextInput
         style={[
           openEventStyles.textWrapper,
+          inputStyles.textInputContainer,
           inputStyles.text,
           status === StatusType.error && inputStyles.errorTextWrapper,
           disabled && inputStyles.disabledTextWrapper,
