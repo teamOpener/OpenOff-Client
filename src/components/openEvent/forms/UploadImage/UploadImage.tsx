@@ -29,6 +29,16 @@ const UploadImage = () => {
     const selectedImages = await openImagePicker(maxNumber);
     const imageBuildersToAdd: ImageBuilder[] = [];
 
+    // android에서는 선택 개수 제한 불가
+    const totalLength = imageBuilders.length + selectedImages.length;
+    if (totalLength > 3) {
+      setOpenEventErrorMessage({
+        ...openEventErrorMessage,
+        imageUrls: MENT_OPEN_EVENT.ERROR.MAX_IMAGE,
+      });
+      return;
+    }
+
     selectedImages.forEach((image) => {
       const temp: ImageBuilder = {
         localImage: image,
@@ -65,7 +75,9 @@ const UploadImage = () => {
       </View>
       <OpenEvent.HelpText
         status={hasError ? StatusType.error : StatusType.default}
-        content={MENT_OPEN_EVENT.HELP_TEXT.IMAGE}
+        content={
+          openEventErrorMessage.imageUrls ?? MENT_OPEN_EVENT.HELP_TEXT.IMAGE
+        }
       />
 
       <ScrollView
