@@ -1,6 +1,6 @@
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import StatusType from 'constants/status';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';

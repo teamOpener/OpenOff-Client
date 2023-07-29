@@ -1,4 +1,4 @@
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import { initEventFormErrMsg } from 'stores/OpenEventStore';
 import { EventForm } from 'types/openEvent/EventForm';
 import { EventFormError } from 'types/openEvent/EventFormError';

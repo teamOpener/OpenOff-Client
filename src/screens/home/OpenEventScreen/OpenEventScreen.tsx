@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import Spacing from 'components/common/Spacing/Spacing';
 import Divider from 'components/common/Divider/Divider';
 import FixedButton from 'components/common/FixedButton/FixedButton';
@@ -40,7 +40,9 @@ const OpenEventScreen = () => {
     }
 
     console.log(openEvent);
+    // TODO
     const submitForm: CreateNewEventRequestDto = {
+      // TODO
       fieldTypeList: [],
       title: openEvent.title!,
       applicationStartDate: openEvent.applicationStartDate!,
@@ -51,6 +53,7 @@ const OpenEventScreen = () => {
       eventFee: openEvent.cost!,
       maxParticipant: openEvent.recruitmentNumber!,
       description: openEvent.description!,
+      // TODO
       imageDataList: [],
       extraQuestionList: openEvent.additionalInformation,
       hostName: openEvent.hostName!,

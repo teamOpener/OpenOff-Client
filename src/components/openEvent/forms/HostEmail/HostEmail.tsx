@@ -1,5 +1,5 @@
 import { OpenEvent } from 'components/openEvent';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { HelpText } from 'components/openEvent/atoms';

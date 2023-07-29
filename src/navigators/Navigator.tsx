@@ -13,7 +13,7 @@ import WishEventScreen from 'screens/home/WishEventScreen/WishEventScreen';
 import textStyles from 'styles/textStyles';
 import { colors } from 'styles/theme';
 import SearchAddressScreen from 'screens/home/SearchAddressScreen/SearchAddressScreen';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();

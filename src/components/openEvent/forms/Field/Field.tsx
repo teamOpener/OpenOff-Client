@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
 import Spacing from 'components/common/Spacing/Spacing';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import StatusType from 'constants/status';
 import { Field as FieldType } from 'types/apps/group';
 import fieldData from 'data/lists/fieldData';

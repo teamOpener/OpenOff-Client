@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { HelpText } from 'components/openEvent/atoms';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import StatusType from 'constants/status';
 
 import costStyles from './Cost.style';

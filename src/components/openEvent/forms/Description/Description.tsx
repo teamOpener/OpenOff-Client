@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { debounce } from 'lodash';
 import { OpenEvent } from 'components/openEvent';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import { useEffect, useState } from 'react';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import StatusType from 'constants/status';

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import DatePicker, { DatePickerProps } from 'react-native-date-picker';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import Icon from 'components/common/Icon/Icon';
 import { formatDateTime } from 'utils/date';
 import openEventStyles from '../OpenEvent.style';

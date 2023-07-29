@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
 import Icon from 'components/common/Icon/Icon';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import additionalInfoStyles from './AdditionalInfo.style';
 
 const AdditionalInfo = () => {

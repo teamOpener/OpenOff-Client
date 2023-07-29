@@ -1,5 +1,5 @@
 import { OpenEvent } from 'components/openEvent';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import { ScrollView, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import { useOpenEventStore } from 'stores/OpenEventStore';
