@@ -21,6 +21,7 @@ import { Field } from 'types/apps/group';
 import NaverMapEvent from 'types/apps/map';
 import { RootStackParamList } from 'types/apps/menu';
 import getDistanceCoordinate from 'utils/coordinate';
+import { Coordinate } from 'types/event';
 import {
   defaultTabBarStyles,
   eventMapScreenStyles,
@@ -31,8 +32,10 @@ const EventMapScreen = () => {
   const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
     undefined,
   );
+
   // 현 위치 검색버튼 활성화 여부
   const [currentFindActive, setCurrentFindActive] = useState<boolean>(false);
+
   // 스크린 위치 & 현재 위치 & 초기 지도위치 & 현위치 검색 저장좌표 & 네이버 맵 useRef
   const {
     screenCoordinate,
@@ -42,20 +45,26 @@ const EventMapScreen = () => {
     focusCoordinate,
     setFocusCoordinate,
   } = useMapCoordinateInfo();
+
   // 거리순, 날짜순 정렬 및 선택자(비용 & 참여인원 & 신청현황)
   const { sort, setSort, selectState, dispatch } =
     useEventMapSelector(eventList);
+
   // 클릭된 마커의 아이디값
   const [clickedMarker, setClickedMarker] = useState<string | null>(null);
+
   // 검색어값
   const searchValue = useRef<string>('');
-  // 해당함수를 통해 search값 반영
+
+  // search값 반영함수
   const handleEventSearch = useCallback((value: string) => {
     searchValue.current = value;
   }, []);
+
   const handleMoveCurrentCoordinate = () => {
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
   };
+
   const handleCameraEvent = (event: NaverMapEvent) => {
     screenCoordinate.current = {
       latitude: event.latitude,
@@ -70,6 +79,7 @@ const EventMapScreen = () => {
       );
     });
   };
+
   const recallEventMap = () => {
     navigation.setOptions({
       tabBarStyle: {
@@ -82,6 +92,15 @@ const EventMapScreen = () => {
       return undefined;
     });
   };
+
+  const handlePressMapCoordinate = (
+    eventId: string,
+    eventCoordinate: Coordinate,
+  ) => {
+    setClickedMarker(eventId);
+    naverMapRef.current?.animateToCoordinate(eventCoordinate);
+  };
+
   const handleShowFieldEvent = useCallback(
     (field: Field) => {
       setFieldMapMode(field);
@@ -110,19 +129,22 @@ const EventMapScreen = () => {
     },
     [navigation],
   );
+
   const bottomSheetLength = {
     snapTop:
       clickedMarker || fieldMapMode
         ? (1 / 3) * Dimensions.get('window').height
         : 80,
     snapBottom: fieldMapMode
-      ? Dimensions.get('window').height
+      ? Dimensions.get('window').height - 90
       : (2 / 3) * Dimensions.get('window').height,
   };
+
   const computedEventList = useMemo(() => {
     if (!clickedMarker) return eventList;
     return eventList.filter((event) => event.id === clickedMarker);
   }, [clickedMarker]);
+
   useFocusEffect(
     useCallback(() => {
       const backAction = () => {
@@ -139,6 +161,7 @@ const EventMapScreen = () => {
       return () => backHandler.remove();
     }, [!fieldMapMode]),
   );
+
   return (
     <View style={eventMapScreenStyles.container}>
       {!fieldMapMode && (
@@ -180,7 +203,7 @@ const EventMapScreen = () => {
             <EventMarker
               key={event.id}
               clickedMarker={clickedMarker}
-              setClickedMarker={setClickedMarker}
+              handlePressMapCoordinate={handlePressMapCoordinate}
               event={event}
             />
           ))}
