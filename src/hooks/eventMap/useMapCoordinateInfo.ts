@@ -4,7 +4,7 @@ import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
 import NaverMapView from 'react-native-nmap';
 import { PERMISSIONS } from 'react-native-permissions';
 import { Coordinate } from 'types/event';
-import { requestSinglePermisson } from 'utils/permission';
+import { requestSinglePermission } from 'utils/permission';
 
 const useMapCoordinateInfo = () => {
   const naverMapRef = useRef<NaverMapView>(null);
@@ -14,9 +14,14 @@ const useMapCoordinateInfo = () => {
     longitude: 37.56278008163968,
   });
   // 지도초기 위치정보(1회성 값)
-  const [mapFocusCoordinate, setMapFocusCoordinate] = useState<Coordinate>({
+  const [firstPlaceCoordinate, setFirstPlaceCoordinate] = useState<Coordinate>({
     latitude: 126.98795373156224,
     longitude: 37.56278008163968,
+  });
+  // 현 지도위치 검색을 위한 상태
+  const [focusCoordinate, setFocusCoordinate] = useState<Coordinate>({
+    latitude: 0,
+    longitude: 0,
   });
   // 사용자 현재 위치정보
   const [currentCoordinate, setCurrentCoordinate] = useState<Coordinate>({
@@ -26,7 +31,7 @@ const useMapCoordinateInfo = () => {
   const getFirstCoordinate = () => {
     Geolocation.getCurrentPosition(
       (position) => {
-        setMapFocusCoordinate({
+        setFirstPlaceCoordinate({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
@@ -67,31 +72,33 @@ const useMapCoordinateInfo = () => {
   };
   useEffect(() => {
     if (Platform.OS === 'ios')
-      requestSinglePermisson(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(() => {
+      requestSinglePermission(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(() => {
         getFirstCoordinate();
+        setGPSCoordinate();
       });
     if (Platform.OS === 'android') {
-      Promise.all([
-        requestSinglePermisson(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION),
-        requestSinglePermisson(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION),
-      ]).then(() => {
-        getFirstCoordinate();
-      });
+      requestSinglePermission(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+        .then(() => {
+          requestSinglePermission(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION);
+        })
+        .then(() => {
+          getFirstCoordinate();
+          setGPSCoordinate();
+        });
     }
-  }, []);
-  useEffect(() => {
-    setGPSCoordinate();
     return () => {
       Geolocation.clearWatch(setGPSCoordinate());
     };
   }, []);
   return {
     screenCoordinate,
-    mapFocusCoordinate,
-    setMapFocusCoordinate,
+    firstPlaceCoordinate,
+    setFirstPlaceCoordinate,
     currentCoordinate,
     setCurrentCoordinate,
     naverMapRef,
+    focusCoordinate,
+    setFocusCoordinate,
   };
 };
 

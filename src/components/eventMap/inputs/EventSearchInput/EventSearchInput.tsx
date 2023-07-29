@@ -1,18 +1,23 @@
 import Icon from 'components/common/Icon/Icon';
+import { StackMenu } from 'constants/menu';
+import useNavigator from 'hooks/navigator/useNavigator';
 import { memo, useState } from 'react';
-import { TextInput, TouchableOpacity, View, Text } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
-import { useAppStore } from 'stores/app';
 import eventSearchInput from './EventSearchInput.style';
 
 interface Props {
   handleSearch: (value: string) => void;
-  handleCalendar: () => void;
 }
 
-const EventSearchInput = ({ handleSearch, handleCalendar }: Props) => {
-  const { startEndDate } = useAppStore();
+const EventSearchInput = ({ handleSearch }: Props) => {
+  const { stackNavigation } = useNavigator();
+  const { startEndDate } = useEventMapStore();
   const [searchValue, setSearchValue] = useState<string>('');
+  const handleCalendar = () => {
+    stackNavigation.navigate(StackMenu.DatePick);
+  };
   return (
     <View style={eventSearchInput.absoluteContainer}>
       <View style={eventSearchInput.container}>

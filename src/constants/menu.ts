@@ -1,7 +1,6 @@
 export const enum StackMenu {
   BottomTabNavigator = 'BottomTabNavigator',
   DatePick = 'DatePick',
-  FieldEventMap = 'FieldEventMap',
   OpenEvent = 'OpenEvent',
   CategoryEvent = 'CategoryEvent',
   WishEvent = 'WishEvent',

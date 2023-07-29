@@ -1,9 +1,9 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import {
   CompositeNavigationProp,
   NavigatorScreenParams,
 } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Coordinate } from 'types/event';
 import { Field } from './group';
 
@@ -33,6 +33,7 @@ export type BottomTabNavigationScreenParams =
 export type RootStackParamList = {
   BottomTabNavigator: BottomTabNavigationScreenParams;
   DatePick: undefined;
+  OpenEvent: undefined;
   FieldEventMap: {
     field: Field;
     coordinate: Coordinate;

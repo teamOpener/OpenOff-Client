@@ -112,21 +112,6 @@ const Navigator = () => {
         name={StackMenu.DatePick}
         component={DatePickScreen}
       />
-      <Stack.Screen
-        name={StackMenu.FieldEventMap}
-        component={FieldEventMapScreen}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            ...textStyles.h3,
-            color: colors.white,
-          },
-        }}
-      />
     </Stack.Navigator>
   );
 };

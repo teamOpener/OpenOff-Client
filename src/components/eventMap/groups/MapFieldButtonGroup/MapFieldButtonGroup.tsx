@@ -6,10 +6,10 @@ import { Field } from 'types/apps/group';
 import mapFieldButtonGroup from './MapFieldButtonGroup.style';
 
 interface Props {
-  getFieldEvent: (field: Field) => void;
+  handleShowFieldEvent: (field: Field) => void;
 }
 
-const MapFieldButtonGroup = ({ getFieldEvent }: Props) => {
+const MapFieldButtonGroup = ({ handleShowFieldEvent }: Props) => {
   return (
     <ScrollView
       style={mapFieldButtonGroup.container}
@@ -20,7 +20,7 @@ const MapFieldButtonGroup = ({ getFieldEvent }: Props) => {
         <MapFieldButton
           field={field}
           key={field.value}
-          handlePress={getFieldEvent}
+          handlePress={handleShowFieldEvent}
         />
       ))}
     </ScrollView>

@@ -1,5 +1,5 @@
-import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Text from 'components/common/Text/Text';
+import { memo } from 'react';
 import { Image, View } from 'react-native';
 import { Event } from 'types/event';
 import mapEventCardStyles from './MapEventCard.style';
@@ -31,21 +31,17 @@ const MapEventCard = ({ event }: Props) => {
           {event.place}
         </Text>
       </View>
-      <BottomSheetScrollView
-        style={mapEventCardStyles.imageContainer}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      >
-        {event.images.map((image) => (
+      <View style={mapEventCardStyles.imageContainer}>
+        {event.images.slice(0, 3).map((image) => (
           <Image
             key={Math.random() * 100}
             style={mapEventCardStyles.eventImage}
             source={{ uri: image }}
           />
         ))}
-      </BottomSheetScrollView>
+      </View>
     </View>
   );
 };
 
-export default MapEventCard;
+export default memo(MapEventCard);

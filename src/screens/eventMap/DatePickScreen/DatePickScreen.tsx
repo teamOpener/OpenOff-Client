@@ -6,7 +6,7 @@ import CalendarCard from 'components/eventMap/cards/CalendarCard/CalendarCard';
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { MarkedDates } from 'react-native-calendars/src/types';
-import { useAppStore } from 'stores/app';
+import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
 import { dateFormatter } from 'utils/date';
 import datePickScreenStyles from './DatePickScreen.style';
@@ -16,7 +16,7 @@ type ParamList = {
 };
 
 const DatePickScreen = () => {
-  const { setStartEndDate } = useAppStore();
+  const { setStartEndDate } = useEventMapStore();
   const navigation = useNavigation<NavigationProp<ParamList>>();
   const [startDay, setStartDay] = useState<string>('');
   const [endDay, setEndDay] = useState<string>('');

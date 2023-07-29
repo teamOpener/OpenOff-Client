@@ -37,7 +37,7 @@ const requestMultiplePermissions = async () => {
   }
 };
 
-const requestSinglePermisson = async (permission: Permission) => {
+const requestSinglePermission = async (permission: Permission) => {
   try {
     const checkResult = await check(permission);
     if (checkResult === RESULTS.DENIED) await request(permission);
@@ -46,4 +46,4 @@ const requestSinglePermisson = async (permission: Permission) => {
   }
 };
 
-export { requestMultiplePermissions, requestSinglePermisson };
+export { requestMultiplePermissions, requestSinglePermission };
