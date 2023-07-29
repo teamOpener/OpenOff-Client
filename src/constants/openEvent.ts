@@ -35,7 +35,9 @@ const MENT_OPEN_EVENT = Object.freeze({
     DESCRIPTION: '이벤트 상세 내용을 입력해주세요.',
     HOST_NAME: '업체(주최자)명을 입력해주세요.',
     HOST_PHONE: '전화번호를 입력해주세요.',
+    INVALID_HOST_PHONE: '올바른 전화번호를 입력해주세요.',
     HOST_EMAIL: '이메일을 입력해주세요.',
+    INVALID_HOST_EMAIL: '유효한 이메일을 입력해주세요.',
   },
 
   PLACEHOLDER: {

@@ -2,6 +2,7 @@ import MENT_OPEN_EVENT from 'constants/openEvent';
 import { initEventFormErrMsg } from 'stores/OpenEventStore';
 import { EventForm } from 'types/openEvent/EventForm';
 import { EventFormError } from 'types/openEvent/EventFormError';
+import { validateEmail, validatorOnlyPhoneNumber } from 'utils/validate';
 
 interface Props {
   openEvent: EventForm;
@@ -54,10 +55,14 @@ const useOpenEventValidator = ({ openEvent }: Props) => {
 
   if (!openEvent.hostPhoneNumber) {
     setError('hostPhoneNumber', MENT_OPEN_EVENT.ERROR.HOST_PHONE);
+  } else if (!validatorOnlyPhoneNumber(openEvent.hostPhoneNumber)) {
+    setError('hostPhoneNumber', MENT_OPEN_EVENT.ERROR.INVALID_HOST_PHONE);
   }
 
   if (!openEvent.hostEmail) {
     setError('hostEmail', MENT_OPEN_EVENT.ERROR.HOST_EMAIL);
+  } else if (!validateEmail(openEvent.hostEmail)) {
+    setError('hostEmail', MENT_OPEN_EVENT.ERROR.INVALID_HOST_EMAIL);
   }
 
   return { hasError, errorMessage };
