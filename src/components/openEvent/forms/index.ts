@@ -1,4 +1,4 @@
-// export { default as AdditionalInfo } from './AdditionalInfo/AdditionalInfo';
+export { default as AdditionalInfo } from './AdditionalInfo/AdditionalInfo';
 export { default as Address } from './Address/Address';
 export { default as ApplicationPeriod } from './ApplicationPeriod/ApplicationPeriod';
 export { default as Cost } from './Cost/Cost';

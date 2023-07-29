@@ -86,7 +86,7 @@ const OpenEventScreen = () => {
         <OpenEventForm.RecruitmentNumber />
         <OpenEventForm.Description />
         <OpenEventForm.UploadImage />
-        {/* <OpenEventForm.AdditionalInfo /> */}
+        <OpenEventForm.AdditionalInfo />
 
         <Divider height={1} color="darkGrey" />
 
