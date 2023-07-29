@@ -17,8 +17,9 @@ const HostPhoneNumber = () => {
   const { hostPhoneNumber: errMsg } = openEventErrorMessage;
 
   const handleChangeText = (value: string) => {
-    // TODO: 숫자만 입력가능하도록
-    setOpenEvent({ ...openEvent, hostPhoneNumber: value });
+    const numbersOnly = value.replace(/[^0-9]/g, '');
+
+    setOpenEvent({ ...openEvent, hostPhoneNumber: numbersOnly });
     setOpenEventErrorMessage({
       ...openEventErrorMessage,
       hostPhoneNumber: null,
