@@ -1,15 +1,22 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Marker } from 'react-native-nmap';
 import { colors } from 'styles/theme';
-import { Event } from 'types/event';
+import { Coordinate, Event } from 'types/event';
 
 interface Props {
   clickedMarker: string | null;
-  setClickedMarker: Dispatch<SetStateAction<string | null>>;
+  handlePressMapCoordinate: (
+    eventId: string,
+    eventCoordinate: Coordinate,
+  ) => void;
   event: Event;
 }
 
-const EventMarker = ({ clickedMarker, setClickedMarker, event }: Props) => {
+const EventMarker = ({
+  clickedMarker,
+  handlePressMapCoordinate,
+  event,
+}: Props) => {
   return (
     <Marker
       key={event.id}
@@ -21,7 +28,7 @@ const EventMarker = ({ clickedMarker, setClickedMarker, event }: Props) => {
         longitude: event.coordinate.longitude,
       }}
       onClick={() => {
-        setClickedMarker(event.id);
+        handlePressMapCoordinate(event.id, event.coordinate);
       }}
       pinColor={colors.background}
     />
