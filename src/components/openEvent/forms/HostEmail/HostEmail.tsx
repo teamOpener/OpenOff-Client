@@ -34,7 +34,6 @@ const HostEmail = () => {
           status={errMsg ? StatusType.error : StatusType.default}
           value={hostEmail ?? ''}
           onChangeText={handleChangeText}
-          keyboardType="numeric"
         />
         {!!errMsg && (
           <HelpText status={StatusType.error} content={errMsg ?? ''} />
