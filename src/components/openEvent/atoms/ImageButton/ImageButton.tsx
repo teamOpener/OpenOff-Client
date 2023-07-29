@@ -1,7 +1,7 @@
 import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { requestSinglePermisson } from 'utils/permission';
+import { requestSinglePermission } from 'utils/permission';
 import { PERMISSIONS } from 'react-native-permissions';
 import { ImageBuilder } from 'types/openEvent/EventForm';
 import imageButtonStyles from './ImageButton.style';
@@ -28,9 +28,9 @@ const ImageButton = ({
     }
 
     if (Platform.OS === 'android') {
-      await requestSinglePermisson(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+      await requestSinglePermission(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
     } else if (Platform.OS === 'ios') {
-      await requestSinglePermisson(PERMISSIONS.IOS.PHOTO_LIBRARY);
+      await requestSinglePermission(PERMISSIONS.IOS.PHOTO_LIBRARY);
     }
     // TODO: 권한 비허용시 setting으로
 
