@@ -4,7 +4,6 @@ import { colors, fonts } from 'styles/theme';
 const openEventStyles = StyleSheet.create({
   textWrapper: {
     margin: 0,
-    padding: 0,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: '#B9B9B9',
