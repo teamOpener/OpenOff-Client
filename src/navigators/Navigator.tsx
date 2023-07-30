@@ -6,7 +6,6 @@ import BackButton from 'components/navigator/BackButton';
 import { StackMenu } from 'constants/menu';
 import { Platform } from 'react-native';
 import DatePickScreen from 'screens/eventMap/DatePickScreen/DatePickScreen';
-import FieldEventMapScreen from 'screens/eventMap/FieldEventMapScreen/FieldEventMapScreen';
 import CategoryEventScreen from 'screens/home/CategoryEventScreen/CategoryEventScreen';
 import OpenEventScreen from 'screens/home/OpenEventScreen/OpenEventScreen';
 import WishEventScreen from 'screens/home/WishEventScreen/WishEventScreen';
@@ -14,6 +13,7 @@ import textStyles from 'styles/textStyles';
 import { colors } from 'styles/theme';
 import SearchAddressScreen from 'screens/home/SearchAddressScreen/SearchAddressScreen';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
+import AlertScreen from 'screens/home/AlertScreen/AlertScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -108,6 +108,22 @@ const Navigator = () => {
         }}
         name={StackMenu.SearchAddress}
         component={SearchAddressScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTitle: '알림',
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            ...textStyles.h3,
+            color: colors.white,
+          },
+        }}
+        name={StackMenu.Alert}
+        component={AlertScreen}
       />
       {/* map */}
       <Stack.Screen

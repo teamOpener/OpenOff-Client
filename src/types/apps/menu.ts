@@ -43,7 +43,7 @@ export type RootStackParamList = {
   };
   WishEvent: undefined;
   PopularEvent: undefined;
-  OpenEvent: undefined;
+  Alert: undefined;
   SearchAddress: undefined;
 };
 
