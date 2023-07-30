@@ -4,19 +4,25 @@ import FloatingButton from 'components/home/floatingbutton/FloatingButton';
 import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/CategoryButtonGroup';
 import EventCardList from 'components/home/lists/EventCardList/EventCardList';
 import { StackMenu } from 'constants/menu';
-import advertisementList from 'data/lists/advertisementList';
-import eventList from 'data/lists/eventList';
+import advertisementList from 'mocks/lists/advertisementList';
+import eventList from 'mocks/lists/eventList';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import homeScreenStyles from './HomeScreen.style';
 
 const HomeScreen = () => {
   const { stackNavigation } = useNavigator();
+
   const handleCategoryPress = (value: string) => {
     stackNavigation.navigate(StackMenu.CategoryEvent, { fieldValue: value });
   };
+
   const handleShowWishEvent = () => {
     stackNavigation.navigate(StackMenu.WishEvent);
+  };
+
+  const handleShowAlertList = () => {
+    stackNavigation.navigate(StackMenu.Alert);
   };
   return (
     <View style={homeScreenStyles.wrapper}>
@@ -29,7 +35,10 @@ const HomeScreen = () => {
           />
           <View />
           <View style={homeScreenStyles.controllerContainer}>
-            <TouchableOpacity style={homeScreenStyles.controllerButton}>
+            <TouchableOpacity
+              style={homeScreenStyles.controllerButton}
+              onPress={handleShowAlertList}
+            >
               <Icon name="IconBell" fill="white" size={20} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleShowWishEvent}>
