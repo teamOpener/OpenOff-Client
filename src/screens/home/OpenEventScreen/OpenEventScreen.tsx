@@ -5,7 +5,8 @@ import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import Spacing from 'components/common/Spacing/Spacing';
 import Divider from 'components/common/Divider/Divider';
 import FixedButton from 'components/common/FixedButton/FixedButton';
-import { OpenEvent, OpenEventForm } from 'components/openEvent';
+import { OpenEventForm } from 'components/openEvent';
+import HeadText from 'components/common/HeadText/HeadText';
 import useOpenEventValidator from 'hooks/openEvent/useOpenEventValidator';
 import { useCreateEvent } from 'hooks/queries/event';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
@@ -78,7 +79,7 @@ const OpenEventScreen = () => {
         contentContainerStyle={openEventScreenStyles.containerContent}
       >
         {/* TODO: 로딩화면제작 */}
-        <OpenEvent.Header title={MENT_OPEN_EVENT.INFO} />
+        <HeadText title={MENT_OPEN_EVENT.INFO} />
 
         <OpenEventForm.Field />
         <OpenEventForm.Title />
@@ -93,7 +94,7 @@ const OpenEventScreen = () => {
 
         <Divider height={1} color="darkGrey" />
 
-        <OpenEvent.Header title={MENT_OPEN_EVENT.INFO} />
+        <HeadText title={MENT_OPEN_EVENT.INFO} />
 
         <OpenEventForm.HostName />
         <OpenEventForm.HostPhoneNumber />
@@ -102,10 +103,10 @@ const OpenEventScreen = () => {
 
         <Divider height={1} color="darkGrey" />
 
-        <OpenEvent.Header title="개인정보 수집 및 이용" />
+        <HeadText title="개인정보 수집 및 이용" />
         {/* TODO */}
 
-        <OpenEvent.Header title="유의사항" />
+        <HeadText title="유의사항" />
         {/* TODO */}
 
         <Spacing height={156} />
