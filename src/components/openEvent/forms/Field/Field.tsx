@@ -25,8 +25,8 @@ const Field = () => {
   /**
    * 최대 3개까지 선택 가능합니다.
    */
-  const handlePress = (f: FieldType): void => {
-    if (!f.isActive && getActiveFieldCodes().length === 3) {
+  const handlePress = (field: FieldType): void => {
+    if (!field.isActive && getActiveFieldCodes().length === 3) {
       setOpenEventErrorMessage({
         ...openEventErrorMessage,
         field: MENT_OPEN_EVENT.ERROR.MAX_FIELD,
@@ -34,7 +34,7 @@ const Field = () => {
       return;
     }
 
-    const updatedFields = toggleFieldIsActive(eventField, f);
+    const updatedFields = toggleFieldIsActive(eventField, field);
     setEventField(updatedFields);
     setOpenEventErrorMessage({ ...openEventErrorMessage, field: null });
   };
