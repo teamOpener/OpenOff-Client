@@ -1,5 +1,5 @@
 import EventRowCardList from 'components/home/lists/EventRowCardList/EventRowCardList';
-import eventList from 'data/lists/eventList';
+import eventList from 'mocks/lists/eventList';
 import { View } from 'react-native';
 import wishEventScreenStyles from './WishEventScreen.style';
 

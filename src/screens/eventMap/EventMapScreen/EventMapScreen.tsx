@@ -10,7 +10,7 @@ import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
-import eventList from 'data/lists/eventList';
+import eventList from 'mocks/lists/eventList';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
 import { useCallback, useMemo, useRef, useState } from 'react';
