@@ -11,6 +11,7 @@ import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { colors, MyTheme } from 'styles/theme';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const appStyles = StyleSheet.create({
   gestureContainer: {
@@ -19,6 +20,17 @@ const appStyles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+});
+
+// TODO
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      staleTime: 1000 * 60 * 3, //  3분
+      refetchOnWindowFocus: false,
+    },
   },
 });
 
@@ -31,18 +43,20 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView style={appStyles.safeAreaContainer}>
-      <GestureHandlerRootView style={appStyles.gestureContainer}>
-        <NavigationContainer theme={MyTheme}>
-          <StatusBar backgroundColor={colors.background} />
-          {isLogin ? (
-            <Navigator />
-          ) : (
-            <AuthorizeNavigator setIsLogin={setIsLogin} />
-          )}
-        </NavigationContainer>
-      </GestureHandlerRootView>
-    </SafeAreaView>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaView style={appStyles.safeAreaContainer}>
+        <GestureHandlerRootView style={appStyles.gestureContainer}>
+          <NavigationContainer theme={MyTheme}>
+            <StatusBar backgroundColor={colors.background} />
+            {isLogin ? (
+              <Navigator />
+            ) : (
+              <AuthorizeNavigator setIsLogin={setIsLogin} />
+            )}
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </SafeAreaView>
+    </QueryClientProvider>
   );
 };
 

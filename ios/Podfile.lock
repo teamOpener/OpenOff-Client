@@ -374,6 +374,8 @@ PODS:
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
+  - react-native-webview (11.23.1):
+    - React-Core
   - React-perflogger (0.71.4)
   - React-RCTActionSheet (0.71.4):
     - React-Core/RCTActionSheetHeaders (= 0.71.4)
@@ -473,7 +475,7 @@ PODS:
     - React-Core
     - React-RCTImage
     - TOCropViewController
-  - RNPermissions (3.8.1):
+  - RNPermissions (3.8.0):
     - React-Core
   - RNReanimated (2.15.0):
     - DoubleConversion
@@ -568,6 +570,7 @@ DEPENDENCIES:
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -677,6 +680,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/slider"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -770,6 +775,7 @@ SPEC CHECKSUMS:
   react-native-safe-area-context: 36cc67648134e89465663b8172336a19eeda493d
   react-native-slider: 33b8d190b59d4f67a541061bb91775d53d617d9d
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
+  react-native-webview: d33e2db8925d090871ffeb232dfa50cb3a727581
   React-perflogger: 0bb0522a12e058f6eb69d888bc16f40c16c4b907
   React-RCTActionSheet: bfd675a10f06a18728ea15d82082d48f228a213a
   React-RCTAnimation: 2fa220b2052ec75b733112aca39143d34546a941
@@ -787,7 +793,7 @@ SPEC CHECKSUMS:
   RNDateTimePicker: 65e1d202799460b286ff5e741d8baf54695e8abd
   RNGestureHandler: dec4645026e7401a0899f2846d864403478ff6a5
   RNImageCropPicker: 486e2f7e2b0461ce24321f751410dce1b3b49e6d
-  RNPermissions: 36c878055b3642d8a012834b508addaa3e330d95
+  RNPermissions: 61ebaee5e5e60e25383bbf5c6f45674fea835e1a
   RNReanimated: 29295af754cdd6f8e4428427d4195e02ea8766e0
   RNSVG: 80584470ff1ffc7994923ea135a3e5ad825546b9
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17

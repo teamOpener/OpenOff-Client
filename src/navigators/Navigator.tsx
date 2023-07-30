@@ -12,6 +12,8 @@ import OpenEventScreen from 'screens/home/OpenEventScreen/OpenEventScreen';
 import WishEventScreen from 'screens/home/WishEventScreen/WishEventScreen';
 import textStyles from 'styles/textStyles';
 import { colors } from 'styles/theme';
+import SearchAddressScreen from 'screens/home/SearchAddressScreen/SearchAddressScreen';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -94,6 +96,18 @@ const Navigator = () => {
             color: colors.white,
           },
         }}
+      />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.white,
+          headerTitle: MENT_OPEN_EVENT.HEADER.SEARCH_ADDRESS,
+          headerLeft: BackButton,
+        }}
+        name={StackMenu.SearchAddress}
+        component={SearchAddressScreen}
       />
       {/* map */}
       <Stack.Screen

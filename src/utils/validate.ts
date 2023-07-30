@@ -72,6 +72,9 @@ const validatePhoneNumber = (phonenumber: string) => {
   return undefined;
 };
 
+const validatorOnlyPhoneNumber = (phoneNumber: string) =>
+  /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/.test(phoneNumber);
+
 const validateAuthNumber = (phonenumber: string) => {
   if (phonenumber)
     return /^\d{4,6}$/.test(phonenumber)
@@ -98,4 +101,5 @@ export {
   validatePassword,
   validatePasswordCheck,
   validatePhoneNumber,
+  validatorOnlyPhoneNumber,
 };

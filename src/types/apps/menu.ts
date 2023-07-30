@@ -43,6 +43,8 @@ export type RootStackParamList = {
   };
   WishEvent: undefined;
   PopularEvent: undefined;
+  OpenEvent: undefined;
+  SearchAddress: undefined;
 };
 
 export type RootStackNavigationProp =

@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
 import Spacing from 'components/common/Spacing/Spacing';
-import MENT_OPEN_EVENT from 'constants/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import StatusType from 'constants/status';
 import { Field as FieldType } from 'types/apps/group';
-import fieldData from 'data/lists/fieldData';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import useField from 'hooks/openEvent/useField';
+import fieldData from 'constants/openEvent/fieldData';
 
 const Field = () => {
   const {
@@ -22,8 +22,19 @@ const Field = () => {
     eventField,
   });
 
-  const handlePress = (f: FieldType): void => {
-    const updatedFields = toggleFieldIsActive(eventField, f);
+  /**
+   * 최대 3개까지 선택 가능합니다.
+   */
+  const handlePress = (field: FieldType): void => {
+    if (!field.isActive && getActiveFieldCodes().length === 3) {
+      setOpenEventErrorMessage({
+        ...openEventErrorMessage,
+        field: MENT_OPEN_EVENT.ERROR.MAX_FIELD,
+      });
+      return;
+    }
+
+    const updatedFields = toggleFieldIsActive(eventField, field);
     setEventField(updatedFields);
     setOpenEventErrorMessage({ ...openEventErrorMessage, field: null });
   };
@@ -55,7 +66,7 @@ const Field = () => {
             key={f.value}
             label={f.label}
             isSelected={f.isActive}
-            handlePress={() => handlePress(f)}
+            onPress={() => handlePress(f)}
           />
         ))}
       </OpenEvent.TagGroup>

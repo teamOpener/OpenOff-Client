@@ -4,7 +4,7 @@ import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { serverDateFormatter } from 'utils/date';
-import { HelpText } from 'components/openEvent/OpenEvent';
+import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/status';
 import applicationPeriodStyles from './ApplicationPeriod.style';
 
