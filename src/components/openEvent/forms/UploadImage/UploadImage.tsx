@@ -6,6 +6,7 @@ import { useOpenEventStore } from 'stores/OpenEventStore';
 import { openImagePicker } from 'services/ImageCropPicker';
 import { ImageBuilder } from 'types/openEvent/EventForm';
 import StatusType from 'constants/status';
+import MAX_POSTER from 'constants/event';
 import uploadImageStyles from './UploadImage.style';
 
 const UploadImage = () => {
@@ -19,10 +20,10 @@ const UploadImage = () => {
   const { imageUrls: hasError } = openEventErrorMessage;
 
   /**
-   * 이미지 추가: 맨 뒤에 추가, Max: 3
+   * 이미지 추가: 맨 뒤에 추가
    */
   const handlePress = async () => {
-    const maxNumber = 3 - imageBuilders.length;
+    const maxNumber = MAX_POSTER - imageBuilders.length;
     if (!maxNumber) {
       return;
     }
@@ -31,7 +32,7 @@ const UploadImage = () => {
 
     // android에서는 선택 개수 제한 불가
     const totalLength = imageBuilders.length + selectedImages.length;
-    if (totalLength > 3) {
+    if (totalLength > MAX_POSTER) {
       setOpenEventErrorMessage({
         ...openEventErrorMessage,
         imageUrls: MENT_OPEN_EVENT.ERROR.MAX_IMAGE,
@@ -93,7 +94,7 @@ const UploadImage = () => {
             onDelete={() => handleDelete(idx)}
           />
         ))}
-        {imageBuilders.length < 3 && (
+        {imageBuilders.length < MAX_POSTER && (
           <OpenEvent.ImageButton hasError={!!hasError} onPress={handlePress} />
         )}
       </ScrollView>
