@@ -4,7 +4,7 @@ import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
 import NaverMapView from 'react-native-nmap';
 import { PERMISSIONS } from 'react-native-permissions';
 import { Coordinate } from 'types/event';
-import { requestSinglePermission } from 'utils/permission';
+import { requestSinglePermission } from 'services/permission';
 
 const useMapCoordinateInfo = () => {
   const naverMapRef = useRef<NaverMapView>(null);

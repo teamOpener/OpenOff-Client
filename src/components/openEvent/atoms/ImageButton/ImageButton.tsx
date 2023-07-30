@@ -1,7 +1,7 @@
 import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { requestSinglePermission } from 'utils/permission';
+import { requestSinglePermission } from 'services/permission';
 import { PERMISSIONS } from 'react-native-permissions';
 import { ImageBuilder } from 'types/openEvent/EventForm';
 import imageButtonStyles from './ImageButton.style';
