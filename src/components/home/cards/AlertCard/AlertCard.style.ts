@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { getPixelSize } from 'styles/styleUtils';
 import { colors, fonts } from 'styles/theme';
 
 const alertCardStyles = StyleSheet.create({
@@ -14,12 +13,12 @@ const alertCardStyles = StyleSheet.create({
   },
   alertTitle: {
     color: colors.white,
-    fontSize: getPixelSize(15),
+    fontSize: 15,
     fontFamily: fonts.medium,
   },
   alertDate: {
     color: colors.white,
-    fontSize: getPixelSize(13),
+    fontSize: 13,
     fontFamily: fonts.regular,
   },
 });
