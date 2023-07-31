@@ -148,7 +148,7 @@ const Navigator = () => {
       />
 
       {/* Event */}
-      {/* <Stack.Screen
+      <Stack.Screen
         options={{
           headerStyle: {
             backgroundColor: colors.background,
@@ -189,7 +189,7 @@ const Navigator = () => {
         }}
         name={StackMenu.EventApply}
         component={EventApplyScreen}
-      /> */}
+      />
     </Stack.Navigator>
   );
 };
