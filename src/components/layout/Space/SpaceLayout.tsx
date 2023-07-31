@@ -1,10 +1,8 @@
-import { PropsWithChildren } from 'react';
-import { View, StyleProp, ViewStyle } from 'react-native';
+import { View, ViewProps } from 'react-native';
 
-interface Props extends PropsWithChildren {
+interface Props extends ViewProps {
   direction?: 'row' | 'column';
   size: number;
-  style?: StyleProp<ViewStyle>;
 }
 
 const SpaceLayout = ({
@@ -12,6 +10,7 @@ const SpaceLayout = ({
   size,
   style,
   children,
+  ...rest
 }: Props) => {
   return (
     <View
@@ -22,6 +21,7 @@ const SpaceLayout = ({
         },
         style,
       ]}
+      {...rest}
     >
       {children}
     </View>

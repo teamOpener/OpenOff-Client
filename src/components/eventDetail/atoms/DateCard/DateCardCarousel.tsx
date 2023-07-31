@@ -1,4 +1,5 @@
-import { Dimensions } from 'react-native';
+import { useState } from 'react';
+import { Dimensions, LayoutChangeEvent } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { EventIndexStatisticsDto } from 'models/event/response/EventIndexStatisticsDto';
 import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailConstants';
@@ -14,11 +15,20 @@ const DateCardCarousel = ({ indexList, maxCapacity }: Props) => {
   const width =
     Dimensions.get('window').width - CONSTANT_EVENT_DETAIL.SCREEN_PADDING * 2;
 
+  const [carouselHeight, setCarouselHeight] = useState<number>(
+    CONSTANT_EVENT_DETAIL.DATE_CAROUSEL_INITIAL_HEIGHT,
+  );
+
+  const handleHeight = (e: LayoutChangeEvent) => {
+    const { height } = e.nativeEvent.layout;
+    setCarouselHeight(height);
+  };
+
   return (
     <Carousel
       loop={false}
       width={width * 0.85}
-      height={80}
+      height={carouselHeight}
       overscrollEnabled={false}
       panGestureHandlerProps={{ minDist: 24 }}
       style={dateCardCarouselStyles.container}
@@ -26,6 +36,7 @@ const DateCardCarousel = ({ indexList, maxCapacity }: Props) => {
       renderItem={({ item }) => (
         <DateCard
           key={item.eventIndexId}
+          onLayout={handleHeight}
           approvedUserCount={item.approvedUserCount}
           maxCapacity={maxCapacity}
           eventDate={item.eventDate}
