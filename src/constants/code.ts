@@ -14,6 +14,7 @@ const enum FieldCode {
   PF = 'PF',
   FSDH = 'FSDH',
 }
+
 /** 
  *- CA: Comment Alert
   - EA: Event Alert

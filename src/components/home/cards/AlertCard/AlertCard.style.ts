@@ -9,7 +9,7 @@ const alertCardStyles = StyleSheet.create({
   },
   alertInfo: {
     marginLeft: 25,
-    flexDirection: 'column',
+    gap: 3,
   },
   alertTitle: {
     color: colors.white,
