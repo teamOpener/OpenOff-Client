@@ -1,7 +1,7 @@
 {
   "eventId": 1,
   "title": "MUSIC CARNIVAL",
-  "streetLoadAddress": "성수동 캠든파크 라운지",
+  "streetLoadAddress": "서울 성동구 성수이로 77 지하1층",
   "detailAddress": "성수동 캠든파크 라운지",
   "eventFee": 10000,
   "maxCapacity": 100,
@@ -12,11 +12,11 @@
       "isMain": true
     },
     {
-      "imageUrl": "https://images.unsplash.com/photo-1496024840928-4c417adf211d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHBhcnR5fGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+      "imageUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGFydHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       "isMain": false
     },
     {
-      "imageUrl": "https://images.unsplash.com/photo-1496024840928-4c417adf211d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHBhcnR5fGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+      "imageUrl": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGFydHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
       "isMain": false
     }
   ],
@@ -29,14 +29,14 @@
     },
     {
       "eventIndexId": 1,
-      "approvedUserCount": 60,
-      "eventDate": "2023-08-21T20:00:00",
+      "approvedUserCount": 77,
+      "eventDate": "2023-08-21T20:30:00",
       "isApply": true
     },
     {
       "eventIndexId": 2,
-      "approvedUserCount": 60,
-      "eventDate": "2023-09-21T20:00:00",
+      "approvedUserCount": 4,
+      "eventDate": "2023-09-21T22:00:00",
       "isApply": false
     }
   ],
