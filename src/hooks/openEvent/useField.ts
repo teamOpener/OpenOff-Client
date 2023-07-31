@@ -1,4 +1,4 @@
-import FieldCode from 'constants/code';
+import { FieldCode } from 'constants/code';
 import { Field as FieldType } from 'types/apps/group';
 
 interface Props {

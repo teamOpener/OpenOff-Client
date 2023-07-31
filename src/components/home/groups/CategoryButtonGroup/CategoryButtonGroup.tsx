@@ -1,5 +1,5 @@
 import Text from 'components/common/Text/Text';
-import FieldCode from 'constants/code';
+import { FieldCode } from 'constants/code';
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 import categoryButtonGroupStyles from './CategoryButtonGroup.style';
 

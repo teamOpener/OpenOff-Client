@@ -1,4 +1,4 @@
-import FieldCode from 'constants/code';
+import { FieldCode } from 'constants/code';
 import { Field } from 'types/apps/group';
 
 const fieldData: Field[] = [
