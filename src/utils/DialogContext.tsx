@@ -2,10 +2,10 @@ import { createContext } from 'react';
 
 const DialogContext = createContext({
   openDialog: (text: string, type: string) => {
-    return false;
+    console.log(text);
   },
   closeDialog: () => {
-    return false;
+    console.log('close');
   },
 });
 export default DialogContext;
