@@ -1,4 +1,4 @@
-import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailContants';
+import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailConstants';
 import { PropsWithChildren } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import screenLayoutStyles from './ScreenLayout.style';

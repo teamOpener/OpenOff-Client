@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { EventIndexStatisticsDto } from 'models/event/response/EventIndexStatisticsDto';
-import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailContants';
+import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailConstants';
 import DateCard from './DateCard';
 import dateCardCarouselStyles from './DateCardCarousel.style';
 

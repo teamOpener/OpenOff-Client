@@ -10,7 +10,7 @@ import FixedButton from 'components/common/FixedButton/FixedButton';
 import { ScrollView } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
 import Text from 'components/common/Text/Text';
-import { EventDetailTabItem } from 'constants/eventDetail/eventDetailContants';
+import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 
 type EventDetailScreenRouteProp = RouteProp<RootStackParamList, 'EventDetail'>;
 

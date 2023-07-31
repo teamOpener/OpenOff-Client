@@ -1,5 +1,5 @@
 import Image from 'components/common/Image/Image';
-import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailContants';
+import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailConstants';
 import { ImageUrlList } from 'models/event/entity/ImageUrlList';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
