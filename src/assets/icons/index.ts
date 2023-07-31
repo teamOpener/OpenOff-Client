@@ -1,3 +1,4 @@
+export { default as IconAlertComment } from './IconAlertComment.svg';
 export { default as IconArrowDown } from './IconArrowDown.svg';
 export { default as IconArrowLeft } from './IconArrowLeft.svg';
 export { default as IconArrowUp } from './IconArrowUp.svg';
@@ -15,6 +16,7 @@ export { default as IconFillHeart } from './IconFillHeart.svg';
 export { default as IconHeart } from './IconHeart.svg';
 export { default as IconHome } from './IconHome.svg';
 export { default as IconMap } from './IconMap.svg';
+export { default as IconMegaPhone } from './IconMegaPhone.svg';
 export { default as IconMinus } from './IconMinus.svg';
 export { default as IconMyCoordinate } from './IconMyCoordinate.svg';
 export { default as IconPlace } from './IconPlace.svg';

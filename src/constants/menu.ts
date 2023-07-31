@@ -5,6 +5,7 @@ export const enum StackMenu {
   CategoryEvent = 'CategoryEvent',
   WishEvent = 'WishEvent',
   SearchAddress = 'SearchAddress',
+  Alert = 'Alert',
 }
 
 export const enum BottomTabMenu {

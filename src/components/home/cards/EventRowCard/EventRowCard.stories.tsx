@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import eventList from 'data/lists/eventList';
+import eventList from 'mocks/lists/eventList';
 import { StyleSheet, View } from 'react-native';
 import { colors } from 'styles/theme';
 import EventRowCard from './EventRowCard';

@@ -1,7 +1,7 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import TopFieldButtonGroup from 'components/home/groups/TopFieldButtonGroup/TopFieldButtonGroup';
 import EventRowCardList from 'components/home/lists/EventRowCardList/EventRowCardList';
-import eventList from 'data/lists/eventList';
+import eventList from 'mocks/lists/eventList';
 import fieldData from 'data/lists/fieldData';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';

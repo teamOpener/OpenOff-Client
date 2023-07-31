@@ -1,4 +1,4 @@
-import FieldCode from 'constants/code';
+import { FieldCode } from 'constants/code';
 
 export interface Field {
   value: FieldCode;

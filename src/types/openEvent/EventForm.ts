@@ -1,4 +1,4 @@
-import FieldCode from 'constants/code';
+import { FieldCode } from 'constants/code';
 import { Image } from 'react-native-image-crop-picker';
 
 export interface ImageBuilder {
