@@ -1,16 +1,15 @@
-import React from 'react';
-import { View } from 'react-native';
-import alertList from 'mocks/lists/alertList';
 import AlertCard from 'components/home/cards/AlertCard/AlertCard';
+import alertList from 'mocks/lists/alertList';
+import { ScrollView } from 'react-native';
 import alertScreenStyles from './AlertScreen.style';
 
 const AlertScreen = () => {
   return (
-    <View style={alertScreenStyles.container}>
+    <ScrollView style={alertScreenStyles.container}>
       {alertList.map((alert, _id) => (
         <AlertCard key={_id} alert={alert} />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
