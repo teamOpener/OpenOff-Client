@@ -3,7 +3,10 @@
 
 // 스토리북 실행을 원한다면 위에 코드 주석 해제, 아래 코드 주석처리
 // 서비스 실행을 원한다면 아래 코드 주석 해제, 위에 코드 주석처리
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
 import { useEffect, useState } from 'react';
@@ -18,6 +21,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { colors, MyTheme } from 'styles/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useFlipper } from '@react-navigation/devtools';
 
 const appStyles = StyleSheet.create({
   gestureContainer: {
@@ -40,7 +44,16 @@ const queryClient = new QueryClient({
   },
 });
 
+if (__DEV__) {
+  import('react-query-native-devtools').then(({ addPlugin }) => {
+    addPlugin({ queryClient });
+  });
+}
+
 const App = () => {
+  const navigationRef = useNavigationContainerRef();
+  useFlipper(navigationRef);
+
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
   useEffect(() => {
@@ -52,7 +65,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <SafeAreaView style={appStyles.safeAreaContainer}>
         <GestureHandlerRootView style={appStyles.gestureContainer}>
-          <NavigationContainer theme={MyTheme}>
+          <NavigationContainer theme={MyTheme} ref={navigationRef}>
             <StatusBar backgroundColor={colors.background} />
             {isLogin ? (
               <Navigator />

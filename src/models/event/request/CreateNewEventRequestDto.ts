@@ -1,5 +1,5 @@
-import { FieldType } from '../FieldType';
-import { ImageUrlList } from '../ImageUrlList';
+import { FieldType } from '../entity/FieldType';
+import { ImageUrlList } from '../entity/ImageUrlList';
 
 export interface CreateNewEventRequestDto {
   fieldTypeList: FieldType[];
