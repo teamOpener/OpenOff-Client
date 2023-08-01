@@ -15,12 +15,15 @@ interface Props {
 
 const LoginScreen = ({ setIsLogin }: Props) => {
   const [emailAddress, setEmailAddress] = useState<string>('');
+
   const [password, setPassword] = useState<string>('');
+
   const isActive =
     !validateEmail(emailAddress) &&
     !validatePassword(password) &&
     emailAddress.length >= 1 &&
     password.length >= 1;
+
   const kakaoLogin = () => {
     loginWithKakaoAccount()
       .then((result) => {
@@ -31,10 +34,12 @@ const LoginScreen = ({ setIsLogin }: Props) => {
         return false;
       });
   };
+
   const handleCommonLogin = () => {
     if (!isActive) return;
     setIsLogin(true);
   };
+
   return (
     <View style={loginScreenStyles.container}>
       <Image

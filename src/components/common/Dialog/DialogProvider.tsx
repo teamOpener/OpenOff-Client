@@ -6,6 +6,7 @@ import Dialog from './Dialog';
 
 const DialogProvider = ({ children }: PropsWithChildren) => {
   const { dialogContextValue, dialog, closeDialog } = useDialog();
+
   return (
     <Portal.Host>
       <DialogContext.Provider value={dialogContextValue}>
