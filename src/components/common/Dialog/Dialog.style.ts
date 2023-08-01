@@ -44,6 +44,7 @@ const dialogStyles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    columnGap: 2,
     marginTop: 71,
   },
   buttonContainer: {
