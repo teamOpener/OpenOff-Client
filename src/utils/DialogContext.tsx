@@ -1,7 +1,8 @@
 import { createContext } from 'react';
+import { DialogType } from 'types/apps/dialog';
 
 const DialogContext = createContext({
-  openDialog: (text: string, type: string, callback?: () => void) => {
+  openDialog: (text: string, type: DialogType, callback?: () => void) => {
     if (!callback) return;
     callback();
   },

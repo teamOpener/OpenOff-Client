@@ -1,8 +1,10 @@
+type DialogType = 'success' | 'validate';
+
 interface Dialog {
-  type: string;
+  type: DialogType;
   text: string;
   isShow: boolean;
   callback: () => void;
 }
 
-export default Dialog;
+export type { Dialog, DialogType };

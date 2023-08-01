@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, TouchableOpacity, View, Pressable } from 'react-native';
-import Dialog from 'types/apps/dialog';
+import { Dialog } from 'types/apps/dialog';
 import Text from '../Text/Text';
 import Icon from '../Icon/Icon';
 import dialogStyles from './Dialog.style';
@@ -30,7 +30,7 @@ const CommonDialog = ({ dialog, closeDialog }: Props) => {
             </View>
           </View>
           <View style={dialogStyles.textContainer}>
-            {dialog.text.split(' ').map((word) => (
+            {dialog.text.split(' ').map((word: string) => (
               <Text color="white" variant="h4">
                 {`${word} `}
               </Text>

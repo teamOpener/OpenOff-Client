@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import Dialog from 'types/apps/dialog';
+import { Dialog, DialogType } from 'types/apps/dialog';
 
 const useDialog = () => {
   const [dialog, setDialog] = useState<Dialog>({
@@ -10,7 +10,11 @@ const useDialog = () => {
     callback: () => {},
   });
 
-  const openDialog = (text: string, type: string, callback?: () => void) => {
+  const openDialog = (
+    text: string,
+    type: DialogType,
+    callback?: () => void,
+  ) => {
     if (!callback) {
       setDialog({
         text,
