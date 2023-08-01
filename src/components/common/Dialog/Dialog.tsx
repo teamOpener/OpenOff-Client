@@ -30,8 +30,8 @@ const CommonDialog = ({ dialog, closeDialog }: Props) => {
             </View>
           </View>
           <View style={dialogStyles.textContainer}>
-            {dialog.text.split(' ').map((word: string) => (
-              <Text color="white" variant="h4">
+            {dialog.text.split(' ').map((word: string, _id) => (
+              <Text key={_id} color="white" variant="h4">
                 {`${word} `}
               </Text>
             ))}
