@@ -37,9 +37,8 @@ const DateCardCarousel = ({ indexList, maxCapacity }: Props) => {
         <DateCard
           key={item.eventIndexId}
           onLayout={handleHeight}
-          approvedUserCount={item.approvedUserCount}
+          indexList={item}
           maxCapacity={maxCapacity}
-          eventDate={item.eventDate}
         />
       )}
     />
