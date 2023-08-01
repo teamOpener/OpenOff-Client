@@ -29,9 +29,13 @@ const CommonDialog = ({ dialog, closeDialog }: Props) => {
               )}
             </View>
           </View>
-          <Text style={dialogStyles.title} variant="h4">
-            {dialog.text}
-          </Text>
+          <View style={dialogStyles.textContainer}>
+            {dialog.text.split(' ').map((word) => (
+              <Text color="white" variant="h4">
+                {`${word} `}
+              </Text>
+            ))}
+          </View>
           <TouchableOpacity
             style={dialogStyles.buttonContainer}
             onPress={closeDialog}

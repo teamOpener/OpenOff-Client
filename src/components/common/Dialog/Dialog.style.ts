@@ -17,7 +17,7 @@ const dialogStyles = StyleSheet.create({
     position: 'relative',
     borderRadius: 15,
     padding: 35,
-    maxWidth: 340,
+    width: 340,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.darkGrey,
@@ -40,7 +40,10 @@ const dialogStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
+  textContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     marginTop: 71,
   },
   buttonContainer: {
