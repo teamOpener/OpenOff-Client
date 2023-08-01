@@ -6,26 +6,38 @@ const useDialog = () => {
     type: 'success',
     text: '',
     isShow: false,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    callback: () => {},
   });
 
-  const openDialog = (text: string, type: string) => {
+  const openDialog = (text: string, type: string, callback?: () => void) => {
+    if (!callback) {
+      setDialog({
+        text,
+        type,
+        isShow: true,
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        callback: () => {},
+      });
+      return;
+    }
     setDialog({
       text,
       type,
       isShow: true,
+      callback,
     });
   };
 
-  const closeDialog = (callback?: () => void) => {
+  const closeDialog = () => {
+    dialog.callback();
     setDialog({
       type: 'success',
       text: '',
       isShow: false,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      callback: () => {},
     });
-    if (!callback) {
-      return;
-    }
-    callback();
   };
 
   const dialogContextValue = useMemo(() => {
