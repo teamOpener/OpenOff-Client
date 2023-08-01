@@ -10,6 +10,7 @@ import {
 } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Dialog from 'components/common/Dialog/Dialog';
+import DialogProvider from 'components/common/Dialog/DialogProvider';
 import useDialog from 'hooks/app/useDialog';
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
@@ -54,7 +55,6 @@ if (__DEV__) {
 }
 
 const App = () => {
-  const { dialogContextValue, dialog, closeDialog } = useDialog();
   const navigationRef = useNavigationContainerRef();
   useFlipper(navigationRef);
 
@@ -66,7 +66,7 @@ const App = () => {
   }, []);
 
   return (
-    <DialogContext.Provider value={dialogContextValue}>
+    <DialogProvider>
       <QueryClientProvider client={queryClient}>
         <SafeAreaView style={appStyles.safeAreaContainer}>
           <GestureHandlerRootView style={appStyles.gestureContainer}>
@@ -78,12 +78,11 @@ const App = () => {
               ) : (
                 <AuthorizeNavigator setIsLogin={setIsLogin} />
               )}
-              <Dialog dialog={dialog} closeDialog={() => closeDialog} />
             </NavigationContainer>
           </GestureHandlerRootView>
         </SafeAreaView>
       </QueryClientProvider>
-    </DialogContext.Provider>
+    </DialogProvider>
   );
 };
 
