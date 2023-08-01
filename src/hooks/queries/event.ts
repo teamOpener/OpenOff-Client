@@ -18,7 +18,21 @@ export const useCreateEvent = (
 
 // TODO: 이벤트 상세 정보 조회
 export const useEventDetail = (id: number) => {
-  return useQuery([...queryKeys.eventKeys.byId(id)], () =>
-    fakeApi<DetailEventInfoResponseDto>(detailEventInfoData),
+  return useQuery(
+    [...queryKeys.eventKeys.byId(id)],
+    () => fakeApi<DetailEventInfoResponseDto>(detailEventInfoData),
+    { select: (data) => data.data },
   );
+};
+
+// TODO 신청
+export const useApplyEvent = (
+  successCallback?: () => void,
+  errorCallback?: () => void,
+) => {
+  // TODO dto 추가
+  return useMutation(() => fakeApi(), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+  });
 };

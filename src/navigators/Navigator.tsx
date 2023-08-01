@@ -14,6 +14,9 @@ import { colors } from 'styles/theme';
 import SearchAddressScreen from 'screens/home/SearchAddressScreen/SearchAddressScreen';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import AlertScreen from 'screens/home/AlertScreen/AlertScreen';
+import EventDetailScreen from 'screens/events/EventDetailScreen/EventDetailScreen';
+import EventSelectScreen from 'screens/events/EventSelectScreen/EventSelectScreen';
+import EventApplyScreen from 'screens/events/EventApplyScreen/EventApplyScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -48,6 +51,7 @@ const Navigator = () => {
           headerShown: false,
         }}
       />
+
       {/* home */}
       <Stack.Screen
         options={{
@@ -141,6 +145,50 @@ const Navigator = () => {
         }}
         name={StackMenu.DatePick}
         component={DatePickScreen}
+      />
+
+      {/* Event */}
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.white,
+          headerTitleStyle: {
+            color: 'transparent',
+          },
+          headerLeft: BackButton,
+        }}
+        name={StackMenu.EventDetail}
+        component={EventDetailScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.white,
+          headerTitleStyle: {
+            color: 'transparent',
+          },
+          headerLeft: BackButton,
+        }}
+        name={StackMenu.EventSelect}
+        component={EventSelectScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.white,
+          headerTitleStyle: {
+            color: 'transparent',
+          },
+          headerLeft: BackButton,
+        }}
+        name={StackMenu.EventApply}
+        component={EventApplyScreen}
       />
     </Stack.Navigator>
   );

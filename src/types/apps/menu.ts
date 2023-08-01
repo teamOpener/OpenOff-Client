@@ -44,6 +44,16 @@ export type RootStackParamList = {
   WishEvent: undefined;
   PopularEvent: undefined;
   Alert: undefined;
+  EventDetail: {
+    id: number;
+  };
+  EventSelect: {
+    id: number;
+  };
+  EventApply: {
+    id: number;
+    idx: number;
+  };
   SearchAddress: undefined;
 };
 

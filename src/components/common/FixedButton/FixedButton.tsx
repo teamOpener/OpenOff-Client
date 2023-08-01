@@ -16,7 +16,7 @@ const FixedButton = ({ label, disabled = false, onPress }: Props) => {
           fixedButtonStyles.button,
           disabled && fixedButtonStyles.disabledButton,
         ]}
-        activeOpacity={0.5}
+        activeOpacity={0.8}
         onPress={onPress}
       >
         <Text style={fixedButtonStyles.label}>{label}</Text>

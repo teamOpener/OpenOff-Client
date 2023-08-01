@@ -23,6 +23,12 @@ import { colors, MyTheme } from 'styles/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFlipper } from '@react-navigation/devtools';
 
+// dayjs setting
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+
+dayjs.locale('ko');
+
 const appStyles = StyleSheet.create({
   gestureContainer: {
     flex: 1,
