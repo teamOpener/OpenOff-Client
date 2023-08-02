@@ -34,15 +34,16 @@ const CommonDialog = ({ dialog, closeDialog }: Props) => {
               </View>
             </View>
           )}
+
           <View
             // eslint-disable-next-line react-native/no-inline-styles
             style={{
               ...dialogStyles.textContainer,
-              marginTop: dialog.type !== 'confirm' ? 71 : 51,
+              marginTop: dialog.type !== 'confirm' ? 16 : 0,
             }}
           >
             {dialog.text.split(' ').map((word: string, _id) => (
-              <Text key={_id} color="white" variant="h4">
+              <Text key={_id} style={dialogStyles.text}>
                 {`${word} `}
               </Text>
             ))}
@@ -53,17 +54,13 @@ const CommonDialog = ({ dialog, closeDialog }: Props) => {
                 onPress={handleConfirm}
                 style={dialogStyles.confirmButtonContainer}
               >
-                <Text variant="h4" color="white">
-                  {dialog.applyText}
-                </Text>
+                <Text style={dialogStyles.text}>{dialog.applyText}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={closeDialog}
                 style={dialogStyles.confirmButtonContainer}
               >
-                <Text variant="h4" color="white">
-                  {dialog.closeText}
-                </Text>
+                <Text style={dialogStyles.text}>{dialog.closeText}</Text>
               </TouchableOpacity>
             </View>
           ) : (
@@ -71,9 +68,7 @@ const CommonDialog = ({ dialog, closeDialog }: Props) => {
               style={dialogStyles.buttonContainer}
               onPress={closeDialog}
             >
-              <Text variant="h4" color="white">
-                {dialog.closeText}
-              </Text>
+              <Text style={dialogStyles.text}>{dialog.closeText}</Text>
             </TouchableOpacity>
           )}
         </View>

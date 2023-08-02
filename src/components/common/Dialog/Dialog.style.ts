@@ -1,5 +1,5 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { Dimensions, StyleSheet, TextStyle } from 'react-native';
+import { colors, fonts } from 'styles/theme';
 
 const dialogStyles = StyleSheet.create({
   modalView: {
@@ -16,8 +16,9 @@ const dialogStyles = StyleSheet.create({
   modalContainer: {
     position: 'relative',
     borderRadius: 15,
-    padding: 35,
     width: 310,
+    paddingTop: 52,
+    gap: 24,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.darkGrey,
@@ -41,6 +42,7 @@ const dialogStyles = StyleSheet.create({
     alignItems: 'center',
   },
   textContainer: {
+    paddingHorizontal: 15,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
@@ -48,17 +50,16 @@ const dialogStyles = StyleSheet.create({
   },
   buttonContainer: {
     paddingVertical: 9,
-    paddingHorizontal: 44,
+    paddingHorizontal: 30,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.main,
-    marginTop: 35,
     borderRadius: 25,
   },
   confirmButtonCover: {
     flexDirection: 'row',
     gap: 10,
-    marginTop: 35,
+    paddingBottom: 15,
   },
   confirmButtonContainer: {
     paddingVertical: 9,
@@ -68,6 +69,11 @@ const dialogStyles = StyleSheet.create({
     backgroundColor: colors.main,
     borderRadius: 25,
   },
+  text: {
+    fontFamily: fonts.semibold,
+    fontSize: 17,
+    lineHeight: 23.8,
+  } as TextStyle,
 });
 
 export default dialogStyles;
