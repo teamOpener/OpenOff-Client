@@ -17,7 +17,7 @@ const dialogStyles = StyleSheet.create({
     position: 'relative',
     borderRadius: 15,
     padding: 35,
-    width: 340,
+    width: 310,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.darkGrey,
