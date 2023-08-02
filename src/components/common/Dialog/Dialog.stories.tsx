@@ -11,13 +11,32 @@ const ExampleDialog = () => {
       <Button
         title="다이얼로그 오픈"
         onPress={() =>
-          openDialog('다이얼로그가 성공적으로 열렸습니다.', 'success')
+          openDialog({
+            text: '다이얼로그가 성공적으로 열렸습니다.',
+            type: 'success',
+          })
         }
       />
       <Button
         title="다이얼로그 오류"
         onPress={() =>
-          openDialog('다이얼로그에 오류가 발생했습니다.', 'validate')
+          openDialog({
+            text: '다이얼로그에 오류가 발생했습니다.',
+            type: 'validate',
+          })
+        }
+      />
+      <Button
+        title="cofirm 다이얼로그"
+        onPress={() =>
+          openDialog({
+            text: '동의하십니까?',
+            type: 'confirm',
+            apply: () => {
+              console.log('동의');
+            },
+            applyText: '동의합니다.',
+          })
         }
       />
     </View>

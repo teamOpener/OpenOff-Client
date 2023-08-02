@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Dialog, DialogType } from 'types/apps/dialog';
+import { Dialog, OpenDialog } from 'types/apps/dialog';
 
 const useDialog = () => {
   const [dialog, setDialog] = useState<Dialog>({
@@ -8,28 +8,35 @@ const useDialog = () => {
     isShow: false,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     callback: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    apply: () => {},
+    applyText: '적용',
+    closeText: '닫기',
   });
 
-  const openDialog = (
-    text: string,
-    type: DialogType,
-    callback?: () => void,
-  ) => {
-    if (!callback) {
-      setDialog({
-        text,
-        type,
-        isShow: true,
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        callback: () => {},
-      });
-      return;
+  const openDialog = ({
+    text,
+    type,
+    callback = () => {
+      return false;
+    },
+    apply = () => {
+      return false;
+    },
+    applyText = '적용',
+    closeText = '닫기',
+  }: OpenDialog) => {
+    if (type === 'confirm' && !apply) {
+      throw new Error('confirm Type일땐 반드시 apply함수를 써야합니다.');
     }
     setDialog({
       text,
       type,
       isShow: true,
       callback,
+      apply,
+      applyText,
+      closeText,
     });
   };
 
@@ -41,6 +48,10 @@ const useDialog = () => {
       isShow: false,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       callback: () => {},
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      apply: () => {},
+      applyText: '적용',
+      closeText: '닫기',
     });
   };
 

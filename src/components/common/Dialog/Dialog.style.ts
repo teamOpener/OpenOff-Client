@@ -45,7 +45,6 @@ const dialogStyles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     columnGap: 2,
-    marginTop: 71,
   },
   buttonContainer: {
     paddingVertical: 9,
@@ -54,6 +53,19 @@ const dialogStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.main,
     marginTop: 35,
+    borderRadius: 25,
+  },
+  confirmButtonCover: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 35,
+  },
+  confirmButtonContainer: {
+    paddingVertical: 9,
+    paddingHorizontal: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.main,
     borderRadius: 25,
   },
 });

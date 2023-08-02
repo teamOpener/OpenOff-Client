@@ -1,8 +1,7 @@
-import React from 'react';
-import { Modal, TouchableOpacity, View, Pressable } from 'react-native';
+import { Modal, Pressable, TouchableOpacity, View } from 'react-native';
 import { Dialog } from 'types/apps/dialog';
-import Text from '../Text/Text';
 import Icon from '../Icon/Icon';
+import Text from '../Text/Text';
 import dialogStyles from './Dialog.style';
 
 interface Props {
@@ -11,6 +10,10 @@ interface Props {
 }
 
 const CommonDialog = ({ dialog, closeDialog }: Props) => {
+  const handleConfirm = () => {
+    dialog.apply();
+    closeDialog();
+  };
   return (
     <Modal
       animationType="fade"
@@ -20,28 +23,59 @@ const CommonDialog = ({ dialog, closeDialog }: Props) => {
     >
       <Pressable onPress={closeDialog} style={dialogStyles.modalBackground}>
         <View style={dialogStyles.modalContainer}>
-          <View style={dialogStyles.typeShow}>
-            <View style={dialogStyles.iconContainer}>
-              {dialog.type === 'success' ? (
-                <Icon name="IconCheck" fill="white" size={30} />
-              ) : (
-                <Icon name="IconExit" fill="white" size={25} />
-              )}
+          {dialog.type !== 'confirm' && (
+            <View style={dialogStyles.typeShow}>
+              <View style={dialogStyles.iconContainer}>
+                {dialog.type === 'success' ? (
+                  <Icon name="IconCheck" fill="white" size={30} />
+                ) : (
+                  <Icon name="IconExit" fill="white" size={25} />
+                )}
+              </View>
             </View>
-          </View>
-          <View style={dialogStyles.textContainer}>
+          )}
+          <View
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{
+              ...dialogStyles.textContainer,
+              marginTop: dialog.type !== 'confirm' ? 71 : 51,
+            }}
+          >
             {dialog.text.split(' ').map((word: string, _id) => (
               <Text key={_id} color="white" variant="h4">
                 {`${word} `}
               </Text>
             ))}
           </View>
-          <TouchableOpacity
-            style={dialogStyles.buttonContainer}
-            onPress={closeDialog}
-          >
-            <Text variant="h4">닫기</Text>
-          </TouchableOpacity>
+          {dialog.type === 'confirm' ? (
+            <View style={dialogStyles.confirmButtonCover}>
+              <TouchableOpacity
+                onPress={handleConfirm}
+                style={dialogStyles.confirmButtonContainer}
+              >
+                <Text variant="h4" color="white">
+                  {dialog.applyText}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={closeDialog}
+                style={dialogStyles.confirmButtonContainer}
+              >
+                <Text variant="h4" color="white">
+                  {dialog.closeText}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={dialogStyles.buttonContainer}
+              onPress={closeDialog}
+            >
+              <Text variant="h4" color="white">
+                {dialog.closeText}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </Pressable>
     </Modal>
