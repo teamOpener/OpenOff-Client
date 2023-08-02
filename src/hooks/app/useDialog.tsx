@@ -26,9 +26,6 @@ const useDialog = () => {
     applyText = '적용',
     closeText = '닫기',
   }: OpenDialog) => {
-    if (type === 'confirm' && !apply) {
-      throw new Error('confirm Type일땐 반드시 apply함수를 써야합니다.');
-    }
     setDialog({
       text,
       type,
