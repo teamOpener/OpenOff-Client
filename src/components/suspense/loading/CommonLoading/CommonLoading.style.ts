@@ -12,7 +12,6 @@ const commonLoadingStyles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column',
     backgroundColor: 'rgba(0, 0, 0, 0.40)',
   },
 });
