@@ -1,17 +1,12 @@
+// 스토리북 실행을 원한다면 주석해제
 // import StorybookUIRoot from './.ondevice/Storybook';
-// export { StorybookUIRoot as default };
-
-// 스토리북 실행을 원한다면 위에 코드 주석 해제, 아래 코드 주석처리
-// 서비스 실행을 원한다면 아래 코드 주석 해제, 위에 코드 주석처리
 import { useFlipper } from '@react-navigation/devtools';
 import {
   NavigationContainer,
   useNavigationContainerRef,
 } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Dialog from 'components/common/Dialog/Dialog';
 import DialogProvider from 'components/common/Dialog/DialogProvider';
-import useDialog from 'hooks/app/useDialog';
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
 import { useEffect, useState } from 'react';
@@ -25,7 +20,6 @@ import {
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { MyTheme, colors } from 'styles/theme';
-import DialogContext from 'utils/DialogContext';
 
 const appStyles = StyleSheet.create({
   gestureContainer: {
@@ -72,6 +66,7 @@ const App = () => {
           <GestureHandlerRootView style={appStyles.gestureContainer}>
             <NavigationContainer theme={MyTheme} ref={navigationRef}>
               {/* <StorybookUIRoot /> */}
+              {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
               <StatusBar backgroundColor={colors.background} />
               {isLogin ? (
                 <Navigator />

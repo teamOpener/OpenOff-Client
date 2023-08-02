@@ -1,11 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { PaperProvider, Portal } from 'react-native-paper';
+import { useContext } from 'react';
 import { Button, View } from 'react-native';
-import useDialog from 'hooks/app/useDialog';
+import DialogContext from 'utils/DialogContext';
 import Dialog from './Dialog';
 
 const ExampleDialog = () => {
-  const { dialog, closeDialog, openDialog } = useDialog();
+  const { openDialog } = useContext(DialogContext);
   return (
     <View>
       <Button
@@ -20,11 +20,6 @@ const ExampleDialog = () => {
           openDialog('다이얼로그에 오류가 발생했습니다.', 'validate')
         }
       />
-      <PaperProvider>
-        <Portal.Host>
-          <Dialog dialog={dialog} closeDialog={() => closeDialog()} />
-        </Portal.Host>
-      </PaperProvider>
     </View>
   );
 };

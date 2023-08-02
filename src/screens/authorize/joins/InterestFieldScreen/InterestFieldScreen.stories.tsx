@@ -1,7 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { View } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import InterestFieldScreen from './InterestFieldScreen';
 
 export default {
@@ -12,11 +10,7 @@ export default {
 export const InterestFieldScreenTest: ComponentStory<
   typeof InterestFieldScreen
 > = (args) => (
-  <GestureHandlerRootView style={{ flex: 1 }}>
-    <NavigationContainer>
-      <View style={{ flex: 1 }}>
-        <InterestFieldScreen {...args} />
-      </View>
-    </NavigationContainer>
-  </GestureHandlerRootView>
+  <View style={{ flex: 1 }}>
+    <InterestFieldScreen {...args} />
+  </View>
 );
