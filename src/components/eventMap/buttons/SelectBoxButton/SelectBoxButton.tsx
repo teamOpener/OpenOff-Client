@@ -28,9 +28,9 @@ const SelectBoxButton = ({ label, handlePress, isActive }: Props) => {
       </Text>
       <View style={selectBoxButtonStyles.arrowContainer}>
         {isActive ? (
-          <Icon name="IconArrowUp" fill="main" size={17} />
+          <Icon name="IconArrowUp" fill="main" size={12} />
         ) : (
-          <Icon name="IconArrowDown" fill="white" size={17} />
+          <Icon name="IconArrowDown" fill="white" size={12} />
         )}
       </View>
     </TouchableOpacity>

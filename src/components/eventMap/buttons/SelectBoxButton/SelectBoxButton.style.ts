@@ -15,7 +15,6 @@ const selectBoxButtonStyles = StyleSheet.create({
   },
   arrowContainer: {
     marginLeft: 5,
-    marginTop: 10,
   },
 });
 

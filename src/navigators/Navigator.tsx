@@ -17,6 +17,9 @@ import AlertScreen from 'screens/home/AlertScreen/AlertScreen';
 import EventDetailScreen from 'screens/events/EventDetailScreen/EventDetailScreen';
 import EventSelectScreen from 'screens/events/EventSelectScreen/EventSelectScreen';
 import EventApplyScreen from 'screens/events/EventApplyScreen/EventApplyScreen';
+import UserTicketScreen from 'screens/userEvent/UserTicketScreen/UserTicketScreen';
+import ExitButton from 'components/navigator/ExitButton/ExitButton';
+import UserQRScreen from 'screens/userEvent/UserQRScreen/UserQRScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -189,6 +192,45 @@ const Navigator = () => {
         }}
         name={StackMenu.EventApply}
         component={EventApplyScreen}
+      />
+      {/* user event */}
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.white,
+          headerTitleStyle: {
+            color: 'transparent',
+          },
+          // eslint-disable-next-line react/no-unstable-nested-components
+          headerLeft: () => {
+            // eslint-disable-next-line react/jsx-no-useless-fragment
+            return <></>;
+          },
+          headerRight: ExitButton,
+        }}
+        name={StackMenu.UserTicket}
+        component={UserTicketScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.white,
+          headerTitleStyle: {
+            color: 'transparent',
+          },
+          // eslint-disable-next-line react/no-unstable-nested-components
+          headerLeft: () => {
+            // eslint-disable-next-line react/jsx-no-useless-fragment
+            return <></>;
+          },
+          headerRight: ExitButton,
+        }}
+        name={StackMenu.UserQR}
+        component={UserQRScreen}
       />
     </Stack.Navigator>
   );

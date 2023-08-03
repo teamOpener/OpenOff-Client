@@ -9,6 +9,8 @@ export const enum StackMenu {
   EventDetail = 'EventDetail',
   EventSelect = 'EventSelect',
   EventApply = 'EventApply',
+  UserTicket = 'UserTicket',
+  UserQR = 'UserQR',
 }
 
 export const enum BottomTabMenu {
