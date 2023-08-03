@@ -6,7 +6,7 @@ import { colors } from 'styles/theme';
 import CarouselCardSkeleton from './CarouselCardSkeleton';
 
 export default {
-  title: 'components/fallback/skeleton/CarouselCardSkeleton',
+  title: 'components/suspense/skeleton/CarouselCardSkeleton',
   component: CarouselCardSkeleton,
 } as ComponentMeta<typeof CarouselCardSkeleton>;
 

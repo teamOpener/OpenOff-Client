@@ -6,7 +6,7 @@ import { colors } from 'styles/theme';
 import PosterCarouselSkeleton from './PosterCarouselSkeleton';
 
 export default {
-  title: 'components/fallback/skeleton/PosterCarouselSkeleton',
+  title: 'components/suspense/skeleton/PosterCarouselSkeleton',
   component: PosterCarouselSkeleton,
 } as ComponentMeta<typeof PosterCarouselSkeleton>;
 

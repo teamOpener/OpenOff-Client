@@ -6,7 +6,7 @@ import { colors } from 'styles/theme';
 import AlertCardSkeleton from './AlertCardSkeleton';
 
 export default {
-  title: 'components/fallback/skeleton/AlertCardSkeleton',
+  title: 'components/suspense/skeleton/AlertCardSkeleton',
   component: AlertCardSkeleton,
 } as ComponentMeta<typeof AlertCardSkeleton>;
 

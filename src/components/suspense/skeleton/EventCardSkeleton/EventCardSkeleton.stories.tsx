@@ -6,7 +6,7 @@ import { colors } from 'styles/theme';
 import EventCardSkeleton from './EventCardSkeleton';
 
 export default {
-  title: 'components/fallback/skeleton/EventCardSkeleton',
+  title: 'components/suspense/skeleton/EventCardSkeleton',
   component: EventCardSkeleton,
 } as ComponentMeta<typeof EventCardSkeleton>;
 

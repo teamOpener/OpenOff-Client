@@ -5,7 +5,7 @@ import { colors } from 'styles/theme';
 import CommonLoading from './CommonLoading';
 
 export default {
-  title: 'components/fallback/skeleton/CommonLoading',
+  title: 'components/suspense/loading/CommonLoading',
   component: CommonLoading,
 } as ComponentMeta<typeof CommonLoading>;
 
