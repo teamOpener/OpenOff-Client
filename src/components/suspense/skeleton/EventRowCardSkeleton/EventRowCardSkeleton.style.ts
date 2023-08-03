@@ -34,14 +34,17 @@ const eventRowCardSkeletonStyles = StyleSheet.create({
   eventTitle: {
     width: 180,
     height: 18,
+    borderRadius: 5,
   },
   contents: {
     width: 59,
     height: 14,
+    borderRadius: 5,
   },
   subInfoText: {
     width: 100,
     height: 14,
+    borderRadius: 5,
   },
 });
 
