@@ -68,6 +68,7 @@ const UserTicketScreen = () => {
         style={[userTicketScreenStyles.carousel, { width }]}
         mode="parallax"
         modeConfig={{
+          // TODO: 기기별 UI 테스트 필요
           parallaxScrollingOffset: 64,
           parallaxScrollingScale: 0.9,
           parallaxAdjacentItemScale: 0.77,
