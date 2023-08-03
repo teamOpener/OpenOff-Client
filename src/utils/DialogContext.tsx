@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { OpenDialog } from 'types/apps/dialog';
+import { DialogType, OpenDialog } from 'types/apps/dialog';
 
 const DialogContext = createContext({
   /**
@@ -8,7 +8,7 @@ const DialogContext = createContext({
    * @property text - 다이얼로그 내용
    * @property type - 다이얼로그 타입
    * @property callback - 닫기 클릭시 실행되는 콜백함수
-   * @property callback - 적용 클릭시 실행되는 함수
+   * @property apply - 적용 클릭시 실행되는 함수
    * @property applyText - 적용버튼 내용
    * @property closeText - 닫기버튼 내용
    */
@@ -28,6 +28,6 @@ const DialogContext = createContext({
     callback();
   },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  closeDialog: () => {},
+  closeDialog: (type: DialogType) => {},
 });
 export default DialogContext;
