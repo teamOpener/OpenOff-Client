@@ -40,16 +40,8 @@ const useDialog = () => {
     closeText = '닫기',
   }: OpenDialog) => {
     switch (type) {
-      case 'success':
-        return setDialog({
-          text,
-          type,
-          isShow: true,
-          contents,
-          callback,
-          closeText,
-        });
       case 'validate':
+      case 'success':
         return setDialog({
           text,
           type,
@@ -76,20 +68,10 @@ const useDialog = () => {
   const closeDialog = (type: DialogType) => {
     switch (type) {
       case 'success':
-        dialog.callback();
-        return setDialog({
-          type: 'success',
-          text: '',
-          isShow: false,
-          contents: '',
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          callback: () => {},
-          closeText: '닫기',
-        });
       case 'validate':
         dialog.callback();
         return setDialog({
-          type: 'validate',
+          type: 'success',
           text: '',
           isShow: false,
           contents: '',
