@@ -73,7 +73,11 @@ const BottomTabNavigator = () => {
         name={BottomTabMenu.UserEvent}
         component={UserEventScreen}
         options={{
-          headerShown: false,
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTitle: '내 이벤트',
+          headerTintColor: colors.white,
           tabBarLabel: '내 이벤트',
           tabBarLabelStyle: {
             ...textStyles.caption,

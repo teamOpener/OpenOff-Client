@@ -55,6 +55,13 @@ export type RootStackParamList = {
     idx: number;
   };
   SearchAddress: undefined;
+  UserTicket: {
+    eventId: number;
+  };
+  UserQR: {
+    eventId: number;
+    ticketId: string;
+  };
 };
 
 export type RootStackNavigationProp =
