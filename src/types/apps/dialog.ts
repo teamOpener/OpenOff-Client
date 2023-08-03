@@ -1,22 +1,30 @@
 type DialogType = 'success' | 'validate' | 'confirm';
 
 interface Dialog {
-  type: DialogType;
   text: string;
   isShow: boolean;
+  closeText: string;
+}
+
+interface CommonDialog extends Dialog {
+  type: DialogType;
+  contents: string;
   callback: () => void;
+}
+
+interface ConfirmDialog extends Dialog {
   apply: () => void;
   applyText: string;
-  closeText: string;
 }
 
 interface OpenDialog {
   text: string;
   type: DialogType;
+  contents?: string;
   callback?: () => void;
   apply?: () => void;
   applyText?: string;
   closeText?: string;
 }
 
-export type { Dialog, DialogType, OpenDialog };
+export type { CommonDialog, ConfirmDialog, Dialog, DialogType, OpenDialog };

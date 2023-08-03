@@ -6,7 +6,7 @@ import {
   useNavigationContainerRef,
 } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import DialogProvider from 'components/common/Dialog/DialogProvider';
+import DialogProvider from 'components/common/dialogs/DialogProvider';
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
 import { useEffect, useState } from 'react';
