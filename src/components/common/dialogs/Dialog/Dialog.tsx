@@ -17,7 +17,14 @@ const Dialog = ({ dialog, closeDialog }: Props) => {
       visible={dialog.isShow}
       style={dialogStyles.modalView}
     >
-      <Pressable onPress={closeDialog} style={dialogStyles.modalBackground}>
+      <Pressable
+        onPress={(event) => {
+          event.stopPropagation();
+          if (event.target !== event.currentTarget) return;
+          closeDialog();
+        }}
+        style={dialogStyles.modalBackground}
+      >
         <View style={dialogStyles.modalContainer}>
           {dialog.type !== 'confirm' && (
             <View style={dialogStyles.typeShow}>
@@ -38,6 +45,15 @@ const Dialog = ({ dialog, closeDialog }: Props) => {
               </Text>
             ))}
           </View>
+          {dialog.contents && (
+            <View style={dialogStyles.textContainer}>
+              {dialog.contents.split(' ').map((word: string, _id) => (
+                <Text key={_id} style={dialogStyles.contentsText}>
+                  {`${word} `}
+                </Text>
+              ))}
+            </View>
+          )}
           <TouchableOpacity
             style={dialogStyles.buttonContainer}
             onPress={closeDialog}

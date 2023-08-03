@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { StyleSheet, TextStyle } from 'react-native';
+import { colors, fonts } from 'styles/theme';
 import dialogStyles from '../dialogStyle';
 
 const commonDialogStyles = StyleSheet.create({
@@ -23,29 +23,21 @@ const commonDialogStyles = StyleSheet.create({
     alignItems: 'center',
   },
   textContainer: {
-    marginTop: 16,
+    marginTop: 26,
     paddingHorizontal: 15,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     columnGap: 2,
   },
+  contentsText: {
+    fontFamily: fonts.semibold,
+    fontSize: 13,
+  } as TextStyle,
   buttonContainer: {
     paddingVertical: 9,
     paddingHorizontal: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.main,
-    borderRadius: 25,
-  },
-  confirmButtonCover: {
-    flexDirection: 'row',
-    gap: 10,
-    paddingBottom: 15,
-  },
-  confirmButtonContainer: {
-    paddingVertical: 9,
-    paddingHorizontal: 30,
+    marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.main,
