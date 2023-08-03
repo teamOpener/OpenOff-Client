@@ -2,16 +2,14 @@ import PhoneAuthButton from 'components/authorize/buttons/PhoneAuthButton/PhoneA
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import TimerText from 'components/authorize/texts/TimerText/TimerText';
-import Text from 'components/common/Text/Text';
 import { useState } from 'react';
 import { View } from 'react-native';
 import {
   validateAuthNumber,
   validateEmail,
-  validatePassword,
-  validatePasswordCheck,
   validatePhoneNumber,
 } from 'utils/validate';
+import PasswordResetScreen from '../PasswordResetScreen/PasswordResetScreen';
 import passwordFindScreenStyles from './PasswordFindScreen.style';
 
 interface Trigger {
@@ -23,14 +21,13 @@ const PasswordFindScreen = () => {
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [authnumber, setAuthnumber] = useState<string>('');
   const [phonenumber, setPhonenumber] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [passwordCheck, setPasswordCheck] = useState<string>('');
   const [retry, setRetry] = useState<boolean>(false);
   const [timerTrigger, setTimerTrigger] = useState<Trigger>({
     active: false,
     reactive: false,
   });
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
+
   const isActive =
     !validateEmail(emailAddress) &&
     emailAddress.length > 1 &&
@@ -39,11 +36,7 @@ const PasswordFindScreen = () => {
     !validateAuthNumber(authnumber) &&
     authnumber.length > 1 &&
     retry;
-  const isConfirmPassword =
-    !validatePassword(password) &&
-    password.length > 1 &&
-    !validatePasswordCheck(password, passwordCheck) &&
-    passwordCheck.length > 1;
+
   const handleCertification = () => {
     setRetry(true);
     if (!timerTrigger.active) {
@@ -56,15 +49,14 @@ const PasswordFindScreen = () => {
     });
     console.log(phonenumber);
   };
+
   const handleAuthorizeFlow = () => {
     setTimerTrigger(() => {
       return { reactive: false, active: false };
     });
     setIsAuthorize(true);
   };
-  const handleChangePassword = () => {
-    return false;
-  };
+
   return (
     <View style={passwordFindScreenStyles.container}>
       {!isAuthorize ? (
@@ -117,35 +109,7 @@ const PasswordFindScreen = () => {
           </EssentialInput>
         </ScreenCover>
       ) : (
-        <ScreenCover
-          authorizeButton={{
-            handlePress: handleChangePassword,
-            label: '다음',
-            isActive: isConfirmPassword,
-          }}
-        >
-          <View>
-            <Text variant="h3" color="white">
-              비밀번호를 재설정해주세요.
-            </Text>
-          </View>
-          <EssentialInput
-            validation={validatePassword}
-            label="새 비밀번호"
-            value={password}
-            setValue={setPassword}
-            type="password"
-          />
-          <EssentialInput
-            validation={(check: string) =>
-              validatePasswordCheck(password, check)
-            }
-            label="새 비밀번호 확인"
-            value={passwordCheck}
-            setValue={setPasswordCheck}
-            type="password"
-          />
-        </ScreenCover>
+        <PasswordResetScreen />
       )}
     </View>
   );
