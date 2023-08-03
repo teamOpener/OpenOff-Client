@@ -17,9 +17,9 @@ const dialogStyles = StyleSheet.create({
     position: 'relative',
     borderRadius: 15,
     width: 310,
-    paddingTop: 52,
-    gap: 14,
-    justifyContent: 'center',
+    paddingTop: 50,
+    paddingHorizontal: 24,
+    paddingBottom: 15,
     alignItems: 'center',
     backgroundColor: colors.darkGrey,
   },
@@ -27,6 +27,7 @@ const dialogStyles = StyleSheet.create({
     fontFamily: fonts.semibold,
     fontSize: 17,
     lineHeight: 23.8,
+    textAlign: 'center',
   } as TextStyle,
 });
 

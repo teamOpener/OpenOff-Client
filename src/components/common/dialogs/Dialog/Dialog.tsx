@@ -38,22 +38,31 @@ const Dialog = ({ dialog, closeDialog }: Props) => {
             </View>
           )}
 
-          <View style={dialogStyles.textContainer}>
-            {dialog.text.split(' ').map((word: string, _id) => (
-              <Text key={_id} style={dialogStyles.text}>
-                {`${word} `}
-              </Text>
-            ))}
-          </View>
-          {dialog.contents && (
+          <View style={dialogStyles.innerContainer}>
             <View style={dialogStyles.textContainer}>
-              {dialog.contents.split(' ').map((word: string, _id) => (
-                <Text key={_id} style={dialogStyles.contentsText}>
+              {dialog.text.split(' ').map((word: string, _id) => (
+                <Text key={_id} style={dialogStyles.text}>
                   {`${word} `}
                 </Text>
               ))}
             </View>
-          )}
+
+            {dialog.contents && (
+              <View
+                style={[
+                  dialogStyles.textContainer,
+                  dialogStyles.subTextContainer,
+                ]}
+              >
+                {dialog.contents.split(' ').map((word: string, _id) => (
+                  <Text key={_id} style={dialogStyles.contentsText}>
+                    {`${word} `}
+                  </Text>
+                ))}
+              </View>
+            )}
+          </View>
+
           <TouchableOpacity
             style={dialogStyles.buttonContainer}
             onPress={closeDialog}

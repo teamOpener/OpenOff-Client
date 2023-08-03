@@ -22,13 +22,18 @@ const commonDialogStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  innerContainer: {
+    paddingTop: 4,
+    paddingBottom: 24,
+  },
   textContainer: {
-    marginTop: 26,
-    paddingHorizontal: 15,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     columnGap: 2,
+  },
+  subTextContainer: {
+    paddingTop: 20,
   },
   contentsText: {
     fontFamily: fonts.semibold,
@@ -37,7 +42,6 @@ const commonDialogStyles = StyleSheet.create({
   buttonContainer: {
     paddingVertical: 9,
     paddingHorizontal: 30,
-    marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.main,

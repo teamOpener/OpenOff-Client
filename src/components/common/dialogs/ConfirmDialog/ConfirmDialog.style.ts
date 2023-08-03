@@ -5,7 +5,9 @@ import dialogStyles from '../dialogStyle';
 const confirmDialogStyles = StyleSheet.create({
   ...dialogStyles,
   textContainer: {
+    textAlign: 'center',
     paddingHorizontal: 15,
+    paddingBottom: 30,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
@@ -14,8 +16,6 @@ const confirmDialogStyles = StyleSheet.create({
   confirmButtonCover: {
     flexDirection: 'row',
     gap: 10,
-    marginTop: 10,
-    paddingBottom: 15,
   },
   confirmButtonContainer: {
     paddingVertical: 9,
