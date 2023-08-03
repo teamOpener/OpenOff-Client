@@ -53,13 +53,9 @@ const validateName = (name: string) => {
 
 const validateNickname = (name: string) => {
   if (name) {
-    const patternCnt = [
-      { type: /^(?=.*?[가-힣])/ },
-      { type: /^.{3,8}$/ },
-    ].filter((item) => {
-      return item.type.test(name);
-    }).length;
-    return patternCnt < 2 ? '닉네임은 한글로만 구성해주세요.' : undefined;
+    return /^[a-zA-Z0-9]{1,10}$/.test(name)
+      ? undefined
+      : '닉네임은 영문과 숫자로 10자리 이하로 입력해주세요.';
   }
   return undefined;
 };
