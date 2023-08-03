@@ -41,6 +41,16 @@ const ExampleDialog = () => {
           })
         }
       />
+      <Button
+        title="다이얼로그 contents"
+        onPress={() =>
+          openDialog({
+            text: '다이얼로그를 볼게요.',
+            contents: '설명이고, 긴설명이고 긴설명입니다.',
+            type: 'success',
+          })
+        }
+      />
     </View>
   );
 };
