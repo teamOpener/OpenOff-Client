@@ -1,28 +1,9 @@
-import { Dimensions, StyleSheet, TextStyle } from 'react-native';
-import { colors, fonts } from 'styles/theme';
+import { StyleSheet } from 'react-native';
+import { colors } from 'styles/theme';
+import dialogStyles from '../dialogStyle';
 
-const dialogStyles = StyleSheet.create({
-  modalView: {
-    margin: 0,
-    height: Dimensions.get('window').height,
-  },
-  modalBackground: {
-    height: '100%',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-  },
-  modalContainer: {
-    position: 'relative',
-    borderRadius: 15,
-    width: 310,
-    paddingTop: 52,
-    gap: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.darkGrey,
-  },
+const commonDialogStyles = StyleSheet.create({
+  ...dialogStyles,
   typeShow: {
     position: 'absolute',
     top: -41,
@@ -42,6 +23,7 @@ const dialogStyles = StyleSheet.create({
     alignItems: 'center',
   },
   textContainer: {
+    marginTop: 16,
     paddingHorizontal: 15,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -69,11 +51,6 @@ const dialogStyles = StyleSheet.create({
     backgroundColor: colors.main,
     borderRadius: 25,
   },
-  text: {
-    fontFamily: fonts.semibold,
-    fontSize: 17,
-    lineHeight: 23.8,
-  } as TextStyle,
 });
 
-export default dialogStyles;
+export default commonDialogStyles;

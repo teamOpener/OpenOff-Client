@@ -2,7 +2,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useContext } from 'react';
 import { Button, View } from 'react-native';
 import DialogContext from 'utils/DialogContext';
-import Dialog from './Dialog';
 
 const ExampleDialog = () => {
   const { openDialog } = useContext(DialogContext);
@@ -14,6 +13,9 @@ const ExampleDialog = () => {
           openDialog({
             text: '다이얼로그가 성공적으로 열렸습니다.',
             type: 'success',
+            callback: () => {
+              console.log('닫기');
+            },
           })
         }
       />
@@ -45,9 +47,9 @@ const ExampleDialog = () => {
 
 export default {
   title: 'components/Dialog',
-  component: Dialog,
-} as ComponentMeta<typeof Dialog>;
+  component: ExampleDialog,
+} as ComponentMeta<typeof ExampleDialog>;
 
-export const DialogTest: ComponentStory<typeof Dialog> = () => (
+export const DialogTest: ComponentStory<typeof ExampleDialog> = () => (
   <ExampleDialog />
 );
