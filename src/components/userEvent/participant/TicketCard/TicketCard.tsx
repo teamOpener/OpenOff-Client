@@ -22,8 +22,8 @@ const TicketCard = ({ ticketInfo, style, ...rest }: Props) => {
 
   const textColor: keyof typeof colors = isWhiteType ? 'main' : 'white';
 
-  const getIconName = (t: TicketType): keyof typeof Icons => {
-    switch (t) {
+  const getIconName = (ticketType: TicketType): keyof typeof Icons => {
+    switch (ticketType) {
       case TicketType.F:
       case TicketType.E:
         return 'IconTicketCircle';

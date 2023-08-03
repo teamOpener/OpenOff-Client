@@ -26,8 +26,8 @@ const TicketList = ({ eventInfo, onPress }: Props) => {
           <Text>{ticketListDateFormatter(eventInfo.eventDateList)}</Text>
         </View>
         <SpaceLayout direction="row" size={5}>
-          {eventInfo.fieldTypeList.map((fieldType) => (
-            <XSmallTag label={getFieldName(fieldType)} />
+          {eventInfo.fieldTypeList.map((fieldType, idx) => (
+            <XSmallTag key={idx} label={getFieldName(fieldType)} />
           ))}
         </SpaceLayout>
       </View>

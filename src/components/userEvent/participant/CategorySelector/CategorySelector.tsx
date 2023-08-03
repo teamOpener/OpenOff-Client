@@ -67,12 +67,12 @@ const CategorySelector = ({ field, setField }: Props) => {
             isSelected={!activeField}
             onPress={() => handleField(null)}
           />
-          {field.map((f) => (
+          {field.map((fieldData) => (
             <Tag
-              key={f.value}
-              label={f.label}
-              isSelected={f.isActive}
-              onPress={() => handleField(f.value)}
+              key={fieldData.value}
+              label={fieldData.label}
+              isSelected={fieldData.isActive}
+              onPress={() => handleField(fieldData.value)}
             />
           ))}
         </TagGroup>

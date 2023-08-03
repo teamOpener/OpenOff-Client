@@ -11,8 +11,8 @@ interface Props {
 }
 
 const StatusButton = ({ status, onPress }: Props) => {
-  const getMessage = (s: UserTicketStatus): string => {
-    switch (s) {
+  const getMessage = (ticketStatus: UserTicketStatus): string => {
+    switch (ticketStatus) {
       case UserTicketStatus.CANCELED:
         return MENT_PARTICIPANT.MAIN.CANCELED;
       case UserTicketStatus.DENIED:
