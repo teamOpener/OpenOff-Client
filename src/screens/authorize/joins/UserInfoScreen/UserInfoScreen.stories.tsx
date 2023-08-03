@@ -1,7 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { View } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import UserInfoScreen from './UserInfoScreen';
 
 export default {
@@ -12,11 +10,7 @@ export default {
 export const UserInfoScreenTest: ComponentStory<typeof UserInfoScreen> = (
   args,
 ) => (
-  <GestureHandlerRootView style={{ flex: 1 }}>
-    <NavigationContainer>
-      <View style={{ flex: 1 }}>
-        <UserInfoScreen {...args} />
-      </View>
-    </NavigationContainer>
-  </GestureHandlerRootView>
+  <View style={{ flex: 1 }}>
+    <UserInfoScreen {...args} />
+  </View>
 );
