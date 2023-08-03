@@ -10,6 +10,8 @@ export const colors = {
   point: '#8c70ff',
   error: '#f34f45',
   green: '#5FA65E',
+  lavender: '#EDE9FF',
+  lightGreen: '#73FFB3',
 };
 
 export const fonts = {
