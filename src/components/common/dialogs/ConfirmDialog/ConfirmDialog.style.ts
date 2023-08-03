@@ -14,6 +14,7 @@ const confirmDialogStyles = StyleSheet.create({
   confirmButtonCover: {
     flexDirection: 'row',
     gap: 10,
+    marginTop: 10,
     paddingBottom: 15,
   },
   confirmButtonContainer: {
