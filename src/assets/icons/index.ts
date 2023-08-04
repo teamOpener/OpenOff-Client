@@ -40,4 +40,5 @@ export { default as IconTicketCircles } from './IconTicketCircles.svg';
 export { default as IconTicketHeart } from './IconTicketHeart.svg';
 export { default as IconTicketStar } from './IconTicketStar.svg';
 export { default as IconUser } from './IconUser.svg';
+export { default as IconVoidTicket } from './IconVoidTicket.svg';
 export { default as IconWarning } from './IconWarning.svg';
