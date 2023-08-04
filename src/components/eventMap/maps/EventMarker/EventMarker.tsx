@@ -30,7 +30,7 @@ const EventMarker = ({
       onClick={() => {
         handlePressMapCoordinate(event.id, event.coordinate);
       }}
-      pinColor={colors.background}
+      pinColor={colors.main}
     />
   );
 };
