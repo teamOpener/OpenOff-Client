@@ -44,7 +44,7 @@ const HostConsoleScreen = () => {
 
   const handlePressLedger = () => {
     if (!params?.eventId) return;
-    stackNavigation.navigate('HostQRScan', {
+    stackNavigation.navigate('HostLedger', {
       eventId: params.eventId,
       eventIndex,
     });
@@ -52,7 +52,7 @@ const HostConsoleScreen = () => {
 
   const handlePressAlarm = () => {
     if (!params?.eventId) return;
-    stackNavigation.navigate('HostQRScan', {
+    stackNavigation.navigate('HostAlarm', {
       eventId: params.eventId,
       eventIndex,
     });
