@@ -49,12 +49,22 @@ try {
 
 const getStories = () => {
   return {
+    "./src/components/common/Dialog/Dialog.stories.tsx": require("../src/components/common/Dialog/Dialog.stories.tsx"),
     "./src/components/common/Icon/Icon.stories.tsx": require("../src/components/common/Icon/Icon.stories.tsx"),
     "./src/components/common/Text/Text.stories.tsx": require("../src/components/common/Text/Text.stories.tsx"),
+    "./src/components/home/cards/EventRowCard/EventRowCard.stories.tsx": require("../src/components/home/cards/EventRowCard/EventRowCard.stories.tsx"),
+    "./src/components/suspense/loading/CommonLoading/CommonLoading.stories.tsx": require("../src/components/suspense/loading/CommonLoading/CommonLoading.stories.tsx"),
+    "./src/components/suspense/skeleton/AlertCardSkeleton/AlertCardSkeleton.stories.tsx": require("../src/components/suspense/skeleton/AlertCardSkeleton/AlertCardSkeleton.stories.tsx"),
+    "./src/components/suspense/skeleton/CarouselCardSkeleton/CarouselCardSkeleton.stories.tsx": require("../src/components/suspense/skeleton/CarouselCardSkeleton/CarouselCardSkeleton.stories.tsx"),
+    "./src/components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton.stories.tsx": require("../src/components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton.stories.tsx"),
+    "./src/components/suspense/skeleton/EventRowCardSkeleton/EventRowCardSkeleton.stories.tsx": require("../src/components/suspense/skeleton/EventRowCardSkeleton/EventRowCardSkeleton.stories.tsx"),
+    "./src/components/suspense/skeleton/MapEventCardSkeleton/MapEventCardSkeleton.stories.tsx": require("../src/components/suspense/skeleton/MapEventCardSkeleton/MapEventCardSkeleton.stories.tsx"),
+    "./src/components/suspense/skeleton/PosterCarouselSkeleton/PosterCarouselSkeleton.stories.tsx": require("../src/components/suspense/skeleton/PosterCarouselSkeleton/PosterCarouselSkeleton.stories.tsx"),
     "./src/navigators/BottomTabNavigator.stories.tsx": require("../src/navigators/BottomTabNavigator.stories.tsx"),
     "./src/screens/authorize/joins/InterestFieldScreen/InterestFieldScreen.stories.tsx": require("../src/screens/authorize/joins/InterestFieldScreen/InterestFieldScreen.stories.tsx"),
     "./src/screens/authorize/joins/UserInfoScreen/UserInfoScreen.stories.tsx": require("../src/screens/authorize/joins/UserInfoScreen/UserInfoScreen.stories.tsx"),
     "./src/screens/eventMap/EventMapScreen/EventMapScreen.stories.tsx": require("../src/screens/eventMap/EventMapScreen/EventMapScreen.stories.tsx"),
+    "./src/screens/user/ScrapScreen/ScrapScreen.stories.tsx": require("../src/screens/user/ScrapScreen/ScrapScreen.stories.tsx"),
   };
 };
 
