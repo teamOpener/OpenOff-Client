@@ -1,7 +1,9 @@
 import {
   NavigationProp,
+  RouteProp,
   useFocusEffect,
   useNavigation,
+  useRoute,
 } from '@react-navigation/native';
 import Icon from 'components/common/Icon/Icon';
 import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
@@ -13,13 +15,13 @@ import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomS
 import eventList from 'mocks/lists/eventList';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BackHandler, Dimensions, Pressable, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
 import { colors } from 'styles/theme';
 import { Field } from 'types/apps/group';
 import NaverMapEvent from 'types/apps/map';
-import { RootStackParamList } from 'types/apps/menu';
+import { BottomTabParamList, RootStackParamList } from 'types/apps/menu';
 import getDistanceCoordinate from 'utils/coordinate';
 import { Coordinate } from 'types/event';
 import {
@@ -27,7 +29,10 @@ import {
   eventMapScreenStyles,
 } from './EventMapScreen.style';
 
+type EventMapScreenRouteProp = RouteProp<BottomTabParamList, 'EventMap'>;
+
 const EventMapScreen = () => {
+  const { params } = useRoute<EventMapScreenRouteProp>();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
     undefined,
@@ -79,6 +84,10 @@ const EventMapScreen = () => {
       );
     });
   };
+
+  useEffect(() => {
+    console.log(params.eventId);
+  }, [params.eventId]);
 
   const recallEventMap = () => {
     navigation.setOptions({
@@ -197,7 +206,7 @@ const EventMapScreen = () => {
             width={50}
             height={50}
             coordinate={currentCoordinate}
-            pinColor="blue"
+            pinColor={colors.black}
           />
           {eventList.map((event) => (
             <EventMarker

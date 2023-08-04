@@ -22,7 +22,9 @@ export type AuthStackParamList = {
 
 export type BottomTabParamList = {
   Home: undefined;
-  EventMap: undefined;
+  EventMap: {
+    eventId: string;
+  };
   UserEvent: undefined;
   User: undefined;
 };
