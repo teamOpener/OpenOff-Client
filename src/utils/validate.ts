@@ -53,9 +53,9 @@ const validateName = (name: string) => {
 
 const validateNickname = (name: string) => {
   if (name) {
-    return /^[a-zA-Z0-9]{1,10}$/.test(name)
+    return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,10}$/.test(name)
       ? undefined
-      : '닉네임은 영문과 숫자로 10자리 이하로 입력해주세요.';
+      : '닉네임은 영문 숫자가 혼합되게 4 ~ 10자리로 입력해주세요';
   }
   return undefined;
 };
