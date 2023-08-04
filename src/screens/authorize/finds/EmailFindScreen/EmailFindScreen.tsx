@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Image, View } from 'react-native';
 import { validateAuthNumber, validatePhoneNumber } from 'utils/validate';
 import emailFindScreenStyles from './EmailFindScreen.style';
+import EmailFindCompleteScreen from '../EmailFindCompleteScreen/EmailFindCompleteScreen';
 
 const EmailFindScreen = () => {
   const [phonenumber, setPhonenumber] = useState<string>('');
@@ -44,15 +45,7 @@ const EmailFindScreen = () => {
           />
         </ScreenCover>
       ) : (
-        <View style={emailFindScreenStyles.authorizeContainer}>
-          <Image
-            style={emailFindScreenStyles.checkImage}
-            source={require('../../../../assets/images/check.png')}
-          />
-          <Text variant="h4" color="main">
-            아이디 찾기 결과입니다!
-          </Text>
-        </View>
+        <EmailFindCompleteScreen />
       )}
     </View>
   );
