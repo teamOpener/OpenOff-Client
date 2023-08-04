@@ -2,6 +2,8 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
+import BackToLoginButton from 'components/authorize/buttons/BackToHomeButton/BackToHomeButton';
+import BackButton from 'components/navigator/BackButton';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import React, { Reducer, useReducer } from 'react';
@@ -107,6 +109,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen
         options={{
           headerTitle: '',
+          headerLeft: BackButton,
         }}
         name={AuthorizeMenu.EmailPassword}
       >
@@ -115,6 +118,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen
         options={{
           headerTitle: '',
+          headerLeft: BackButton,
         }}
         name={AuthorizeMenu.AgreeToTerm}
       >
@@ -123,6 +127,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen
         options={{
           headerTitle: '',
+          headerLeft: BackButton,
         }}
         name={AuthorizeMenu.PhoneCertification}
       >
@@ -131,6 +136,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen
         options={{
           headerTitle: '',
+          headerLeft: BackButton,
         }}
         name={AuthorizeMenu.Nickname}
       >
@@ -139,6 +145,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen
         options={{
           headerTitle: '',
+          headerLeft: BackButton,
         }}
         name={AuthorizeMenu.UserInfo}
       >
@@ -147,6 +154,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen
         options={{
           headerTitle: '',
+          headerLeft: BackButton,
         }}
         name={AuthorizeMenu.InterestField}
       >
@@ -155,6 +163,8 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen
         options={{
           headerTitle: '',
+          // eslint-disable-next-line react/no-unstable-nested-components
+          headerLeft: () => <BackToLoginButton setIsLogin={setIsLogin} />,
         }}
         name={AuthorizeMenu.JoinComplete}
       >
@@ -163,6 +173,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
       <Stack.Screen
         name={AuthorizeMenu.EmailPasswordFind}
         options={{
+          headerLeft: BackButton,
           headerStyle: {
             backgroundColor: colors.background,
             ...Platform.select({
