@@ -65,6 +65,8 @@ const getStories = () => {
     "./src/screens/authorize/joins/UserInfoScreen/UserInfoScreen.stories.tsx": require("../src/screens/authorize/joins/UserInfoScreen/UserInfoScreen.stories.tsx"),
     "./src/screens/eventMap/EventMapScreen/EventMapScreen.stories.tsx": require("../src/screens/eventMap/EventMapScreen/EventMapScreen.stories.tsx"),
     "./src/screens/user/ScrapScreen/ScrapScreen.stories.tsx": require("../src/screens/user/ScrapScreen/ScrapScreen.stories.tsx"),
+    "./src/screens/user/UserCommentScreen/UserCommentScreen.stories.tsx": require("../src/screens/user/UserCommentScreen/UserCommentScreen.stories.tsx"),
+    "./src/screens/user/UserProfileEditScreen/UserProfileEditScreen.stories.tsx": require("../src/screens/user/UserProfileEditScreen/UserProfileEditScreen.stories.tsx"),
   };
 };
 
