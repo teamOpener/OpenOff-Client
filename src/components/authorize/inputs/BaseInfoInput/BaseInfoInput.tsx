@@ -3,11 +3,12 @@ import Icon from 'components/common/Icon/Icon';
 import { Dispatch, SetStateAction, useState } from 'react';
 import {
   GestureResponderEvent,
-  Text,
+  Pressable,
   TouchableOpacity,
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import Text from 'components/common/Text/Text';
 import { TextInput } from 'react-native-gesture-handler';
 import { colors } from 'styles/theme';
 import { dateFormatter } from 'utils/date';
@@ -38,11 +39,11 @@ const BaseInfoInput = ({
   return (
     <>
       <View style={{ ...baseInfoInputStyles.container, width }}>
-        <Text style={{ ...baseInfoInputStyles.inputTitle, width }}>
+        <Text variant="h4" color="white" style={{ width }}>
           {label}
         </Text>
-        <TextInput
-          onFocus={
+        <Pressable
+          onPressIn={
             focusMode
               ? () => {
                   setOpen(true);
@@ -51,15 +52,19 @@ const BaseInfoInput = ({
                   return false;
                 }
           }
-          value={value}
-          style={{
-            ...baseInfoInputStyles.input,
-            width,
-            color: validation(value) ? colors.error : colors.white,
-            borderColor: validation(value) ? colors.error : colors.main,
-          }}
-          onChangeText={(value) => setValue(value)}
-        />
+        >
+          <TextInput
+            editable={!focusMode}
+            value={value}
+            style={{
+              ...baseInfoInputStyles.input,
+              width,
+              color: validation(value) ? colors.error : colors.white,
+              borderColor: validation(value) ? colors.error : colors.main,
+            }}
+            onChangeText={(value) => setValue(value)}
+          />
+        </Pressable>
         <View
           style={{ ...baseInfoInputStyles.resetPosition, left: width - 18 }}
         >
