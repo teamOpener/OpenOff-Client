@@ -42,7 +42,7 @@ const validateName = (name: string) => {
   if (name) {
     const patternCnt = [
       { type: /^(?=.*?[가-힣])/ },
-      { type: /^.{3,8}$/ },
+      { type: /^.{2,8}$/ },
     ].filter((item) => {
       return item.type.test(name);
     }).length;
