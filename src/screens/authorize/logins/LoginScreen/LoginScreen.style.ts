@@ -19,7 +19,7 @@ const loginScreenStyles = StyleSheet.create({
     marginBottom: 10,
   },
   joinAndFindContainer: {
-    marginTop: 40,
+    marginTop: 25,
   },
 });
 

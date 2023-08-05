@@ -1,8 +1,9 @@
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
-import React from 'react';
-import { View } from 'react-native';
+import React, { useCallback } from 'react';
+import { BackHandler, View } from 'react-native';
 import { JoinInfo } from 'types/join';
+import { useFocusEffect } from '@react-navigation/native';
 import joinCompleteScreenStyles from './JoinCompleteScreen.style';
 
 interface Props {
@@ -11,6 +12,19 @@ interface Props {
 }
 
 const JoinCompleteScreen = ({ state, setIsLogin }: Props) => {
+  useFocusEffect(
+    useCallback(() => {
+      const backAction = () => {
+        setIsLogin(true);
+        return true;
+      };
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction,
+      );
+      return () => backHandler.remove();
+    }, []),
+  );
   return (
     <ScreenCover
       authorizeButton={{

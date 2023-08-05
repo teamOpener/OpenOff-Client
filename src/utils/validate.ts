@@ -42,7 +42,7 @@ const validateName = (name: string) => {
   if (name) {
     const patternCnt = [
       { type: /^(?=.*?[가-힣])/ },
-      { type: /^.{3,8}$/ },
+      { type: /^.{2,8}$/ },
     ].filter((item) => {
       return item.type.test(name);
     }).length;
@@ -53,13 +53,9 @@ const validateName = (name: string) => {
 
 const validateNickname = (name: string) => {
   if (name) {
-    const patternCnt = [
-      { type: /^(?=.*?[가-힣])/ },
-      { type: /^.{3,8}$/ },
-    ].filter((item) => {
-      return item.type.test(name);
-    }).length;
-    return patternCnt < 2 ? '닉네임은 한글로만 구성해주세요.' : undefined;
+    return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,10}$/.test(name)
+      ? undefined
+      : '닉네임은 영문 숫자가 혼합되게 4 ~ 10자리로 입력해주세요';
   }
   return undefined;
 };

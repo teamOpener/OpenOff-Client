@@ -12,7 +12,7 @@ const genderInputStyles = StyleSheet.create({
     }),
   },
   title: {
-    marginBottom: 21,
+    marginBottom: 14,
     color: 'white',
     fontSize: 18,
     fontFamily: fonts.semibold,

@@ -31,7 +31,6 @@ const NickNameScreen = ({ dispatch }: Props) => {
       <EssentialInput
         validation={validateNickname}
         label="닉네임"
-        maxLength={5}
         value={nickname}
         setValue={setNickname}
         type="nickname"
