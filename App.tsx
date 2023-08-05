@@ -9,7 +9,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DialogProvider from 'components/common/dialogs/DialogProvider';
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -19,7 +19,10 @@ import {
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
+import ErrorBoundary from 'react-native-error-boundary';
 import { MyTheme, colors } from 'styles/theme';
+import FallbackError from 'components/fallback/FallbackError';
+import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 
 // dayjs setting
 import dayjs from 'dayjs';
@@ -37,13 +40,14 @@ const appStyles = StyleSheet.create({
   },
 });
 
-// TODO
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 1,
+      retry: 0,
       staleTime: 1000 * 60 * 3, //  3분
       refetchOnWindowFocus: false,
+      useErrorBoundary: true,
+      suspense: true,
     },
   },
 });
@@ -68,20 +72,28 @@ const App = () => {
   return (
     <DialogProvider>
       <QueryClientProvider client={queryClient}>
-        <SafeAreaView style={appStyles.safeAreaContainer}>
-          <GestureHandlerRootView style={appStyles.gestureContainer}>
-            <NavigationContainer theme={MyTheme} ref={navigationRef}>
-              {/* <StorybookUIRoot /> */}
-              {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
-              <StatusBar backgroundColor={colors.background} />
-              {isLogin ? (
-                <Navigator />
-              ) : (
-                <AuthorizeNavigator setIsLogin={setIsLogin} />
-              )}
-            </NavigationContainer>
-          </GestureHandlerRootView>
-        </SafeAreaView>
+        <ErrorBoundary FallbackComponent={FallbackError}>
+          <Suspense
+            fallback={
+              <CommonLoading isActive backgroundColor={colors.background} />
+            }
+          >
+            <SafeAreaView style={appStyles.safeAreaContainer}>
+              <GestureHandlerRootView style={appStyles.gestureContainer}>
+                <NavigationContainer theme={MyTheme} ref={navigationRef}>
+                  {/* <StorybookUIRoot /> */}
+                  {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
+                  <StatusBar backgroundColor={colors.background} />
+                  {!isLogin ? (
+                    <Navigator />
+                  ) : (
+                    <AuthorizeNavigator setIsLogin={setIsLogin} />
+                  )}
+                </NavigationContainer>
+              </GestureHandlerRootView>
+            </SafeAreaView>
+          </Suspense>
+        </ErrorBoundary>
       </QueryClientProvider>
     </DialogProvider>
   );
