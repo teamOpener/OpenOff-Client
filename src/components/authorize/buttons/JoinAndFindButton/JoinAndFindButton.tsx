@@ -19,12 +19,10 @@ const JoinAndFindButton = () => {
         </Text>
       </TouchableOpacity>
       <Text variant="caption" color="white">{`   |   `}</Text>
-      <TouchableOpacity>
-        <Text
-          variant="caption"
-          color="white"
-          onPress={() => navigation.navigate(AuthorizeMenu.EmailPasswordFind)}
-        >
+      <TouchableOpacity
+        onPress={() => navigation.navigate(AuthorizeMenu.EmailPasswordFind)}
+      >
+        <Text variant="caption" color="white">
           아이디/비밀번호 찾기
         </Text>
       </TouchableOpacity>
