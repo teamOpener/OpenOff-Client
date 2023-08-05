@@ -2,7 +2,7 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
-import BackToLoginButton from 'components/authorize/buttons/BackToHomeButton/BackToHomeButton';
+import BackToHomeButton from 'components/authorize/buttons/BackToHomeButton/BackToHomeButton';
 import BackButton from 'components/navigator/BackButton';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
@@ -164,7 +164,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
         options={{
           headerTitle: '',
           // eslint-disable-next-line react/no-unstable-nested-components
-          headerLeft: () => <BackToLoginButton setIsLogin={setIsLogin} />,
+          headerLeft: () => <BackToHomeButton setIsLogin={setIsLogin} />,
         }}
         name={AuthorizeMenu.JoinComplete}
       >
