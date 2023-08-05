@@ -11,6 +11,10 @@ export const enum StackMenu {
   EventApply = 'EventApply',
   UserTicket = 'UserTicket',
   UserQR = 'UserQR',
+  HostConsole = 'HostConsole',
+  HostQRScan = 'HostQRScan',
+  HostLedger = 'HostLedger',
+  HostAlarm = 'HostAlarm',
 }
 
 export const enum BottomTabMenu {

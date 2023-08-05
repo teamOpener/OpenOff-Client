@@ -62,6 +62,21 @@ export type RootStackParamList = {
     eventId: number;
     ticketId: string;
   };
+  HostConsole: {
+    eventId: number;
+  };
+  HostQRScan: {
+    eventId: number;
+    eventIndex: number;
+  };
+  HostLedger: {
+    eventId: number;
+    eventIndex: number;
+  };
+  HostAlarm: {
+    eventId: number;
+    eventIndex: number;
+  };
 };
 
 export type RootStackNavigationProp =
