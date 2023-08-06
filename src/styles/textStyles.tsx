@@ -35,6 +35,10 @@ const textStyles = StyleSheet.create({
     fontFamily: fonts.regular,
     fontSize: 12,
   } as TextStyle,
+  bodySB: {
+    fontFamily: fonts.semibold,
+    fontSize: 12,
+  } as TextStyle,
   caption: {
     fontFamily: fonts.bold,
     fontSize: 12,
