@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Pressable, TouchableOpacity, ScrollView } from 'react-native';
 import Text from 'components/common/Text/Text';
 import Icon from 'components/common/Icon/Icon';
@@ -7,6 +6,7 @@ import userInfo from 'mocks/user/userInfo';
 import fieldData from 'data/lists/fieldData';
 import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
 import Divider from 'components/common/Divider/Divider';
+import Spacing from 'components/common/Spacing/Spacing';
 import userScreenStyles from './UserScreen.style';
 
 const UserScreen = () => {
@@ -17,6 +17,7 @@ const UserScreen = () => {
           <Pressable style={userScreenStyles.userProfileImage}>
             <Icon name="IconUser" size={50} fill="grey" />
           </Pressable>
+          <Spacing height={6} />
           <Text variant="h4" color="white">
             {userInfo.nickname}
           </Text>
@@ -24,6 +25,7 @@ const UserScreen = () => {
             {userInfo.email}
           </Text>
         </View>
+
         <View style={userScreenStyles.fieldContainer}>
           <TouchableOpacity style={userScreenStyles.fieldResetButton}>
             <Icon name="IconPlace" size={16} fill="main" />
@@ -43,6 +45,7 @@ const UserScreen = () => {
         <UserMenuButtonGroup />
       </View>
       <Divider height={8} color="darkGrey" />
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={userScreenStyles.userControllerContainer}

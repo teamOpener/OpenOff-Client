@@ -12,7 +12,7 @@ const userFieldBoxStyles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    fontFamily: fonts.regular,
+    fontFamily: fonts.semibold,
     color: colors.white,
   } as TextStyle,
 });

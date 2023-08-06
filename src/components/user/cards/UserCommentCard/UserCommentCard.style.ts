@@ -8,6 +8,7 @@ const userCommentCardStyles = StyleSheet.create({
   },
   baseContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 10,
     gap: 10,
   },

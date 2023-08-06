@@ -2,6 +2,7 @@ import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { Dimensions, Image, TouchableOpacity, View } from 'react-native';
 import { Event } from 'types/event';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import eventCardStyles from './EventCard.style';
 
 interface Props {
@@ -13,15 +14,10 @@ interface Props {
 const EventCard = ({ event, type = 'default', handlePress }: Props) => {
   const calcWidth =
     type === 'default' ? 200 : Dimensions.get('window').width / 2 - 30;
+
   return (
-    <View
-      // eslint-disable-next-line react-native/no-inline-styles
-      style={{
-        ...eventCardStyles.container,
-        marginBottom: type === 'default' ? 0 : 20,
-      }}
-    >
-      <TouchableOpacity onPress={handlePress}>
+    <View style={eventCardStyles.container}>
+      <TouchableOpacity activeOpacity={0.8} onPress={handlePress}>
         <Image
           style={{
             ...eventCardStyles.image,
@@ -31,21 +27,28 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
           source={{ uri: event.images[0] }}
         />
       </TouchableOpacity>
-      <Text variant="body2" color={type === 'default' ? 'white' : 'main'}>
-        {event.name}
-      </Text>
-      <View style={eventCardStyles.iconText}>
-        <Icon name="IconPlace" size={10} fill="main" />
-        <Text variant="body3" color="white">
-          {event.place}
+
+      <SpaceLayout size={3}>
+        <Text
+          color={type === 'default' ? 'white' : 'main'}
+          style={eventCardStyles.titleText}
+        >
+          {event.name}
         </Text>
-      </View>
-      <View style={eventCardStyles.iconText}>
-        <Icon name="IconUser" size={10} fill="main" />
-        <Text variant="body3" color="white">
-          {event.participant}명 참여중
-        </Text>
-      </View>
+        <View style={eventCardStyles.iconText}>
+          <Icon name="IconPlace" size={10} fill="main" />
+          <Text variant="body3" color="white">
+            {event.place}
+          </Text>
+        </View>
+        <View style={eventCardStyles.iconText}>
+          <Icon name="IconUser" size={10} fill="main" />
+          <Text variant="body3" color="white">
+            {event.participant}명 참여중
+          </Text>
+        </View>
+      </SpaceLayout>
+
       <TouchableOpacity style={eventCardStyles.likeButton}>
         {type === 'default' &&
           (event.like ? (

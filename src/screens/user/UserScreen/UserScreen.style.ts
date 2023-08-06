@@ -8,7 +8,7 @@ const userScreenStyles = StyleSheet.create({
   },
   fieldContainer: {
     alignItems: 'center',
-    gap: 10,
+    gap: 13,
   },
   fieldResetButton: {
     flexDirection: 'row',

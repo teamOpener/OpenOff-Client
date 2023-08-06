@@ -10,7 +10,9 @@ interface Props {
 const UserFieldBox = ({ field }: Props) => {
   return (
     <View style={userFieldBoxStyles.container}>
-      <Text color="white">#{field}</Text>
+      <Text color="white" style={userFieldBoxStyles.text}>
+        #{field}
+      </Text>
     </View>
   );
 };
