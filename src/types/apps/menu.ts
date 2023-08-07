@@ -1,9 +1,9 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import {
   CompositeNavigationProp,
   NavigatorScreenParams,
 } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Coordinate } from 'types/event';
 import { Field } from './group';
 
@@ -23,7 +23,7 @@ export type AuthStackParamList = {
 export type BottomTabParamList = {
   Home: undefined;
   EventMap: {
-    eventId: string;
+    eventId?: string;
   };
   UserEvent: undefined;
   User: undefined;
