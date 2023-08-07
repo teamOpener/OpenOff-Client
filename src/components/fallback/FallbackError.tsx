@@ -1,3 +1,4 @@
+import { ApiErrorResponse } from 'types/ApiResponse';
 import { TouchableOpacity, View } from 'react-native';
 import {
   useQueryClient,
@@ -17,7 +18,9 @@ const FallbackError = ({
   const { reset } = useQueryErrorResetBoundary();
   const queryClient = useQueryClient();
 
-  const errorMessage = error && error.message; // TODO 수정
+  const err = error as ApiErrorResponse;
+  const data = err.response?.data;
+  const errorMessage = data?.message;
 
   const resetErrors = () => {
     queryClient.clear();
