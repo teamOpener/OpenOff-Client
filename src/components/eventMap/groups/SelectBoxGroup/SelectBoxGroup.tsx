@@ -13,11 +13,15 @@ import selectBoxGroup from './SelectBoxGroup.style';
 
 interface Props {
   selectState: SelectBox;
-  dispatch: Dispatch<Action>;
+  selectDispatch: Dispatch<Action>;
   openDetailGroup: () => void;
 }
 
-const SelectBoxGroup = ({ selectState, dispatch, openDetailGroup }: Props) => {
+const SelectBoxGroup = ({
+  selectState,
+  selectDispatch,
+  openDetailGroup,
+}: Props) => {
   return (
     <View style={selectBoxGroup.selectContainer}>
       <TouchableOpacity
@@ -31,7 +35,7 @@ const SelectBoxGroup = ({ selectState, dispatch, openDetailGroup }: Props) => {
         options={payOptions}
         label="비용"
         select={(option: Option) => {
-          dispatch({
+          selectDispatch({
             type: SelectStatus.SET_PAY_OPTION,
             option,
           });
@@ -42,7 +46,7 @@ const SelectBoxGroup = ({ selectState, dispatch, openDetailGroup }: Props) => {
         options={participantOptions}
         label="참여 인원"
         select={(option: Option) => {
-          dispatch({
+          selectDispatch({
             type: SelectStatus.SET_PARTICIPANT_OPTION,
             option,
           });
@@ -53,7 +57,7 @@ const SelectBoxGroup = ({ selectState, dispatch, openDetailGroup }: Props) => {
         options={applicationAbleOptions}
         label="신청 현황"
         select={(option: Option) => {
-          dispatch({
+          selectDispatch({
             type: SelectStatus.SET_APPLICATION_ABLE_OPTION,
             option,
           });
