@@ -1,8 +1,8 @@
 import Text from 'components/common/Text/Text';
 import { memo } from 'react';
 import { Dimensions, Image, View } from 'react-native';
-import { Event } from 'types/event';
 import Carousel from 'react-native-reanimated-carousel';
+import { Event } from 'types/event';
 import mapEventCardStyles from './MapEventCard.style';
 
 interface Props {
@@ -39,7 +39,7 @@ const MapEventCard = ({ event }: Props) => {
           loop={false}
           overscrollEnabled={false}
           style={{ width: Dimensions.get('window').width - 20 }}
-          panGestureHandlerProps={{ minDist: 20 }}
+          panGestureHandlerProps={{ minDist: 10 }}
           data={event.images}
           renderItem={({ item, index }) => (
             <Image
