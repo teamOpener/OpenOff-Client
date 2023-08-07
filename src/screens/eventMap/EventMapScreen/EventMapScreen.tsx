@@ -12,18 +12,20 @@ import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
-import eventList from 'mocks/lists/eventList';
+import SelectStatus from 'constants/selectBox';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import eventList from 'mocks/lists/eventList';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { BackHandler, Dimensions, Pressable, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
+import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
 import { Field } from 'types/apps/group';
 import NaverMapEvent from 'types/apps/map';
 import { BottomTabParamList, RootStackParamList } from 'types/apps/menu';
-import getDistanceCoordinate from 'utils/coordinate';
 import { Coordinate } from 'types/event';
+import getDistanceCoordinate from 'utils/coordinate';
 import {
   defaultTabBarStyles,
   eventMapScreenStyles,
@@ -33,7 +35,11 @@ type EventMapScreenRouteProp = RouteProp<BottomTabParamList, 'EventMap'>;
 
 const EventMapScreen = () => {
   const { params } = useRoute<EventMapScreenRouteProp>();
+  const eventIdParam = useRef<string | undefined>(
+    params ? params.eventId : undefined,
+  );
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { startEndDate } = useEventMapStore();
   const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
     undefined,
   );
@@ -52,7 +58,7 @@ const EventMapScreen = () => {
   } = useMapCoordinateInfo();
 
   // 거리순, 날짜순 정렬 및 선택자(비용 & 참여인원 & 신청현황)
-  const { sort, setSort, selectState, dispatch } =
+  const { sort, setSort, selectState, selectDispatch } =
     useEventMapSelector(eventList);
 
   // 클릭된 마커의 아이디값
@@ -70,6 +76,47 @@ const EventMapScreen = () => {
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
   };
 
+  // 쿼리 파라메터 계산 함수
+  const calculateQueryParams = () => {
+    const coordinateMode = !searchValue || !eventIdParam.current;
+
+    const appAble =
+      selectState.applicationAbleOption.value !== 'all'
+        ? undefined
+        : selectState.applicationAbleOption.value;
+
+    const part =
+      selectState.participantOption.value !== 'all'
+        ? undefined
+        : selectState.participantOption.value;
+
+    const pay =
+      selectState.payOption.value !== 'all'
+        ? undefined
+        : selectState.participantOption.value;
+
+    const commonCoordinate: Coordinate = !startEndDate.startDay
+      ? screenCoordinate.current
+      : currentCoordinate;
+
+    const coordinate: Coordinate = fieldMapMode?.value
+      ? focusCoordinate
+      : commonCoordinate;
+
+    return {
+      startDate: startEndDate.startDay,
+      endDate: startEndDate.endDay,
+      appAble,
+      part,
+      pay,
+      searchValue,
+      field: fieldMapMode?.value,
+      eventId: eventIdParam.current,
+      latitude: coordinateMode && coordinate.latitude,
+      longitude: coordinateMode && coordinate.longitude,
+    };
+  };
+
   const handleCameraEvent = (event: NaverMapEvent) => {
     screenCoordinate.current = {
       latitude: event.latitude,
@@ -84,10 +131,6 @@ const EventMapScreen = () => {
       );
     });
   };
-
-  useEffect(() => {
-    console.log(params.eventId);
-  }, [params.eventId]);
 
   const recallEventMap = () => {
     navigation.setOptions({
@@ -113,6 +156,8 @@ const EventMapScreen = () => {
   const handleShowFieldEvent = useCallback(
     (field: Field) => {
       setFieldMapMode(field);
+      selectDispatch({ type: SelectStatus.RESET_SELECT });
+      searchValue.current = '';
       navigation.setOptions({
         tabBarStyle: {
           ...defaultTabBarStyles,
@@ -199,6 +244,7 @@ const EventMapScreen = () => {
           onCameraChange={handleCameraEvent}
           onMapClick={() => {
             setClickedMarker(null);
+            eventIdParam.current = undefined;
           }}
         >
           <Marker
@@ -224,7 +270,7 @@ const EventMapScreen = () => {
         sort={sort}
         setSort={setSort}
         selectState={selectState}
-        dispatch={dispatch}
+        selectDispatch={selectDispatch}
         clickedMarker={clickedMarker}
         eventList={computedEventList}
       />
