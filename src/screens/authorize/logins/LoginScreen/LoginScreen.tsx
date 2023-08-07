@@ -1,4 +1,8 @@
+import { AxiosError } from 'axios';
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
+import ApiResponse from 'types/ApiResponse';
+import { useNormalLogin } from 'hooks/queries/auth';
+import Text from 'components/common/Text/Text';
 import JoinButton from 'components/authorize/buttons/JoinAndFindButton/JoinAndFindButton';
 import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
 import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButtonGroup/SocialLoginButtonGroup';
@@ -6,7 +10,7 @@ import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Image, View } from 'react-native';
 import { validateEmail, validatePassword } from 'utils/validate';
-import Text from '../../../../components/common/Text/Text';
+
 import loginScreenStyles from './LoginScreen.style';
 
 interface Props {
@@ -17,6 +21,19 @@ const LoginScreen = ({ setIsLogin }: Props) => {
   const [emailAddress, setEmailAddress] = useState<string>('');
 
   const [password, setPassword] = useState<string>('');
+
+  const handleLoginSuccess = () => {
+    setIsLogin(true);
+  };
+
+  const handleLoginError = (error: AxiosError<ApiResponse>) => {
+    console.log(error.response?.data);
+  };
+
+  const { mutateAsync: normalLogin } = useNormalLogin(
+    handleLoginSuccess,
+    handleLoginError,
+  );
 
   const isActive =
     !validateEmail(emailAddress) &&
@@ -37,7 +54,7 @@ const LoginScreen = ({ setIsLogin }: Props) => {
 
   const handleCommonLogin = () => {
     if (!isActive) return;
-    setIsLogin(true);
+    normalLogin({ email: emailAddress, password });
   };
 
   return (

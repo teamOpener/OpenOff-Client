@@ -49,6 +49,10 @@ const queryClient = new QueryClient({
       useErrorBoundary: true,
       suspense: true,
     },
+    mutations: {
+      useErrorBoundary: true,
+      retry: 0,
+    },
   },
 });
 
@@ -84,7 +88,7 @@ const App = () => {
                   {/* <StorybookUIRoot /> */}
                   {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
                   <StatusBar backgroundColor={colors.background} />
-                  {!isLogin ? (
+                  {isLogin ? (
                     <Navigator />
                   ) : (
                     <AuthorizeNavigator setIsLogin={setIsLogin} />
