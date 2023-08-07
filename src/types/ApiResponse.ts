@@ -8,5 +8,3 @@ export type ApiResponse<T = object> = {
 };
 
 export type ApiErrorResponse = AxiosError<ApiResponse>;
-
-export default ApiResponse;

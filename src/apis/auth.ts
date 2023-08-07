@@ -1,5 +1,5 @@
 import fetcher from 'apis';
-import ApiResponse from 'types/ApiResponse';
+import { ApiResponse } from 'types/ApiResponse';
 import { NormalSignInRequestDto } from 'models/auth/request/NormalSignInRequestDto';
 import { TokenResponseDto } from 'models/auth/response/TokenResponseDto';
 

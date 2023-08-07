@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
-import ApiResponse from 'types/ApiResponse';
+import { ApiResponse } from 'types/ApiResponse';
 import { useNormalLogin } from 'hooks/queries/auth';
 import Text from 'components/common/Text/Text';
 import JoinButton from 'components/authorize/buttons/JoinAndFindButton/JoinAndFindButton';
