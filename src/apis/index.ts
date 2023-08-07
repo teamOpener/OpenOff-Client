@@ -1,47 +1,65 @@
 /* eslint-disable no-return-assign */
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import Config from 'react-native-config';
+import { ApiErrorResponse } from 'types/ApiResponse';
 
-const baseURL = 'https://example.com';
+const baseURL = Config.OPENOFF_PROD_SERVER;
 
 const fetcher = axios.create({
   baseURL,
   timeout: 10 * 1000,
-  withCredentials: true,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 });
 
+// TODO 사용안하면 지우기
 fetcher.interceptors.request.use((config) => {
-  // TODO 지우기
   return config;
 });
 
-fetcher.interceptors.response.use(
-  (res) => {
-    return res;
-  },
-  (error) => {
-    const res = error && error.response;
-    const apiError = res && res.code;
+// TODO 사용안하면 지우기
+const onFulfilled = (res: AxiosResponse) => {
+  return res;
+};
 
-    if (apiError) {
-      // error code로 token error 판별
-      // TODO
-      /**
-        * if (토근 만료 에러) {
-            const refreshToken = await AsyncStorage.get();
-            if(refreshToken); { // refresh token이 있다면 refresh 시키기
-                return;
-            }
-            // 없다면 logout 시키기 + login 페이지로 이동
-            clearToken();
-        }
-    */
+let isTokenRenewalInProgress = false;
+
+const onRejected = async (error: ApiErrorResponse) => {
+  const originalRequest = error.config;
+  const data = error.response?.data;
+
+  if (
+    originalRequest &&
+    data &&
+    data.code === 601 &&
+    !isTokenRenewalInProgress
+  ) {
+    isTokenRenewalInProgress = true;
+
+    try {
+      // 1. refresh token 가져오기
+      // 1-1. refresh token이 없다면, 로그아웃
+      // 1-2. refresh token이 있다면 refresh
+      // const accessToken = await refresh();
+
+      // 2. 새로 받아온 access token으로 재시도
+      // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+      const response = await fetcher.request(originalRequest);
+      isTokenRenewalInProgress = false;
+      return response;
+    } catch (refreshError) {
+      console.log(refreshError);
+      // 로그아웃
+      isTokenRenewalInProgress = false;
+      return Promise.reject(refreshError);
     }
-  },
-);
+  }
+  return Promise.reject(error);
+};
+
+fetcher.interceptors.response.use(onFulfilled, onRejected);
 
 export default fetcher;
 
