@@ -7,9 +7,11 @@ import {
 } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DialogProvider from 'components/common/dialogs/DialogProvider';
+import FallbackError from 'components/fallback/FallbackError';
+import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -17,16 +19,15 @@ import {
   Text,
   TextInput,
 } from 'react-native';
+import ErrorBoundary from 'react-native-error-boundary';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
-import ErrorBoundary from 'react-native-error-boundary';
 import { MyTheme, colors } from 'styles/theme';
-import FallbackError from 'components/fallback/FallbackError';
-import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 
 // dayjs setting
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import { useAuthorizeStore } from 'stores/Authorize';
 
 dayjs.locale('ko');
 
@@ -66,7 +67,7 @@ const App = () => {
   const navigationRef = useNavigationContainerRef();
   useFlipper(navigationRef);
 
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const { isLogin } = useAuthorizeStore();
 
   useEffect(() => {
     const timer = setTimeout(() => SplashScreen.hide(), 2000);
@@ -88,11 +89,7 @@ const App = () => {
                   {/* <StorybookUIRoot /> */}
                   {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
                   <StatusBar backgroundColor={colors.background} />
-                  {isLogin ? (
-                    <Navigator />
-                  ) : (
-                    <AuthorizeNavigator setIsLogin={setIsLogin} />
-                  )}
+                  {isLogin ? <Navigator /> : <AuthorizeNavigator />}
                 </NavigationContainer>
               </GestureHandlerRootView>
             </SafeAreaView>
