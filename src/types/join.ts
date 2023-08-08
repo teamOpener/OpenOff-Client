@@ -6,7 +6,7 @@ interface EmailPassword {
   password: string;
 }
 
-type Gender = '남' | '여';
+type Gender = 'MAN' | 'WOMAN';
 
 type Action =
   | { type: UserInfoStatus.SET_NAME; name: string }
