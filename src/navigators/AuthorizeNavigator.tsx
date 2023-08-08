@@ -118,7 +118,7 @@ const AuthorizeNavigator = () => {
       <Stack.Screen
         options={{
           headerTitle: '',
-          headerLeft: BackButton,
+          headerLeft: () => null,
         }}
         name={AuthorizeMenu.AgreeToTerm}
       >
