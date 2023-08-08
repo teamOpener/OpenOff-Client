@@ -1,6 +1,6 @@
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { clearToken } from 'apis';
+import { applyToken, clearToken } from 'apis';
 import { getMyInfo } from 'apis/user';
 import { AxiosError } from 'axios';
 import JoinButton from 'components/authorize/buttons/JoinAndFindButton/JoinAndFindButton';
@@ -70,6 +70,7 @@ const LoginScreen = () => {
           accessToken: socialToken.data?.accessToken,
           refreshToken: socialToken.data?.refreshToken,
         });
+        applyToken(socialToken.data?.accessToken ?? '');
         return getMyInfo();
       })
       .then((data) => {
@@ -89,6 +90,7 @@ const LoginScreen = () => {
           accessToken: normalToken.data?.accessToken,
           refreshToken: normalToken.data?.refreshToken,
         });
+        applyToken(normalToken.data?.accessToken ?? '');
         return getMyInfo();
       })
       .then((data) => {
