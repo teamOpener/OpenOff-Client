@@ -1,10 +1,14 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+  NavigationProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
 import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
-import { Dispatch, useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Dispatch, useCallback, useEffect, useState } from 'react';
+import { BackHandler, View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import agreeToTermScreenStyles from './AgreeToTermScreen.style';
@@ -26,11 +30,26 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
     termToPrivacy: false,
     termToMarketing: false,
   });
+
   const handleSingleTerm = (key: string) => {
     setTerm((checkTerm) => {
       return { ...checkTerm, [key]: !checkTerm[key] };
     });
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        () => {
+          BackHandler.exitApp();
+          return true;
+        },
+      );
+      return () => backHandler.remove();
+    }, []),
+  );
+
   useEffect(() => {
     if (
       term.termToMarketing &&
@@ -52,6 +71,7 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
     term.termToTeenager,
     term.termToUse,
   ]);
+
   const isActive = term.termToPrivacy && term.termToTeenager && term.termToUse;
   return (
     <ScreenCover
