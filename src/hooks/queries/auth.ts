@@ -1,15 +1,57 @@
-import { ApiErrorResponse } from 'types/ApiResponse';
 import { useMutation } from '@tanstack/react-query';
-import { normalLogin } from 'apis/auth';
+import { applyToken } from 'apis';
+import { checkEmail, normalLogin, normalSignUp, socialLogin } from 'apis/auth';
 import { NormalSignInRequestDto } from 'models/auth/request/NormalSignInRequestDto';
+import { SocialSignupRequestDto } from 'models/auth/request/SocialSignupRequestDto';
+import { useAuthorizeStore } from 'stores/Authorize';
+import { ApiErrorResponse } from 'types/ApiResponse';
 
-// eslint-disable-next-line import/prefer-default-export
+const { setToken } = useAuthorizeStore.getState();
+
 export const useNormalLogin = (
   successCallback?: () => void,
   errorCallback?: (error: ApiErrorResponse) => void,
 ) => {
   return useMutation((data: NormalSignInRequestDto) => normalLogin(data), {
     onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
+  });
+};
+
+export const useSocialLogin = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((data: SocialSignupRequestDto) => socialLogin(data), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
+  });
+};
+
+export const useEmailCheck = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((email: string) => checkEmail(email), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
+  });
+};
+
+export const useNormalSignUp = (
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((data: NormalSignInRequestDto) => normalSignUp(data), {
+    onSuccess: (data) => {
+      applyToken(data.data?.accessToken ?? '');
+      setToken({
+        accessToken: data.data?.accessToken,
+        refreshToken: data.data?.refreshToken,
+      });
+    },
     onError: errorCallback,
     useErrorBoundary: false,
   });
