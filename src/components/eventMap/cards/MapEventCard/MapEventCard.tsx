@@ -1,6 +1,7 @@
 import Text from 'components/common/Text/Text';
 import { memo } from 'react';
-import { Image, View } from 'react-native';
+import { Dimensions, Image, View } from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 import { Event } from 'types/event';
 import mapEventCardStyles from './MapEventCard.style';
 
@@ -32,13 +33,22 @@ const MapEventCard = ({ event }: Props) => {
         </Text>
       </View>
       <View style={mapEventCardStyles.imageContainer}>
-        {event.images.slice(0, 3).map((image) => (
-          <Image
-            key={Math.random() * 100}
-            style={mapEventCardStyles.eventImage}
-            source={{ uri: image }}
-          />
-        ))}
+        <Carousel
+          width={124}
+          height={114}
+          loop={false}
+          overscrollEnabled={false}
+          style={{ width: Dimensions.get('window').width - 20 }}
+          panGestureHandlerProps={{ minDist: 10 }}
+          data={event.images}
+          renderItem={({ item, index }) => (
+            <Image
+              key={index}
+              style={mapEventCardStyles.eventImage}
+              source={{ uri: item }}
+            />
+          )}
+        />
       </View>
     </View>
   );

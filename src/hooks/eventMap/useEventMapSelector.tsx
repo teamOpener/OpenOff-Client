@@ -42,7 +42,7 @@ const useEventMapSelector = (eventList: Event[]) => {
     dialog: false,
     value: 'date',
   });
-  const [selectState, dispatch] = useReducer<Reducer<SelectBox, Action>>(
+  const [selectState, selectDispatch] = useReducer<Reducer<SelectBox, Action>>(
     selectReducer,
     initSelect,
   );
@@ -50,7 +50,7 @@ const useEventMapSelector = (eventList: Event[]) => {
     sort,
     setSort,
     selectState,
-    dispatch,
+    selectDispatch,
   };
 };
 

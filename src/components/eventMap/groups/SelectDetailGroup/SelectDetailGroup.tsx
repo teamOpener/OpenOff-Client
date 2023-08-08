@@ -16,17 +16,17 @@ import selectDetailGroupStyles from './SelectDetailGroup.style';
 
 interface Props {
   selectState: SelectBox;
-  dispatch: Dispatch<Action>;
+  selectDispatch: Dispatch<Action>;
   closeDetailGroup: () => void;
 }
 
 const SelectDetailGroup = ({
   selectState,
-  dispatch,
+  selectDispatch,
   closeDetailGroup,
 }: Props) => {
   const initializeSelect = () => {
-    dispatch({ type: SelectStatus.RESET_SELECT });
+    selectDispatch({ type: SelectStatus.RESET_SELECT });
     closeDetailGroup();
   };
   const applySelect = () => {
@@ -48,7 +48,7 @@ const SelectDetailGroup = ({
         options={payOptions}
         label="비용"
         select={(option: Option) => {
-          dispatch({
+          selectDispatch({
             type: SelectStatus.SET_PAY_OPTION,
             option,
           });
@@ -60,7 +60,7 @@ const SelectDetailGroup = ({
         options={participantOptions}
         label="참여 인원"
         select={(option: Option) => {
-          dispatch({
+          selectDispatch({
             type: SelectStatus.SET_PARTICIPANT_OPTION,
             option,
           });
@@ -72,7 +72,7 @@ const SelectDetailGroup = ({
         options={applicationAbleOptions}
         label="신청 현황"
         select={(option: Option) => {
-          dispatch({
+          selectDispatch({
             type: SelectStatus.SET_APPLICATION_ABLE_OPTION,
             option,
           });

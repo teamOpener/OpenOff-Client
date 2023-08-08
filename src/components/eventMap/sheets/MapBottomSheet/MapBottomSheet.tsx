@@ -25,7 +25,7 @@ interface Props {
   sort: SortInfo;
   setSort: Dispatch<SetStateAction<SortInfo>>;
   selectState: SelectBox;
-  dispatch: Dispatch<Action>;
+  selectDispatch: Dispatch<Action>;
   eventList: Event[];
   clickedMarker: string | null;
 }
@@ -37,7 +37,7 @@ const MapBottomSheet = ({
   setSort,
   selectState,
   eventList,
-  dispatch,
+  selectDispatch,
   clickedMarker,
 }: Props) => {
   const [isDetail, setIsDetail] = useState<boolean>(false);
@@ -58,7 +58,7 @@ const MapBottomSheet = ({
               <>
                 <SelectBoxGroup
                   selectState={selectState}
-                  dispatch={dispatch}
+                  selectDispatch={selectDispatch}
                   openDetailGroup={() => {
                     setIsDetail(true);
                   }}
@@ -88,7 +88,7 @@ const MapBottomSheet = ({
           >
             <SelectDetailGroup
               selectState={selectState}
-              dispatch={dispatch}
+              selectDispatch={selectDispatch}
               closeDetailGroup={() => {
                 setIsDetail(false);
               }}
