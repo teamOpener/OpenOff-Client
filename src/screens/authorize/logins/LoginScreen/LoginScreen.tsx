@@ -1,39 +1,58 @@
-import { AxiosError } from 'axios';
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
-import { ApiResponse } from 'types/ApiResponse';
-import { useNormalLogin } from 'hooks/queries/auth';
-import Text from 'components/common/Text/Text';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { clearToken } from 'apis';
+import { getMyInfo } from 'apis/user';
+import { AxiosError } from 'axios';
 import JoinButton from 'components/authorize/buttons/JoinAndFindButton/JoinAndFindButton';
 import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
 import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButtonGroup/SocialLoginButtonGroup';
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
-import { Dispatch, SetStateAction, useState } from 'react';
+import Text from 'components/common/Text/Text';
+import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
+import { useContext, useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
+import { useAuthorizeStore } from 'stores/Authorize';
+import { colors } from 'styles/theme';
+import { ApiResponse } from 'types/ApiResponse';
+import { AuthStackParamList } from 'types/apps/menu';
+import DialogContext from 'utils/DialogContext';
 import { validateEmail, validatePassword } from 'utils/validate';
-
 import loginScreenStyles from './LoginScreen.style';
 
-interface Props {
-  setIsLogin: Dispatch<SetStateAction<boolean>>;
-}
-
-const LoginScreen = ({ setIsLogin }: Props) => {
+const LoginScreen = () => {
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [emailAddress, setEmailAddress] = useState<string>('');
+
+  const { setToken, setIsLogin, resetToken } = useAuthorizeStore();
+
+  const { openDialog } = useContext(DialogContext);
 
   const [password, setPassword] = useState<string>('');
 
-  const handleLoginSuccess = () => {
-    setIsLogin(true);
-  };
-
   const handleLoginError = (error: AxiosError<ApiResponse>) => {
-    console.log(error.response?.data);
+    openDialog({
+      type: 'validate',
+      text: error.response?.data.message ?? '',
+    });
   };
 
-  const { mutateAsync: normalLogin } = useNormalLogin(
-    handleLoginSuccess,
-    handleLoginError,
-  );
+  const handleSocialLoginError = (error: AxiosError<ApiResponse>) => {
+    openDialog({
+      type: 'validate',
+      text: error.response?.data.message ?? '',
+    });
+  };
+
+  const { mutateAsync: normalLogin, isLoading: isNormalLoginLoading } =
+    useNormalLogin(() => {
+      return false;
+    }, handleLoginError);
+
+  const { mutateAsync: socialLogin, isLoading: isSocialLoginLoading } =
+    useSocialLogin(() => {
+      return false;
+    }, handleSocialLoginError);
 
   const isActive =
     !validateEmail(emailAddress) &&
@@ -41,21 +60,53 @@ const LoginScreen = ({ setIsLogin }: Props) => {
     emailAddress.length >= 1 &&
     password.length >= 1;
 
-  const kakaoLogin = () => {
+  const handleKakaoLogin = () => {
     loginWithKakaoAccount()
       .then((result) => {
-        console.log('Login Success', JSON.stringify(result));
-        setIsLogin(true);
+        return socialLogin({ socialType: 'kakao', token: result.idToken });
       })
-      .catch(() => {
-        return false;
+      .then((socialToken) => {
+        setToken({
+          accessToken: socialToken.data?.accessToken,
+          refreshToken: socialToken.data?.refreshToken,
+        });
+        return getMyInfo();
+      })
+      .then((data) => {
+        if (data.data?.userInfo.userName) {
+          setIsLogin(true);
+        } else {
+          navigation.navigate('AgreeToTerm');
+        }
       });
   };
 
   const handleCommonLogin = () => {
     if (!isActive) return;
-    normalLogin({ email: emailAddress, password });
+    normalLogin({ email: emailAddress, password })
+      .then((normalToken) => {
+        setToken({
+          accessToken: normalToken.data?.accessToken,
+          refreshToken: normalToken.data?.refreshToken,
+        });
+        return getMyInfo();
+      })
+      .then((data) => {
+        if (data.data?.userInfo.userName) {
+          setIsLogin(true);
+        } else {
+          navigation.navigate('AgreeToTerm');
+        }
+      });
   };
+
+  useEffect(() => {
+    resetToken();
+    clearToken();
+  }, []);
+
+  if (isSocialLoginLoading || isNormalLoginLoading)
+    return <CommonLoading isActive backgroundColor={colors.background} />;
 
   return (
     <View style={loginScreenStyles.container}>
@@ -82,7 +133,7 @@ const LoginScreen = ({ setIsLogin }: Props) => {
         또는
       </Text>
       <SocialLoginButtonGroup
-        kakaoLogin={kakaoLogin}
+        kakaoLogin={handleKakaoLogin}
         naverLogin={() => {
           return false;
         }}

@@ -7,7 +7,7 @@ import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
-import { Action } from 'types/join';
+import { Action, Gender } from 'types/join';
 import { validateBirthday, validateName } from 'utils/validate';
 import userInfoScreenStyles from './UserInfoScreen.style';
 
@@ -19,7 +19,7 @@ const UserInfoScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [name, setName] = useState<string>('');
   const [birth, setBirth] = useState<string>('2000-00-00');
-  const [gender, setGender] = useState<'남' | '여'>('남');
+  const [gender, setGender] = useState<Gender>('MAN');
   const isActive =
     !validateName(name) && !validateBirthday(birth) && name.length > 1;
   return (

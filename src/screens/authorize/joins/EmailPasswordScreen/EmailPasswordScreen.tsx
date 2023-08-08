@@ -3,6 +3,7 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
+import { useEmailCheck, useNormalSignUp } from 'hooks/queries/auth';
 import { Dispatch, useState } from 'react';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
@@ -16,21 +17,34 @@ const EmailPasswordScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const { mutateAsync: checkEmail } = useEmailCheck();
+
+  const { mutateAsync: normalSignUp } = useNormalSignUp();
+
   const isActive =
     !validateEmail(email) &&
     email.length > 1 &&
     !validatePassword(password) &&
     password.length > 1;
+
+  const handleAuthorize = () => {
+    checkEmail(email)
+      .then(() => {
+        normalSignUp({ email, password });
+      })
+      .then(() => {
+        dispatch({
+          type: UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD,
+          emailPassword: { email, password },
+        });
+        navigation.navigate(AuthorizeMenu.AgreeToTerm);
+      });
+  };
   return (
     <ScreenCover
       authorizeButton={{
-        handlePress: () => {
-          dispatch({
-            type: UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD,
-            emailPassword: { email, password },
-          });
-          navigation.navigate(AuthorizeMenu.AgreeToTerm);
-        },
+        handlePress: handleAuthorize,
         label: '확인',
         isActive,
       }}
