@@ -1,17 +1,18 @@
+import { useFocusEffect } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { BackHandler, View } from 'react-native';
+import { useAuthorizeStore } from 'stores/Authorize';
 import { JoinInfo } from 'types/join';
-import { useFocusEffect } from '@react-navigation/native';
 import joinCompleteScreenStyles from './JoinCompleteScreen.style';
 
 interface Props {
   state: JoinInfo;
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const JoinCompleteScreen = ({ state, setIsLogin }: Props) => {
+const JoinCompleteScreen = ({ state }: Props) => {
+  const { setIsLogin } = useAuthorizeStore();
   useFocusEffect(
     useCallback(() => {
       const backAction = () => {

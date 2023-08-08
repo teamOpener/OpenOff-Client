@@ -54,7 +54,7 @@ const userInfoReducer = (state: JoinInfo, action: Action): JoinInfo => {
   }
 };
 
-const AuthorizeNavigator = ({ setIsLogin }: Props) => {
+const AuthorizeNavigator = () => {
   const initialState = {
     name: '',
     birth: '',
@@ -104,7 +104,7 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
         }}
         name={AuthorizeMenu.Login}
       >
-        {() => <LoginScreen setIsLogin={setIsLogin} />}
+        {() => <LoginScreen />}
       </Stack.Screen>
       <Stack.Screen
         options={{
@@ -164,11 +164,11 @@ const AuthorizeNavigator = ({ setIsLogin }: Props) => {
         options={{
           headerTitle: '',
           // eslint-disable-next-line react/no-unstable-nested-components
-          headerLeft: () => <BackToHomeButton setIsLogin={setIsLogin} />,
+          headerLeft: () => <BackToHomeButton />,
         }}
         name={AuthorizeMenu.JoinComplete}
       >
-        {() => <JoinCompleteScreen state={state} setIsLogin={setIsLogin} />}
+        {() => <JoinCompleteScreen state={state} />}
       </Stack.Screen>
       <Stack.Screen
         name={AuthorizeMenu.EmailPasswordFind}
