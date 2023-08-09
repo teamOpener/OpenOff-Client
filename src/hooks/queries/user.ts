@@ -37,8 +37,8 @@ interface ConcludeOnBoardingProps {
 export const useConcludeOnBoarding = () => {
   return useMutation(
     (data: ConcludeOnBoardingProps) =>
-      updateOnBoarding(data.onBoarding).then(() => {
-        updateInterestField(data.fields);
+      updateInterestField(data.fields).then(() => {
+        updateOnBoarding(data.onBoarding);
       }),
     {
       useErrorBoundary: false,
