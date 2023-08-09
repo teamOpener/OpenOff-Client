@@ -1,7 +1,6 @@
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { applyToken, clearToken } from 'apis';
-import { getMyInfo } from 'apis/user';
+import { clearToken } from 'apis';
 import { AxiosError } from 'axios';
 import JoinButton from 'components/authorize/buttons/JoinAndFindButton/JoinAndFindButton';
 import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
@@ -24,7 +23,7 @@ const LoginScreen = () => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [emailAddress, setEmailAddress] = useState<string>('');
 
-  const { setToken, setIsLogin, resetToken } = useAuthorizeStore();
+  const { setIsLogin, resetToken } = useAuthorizeStore();
 
   const { openDialog } = useContext(DialogContext);
 
@@ -33,14 +32,14 @@ const LoginScreen = () => {
   const handleLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? '',
+      text: error.response?.data.message ?? '서버에 오류가 발생했습니다.',
     });
   };
 
   const handleSocialLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? '',
+      text: error.response?.data.message ?? '서버에 오류가 발생했습니다.',
     });
   };
 
@@ -60,46 +59,29 @@ const LoginScreen = () => {
     emailAddress.length >= 1 &&
     password.length >= 1;
 
+  const divergeAuthorizeFlow = (userName?: string) => {
+    if (userName) {
+      setIsLogin(true);
+    } else {
+      navigation.navigate('AgreeToTerm');
+    }
+  };
+
   const handleKakaoLogin = () => {
     loginWithKakaoAccount()
       .then((result) => {
         return socialLogin({ socialType: 'kakao', token: result.idToken });
       })
-      .then((socialToken) => {
-        setToken({
-          accessToken: socialToken.data?.accessToken,
-          refreshToken: socialToken.data?.refreshToken,
-        });
-        applyToken(socialToken.data?.accessToken ?? '');
-        return getMyInfo();
-      })
       .then((data) => {
-        if (data.data?.userInfo.userName) {
-          setIsLogin(true);
-        } else {
-          navigation.navigate('AgreeToTerm');
-        }
+        divergeAuthorizeFlow(data.data?.userInfo.userName);
       });
   };
 
   const handleCommonLogin = () => {
     if (!isActive) return;
-    normalLogin({ email: emailAddress, password })
-      .then((normalToken) => {
-        setToken({
-          accessToken: normalToken.data?.accessToken,
-          refreshToken: normalToken.data?.refreshToken,
-        });
-        applyToken(normalToken.data?.accessToken ?? '');
-        return getMyInfo();
-      })
-      .then((data) => {
-        if (data.data?.userInfo.userName) {
-          setIsLogin(true);
-        } else {
-          navigation.navigate('AgreeToTerm');
-        }
-      });
+    normalLogin({ email: emailAddress, password }).then((data) => {
+      divergeAuthorizeFlow(data.data?.userInfo.userName);
+    });
   };
 
   useEffect(() => {

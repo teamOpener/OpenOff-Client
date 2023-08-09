@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { applyToken } from 'apis';
 import { checkEmail, normalLogin, normalSignUp, socialLogin } from 'apis/auth';
+import { getMyInfo } from 'apis/user';
 import { NormalSignInRequestDto } from 'models/auth/request/NormalSignInRequestDto';
 import { SocialSignupRequestDto } from 'models/auth/request/SocialSignupRequestDto';
 import { useAuthorizeStore } from 'stores/Authorize';
@@ -12,22 +13,44 @@ export const useNormalLogin = (
   successCallback?: () => void,
   errorCallback?: (error: ApiErrorResponse) => void,
 ) => {
-  return useMutation((data: NormalSignInRequestDto) => normalLogin(data), {
-    onSuccess: successCallback,
-    onError: errorCallback,
-    useErrorBoundary: false,
-  });
+  return useMutation(
+    (data: NormalSignInRequestDto) =>
+      normalLogin(data).then((socialToken) => {
+        setToken({
+          accessToken: socialToken.data?.accessToken,
+          refreshToken: socialToken.data?.refreshToken,
+        });
+        applyToken(socialToken.data?.accessToken ?? '');
+        return getMyInfo();
+      }),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
+    },
+  );
 };
 
 export const useSocialLogin = (
   successCallback?: () => void,
   errorCallback?: (error: ApiErrorResponse) => void,
 ) => {
-  return useMutation((data: SocialSignupRequestDto) => socialLogin(data), {
-    onSuccess: successCallback,
-    onError: errorCallback,
-    useErrorBoundary: false,
-  });
+  return useMutation(
+    (data: SocialSignupRequestDto) =>
+      socialLogin(data).then((socialToken) => {
+        setToken({
+          accessToken: socialToken.data?.accessToken,
+          refreshToken: socialToken.data?.refreshToken,
+        });
+        applyToken(socialToken.data?.accessToken ?? '');
+        return getMyInfo();
+      }),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
+    },
+  );
 };
 
 export const useEmailCheck = (
