@@ -34,6 +34,7 @@ let isTokenRenewalInProgress = false;
 const initializeAuthorizeState = (error?: unknown) => {
   resetToken();
   setIsLogin(false);
+  fetcher.defaults.headers.Authorization = null;
   isTokenRenewalInProgress = false;
   return Promise.reject(error);
 };
