@@ -7,7 +7,11 @@ import { validatePassword, validatePasswordCheck } from 'utils/validate';
 import PasswordResetCompleteScreen from '../PasswordResetCompleteScreen/PasswordResetCompleteScreen';
 import passwordResetScreenStyles from './PasswordResetScreen.style';
 
-const PasswordResetScreen = () => {
+interface Props {
+  email?: string;
+}
+
+const PasswordResetScreen = ({ email }: Props) => {
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
