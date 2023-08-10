@@ -3,6 +3,7 @@ import { NormalSignInRequestDto } from 'models/auth/request/NormalSignInRequestD
 import { SocialSignupRequestDto } from 'models/auth/request/SocialSignupRequestDto';
 import { TokenRequestDto } from 'models/auth/request/TokenRequestDto';
 import { CheckEmailResponseDto } from 'models/auth/response/CheckEmailResponseDto';
+import { CheckNicknameResponseDto } from 'models/auth/response/CheckNicknameResponseDto';
 import { TokenResponseDto } from 'models/auth/response/TokenResponseDto';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiResponse } from 'types/ApiResponse';
@@ -52,5 +53,15 @@ export const checkEmail = async (
     email,
   };
   const response = await fetcher.get(`/auth/check/email`, { params });
+  return response.data;
+};
+
+export const checkNickname = async (
+  nickname: string,
+): Promise<ApiResponse<CheckNicknameResponseDto>> => {
+  const params = {
+    nickname,
+  };
+  const response = await fetcher.get(`/auth/check/nickname`, { params });
   return response.data;
 };
