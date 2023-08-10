@@ -1,3 +1,5 @@
+import { FieldCode } from './code';
+
 const DOMAIN = {
   USER: 'USER',
   EVENT: 'EVENT',
@@ -20,10 +22,17 @@ const participantKeys = {
   cardById: (eventId: number) => [DOMAIN.PARTICIPANT, 'list', eventId, 'card'],
 };
 
+const hostKeys = {
+  all: [DOMAIN.HOST],
+  list: [DOMAIN.HOST, 'list'],
+  listByFieldCode: (type: FieldCode) => [DOMAIN.HOST, 'list', type],
+};
+
 const queryKeys = {
   userKeys,
   eventKeys,
   participantKeys,
+  hostKeys,
 };
 
 export default queryKeys;
