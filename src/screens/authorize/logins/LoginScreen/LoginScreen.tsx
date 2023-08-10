@@ -67,21 +67,22 @@ const LoginScreen = () => {
     }
   };
 
-  const handleKakaoLogin = () => {
-    loginWithKakaoAccount()
-      .then((result) => {
-        return socialLogin({ socialType: 'kakao', token: result.idToken });
-      })
-      .then((data) => {
-        divergeAuthorizeFlow(data.data?.userInfo.userName);
-      });
+  const handleKakaoLogin = async () => {
+    const kakaoResult = await loginWithKakaoAccount();
+    const socialLoginResult = await socialLogin({
+      socialType: 'kakao',
+      token: kakaoResult.idToken,
+    });
+    divergeAuthorizeFlow(socialLoginResult.data?.userInfo.userName);
   };
 
-  const handleCommonLogin = () => {
+  const handleCommonLogin = async () => {
     if (!isActive) return;
-    normalLogin({ email: emailAddress, password }).then((data) => {
-      divergeAuthorizeFlow(data.data?.userInfo.userName);
+    const normalLoginResult = await normalLogin({
+      email: emailAddress,
+      password,
     });
+    divergeAuthorizeFlow(normalLoginResult.data?.userInfo.userName);
   };
 
   useEffect(() => {

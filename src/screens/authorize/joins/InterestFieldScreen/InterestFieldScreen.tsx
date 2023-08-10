@@ -11,14 +11,15 @@ import { Image } from 'react-native';
 import { colors } from 'styles/theme';
 import { Field } from 'types/apps/group';
 import { AuthStackParamList } from 'types/apps/menu';
-import { Action } from 'types/join';
+import { Action, JoinInfo } from 'types/join';
 import interestFieldScreenStyles from './InterestFieldScreen.style';
 
 interface Props {
+  state: JoinInfo;
   dispatch: Dispatch<Action>;
 }
 
-const InterestFieldScreen = ({ dispatch }: Props) => {
+const InterestFieldScreen = ({ state, dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [interestField, setInterestField] = useState<Field[]>(fieldData);
   const { mutateAsync: concludeOnBoarding, isLoading } =
@@ -38,30 +39,30 @@ const InterestFieldScreen = ({ dispatch }: Props) => {
     return count;
   };
 
-  const handleAuthorize = () => {
-    concludeOnBoarding({
+  const handleAuthorize = async () => {
+    const params = {
       onBoarding: {
-        nickname: '',
-        username: '',
-        gender: 'MAN',
-        year: 0,
-        month: 0,
-        day: 0,
+        nickname: state.nickname,
+        username: state.username,
+        gender: state.gender,
+        year: parseInt(state.birth.substring(0, 4), 10),
+        month: parseInt(state.birth.substring(5, 7), 10),
+        day: parseInt(state.birth.substring(8, 10), 10),
       },
       fields: {
         fieldTypeList: interestField
           .filter((fieldElement) => fieldElement.isActive)
           .map((field) => field.value),
       },
-    }).then(() => {
-      dispatch({
-        type: UserInfoStatus.SET_INTEREST_FIELD,
-        interestField: interestField.filter(
-          (fieldElement) => fieldElement.isActive,
-        ),
-      });
-      navigation.navigate(AuthorizeMenu.JoinComplete);
+    };
+    await concludeOnBoarding(params);
+    dispatch({
+      type: UserInfoStatus.SET_INTEREST_FIELD,
+      interestField: interestField.filter(
+        (fieldElement) => fieldElement.isActive,
+      ),
     });
+    navigation.navigate(AuthorizeMenu.JoinComplete);
   };
 
   if (isLoading) {

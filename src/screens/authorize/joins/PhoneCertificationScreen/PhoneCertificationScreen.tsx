@@ -47,13 +47,12 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
   const { mutateAsync: sendSms } = useSendSms(handleSendSmsSuccess);
   const { mutateAsync: checkSms } = useCheckSms(handleCheckSmsSuccess);
 
-  const handleCertification = () => {
-    sendSms({
+  const handleCertification = async () => {
+    await sendSms({
       content: '핸드폰 인증',
       to: phonenumber.replaceAll('-', ''),
-    }).then(() => {
-      setRetry(true);
     });
+    setRetry(true);
   };
 
   const isActive =

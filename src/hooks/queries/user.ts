@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { updateInterestField } from 'apis/field';
+import { updateInterestField } from 'apis/interest';
 import { checkSms, sendSms, updateOnBoarding } from 'apis/user';
 import AddInterestRequestDto from 'models/field/request/AddInterestRequestDto';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
@@ -36,10 +36,11 @@ interface ConcludeOnBoardingProps {
 
 export const useConcludeOnBoarding = () => {
   return useMutation(
-    (data: ConcludeOnBoardingProps) =>
-      updateInterestField(data.fields).then(() => {
-        updateOnBoarding(data.onBoarding);
-      }),
+    async (data: ConcludeOnBoardingProps) => {
+      await updateInterestField(data.fields);
+      const onboarding = await updateOnBoarding(data.onBoarding);
+      return onboarding;
+    },
     {
       useErrorBoundary: false,
     },
