@@ -1,10 +1,14 @@
 import fetcher from 'apis';
 import { NormalSignInRequestDto } from 'models/auth/request/NormalSignInRequestDto';
+import ResetPasswordRequestDto from 'models/auth/request/ResetPasswordRequestDto';
 import { SocialSignupRequestDto } from 'models/auth/request/SocialSignupRequestDto';
 import { TokenRequestDto } from 'models/auth/request/TokenRequestDto';
 import { CheckEmailResponseDto } from 'models/auth/response/CheckEmailResponseDto';
 import { CheckNicknameResponseDto } from 'models/auth/response/CheckNicknameResponseDto';
+import SearchIdResponseDto from 'models/auth/response/SearchIdResponseDto';
 import { TokenResponseDto } from 'models/auth/response/TokenResponseDto';
+import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
+import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiResponse } from 'types/ApiResponse';
 
@@ -20,7 +24,7 @@ export const normalLogin = async (
 export const normalSignUp = async (
   data: NormalSignInRequestDto,
 ): Promise<ApiResponse<TokenResponseDto>> => {
-  const response = await fetcher.post(`/auth/signup/normal`, data);
+  const response = await fetcher.post(`auth/signup/normal`, data);
   return response.data;
 };
 
@@ -52,7 +56,7 @@ export const checkEmail = async (
   const params = {
     email,
   };
-  const response = await fetcher.get(`/auth/check/email`, { params });
+  const response = await fetcher.get(`auth/check/email`, { params });
   return response.data;
 };
 
@@ -62,6 +66,37 @@ export const checkNickname = async (
   const params = {
     nickname,
   };
-  const response = await fetcher.get(`/auth/check/nickname`, { params });
+  const response = await fetcher.get(`auth/check/nickname`, { params });
+  return response.data;
+};
+
+export const sendAuthSms = async (
+  data: NCPSmsInfoRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.post(`auth/sms`, data);
+  return response.data;
+};
+
+export const checkAuthSms = async (
+  data: UserSmsCheckRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.patch(`auth/sms`, data);
+  return response.data;
+};
+
+export const searchEmail = async (
+  email: string,
+): Promise<ApiResponse<SearchIdResponseDto>> => {
+  const params = {
+    id: email,
+  };
+  const response = await fetcher.get('/auth/searh/id', { params });
+  return response.data;
+};
+
+export const resetPassword = async (
+  data: ResetPasswordRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.patch('/auth/reset/password', data);
   return response.data;
 };
