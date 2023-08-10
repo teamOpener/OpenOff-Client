@@ -1,28 +1,34 @@
-import Text from 'components/common/Text/Text';
+import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import Icon from 'components/common/Icon/Icon';
-import { useState } from 'react';
 import dayjs from 'dayjs';
+import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
+import { EventIndexInfo } from 'models/ledger/entity/EventIndexInfo';
 import dateSelectorStyles from './DateSelector.style';
-
-const dateLists: string[] = [
-  '2023-07-13T20:00:00',
-  '2023-07-14T18:00:00',
-  '2023-07-15T21:00:00',
-];
 
 // TODO 한개일때는 안열리게
 
-const DateSelector = () => {
+interface Props {
+  eventIndexInfoList: EventIndexInfo[];
+  selectedEventIndexInfo: EventIndexInfo;
+  setSelectedEventIndexInfo: React.Dispatch<
+    React.SetStateAction<EventIndexInfo | undefined>
+  >;
+}
+
+const DateSelector = ({
+  eventIndexInfoList,
+  selectedEventIndexInfo,
+  setSelectedEventIndexInfo,
+}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedDateIdx, setSelectedDateIdx] = useState<number>(0);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleDate = (idx: number) => {
-    setSelectedDateIdx(idx);
+  const handleDate = (eventIndexInfo: EventIndexInfo) => {
+    setSelectedEventIndexInfo(eventIndexInfo);
     setIsOpen(false);
   };
 
@@ -34,7 +40,7 @@ const DateSelector = () => {
         onPress={handleOpen}
       >
         <Text style={dateSelectorStyles.dateText} color="main">
-          {dayjs(dateLists[selectedDateIdx]).format(
+          {dayjs(selectedEventIndexInfo.eventDate).format(
             'YYYY.MM.DD (ddd) HH시 mm분',
           )}
         </Text>
@@ -47,21 +53,25 @@ const DateSelector = () => {
 
       {isOpen && (
         <View style={dateSelectorStyles.absoluteContainer}>
-          {dateLists.map((dateList, idx) => (
+          {eventIndexInfoList.map((dateList, idx) => (
             <TouchableOpacity
-              key={idx}
+              key={dateList.eventIndexId}
               activeOpacity={0.8}
               style={[
                 dateSelectorStyles.dateList,
                 idx !== 0 && dateSelectorStyles.divider,
               ]}
-              onPress={() => handleDate(idx)}
+              onPress={() => handleDate(dateList)}
             >
               <Text
                 style={dateSelectorStyles.dateText}
-                color={selectedDateIdx === idx ? 'main' : 'grey'}
+                color={
+                  selectedEventIndexInfo.eventIndexId === dateList.eventIndexId
+                    ? 'main'
+                    : 'grey'
+                }
               >
-                {dayjs(dateList).format('YYYY.MM.DD (ddd) HH시 mm분')}
+                {dayjs(dateList.eventDate).format('YYYY.MM.DD (ddd) HH시 mm분')}
               </Text>
             </TouchableOpacity>
           ))}
