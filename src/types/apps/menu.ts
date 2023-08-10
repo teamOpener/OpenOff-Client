@@ -75,6 +75,11 @@ export type RootStackParamList = {
     eventId: number;
     eventIndex: number;
   };
+  HostLedgerDetail: {
+    eventId: number;
+    eventIndex: string;
+    userId: number;
+  };
   HostAlarm: {
     eventId: number;
     eventIndex: number;
