@@ -120,7 +120,10 @@ const PasswordFindScreen = () => {
           />
         </ScreenCover>
       ) : (
-        <PasswordResetScreen email={emailAddress} />
+        <PasswordResetScreen
+          email={emailAddress}
+          phoneNum={phonenumber.replaceAll('-', '')}
+        />
       )}
     </View>
   );

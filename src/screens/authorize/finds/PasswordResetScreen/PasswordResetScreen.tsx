@@ -1,22 +1,48 @@
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import Text from 'components/common/Text/Text';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { View } from 'react-native';
 import { validatePassword, validatePasswordCheck } from 'utils/validate';
+import { useResetPassword } from 'hooks/queries/auth';
+import { ApiErrorResponse } from 'types/ApiResponse';
+import DialogContext from 'utils/DialogContext';
 import PasswordResetCompleteScreen from '../PasswordResetCompleteScreen/PasswordResetCompleteScreen';
 import passwordResetScreenStyles from './PasswordResetScreen.style';
 
 interface Props {
   email?: string;
+  phoneNum?: string;
 }
 
-const PasswordResetScreen = ({ email }: Props) => {
+const PasswordResetScreen = ({
+  email = 'error',
+  phoneNum = 'error',
+}: Props) => {
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
-  const handleChangePassword = () => {
+  const { openDialog } = useContext(DialogContext);
+
+  const handleSuccessCallback = () => {
     setIsAuthorize(true);
+  };
+  const handleErrorCallback = (error: ApiErrorResponse) => {
+    openDialog({
+      text: error.message,
+      type: 'validate',
+    });
+  };
+  const { mutateAsync: resetPassword } = useResetPassword(
+    handleSuccessCallback,
+    handleErrorCallback,
+  );
+  const handleChangePassword = () => {
+    resetPassword({
+      email,
+      phoneNum,
+      newPassword: passwordCheck,
+    });
   };
 
   const isConfirmPassword =
