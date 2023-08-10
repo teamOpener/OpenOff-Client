@@ -1,12 +1,15 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import queryKeys from 'constants/queryKeys';
 import fakeApi from 'apis/test';
+import EventLadgerTotalStatusResponseData from 'mocks/ledger/user/EventLadgerTotalStatusResponseData.json';
 import MyTicketInfoResponseData from 'mocks/ledger/user/MyTicketInfoResponseData.json';
 import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
 import { ApplicationInfoResponseDto } from 'models/ledger/response/ApplicationInfoResponseDto';
 import ApplicationInfoResponseData from 'mocks/ledger/user/ApplicationInfoResponseData.json';
-import { getHostEventLists } from 'apis/ledger';
+import { getHostEventLists } from 'apis/eventInstance';
 import { FieldCode } from 'constants/code';
+import { getLedgerStatus } from 'apis/ledger';
+import { EventLadgerTotalStatusResponseDto } from 'models/ledger/response/EventLadgerTotalStatusResponseDto';
 
 // TODO: 이벤트 상세 정보 조회
 export const useUserTickets = (eventId: number) => {
@@ -64,4 +67,27 @@ export const useHostEventLists = (fieldType?: FieldCode) => {
     },
   );
   return query;
+};
+
+// TODO error 해결되면 위에껄로 수정
+// export const useLedgerStatus = (eventIndexId: number) => {
+//   return useQuery(
+//     [...queryKeys.hostKeys.statusByIndexId(eventIndexId)],
+//     () => getLedgerStatus({ eventIndexId }),
+//     {
+//       select: (data) => data.data,
+//     },
+//   );
+// };
+export const useLedgerStatus = (eventIndexId: number) => {
+  return useQuery(
+    [...queryKeys.hostKeys.statusByIndexId(eventIndexId)],
+    () =>
+      fakeApi<EventLadgerTotalStatusResponseDto>(
+        EventLadgerTotalStatusResponseData as unknown as EventLadgerTotalStatusResponseDto,
+      ),
+    {
+      select: (data) => data.data,
+    },
+  );
 };

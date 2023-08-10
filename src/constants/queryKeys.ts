@@ -26,6 +26,11 @@ const hostKeys = {
   all: [DOMAIN.HOST],
   list: [DOMAIN.HOST, 'list'],
   listByFieldCode: (type: FieldCode) => [DOMAIN.HOST, 'list', type],
+  statusByIndexId: (eventIndexId: number) => [
+    DOMAIN.HOST,
+    'status',
+    eventIndexId,
+  ],
 };
 
 const queryKeys = {
