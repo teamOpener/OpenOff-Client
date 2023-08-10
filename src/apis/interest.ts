@@ -6,6 +6,6 @@ import { ApiResponse } from 'types/ApiResponse';
 export const updateInterestField = async (
   data: AddInterestRequestDto,
 ): Promise<ApiResponse> => {
-  const response = await fetcher.post(`field/save`, data);
+  const response = await fetcher.post(`interest/save`, data);
   return response.data;
 };
