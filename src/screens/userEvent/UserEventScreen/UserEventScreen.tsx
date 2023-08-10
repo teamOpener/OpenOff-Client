@@ -32,10 +32,12 @@ const UserEventScreen = () => {
   const activeField = field.find((fieldData) => fieldData.isActive);
 
   const {
-    data: hostEventLists,
+    data: hostEventList,
     hasNextPage,
     fetchNextPage,
   } = useHostEventLists(activeField?.value);
+
+  const flatHostEventList = hostEventList?.pages.flatMap((x) => x.data.content);
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const ItemSeparatorComponent = () => <Spacing height={15} />;
@@ -77,7 +79,7 @@ const UserEventScreen = () => {
   }
 
   // TODO
-  if (!hostEventLists) {
+  if (!hostEventList) {
     return null;
   }
 
@@ -127,14 +129,14 @@ const UserEventScreen = () => {
 
       {/* 주최 이벤트 */}
       {activeTabName === UserEventTabItem.HOST &&
-        (hostEventLists.pages.length === 0 ? (
+        (flatHostEventList?.length === 0 ? (
           <View style={userEventScreenStyles.emptyContainer}>
             <Text>{MENT_HOST.MAIN.EMPTY}</Text>
           </View>
         ) : (
           <View style={userEventScreenStyles.scrollContainer}>
             <FlatList
-              data={hostEventLists.pages.flatMap((x) => x.data.content)}
+              data={flatHostEventList}
               contentContainerStyle={userEventScreenStyles.flatListContentStyle}
               ItemSeparatorComponent={ItemSeparatorComponent}
               renderItem={({ item }) => (

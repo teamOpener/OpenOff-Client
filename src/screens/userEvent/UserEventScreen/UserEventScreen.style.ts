@@ -10,7 +10,7 @@ const userEventScreenStyles = StyleSheet.create({
   },
   emptyContainer: {
     flex: 1,
-    paddingTop: '60%',
+    paddingTop: '68%',
     alignItems: 'center',
   },
   flatListContentStyle: {
