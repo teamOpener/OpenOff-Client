@@ -60,12 +60,10 @@ const UserEventScreen = () => {
   };
 
   // TODO
-  const handlePressHostEvent = (id: number) => {
+  const handlePressHostEvent = (eventId: number) => {
     // 1. 승인되지 않았을 경우, dialog 등장
     // 2. 승인된 이벤트의 경우, id 가지고 이동
-    stackNavigation.navigate('HostConsole', {
-      eventId: 1,
-    });
+    stackNavigation.navigate('HostConsole', { eventId });
   };
 
   useEffect(() => {
