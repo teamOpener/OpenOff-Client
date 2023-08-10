@@ -13,6 +13,9 @@ const userEventScreenStyles = StyleSheet.create({
     paddingTop: '60%',
     alignItems: 'center',
   },
+  flatListContentStyle: {
+    paddingBottom: 100,
+  },
 });
 
 export default userEventScreenStyles;
