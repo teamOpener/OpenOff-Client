@@ -4,7 +4,7 @@ import {
 } from '@react-navigation/stack';
 import BackToHomeButton from 'components/authorize/buttons/BackToHomeButton/BackToHomeButton';
 import BackButton from 'components/navigator/BackButton';
-import { UserInfoStatus } from 'constants/join';
+import { GenderType, UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import React, { Reducer, useReducer } from 'react';
 import { Platform } from 'react-native';
@@ -30,7 +30,7 @@ interface Props {
 const userInfoReducer = (state: JoinInfo, action: Action): JoinInfo => {
   switch (action.type) {
     case UserInfoStatus.SET_NAME:
-      return { ...state, name: action.name };
+      return { ...state, username: action.username };
     case UserInfoStatus.SET_BIRTH:
       return { ...state, birth: action.birth };
     case UserInfoStatus.SET_AGREE_TO_TERM:
@@ -56,12 +56,12 @@ const userInfoReducer = (state: JoinInfo, action: Action): JoinInfo => {
 
 const AuthorizeNavigator = () => {
   const initialState = {
-    name: '',
+    username: '',
     birth: '',
     agreeToTerm: '',
     phoneNumber: '',
     nickname: '',
-    gender: '',
+    gender: GenderType.MAN,
     emailAddress: '',
     password: '',
     interestField: [],
@@ -158,7 +158,7 @@ const AuthorizeNavigator = () => {
         }}
         name={AuthorizeMenu.InterestField}
       >
-        {() => <InterestFieldScreen dispatch={dispatch} />}
+        {() => <InterestFieldScreen state={state} dispatch={dispatch} />}
       </Stack.Screen>
       <Stack.Screen
         options={{

@@ -36,7 +36,7 @@ const GenderInput = ({ value, setValue }: Props) => {
       </Text>
       <View style={genderInputStyles.genderButtonContainer}>
         <ColorButton
-          label={GenderType.MAN}
+          label="남"
           color={computedGenderAction(GenderType.MAN).color}
           marginRight={10}
           borderColor={computedGenderAction(GenderType.MAN).borderColor}
@@ -44,7 +44,7 @@ const GenderInput = ({ value, setValue }: Props) => {
           handleClick={computedGenderAction(GenderType.MAN).handlePress}
         />
         <ColorButton
-          label={GenderType.WOMAN}
+          label="여"
           color={computedGenderAction(GenderType.WOMAN).color}
           marginRight={10}
           borderColor={computedGenderAction(GenderType.WOMAN).borderColor}
