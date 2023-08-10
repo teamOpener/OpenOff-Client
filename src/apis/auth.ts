@@ -85,12 +85,12 @@ export const checkAuthSms = async (
 };
 
 export const searchEmail = async (
-  email: string,
+  phoneNum: string,
 ): Promise<ApiResponse<SearchIdResponseDto>> => {
   const params = {
-    id: email,
+    phoneNum,
   };
-  const response = await fetcher.get('/auth/searh/id', { params });
+  const response = await fetcher.get('/auth/search/id', { params });
   return response.data;
 };
 

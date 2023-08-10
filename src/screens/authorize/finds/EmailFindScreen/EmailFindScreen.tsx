@@ -26,8 +26,7 @@ const EmailFindScreen = () => {
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
 
   const handleCheckSmsError = (error: ApiErrorResponse) => {
-    const errorResponse = error.response;
-    if (errorResponse?.status === 404) {
+    if (error.response?.data.code === 800) {
       openDialog({
         type: 'validate',
         text: '해당 핸드폰으로 등록된 아이디가 존재하지 않습니다!',
@@ -72,7 +71,7 @@ const EmailFindScreen = () => {
     setEmail(emailInfo.data?.id);
   };
 
-  if (isCheckAuthSms && isSendAuthSms) {
+  if (isCheckAuthSms || isSendAuthSms) {
     <CommonLoading isActive backgroundColor={colors.background} />;
   }
 

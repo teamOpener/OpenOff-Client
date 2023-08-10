@@ -9,21 +9,24 @@ import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import DialogContext from 'utils/DialogContext';
-import { validateEmail } from 'utils/validate';
+import {
+  validateAuthNumber,
+  validateEmail,
+  validatePhoneNumber,
+} from 'utils/validate';
 import PasswordResetScreen from '../PasswordResetScreen/PasswordResetScreen';
 import passwordFindScreenStyles from './PasswordFindScreen.style';
 
 const PasswordFindScreen = () => {
   const [emailAddress, setEmailAddress] = useState<string>('');
-  const { phonenumber, setPhonenumber, authnumber, setAuthnumber, isActive } =
+  const { phonenumber, setPhonenumber, authnumber, setAuthnumber } =
     usePhoneCertificate();
   const { openDialog } = useContext(DialogContext);
   const [retry, setRetry] = useState<boolean>(false);
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
 
   const handleCheckSmsError = (error: ApiErrorResponse) => {
-    const errorResponse = error.response;
-    if (errorResponse?.status === 404) {
+    if (error.response?.data.code === 800) {
       openDialog({
         type: 'validate',
         text: '해당 핸드폰으로 등록된 아이디가 존재하지 않습니다!',
@@ -52,7 +55,14 @@ const PasswordFindScreen = () => {
   const { mutateAsync: checkAuthSms, isLoading: isCheckAuthSms } =
     useCheckAuthSms(handleCheckSmsSuccess, handleCheckSmsError);
 
-  const isResetButtonActive = isActive && retry;
+  const isResetButtonActive: boolean =
+    !validatePhoneNumber(phonenumber) &&
+    phonenumber.length > 1 &&
+    !validateAuthNumber(authnumber) &&
+    authnumber.length > 1 &&
+    !validateEmail(emailAddress) &&
+    emailAddress.length > 1 &&
+    retry;
 
   const handleCertification = async () => {
     await sendAuthSms({
@@ -77,7 +87,7 @@ const PasswordFindScreen = () => {
     }
   };
 
-  if (isCheckAuthSms && isSendAuthSms) {
+  if (isCheckAuthSms || isSendAuthSms) {
     <CommonLoading isActive backgroundColor={colors.background} />;
   }
 
