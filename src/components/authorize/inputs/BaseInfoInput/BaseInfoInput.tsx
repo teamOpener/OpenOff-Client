@@ -1,5 +1,6 @@
 import ErrorText from 'components/authorize/texts/ErrorText/ErrorText';
 import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
 import { Dispatch, SetStateAction, useState } from 'react';
 import {
   GestureResponderEvent,
@@ -8,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import Text from 'components/common/Text/Text';
 import { TextInput } from 'react-native-gesture-handler';
 import { colors } from 'styles/theme';
 import { dateFormatter } from 'utils/date';
@@ -42,19 +42,8 @@ const BaseInfoInput = ({
         <Text variant="h4" color="white" style={{ width }}>
           {label}
         </Text>
-        <Pressable
-          onPressIn={
-            focusMode
-              ? () => {
-                  setOpen(true);
-                }
-              : () => {
-                  return false;
-                }
-          }
-        >
+        {!focusMode ? (
           <TextInput
-            editable={!focusMode}
             value={value}
             style={{
               ...baseInfoInputStyles.input,
@@ -62,9 +51,22 @@ const BaseInfoInput = ({
               color: validation(value) ? colors.error : colors.white,
               borderColor: validation(value) ? colors.error : colors.main,
             }}
-            onChangeText={(value) => setValue(value)}
+            onChangeText={(inputValue) => setValue(inputValue)}
           />
-        </Pressable>
+        ) : (
+          <Pressable onPress={() => setOpen(true)}>
+            <Text
+              style={{
+                ...baseInfoInputStyles.input,
+                width,
+                color: validation(value) ? colors.error : colors.white,
+                borderColor: validation(value) ? colors.error : colors.main,
+              }}
+            >
+              {value}
+            </Text>
+          </Pressable>
+        )}
         <View
           style={{ ...baseInfoInputStyles.resetPosition, left: width - 18 }}
         >

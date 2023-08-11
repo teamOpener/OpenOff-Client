@@ -7,6 +7,7 @@ const baseInfoInputStyles = StyleSheet.create({
     position: 'relative',
   },
   input: {
+    marginTop: 5,
     width: '100%',
     fontSize: 15,
     paddingVertical: 10,
