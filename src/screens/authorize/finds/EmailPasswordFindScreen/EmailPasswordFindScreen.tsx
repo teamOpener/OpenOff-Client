@@ -1,11 +1,11 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Text from 'components/common/Text/Text';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import EmailFindScreen from '../EmailFindScreen/EmailFindScreen';
-import emailPasswordFindScreenStyles from './EmailPasswordFindScreen.style';
 import PasswordFindScreen from '../PasswordFindScreen/PasswordFindScreen';
+import emailPasswordFindScreenStyles from './EmailPasswordFindScreen.style';
 
 type ParamList = {
   passwordFind: undefined;
@@ -14,11 +14,13 @@ type ParamList = {
 const EmailPasswordFindScreen = () => {
   const navigation = useNavigation<NavigationProp<ParamList>>();
   const [screenMode, setScreenMode] = useState<'id' | 'password'>('id');
+
   useEffect(() => {
     navigation.setOptions({
       title: screenMode === 'id' ? '아이디 찾기' : '비밀번호 찾기',
     });
   }, [navigation, screenMode]);
+
   return (
     <View style={emailPasswordFindScreenStyles.container}>
       <View style={emailPasswordFindScreenStyles.findController}>

@@ -87,44 +87,46 @@ const PasswordFindScreen = () => {
     }
   };
 
-  if (isSendAuthSms || isCheckAuthSms)
-    return <CommonLoading isActive backgroundColor={colors.background} />;
-
   return (
-    <View style={passwordFindScreenStyles.container}>
-      {!isAuthorize ? (
-        <ScreenCover
-          authorizeButton={{
-            handlePress: handleAuthorizeFlow,
-            label: '다음',
-            isActive: isResetButtonActive,
-          }}
-        >
-          <EssentialInput
-            validation={validateEmail}
-            label="이메일"
-            keyboardType="default"
-            value={emailAddress}
-            setValue={setEmailAddress}
-            type="emailAddress"
-          />
-          <PhoneCertificationForm
-            retry={retry}
-            phonenumber={phonenumber}
-            setPhonenumber={setPhonenumber}
-            authnumber={authnumber}
-            setAuthnumber={setAuthnumber}
-            handleCertification={handleCertification}
-            setRetry={setRetry}
-          />
-        </ScreenCover>
-      ) : (
-        <PasswordResetScreen
-          email={emailAddress}
-          phoneNum={phonenumber.replaceAll('-', '')}
-        />
+    <>
+      {(isSendAuthSms || isCheckAuthSms) && (
+        <CommonLoading isActive backgroundColor={colors.background} />
       )}
-    </View>
+      <View style={passwordFindScreenStyles.container}>
+        {!isAuthorize ? (
+          <ScreenCover
+            authorizeButton={{
+              handlePress: handleAuthorizeFlow,
+              label: '다음',
+              isActive: isResetButtonActive,
+            }}
+          >
+            <EssentialInput
+              validation={validateEmail}
+              label="이메일"
+              keyboardType="default"
+              value={emailAddress}
+              setValue={setEmailAddress}
+              type="emailAddress"
+            />
+            <PhoneCertificationForm
+              retry={retry}
+              phonenumber={phonenumber}
+              setPhonenumber={setPhonenumber}
+              authnumber={authnumber}
+              setAuthnumber={setAuthnumber}
+              handleCertification={handleCertification}
+              setRetry={setRetry}
+            />
+          </ScreenCover>
+        ) : (
+          <PasswordResetScreen
+            email={emailAddress}
+            phoneNum={phonenumber.replaceAll('-', '')}
+          />
+        )}
+      </View>
+    </>
   );
 };
 

@@ -71,33 +71,35 @@ const EmailFindScreen = () => {
     setEmail(emailInfo.data?.id);
   };
 
-  if (isCheckAuthSms || isSendAuthSms)
-    return <CommonLoading isActive backgroundColor={colors.background} />;
-
   return (
-    <View style={emailFindScreenStyles.container}>
-      {!isAuthorize ? (
-        <ScreenCover
-          authorizeButton={{
-            handlePress: handleAuthorizeFlow,
-            label: '다음',
-            isActive,
-          }}
-        >
-          <PhoneCertificationForm
-            retry={retry}
-            phonenumber={phonenumber}
-            setPhonenumber={setPhonenumber}
-            authnumber={authnumber}
-            setAuthnumber={setAuthnumber}
-            handleCertification={handleCertification}
-            setRetry={setRetry}
-          />
-        </ScreenCover>
-      ) : (
-        <EmailFindCompleteScreen email={email} />
+    <>
+      {(isCheckAuthSms || isSendAuthSms) && (
+        <CommonLoading isActive backgroundColor={colors.background} />
       )}
-    </View>
+      <View style={emailFindScreenStyles.container}>
+        {!isAuthorize ? (
+          <ScreenCover
+            authorizeButton={{
+              handlePress: handleAuthorizeFlow,
+              label: '다음',
+              isActive,
+            }}
+          >
+            <PhoneCertificationForm
+              retry={retry}
+              phonenumber={phonenumber}
+              setPhonenumber={setPhonenumber}
+              authnumber={authnumber}
+              setAuthnumber={setAuthnumber}
+              handleCertification={handleCertification}
+              setRetry={setRetry}
+            />
+          </ScreenCover>
+        ) : (
+          <EmailFindCompleteScreen email={email} />
+        )}
+      </View>
+    </>
   );
 };
 
