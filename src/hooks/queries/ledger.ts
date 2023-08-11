@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import queryKeys from 'constants/queryKeys';
+import { ApiErrorResponse } from 'types/ApiResponse';
 import fakeApi from 'apis/test';
 import EventLadgerTotalStatusResponseData from 'mocks/ledger/user/EventLadgerTotalStatusResponseData.json';
 import MyTicketInfoResponseData from 'mocks/ledger/user/MyTicketInfoResponseData.json';
@@ -8,8 +9,17 @@ import { ApplicationInfoResponseDto } from 'models/ledger/response/ApplicationIn
 import ApplicationInfoResponseData from 'mocks/ledger/user/ApplicationInfoResponseData.json';
 import { getHostEventLists } from 'apis/eventInstance';
 import { FieldCode } from 'constants/code';
-import { getLedgerStatus } from 'apis/ledger';
+import {
+  cancelPermittedApplicant,
+  getLedgerStatus,
+  getLedgerUserList,
+  permitAllApplicant,
+  permitApplicant,
+} from 'apis/ledger';
 import { EventLadgerTotalStatusResponseDto } from 'models/ledger/response/EventLadgerTotalStatusResponseDto';
+import SortType from 'models/ledger/entity/SortType';
+import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
+import { EventAllApplicantPermitRequestDto } from 'models/ledger/request/EventAllApplicantPermitRequestDto';
 
 // TODO: 이벤트 상세 정보 조회
 export const useUserTickets = (eventId: number) => {
@@ -88,6 +98,71 @@ export const useLedgerStatus = (eventIndexId: number) => {
       ),
     {
       select: (data) => data.data,
+    },
+  );
+};
+
+// TODO 무한 스크롤을 위한 query parameter 수정
+export const useLedgerUserList = (eventIndexId: number, sortType: SortType) => {
+  const query = useInfiniteQuery(
+    [...queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType)],
+    ({ pageParam = null }) =>
+      getLedgerUserList({
+        eventIndexId,
+        sort: sortType,
+      }),
+    {
+      getNextPageParam: (lastPage) => {
+        if (lastPage.data.last) {
+          return false;
+        }
+
+        const page = lastPage.data.pageNumber;
+        return page + 1;
+      },
+    },
+  );
+  return query;
+};
+
+export const usePermitApplicant = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (data: EventApplicantPermitRequestDto) => permitApplicant(data),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
+    },
+  );
+};
+
+export const useCancelPermittedApplicant = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (data: EventApplicantPermitRequestDto) => cancelPermittedApplicant(data),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
+    },
+  );
+};
+
+export const usePermitAllApplicant = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (data: EventAllApplicantPermitRequestDto) => permitAllApplicant(data),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
     },
   );
 };

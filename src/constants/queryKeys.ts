@@ -1,3 +1,4 @@
+import SortType from 'models/ledger/entity/SortType';
 import { FieldCode } from './code';
 
 const DOMAIN = {
@@ -29,6 +30,13 @@ const hostKeys = {
   statusByIndexId: (eventIndexId: number) => [
     DOMAIN.HOST,
     'status',
+    eventIndexId,
+  ],
+  ledgerList: [DOMAIN.HOST, 'ledger-list'],
+  ledgerListByIndexId: (eventIndexId: number, sortType: SortType) => [
+    DOMAIN.HOST,
+    'ledger-list',
+    sortType,
     eventIndexId,
   ],
 };
