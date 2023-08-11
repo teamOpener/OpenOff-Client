@@ -87,9 +87,8 @@ const PasswordFindScreen = () => {
     }
   };
 
-  if (isCheckAuthSms || isSendAuthSms) {
-    <CommonLoading isActive backgroundColor={colors.background} />;
-  }
+  if (isSendAuthSms || isCheckAuthSms)
+    return <CommonLoading isActive backgroundColor={colors.background} />;
 
   return (
     <View style={passwordFindScreenStyles.container}>

@@ -71,9 +71,8 @@ const EmailFindScreen = () => {
     setEmail(emailInfo.data?.id);
   };
 
-  if (isCheckAuthSms || isSendAuthSms) {
-    <CommonLoading isActive backgroundColor={colors.background} />;
-  }
+  if (isCheckAuthSms || isSendAuthSms)
+    return <CommonLoading isActive backgroundColor={colors.background} />;
 
   return (
     <View style={emailFindScreenStyles.container}>
