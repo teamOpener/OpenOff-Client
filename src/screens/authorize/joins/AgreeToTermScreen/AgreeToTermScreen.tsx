@@ -97,7 +97,7 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
               termToMarketing: !term.allAgree,
             });
           }}
-          marginBottom={30}
+          marginBottom={17}
           label="네, 모두 동의합니다."
         />
         <CheckButton

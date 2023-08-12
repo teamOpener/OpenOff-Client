@@ -5,6 +5,7 @@ const screenCoverStyles = StyleSheet.create({
     flex: 1,
   },
   scrollContainer: {
+    paddingTop: 25,
     paddingHorizontal: 25,
   },
 });

@@ -26,6 +26,7 @@ const ColorButton = ({
 }: Props) => {
   return (
     <TouchableOpacity
+      activeOpacity={0.8}
       style={{
         ...colorButtonStyles.container,
         backgroundColor,

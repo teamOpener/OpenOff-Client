@@ -1,25 +1,21 @@
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, TextStyle } from 'react-native';
+import textStyles from 'styles/textStyles';
 import { fonts } from 'styles/theme';
 
 const baseInfoInputStyles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    position: 'relative',
+    flex: 1,
   },
-  input: {
-    marginTop: 5,
-    width: '100%',
-    fontSize: 15,
-    paddingVertical: 10,
+  labelText: {
     fontFamily: fonts.semibold,
+    fontSize: 18,
+  } as TextStyle,
+  input: {
+    flex: 1,
+    paddingVertical: 6,
     borderBottomWidth: 1,
     backgroundColor: 'transparent',
-  },
-  inputTitle: {
-    color: 'white',
-    fontSize: 18,
-    marginBottom: Platform.OS === 'android' ? 10 : 14,
-    fontWeight: '600',
+    ...textStyles.body1,
   },
   resetPosition: {
     position: 'relative',
@@ -28,6 +24,13 @@ const baseInfoInputStyles = StyleSheet.create({
   resetImage: {
     width: 18,
     height: 18,
+  },
+  inputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    alignItems: 'center',
+    gap: 5,
   },
 });
 

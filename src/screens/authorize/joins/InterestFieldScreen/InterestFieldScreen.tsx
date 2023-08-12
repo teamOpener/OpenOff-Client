@@ -12,6 +12,7 @@ import { colors } from 'styles/theme';
 import { Field } from 'types/apps/group';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action, JoinInfo } from 'types/join';
+import Spacing from 'components/common/Spacing/Spacing';
 import interestFieldScreenStyles from './InterestFieldScreen.style';
 
 interface Props {
@@ -82,6 +83,8 @@ const InterestFieldScreen = ({ state, dispatch }: Props) => {
         style={interestFieldScreenStyles.fieldInfomation}
         source={require('../../../../assets/images/interestFieldInfo.png')}
       />
+      <Spacing height={42} />
+
       <FieldButtonGroup
         fields={interestField}
         setFields={setInterestField}

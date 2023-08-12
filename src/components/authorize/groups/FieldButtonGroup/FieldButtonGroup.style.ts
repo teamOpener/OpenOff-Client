@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
+import { fonts } from 'styles/theme';
 
 const fieldButtonGroupStyles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    marginTop: 20,
+    gap: 10,
   },
   fieldContainer: {
     width: 360,
@@ -12,9 +12,7 @@ const fieldButtonGroupStyles = StyleSheet.create({
   },
   title: {
     fontSize: 12,
-    color: '#FFF',
-    width: 360,
-    marginBottom: 7,
+    fontFamily: fonts.semibold,
   },
 });
 

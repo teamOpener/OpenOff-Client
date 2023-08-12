@@ -5,7 +5,7 @@ import GenderInput from 'components/authorize/inputs/GenderInput/GenderInput';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useState } from 'react';
-import { Dimensions, View } from 'react-native';
+import { View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action, Gender } from 'types/join';
 import { validateBirthday, validateName } from 'utils/validate';
@@ -43,7 +43,6 @@ const UserInfoScreen = ({ dispatch }: Props) => {
       <BaseInfoInput
         label="이름"
         value={username}
-        width={Dimensions.get('window').width - 50}
         setValue={setUsername}
         validation={validateName}
       />
@@ -51,7 +50,6 @@ const UserInfoScreen = ({ dispatch }: Props) => {
         <BaseInfoInput
           label="생일"
           value={birth}
-          width={Dimensions.get('window').width / 2 - 32}
           setValue={setBirth}
           validation={validateBirthday}
           focusMode
