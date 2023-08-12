@@ -7,7 +7,6 @@ import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/Cate
 import EventCardList from 'components/home/lists/EventCardList/EventCardList';
 import { StackMenu } from 'constants/menu';
 import advertisementList from 'mocks/lists/advertisementList';
-import eventList from 'mocks/lists/eventList';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import homeScreenStyles from './HomeScreen.style';
@@ -61,14 +60,15 @@ const HomeScreen = () => {
         <AdvertisementCarousel carouselData={advertisementList} />
         <CategoryButtonGroup handlePress={handleCategoryPress} />
         <EventCardList
-          events={eventList}
+          events={[]}
           title="맞춤 이벤트 추천"
           subTitle="#공연 #파티"
         />
         <EventCardList
-          events={eventList}
+          events={[]}
           title="인기 이벤트"
           subTitle="지금 핫한 인기 이벤트를 둘러보세요."
+          type="popular"
         />
       </ScrollView>
     </View>
