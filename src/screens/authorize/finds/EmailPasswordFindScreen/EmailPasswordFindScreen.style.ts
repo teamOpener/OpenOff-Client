@@ -1,32 +1,30 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
+import { colors, fonts } from 'styles/theme';
 
 const emailPasswordFindScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'column',
-  },
-  titleContainer: {
-    width: Dimensions.get('window').width,
-    alignItems: 'center',
   },
   findController: {
-    width: Dimensions.get('window').width,
     flexDirection: 'row',
   },
   button: {
-    flexDirection: 'column',
+    flex: 1,
+    borderBottomWidth: 5,
+    borderBottomColor: colors.background,
+  },
+  activeButton: {
+    borderBottomColor: colors.main,
   },
   buttonTextContainer: {
-    width: Dimensions.get('window').width / 2,
-    height: 41,
-    justifyContent: 'center',
+    paddingVertical: 10,
     alignItems: 'center',
   },
-  activeNotifier: {
-    width: Dimensions.get('window').width / 2,
-    height: 7,
-  },
+  tabText: {
+    fontFamily: fonts.semibold,
+    fontSize: 15,
+    lineHeight: 21,
+  } as TextStyle,
 });
 
 export default emailPasswordFindScreenStyles;
