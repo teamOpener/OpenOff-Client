@@ -61,7 +61,7 @@ const HostLedgerScreen = () => {
     fetchNextPage,
   } = useLedgerUserList(params?.eventIndex ?? 0, selectedSortType);
   const flatLedgerUserList = ledgerUserList?.pages.flatMap(
-    (x) => x.data.content,
+    (page) => page.data.content,
   );
 
   // eslint-disable-next-line react/no-unstable-nested-components

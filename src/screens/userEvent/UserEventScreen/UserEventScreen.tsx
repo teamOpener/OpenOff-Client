@@ -37,7 +37,9 @@ const UserEventScreen = () => {
     fetchNextPage,
   } = useHostEventLists(activeField?.value);
 
-  const flatHostEventList = hostEventList?.pages.flatMap((x) => x.data.content);
+  const flatHostEventList = hostEventList?.pages.flatMap(
+    (page) => page.data.content,
+  );
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const ItemSeparatorComponent = () => <Spacing height={15} />;
