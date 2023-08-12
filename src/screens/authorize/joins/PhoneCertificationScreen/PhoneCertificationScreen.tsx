@@ -40,7 +40,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
     if (error.response?.data.code === 1003) {
       openDialog({
         type: 'validate',
-        text: error.response?.data.message,
+        text: '이미 회원정보가 있는 핸드폰 번호입니다.',
       });
       return;
     }
