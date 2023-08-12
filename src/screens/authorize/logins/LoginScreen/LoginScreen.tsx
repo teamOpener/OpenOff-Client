@@ -99,39 +99,38 @@ const LoginScreen = () => {
         style={loginScreenStyles.logo}
         source={require('../../../../assets/images/logo.png')}
       />
-      <LoginInput
-        label="이메일"
-        value={emailAddress}
-        type="emailAddress"
-        validation={validateEmail}
-        setValue={setEmailAddress}
-      />
-      <LoginInput
-        label="비밀번호"
-        value={password}
-        type="password"
-        setValue={setPassword}
-        validation={validatePassword}
-      />
-      <LoginButton isActive={isActive} handlePress={handleCommonLogin} />
-      <Text variant="caption" style={loginScreenStyles.middleText}>
-        또는
-      </Text>
-      <SocialLoginButtonGroup
-        kakaoLogin={handleKakaoLogin}
-        naverLogin={() => {
-          return false;
-        }}
-        googleLogin={() => {
-          return false;
-        }}
-        appleLogin={() => {
-          return false;
-        }}
-      />
-      <View style={loginScreenStyles.joinAndFindContainer}>
-        <JoinButton />
+      <View style={loginScreenStyles.mainContainer}>
+        <LoginInput
+          label="이메일"
+          value={emailAddress}
+          type="emailAddress"
+          validation={validateEmail}
+          setValue={setEmailAddress}
+        />
+        <LoginInput
+          label="비밀번호"
+          value={password}
+          type="password"
+          setValue={setPassword}
+          validation={validatePassword}
+        />
+        <LoginButton isActive={isActive} handlePress={handleCommonLogin} />
+        <Text style={loginScreenStyles.middleText}>또는</Text>
+        <SocialLoginButtonGroup
+          kakaoLogin={handleKakaoLogin}
+          naverLogin={() => {
+            return false;
+          }}
+          googleLogin={() => {
+            return false;
+          }}
+          appleLogin={() => {
+            return false;
+          }}
+        />
       </View>
+
+      <JoinButton />
     </View>
   );
 };

@@ -16,7 +16,7 @@ const LoginInput = ({ label, value, setValue, type, validation }: Props) => {
   const PASSWORD = '비밀번호를';
   const EMAIL = '이메일을';
   return (
-    <View style={loginInputStyles.container}>
+    <View>
       <Text variant="h4" style={loginInputStyles.inputTitle}>
         {label}
       </Text>
