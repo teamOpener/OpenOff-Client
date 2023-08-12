@@ -12,7 +12,7 @@ const EventRowCardList = ({ eventList }: Props) => {
       numColumns={1}
       data={eventList}
       renderItem={(event) => (
-        <EventRowCard key={event.item.id} event={event.item} />
+        <EventRowCard key={event.item.eventInfoId} event={event.item} />
       )}
       // ListFooterComponent={isFetching ? <EventRowCardSkeleton /> : undefined}
       onEndReachedThreshold={0.5}

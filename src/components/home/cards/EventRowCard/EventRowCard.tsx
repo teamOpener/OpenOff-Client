@@ -2,6 +2,7 @@ import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { Image, View } from 'react-native';
 import { Event } from 'types/event';
+import fieldData from 'data/lists/fieldData';
 import eventRowCardStyles from './EventRowCard.style';
 
 interface Props {
@@ -9,22 +10,29 @@ interface Props {
 }
 
 const EventRowCard = ({ event }: Props) => {
-  const city = event.place.split(' ');
+  const city = event.streetRoadAddress.split(' ');
   return (
     <View style={eventRowCardStyles.container}>
       <Image
         style={eventRowCardStyles.image}
-        source={{ uri: event.images[0] }}
+        source={{ uri: event.mainImageUrl }}
       />
       <View style={eventRowCardStyles.eventInfo}>
-        <View style={eventRowCardStyles.fieldBox}>
-          <Text variant="body3" color="darkGrey">
-            {event.eventType}
-          </Text>
+        <View style={eventRowCardStyles.fieldBoxContainer}>
+          {event.fieldTypes.map((field) => (
+            <View style={eventRowCardStyles.fieldBox}>
+              <Text variant="body3" color="darkGrey">
+                {
+                  fieldData.find((fieldElement) => fieldElement.value === field)
+                    ?.label
+                }
+              </Text>
+            </View>
+          ))}
         </View>
-        <Text style={eventRowCardStyles.eventTitle}>{event.name}</Text>
+        <Text style={eventRowCardStyles.eventTitle}>{event.eventTitle}</Text>
         <Text variant="body3" color="background">
-          {event.date.substring(0, 10).replaceAll('-', '.')}
+          {event.eventDate.substring(0, 10).replaceAll('-', '.')}
         </Text>
         <View style={eventRowCardStyles.subInfo}>
           <View style={eventRowCardStyles.subInfoText}>
@@ -36,7 +44,7 @@ const EventRowCard = ({ event }: Props) => {
           <View style={eventRowCardStyles.subInfoText}>
             <Icon name="IconUser" fill="main" size={10} />
             <Text variant="body3" color="background">
-              {event.participant}
+              {event.totalApplicantCount}
             </Text>
           </View>
         </View>

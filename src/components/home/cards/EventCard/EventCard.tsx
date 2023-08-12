@@ -24,7 +24,7 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
             width: calcWidth,
             height: calcWidth,
           }}
-          source={{ uri: event.images[0] }}
+          source={{ uri: event.mainImageUrl }}
         />
       </TouchableOpacity>
 
@@ -33,25 +33,25 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
           color={type === 'default' ? 'white' : 'main'}
           style={eventCardStyles.titleText}
         >
-          {event.name}
+          {event.eventTitle}
         </Text>
         <View style={eventCardStyles.iconText}>
           <Icon name="IconPlace" size={10} fill="main" />
           <Text variant="body3" color="white">
-            {event.place}
+            {event.streetRoadAddress}
           </Text>
         </View>
         <View style={eventCardStyles.iconText}>
           <Icon name="IconUser" size={10} fill="main" />
           <Text variant="body3" color="white">
-            {event.participant}명 참여중
+            {event.totalApplicantCount}명 참여중
           </Text>
         </View>
       </SpaceLayout>
 
       <TouchableOpacity style={eventCardStyles.likeButton}>
         {type === 'default' &&
-          (event.like ? (
+          (event.isBookmarked ? (
             <Icon name="IconFillHeart" size={20} fill="main" />
           ) : (
             <Icon name="IconHeart" size={20} />

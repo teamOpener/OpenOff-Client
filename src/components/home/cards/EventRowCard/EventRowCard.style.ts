@@ -22,6 +22,10 @@ const eventRowCardStyles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
+  fieldBoxContainer: {
+    flexDirection: 'row',
+    gap: 4,
+  },
   fieldBox: {
     paddingHorizontal: 6,
     paddingVertical: 2,
