@@ -75,28 +75,28 @@ const App = () => {
   }, []);
 
   return (
-    <DialogProvider>
-      <QueryClientProvider client={queryClient}>
-        <ErrorBoundary FallbackComponent={FallbackError}>
-          <Suspense
-            fallback={
-              <CommonLoading isActive backgroundColor={colors.background} />
-            }
-          >
-            <SafeAreaView style={appStyles.safeAreaContainer}>
-              <GestureHandlerRootView style={appStyles.gestureContainer}>
-                <NavigationContainer theme={MyTheme} ref={navigationRef}>
+    <QueryClientProvider client={queryClient}>
+      <ErrorBoundary FallbackComponent={FallbackError}>
+        <Suspense
+          fallback={
+            <CommonLoading isActive backgroundColor={colors.background} />
+          }
+        >
+          <SafeAreaView style={appStyles.safeAreaContainer}>
+            <GestureHandlerRootView style={appStyles.gestureContainer}>
+              <NavigationContainer theme={MyTheme} ref={navigationRef}>
+                <DialogProvider>
                   {/* <StorybookUIRoot /> */}
                   {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
                   <StatusBar backgroundColor={colors.background} />
                   {isLogin ? <Navigator /> : <AuthorizeNavigator />}
-                </NavigationContainer>
-              </GestureHandlerRootView>
-            </SafeAreaView>
-          </Suspense>
-        </ErrorBoundary>
-      </QueryClientProvider>
-    </DialogProvider>
+                </DialogProvider>
+              </NavigationContainer>
+            </GestureHandlerRootView>
+          </SafeAreaView>
+        </Suspense>
+      </ErrorBoundary>
+    </QueryClientProvider>
   );
 };
 
