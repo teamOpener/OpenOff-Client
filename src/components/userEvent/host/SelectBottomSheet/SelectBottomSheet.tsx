@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useRef } from 'react';
 import { View } from 'react-native';
 import {
   BottomSheetBackdrop,
+  BottomSheetBackdropProps,
   BottomSheetModal,
   BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet';
@@ -22,10 +23,10 @@ const SelectBottomSheet = React.forwardRef<BottomSheetModal, Props>(
     { selectedSortType, setSelectedSortType, handleModalClose },
     forwardedRef,
   ) => {
-    const fallbackRef = useRef(null);
+    const fallbackRef = useRef<BottomSheetModal>(null);
     const ref = forwardedRef || fallbackRef;
 
-    const snapPoints = useMemo(() => ['24%'], []);
+    const snapPoints = useMemo<string[]>(() => ['24%'], []);
 
     const handleSortType = (type: SortType) => {
       setSelectedSortType(type);
@@ -39,7 +40,7 @@ const SelectBottomSheet = React.forwardRef<BottomSheetModal, Props>(
     }, []);
 
     const renderBackdrop = useCallback(
-      (props: any) => (
+      (props: BottomSheetBackdropProps) => (
         <BottomSheetBackdrop
           {...props}
           disappearsOnIndex={-1}
