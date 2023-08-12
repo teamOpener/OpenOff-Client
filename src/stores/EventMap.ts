@@ -8,6 +8,7 @@ interface StartEndDate {
 export interface EventMapStore {
   startEndDate: StartEndDate;
   setStartEndDate: (date: StartEndDate) => void;
+  resetStartEndDate: () => void;
 }
 
 const initEventMap = {
@@ -25,6 +26,14 @@ export const useEventMapStore = create<EventMapStore>((set) => ({
       startEndDate: {
         startDay: payload.startDay,
         endDay: payload.endDay,
+      },
+    })),
+  resetStartEndDate: () =>
+    set((state) => ({
+      ...state,
+      startEndDate: {
+        startDay: '',
+        endDay: '',
       },
     })),
 }));
