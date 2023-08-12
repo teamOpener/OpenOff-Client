@@ -22,19 +22,19 @@ const participantOptions: Option[] = [
   },
   {
     label: '20인 미만',
-    value: '20',
+    value: 'SMALL',
   },
   {
     label: '20인 ~ 50인',
-    value: '20to50',
+    value: 'MEDIUM',
   },
   {
     label: '50인 ~ 100인',
-    value: '50to100',
+    value: 'LARGE',
   },
   {
     label: '100인 이상',
-    value: '100',
+    value: 'HUGE',
   },
 ];
 
