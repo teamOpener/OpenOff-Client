@@ -11,8 +11,8 @@ interface Props {
 const ErrorText = ({ validation, value, width = 350 }: Props) => {
   const calcFontSize = () => {
     const validate = validation(value);
-    if (!validate) return 12;
-    return validate.length > 29 ? 10 : 12;
+    if (!validate) return 11;
+    return validate.length > 20 ? 10 : 11;
   };
   return (
     <View>
@@ -24,7 +24,7 @@ const ErrorText = ({ validation, value, width = 350 }: Props) => {
           style={{
             ...errorTextStyles.text,
             width,
-            fontSize: Platform.OS === 'android' ? 12 : calcFontSize(),
+            fontSize: Platform.OS === 'android' ? 11 : calcFontSize(),
           }}
         >
           {validation(value)}
