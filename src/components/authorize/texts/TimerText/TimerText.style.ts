@@ -1,10 +1,10 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const timerTextStyles = StyleSheet.create({
   textContainer: {
     position: 'absolute',
-    top: Platform.OS === 'android' ? 18 : 12,
-    right: 5,
+    top: 17,
+    right: 16,
     zIndex: 7,
   },
 });

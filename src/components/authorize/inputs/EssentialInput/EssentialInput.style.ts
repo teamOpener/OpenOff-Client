@@ -1,40 +1,40 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { fonts } from 'styles/theme';
 
 const essentialInputStyles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    marginBottom: 20,
+    flex: 1,
+    marginBottom: 15,
   },
   inputContainer: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
     borderRadius: 8,
     borderWidth: 1.5,
     fontSize: 15,
     fontFamily: fonts.semibold,
   },
   inputAbsoluteContainer: {
-    position: 'relative',
-  },
-  phoneInputContainer: {
-    flexDirection: 'column',
+    flex: 1,
   },
   phoneInputRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 10,
   },
   label: {
     fontFamily: fonts.semibold,
     fontSize: 15,
-    alignItems: 'flex-start',
-    width: '100%',
-    marginBottom: 4,
+    marginBottom: 5,
   },
   validateStatus: {
     position: 'absolute',
-    top: Platform.OS === 'android' ? 15 : 8,
-    right: 10,
+    top: 14,
+    right: 16,
+  },
+  helpTextContainer: {
+    marginTop: 5,
+    flex: 1,
   },
 });
 

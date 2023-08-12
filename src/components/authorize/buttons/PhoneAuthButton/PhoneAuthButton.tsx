@@ -15,14 +15,19 @@ const PhoneAuthButton = ({ label, active, handlePress }: Props) => {
   };
   return (
     <TouchableOpacity
-      style={
+      activeOpacity={0.8}
+      style={[
+        phoneAuthButtonStyles.buttonWrapper,
         active
           ? phoneAuthButtonStyles.activeButton
-          : phoneAuthButtonStyles.nonActiveButton
-      }
+          : phoneAuthButtonStyles.nonActiveButton,
+      ]}
       onPress={hadleAuthPress}
     >
-      <Text variant="caption" color={active ? 'white' : 'grey'}>
+      <Text
+        color={active ? 'white' : 'grey'}
+        style={phoneAuthButtonStyles.text}
+      >
         {label}
       </Text>
     </TouchableOpacity>

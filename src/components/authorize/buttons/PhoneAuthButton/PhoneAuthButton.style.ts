@@ -1,27 +1,25 @@
-import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { StyleSheet, TextStyle } from 'react-native';
+import { colors, fonts } from 'styles/theme';
 
 const phoneAuthButtonStyles = StyleSheet.create({
-  activeButton: {
-    width: 80,
-    height: 40,
-    marginLeft: 5,
+  buttonWrapper: {
+    marginTop: 5,
+    paddingHorizontal: 17,
+    paddingVertical: 12,
     borderRadius: 27.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    borderColor: colors.white,
     borderWidth: 1,
   },
-  nonActiveButton: {
-    width: 80,
-    height: 40,
-    marginLeft: 10,
-    borderRadius: 27.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.darkGrey,
+  activeButton: {
+    borderColor: colors.white,
   },
+  nonActiveButton: {
+    backgroundColor: colors.darkGrey,
+    borderColor: colors.darkGrey,
+  },
+  text: {
+    fontFamily: fonts.semibold,
+    fontSize: 13,
+  } as TextStyle,
 });
 
 export default phoneAuthButtonStyles;
