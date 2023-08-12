@@ -37,6 +37,13 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
   };
 
   const handleCheckSmsError = (error: ApiErrorResponse) => {
+    if (error.response?.data.code === 1003) {
+      openDialog({
+        type: 'validate',
+        text: error.response?.data.message,
+      });
+      return;
+    }
     openDialog({
       type: 'validate',
       text: error.message,
