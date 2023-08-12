@@ -1,7 +1,6 @@
 import SelectStatus from 'constants/selectBox';
 import { Reducer, useReducer, useState } from 'react';
 import { Action, SelectBox } from 'types/apps/selectbox';
-import { Event } from 'types/event';
 
 interface SortInfo {
   dialog: boolean;
@@ -37,7 +36,7 @@ const selectReducer = (state: SelectBox, action: Action): SelectBox => {
       return state;
   }
 };
-const useEventMapSelector = (eventList: Event[]) => {
+const useEventMapSelector = () => {
   const [sort, setSort] = useState<SortInfo>({
     dialog: false,
     value: 'date',

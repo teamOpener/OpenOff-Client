@@ -39,7 +39,7 @@ const EventMapScreen = () => {
     params ? params.eventId : undefined,
   );
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { startEndDate } = useEventMapStore();
+  const { startEndDate, resetStartEndDate } = useEventMapStore();
   const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
     undefined,
   );
@@ -58,11 +58,12 @@ const EventMapScreen = () => {
   } = useMapCoordinateInfo();
 
   // 거리순, 날짜순 정렬 및 선택자(비용 & 참여인원 & 신청현황)
-  const { sort, setSort, selectState, selectDispatch } =
-    useEventMapSelector(eventList);
+  const { sort, setSort, selectState, selectDispatch } = useEventMapSelector();
 
   // 클릭된 마커의 아이디값
-  const [clickedMarker, setClickedMarker] = useState<string | null>(null);
+  const [clickedMarker, setClickedMarker] = useState<number | undefined>(
+    undefined,
+  );
 
   // 검색어값
   const searchValue = useRef<string>('');
@@ -78,8 +79,6 @@ const EventMapScreen = () => {
 
   // 쿼리 파라메터 계산 함수
   const calculateQueryParams = () => {
-    const coordinateMode = !searchValue || !eventIdParam.current;
-
     const appAble =
       selectState.applicationAbleOption.value !== 'all'
         ? undefined
@@ -93,27 +92,28 @@ const EventMapScreen = () => {
     const pay =
       selectState.payOption.value !== 'all'
         ? undefined
-        : selectState.participantOption.value;
+        : selectState.participantOption.value === 'applying';
 
-    const commonCoordinate: Coordinate = !startEndDate.startDay
-      ? screenCoordinate.current
-      : currentCoordinate;
+    const commonCoordinate: Coordinate =
+      searchValue || !startEndDate.startDay
+        ? screenCoordinate.current
+        : currentCoordinate;
 
-    const coordinate: Coordinate = fieldMapMode?.value
+    const calculateCoordinate: Coordinate = fieldMapMode?.value
       ? focusCoordinate
       : commonCoordinate;
 
     return {
       startDate: startEndDate.startDay,
       endDate: startEndDate.endDay,
-      appAble,
-      part,
-      pay,
-      searchValue,
+      applyable: appAble,
+      capacity: part,
+      eventFee: pay,
+      keyword: searchValue,
       field: fieldMapMode?.value,
       eventId: eventIdParam.current,
-      latitude: coordinateMode && coordinate.latitude,
-      longitude: coordinateMode && coordinate.longitude,
+      latitude: calculateCoordinate.latitude,
+      longitude: calculateCoordinate.longitude,
     };
   };
 
@@ -146,7 +146,7 @@ const EventMapScreen = () => {
   };
 
   const handlePressMapCoordinate = (
-    eventId: string,
+    eventId: number,
     eventCoordinate: Coordinate,
   ) => {
     setClickedMarker(eventId);
@@ -155,9 +155,10 @@ const EventMapScreen = () => {
 
   const handleShowFieldEvent = useCallback(
     (field: Field) => {
-      setFieldMapMode(field);
       selectDispatch({ type: SelectStatus.RESET_SELECT });
       searchValue.current = '';
+      resetStartEndDate();
+      setFieldMapMode(field);
       navigation.setOptions({
         tabBarStyle: {
           ...defaultTabBarStyles,
@@ -179,7 +180,7 @@ const EventMapScreen = () => {
           backgroundColor: colors.background,
         },
       });
-      setClickedMarker(null);
+      setClickedMarker(undefined);
     },
     [navigation],
   );
@@ -243,7 +244,7 @@ const EventMapScreen = () => {
           center={{ ...firstPlaceCoordinate, zoom: 16 }}
           onCameraChange={handleCameraEvent}
           onMapClick={() => {
-            setClickedMarker(null);
+            setClickedMarker(undefined);
             eventIdParam.current = undefined;
           }}
         >

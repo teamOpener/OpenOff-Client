@@ -11,7 +11,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { Action, SelectBox } from 'types/apps/selectbox';
-import { Event } from 'types/event';
+import { MapEvent } from 'types/event';
 import mapBottomSheetStyles from './MapBottomSheet.style';
 
 interface SortInfo {
@@ -26,8 +26,8 @@ interface Props {
   setSort: Dispatch<SetStateAction<SortInfo>>;
   selectState: SelectBox;
   selectDispatch: Dispatch<Action>;
-  eventList: Event[];
-  clickedMarker: string | null;
+  eventList: MapEvent[];
+  clickedMarker: number | undefined;
 }
 
 const MapBottomSheet = ({

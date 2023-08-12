@@ -2,11 +2,11 @@ import Text from 'components/common/Text/Text';
 import { memo } from 'react';
 import { Dimensions, Image, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { Event } from 'types/event';
+import { MapEvent } from 'types/event';
 import mapEventCardStyles from './MapEventCard.style';
 
 interface Props {
-  event: Event;
+  event: MapEvent;
 }
 
 const MapEventCard = ({ event }: Props) => {
@@ -14,10 +14,10 @@ const MapEventCard = ({ event }: Props) => {
     <View style={mapEventCardStyles.container}>
       <View style={mapEventCardStyles.textContainer}>
         <Text variant="h3" color="white" style={mapEventCardStyles.textMargin}>
-          {event.name}
+          {event.title}
         </Text>
         <Text variant="body2" color="grey">
-          {event.eventType}
+          {event.fieldTypes}
         </Text>
       </View>
       <View style={mapEventCardStyles.textContainer}>
@@ -29,7 +29,7 @@ const MapEventCard = ({ event }: Props) => {
           22km
         </Text>
         <Text variant="body2" color="white">
-          {event.place}
+          {`${event.streetLoadAddress} ${event.detailAddress}`}
         </Text>
       </View>
       <View style={mapEventCardStyles.imageContainer}>
@@ -40,7 +40,7 @@ const MapEventCard = ({ event }: Props) => {
           overscrollEnabled={false}
           style={{ width: Dimensions.get('window').width - 20 }}
           panGestureHandlerProps={{ minDist: 10 }}
-          data={event.images}
+          data={event.imageList}
           renderItem={({ item, index }) => (
             <Image
               key={index}
