@@ -19,7 +19,7 @@ const textStyles = StyleSheet.create({
   } as TextStyle,
   h4: {
     fontFamily: fonts.bold,
-    fontSize: 18,
+    fontSize: 17,
     lineHeight: 25.2,
   } as TextStyle,
   body1: {
