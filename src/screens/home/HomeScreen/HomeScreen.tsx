@@ -9,17 +9,32 @@ import { StackMenu } from 'constants/menu';
 import advertisementList from 'mocks/lists/advertisementList';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { usePersonalEventLists, useVogueEventLists } from 'hooks/queries/event';
+import { useMyInfo } from 'hooks/queries/user';
+import fieldData from 'data/lists/fieldData';
 import homeScreenStyles from './HomeScreen.style';
 
 const HomeScreen = () => {
   const { stackNavigation } = useNavigator();
 
+  const { data: vogueEventLists, isLoading: isVogueLoading } =
+    useVogueEventLists();
+  const { data: personalEventLists, isLoading: isPersonalLoading } =
+    usePersonalEventLists();
+  const { data: userInfo } = useMyInfo();
+
+  const userInterest = userInfo?.userInfo.fieldTypeList.map((field) => {
+    return `#${
+      fieldData.find((fieldElement) => fieldElement.value === field)?.label
+    }   `;
+  });
+
   const handleCategoryPress = (value: string) => {
     stackNavigation.navigate(StackMenu.CategoryEvent, { fieldValue: value });
   };
 
-  const handleShowWishEvent = () => {
-    stackNavigation.navigate(StackMenu.WishEvent);
+  const handleShowBookmarkEvent = () => {
+    stackNavigation.navigate(StackMenu.BookmarkEvent);
   };
 
   const handleShowAlertList = () => {
@@ -52,7 +67,7 @@ const HomeScreen = () => {
             >
               <Icon name="IconBell" fill="white" size={20} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleShowWishEvent}>
+            <TouchableOpacity onPress={handleShowBookmarkEvent}>
               <Icon name="IconHeart" fill="white" size={20} />
             </TouchableOpacity>
           </View>
@@ -60,12 +75,14 @@ const HomeScreen = () => {
         <AdvertisementCarousel carouselData={advertisementList} />
         <CategoryButtonGroup handlePress={handleCategoryPress} />
         <EventCardList
-          events={[]}
+          isLoading={isPersonalLoading}
+          events={personalEventLists}
           title="맞춤 이벤트 추천"
-          subTitle="#공연 #파티"
+          subTitle={userInterest?.join('') ?? ''}
         />
         <EventCardList
-          events={[]}
+          isLoading={isVogueLoading}
+          events={vogueEventLists?.content}
           title="인기 이벤트"
           subTitle="지금 핫한 인기 이벤트를 둘러보세요."
           type="popular"
