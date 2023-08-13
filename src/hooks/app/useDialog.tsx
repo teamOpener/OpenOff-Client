@@ -71,7 +71,7 @@ const useDialog = () => {
       case 'validate':
         dialog.callback();
         return setDialog({
-          type: 'success',
+          ...dialog,
           text: '',
           isShow: false,
           contents: '',
