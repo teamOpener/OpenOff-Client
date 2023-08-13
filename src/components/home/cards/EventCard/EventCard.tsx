@@ -44,7 +44,7 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
         <View style={eventCardStyles.iconText}>
           <Icon name="IconUser" size={10} fill="main" />
           <Text variant="body3" color="white">
-            {event.totalApplicantCount}명 참여중
+            {event.totalApplicantCount}명 신청중
           </Text>
         </View>
       </SpaceLayout>
