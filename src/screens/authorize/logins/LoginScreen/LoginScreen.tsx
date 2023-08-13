@@ -17,6 +17,7 @@ import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
 import DialogContext from 'utils/DialogContext';
 import { validateEmail, validatePassword } from 'utils/validate';
+import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
 import loginScreenStyles from './LoginScreen.style';
 
 const LoginScreen = () => {
@@ -59,12 +60,18 @@ const LoginScreen = () => {
     emailAddress.length >= 1 &&
     password.length >= 1;
 
-  const divergeAuthorizeFlow = (userName?: string) => {
-    if (userName) {
+  const divergeAuthorizeFlow = (
+    userInfo?: UserTotalInfoResponseDto['userInfo'],
+  ) => {
+    if (userInfo?.userName) {
       setIsLogin(true);
-    } else {
-      navigation.navigate('AgreeToTerm');
+      return;
     }
+    if (userInfo?.phoneNumber) {
+      navigation.navigate('Nickname');
+      return;
+    }
+    navigation.navigate('AgreeToTerm');
   };
 
   const handleKakaoLogin = async () => {
@@ -73,7 +80,7 @@ const LoginScreen = () => {
       socialType: 'kakao',
       token: kakaoResult.idToken,
     });
-    divergeAuthorizeFlow(socialLoginResult.data?.userInfo.userName);
+    divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
   };
 
   const handleCommonLogin = async () => {
@@ -82,7 +89,7 @@ const LoginScreen = () => {
       email: emailAddress,
       password,
     });
-    divergeAuthorizeFlow(normalLoginResult.data?.userInfo.userName);
+    divergeAuthorizeFlow(normalLoginResult.data?.userInfo);
   };
 
   useEffect(() => {
