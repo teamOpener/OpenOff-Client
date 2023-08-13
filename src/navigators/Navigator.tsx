@@ -25,6 +25,7 @@ import HostQRScanScreen from 'screens/userEvent/HostQRScanScreen/HostQRScanScree
 import HostLedgerScreen from 'screens/userEvent/HostLedgerScreen/HostLedgerScreen';
 import HostAlarmScreen from 'screens/userEvent/HostAlarmScreen/HostAlarmScreen';
 import HostLedgerDetailScreen from 'screens/userEvent/HostLedgerDetailScreen/HostLedgerDetailScreen';
+import PopularEventScreen from 'screens/home/PopularEventScreen/PopularEventScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -90,6 +91,7 @@ const Navigator = () => {
             ...textStyles.h3,
             color: colors.white,
           },
+          headerLeft: BackButton,
         }}
       />
       <Stack.Screen
@@ -107,6 +109,7 @@ const Navigator = () => {
             ...textStyles.h3,
             color: colors.white,
           },
+          headerLeft: BackButton,
         }}
       />
       <Stack.Screen
@@ -133,9 +136,27 @@ const Navigator = () => {
             ...textStyles.h3,
             color: colors.white,
           },
+          headerLeft: BackButton,
         }}
         name={StackMenu.Alert}
         component={AlertScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTitle: '인기 이벤트',
+          headerTitleAlign: 'center',
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            ...textStyles.h3,
+            color: colors.white,
+          },
+          headerLeft: BackButton,
+        }}
+        name={StackMenu.PopularEvent}
+        component={PopularEventScreen}
       />
       {/* map */}
       <Stack.Screen
@@ -150,6 +171,7 @@ const Navigator = () => {
             ...textStyles.h3,
             color: colors.white,
           },
+          headerLeft: BackButton,
         }}
         name={StackMenu.DatePick}
         component={DatePickScreen}

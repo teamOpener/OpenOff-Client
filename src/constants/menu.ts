@@ -4,6 +4,7 @@ export const enum StackMenu {
   OpenEvent = 'OpenEvent',
   CategoryEvent = 'CategoryEvent',
   WishEvent = 'WishEvent',
+  PopularEvent = 'PopularEvent',
   SearchAddress = 'SearchAddress',
   Alert = 'Alert',
   EventDetail = 'EventDetail',
