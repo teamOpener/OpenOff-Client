@@ -66,3 +66,7 @@ yarn-error.log
 
 #react-native-config
 ios/tmp.xcconfig
+
+#fcm
+ios/GoogleService-Info.plist
+android/app/google-services.json

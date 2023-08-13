@@ -1,3 +1,5 @@
+import { useCallback, useEffect } from 'react';
+import { foregroundListener, requestAlarmPermission } from 'services/fcm';
 import Icon from 'components/common/Icon/Icon';
 import AdvertisementCarousel from 'components/home/carousels/AdvertisementCarousel/AdvertisementCarousel';
 import FloatingButton from 'components/home/floatingbutton/FloatingButton';
@@ -24,6 +26,16 @@ const HomeScreen = () => {
   const handleShowAlertList = () => {
     stackNavigation.navigate(StackMenu.Alert);
   };
+
+  const foregroundListenerCallback = useCallback(() => {
+    foregroundListener();
+  }, []);
+
+  useEffect(() => {
+    requestAlarmPermission();
+    foregroundListenerCallback();
+  }, []);
+
   return (
     <View style={homeScreenStyles.wrapper}>
       <FloatingButton />
