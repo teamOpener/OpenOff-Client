@@ -84,6 +84,7 @@ export const useVogueEventInfiniteLists = () => {
           count: lastPage.data?.content[lastIdx - 1].totalApplicantCount,
         };
       },
+      suspense: false,
     },
   );
 };
@@ -104,6 +105,7 @@ export const usePersonalEventLists = () => {
     () => getPersonalEventLists(),
     {
       select: (data) => data.data,
+      suspense: false,
     },
   );
 };

@@ -15,6 +15,7 @@ export const useBookmarkEventLists = () => {
         }
         return lastPage.data?.content[lastIdx - 1].bookmarkId;
       },
+      suspense: false,
     },
   );
 };
