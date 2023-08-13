@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as ConsoleScreenLayout } from './ConsoleScreenLayout/ConsoleScreenLayout';
+export { default as LedgerScreenLayout } from './LedgerScreenLayout/LedgerScreenLayout';

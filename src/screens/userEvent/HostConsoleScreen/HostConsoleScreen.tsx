@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { StackMenu } from 'constants/menu';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useRouteParams from 'hooks/navigator/useRouteParams';
+import { useHostEventLists, useLedgerStatus } from 'hooks/queries/ledger';
 import {
   DateSelector,
   DonutChartInfo,
@@ -14,49 +15,63 @@ import { ConsoleScreenLayout } from 'components/userEvent/host/layout';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Spacing from 'components/common/Spacing/Spacing';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import { EventIndexInfo } from 'models/ledger/entity/EventIndexInfo';
 import hostConsoleStyles from './HostConsole.style';
 
 const HostConsoleScreen = () => {
   const { stackNavigation } = useNavigator();
   const params = useRouteParams<StackMenu.HostConsole>();
-  // TODO 수정
-  const [isEnded, setIsEnded] = useState<boolean>(false);
-  const [eventIndex, setEventIndex] = useState<number>(0);
+
+  const { data: hostEventList } = useHostEventLists();
+  const flatHostEventList = hostEventList?.pages.flatMap(
+    (page) => page.data.content,
+  );
+
+  const getEventIndexList = (eventId?: number) =>
+    flatHostEventList
+      ?.filter((event) => event.eventInfoId === eventId)
+      .flatMap((event) => event.eventIndexInfoList);
+
+  const eventIndexList = getEventIndexList(params?.eventId);
+  const [selectedEventIndexInfo, setSelectedEventIndexInfo] = useState<
+    EventIndexInfo | undefined
+  >(eventIndexList?.[0]);
+
+  const { data: eventStatus } = useLedgerStatus(
+    selectedEventIndexInfo?.eventIndexId ?? 0,
+  );
+
+  const handleNavigation = (
+    screenName:
+      | StackMenu.HostAlarm
+      | StackMenu.HostQRScan
+      | StackMenu.HostLedger,
+  ) => {
+    if (!params?.eventId || !selectedEventIndexInfo?.eventIndexId) {
+      return;
+    }
+    stackNavigation.navigate(screenName, {
+      eventId: params.eventId,
+      eventIndex: selectedEventIndexInfo.eventIndexId,
+    });
+  };
+
+  const handleNavigationDetailPage = () => {
+    if (!params?.eventId) {
+      return;
+    }
+    stackNavigation.navigate('EventDetail', {
+      id: params.eventId,
+    });
+  };
 
   const headerRight = () => (
     <SmallIconButton
       iconName="IconCommentCircle"
       label={MENT_HOST.MAIN.COMMENT}
-      onPress={() => {
-        // TODO
-        // stackNavigation.navigate('')
-      }}
+      onPress={handleNavigationDetailPage}
     />
   );
-
-  const handlePressQR = () => {
-    if (!params?.eventId) return;
-    stackNavigation.navigate('HostQRScan', {
-      eventId: params.eventId,
-      eventIndex,
-    });
-  };
-
-  const handlePressLedger = () => {
-    if (!params?.eventId) return;
-    stackNavigation.navigate('HostLedger', {
-      eventId: params.eventId,
-      eventIndex,
-    });
-  };
-
-  const handlePressAlarm = () => {
-    if (!params?.eventId) return;
-    stackNavigation.navigate('HostAlarm', {
-      eventId: params.eventId,
-      eventIndex,
-    });
-  };
 
   const handleStopApplication = () => {
     // TODO
@@ -68,20 +83,30 @@ const HostConsoleScreen = () => {
     });
   }, []);
 
+  // TODO loading
+
+  if (!eventStatus || !eventIndexList || !selectedEventIndexInfo) {
+    return null;
+  }
+
   return (
     <ConsoleScreenLayout>
-      <DateSelector />
+      <DateSelector
+        eventIndexInfoList={eventIndexList}
+        selectedEventIndexInfo={selectedEventIndexInfo}
+        setSelectedEventIndexInfo={setSelectedEventIndexInfo}
+      />
 
       <View style={hostConsoleStyles.chartContainer}>
         <DonutChartInfo
-          numerator={63}
-          denominator={100}
+          numerator={eventStatus.approvedCount}
+          denominator={eventStatus.maxCount}
           label={MENT_HOST.MAIN.APPROVED}
           color="lightGreen"
         />
         <DonutChartInfo
-          numerator={10}
-          denominator={100}
+          numerator={eventStatus.joinedCount}
+          denominator={eventStatus.maxCount}
           label={MENT_HOST.MAIN.ATTENDED}
           color="main"
         />
@@ -90,27 +115,27 @@ const HostConsoleScreen = () => {
       <View style={hostConsoleStyles.buttonContainer}>
         <SpaceLayout direction="row" size={0}>
           <LargeIconButton
-            disabled={isEnded}
+            disabled={eventStatus.isClosed}
             iconName="IconQR"
             label={MENT_HOST.MAIN.QR_SCAN_BTN}
-            onPress={handlePressQR}
+            onPress={() => handleNavigation(StackMenu.HostQRScan)}
           />
           <LargeIconButton
-            disabled={isEnded}
+            disabled={eventStatus.isClosed}
             iconName="IconPeople"
             label={MENT_HOST.MAIN.LEDGER}
-            onPress={handlePressLedger}
+            onPress={() => handleNavigation(StackMenu.HostLedger)}
           />
         </SpaceLayout>
         <SpaceLayout direction="row" size={0}>
           <LargeIconButton
-            disabled={isEnded}
+            disabled={eventStatus.isClosed}
             iconName="IconBellLing"
             label={MENT_HOST.MAIN.ALARM}
-            onPress={handlePressAlarm}
+            onPress={() => handleNavigation(StackMenu.HostAlarm)}
           />
           <LargeIconButton
-            disabled={isEnded}
+            disabled={eventStatus.isClosed}
             iconName="IconStopCircle"
             label={MENT_HOST.MAIN.STOP_APPLICATION}
             onPress={handleStopApplication}
@@ -119,7 +144,9 @@ const HostConsoleScreen = () => {
       </View>
 
       <Spacing height={80} />
-      {isEnded && <FixedButton disabled label={MENT_HOST.MAIN.ENDED} />}
+      {eventStatus.isClosed && (
+        <FixedButton disabled label={MENT_HOST.MAIN.ENDED} />
+      )}
     </ConsoleScreenLayout>
   );
 };

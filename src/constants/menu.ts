@@ -14,6 +14,7 @@ export const enum StackMenu {
   HostConsole = 'HostConsole',
   HostQRScan = 'HostQRScan',
   HostLedger = 'HostLedger',
+  HostLedgerDetail = 'HostLedgerDetail',
   HostAlarm = 'HostAlarm',
 }
 

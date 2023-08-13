@@ -12,6 +12,7 @@ export const colors = {
   green: '#5FA65E',
   lavender: '#EDE9FF',
   lightGreen: '#73FFB3',
+  blue: '#3E9ED4',
 };
 
 export const fonts = {
@@ -20,6 +21,10 @@ export const fonts = {
   medium: 'Pretendard-Medium',
   regular: 'Pretendard-Regular',
   light: 'Pretendard-Light',
+};
+
+export const layouts = {
+  PADDING: 25,
 };
 
 export const MyTheme = {

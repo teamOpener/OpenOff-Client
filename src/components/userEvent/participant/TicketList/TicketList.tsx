@@ -1,19 +1,25 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { getFieldName } from 'constants/code';
+import { FieldCode, getFieldName } from 'constants/code';
 import { TouchableOpacity, View } from 'react-native';
 import { ticketListDateFormatter } from 'utils/date';
-import { ApplicationInfoResponseDto } from 'models/ledger/response/ApplicationInfoResponseDto';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import ticketListStyles from './TicketList.style';
 import XSmallTag from '../XSmallTag/XSmallTag';
 
 interface Props {
-  eventInfo: ApplicationInfoResponseDto;
+  eventTitle: string;
+  eventDateList: string[];
+  fieldTypeList: FieldCode[];
   onPress: () => void;
 }
 
-const TicketList = ({ eventInfo, onPress }: Props) => {
+const TicketList = ({
+  eventTitle,
+  eventDateList,
+  fieldTypeList,
+  onPress,
+}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -22,11 +28,11 @@ const TicketList = ({ eventInfo, onPress }: Props) => {
     >
       <View style={ticketListStyles.info}>
         <View>
-          <Text style={ticketListStyles.titleText}>{eventInfo.eventTitle}</Text>
-          <Text>{ticketListDateFormatter(eventInfo.eventDateList)}</Text>
+          <Text style={ticketListStyles.titleText}>{eventTitle}</Text>
+          <Text>{ticketListDateFormatter(eventDateList)}</Text>
         </View>
         <SpaceLayout direction="row" size={5}>
-          {eventInfo.fieldTypeList.map((fieldType, idx) => (
+          {fieldTypeList.map((fieldType, idx) => (
             <XSmallTag key={idx} label={getFieldName(fieldType)} />
           ))}
         </SpaceLayout>

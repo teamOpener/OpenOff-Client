@@ -24,6 +24,7 @@ import HostConsoleScreen from 'screens/userEvent/HostConsoleScreen/HostConsoleSc
 import HostQRScanScreen from 'screens/userEvent/HostQRScanScreen/HostQRScanScreen';
 import HostLedgerScreen from 'screens/userEvent/HostLedgerScreen/HostLedgerScreen';
 import HostAlarmScreen from 'screens/userEvent/HostAlarmScreen/HostAlarmScreen';
+import HostLedgerDetailScreen from 'screens/userEvent/HostLedgerDetailScreen/HostLedgerDetailScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -274,6 +275,20 @@ const Navigator = () => {
         }}
         name={StackMenu.HostLedger}
         component={HostLedgerScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.white,
+          headerTitleStyle: {
+            color: 'transparent',
+          },
+          headerLeft: BackButton,
+        }}
+        name={StackMenu.HostLedgerDetail}
+        component={HostLedgerDetailScreen}
       />
       <Stack.Screen
         options={{
