@@ -1,5 +1,6 @@
-import { Modal, Pressable, TouchableOpacity, View } from 'react-native';
+import { Pressable, TouchableOpacity, View } from 'react-native';
 import { CommonDialog } from 'types/apps/dialog';
+import { Modal } from 'react-native-paper';
 import Icon from '../../Icon/Icon';
 import Text from '../../Text/Text';
 import dialogStyles from './Dialog.style';
@@ -11,12 +12,7 @@ interface Props {
 
 const Dialog = ({ dialog, closeDialog }: Props) => {
   return (
-    <Modal
-      animationType="fade"
-      transparent
-      visible={dialog.isShow}
-      style={dialogStyles.modalView}
-    >
+    <Modal visible={dialog.isShow} style={dialogStyles.modalView}>
       <Pressable
         onPress={(event) => {
           event.stopPropagation();

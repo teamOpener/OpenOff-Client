@@ -11,6 +11,7 @@ interface Props {
 const LoginButton = ({ handlePress, isActive }: Props) => {
   return (
     <TouchableOpacity
+      activeOpacity={0.7}
       onPress={handlePress}
       style={{
         ...loginButtonStyles.container,

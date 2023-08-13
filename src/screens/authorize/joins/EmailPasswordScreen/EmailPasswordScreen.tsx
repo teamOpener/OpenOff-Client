@@ -1,11 +1,15 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
+import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
-import { Dispatch, useState } from 'react';
+import { useEmailCheck, useNormalSignUp } from 'hooks/queries/auth';
+import { Dispatch, useContext, useState } from 'react';
+import { colors } from 'styles/theme';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
+import DialogContext from 'utils/DialogContext';
 import { validateEmail, validatePassword } from 'utils/validate';
 
 interface Props {
@@ -14,23 +18,44 @@ interface Props {
 
 const EmailPasswordScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const { openDialog } = useContext(DialogContext);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const { mutateAsync: checkEmail, isLoading: isEmailCheckLoading } =
+    useEmailCheck();
+
+  const { mutateAsync: normalSignUp, isLoading: isNormalSignUpLoading } =
+    useNormalSignUp();
+
   const isActive =
     !validateEmail(email) &&
     email.length > 1 &&
     !validatePassword(password) &&
     password.length > 1;
+
+  const handleNormalSignUp = async () => {
+    await normalSignUp({ email, password });
+    dispatch({
+      type: UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD,
+      emailPassword: { email, password },
+    });
+    navigation.navigate(AuthorizeMenu.AgreeToTerm);
+  };
+
+  const handleAuthorize = async () => {
+    const checkInfo = await checkEmail(email);
+    if (checkInfo.data?.check) handleNormalSignUp();
+    else openDialog({ text: '중복된 이메일입니다.', type: 'validate' });
+  };
+
+  if (isEmailCheckLoading || isNormalSignUpLoading)
+    return <CommonLoading isActive backgroundColor={colors.background} />;
+
   return (
     <ScreenCover
       authorizeButton={{
-        handlePress: () => {
-          dispatch({
-            type: UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD,
-            emailPassword: { email, password },
-          });
-          navigation.navigate(AuthorizeMenu.AgreeToTerm);
-        },
+        handlePress: handleAuthorize,
         label: '확인',
         isActive,
       }}

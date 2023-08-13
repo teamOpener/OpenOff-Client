@@ -14,7 +14,7 @@ interface Props {
 }
 
 const TimerText = memo(({ setTimerTrigger, timerTrigger, setRetry }: Props) => {
-  const MINUTES_IN_MS = 3 * 60 * 1000;
+  const MINUTES_IN_MS = 5 * 60 * 1000;
   const INTERVAL = 1000;
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
   const [currentReactive, setCurrentReactive] = useState<boolean>(

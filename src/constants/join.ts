@@ -11,8 +11,8 @@ const enum UserInfoStatus {
 }
 
 const enum GenderType {
-  MAN = '남',
-  WOMAN = '여',
+  MAN = 'MAN',
+  WOMAN = 'WOMAN',
 }
 
 export { GenderType, UserInfoStatus };

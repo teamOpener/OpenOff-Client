@@ -1,9 +1,14 @@
-import PhoneAuthButton from 'components/authorize/buttons/PhoneAuthButton/PhoneAuthButton';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
+import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
-import TimerText from 'components/authorize/texts/TimerText/TimerText';
-import { useState } from 'react';
+import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
+import { useCheckAuthSms, useSendAuthSms } from 'hooks/queries/auth';
+import { useContext, useState } from 'react';
 import { View } from 'react-native';
+import { colors } from 'styles/theme';
+import { ApiErrorResponse } from 'types/ApiResponse';
+import DialogContext from 'utils/DialogContext';
 import {
   validateAuthNumber,
   validateEmail,
@@ -12,106 +17,116 @@ import {
 import PasswordResetScreen from '../PasswordResetScreen/PasswordResetScreen';
 import passwordFindScreenStyles from './PasswordFindScreen.style';
 
-interface Trigger {
-  active: boolean;
-  reactive: boolean;
-}
-
 const PasswordFindScreen = () => {
   const [emailAddress, setEmailAddress] = useState<string>('');
-  const [authnumber, setAuthnumber] = useState<string>('');
-  const [phonenumber, setPhonenumber] = useState<string>('');
+  const { phonenumber, setPhonenumber, authnumber, setAuthnumber } =
+    usePhoneCertificate();
+  const { openDialog } = useContext(DialogContext);
   const [retry, setRetry] = useState<boolean>(false);
-  const [timerTrigger, setTimerTrigger] = useState<Trigger>({
-    active: false,
-    reactive: false,
-  });
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
 
-  const isActive =
-    !validateEmail(emailAddress) &&
-    emailAddress.length > 1 &&
+  const handleCheckSmsError = (error: ApiErrorResponse) => {
+    if (error.response?.data.code === 800) {
+      openDialog({
+        type: 'validate',
+        text: '해당 핸드폰으로 등록된 아이디가 존재하지 않습니다!',
+      });
+      return;
+    }
+    openDialog({
+      type: 'validate',
+      text: error.message,
+    });
+  };
+
+  const handleCheckSmsSuccess = () => {
+    setIsAuthorize(true);
+  };
+
+  const handleSendSmsSuccess = () => {
+    openDialog({
+      type: 'success',
+      text: '인증번호를 발송하였습니다.',
+    });
+  };
+
+  const { mutateAsync: sendAuthSms, isLoading: isSendAuthSms } =
+    useSendAuthSms(handleSendSmsSuccess);
+  const { mutateAsync: checkAuthSms, isLoading: isCheckAuthSms } =
+    useCheckAuthSms(handleCheckSmsSuccess, handleCheckSmsError);
+
+  const isResetButtonActive: boolean =
     !validatePhoneNumber(phonenumber) &&
     phonenumber.length > 1 &&
     !validateAuthNumber(authnumber) &&
     authnumber.length > 1 &&
+    !validateEmail(emailAddress) &&
+    emailAddress.length > 1 &&
     retry;
 
-  const handleCertification = () => {
-    setRetry(true);
-    if (!timerTrigger.active) {
-      setTimerTrigger({ ...timerTrigger, active: true });
-      return;
-    }
-    setTimerTrigger({
-      ...timerTrigger,
-      reactive: !timerTrigger.reactive,
+  const handleCertification = async () => {
+    await sendAuthSms({
+      content: '일반 핸드폰 인증',
+      to: phonenumber.replaceAll('-', ''),
     });
-    console.log(phonenumber);
+    setRetry(true);
   };
 
-  const handleAuthorizeFlow = () => {
-    setTimerTrigger(() => {
-      return { reactive: false, active: false };
+  const handleAuthorizeFlow = async () => {
+    const emailInfo = await checkAuthSms({
+      phoneNum: phonenumber.replaceAll('-', ''),
+      checkNum: authnumber,
     });
-    setIsAuthorize(true);
+    if (emailInfo.data?.id === emailAddress) {
+      setIsAuthorize(true);
+    } else {
+      openDialog({
+        type: 'validate',
+        text: '회원정보가 일치하지 않습니다. 이메일과 핸드폰 번호를 확인해주세요.',
+      });
+    }
   };
 
   return (
-    <View style={passwordFindScreenStyles.container}>
-      {!isAuthorize ? (
-        <ScreenCover
-          authorizeButton={{
-            handlePress: handleAuthorizeFlow,
-            label: '다음',
-            isActive,
-          }}
-        >
-          <EssentialInput
-            validation={validateEmail}
-            label="이메일"
-            keyboardType="default"
-            value={emailAddress}
-            setValue={setEmailAddress}
-            type="emailAddress"
-          />
-          <EssentialInput
-            validation={validatePhoneNumber}
-            label="휴대폰 번호"
-            keyboardType="number-pad"
-            value={phonenumber}
-            setValue={setPhonenumber}
-            type="phonenumber"
-          >
-            <PhoneAuthButton
-              label={retry ? '재발송' : '인증받기'}
-              active={
-                !(validatePhoneNumber(phonenumber) || phonenumber.length < 2)
-              }
-              handlePress={handleCertification}
-            />
-          </EssentialInput>
-          <EssentialInput
-            validation={validateAuthNumber}
-            label="인증번호"
-            keyboardType="number-pad"
-            value={authnumber}
-            setValue={setAuthnumber}
-            type="authnumber"
-          >
-            {timerTrigger.active && (
-              <TimerText
-                timerTrigger={timerTrigger}
-                setTimerTrigger={setTimerTrigger}
-                setRetry={setRetry}
-              />
-            )}
-          </EssentialInput>
-        </ScreenCover>
-      ) : (
-        <PasswordResetScreen />
+    <>
+      {(isSendAuthSms || isCheckAuthSms) && (
+        <CommonLoading isActive backgroundColor={colors.background} />
       )}
-    </View>
+      <View style={passwordFindScreenStyles.container}>
+        {!isAuthorize ? (
+          <ScreenCover
+            authorizeButton={{
+              handlePress: handleAuthorizeFlow,
+              label: '다음',
+              isActive: isResetButtonActive,
+            }}
+          >
+            <EssentialInput
+              validation={validateEmail}
+              label="이메일"
+              keyboardType="default"
+              value={emailAddress}
+              setValue={setEmailAddress}
+              type="emailAddress"
+            />
+            <PhoneCertificationForm
+              retry={retry}
+              phonenumber={phonenumber}
+              setPhonenumber={setPhonenumber}
+              authnumber={authnumber}
+              setAuthnumber={setAuthnumber}
+              handleCertification={handleCertification}
+              setRetry={setRetry}
+            />
+          </ScreenCover>
+        ) : (
+          <PasswordResetScreen
+            email={emailAddress}
+            phoneNum={phonenumber.replaceAll('-', '')}
+          />
+        )}
+      </View>
+    </>
   );
 };
 

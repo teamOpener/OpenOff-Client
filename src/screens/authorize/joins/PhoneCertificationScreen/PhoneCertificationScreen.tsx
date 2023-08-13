@@ -3,23 +3,31 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
-import { Dispatch, useState } from 'react';
+import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
+import { useCheckSms, useSendSms } from 'hooks/queries/user';
+import { Dispatch, useContext } from 'react';
+import { ApiErrorResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
-import { validateAuthNumber, validatePhoneNumber } from 'utils/validate';
+import DialogContext from 'utils/DialogContext';
 
 interface Props {
   dispatch: Dispatch<Action>;
 }
 
 const PhoneCertificationScreen = ({ dispatch }: Props) => {
+  const { openDialog } = useContext(DialogContext);
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
-  const [phonenumber, setPhonenumber] = useState<string>('');
-  const [authnumber, setAuthnumber] = useState<string>('');
-  const [retry, setRetry] = useState<boolean>(false);
-  const handleCertification = () => {
-    setRetry(true);
-  };
+  const {
+    phonenumber,
+    setPhonenumber,
+    authnumber,
+    setAuthnumber,
+    retry,
+    setRetry,
+    isActive,
+  } = usePhoneCertificate();
+
   const handleAuthorizeFlow = () => {
     dispatch({
       type: UserInfoStatus.SET_PHONE_NUMBER,
@@ -27,16 +35,50 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
     });
     navigation.navigate(AuthorizeMenu.Nickname);
   };
-  const isActive =
-    !validatePhoneNumber(phonenumber) &&
-    phonenumber.length > 1 &&
-    !validateAuthNumber(authnumber) &&
-    authnumber.length > 1 &&
-    retry;
+
+  const handleCheckSmsError = (error: ApiErrorResponse) => {
+    if (error.response?.data.code === 1003) {
+      openDialog({
+        type: 'validate',
+        text: '이미 회원정보가 있는 핸드폰 번호입니다.',
+      });
+      return;
+    }
+    openDialog({
+      type: 'validate',
+      text: error.message,
+    });
+  };
+
+  const handleSendSmsSuccess = () => {
+    openDialog({
+      type: 'success',
+      text: '인증번호를 발송하였습니다.',
+    });
+  };
+
+  const { mutateAsync: sendSms } = useSendSms(handleSendSmsSuccess);
+  const { mutateAsync: checkSms } = useCheckSms(
+    handleAuthorizeFlow,
+    handleCheckSmsError,
+  );
+
+  const handleCertification = async () => {
+    await sendSms({
+      content: '핸드폰 인증',
+      to: phonenumber.replaceAll('-', ''),
+    });
+    setRetry(true);
+  };
+
   return (
     <ScreenCover
       authorizeButton={{
-        handlePress: handleAuthorizeFlow,
+        handlePress: () =>
+          checkSms({
+            phoneNum: phonenumber.replaceAll('-', ''),
+            checkNum: authnumber,
+          }),
         label: '다음',
         isActive,
       }}

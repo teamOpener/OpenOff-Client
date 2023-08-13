@@ -1,7 +1,7 @@
 import useDialog from 'hooks/app/useDialog';
 import { PropsWithChildren } from 'react';
-import { Portal } from 'react-native-paper';
 import DialogContext from 'utils/DialogContext';
+import { Provider, Portal } from 'react-native-paper';
 import ConfirmDialog from './ConfirmDialog/ConfirmDialog';
 import Dialog from './Dialog/Dialog';
 
@@ -10,9 +10,8 @@ const DialogProvider = ({ children }: PropsWithChildren) => {
     useDialog();
 
   return (
-    <Portal.Host>
-      <DialogContext.Provider value={dialogContextValue}>
-        {children}
+    <DialogContext.Provider value={dialogContextValue}>
+      <Provider>
         <Portal>
           <Dialog dialog={dialog} closeDialog={() => closeDialog('success')} />
           <ConfirmDialog
@@ -20,8 +19,9 @@ const DialogProvider = ({ children }: PropsWithChildren) => {
             closeDialog={() => closeDialog('confirm')}
           />
         </Portal>
-      </DialogContext.Provider>
-    </Portal.Host>
+        {children}
+      </Provider>
+    </DialogContext.Provider>
   );
 };
 

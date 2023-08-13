@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
 
 const errorTextStyles = StyleSheet.create({
   text: {
     height: 20,
-    width: '100%',
+    flex: 1,
+    textAlign: 'right',
+    alignSelf: 'flex-end',
   },
 });
 

@@ -1,7 +1,12 @@
 /* eslint-disable no-return-assign */
 import axios, { AxiosResponse } from 'axios';
 import Config from 'react-native-config';
+import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import { refresh } from './auth';
+
+const { token, setIsLogin, resetToken, setToken } =
+  useAuthorizeStore.getState();
 
 const baseURL = Config.OPENOFF_PROD_SERVER;
 
@@ -26,6 +31,14 @@ const onFulfilled = (res: AxiosResponse) => {
 
 let isTokenRenewalInProgress = false;
 
+const initializeAuthorizeState = (error?: unknown) => {
+  resetToken();
+  setIsLogin(false);
+  fetcher.defaults.headers.Authorization = null;
+  isTokenRenewalInProgress = false;
+  return Promise.reject(error);
+};
+
 const onRejected = async (error: ApiErrorResponse) => {
   const originalRequest = error.config;
   const data = error.response?.data;
@@ -39,21 +52,24 @@ const onRejected = async (error: ApiErrorResponse) => {
     isTokenRenewalInProgress = true;
 
     try {
-      // 1. refresh token 가져오기
-      // 1-1. refresh token이 없다면, 로그아웃
-      // 1-2. refresh token이 있다면 refresh
-      // const accessToken = await refresh();
+      if (!token.refreshToken) {
+        initializeAuthorizeState();
+      }
 
-      // 2. 새로 받아온 access token으로 재시도
-      // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+      if (token.refreshToken) {
+        const accessToken = await refresh();
+        originalRequest.headers.Authorization = `Bearer ${accessToken.data?.accessToken}`;
+        setToken({
+          accessToken: accessToken.data?.accessToken,
+          refreshToken: accessToken.data?.refreshToken,
+        });
+      }
+
       const response = await fetcher.request(originalRequest);
       isTokenRenewalInProgress = false;
       return response;
     } catch (refreshError) {
-      console.log(refreshError);
-      // 로그아웃
-      isTokenRenewalInProgress = false;
-      return Promise.reject(refreshError);
+      initializeAuthorizeState(refreshError);
     }
   }
   return Promise.reject(error);

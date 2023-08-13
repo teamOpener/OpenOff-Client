@@ -1,6 +1,7 @@
 import Text from 'components/common/Text/Text';
-import { Modal, Pressable, TouchableOpacity, View } from 'react-native';
+import { Pressable, TouchableOpacity, View } from 'react-native';
 import { ConfirmDialog as ConfirmDialogType } from 'types/apps/dialog';
+import { Modal } from 'react-native-paper';
 import confirmDialogStyles from './ConfirmDialog.style';
 
 interface Props {
@@ -14,12 +15,7 @@ const ConfirmDialog = ({ dialog, closeDialog }: Props) => {
     closeDialog();
   };
   return (
-    <Modal
-      animationType="fade"
-      transparent
-      visible={dialog.isShow}
-      style={confirmDialogStyles.modalView}
-    >
+    <Modal visible={dialog.isShow} style={confirmDialogStyles.modalView}>
       <Pressable
         onPress={(event) => {
           event.stopPropagation();

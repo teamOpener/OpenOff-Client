@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
+import { fonts } from 'styles/theme';
 
 const checkButtonStyles = StyleSheet.create({
   container: {
@@ -17,9 +18,8 @@ const checkButtonStyles = StyleSheet.create({
   },
   checkButtonLabel: {
     fontSize: 17,
-    color: '#FFF',
-    fontWeight: '600',
-  },
+    fontFamily: fonts.semibold,
+  } as TextStyle,
 });
 
 export default checkButtonStyles;

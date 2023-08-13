@@ -11,20 +11,18 @@ const JoinAndFindButton = () => {
   return (
     <View style={joinAndFindButtonStyle.container}>
       <TouchableOpacity
+        activeOpacity={0.8}
         style={joinAndFindButtonStyle.buttonContainer}
         onPress={() => navigation.navigate(AuthorizeMenu.EmailPassword)}
       >
-        <Text variant="caption" color="white">
-          회원가입
-        </Text>
+        <Text style={joinAndFindButtonStyle.text}>회원가입</Text>
       </TouchableOpacity>
-      <Text variant="caption" color="white">{`   |   `}</Text>
+      <Text style={joinAndFindButtonStyle.text}>{`   |   `}</Text>
       <TouchableOpacity
+        activeOpacity={0.8}
         onPress={() => navigation.navigate(AuthorizeMenu.EmailPasswordFind)}
       >
-        <Text variant="caption" color="white">
-          아이디/비밀번호 찾기
-        </Text>
+        <Text style={joinAndFindButtonStyle.text}>아이디/비밀번호 찾기</Text>
       </TouchableOpacity>
     </View>
   );

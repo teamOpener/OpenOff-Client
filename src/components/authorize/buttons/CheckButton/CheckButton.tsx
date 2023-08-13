@@ -32,9 +32,7 @@ const CheckButton = ({
           }
         />
       </TouchableOpacity>
-      <Text variant="h4" color="white">
-        {label}
-      </Text>
+      <Text style={checkButtonStyles.checkButtonLabel}>{label}</Text>
     </View>
   );
 };

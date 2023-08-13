@@ -9,9 +9,9 @@ const joinCompleteScreenStyles = StyleSheet.create({
     flexDirection: 'column',
   },
   myFieldTitle: {
-    color: colors.white,
     fontFamily: fonts.regular,
     fontSize: 18,
+    lineHeight: 25.2,
   },
   myFieldContainer: {
     width: '100%',
@@ -22,6 +22,7 @@ const joinCompleteScreenStyles = StyleSheet.create({
     color: colors.main,
     fontFamily: fonts.regular,
     fontSize: 18,
+    lineHeight: 25.2,
     marginRight: 10,
   },
 });

@@ -1,8 +1,9 @@
 import ErrorText from 'components/authorize/texts/ErrorText/ErrorText';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
+import Spacing from 'components/common/Spacing/Spacing';
 import React, { Dispatch, ReactNode, SetStateAction } from 'react';
-import { Dimensions, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { colors } from 'styles/theme';
 import essentialInputStyles from './EssentialInput.style';
 
@@ -27,10 +28,6 @@ const EssentialInput = ({
   maxLength = 20,
   ...rest
 }: Props) => {
-  const clacWidth =
-    children && type === 'phonenumber'
-      ? Dimensions.get('window').width - 140
-      : Dimensions.get('window').width - 50;
   const handleChangeText = (
     textValue: string,
     onChange: Dispatch<SetStateAction<string>>,
@@ -48,49 +45,49 @@ const EssentialInput = ({
   };
   return (
     <View style={essentialInputStyles.container}>
-      <View style={essentialInputStyles.phoneInputContainer}>
-        <Text color="grey" style={essentialInputStyles.label}>
-          {label}
-        </Text>
-        <View style={essentialInputStyles.phoneInputRow}>
-          <View style={essentialInputStyles.inputAbsoluteContainer}>
-            <TextInput
-              value={value}
-              maxLength={maxLength}
-              keyboardType={keyboardType}
-              secureTextEntry={type === 'password'}
-              style={{
-                ...essentialInputStyles.inputContainer,
-                width: clacWidth,
-                color: validation(value) ? colors.error : colors.grey,
-                borderColor: validation(value) ? colors.error : colors.grey,
-              }}
-              onChangeText={(textValue: string) =>
-                handleChangeText(textValue, setValue)
-              }
-              {...rest}
-            />
-            <View style={essentialInputStyles.validateStatus}>
-              {validation(value) &&
-                value.length > 0 &&
-                type !== 'authnumber' && (
-                  <Text variant="body1" color="error">
-                    !
-                  </Text>
-                )}
-              {!validation(value) &&
-                value.length > 0 &&
-                type !== 'authnumber' && (
-                  <Icon name="IconCheck" size={20} fill="green" />
-                )}
-            </View>
+      <Text color="grey" style={essentialInputStyles.label}>
+        {label}
+      </Text>
+
+      <View style={essentialInputStyles.phoneInputRow}>
+        <View style={essentialInputStyles.inputAbsoluteContainer}>
+          <TextInput
+            value={value}
+            maxLength={maxLength}
+            keyboardType={keyboardType}
+            secureTextEntry={type === 'password'}
+            style={{
+              ...essentialInputStyles.inputContainer,
+              color: validation(value) ? colors.error : colors.white,
+              borderColor: validation(value) ? colors.error : colors.darkGrey,
+            }}
+            onChangeText={(textValue: string) =>
+              handleChangeText(textValue, setValue)
+            }
+            {...rest}
+          />
+
+          <View style={essentialInputStyles.helpTextContainer}>
+            <ErrorText validation={validation} value={value} />
           </View>
-          {children}
+
+          <View style={essentialInputStyles.validateStatus}>
+            {validation(value) && value.length > 0 && type !== 'authnumber' && (
+              <Text variant="body1" color="error">
+                !
+              </Text>
+            )}
+            {!validation(value) &&
+              value.length > 0 &&
+              type !== 'authnumber' && (
+                <Icon name="IconCheck" size={20} fill="green" />
+              )}
+          </View>
         </View>
-        <View style={{ width: clacWidth }}>
-          <ErrorText validation={validation} value={value} />
-        </View>
+        {children}
       </View>
+
+      <Spacing height={5} />
     </View>
   );
 };

@@ -6,10 +6,10 @@ interface EmailPassword {
   password: string;
 }
 
-type Gender = '남' | '여';
+type Gender = 'MAN' | 'WOMAN';
 
 type Action =
-  | { type: UserInfoStatus.SET_NAME; name: string }
+  | { type: UserInfoStatus.SET_NAME; username: string }
   | { type: UserInfoStatus.SET_BIRTH; birth: string }
   | {
       type: UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD;
@@ -21,11 +21,11 @@ type Action =
   | { type: UserInfoStatus.SET_NICK_NAME; nickname: string }
   | { type: UserInfoStatus.SET_PHONE_NUMBER; phoneNumber: string };
 interface JoinInfo {
-  name: string;
+  username: string;
   birth: string;
   agreeToTerm: string;
   phoneNumber: string;
-  gender: string;
+  gender: Gender;
   nickname: string;
   emailAddress: string;
   password: string;

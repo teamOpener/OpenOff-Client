@@ -1,17 +1,11 @@
 import Icon from 'components/common/Icon/Icon';
+import { useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
-import React, { useCallback } from 'react';
-import useNavigator from 'hooks/navigator/useNavigator';
-import { AuthorizeMenu } from 'constants/menu';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { AuthStackParamList } from 'types/apps/menu';
+import { useAuthorizeStore } from 'stores/Authorize';
 import backToLoginButtonStyles from './BackToHomeButton.style';
 
-interface Props {
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const BackToHomeButton = ({ setIsLogin }: Props) => {
+const BackToHomeButton = () => {
+  const { setIsLogin } = useAuthorizeStore();
   const handlePress = useCallback(() => {
     setIsLogin(true);
   }, []);

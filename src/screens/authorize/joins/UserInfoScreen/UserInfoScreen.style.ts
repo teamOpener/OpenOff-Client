@@ -1,16 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
 
 const userInfoScreenStyles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: colors.background,
-  },
   detailUserInfo: {
+    flex: 1,
     flexDirection: 'row',
     marginTop: 70,
+    gap: 10,
   },
 });
 
