@@ -154,6 +154,7 @@ dependencies {
     implementation("com.facebook.react:react-android")
     implementation("com.naver.maps:map-sdk:3.12.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
     implementation project(':react-native-splash-screen')
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
@@ -171,3 +172,4 @@ dependencies {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply plugin: 'com.google.gms.google-services'
