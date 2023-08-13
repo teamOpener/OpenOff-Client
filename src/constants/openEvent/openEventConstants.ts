@@ -1,3 +1,5 @@
+import MAX_POSTER from 'constants/event';
+
 const MENT_OPEN_EVENT = Object.freeze({
   // TODO: 정리
   INFO: '이벤트 정보를 입력해주세요.',
@@ -35,7 +37,7 @@ const MENT_OPEN_EVENT = Object.freeze({
     COST: '가격을 입력해주세요.',
     RECRUITMENT: '모집 인원를 입력해주세요.',
     DESCRIPTION: '이벤트 상세 내용을 입력해주세요.',
-    MAX_IMAGE: '최대 3장까지 등록이 가능합니다.',
+    MAX_IMAGE: `최대 ${MAX_POSTER}장까지 등록이 가능합니다.`,
     HOST_NAME: '업체(주최자)명을 입력해주세요.',
     HOST_PHONE: '전화번호를 입력해주세요.',
     INVALID_HOST_PHONE: '올바른 전화번호를 입력해주세요.',
@@ -53,7 +55,7 @@ const MENT_OPEN_EVENT = Object.freeze({
   },
 
   HELP_TEXT: {
-    IMAGE: '최소 1장의 사진을 등록해주세요. (최대 3장)',
+    IMAGE: `최소 1장의 사진을 등록해주세요. (최대 ${MAX_POSTER}장)`,
   },
 });
 
