@@ -3,6 +3,8 @@ import axios, { AxiosResponse } from 'axios';
 import Config from 'react-native-config';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
 import { refresh } from './auth';
 
 const { token, setIsLogin, resetToken, setToken } =
@@ -20,7 +22,13 @@ const fetcher = axios.create({
 });
 
 // TODO 사용안하면 지우기
-fetcher.interceptors.request.use((config) => {
+fetcher.interceptors.request.use(async (config) => {
+  const value = await AsyncStorage.getItem('authorize');
+  const data: AsyncAuthorizeStorage = JSON.parse(value ?? '');
+  if (data.state.token.refreshToken) {
+    // eslint-disable-next-line no-param-reassign
+    config.headers.Authorization = `Bearer ${data.state.token.accessToken}`;
+  }
   return config;
 });
 
