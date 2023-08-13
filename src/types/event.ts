@@ -6,7 +6,6 @@ interface Coordinate {
 }
 
 interface Event {
-  eventInfoId: number;
   eventTitle: string;
   fieldTypes: FieldCode[];
   eventDate: string;
