@@ -5,7 +5,7 @@ import { Event } from 'types/event';
 import useNavigator from 'hooks/navigator/useNavigator';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
-import EventRowCardSkeleton from 'components/suspense/skeleton/EventRowCardSkeleton/EventRowCardSkeleton';
+import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
 import { useId } from 'react';
 import eventCardListStyles from './EventCardList.style';
 
@@ -68,7 +68,7 @@ const EventCardList = ({
         {isLoading
           ? new Array(6)
               .fill(1)
-              .map((key, _idx) => <EventRowCardSkeleton key={_idx} />)
+              .map((key, _idx) => <EventCardSkeleton key={_idx} />)
           : events.map((event, eventId) => (
               <EventCard
                 key={`eventCard-${eventCardListid}${eventId}`}

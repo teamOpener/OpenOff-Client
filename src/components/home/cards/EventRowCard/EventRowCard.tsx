@@ -3,6 +3,7 @@ import Text from 'components/common/Text/Text';
 import { Image, View } from 'react-native';
 import { Event } from 'types/event';
 import fieldData from 'data/lists/fieldData';
+import { useId } from 'react';
 import eventRowCardStyles from './EventRowCard.style';
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 const EventRowCard = ({ event }: Props) => {
   const city = event.streetRoadAddress.split(' ');
+  const fieldId = useId();
   return (
     <View style={eventRowCardStyles.container}>
       <Image
@@ -19,8 +21,8 @@ const EventRowCard = ({ event }: Props) => {
       />
       <View style={eventRowCardStyles.eventInfo}>
         <View style={eventRowCardStyles.fieldBoxContainer}>
-          {event.fieldTypes.map((field) => (
-            <View style={eventRowCardStyles.fieldBox}>
+          {event.fieldTypes.map((field, _id) => (
+            <View key={`${fieldId}${_id}`} style={eventRowCardStyles.fieldBox}>
               <Text variant="body3" color="darkGrey">
                 {
                   fieldData.find((fieldElement) => fieldElement.value === field)

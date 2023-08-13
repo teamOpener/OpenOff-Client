@@ -37,7 +37,7 @@ const EventRowCardList = ({
         isHasNextSkeleton || isLoading ? (
           <>
             {new Array(6).fill(1).map((_, _idx) => (
-              <EventRowCardSkeleton key={_idx} />
+              <EventRowCardSkeleton key={`eventCard-skeleton-${_idx}`} />
             ))}
           </>
         ) : undefined
