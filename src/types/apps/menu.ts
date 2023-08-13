@@ -43,7 +43,7 @@ export type RootStackParamList = {
   CategoryEvent: {
     fieldValue: string;
   };
-  WishEvent: undefined;
+  BookmarkEvent: undefined;
   PopularEvent: undefined;
   Alert: undefined;
   EventDetail: {

@@ -8,7 +8,7 @@ import { Platform } from 'react-native';
 import DatePickScreen from 'screens/eventMap/DatePickScreen/DatePickScreen';
 import CategoryEventScreen from 'screens/home/CategoryEventScreen/CategoryEventScreen';
 import OpenEventScreen from 'screens/home/OpenEventScreen/OpenEventScreen';
-import WishEventScreen from 'screens/home/WishEventScreen/WishEventScreen';
+import BookmarkEventScreen from 'screens/home/BookmarkEventScreen/BookmarkEventScreen';
 import textStyles from 'styles/textStyles';
 import { colors } from 'styles/theme';
 import SearchAddressScreen from 'screens/home/SearchAddressScreen/SearchAddressScreen';
@@ -95,8 +95,8 @@ const Navigator = () => {
         }}
       />
       <Stack.Screen
-        name={StackMenu.WishEvent}
-        component={WishEventScreen}
+        name={StackMenu.BookmarkEvent}
+        component={BookmarkEventScreen}
         options={{
           ...TransitionPresets.SlideFromRightIOS,
           headerTitle: '찜한 이벤트',

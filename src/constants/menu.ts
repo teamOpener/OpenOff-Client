@@ -3,7 +3,7 @@ export const enum StackMenu {
   DatePick = 'DatePick',
   OpenEvent = 'OpenEvent',
   CategoryEvent = 'CategoryEvent',
-  WishEvent = 'WishEvent',
+  BookmarkEvent = 'BookmarkEvent',
   PopularEvent = 'PopularEvent',
   SearchAddress = 'SearchAddress',
   Alert = 'Alert',

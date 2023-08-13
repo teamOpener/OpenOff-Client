@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from 'styles/theme';
 
-const wishEventScreenStyles = StyleSheet.create({
+const bookmarkEventScreenStyles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     paddingLeft: 25,
@@ -10,4 +10,4 @@ const wishEventScreenStyles = StyleSheet.create({
   },
 });
 
-export default wishEventScreenStyles;
+export default bookmarkEventScreenStyles;
