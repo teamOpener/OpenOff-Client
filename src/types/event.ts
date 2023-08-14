@@ -6,6 +6,8 @@ interface Coordinate {
 }
 
 interface Event {
+  eventInfoId?: number;
+  bookmarkId?: number;
   eventTitle: string;
   fieldTypes: FieldCode[];
   eventDate: string;
