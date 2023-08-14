@@ -4,7 +4,7 @@ import { colors } from 'styles/theme';
 const bookmarkEventScreenStyles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    paddingLeft: 25,
+    paddingHorizontal: 25,
     backgroundColor: colors.background,
     flex: 1,
   },
