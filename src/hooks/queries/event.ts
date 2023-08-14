@@ -1,14 +1,14 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
-import fakeApi from 'apis/test';
-import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 import {
   getEventDetailInfo,
   getFieldEventLists,
   getPersonalEventLists,
   getVogueEventLists,
 } from 'apis/eventInstance';
+import fakeApi from 'apis/test';
 import { FieldCode } from 'constants/code';
+import queryKeys from 'constants/queryKeys';
+import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 
 // TODO: 생성
 export const useCreateEvent = (
@@ -95,6 +95,7 @@ export const useVogueEventLists = () => {
     () => getVogueEventLists(),
     {
       select: (data) => data.data,
+      suspense: false,
     },
   );
 };
