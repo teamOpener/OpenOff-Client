@@ -82,6 +82,11 @@ export type RootStackParamList = {
     eventId: number;
     eventIndex: number;
   };
+  UserProfileEdit: undefined;
+  UserInterest: undefined;
+  UserComment: undefined;
+  UserPasswordReset: undefined;
+  Scrap: undefined;
 };
 
 export type RootStackNavigationProp =

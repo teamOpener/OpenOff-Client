@@ -17,6 +17,11 @@ export const enum StackMenu {
   HostLedger = 'HostLedger',
   HostLedgerDetail = 'HostLedgerDetail',
   HostAlarm = 'HostAlarm',
+  UserProfileEdit = 'UserProfileEdit',
+  UserInterest = 'UserInterest',
+  UserComment = 'UserComment',
+  UserPasswordReset = 'UserPasswordReset',
+  Scrap = 'Scrap',
 }
 
 export const enum BottomTabMenu {
