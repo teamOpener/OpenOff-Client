@@ -1,4 +1,5 @@
 import {
+  StackNavigationOptions,
   TransitionPresets,
   createStackNavigator,
 } from '@react-navigation/stack';
@@ -9,8 +10,7 @@ import DatePickScreen from 'screens/eventMap/DatePickScreen/DatePickScreen';
 import CategoryEventScreen from 'screens/home/CategoryEventScreen/CategoryEventScreen';
 import OpenEventScreen from 'screens/home/OpenEventScreen/OpenEventScreen';
 import BookmarkEventScreen from 'screens/home/BookmarkEventScreen/BookmarkEventScreen';
-import textStyles from 'styles/textStyles';
-import { colors } from 'styles/theme';
+import { colors, fonts } from 'styles/theme';
 import SearchAddressScreen from 'screens/home/SearchAddressScreen/SearchAddressScreen';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import AlertScreen from 'screens/home/AlertScreen/AlertScreen';
@@ -31,6 +31,27 @@ import BottomTabNavigator from './BottomTabNavigator';
 const Stack = createStackNavigator();
 
 const Navigator = () => {
+  const defaultOptions: StackNavigationOptions = {
+    headerStyle: {
+      backgroundColor: colors.background,
+    },
+    headerTitleAlign: 'center',
+    headerTintColor: colors.white,
+    headerTitleStyle: {
+      fontFamily: fonts.semibold,
+      fontSize: 18,
+      color: colors.white,
+    },
+    headerLeft: BackButton,
+  };
+
+  const noTextOptions: StackNavigationOptions = {
+    ...defaultOptions,
+    headerTitleStyle: {
+      color: 'transparent',
+    },
+  };
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -64,14 +85,7 @@ const Navigator = () => {
       {/* home */}
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          headerLeft: BackButton,
+          ...noTextOptions,
         }}
         name={StackMenu.OpenEvent}
         component={OpenEventScreen}
@@ -82,16 +96,7 @@ const Navigator = () => {
         options={{
           ...TransitionPresets.SlideFromRightIOS,
           headerTitle: '카테고리',
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            ...textStyles.h3,
-            color: colors.white,
-          },
-          headerLeft: BackButton,
+          ...defaultOptions,
         }}
       />
       <Stack.Screen
@@ -100,16 +105,7 @@ const Navigator = () => {
         options={{
           ...TransitionPresets.SlideFromRightIOS,
           headerTitle: '찜한 이벤트',
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            ...textStyles.h3,
-            color: colors.white,
-          },
-          headerLeft: BackButton,
+          ...defaultOptions,
         }}
       />
       <Stack.Screen
@@ -126,34 +122,16 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
           headerTitle: '알림',
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            ...textStyles.h3,
-            color: colors.white,
-          },
-          headerLeft: BackButton,
+          ...defaultOptions,
         }}
         name={StackMenu.Alert}
         component={AlertScreen}
       />
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
           headerTitle: '인기 이벤트',
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            ...textStyles.h3,
-            color: colors.white,
-          },
-          headerLeft: BackButton,
+          ...defaultOptions,
         }}
         name={StackMenu.PopularEvent}
         component={PopularEventScreen}
@@ -161,17 +139,8 @@ const Navigator = () => {
       {/* map */}
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
           headerTitle: '날짜 선택',
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            ...textStyles.h3,
-            color: colors.white,
-          },
-          headerLeft: BackButton,
+          ...defaultOptions,
         }}
         name={StackMenu.DatePick}
         component={DatePickScreen}
@@ -180,42 +149,21 @@ const Navigator = () => {
       {/* Event */}
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          headerLeft: BackButton,
+          ...noTextOptions,
         }}
         name={StackMenu.EventDetail}
         component={EventDetailScreen}
       />
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          headerLeft: BackButton,
+          ...noTextOptions,
         }}
         name={StackMenu.EventSelect}
         component={EventSelectScreen}
       />
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          headerLeft: BackButton,
+          ...noTextOptions,
         }}
         name={StackMenu.EventApply}
         component={EventApplyScreen}
@@ -223,17 +171,9 @@ const Navigator = () => {
       {/* user event */}
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          // eslint-disable-next-line react/no-unstable-nested-components
+          ...noTextOptions,
           headerLeft: () => {
-            // eslint-disable-next-line react/jsx-no-useless-fragment
-            return <></>;
+            return null;
           },
           headerRight: ExitButton,
         }}
@@ -242,17 +182,9 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          // eslint-disable-next-line react/no-unstable-nested-components
+          ...noTextOptions,
           headerLeft: () => {
-            // eslint-disable-next-line react/jsx-no-useless-fragment
-            return <></>;
+            return null;
           },
           headerRight: ExitButton,
         }}
@@ -262,14 +194,7 @@ const Navigator = () => {
       {/* host event */}
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          headerLeft: BackButton,
+          ...noTextOptions,
         }}
         name={StackMenu.HostConsole}
         component={HostConsoleScreen}
@@ -286,42 +211,21 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          headerLeft: BackButton,
+          ...noTextOptions,
         }}
         name={StackMenu.HostLedger}
         component={HostLedgerScreen}
       />
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          headerLeft: BackButton,
+          ...noTextOptions,
         }}
         name={StackMenu.HostLedgerDetail}
         component={HostLedgerDetailScreen}
       />
       <Stack.Screen
         options={{
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
-          headerTintColor: colors.white,
-          headerTitleStyle: {
-            color: 'transparent',
-          },
-          headerLeft: BackButton,
+          ...noTextOptions,
         }}
         name={StackMenu.HostAlarm}
         component={HostAlarmScreen}
