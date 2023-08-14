@@ -1,20 +1,44 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { Image, View } from 'react-native';
-import { Event } from 'types/event';
 import fieldData from 'data/lists/fieldData';
-import { useId } from 'react';
+import { useContext, useId } from 'react';
+import { Image, Pressable, View } from 'react-native';
+import { Event } from 'types/event';
+import DialogContext from 'utils/DialogContext';
 import eventRowCardStyles from './EventRowCard.style';
 
 interface Props {
   event: Event;
+  handleEventPress: (eventId: number) => void;
 }
 
-const EventRowCard = ({ event }: Props) => {
+const EventRowCard = ({ event, handleEventPress }: Props) => {
+  const { openDialog } = useContext(DialogContext);
   const city = event.streetRoadAddress.split(' ');
   const fieldId = useId();
+
+  const handlePress = () => {
+    if (!event.bookmarkId && !event.eventInfoId) {
+      openDialog({
+        type: 'validate',
+        text: '잘못된 접근입니다!',
+      });
+      return;
+    }
+    if (event.bookmarkId) {
+      handleEventPress(event.bookmarkId);
+      return;
+    }
+    if (event.eventInfoId) {
+      handleEventPress(event.eventInfoId);
+    }
+  };
+
   return (
-    <View style={eventRowCardStyles.container}>
+    <Pressable
+      style={eventRowCardStyles.container}
+      onPress={() => handlePress()}
+    >
       <Image
         style={eventRowCardStyles.image}
         source={{ uri: event.mainImageUrl }}
@@ -51,7 +75,7 @@ const EventRowCard = ({ event }: Props) => {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

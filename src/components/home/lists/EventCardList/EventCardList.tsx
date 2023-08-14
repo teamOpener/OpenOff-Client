@@ -1,18 +1,18 @@
-import Text from 'components/common/Text/Text';
-import EventCard from 'components/home/cards/EventCard/EventCard';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
-import { Event } from 'types/event';
-import useNavigator from 'hooks/navigator/useNavigator';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
+import Text from 'components/common/Text/Text';
+import EventCard from 'components/home/cards/EventCard/EventCard';
 import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
+import useNavigator from 'hooks/navigator/useNavigator';
+import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
 import { useId } from 'react';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import eventCardListStyles from './EventCardList.style';
 
 interface Props {
   title: string;
   subTitle: string;
-  events?: Event[];
+  events?: MainTapEventInfoResponseDto[];
   type?: 'popular' | 'custom';
   isLoading: boolean;
 }
@@ -29,8 +29,8 @@ const EventCardList = ({
 
   const eventCardListid = useId();
 
-  const handlePress = () => {
-    stackNavigation.navigate('EventDetail', { id: 1 });
+  const handleEventPress = (eventId: number) => {
+    stackNavigation.navigate('EventDetail', { id: eventId });
   };
 
   const handleShowPopularEvent = () => {
@@ -73,7 +73,7 @@ const EventCardList = ({
               <EventCard
                 key={`eventCard-${eventCardListid}${eventId}`}
                 event={event}
-                handlePress={handlePress}
+                handlePress={handleEventPress}
               />
             ))}
       </ScrollView>

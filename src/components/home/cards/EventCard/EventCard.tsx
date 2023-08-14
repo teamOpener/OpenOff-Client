@@ -1,14 +1,14 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { Dimensions, Image, TouchableOpacity, View } from 'react-native';
-import { Event } from 'types/event';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
+import { Dimensions, Image, TouchableOpacity, View } from 'react-native';
 import eventCardStyles from './EventCard.style';
 
 interface Props {
-  event: Event;
+  event: MainTapEventInfoResponseDto;
   type?: 'default' | 'scrap';
-  handlePress: () => void;
+  handlePress: (eventId: number) => void;
 }
 
 const EventCard = ({ event, type = 'default', handlePress }: Props) => {
@@ -17,7 +17,10 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
 
   return (
     <View style={eventCardStyles.container}>
-      <TouchableOpacity activeOpacity={0.8} onPress={handlePress}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => handlePress(event.eventInfoId)}
+      >
         <Image
           style={{
             ...eventCardStyles.image,
