@@ -20,7 +20,7 @@ const userScreenStyles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 15,
     fontFamily: fonts.semibold,
-    fontColor: colors.white,
+    color: colors.white,
   },
   userInfo: {
     justifyContent: 'center',
