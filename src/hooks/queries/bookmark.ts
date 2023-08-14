@@ -1,7 +1,7 @@
-/* eslint-disable import/prefer-default-export */
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getBookmarkEventLists } from 'apis/bookmark';
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
+import { getBookmarkEventLists, updateBookmarkEvent } from 'apis/bookmark';
 import queryKeys from 'constants/queryKeys';
+import { ApiErrorResponse } from 'types/ApiResponse';
 
 export const useBookmarkEventLists = () => {
   return useInfiniteQuery(
@@ -16,6 +16,20 @@ export const useBookmarkEventLists = () => {
         return lastPage.data?.content[lastIdx - 1].bookmarkId;
       },
       suspense: false,
+    },
+  );
+};
+
+export const useBookmark = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (eventInfoId: number) => updateBookmarkEvent(eventInfoId),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
     },
   );
 };
