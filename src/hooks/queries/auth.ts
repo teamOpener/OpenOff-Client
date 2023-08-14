@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import { applyToken } from 'apis';
 import {
   checkAuthSms,
   checkEmail,
@@ -33,7 +32,6 @@ export const useNormalLogin = (
         accessToken: normalToken.data?.accessToken,
         refreshToken: normalToken.data?.refreshToken,
       });
-      applyToken(normalToken.data?.accessToken ?? '');
       const myInfo = await getMyInfo();
       return myInfo;
     },
@@ -56,7 +54,6 @@ export const useSocialLogin = (
         accessToken: normalToken.data?.accessToken,
         refreshToken: normalToken.data?.refreshToken,
       });
-      applyToken(normalToken.data?.accessToken ?? '');
       const myInfo = await getMyInfo();
       return myInfo;
     },
@@ -84,7 +81,6 @@ export const useNormalSignUp = (
 ) => {
   return useMutation((data: NormalSignInRequestDto) => normalSignUp(data), {
     onSuccess: (data) => {
-      applyToken(data.data?.accessToken ?? '');
       setToken({
         accessToken: data.data?.accessToken,
         refreshToken: data.data?.refreshToken,
