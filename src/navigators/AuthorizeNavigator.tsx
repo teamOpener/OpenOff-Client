@@ -23,10 +23,6 @@ import { Action, JoinInfo } from 'types/join';
 
 const Stack = createStackNavigator();
 
-interface Props {
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 const userInfoReducer = (state: JoinInfo, action: Action): JoinInfo => {
   switch (action.type) {
     case UserInfoStatus.SET_NAME:

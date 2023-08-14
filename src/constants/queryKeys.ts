@@ -6,15 +6,21 @@ const DOMAIN = {
   EVENT: 'EVENT',
   PARTICIPANT: 'PARTICIPANT',
   HOST: 'HOST',
+  BOOKMARK: 'BOOKMARK',
 };
 
 const userKeys = {
   all: [DOMAIN.USER],
+  myInfo: [DOMAIN.USER, 'my-info'],
 };
 
 const eventKeys = {
   all: [DOMAIN.EVENT],
   byId: (id: number) => [DOMAIN.EVENT, 'detail', id],
+  personalList: [DOMAIN.EVENT, 'personal-list'],
+  vogueList: [DOMAIN.EVENT, 'vogue-list'],
+  vogueInfiniteList: [DOMAIN.EVENT, 'vogue-infinite-list'],
+  listByField: (type: FieldCode) => [DOMAIN.EVENT, 'list', type],
 };
 
 const participantKeys = {
@@ -41,11 +47,17 @@ const hostKeys = {
   ],
 };
 
+const bookmarkKeys = {
+  all: [DOMAIN.BOOKMARK],
+  list: [DOMAIN.BOOKMARK, 'list'],
+};
+
 const queryKeys = {
   userKeys,
   eventKeys,
   participantKeys,
   hostKeys,
+  bookmarkKeys,
 };
 
 export default queryKeys;

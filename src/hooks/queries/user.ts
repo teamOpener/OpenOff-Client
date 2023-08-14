@@ -1,6 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { updateInterestField } from 'apis/interest';
-import { checkSms, sendSms, updateOnBoarding } from 'apis/user';
+import { checkSms, getMyInfo, sendSms, updateOnBoarding } from 'apis/user';
+import queryKeys from 'constants/queryKeys';
 import AddInterestRequestDto from 'models/field/request/AddInterestRequestDto';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
 import UserOnboardingRequestDto from 'models/user/request/UserOnboardingRequestDto';
@@ -45,4 +46,10 @@ export const useConcludeOnBoarding = () => {
       useErrorBoundary: false,
     },
   );
+};
+
+export const useMyInfo = () => {
+  return useQuery([...queryKeys.userKeys.myInfo], () => getMyInfo(), {
+    select: (data) => data.data,
+  });
 };

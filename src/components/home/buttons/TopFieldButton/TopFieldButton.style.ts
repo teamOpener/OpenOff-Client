@@ -2,10 +2,8 @@ import { Platform, StyleSheet } from 'react-native';
 
 const topFieldButtonStyles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 36,
   },
   fieldText: {
     marginHorizontal: 6,

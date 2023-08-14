@@ -3,20 +3,22 @@ import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import EventRowCard from 'components/home/cards/EventRowCard/EventRowCard';
 import EventRowCardSkeleton from 'components/suspense/skeleton/EventRowCardSkeleton/EventRowCardSkeleton';
 import useNavigator from 'hooks/navigator/useNavigator';
+import { MyBookmarkEventResponseDto } from 'models/event/response/MyBookmarkEventResponseDto';
 import { FlatList, View } from 'react-native';
 import { InfiniteScrollApiResponse } from 'types/ApiResponse';
-import { Event } from 'types/event';
-import eventRowCardListStyles from './EventRowCardList.style';
+import bookmarkCardListStyles from './BookmarkCardList.style';
 
 interface Props {
-  pageData?: InfiniteData<InfiniteScrollApiResponse<Event>>;
+  pageData?: InfiniteData<
+    InfiniteScrollApiResponse<MyBookmarkEventResponseDto>
+  >;
   isFetching: boolean;
   isLoading: boolean;
   hasNextPage?: boolean;
   handleEndReached: () => void;
 }
 
-const EventRowCardList = ({
+const BookmarkCardList = ({
   pageData,
   isFetching,
   isLoading,
@@ -35,8 +37,19 @@ const EventRowCardList = ({
     });
   };
 
+  const formattedEvent = (event: MyBookmarkEventResponseDto) => ({
+    eventInfoId: event.eventInfoId,
+    eventTitle: event.eventTitle,
+    streetRoadAddress: event.streetRoadAddress,
+    totalApplicantCount: event.totalApplicantCount,
+    isBookmarked: true,
+    fieldTypes: event.fieldTypeList,
+    mainImageUrl: event.eventMainImageUrl,
+    eventDate: event.eventDateList[0],
+  });
+
   return (
-    <View style={eventRowCardListStyles.container}>
+    <View style={bookmarkCardListStyles.container}>
       {flatEventRowList?.length === 0 ? (
         <EmptyScreen content="이런! 아직 이벤트가 존재하지 않아요!" />
       ) : (
@@ -47,7 +60,7 @@ const EventRowCardList = ({
             <EventRowCard
               key={`eventCard-${event.index}`}
               handleEventPress={handleEventPress}
-              event={event.item}
+              event={formattedEvent(event.item)}
             />
           )}
           ListFooterComponent={
@@ -67,4 +80,4 @@ const EventRowCardList = ({
   );
 };
 
-export default EventRowCardList;
+export default BookmarkCardList;

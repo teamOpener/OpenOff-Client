@@ -13,7 +13,7 @@ const loginInputStyles = StyleSheet.create({
   },
   validateStatus: {
     position: 'absolute',
-    top: 15,
+    top: 10,
     right: 10,
   },
 });

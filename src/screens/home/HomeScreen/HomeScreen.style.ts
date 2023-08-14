@@ -10,6 +10,7 @@ const homeScreenStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     paddingLeft: 25,
+    marginBottom: 30,
   },
   logo: {
     width: 50,

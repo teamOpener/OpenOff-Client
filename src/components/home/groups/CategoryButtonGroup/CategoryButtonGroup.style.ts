@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from 'styles/theme';
 
 const categoryButtonGroupStyles = StyleSheet.create({
   titleContainer: {
@@ -18,6 +19,7 @@ const categoryButtonGroupStyles = StyleSheet.create({
     height: 85,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.background,
   },
   buttonContainer: {
     margin: 5,
@@ -28,7 +30,7 @@ const categoryButtonGroupStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    backgroundColor: 'rgba(25, 25, 25, 0.70)',
+    backgroundColor: 'rgba(30, 30, 30, 0.70)',
   },
 });
 
