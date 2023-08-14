@@ -54,11 +54,12 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
           </Text>
         </View>
       </SpaceLayout>
-
-      <BookmarkButton
-        isEventBookmarked={event.isBookmarked}
-        eventInfoId={event.eventInfoId}
-      />
+      {type === 'default' && (
+        <BookmarkButton
+          isEventBookmarked={event.isBookmarked}
+          eventInfoId={event.eventInfoId}
+        />
+      )}
     </View>
   );
 };
