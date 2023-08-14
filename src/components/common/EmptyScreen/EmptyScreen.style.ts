@@ -8,6 +8,7 @@ const emptyScreenStyles = StyleSheet.create({
     gap: 20,
   },
   emptyImage: {
+    marginTop: -50,
     width: 100,
     height: 100,
   },

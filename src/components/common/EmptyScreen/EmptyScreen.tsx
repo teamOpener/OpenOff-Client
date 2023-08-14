@@ -13,7 +13,7 @@ const EmptyScreen = ({ content }: Props) => {
         style={emptyScreenStyles.emptyImage}
         source={require('../../../assets/images/empty.png')}
       />
-      <Text variant="h4" color="main">
+      <Text variant="body2" color="main">
         {content}
       </Text>
     </View>
