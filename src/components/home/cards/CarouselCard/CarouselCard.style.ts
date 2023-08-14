@@ -10,12 +10,10 @@ const carouselCardStyle = StyleSheet.create({
     overflow: 'hidden',
   },
   carouselInfo: {
-    width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    flexDirection: 'column',
-    position: 'relative',
+    paddingBottom: 25,
   },
   backgroundImage: {
     width: '100%',
@@ -23,7 +21,7 @@ const carouselCardStyle = StyleSheet.create({
   },
   fieldContainer: {
     marginTop: 10,
-    height: 26,
+    paddingVertical: 6,
     paddingHorizontal: 10,
     borderWidth: 1,
     borderRadius: 15.5,
