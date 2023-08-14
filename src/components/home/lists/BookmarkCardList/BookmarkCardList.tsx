@@ -29,14 +29,24 @@ const BookmarkCardList = ({
 
   const flatEventRowList = pageData?.pages.flatMap((page) => page.data.content);
 
-  const isHasNextSkeleton =
-    hasNextPage && flatEventRowList?.length !== 0 && isFetching;
+  const isHasNextSkeleton = hasNextPage && isFetching;
 
   const handleEventPress = (eventId: number) => {
     stackNavigation.navigate('EventDetail', {
       id: eventId,
     });
   };
+
+  const formattedEvent = (event: MyBookmarkEventResponseDto) => ({
+    eventInfoId: event.eventInfoId,
+    eventTitle: event.eventTitle,
+    streetRoadAddress: event.streetRoadAddress,
+    totalApplicantCount: event.totalApplicantCount,
+    isBookmarked: true,
+    fieldTypes: event.fieldTypeList,
+    mainImageUrl: event.eventMainImageUrl,
+    eventDate: event.eventDateList[0],
+  });
 
   return (
     <View style={bookmarkCardListStyles.container}>
@@ -50,16 +60,7 @@ const BookmarkCardList = ({
             <EventRowCard
               key={`eventCard-${event.index}`}
               handleEventPress={handleEventPress}
-              event={{
-                eventInfoId: event.item.eventInfoId,
-                eventTitle: event.item.eventTitle,
-                streetRoadAddress: event.item.streetRoadAddress,
-                totalApplicantCount: event.item.totalApplicantCount,
-                isBookmarked: true,
-                fieldTypes: event.item.fieldTypeList,
-                mainImageUrl: event.item.eventMainImageUrl,
-                eventDate: event.item.eventDateList[0],
-              }}
+              event={formattedEvent(event.item)}
             />
           )}
           ListFooterComponent={

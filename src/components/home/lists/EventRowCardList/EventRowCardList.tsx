@@ -27,8 +27,7 @@ const EventRowCardList = ({
 
   const flatEventRowList = pageData?.pages.flatMap((page) => page.data.content);
 
-  const isHasNextSkeleton =
-    hasNextPage && flatEventRowList?.length !== 0 && isFetching;
+  const isHasNextSkeleton = hasNextPage && isFetching;
 
   const handleEventPress = (eventId: number) => {
     stackNavigation.navigate('EventDetail', {
