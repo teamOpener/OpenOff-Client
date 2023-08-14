@@ -1,5 +1,12 @@
-import { Event } from 'types/event';
+import { FieldCode } from 'constants/code';
 
-export interface MyBookmarkEventResponseDto extends Event {
-  bookmarkId: string;
+export interface MyBookmarkEventResponseDto {
+  bookmarkId: number;
+  eventDateList: string[];
+  eventInfoId: number;
+  eventTitle: string;
+  eventMainImageUrl: string;
+  fieldTypeList: FieldCode[];
+  streetRoadAddress: string;
+  totalApplicantCount: number;
 }
