@@ -53,7 +53,7 @@ const EventRowCardList = ({
           ListFooterComponent={
             isHasNextSkeleton || isLoading ? (
               <>
-                {new Array(6).fill(1).map((_, _idx) => (
+                {new Array(3).fill(1).map((_, _idx) => (
                   <EventRowCardSkeleton key={`eventCard-skeleton-${_idx}`} />
                 ))}
               </>

@@ -66,7 +66,7 @@ const EventCardList = ({
         showsHorizontalScrollIndicator={false}
       >
         {isLoading
-          ? new Array(6)
+          ? new Array(3)
               .fill(1)
               .map((key, _idx) => <EventCardSkeleton key={_idx} />)
           : events.map((event, eventId) => (
