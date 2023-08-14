@@ -1,13 +1,13 @@
-import { View, Pressable, TouchableOpacity, ScrollView } from 'react-native';
-import Text from 'components/common/Text/Text';
-import Icon from 'components/common/Icon/Icon';
-import UserFieldBoxGroup from 'components/user/groups/UserFieldBoxGroup/UserFieldBoxGroup';
-import fieldData from 'data/lists/fieldData';
-import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
 import Divider from 'components/common/Divider/Divider';
+import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
-import { useMyInfo } from 'hooks/queries/user';
+import Text from 'components/common/Text/Text';
+import UserFieldBoxGroup from 'components/user/groups/UserFieldBoxGroup/UserFieldBoxGroup';
+import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
+import fieldData from 'data/lists/fieldData';
 import useNavigator from 'hooks/navigator/useNavigator';
+import { useMyInfo } from 'hooks/queries/user';
+import { Pressable, ScrollView, TouchableOpacity, View } from 'react-native';
 import userScreenStyles from './UserScreen.style';
 
 const UserScreen = () => {
