@@ -1,5 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
+import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
 import { Dimensions, Image, TouchableOpacity, View } from 'react-native';
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const EventCard = ({ event, type = 'default', handlePress }: Props) => {
+  const TOTAL_APPLICANT_MENT = '명 신청중';
   const calcWidth =
     type === 'default' ? 200 : Dimensions.get('window').width / 2 - 30;
 
@@ -47,19 +49,15 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
         <View style={eventCardStyles.iconText}>
           <Icon name="IconUser" size={10} fill="main" />
           <Text variant="body3" color="white">
-            {event.totalApplicantCount}명 신청중
+            {`${event.totalApplicantCount}${TOTAL_APPLICANT_MENT}`}
           </Text>
         </View>
       </SpaceLayout>
 
-      <TouchableOpacity style={eventCardStyles.likeButton}>
-        {type === 'default' &&
-          (event.isBookmarked ? (
-            <Icon name="IconFillHeart" size={20} fill="main" />
-          ) : (
-            <Icon name="IconHeart" size={20} />
-          ))}
-      </TouchableOpacity>
+      <BookmarkButton
+        isEventBookmarked={event.isBookmarked}
+        eventInfoId={event.eventInfoId}
+      />
     </View>
   );
 };

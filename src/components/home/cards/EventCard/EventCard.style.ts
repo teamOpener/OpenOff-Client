@@ -23,13 +23,6 @@ const eventCardStyles = StyleSheet.create({
     alignItems: 'center',
     gap: 3,
   },
-  likeButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 5,
-    right: 5,
-  },
 });
 
 export default eventCardStyles;

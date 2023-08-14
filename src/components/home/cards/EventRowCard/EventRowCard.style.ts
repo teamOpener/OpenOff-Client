@@ -4,6 +4,7 @@ import { colors, fonts } from 'styles/theme';
 const eventRowCardStyles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width - 50,
+    position: 'relative',
     borderRadius: 6,
     alignItems: 'center',
     flexDirection: 'row',
