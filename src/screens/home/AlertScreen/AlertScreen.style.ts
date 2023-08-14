@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 
 const alertScreenStyles = StyleSheet.create({
   container: {
-    padding: 49,
+    paddingTop: 5,
+    paddingHorizontal: 30,
   },
 });
 

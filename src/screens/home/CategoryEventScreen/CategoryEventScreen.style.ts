@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { colors, layouts } from 'styles/theme';
 
 const categoryEventScreenStyles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    paddingHorizontal: 25,
+    paddingHorizontal: layouts.PADDING,
     backgroundColor: colors.background,
     flex: 1,
   },
