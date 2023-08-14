@@ -1,17 +1,17 @@
-import { useCallback, useEffect } from 'react';
-import { foregroundListener, requestAlarmPermission } from 'services/fcm';
 import Icon from 'components/common/Icon/Icon';
 import AdvertisementCarousel from 'components/home/carousels/AdvertisementCarousel/AdvertisementCarousel';
 import FloatingButton from 'components/home/floatingbutton/FloatingButton';
 import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/CategoryButtonGroup';
 import EventCardList from 'components/home/lists/EventCardList/EventCardList';
 import { StackMenu } from 'constants/menu';
-import advertisementList from 'mocks/lists/advertisementList';
+import fieldData from 'data/lists/fieldData';
 import useNavigator from 'hooks/navigator/useNavigator';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { usePersonalEventLists, useVogueEventLists } from 'hooks/queries/event';
 import { useMyInfo } from 'hooks/queries/user';
-import fieldData from 'data/lists/fieldData';
+import advertisementList from 'mocks/lists/advertisementList';
+import { useCallback, useEffect } from 'react';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { foregroundListener, requestAlarmPermission } from 'services/fcm';
 import homeScreenStyles from './HomeScreen.style';
 
 const HomeScreen = () => {

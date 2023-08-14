@@ -1,6 +1,6 @@
-import EventRowCardList from 'components/home/lists/EventRowCardList/EventRowCardList';
-import { View } from 'react-native';
+import BookmarkCardList from 'components/home/lists/BookmarkCardList/BookmarkCardList';
 import { useBookmarkEventLists } from 'hooks/queries/bookmark';
+import { View } from 'react-native';
 import bookmarkEventScreenStyles from './BookmarkEventScreen.style';
 
 const BookmarkEventScreen = () => {
@@ -18,7 +18,7 @@ const BookmarkEventScreen = () => {
 
   return (
     <View style={bookmarkEventScreenStyles.container}>
-      <EventRowCardList
+      <BookmarkCardList
         pageData={bookmarkEventLists}
         isFetching={isFetching}
         isLoading={isLoading}
