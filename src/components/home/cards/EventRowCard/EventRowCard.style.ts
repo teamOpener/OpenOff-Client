@@ -1,10 +1,8 @@
-import { Dimensions, Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const eventRowCardStyles = StyleSheet.create({
   container: {
-    width: Dimensions.get('window').width - 50,
-    position: 'relative',
     borderRadius: 6,
     alignItems: 'center',
     flexDirection: 'row',
@@ -48,6 +46,11 @@ const eventRowCardStyles = StyleSheet.create({
     marginRight: 5,
     gap: 3,
     alignItems: 'center',
+  },
+  bookmarkButtonWrapper: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
   },
 });
 

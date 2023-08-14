@@ -44,12 +44,16 @@ const BookmarkButton = ({
     >
       {(type === 'default' || type === 'rowEvent') &&
         (isBookmarked ? (
-          <Icon name="IconFillHeart" size={20} fill="main" />
+          <Icon
+            name="IconFillHeart"
+            size={type === 'rowEvent' ? 16 : 20}
+            fill="main"
+          />
         ) : (
           <Icon
             name="IconHeart"
-            size={20}
-            fill={type === 'rowEvent' ? 'background' : 'white'}
+            size={type === 'rowEvent' ? 16 : 20}
+            fill={type === 'rowEvent' ? 'darkGrey' : 'white'}
           />
         ))}
     </TouchableOpacity>

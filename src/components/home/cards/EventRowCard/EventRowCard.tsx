@@ -85,11 +85,13 @@ const EventRowCard = ({ event, handleEventPress }: Props) => {
           </View>
         </View>
       </View>
-      <BookmarkButton
-        eventInfoId={event.eventInfoId}
-        isEventBookmarked={event.isBookmarked}
-        type="rowEvent"
-      />
+      <View style={eventRowCardStyles.bookmarkButtonWrapper}>
+        <BookmarkButton
+          eventInfoId={event.eventInfoId}
+          isEventBookmarked={event.isBookmarked}
+          type="rowEvent"
+        />
+      </View>
     </View>
   );
 };
