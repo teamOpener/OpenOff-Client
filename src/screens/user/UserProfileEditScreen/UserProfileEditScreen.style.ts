@@ -43,7 +43,6 @@ const userProfileEditScreenStyles = StyleSheet.create({
     lineHeight: 10 * 1.4,
     fontFamily: fonts.semibold,
     color: colors.white,
-    underline: { textDecorationLine: 'underline' },
   },
 });
 
