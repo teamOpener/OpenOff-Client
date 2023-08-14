@@ -1,9 +1,9 @@
 /* eslint-disable no-return-assign */
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosResponse } from 'axios';
 import Config from 'react-native-config';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
 import { refresh } from './auth';
 
@@ -25,7 +25,10 @@ const fetcher = axios.create({
 fetcher.interceptors.request.use(async (config) => {
   const value = await AsyncStorage.getItem('authorize');
   const data: AsyncAuthorizeStorage = JSON.parse(value ?? '');
-  if (data.state.token.refreshToken) {
+  if (
+    data.state.token.refreshToken &&
+    fetcher.defaults.headers.Authorization === null
+  ) {
     // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${data.state.token.accessToken}`;
   }
