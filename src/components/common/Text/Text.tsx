@@ -20,8 +20,10 @@ export default function Text({
         variant && textStyles[variant],
         {
           color: color ? colors[color] : colors.white,
-          ...(style as object),
+          includeFontPadding: false,
+          textAlignVertical: 'center',
         },
+        style,
       ]}
       {...rest}
     />
