@@ -1,11 +1,12 @@
 import fetcher from 'apis';
+import { ApiResponse, InfiniteScrollApiResponse } from 'types/ApiResponse';
 import EventFieldListRequestDto from 'models/event/request/EventFieldListRequestDto';
 import EventVogueListRequestDto from 'models/event/request/EventVogueListRequestDto';
 import { DetailEventInfoResponseDto } from 'models/event/response/DetailEventInfoResponseDto';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
 import { HostEventInfoRequestDto } from 'models/ledger/request/HostEventInfoRequestDto';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
-import { ApiResponse, InfiniteScrollApiResponse } from 'types/ApiResponse';
+import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 
 export const getHostEventLists = async (
   params: HostEventInfoRequestDto,
@@ -47,5 +48,12 @@ export const getFieldEventLists = async (
       params,
     },
   );
+  return response.data;
+};
+
+export const createEvent = async (
+  data: CreateNewEventRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.post(`/event-instance/create`, data);
   return response.data;
 };

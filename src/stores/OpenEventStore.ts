@@ -18,6 +18,7 @@ export const initEventForm: EventForm = {
   imageBuilders: [],
   additionalInformation: [],
   hostName: null,
+  staffIdList: [],
   hostPhoneNumber: null,
   hostEmail: null,
 };
@@ -34,6 +35,7 @@ export const initEventFormErrMsg: EventFormError = {
   imageUrls: null,
   additionalInformation: null,
   hostName: null,
+  staffIdList: null,
   hostPhoneNumber: null,
   hostEmail: null,
 };

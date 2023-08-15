@@ -1,8 +1,8 @@
-import { FieldType } from '../entity/FieldType';
+import { FieldCode } from 'constants/code';
 import { ImageUrlList } from '../entity/ImageUrlList';
 
 export interface CreateNewEventRequestDto {
-  fieldTypeList: FieldType[];
+  fieldTypeList: FieldCode[];
   title: string;
   applicationStartDate: string;
   applicationEndDate: string;
@@ -15,7 +15,7 @@ export interface CreateNewEventRequestDto {
   imageDataList: ImageUrlList[];
   extraQuestionList: string[];
   hostName: string;
+  staffIdList: string[];
   hostPhoneNumber: string;
   hostEmail: string;
-  //   TODO: 주최자 추가
 }

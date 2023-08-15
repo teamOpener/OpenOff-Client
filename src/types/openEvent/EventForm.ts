@@ -22,6 +22,7 @@ export interface EventForm {
   imageBuilders: ImageBuilder[];
   additionalInformation: string[];
   hostName: string | null;
+  staffIdList: string[] | null;
   hostPhoneNumber: string | null;
   hostEmail: string | null;
 }

@@ -31,6 +31,10 @@ const MENT_OPEN_EVENT = Object.freeze({
     HOST_EMAIL: '이메일',
   },
 
+  LOADING: {
+    CREATE: '이벤트 업로드 중이에요!',
+  },
+
   ERROR: {
     MAX_FIELD: '최대 3개 장르까지 선택 가능합니다.',
     ADDRESS: '이벤트 장소를 등록해주세요.',
