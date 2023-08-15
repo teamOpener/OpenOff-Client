@@ -20,10 +20,12 @@ const inputStyles = StyleSheet.create({
     color: colors.white,
   } as TextStyle,
   textInputContainer: {
+    alignItems: 'center',
     paddingVertical: Platform.select({
       android: getPixelSize(7),
       ios: 7,
     }),
+    paddingBottom: 13 * 0.2 + 7,
   },
 });
 

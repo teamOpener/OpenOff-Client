@@ -13,6 +13,7 @@ const essentialInputStyles = StyleSheet.create({
       android: getPixelSize(14),
       ios: 14,
     }),
+    paddingBottom: 14 + 15 * 0.4,
     paddingHorizontal: 16,
     borderRadius: 8,
     borderWidth: 1.5,

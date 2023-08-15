@@ -14,6 +14,7 @@ const baseInfoInputStyles = StyleSheet.create({
   input: {
     flex: 1,
     paddingVertical: 6,
+    paddingBottom: 18 * 0.2 + 6,
     borderBottomWidth: 1,
     backgroundColor: 'transparent',
     ...textStyles.body1,
