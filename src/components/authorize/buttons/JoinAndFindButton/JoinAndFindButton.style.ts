@@ -4,6 +4,7 @@ import { StyleSheet, TextStyle } from 'react-native';
 const joinAndFindButtonStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignSelf: 'center',
   },
   buttonContainer: {
     alignItems: 'center',
