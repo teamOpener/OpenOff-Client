@@ -12,7 +12,7 @@ export const initEventForm: EventForm = {
     roadAddress: null,
     detailAddress: null,
   },
-  cost: null,
+  cost: 0,
   recruitmentNumber: null,
   description: null,
   imageBuilders: [],
