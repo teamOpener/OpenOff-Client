@@ -26,6 +26,10 @@ const UserScreen = () => {
     stackNavigation.navigate('UserProfileEdit');
   };
 
+  const handleResetInterest = () => {
+    stackNavigation.navigate('UserInterest');
+  };
+
   return (
     <View style={userScreenStyles.container}>
       <View style={userScreenStyles.userInfo}>
@@ -46,7 +50,10 @@ const UserScreen = () => {
         </View>
 
         <View style={userScreenStyles.fieldContainer}>
-          <TouchableOpacity style={userScreenStyles.fieldResetButton}>
+          <TouchableOpacity
+            onPress={handleResetInterest}
+            style={userScreenStyles.fieldResetButton}
+          >
             <Icon name="IconPlace" size={16} fill="main" />
             <Text style={userScreenStyles.fieldResetText}>
               {USER_INTEREST_FIELD}
