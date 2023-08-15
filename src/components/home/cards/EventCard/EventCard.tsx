@@ -18,7 +18,7 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
     type === 'default' ? 200 : Dimensions.get('window').width / 2 - 30;
 
   return (
-    <View style={eventCardStyles.container}>
+    <View style={[eventCardStyles.container, { width: calcWidth }]}>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => handlePress(event.eventInfoId)}
@@ -37,18 +37,19 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
         <Text
           color={type === 'default' ? 'white' : 'main'}
           style={eventCardStyles.titleText}
+          numberOfLines={1}
         >
           {event.eventTitle}
         </Text>
         <View style={eventCardStyles.iconText}>
           <Icon name="IconPlace" size={10} fill="main" />
-          <Text variant="body3" color="white">
+          <Text variant="body3" numberOfLines={1}>
             {event.streetRoadAddress}
           </Text>
         </View>
         <View style={eventCardStyles.iconText}>
           <Icon name="IconUser" size={10} fill="main" />
-          <Text variant="body3" color="white">
+          <Text variant="body3" numberOfLines={1}>
             {`${event.totalApplicantCount}${TOTAL_APPLICANT_MENT}`}
           </Text>
         </View>

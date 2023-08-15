@@ -10,6 +10,7 @@ const eventRowCardStyles = StyleSheet.create({
     backgroundColor: colors.white,
     marginVertical: 5,
     padding: 10,
+    flex: 1,
   },
   image: {
     width: 75,
@@ -17,6 +18,7 @@ const eventRowCardStyles = StyleSheet.create({
     borderRadius: 5,
   },
   eventInfo: {
+    flex: 1,
     gap: Platform.OS === 'ios' ? 2 : 0,
     alignItems: 'flex-start',
     justifyContent: 'center',

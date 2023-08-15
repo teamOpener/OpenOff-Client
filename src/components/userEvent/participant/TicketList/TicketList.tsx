@@ -28,8 +28,12 @@ const TicketList = ({
     >
       <View style={ticketListStyles.info}>
         <View>
-          <Text style={ticketListStyles.titleText}>{eventTitle}</Text>
-          <Text>{ticketListDateFormatter(eventDateList)}</Text>
+          <Text style={ticketListStyles.titleText} numberOfLines={1}>
+            {eventTitle}
+          </Text>
+          <Text style={ticketListStyles.dateText}>
+            {ticketListDateFormatter(eventDateList)}
+          </Text>
         </View>
         <SpaceLayout direction="row" size={5}>
           {fieldTypeList.map((fieldType, idx) => (

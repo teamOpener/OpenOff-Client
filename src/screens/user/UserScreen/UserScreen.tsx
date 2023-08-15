@@ -54,23 +54,23 @@ const UserScreen = () => {
           고객센터
         </Text>
         <Pressable>
-          <Text>FAQ</Text>
+          <Text variant="body2">FAQ</Text>
         </Pressable>
         <Pressable>
-          <Text>공지사항</Text>
+          <Text variant="body2">공지사항</Text>
         </Pressable>
         <Pressable>
-          <Text>문의하기</Text>
+          <Text variant="body2">문의하기</Text>
         </Pressable>
         <Divider height={1} color="darkGrey" />
         <Text variant="bodySB" color="darkGrey">
           설정
         </Text>
         <Pressable>
-          <Text>서비스 설정</Text>
+          <Text variant="body2">서비스 설정</Text>
         </Pressable>
         <Pressable>
-          <Text>로그아웃</Text>
+          <Text variant="body2">로그아웃</Text>
         </Pressable>
       </ScrollView>
     </View>

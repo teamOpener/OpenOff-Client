@@ -22,6 +22,7 @@ const eventCardStyles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     gap: 3,
+    paddingRight: 4,
   },
 });
 

@@ -21,6 +21,10 @@ const ticketListStyles = StyleSheet.create({
     fontFamily: fonts.semibold,
     fontSize: 15,
   } as TextStyle,
+  dateText: {
+    fontFamily: fonts.regular,
+    fontSize: 13,
+  } as TextStyle,
   line: {
     flex: 1,
     paddingHorizontal: CONSTANT_PARTICIPANT.TICKET_MORE_BTN_PADDING_RIGHT / 2,
