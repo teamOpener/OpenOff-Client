@@ -11,6 +11,7 @@ const findButtonStyles = StyleSheet.create({
   text: {
     fontFamily: fonts.semibold,
     fontSize: 12,
+    lineHeight: 16.8,
   } as TextStyle,
 });
 

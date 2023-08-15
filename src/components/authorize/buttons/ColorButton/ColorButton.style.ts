@@ -11,6 +11,7 @@ const colorButtonStyles = StyleSheet.create({
   },
   labelText: {
     fontSize: 14,
+    lineHeight: 14 * 1.4,
   },
 });
 

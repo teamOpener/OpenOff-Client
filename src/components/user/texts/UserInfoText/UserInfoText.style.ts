@@ -12,6 +12,7 @@ const userInfoTextStyles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
+    lineHeight: 15 * 1.4,
     fontFamily: fonts.semibold,
     color: colors.grey,
   },

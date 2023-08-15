@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { colors, fonts } from 'styles/theme';
 
 const authorizeFlowButtonStyles = StyleSheet.create({
   absolutePosition: {
@@ -17,8 +17,9 @@ const authorizeFlowButtonStyles = StyleSheet.create({
     zIndex: 999,
   },
   label: {
+    fontFamily: fonts.semibold,
     fontSize: 17,
-    fontWeight: '600',
+    lineHeight: 17 * 1.4,
   },
 });
 

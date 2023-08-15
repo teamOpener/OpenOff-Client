@@ -1,4 +1,5 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { fonts } from 'styles/theme';
 
 const topFieldButtonStyles = StyleSheet.create({
   container: {
@@ -7,9 +8,12 @@ const topFieldButtonStyles = StyleSheet.create({
   },
   fieldText: {
     marginHorizontal: 6,
+    fontFamily: fonts.semibold,
+    fontSize: 15,
+    lineHeight: 15 * 1.4,
   },
   delimiter: {
-    height: Platform.OS === 'android' ? 5 : 3,
+    height: 3,
     width: '100%',
     marginTop: 5,
   },

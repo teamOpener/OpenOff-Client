@@ -11,6 +11,7 @@ const userProfileEditScreenStyles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
+    lineHeight: 15 * 1.4,
     fontFamily: fonts.semibold,
     color: colors.grey,
   },
@@ -33,11 +34,13 @@ const userProfileEditScreenStyles = StyleSheet.create({
   },
   withdrawalInfo: {
     fontSize: 10,
+    lineHeight: 10 * 1.4,
     fontFamily: fonts.regular,
     color: colors.white,
   },
   withdrawal: {
     fontSize: 10,
+    lineHeight: 10 * 1.4,
     fontFamily: fonts.semibold,
     color: colors.white,
     underline: { textDecorationLine: 'underline' },

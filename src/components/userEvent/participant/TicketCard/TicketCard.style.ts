@@ -21,11 +21,12 @@ const ticketCardStyles = StyleSheet.create({
   address: {
     fontFamily: fonts.medium,
     fontSize: 20,
-    lineHeight: 28,
+    lineHeight: 20 * 1.4,
   } as TextStyle,
   reservationNumber: {
     fontFamily: fonts.regular,
     fontSize: 13,
+    lineHeight: 13 * 1.4,
   } as TextStyle,
   iconContainer: {
     flexDirection: 'row',
@@ -45,6 +46,7 @@ const ticketCardStyles = StyleSheet.create({
   dateTitle: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
   } as TextStyle,
   dateContainer: {
     flexDirection: 'row',
@@ -53,14 +55,17 @@ const ticketCardStyles = StyleSheet.create({
   date: {
     fontFamily: fonts.semibold,
     fontSize: 25,
+    lineHeight: 25 * 1.4,
   } as TextStyle,
   day: {
     fontFamily: fonts.regular,
     fontSize: 16,
+    lineHeight: 16 * 1.4,
   } as TextStyle,
   time: {
     fontFamily: fonts.semibold,
     fontSize: 25,
+    lineHeight: 25 * 1.2,
   } as TextStyle,
   btn: {
     backgroundColor: colors.lavender,

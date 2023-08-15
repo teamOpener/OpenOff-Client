@@ -15,10 +15,12 @@ const dateSelectButtonStyles = StyleSheet.create({
   dateText: {
     fontFamily: fonts.bold,
     fontSize: 14,
+    lineHeight: 14 * 1.4,
   } as TextStyle,
   countText: {
     fontFamily: fonts.semibold,
     fontSize: 14,
+    lineHeight: 14 * 1.4,
   } as TextStyle,
   activeText: {
     color: colors.main,

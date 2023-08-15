@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
+import { fonts } from 'styles/theme';
 
 const applicationPeriodStyles = StyleSheet.create({
   inputContainer: {
@@ -10,6 +11,11 @@ const applicationPeriodStyles = StyleSheet.create({
   dateTimePickerContentContainer: {
     columnGap: 12,
   },
+  text: {
+    fontFamily: fonts.regular,
+    fontSize: 15,
+    lineHeight: 15 * 1.4,
+  } as TextStyle,
   dateTimePickerWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',

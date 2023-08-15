@@ -18,7 +18,7 @@ import {
   View,
 } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
-import { colors, layouts } from 'styles/theme';
+import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
 import DialogContext from 'utils/DialogContext';

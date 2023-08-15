@@ -16,6 +16,7 @@ const inputStyles = StyleSheet.create({
   text: {
     fontFamily: fonts.regular,
     fontSize: 13,
+    lineHeight: 13 * 1.4,
     color: colors.white,
   } as TextStyle,
   textInputContainer: {

@@ -9,10 +9,12 @@ const ledgerHeaderStyles = StyleSheet.create({
   titleText: {
     fontFamily: fonts.semibold,
     fontSize: 18,
+    lineHeight: 18 * 1.4,
   } as TextStyle,
   subTitleText: {
     fontFamily: fonts.semibold,
     fontSize: 12,
+    lineHeight: 12 * 1.4,
   },
 });
 

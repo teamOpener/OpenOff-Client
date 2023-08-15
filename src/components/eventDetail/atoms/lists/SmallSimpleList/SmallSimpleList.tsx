@@ -12,8 +12,12 @@ interface Props {
 
 const SmallSimpleList = ({ title, description, action }: Props) => {
   return (
-    <SpaceLayout direction="row" size={10}>
-      <View>
+    <SpaceLayout
+      direction="row"
+      size={10}
+      style={smallSimpleListStyles.container}
+    >
+      <View style={smallSimpleListStyles.locationWrapper}>
         <Text style={smallSimpleListStyles.title}>{title}</Text>
       </View>
       <SpaceLayout size={5} style={smallSimpleListStyles.desc}>

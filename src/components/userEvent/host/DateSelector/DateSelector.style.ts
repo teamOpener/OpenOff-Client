@@ -19,6 +19,7 @@ const dateSelectorStyles = StyleSheet.create({
   dateText: {
     fontFamily: fonts.bold,
     fontSize: 14,
+    lineHeight: 14 * 1.4,
   } as TextStyle,
   absoluteContainer: {
     backgroundColor: colors.background,

@@ -26,6 +26,7 @@ const loginScreenStyles = StyleSheet.create({
   middleText: {
     fontFamily: fonts.regular,
     fontSize: 13,
+    lineHeight: 13 * 1.4,
     alignSelf: 'center',
   },
 });

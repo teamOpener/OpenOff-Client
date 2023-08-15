@@ -16,6 +16,7 @@ const eventCardStyles = StyleSheet.create({
   titleText: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
   } as TextStyle,
   iconText: {
     flexDirection: 'row',

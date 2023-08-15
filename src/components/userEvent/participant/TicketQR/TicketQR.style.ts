@@ -29,6 +29,7 @@ const ticketQRStyles = StyleSheet.create({
   ticketIndex: {
     fontFamily: fonts.regular,
     fontSize: 13,
+    lineHeight: 13 * 1.4,
   } as TextStyle,
   userInfo: {
     paddingTop: 10,

@@ -12,6 +12,7 @@ const fieldButtonGroupStyles = StyleSheet.create({
   },
   title: {
     fontSize: 12,
+    lineHeight: 12 * 1.4,
     fontFamily: fonts.semibold,
   },
 });

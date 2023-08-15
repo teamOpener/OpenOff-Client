@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const eventRowCardStyles = StyleSheet.create({
@@ -19,9 +19,9 @@ const eventRowCardStyles = StyleSheet.create({
   },
   eventInfo: {
     flex: 1,
-    gap: Platform.OS === 'ios' ? 2 : 0,
     alignItems: 'flex-start',
-    justifyContent: 'center',
+    height: '100%',
+    justifyContent: 'space-between',
   },
   fieldBoxContainer: {
     flexDirection: 'row',
@@ -38,6 +38,7 @@ const eventRowCardStyles = StyleSheet.create({
   eventTitle: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 21,
     color: colors.black,
   },
   subInfo: {

@@ -40,6 +40,7 @@ const Navigator = () => {
     headerTitleStyle: {
       fontFamily: fonts.semibold,
       fontSize: 18,
+      lineHeight: 18 * 1.4,
       color: colors.white,
     },
     headerLeft: BackButton,

@@ -50,6 +50,7 @@ const imageButtonStyles = StyleSheet.create({
   primaryLabelText: {
     fontFamily: fonts.regular,
     fontSize: 13,
+    lineHeight: 13 * 1.4,
   },
   image: {
     resizeMode: 'cover',

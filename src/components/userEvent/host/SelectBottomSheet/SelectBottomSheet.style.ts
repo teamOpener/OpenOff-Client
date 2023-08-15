@@ -16,6 +16,7 @@ const selectBottomSheetStyles = StyleSheet.create({
   modalTitleText: {
     fontFamily: fonts.semibold,
     fontSize: 18,
+    lineHeight: 18 * 1.4,
   } as TextStyle,
   modalBackDrop: {
     opacity: 0.3,

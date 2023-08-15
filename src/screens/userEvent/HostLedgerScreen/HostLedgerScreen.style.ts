@@ -26,6 +26,7 @@ const hostLedgerScreenStyles = StyleSheet.create({
   approveText: {
     fontFamily: fonts.semibold,
     fontSize: 20,
+    lineHeight: 20 * 1.4,
   } as TextStyle,
   totalApproveBtn: {
     backgroundColor: colors.main,
@@ -33,6 +34,7 @@ const hostLedgerScreenStyles = StyleSheet.create({
   sortBtnText: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
   } as TextStyle,
   sortBtn: {
     flexDirection: 'row',
@@ -56,6 +58,7 @@ const hostLedgerScreenStyles = StyleSheet.create({
     flex: 1,
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
     color: colors.white,
   },
   scrollContainer: {

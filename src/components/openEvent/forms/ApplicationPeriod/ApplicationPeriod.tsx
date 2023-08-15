@@ -76,7 +76,7 @@ const ApplicationPeriod = () => {
               isEmpty={openEvent.applicationStartDate === null}
               hasError={hasError}
             />
-            <Text>부터</Text>
+            <Text style={applicationPeriodStyles.text}>부터</Text>
           </View>
 
           <View style={applicationPeriodStyles.dateTimePickerWrapper}>
@@ -88,7 +88,7 @@ const ApplicationPeriod = () => {
               minimumDate={startDate}
               hasError={hasError}
             />
-            <Text>까지</Text>
+            <Text style={applicationPeriodStyles.text}>까지</Text>
           </View>
         </ScrollView>
 
