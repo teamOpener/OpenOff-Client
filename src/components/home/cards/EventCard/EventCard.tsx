@@ -35,9 +35,10 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
 
       <SpaceLayout size={3}>
         <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
           color={type === 'default' ? 'white' : 'main'}
           style={eventCardStyles.titleText}
-          numberOfLines={1}
         >
           {event.eventTitle}
         </Text>

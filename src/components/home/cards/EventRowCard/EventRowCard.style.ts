@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const eventRowCardStyles = StyleSheet.create({
@@ -36,6 +36,7 @@ const eventRowCardStyles = StyleSheet.create({
     backgroundColor: '#d9d9d9',
   },
   eventTitle: {
+    width: Dimensions.get('window').width - 170,
     fontFamily: fonts.semibold,
     fontSize: 15,
     lineHeight: 21,
