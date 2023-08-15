@@ -17,7 +17,9 @@ const SmallIconButton = ({ iconName, label, style, ...rest }: Props) => {
       {...rest}
     >
       <Icon name={iconName} fill="main" size={23} />
-      <Text color="main">{label}</Text>
+      <Text color="main" style={smallIconButtonStyles.labelText}>
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };
