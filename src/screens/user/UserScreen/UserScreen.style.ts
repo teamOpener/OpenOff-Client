@@ -18,7 +18,7 @@ const userScreenStyles = StyleSheet.create({
   },
   fieldResetText: {
     fontSize: 15,
-    lineHeight: 15,
+    lineHeight: 15 * 1.4,
     fontFamily: fonts.semibold,
     color: colors.white,
   },
@@ -29,7 +29,7 @@ const userScreenStyles = StyleSheet.create({
     marginBottom: 45,
   },
   emailText: {
-    fontSize: 13 * 1.4,
+    fontSize: 13,
     lineHeight: 13 * 1.4,
     fontFamily: fonts.regular,
   },
