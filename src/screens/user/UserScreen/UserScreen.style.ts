@@ -38,6 +38,9 @@ const userScreenStyles = StyleSheet.create({
     alignItems: 'center',
     gap: 2,
   },
+  profileMainContainer: {
+    position: 'relative',
+  },
   userProfileImageContainer: {
     width: 60,
     height: 60,
@@ -50,6 +53,12 @@ const userScreenStyles = StyleSheet.create({
   userProfileImage: {
     width: 60,
     height: 60,
+  },
+  pencilPosition: {
+    zIndex: 99,
+    position: 'absolute',
+    top: 1,
+    right: -1,
   },
   userNoneImage: {
     marginTop: 10,

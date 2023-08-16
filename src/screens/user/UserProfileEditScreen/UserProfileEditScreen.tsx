@@ -50,7 +50,7 @@ const UserProfileEditScreen = () => {
         ) && (
           <UserInfoText
             title={MENT_USER.PROFILE_EDIT.PASSWORD}
-            content="********"
+            content="••••••••"
           />
         )}
         <UserInfoText

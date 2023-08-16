@@ -34,22 +34,30 @@ const UserScreen = () => {
       <View style={userScreenStyles.userInfo}>
         <View style={userScreenStyles.userBasicContainer}>
           <Pressable
-            style={userScreenStyles.userProfileImageContainer}
+            style={userScreenStyles.profileMainContainer}
             onPress={handleEditProfile}
           >
-            {userInfo?.userInfo.profileImageUrl ? (
-              <Image
-                style={userScreenStyles.userProfileImage}
-                source={{ uri: userInfo?.userInfo.profileImageUrl }}
-              />
-            ) : (
-              <Icon
-                name="IconUser"
-                size={50}
-                fill="grey"
-                style={userScreenStyles.userNoneImage}
-              />
-            )}
+            <View style={userScreenStyles.userProfileImageContainer}>
+              {userInfo?.userInfo.profileImageUrl ? (
+                <Image
+                  style={userScreenStyles.userProfileImage}
+                  source={{ uri: userInfo?.userInfo.profileImageUrl }}
+                />
+              ) : (
+                <Icon
+                  name="IconUser"
+                  size={50}
+                  fill="grey"
+                  style={userScreenStyles.userNoneImage}
+                />
+              )}
+            </View>
+            <Icon
+              style={userScreenStyles.pencilPosition}
+              name="IconPencilCircle"
+              size={17}
+              fill="grey"
+            />
           </Pressable>
           <Spacing height={6} />
           <Text variant="h4" color="white">
