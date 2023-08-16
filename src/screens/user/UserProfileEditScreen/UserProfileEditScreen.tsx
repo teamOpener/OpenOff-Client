@@ -45,7 +45,9 @@ const UserProfileEditScreen = () => {
           title={MENT_USER.PROFILE_EDIT.NICK_NAME}
           content={userInfo?.userInfo.nickname}
         />
-        {userInfo?.socialAccountInfoList[0].accountType === 'NORMAL' && (
+        {userInfo?.socialAccountInfoList.find(
+          (socialAccount) => socialAccount.accountType === 'NORMAL',
+        ) && (
           <UserInfoText
             title={MENT_USER.PROFILE_EDIT.PASSWORD}
             content="********"

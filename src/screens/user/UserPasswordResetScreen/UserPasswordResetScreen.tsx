@@ -43,7 +43,10 @@ const UserPasswordResetScreen = () => {
 
   const handleChangePassword = () => {
     resetPassword({
-      email: userInfo?.socialAccountInfoList[0].email ?? '',
+      email:
+        userInfo?.socialAccountInfoList.find(
+          (socialAccount) => socialAccount.accountType === 'NORMAL',
+        )?.email ?? '',
       phoneNum: userInfo?.userInfo.phoneNumber ?? '',
       newPassword: passwordCheck,
     });
