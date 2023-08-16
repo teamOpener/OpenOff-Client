@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { HelpText } from 'components/openEvent/atoms';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import StatusType from 'constants/status';
-
 import costStyles from './Cost.style';
 
 const Cost = () => {
@@ -15,11 +15,10 @@ const Cost = () => {
     openEventErrorMessage,
     setOpenEventErrorMessage,
   } = useOpenEventStore();
+  const { cost } = openEvent;
   const hasError = !!openEventErrorMessage.cost;
 
-  const [isFree, setIsFree] = useState<boolean>(true);
-  const [cost, setCost] = useState<string>('0');
-  const numericCost = Number(cost);
+  const [isFree, setIsFree] = useState<boolean>(!openEvent.cost);
 
   /**
    * 0원으로 입력하거나 빈 칸으로 남겨 둘 경우, 자동으로 무료로 바뀌도록 합니다.
@@ -29,10 +28,17 @@ const Cost = () => {
     if (isFree) {
       return;
     }
-    if (cost === '0') {
+    if (cost === 0 || cost === null) {
       setIsFree(true);
-    } else if (cost === '') {
-      setIsFree(true);
+    }
+  };
+
+  const handleIsFree = (isFreeValue: boolean) => {
+    setIsFree(isFreeValue);
+    if (isFreeValue) {
+      setOpenEvent({ ...openEvent, cost: 0 });
+    } else {
+      setOpenEvent({ ...openEvent, cost: null });
     }
   };
 
@@ -43,50 +49,39 @@ const Cost = () => {
     const numbersOnly = value.replace(/[^0-9]/g, '');
 
     // TODO: 3자리마다 쉼표 추가
-    setCost(numbersOnly);
+    setOpenEvent({ ...openEvent, cost: Number(numbersOnly) });
   };
 
   useEffect(() => {
-    if (isFree) {
-      setCost('0');
-      setOpenEvent({ ...openEvent, cost: 0 });
-    } else {
-      setCost('');
-      setOpenEvent({ ...openEvent, cost: null });
-    }
-  }, [isFree]);
-
-  useEffect(() => {
-    if (cost !== '' && openEventErrorMessage.cost) {
+    if (cost !== null && openEventErrorMessage.cost) {
       setOpenEventErrorMessage({
         ...openEventErrorMessage,
         cost: null,
       });
-    }
-
-    if (!isFree) {
-      setOpenEvent({ ...openEvent, cost: numericCost });
     }
   }, [cost]);
 
   return (
     <View>
       <OpenEvent.Label content="참가 비용" />
-      <View style={costStyles.horizontalView}>
-        <OpenEvent.Tag
-          label="무료"
-          isSelected={isFree}
-          onPress={() => setIsFree(true)}
-        />
-        <OpenEvent.Tag
-          label="유료"
-          isSelected={!isFree}
-          onPress={() => setIsFree(false)}
-        />
+      <SpaceLayout size={10}>
+        <View style={costStyles.horizontalView}>
+          <OpenEvent.Tag
+            label="무료"
+            isSelected={isFree}
+            onPress={() => handleIsFree(true)}
+          />
+          <OpenEvent.Tag
+            label="유료"
+            isSelected={!isFree}
+            onPress={() => handleIsFree(false)}
+          />
+        </View>
 
         <View style={costStyles.absoluteContainer}>
           <OpenEvent.Input
-            value={`₩ ${isFree ? '0' : cost}`}
+            // eslint-disable-next-line no-nested-ternary
+            value={`₩ ${isFree ? '0' : cost === null ? '' : cost}`}
             onChangeText={handleChangeText}
             onEndEditing={handleFocusOut}
             style={costStyles.input}
@@ -104,7 +99,7 @@ const Cost = () => {
             )}
           </View>
         </View>
-      </View>
+      </SpaceLayout>
     </View>
   );
 };
