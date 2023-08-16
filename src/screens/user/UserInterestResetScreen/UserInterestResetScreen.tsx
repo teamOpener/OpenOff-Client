@@ -4,32 +4,29 @@ import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/Field
 import Spacing from 'components/common/Spacing/Spacing';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import queryKeys from 'constants/queryKeys';
+import MENT_USER from 'constants/user/userConstants';
+import useDialog from 'hooks/app/useDialog';
 import useInterestField from 'hooks/authorize/useInterestField';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useUpdateInterestField } from 'hooks/queries/interest';
 import { useMyInfo } from 'hooks/queries/user';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Image } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import DialogContext from 'utils/DialogContext';
 import userInterestResetScreenStyles from './UserInterestResetScreen.style';
 
 const UserInterestResetScreen = () => {
-  const COMMENTS_ON_SETTING_INTERESTS = ['관심 분야를 설정해주세요.'];
-  const AUTHORIZE_BUTTON_TEXT = '확인';
-  const INTEREST_SETTING_COMPLETED = '관심분야 설정이 완료되었습니다!';
-  const UNKNOWN_ERROR = '서버상에 알 수 없는 에러가 발생했습니다!';
   const { stackNavigation } = useNavigator();
-  const { openDialog } = useContext(DialogContext);
-  const query = useQueryClient();
+  const { openDialog } = useDialog();
+  const queryClient = useQueryClient();
 
   const handleSuccessUpdateField = () => {
-    query.invalidateQueries(queryKeys.userKeys.myInfo);
-    query.invalidateQueries(queryKeys.eventKeys.all);
+    queryClient.invalidateQueries(queryKeys.userKeys.myInfo);
+    queryClient.invalidateQueries(queryKeys.eventKeys.all);
     openDialog({
       type: 'success',
-      text: INTEREST_SETTING_COMPLETED,
+      text: MENT_USER.SUCCESS.INTEREST_SETTING_SUCCESS,
       callback: () => stackNavigation.goBack(),
     });
   };
@@ -37,7 +34,7 @@ const UserInterestResetScreen = () => {
   const handleErrorUpdateField = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? UNKNOWN_ERROR,
+      text: error.response?.data.message ?? MENT_USER.ERROR.SERVER,
     });
   };
 
@@ -72,10 +69,10 @@ const UserInterestResetScreen = () => {
 
   return (
     <ScreenCover
-      titleElements={COMMENTS_ON_SETTING_INTERESTS}
+      titleElements={MENT_USER.INTEREST_RESET.COMMENTS_ON_SETTING_INTERESTS}
       authorizeButton={{
         handlePress: handleAuthorize,
-        label: AUTHORIZE_BUTTON_TEXT,
+        label: MENT_USER.AUTHORIZE_BUTTON_TEXT,
         isActive: computedCount() >= 1,
       }}
     >

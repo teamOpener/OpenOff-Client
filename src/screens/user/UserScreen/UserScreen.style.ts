@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const userScreenStyles = StyleSheet.create({
@@ -38,15 +38,21 @@ const userScreenStyles = StyleSheet.create({
     alignItems: 'center',
     gap: 2,
   },
-  userProfileImage: {
+  userProfileImageContainer: {
     width: 60,
     height: 60,
     borderRadius: 300,
-    paddingTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
     backgroundColor: colors.darkGrey,
+  },
+  userProfileImage: {
+    width: 60,
+    height: 60,
+  },
+  userNoneImage: {
+    marginTop: 10,
   },
   userControllerContainer: {
     paddingTop: 20,

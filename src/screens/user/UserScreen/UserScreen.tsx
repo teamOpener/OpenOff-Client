@@ -4,23 +4,22 @@ import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import UserFieldBoxGroup from 'components/user/groups/UserFieldBoxGroup/UserFieldBoxGroup';
 import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
+import MENT_USER from 'constants/user/userConstants';
 import fieldData from 'data/lists/fieldData';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useMyInfo } from 'hooks/queries/user';
-import { Pressable, ScrollView, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import userScreenStyles from './UserScreen.style';
 
 const UserScreen = () => {
   const { data: userInfo } = useMyInfo();
   const { stackNavigation } = useNavigator();
-  const USER_INTEREST_FIELD = '관심 분야';
-  const CUSTOMER_SERVICE_CENTER = '고객센터';
-  const FAQ = 'FAQ';
-  const ANNOUNCEMENT = '공지사항';
-  const INQUIRY = '문의하기';
-  const SETTING = '설정';
-  const SERVICE_SETTING = '서비스 설정';
-  const LOGOUT = '로그아웃';
 
   const handleEditProfile = () => {
     stackNavigation.navigate('UserProfileEdit');
@@ -35,10 +34,22 @@ const UserScreen = () => {
       <View style={userScreenStyles.userInfo}>
         <View style={userScreenStyles.userBasicContainer}>
           <Pressable
-            style={userScreenStyles.userProfileImage}
+            style={userScreenStyles.userProfileImageContainer}
             onPress={handleEditProfile}
           >
-            <Icon name="IconUser" size={50} fill="grey" />
+            {userInfo?.userInfo.profileImageUrl ? (
+              <Image
+                style={userScreenStyles.userProfileImage}
+                source={{ uri: userInfo?.userInfo.profileImageUrl }}
+              />
+            ) : (
+              <Icon
+                name="IconUser"
+                size={50}
+                fill="grey"
+                style={userScreenStyles.userNoneImage}
+              />
+            )}
           </Pressable>
           <Spacing height={6} />
           <Text variant="h4" color="white">
@@ -56,7 +67,7 @@ const UserScreen = () => {
           >
             <Icon name="IconPlace" size={16} fill="main" />
             <Text style={userScreenStyles.fieldResetText}>
-              {USER_INTEREST_FIELD}
+              {MENT_USER.MAIN.USER_INTEREST_FIELD}
             </Text>
             <Icon name="IconArrowRight" size={16} fill="white" />
           </TouchableOpacity>
@@ -79,26 +90,26 @@ const UserScreen = () => {
         contentContainerStyle={userScreenStyles.userControllerContainer}
       >
         <Text variant="bodySB" color="darkGrey">
-          {CUSTOMER_SERVICE_CENTER}
+          {MENT_USER.MAIN.CUSTOMER_SERVICE_CENTER}
         </Text>
         <Pressable>
-          <Text variant="body2">{FAQ}</Text>
+          <Text variant="body2">{MENT_USER.MAIN.FAQ}</Text>
         </Pressable>
         <Pressable>
-          <Text variant="body2">{ANNOUNCEMENT}</Text>
+          <Text variant="body2">{MENT_USER.MAIN.ANNOUNCEMENT}</Text>
         </Pressable>
         <Pressable>
-          <Text variant="body2">{INQUIRY}</Text>
+          <Text variant="body2">{MENT_USER.MAIN.INQUIRY}</Text>
         </Pressable>
         <Divider height={1} color="darkGrey" />
         <Text variant="bodySB" color="darkGrey">
-          {SETTING}
+          {MENT_USER.MAIN.SETTING}
         </Text>
         <Pressable>
-          <Text variant="body2">{SERVICE_SETTING}</Text>
+          <Text variant="body2">{MENT_USER.MAIN.SERVICE_SETTING}</Text>
         </Pressable>
         <Pressable>
-          <Text variant="body2">{LOGOUT}</Text>
+          <Text variant="body2">{MENT_USER.MAIN.LOGOUT}</Text>
         </Pressable>
       </ScrollView>
     </View>
