@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Alert, ScrollView, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -7,49 +7,44 @@ import Divider from 'components/common/Divider/Divider';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import { OpenEventForm } from 'components/openEvent';
 import HeadText from 'components/common/HeadText/HeadText';
+import BackButton from 'components/navigator/BackButton';
+import BackEventButton from 'components/navigator/BackEventButton';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import useOpenEventValidator from 'hooks/openEvent/useOpenEventValidator';
 import { useCreateEvent } from 'hooks/queries/event';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useImageUpload from 'hooks/openEvent/useImageUpload';
+import useDialog from 'hooks/app/useDialog';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
+import { ApiErrorResponse } from 'types/ApiResponse';
 import openEventScreenStyles from './OpenEventScreen.style';
 
 const OpenEventScreen = () => {
   const { stackNavigation } = useNavigator();
+  const { openDialog } = useDialog();
 
   const { init, openEvent, setOpenEventErrorMessage } = useOpenEventStore();
   const { hasError, errorMessage } = useOpenEventValidator({ openEvent });
 
-  const handleCreateEventSuccess = () => {
-    Alert.alert('성공');
-    stackNavigation.goBack();
-    /**
-    TODO
+  const backEventCallback = () => {
     openDialog({
-      type: 'success',
-      text: '이벤트 개설 신청이 완료되었습니다!',
-      contents: `해당 이벤트는 관리자 승인 이후\n업로드 될 예정입니다.`,
-      callback: () => {
-        stackNavigation.goBack();
-      },
+      type: 'validate',
+      text: MENT_OPEN_EVENT.LOADING.CREATE,
     });
- */
   };
 
-  const handleCreateEventError = () => {
-    // TODO
-  };
-
-  const { mutateAsync: createEvent, isLoading: isCreateEventLoading } =
-    useCreateEvent(handleCreateEventSuccess, handleCreateEventError);
-
+  /**
+   * 이미지 업로드
+   */
   const handleUploadImageSuccess = () => {
     //
   };
 
-  const handleUploadImageError = () => {
-    // TODO
+  const handleUploadImageError = (error: ApiErrorResponse) => {
+    openDialog({
+      type: 'validate',
+      text: error.response?.data.message ?? MENT_OPEN_EVENT.ERROR.UPLOAD_IMAGE,
+    });
   };
 
   const { uploadImages, isLoading: isImageUploadLoading } = useImageUpload({
@@ -58,6 +53,30 @@ const OpenEventScreen = () => {
     errorCallback: handleUploadImageError,
   });
 
+  /**
+   * 이벤트 업로드
+   */
+  const handleCreateEventSuccess = () => {
+    openDialog({
+      type: 'success',
+      text: MENT_OPEN_EVENT.SUCCESS.CREATE_EVENT_TITLE,
+      contents: MENT_OPEN_EVENT.SUCCESS.CREATE_EVENT_CONTENT,
+      callback: () => {
+        stackNavigation.goBack();
+      },
+    });
+  };
+
+  const handleCreateEventError = (error: ApiErrorResponse) => {
+    openDialog({
+      type: 'validate',
+      text: error.response?.data.message ?? MENT_OPEN_EVENT.ERROR.CREATE_EVENT,
+    });
+  };
+
+  const { mutateAsync: createEvent, isLoading: isCreateEventLoading } =
+    useCreateEvent(handleCreateEventSuccess, handleCreateEventError);
+
   const handleCreateEventPress = async () => {
     // 1. 유효성 검사
     if (hasError) {
@@ -65,49 +84,53 @@ const OpenEventScreen = () => {
       return;
     }
 
-    // 2. 이미지 업로드
-    const imageUrlList = await uploadImages();
+    try {
+      // 2. 이미지 업로드
+      const imageUrlList = await uploadImages();
 
-    // TODO refactor
-    // 3. 이벤트 개설
-    if (
-      !openEvent.field.length ||
-      !openEvent.title ||
-      !openEvent.applicationStartDate ||
-      !openEvent.applicationEndDate ||
-      !openEvent.eventDates.length ||
-      !openEvent.address.roadAddress ||
-      !openEvent.cost ||
-      !openEvent.recruitmentNumber ||
-      !openEvent.description ||
-      !openEvent.imageBuilders.length ||
-      !openEvent.hostName ||
-      !openEvent.hostPhoneNumber ||
-      !openEvent.hostEmail
-    ) {
-      return;
+      // TODO refactor
+      // 3. 이벤트 개설
+      if (
+        !openEvent.field.length ||
+        !openEvent.title ||
+        !openEvent.applicationStartDate ||
+        !openEvent.applicationEndDate ||
+        !openEvent.eventDates.length ||
+        !openEvent.address.roadAddress ||
+        !openEvent.cost ||
+        !openEvent.recruitmentNumber ||
+        !openEvent.description ||
+        !openEvent.imageBuilders.length ||
+        !openEvent.hostName ||
+        !openEvent.hostPhoneNumber ||
+        !openEvent.hostEmail
+      ) {
+        return;
+      }
+
+      const submitForm: CreateNewEventRequestDto = {
+        fieldTypeList: openEvent.field,
+        title: openEvent.title,
+        applicationStartDate: openEvent.applicationStartDate,
+        applicationEndDate: openEvent.applicationEndDate,
+        eventDates: openEvent.eventDates,
+        streetLoadAddress: openEvent.address.roadAddress,
+        detailAddress: openEvent.address.detailAddress ?? '',
+        eventFee: openEvent.cost,
+        maxParticipant: openEvent.recruitmentNumber,
+        description: openEvent.description,
+        imageDataList: imageUrlList,
+        extraQuestionList: openEvent.additionalInformation,
+        hostName: openEvent.hostName,
+        staffIdList: openEvent.staffIdList ?? [],
+        hostPhoneNumber: openEvent.hostPhoneNumber,
+        hostEmail: openEvent.hostEmail,
+      };
+
+      await createEvent(submitForm);
+    } catch (error) {
+      handleCreateEventError(error as ApiErrorResponse);
     }
-
-    const submitForm: CreateNewEventRequestDto = {
-      fieldTypeList: openEvent.field,
-      title: openEvent.title,
-      applicationStartDate: openEvent.applicationStartDate,
-      applicationEndDate: openEvent.applicationEndDate,
-      eventDates: openEvent.eventDates,
-      streetLoadAddress: openEvent.address.roadAddress,
-      detailAddress: openEvent.address.detailAddress ?? '',
-      eventFee: openEvent.cost,
-      maxParticipant: openEvent.recruitmentNumber,
-      description: openEvent.description,
-      imageDataList: imageUrlList,
-      extraQuestionList: openEvent.additionalInformation,
-      hostName: openEvent.hostName,
-      staffIdList: openEvent.staffIdList ?? [],
-      hostPhoneNumber: openEvent.hostPhoneNumber,
-      hostEmail: openEvent.hostEmail,
-    };
-
-    await createEvent(submitForm);
   };
 
   useEffect(() => {
@@ -117,9 +140,23 @@ const OpenEventScreen = () => {
     };
   }, []);
 
-  // TODO 뒤로가기 버튼 클릭시 안내 모달
+  /**
+   * 이벤트 업로드 중, 뒤로가기 막기
+   */
+  // TODO android device
+  useEffect(() => {
+    if (isImageUploadLoading || isCreateEventLoading) {
+      stackNavigation.setOptions({
+        headerLeft: () => BackEventButton({ callback: backEventCallback }),
+      });
+      return;
+    }
+    stackNavigation.setOptions({
+      headerLeft: BackButton,
+    });
+  }, [isCreateEventLoading, isImageUploadLoading]);
 
-  if (isCreateEventLoading || isImageUploadLoading)
+  if (isImageUploadLoading || isCreateEventLoading)
     return <WithIconLoading isActive text={MENT_OPEN_EVENT.LOADING.CREATE} />;
 
   return (
