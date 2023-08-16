@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { layouts } from 'styles/theme';
 
 const openEventScreenStyles = StyleSheet.create({
   wrapper: {
@@ -6,7 +7,8 @@ const openEventScreenStyles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingHorizontal: 25,
+    paddingTop: layouts.PADDING,
+    paddingHorizontal: layouts.PADDING,
   },
   containerContent: {
     rowGap: 20,
