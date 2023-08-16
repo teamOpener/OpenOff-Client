@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { RootStackParamList } from 'types/apps/menu';
 import { useEventDetail } from 'hooks/queries/event';
+import useRouteParams from 'hooks/navigator/useRouteParams';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
@@ -11,14 +10,13 @@ import { ScrollView } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
 import Text from 'components/common/Text/Text';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
-
-type EventDetailScreenRouteProp = RouteProp<RootStackParamList, 'EventDetail'>;
+import { StackMenu } from 'constants/menu';
 
 const EventDetailScreen = () => {
-  const { params } = useRoute<EventDetailScreenRouteProp>();
+  const params = useRouteParams<StackMenu.EventDetail>();
   const { stackNavigation } = useNavigator();
 
-  const { data: event, isLoading } = useEventDetail(params.id);
+  const { data: event, isLoading } = useEventDetail(params?.id ?? 0);
 
   const [activeTabName, setActiveTabName] = useState<EventDetailTabItem>(
     EventDetailTabItem.DESCRIPTION,
@@ -42,6 +40,8 @@ const EventDetailScreen = () => {
 
   const handleApply = () => {
     // TODO: 참여 버튼 막기, 얼마 안남았을 경우 timer 걸기
+    if (!params) return;
+
     stackNavigation.navigate('EventSelect', {
       id: params.id,
     });
