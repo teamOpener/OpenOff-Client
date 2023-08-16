@@ -53,7 +53,6 @@ const initializeAuthorizeState = (error?: unknown) => {
 const onRejected = async (error: ApiErrorResponse) => {
   const originalRequest = error.config;
   const data = error.response?.data;
-  console.log(error.response?.status);
   if (
     originalRequest &&
     data &&
@@ -62,13 +61,12 @@ const onRejected = async (error: ApiErrorResponse) => {
   ) {
     isTokenRenewalInProgress = true;
     try {
-      if (!token.refreshToken) {
+      const value = await AsyncStorage.getItem('authorize');
+      const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
+      if (!authorizeStore.state.token.refreshToken) {
         initializeAuthorizeState();
-      }
-
-      if (token.refreshToken) {
+      } else {
         const accessToken = await refresh();
-        isTokenRenewalInProgress = false;
         originalRequest.headers.Authorization = `Bearer ${accessToken.data?.accessToken}`;
         setToken({
           accessToken: accessToken.data?.accessToken,

@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import fetcher from 'apis';
 import { NormalSignInRequestDto } from 'models/auth/request/NormalSignInRequestDto';
 import ResetPasswordRequestDto from 'models/auth/request/ResetPasswordRequestDto';
@@ -11,6 +12,7 @@ import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
 import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiResponse } from 'types/ApiResponse';
+import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
 
 const { token } = useAuthorizeStore.getState();
 
@@ -29,9 +31,11 @@ export const normalSignUp = async (
 };
 
 export const refresh = async (): Promise<ApiResponse<TokenResponseDto>> => {
+  const value = await AsyncStorage.getItem('authorize');
+  const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
   const params: TokenRequestDto = {
-    accessToken: token.accessToken,
-    refreshToken: token.refreshToken,
+    accessToken: authorizeStore.state.token.accessToken,
+    refreshToken: authorizeStore.state.token.refreshToken,
   };
   const response = await fetcher.post(`auth/refresh`, params);
   return response.data;
