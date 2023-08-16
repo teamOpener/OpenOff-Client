@@ -9,9 +9,11 @@ interface Token {
 
 export interface AuthorizeStore {
   token: Token;
+  fcmToken: string | undefined;
   isLogin: boolean;
   setToken: (token: Token) => void;
   resetToken: () => void;
+  setFcmToken: (fcmToken?: string) => void;
   setIsLogin: (loginStatus: boolean) => void;
 }
 
@@ -20,6 +22,7 @@ const initAuthorize = {
     accessToken: undefined,
     refreshToken: undefined,
   },
+  fcmToken: undefined,
   isLogin: false,
 };
 
@@ -42,6 +45,11 @@ export const useAuthorizeStore = create<AuthorizeStore>()(
             accessToken: undefined,
             refreshToken: undefined,
           },
+        })),
+      setFcmToken: (payload) =>
+        set((state) => ({
+          ...state,
+          fcmToken: payload,
         })),
       setIsLogin: (payload) =>
         set((state) => ({
