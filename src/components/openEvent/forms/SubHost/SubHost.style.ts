@@ -12,14 +12,13 @@ const subHostStyles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   searchingContainer: {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
     borderBottomWidth: 0,
   },
   contentContainer: {
     gap: 5,
   },
   inputContainer: {
+    padding: 0,
     paddingRight: 20,
   },
   inputText: {
@@ -31,10 +30,10 @@ const subHostStyles = StyleSheet.create({
     color: colors.white,
   } as TextStyle,
   searchContainer: {
-    maxHeight: 110,
+    maxHeight: 120,
     margin: 0,
+    marginTop: -6,
     borderWidth: 1,
-    zIndex: 1,
     borderTopWidth: 0,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,

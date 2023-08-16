@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle } from 'react-native';
+import { Platform, StyleSheet, TextStyle } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const nameTagStyles = StyleSheet.create({
@@ -6,7 +6,13 @@ const nameTagStyles = StyleSheet.create({
     backgroundColor: colors.darkGrey,
     borderRadius: 10,
     paddingHorizontal: 6,
-    paddingVertical: 1,
+    paddingVertical: Platform.select({
+      android: 4,
+      ios: 2,
+    }),
+    marginVertical: Platform.select({
+      ios: -2,
+    }),
   },
   text: {
     fontFamily: fonts.regular,
