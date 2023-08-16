@@ -38,7 +38,7 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
           numberOfLines={1}
           ellipsizeMode="tail"
           color={type === 'default' ? 'white' : 'main'}
-          style={eventCardStyles.titleText}
+          style={{ ...eventCardStyles.titleText, width: calcWidth }}
         >
           {event.eventTitle}
         </Text>
