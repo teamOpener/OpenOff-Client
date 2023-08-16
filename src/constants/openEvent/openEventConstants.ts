@@ -53,6 +53,8 @@ const MENT_OPEN_EVENT = Object.freeze({
     INVALID_HOST_EMAIL: '유효한 이메일을 입력해주세요.',
     CREATE_EVENT: '이벤트를 업로드하는데 실패했습니다. 다시 시도해주세요.',
     UPLOAD_IMAGE: '이미지를 업로드하는데 실패했습니다. 다시 시도해주세요.',
+    UPLOAD_TYPE:
+      '이벤트를 업로드하는데 실패했습니다. 양식을 다시 확인해주세요.',
   },
   PLACEHOLDER: {
     DESCRIPTION:

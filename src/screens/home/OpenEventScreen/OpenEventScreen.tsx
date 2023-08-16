@@ -70,10 +70,17 @@ const OpenEventScreen = () => {
     });
   };
 
-  const handleCreateEventError = (error: ApiErrorResponse) => {
+  const handleCreateEventError = (error?: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? MENT_OPEN_EVENT.ERROR.CREATE_EVENT,
+      text: error?.response?.data.message ?? MENT_OPEN_EVENT.ERROR.CREATE_EVENT,
+    });
+  };
+
+  const handleCreateEventTypeError = () => {
+    openDialog({
+      type: 'validate',
+      text: MENT_OPEN_EVENT.ERROR.UPLOAD_TYPE,
     });
   };
 
@@ -99,7 +106,7 @@ const OpenEventScreen = () => {
       !openEvent.applicationEndDate ||
       !openEvent.eventDates.length ||
       !openEvent.address.roadAddress ||
-      !openEvent.cost ||
+      openEvent.cost == null ||
       !openEvent.recruitmentNumber ||
       !openEvent.description ||
       !openEvent.imageBuilders.length ||
@@ -107,6 +114,7 @@ const OpenEventScreen = () => {
       !openEvent.hostPhoneNumber ||
       !openEvent.hostEmail
     ) {
+      handleCreateEventTypeError();
       return;
     }
 
