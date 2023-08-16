@@ -5,8 +5,6 @@ const MENT_OPEN_EVENT = Object.freeze({
   INFO: '이벤트 정보를 입력해주세요.',
   FIELD_HELP_TEXT: '여러 개의 장르 선택이 가능하고, 장르 검색시 적용됩니다.',
   DATE_PICKER_PLACEHOLDER: '날짜를 선택해주세요.',
-  DATE_PICKER_TITLE: '날짜를 선택해주세요.',
-  TIME_PICKER_TITLE: '시간을 선택해주세요.',
   ADDRESS_PLACEHOLDER: '주소를 검색해주세요',
   ADDRESS_DETAIL_PLACEHOLDER: '상세 주소를 입력해주세요',
   IMAGE_UPLOAD_HELP_TEXT: '최소 1장의 사진을 등록해주세요.',
@@ -30,6 +28,7 @@ const MENT_OPEN_EVENT = Object.freeze({
     HOST_PHONE: '전화번호',
     HOST_EMAIL: '이메일',
     EMPTY_NICKNAME: '검색 결과가 없습니다.',
+    DATA_TIME_PICKER_TITLE: '날짜와 시간을 선택해주세요.',
   },
   LOADING: {
     CREATE: '이벤트 업로드 중이에요!',
