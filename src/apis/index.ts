@@ -73,11 +73,10 @@ const onRejected = async (error: ApiErrorResponse) => {
           accessToken: accessToken.data?.accessToken,
           refreshToken: accessToken.data?.refreshToken,
         });
+        const response = await fetcher.request(originalRequest);
+        return response;
       }
-
-      const response = await fetcher.request(originalRequest);
       isTokenRenewalInProgress = false;
-      return response;
     } catch (refreshError) {
       initializeAuthorizeState(refreshError);
     }
