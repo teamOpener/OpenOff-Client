@@ -68,6 +68,7 @@ const onRejected = async (error: ApiErrorResponse) => {
 
       if (token.refreshToken) {
         const accessToken = await refresh();
+        isTokenRenewalInProgress = false;
         originalRequest.headers.Authorization = `Bearer ${accessToken.data?.accessToken}`;
         setToken({
           accessToken: accessToken.data?.accessToken,
