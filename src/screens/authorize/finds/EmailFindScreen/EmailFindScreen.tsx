@@ -3,16 +3,16 @@ import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificatio
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckAuthSms, useSendAuthSms } from 'hooks/queries/auth';
-import { useContext, useState } from 'react';
+import useDialog from 'hooks/app/useDialog';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import DialogContext from 'utils/DialogContext';
 import EmailFindCompleteScreen from '../EmailFindCompleteScreen/EmailFindCompleteScreen';
 import emailFindScreenStyles from './EmailFindScreen.style';
 
 const EmailFindScreen = () => {
-  const { openDialog } = useContext(DialogContext);
+  const { openDialog } = useDialog();
   const {
     phonenumber,
     setPhonenumber,

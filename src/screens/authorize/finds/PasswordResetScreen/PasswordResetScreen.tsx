@@ -3,11 +3,11 @@ import EssentialInput from 'components/authorize/inputs/EssentialInput/Essential
 import Text from 'components/common/Text/Text';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { useResetPassword } from 'hooks/queries/auth';
-import { useContext, useState } from 'react';
+import useDialog from 'hooks/app/useDialog';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import DialogContext from 'utils/DialogContext';
 import { validatePassword, validatePasswordCheck } from 'utils/validate';
 import PasswordResetCompleteScreen from '../PasswordResetCompleteScreen/PasswordResetCompleteScreen';
 import passwordResetScreenStyles from './PasswordResetScreen.style';
@@ -24,7 +24,7 @@ const PasswordResetScreen = ({
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
-  const { openDialog } = useContext(DialogContext);
+  const { openDialog } = useDialog();
 
   const handleSuccessCallback = () => {
     setIsAuthorize(true);

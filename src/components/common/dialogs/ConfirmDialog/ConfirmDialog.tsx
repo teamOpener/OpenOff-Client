@@ -1,32 +1,31 @@
 import Text from 'components/common/Text/Text';
 import { Pressable, TouchableOpacity, View } from 'react-native';
-import { ConfirmDialog as ConfirmDialogType } from 'types/apps/dialog';
+import { DialogEnumType } from 'types/apps/dialog';
+import useDialog from 'hooks/app/useDialog';
 import { Modal } from 'react-native-paper';
 import confirmDialogStyles from './ConfirmDialog.style';
 
-interface Props {
-  dialog: ConfirmDialogType;
-  closeDialog: () => void;
-}
+const ConfirmDialog = () => {
+  const { confirmDialog, closeDialog } = useDialog();
 
-const ConfirmDialog = ({ dialog, closeDialog }: Props) => {
   const handleConfirm = () => {
-    dialog.apply();
-    closeDialog();
+    confirmDialog.apply();
+    closeDialog(DialogEnumType.Confirm);
   };
+
   return (
-    <Modal visible={dialog.isShow} style={confirmDialogStyles.modalView}>
+    <Modal visible={confirmDialog.isShow} style={confirmDialogStyles.modalView}>
       <Pressable
         onPress={(event) => {
           event.stopPropagation();
           if (event.target !== event.currentTarget) return;
-          closeDialog();
+          closeDialog(DialogEnumType.Confirm);
         }}
         style={confirmDialogStyles.modalBackground}
       >
         <View style={confirmDialogStyles.modalContainer}>
           <View style={confirmDialogStyles.textContainer}>
-            {dialog.text.split(' ').map((word: string, _id) => (
+            {confirmDialog.text.split(' ').map((word: string, _id) => (
               <Text key={_id} style={confirmDialogStyles.text}>
                 {`${word} `}
               </Text>
@@ -37,13 +36,17 @@ const ConfirmDialog = ({ dialog, closeDialog }: Props) => {
               onPress={handleConfirm}
               style={confirmDialogStyles.confirmButtonContainer}
             >
-              <Text style={confirmDialogStyles.text}>{dialog.applyText}</Text>
+              <Text style={confirmDialogStyles.text}>
+                {confirmDialog.applyText}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={closeDialog}
+              onPress={() => closeDialog(DialogEnumType.Confirm)}
               style={confirmDialogStyles.confirmButtonContainer}
             >
-              <Text style={confirmDialogStyles.text}>{dialog.closeText}</Text>
+              <Text style={confirmDialogStyles.text}>
+                {confirmDialog.closeText}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

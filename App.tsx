@@ -6,7 +6,6 @@ import {
   useNavigationContainerRef,
 } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import DialogProvider from 'components/common/dialogs/DialogProvider';
 import FallbackError from 'components/fallback/FallbackError';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
@@ -28,6 +27,7 @@ import { MyTheme, colors } from 'styles/theme';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useAuthorizeStore } from 'stores/Authorize';
+import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 
 dayjs.locale('ko');
 
@@ -85,12 +85,12 @@ const App = () => {
           <SafeAreaView style={appStyles.safeAreaContainer}>
             <GestureHandlerRootView style={appStyles.gestureContainer}>
               <NavigationContainer theme={MyTheme} ref={navigationRef}>
-                <DialogProvider>
+                <DialogPortalProvider>
                   {/* <StorybookUIRoot /> */}
                   {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
                   <StatusBar backgroundColor={colors.background} />
                   {isLogin ? <Navigator /> : <AuthorizeNavigator />}
-                </DialogProvider>
+                </DialogPortalProvider>
               </NavigationContainer>
             </GestureHandlerRootView>
           </SafeAreaView>

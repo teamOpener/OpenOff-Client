@@ -9,7 +9,7 @@ import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import Text from 'components/common/Text/Text';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Image,
   KeyboardAvoidingView,
@@ -21,7 +21,7 @@ import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
-import DialogContext from 'utils/DialogContext';
+import useDialog from 'hooks/app/useDialog';
 import { validateEmail, validatePassword } from 'utils/validate';
 import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
 import loginScreenStyles from './LoginScreen.style';
@@ -32,7 +32,7 @@ const LoginScreen = () => {
 
   const { setIsLogin, resetToken } = useAuthorizeStore();
 
-  const { openDialog } = useContext(DialogContext);
+  const { openDialog } = useDialog();
 
   const [password, setPassword] = useState<string>('');
 
