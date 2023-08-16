@@ -1,11 +1,11 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
+import useDialog from 'hooks/app/useDialog';
 import fieldData from 'data/lists/fieldData';
-import { useContext, useId } from 'react';
+import { useId } from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { Event } from 'types/event';
-import DialogContext from 'utils/DialogContext';
 import eventRowCardStyles from './EventRowCard.style';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const EventRowCard = ({ event, handleEventPress }: Props) => {
-  const { openDialog } = useContext(DialogContext);
+  const { openDialog } = useDialog();
   const city = event.streetRoadAddress.split(' ');
   const fieldId = useId();
 

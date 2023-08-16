@@ -3,20 +3,20 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
+import useDialog from 'hooks/app/useDialog';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckSms, useSendSms } from 'hooks/queries/user';
-import { Dispatch, useContext } from 'react';
+import { Dispatch } from 'react';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
-import DialogContext from 'utils/DialogContext';
 
 interface Props {
   dispatch: Dispatch<Action>;
 }
 
 const PhoneCertificationScreen = ({ dispatch }: Props) => {
-  const { openDialog } = useContext(DialogContext);
+  const { openDialog } = useDialog();
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const {
     phonenumber,

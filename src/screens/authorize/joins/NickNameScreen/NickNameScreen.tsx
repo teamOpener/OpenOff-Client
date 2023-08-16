@@ -4,12 +4,12 @@ import EssentialInput from 'components/authorize/inputs/EssentialInput/Essential
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
+import useDialog from 'hooks/app/useDialog';
 import { useNicknameCheck } from 'hooks/queries/auth';
-import { Dispatch, useContext, useState } from 'react';
+import { Dispatch, useState } from 'react';
 import { colors } from 'styles/theme';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
-import DialogContext from 'utils/DialogContext';
 import { validateNickname } from 'utils/validate';
 
 interface Props {
@@ -20,7 +20,7 @@ const NickNameScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [nickname, setNickname] = useState<string>('');
   const isActive = !validateNickname(nickname) && nickname.length > 1;
-  const { openDialog } = useContext(DialogContext);
+  const { openDialog } = useDialog();
 
   const { mutateAsync: checkNickname, isLoading: isCheckNickname } =
     useNicknameCheck();

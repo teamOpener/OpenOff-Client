@@ -4,12 +4,12 @@ import EssentialInput from 'components/authorize/inputs/EssentialInput/Essential
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
+import useDialog from 'hooks/app/useDialog';
 import { useEmailCheck, useNormalSignUp } from 'hooks/queries/auth';
-import { Dispatch, useContext, useState } from 'react';
+import { Dispatch, useState } from 'react';
 import { colors } from 'styles/theme';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
-import DialogContext from 'utils/DialogContext';
 import { validateEmail, validatePassword } from 'utils/validate';
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
 
 const EmailPasswordScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
-  const { openDialog } = useContext(DialogContext);
+  const { openDialog } = useDialog();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 

@@ -4,11 +4,11 @@ import EssentialInput from 'components/authorize/inputs/EssentialInput/Essential
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckAuthSms, useSendAuthSms } from 'hooks/queries/auth';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import DialogContext from 'utils/DialogContext';
+import useDialog from 'hooks/app/useDialog';
 import {
   validateAuthNumber,
   validateEmail,
@@ -21,7 +21,7 @@ const PasswordFindScreen = () => {
   const [emailAddress, setEmailAddress] = useState<string>('');
   const { phonenumber, setPhonenumber, authnumber, setAuthnumber } =
     usePhoneCertificate();
-  const { openDialog } = useContext(DialogContext);
+  const { openDialog } = useDialog();
   const [retry, setRetry] = useState<boolean>(false);
   const [isAuthorize, setIsAuthorize] = useState<boolean>(false);
 
