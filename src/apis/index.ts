@@ -63,9 +63,12 @@ const onRejected = async (error: ApiErrorResponse) => {
     try {
       const value = await AsyncStorage.getItem('authorize');
       const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
+
       if (!authorizeStore.state.token.refreshToken) {
         initializeAuthorizeState();
-      } else {
+      }
+
+      if (authorizeStore.state.token.refreshToken) {
         const accessToken = await refresh();
         originalRequest.headers.Authorization = `Bearer ${accessToken.data?.accessToken}`;
         setToken({
@@ -73,8 +76,10 @@ const onRejected = async (error: ApiErrorResponse) => {
           refreshToken: accessToken.data?.refreshToken,
         });
         const response = await fetcher.request(originalRequest);
+        // 아직 progress중이므로 true상태를 유지한다.
         return response;
       }
+
       isTokenRenewalInProgress = false;
     } catch (refreshError) {
       initializeAuthorizeState(refreshError);
