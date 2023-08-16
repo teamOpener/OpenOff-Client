@@ -24,13 +24,13 @@ const fetcher = axios.create({
 // TODO 사용안하면 지우기
 fetcher.interceptors.request.use(async (config) => {
   const value = await AsyncStorage.getItem('authorize');
-  const data: AsyncAuthorizeStorage = JSON.parse(value ?? '');
+  const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
   if (
-    data.state.token.refreshToken &&
+    authorizeStore.state.token.refreshToken &&
     fetcher.defaults.headers.Authorization === null
   ) {
     // eslint-disable-next-line no-param-reassign
-    config.headers.Authorization = `Bearer ${data.state.token.accessToken}`;
+    config.headers.Authorization = `Bearer ${authorizeStore.state.token.accessToken}`;
   }
   return config;
 });

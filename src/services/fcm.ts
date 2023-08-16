@@ -2,12 +2,16 @@ import messaging from '@react-native-firebase/messaging';
 import { PERMISSIONS } from 'react-native-permissions';
 import { Platform } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
 import { requestSinglePermission } from './permission';
 
-const { fcmToken, setFcmToken } = useAuthorizeStore.getState();
+const { setFcmToken } = useAuthorizeStore.getState();
 
 export const getToken = async () => {
-  if (!fcmToken) {
+  const value = await AsyncStorage.getItem('authorize');
+  const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
+  if (!authorizeStore.state.fcmToken) {
     const fcmDeviceToken = await messaging().getToken();
     setFcmToken(fcmDeviceToken);
     // TODO 서버로 token 전송

@@ -5,6 +5,7 @@ interface AsyncAuthorizeStorage {
       accessToken: string;
       refreshToken: string;
     };
+    fcmToken: string;
   };
   version: number;
 }
