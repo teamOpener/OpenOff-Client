@@ -17,7 +17,9 @@ const essentialInputStyles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1.5,
     fontSize: 15,
-    lineHeight: 15 * 1.4,
+    lineHeight: Platform.select({
+      android: 15 * 1.4,
+    }),
     includeFontPadding: false,
     textAlignVertical: 'center',
     fontFamily: fonts.semibold,

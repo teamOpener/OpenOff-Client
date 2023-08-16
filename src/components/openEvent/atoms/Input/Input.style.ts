@@ -16,13 +16,16 @@ const inputStyles = StyleSheet.create({
   text: {
     fontFamily: fonts.regular,
     fontSize: 13,
-    lineHeight: 13 * 1.4,
+    lineHeight: Platform.select({
+      android: 13 * 1.4,
+    }),
     color: colors.white,
   } as TextStyle,
   textInputContainer: {
+    alignItems: 'center',
     paddingVertical: Platform.select({
       android: getPixelSize(7),
-      ios: 7,
+      ios: 7 + (13 * 0.2) / 2,
     }),
   },
 });
