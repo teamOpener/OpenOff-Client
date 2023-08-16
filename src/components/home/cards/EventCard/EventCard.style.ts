@@ -16,12 +16,14 @@ const eventCardStyles = StyleSheet.create({
   titleText: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
   } as TextStyle,
   iconText: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     gap: 3,
+    paddingRight: 4,
   },
 });
 

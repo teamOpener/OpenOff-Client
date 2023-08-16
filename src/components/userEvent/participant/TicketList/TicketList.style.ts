@@ -20,6 +20,12 @@ const ticketListStyles = StyleSheet.create({
   titleText: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
+  } as TextStyle,
+  dateText: {
+    fontFamily: fonts.regular,
+    fontSize: 13,
+    lineHeight: 13 * 1.4,
   } as TextStyle,
   line: {
     flex: 1,

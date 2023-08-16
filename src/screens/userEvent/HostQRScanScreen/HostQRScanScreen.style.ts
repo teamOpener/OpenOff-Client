@@ -3,9 +3,10 @@ import { colors, fonts } from 'styles/theme';
 
 const hostQRScanScreenStyles = StyleSheet.create({
   barcodeTextURL: {
+    fontFamily: fonts.bold,
     fontSize: 20,
-    color: 'white',
-    fontWeight: 'bold',
+    lineHeight: 20 * 1.4,
+    color: colors.white,
     backgroundColor: 'red',
   },
   container: {
@@ -27,10 +28,12 @@ const hostQRScanScreenStyles = StyleSheet.create({
   mainText: {
     fontFamily: fonts.semibold,
     fontSize: 18,
+    lineHeight: 18 * 1.4,
   } as TextStyle,
   subText: {
     fontFamily: fonts.regular,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
     textAlign: 'center',
   } as TextStyle,
   resultWrapper: {
@@ -46,6 +49,7 @@ const hostQRScanScreenStyles = StyleSheet.create({
   resultText: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
   } as TextStyle,
   requestCameraPermission: {
     textAlign: 'center',

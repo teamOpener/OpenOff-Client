@@ -11,6 +11,7 @@ const nicknameScreenStyles = StyleSheet.create({
   title: {
     color: colors.white,
     fontSize: 25,
+    lineHeight: 25 * 1.4,
     paddingVertical: 10,
     width: '100%',
   },

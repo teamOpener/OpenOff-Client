@@ -23,6 +23,7 @@ const eventSearchInput = StyleSheet.create({
   searchInput: {
     fontFamily: fonts.regular,
     fontSize: 14,
+    lineHeight: 14 * 1.4,
     zIndex: 11,
     flex: 1,
     paddingVertical: 0,
@@ -47,6 +48,7 @@ const eventSearchInput = StyleSheet.create({
   calendarText: {
     color: colors.background,
     fontSize: 10,
+    lineHeight: 10 * 1.4,
     fontFamily: fonts.regular,
   },
 });

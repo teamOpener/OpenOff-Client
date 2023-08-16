@@ -8,21 +8,24 @@ interface Props extends React.ComponentProps<typeof RNText> {
   color?: keyof typeof colors;
 }
 
-export default function Text({ style, variant, color, ...rest }: Props) {
+export default function Text({
+  style,
+  variant = 'body1',
+  color,
+  ...rest
+}: Props) {
   return (
     <RNText
       style={[
         variant && textStyles[variant],
         {
           color: color ? colors[color] : colors.white,
-          ...(style as object),
+          includeFontPadding: false,
+          textAlignVertical: 'center',
         },
+        style,
       ]}
       {...rest}
     />
   );
 }
-
-Text.defaultProps = {
-  variant: textStyles.body1,
-};

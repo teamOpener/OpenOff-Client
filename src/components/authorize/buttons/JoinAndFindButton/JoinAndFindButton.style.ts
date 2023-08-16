@@ -4,6 +4,7 @@ import { StyleSheet, TextStyle } from 'react-native';
 const joinAndFindButtonStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignSelf: 'center',
   },
   buttonContainer: {
     alignItems: 'center',
@@ -12,6 +13,7 @@ const joinAndFindButtonStyle = StyleSheet.create({
   text: {
     fontFamily: fonts.regular,
     fontSize: 13,
+    lineHeight: 13 * 1.4,
   } as TextStyle,
 });
 

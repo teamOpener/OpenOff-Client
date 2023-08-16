@@ -18,3 +18,22 @@ const AlertCardSkeleton = () => {
 };
 
 export default AlertCardSkeleton;
+
+/**
+{!isLoading && (
+  <View>
+    <Icon
+      name="IconTicketStar"
+      fill="background"
+      style={{ position: 'absolute', left: '50%', top: 20, zIndex: 10 }}
+    />
+    <Icon
+      name="IconTicketStar"
+      fill="background"
+      size={20}
+      style={{ position: 'absolute', left: '30%', top: 16, zIndex: 10 }}
+    />
+    <AlertCardSkeleton />
+  </View>
+)}
+ */

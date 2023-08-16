@@ -41,6 +41,7 @@ const carouselCardStyle = StyleSheet.create({
   pageText: {
     fontFamily: fonts.regular,
     fontSize: 10,
+    lineHeight: 10 * 1.4,
   },
 });
 

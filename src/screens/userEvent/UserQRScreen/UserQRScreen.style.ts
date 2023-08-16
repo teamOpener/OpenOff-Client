@@ -22,6 +22,7 @@ const userQRScreenStyles = StyleSheet.create({
   topInfoText: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
     color: colors.main,
   } as TextStyle,
   cancelBtn: {

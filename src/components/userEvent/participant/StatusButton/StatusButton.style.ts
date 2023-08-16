@@ -17,6 +17,7 @@ const statusButtonStyles = StyleSheet.create({
   qrText: {
     fontFamily: fonts.regular,
     fontSize: 10,
+    lineHeight: 10 * 1.4,
   } as TextStyle,
 });
 

@@ -24,6 +24,7 @@ const donutChartInfoStyles = StyleSheet.create({
   numeratorText: {
     fontFamily: fonts.semibold,
     fontSize: 30,
+    lineHeight: 30 * 1.4,
   } as TextStyle,
   denominatorText: {
     fontFamily: fonts.semibold,

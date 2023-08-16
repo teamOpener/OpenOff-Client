@@ -18,6 +18,7 @@ const checkButtonStyles = StyleSheet.create({
   },
   checkButtonLabel: {
     fontSize: 17,
+    lineHeight: 17 * 1.4,
     fontFamily: fonts.semibold,
   } as TextStyle,
 });

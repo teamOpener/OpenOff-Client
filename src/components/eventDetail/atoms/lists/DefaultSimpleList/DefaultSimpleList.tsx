@@ -11,7 +11,7 @@ interface Props {
 const DefaultSimpleList = ({ title, description }: Props) => {
   return (
     <SpaceLayout direction="row" size={10}>
-      <View>
+      <View style={defaultSimpleListStyles.container}>
         <Text variant="body2" color="grey">
           {title}
         </Text>

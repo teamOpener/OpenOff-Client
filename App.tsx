@@ -8,7 +8,7 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DialogProvider from 'components/common/dialogs/DialogProvider';
 import FallbackError from 'components/fallback/FallbackError';
-import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
 import { Suspense, useEffect } from 'react';
@@ -79,7 +79,7 @@ const App = () => {
       <ErrorBoundary FallbackComponent={FallbackError}>
         <Suspense
           fallback={
-            <CommonLoading isActive backgroundColor={colors.background} />
+            <WithIconLoading isActive backgroundColor={colors.background} />
           }
         >
           <SafeAreaView style={appStyles.safeAreaContainer}>

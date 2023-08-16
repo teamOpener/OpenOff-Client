@@ -8,6 +8,7 @@ const titleTextStyles = StyleSheet.create({
   title: {
     fontFamily: fonts.bold,
     fontSize: 24,
+    lineHeight: 24 * 1.4,
   } as TextStyle,
 });
 

@@ -12,12 +12,13 @@ export const initEventForm: EventForm = {
     roadAddress: null,
     detailAddress: null,
   },
-  cost: null,
+  cost: 0,
   recruitmentNumber: null,
   description: null,
   imageBuilders: [],
   additionalInformation: [],
   hostName: null,
+  staffIdList: [],
   hostPhoneNumber: null,
   hostEmail: null,
 };
@@ -34,6 +35,7 @@ export const initEventFormErrMsg: EventFormError = {
   imageUrls: null,
   additionalInformation: null,
   hostName: null,
+  staffIdList: null,
   hostPhoneNumber: null,
   hostEmail: null,
 };

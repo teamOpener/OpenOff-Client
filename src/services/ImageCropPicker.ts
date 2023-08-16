@@ -17,6 +17,7 @@ export const openImagePicker = async (maxNumber: number): Promise<Image[]> => {
       multiple: true,
       maxFiles: maxNumber,
       mediaType: 'photo',
+      includeBase64: true,
     });
 
     return images;

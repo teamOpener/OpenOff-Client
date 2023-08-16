@@ -9,6 +9,7 @@ const genderInputStyles = StyleSheet.create({
   title: {
     marginBottom: 14,
     fontSize: 18,
+    lineHeight: 18 * 1.4,
     fontFamily: fonts.semibold,
   },
   genderButtonContainer: {

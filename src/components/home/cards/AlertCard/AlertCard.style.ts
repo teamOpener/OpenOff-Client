@@ -14,11 +14,13 @@ const alertCardStyles = StyleSheet.create({
   alertTitle: {
     color: colors.white,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
     fontFamily: fonts.medium,
   },
   alertDate: {
     color: colors.white,
     fontSize: 13,
+    lineHeight: 13 * 1.4,
     fontFamily: fonts.regular,
   },
 });

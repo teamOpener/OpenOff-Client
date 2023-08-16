@@ -30,14 +30,17 @@ const textStyles = StyleSheet.create({
   body2: {
     fontFamily: fonts.regular,
     fontSize: 15,
+    lineHeight: 15 * 1.2,
   } as TextStyle,
   body3: {
     fontFamily: fonts.regular,
     fontSize: 12,
+    lineHeight: 12 * 1.2,
   } as TextStyle,
   bodySB: {
     fontFamily: fonts.semibold,
     fontSize: 12,
+    lineHeight: 12 * 1.2,
   } as TextStyle,
   caption: {
     fontFamily: fonts.bold,

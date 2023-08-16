@@ -1,9 +1,17 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { updateInterestField } from 'apis/interest';
-import { checkSms, getMyInfo, sendSms, updateOnBoarding } from 'apis/user';
+import {
+  checkSms,
+  getMyInfo,
+  sendSms,
+  updateOnBoarding,
+  uploadImage,
+  uploadImages,
+} from 'apis/user';
 import queryKeys from 'constants/queryKeys';
 import AddInterestRequestDto from 'models/field/request/AddInterestRequestDto';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
+import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
 import UserOnboardingRequestDto from 'models/user/request/UserOnboardingRequestDto';
 import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
 import { ApiErrorResponse } from 'types/ApiResponse';
@@ -51,5 +59,27 @@ export const useConcludeOnBoarding = () => {
 export const useMyInfo = () => {
   return useQuery([...queryKeys.userKeys.myInfo], () => getMyInfo(), {
     select: (data) => data.data,
+  });
+};
+
+export const useUploadImage = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((data: S3UploadServiceRequestDto) => uploadImage(data), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
+  });
+};
+
+export const useUploadImages = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((data: FormData[]) => uploadImages(data), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
   });
 };

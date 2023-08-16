@@ -29,7 +29,7 @@ const CarouselCard = <T extends Advertisement>({
               {item.title}
             </Text>
             <View style={carouselCardStyle.fieldContainer}>
-              <Text>
+              <Text variant="body3">
                 {
                   fieldData.find(
                     (fieldElement) => fieldElement.value === item.field,

@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import {
+  createEvent,
   getEventDetailInfo,
   getFieldEventLists,
   getPersonalEventLists,
@@ -10,14 +11,14 @@ import { FieldCode } from 'constants/code';
 import queryKeys from 'constants/queryKeys';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 
-// TODO: 생성
 export const useCreateEvent = (
   successCallback?: () => void,
   errorCallback?: () => void,
 ) => {
-  return useMutation((data: CreateNewEventRequestDto) => fakeApi(), {
+  return useMutation((data: CreateNewEventRequestDto) => createEvent(data), {
     onSuccess: successCallback,
     onError: errorCallback,
+    useErrorBoundary: false,
   });
 };
 

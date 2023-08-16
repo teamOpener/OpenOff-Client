@@ -9,6 +9,7 @@ const baseInfoInputStyles = StyleSheet.create({
   labelText: {
     fontFamily: fonts.semibold,
     fontSize: 18,
+    lineHeight: 18 * 1.4,
   } as TextStyle,
   input: {
     flex: 1,

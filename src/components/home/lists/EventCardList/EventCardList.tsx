@@ -57,6 +57,7 @@ const EventCardList = ({
           </TouchableOpacity>
         )}
       </View>
+      <Spacing height={5} />
       <Text variant="body2" color="main">
         {subTitle}
       </Text>

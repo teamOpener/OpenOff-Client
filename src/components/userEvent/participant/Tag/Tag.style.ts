@@ -18,6 +18,7 @@ const tagStyles = StyleSheet.create({
   label: {
     fontFamily: fonts.regular,
     fontSize: 12,
+    lineHeight: 12 * 1.4,
   } as TextStyle,
 });
 

@@ -17,10 +17,14 @@ const essentialInputStyles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1.5,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
+    includeFontPadding: false,
+    textAlignVertical: 'center',
     fontFamily: fonts.semibold,
   },
   inputAbsoluteContainer: {
     flex: 1,
+    justifyContent: 'center',
   },
   phoneInputRow: {
     flexDirection: 'row',
@@ -30,6 +34,7 @@ const essentialInputStyles = StyleSheet.create({
   label: {
     fontFamily: fonts.semibold,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
     marginBottom: 5,
   },
   validateStatus: {

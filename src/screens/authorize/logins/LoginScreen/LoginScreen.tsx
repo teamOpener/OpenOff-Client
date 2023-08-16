@@ -10,7 +10,13 @@ import Text from 'components/common/Text/Text';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
 import { useContext, useEffect, useState } from 'react';
-import { Image, View } from 'react-native';
+import {
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View,
+} from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
@@ -101,44 +107,50 @@ const LoginScreen = () => {
     return <CommonLoading isActive backgroundColor={colors.background} />;
 
   return (
-    <View style={loginScreenStyles.container}>
-      <Image
-        style={loginScreenStyles.logo}
-        source={require('../../../../assets/images/logo.png')}
-      />
-      <View style={loginScreenStyles.mainContainer}>
-        <LoginInput
-          label="이메일"
-          value={emailAddress}
-          type="emailAddress"
-          validation={validateEmail}
-          setValue={setEmailAddress}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      style={loginScreenStyles.container}
+    >
+      <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>
+        <Image
+          style={loginScreenStyles.logo}
+          source={require('../../../../assets/images/logo.png')}
         />
-        <LoginInput
-          label="비밀번호"
-          value={password}
-          type="password"
-          setValue={setPassword}
-          validation={validatePassword}
-        />
-        <LoginButton isActive={isActive} handlePress={handleCommonLogin} />
-        <Text style={loginScreenStyles.middleText}>또는</Text>
-        <SocialLoginButtonGroup
-          kakaoLogin={handleKakaoLogin}
-          naverLogin={() => {
-            return false;
-          }}
-          googleLogin={() => {
-            return false;
-          }}
-          appleLogin={() => {
-            return false;
-          }}
-        />
-      </View>
 
-      <JoinButton />
-    </View>
+        <View style={loginScreenStyles.mainContainer}>
+          <LoginInput
+            label="이메일"
+            value={emailAddress}
+            type="emailAddress"
+            validation={validateEmail}
+            setValue={setEmailAddress}
+          />
+          <LoginInput
+            label="비밀번호"
+            value={password}
+            type="password"
+            setValue={setPassword}
+            validation={validatePassword}
+          />
+          <LoginButton isActive={isActive} handlePress={handleCommonLogin} />
+          <Text style={loginScreenStyles.middleText}>또는</Text>
+          <SocialLoginButtonGroup
+            kakaoLogin={handleKakaoLogin}
+            naverLogin={() => {
+              return false;
+            }}
+            googleLogin={() => {
+              return false;
+            }}
+            appleLogin={() => {
+              return false;
+            }}
+          />
+
+          <JoinButton />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

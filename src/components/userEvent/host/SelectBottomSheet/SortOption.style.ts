@@ -11,6 +11,7 @@ const sortOptionStyles = StyleSheet.create({
   modalText: {
     fontFamily: fonts.medium,
     fontSize: 15,
+    lineHeight: 15 * 1.4,
   } as TextStyle,
 });
 
