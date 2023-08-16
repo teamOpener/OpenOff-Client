@@ -19,6 +19,10 @@ const MENT_USER = Object.freeze({
   },
   MAIN: {
     USER_INTEREST_FIELD: '관심 분야',
+    MY_TICKET: '내 티켓',
+    MY_SCRAP: '스크랩',
+    HOST_EVENT: '주최 이벤트',
+    MY_COMMENT: '내가 쓴 댓글',
     CUSTOMER_SERVICE_CENTER: '고객센터',
     FAQ: 'FAQ',
     ANNOUNCEMENT: '공지사항',
