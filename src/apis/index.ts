@@ -76,7 +76,7 @@ const onRejected = async (error: ApiErrorResponse) => {
           refreshToken: accessToken.data?.refreshToken,
         });
         const response = await fetcher.request(originalRequest);
-        // 아직 progress중이므로 true상태를 유지한다.
+        isTokenRenewalInProgress = false;
         return response;
       }
 
