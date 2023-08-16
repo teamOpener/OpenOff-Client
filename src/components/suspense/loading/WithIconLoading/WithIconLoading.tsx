@@ -20,9 +20,9 @@ const WithIconLoading = ({
   backgroundColor = 'rgba(0, 0, 0, 0.4)',
   text,
 }: Props) => {
-  const animatedStyle1 = useBlinkingEffect(800);
-  const animatedStyle2 = useBlinkingEffect(1000);
-  const animatedStyle3 = useBlinkingEffect(600);
+  const animatedDefaultStyle = useBlinkingEffect(1000);
+  const animatedStarStyle = useBlinkingEffect(800);
+  const animatedHeartStyle = useBlinkingEffect(600);
 
   return (
     <Modal
@@ -40,7 +40,7 @@ const WithIconLoading = ({
         ]}
       >
         <SpaceLayout size={2}>
-          <Animated.View style={animatedStyle1}>
+          <Animated.View style={animatedStarStyle}>
             <Icon
               name="IconTicketStar"
               size={16}
@@ -50,11 +50,11 @@ const WithIconLoading = ({
           </Animated.View>
 
           <Animated.View
-            style={[animatedStyle2, withIconLoadingStyles.absoluteCircle]}
+            style={[animatedDefaultStyle, withIconLoadingStyles.absoluteCircle]}
           />
           <ActivityIndicator size={40} color={colors.main} animating />
 
-          <Animated.View style={animatedStyle2}>
+          <Animated.View style={animatedDefaultStyle}>
             <Icon
               name="IconTicketStar"
               size={10}
@@ -62,7 +62,7 @@ const WithIconLoading = ({
               style={withIconLoadingStyles.rightTopIcon}
             />
           </Animated.View>
-          <Animated.View style={animatedStyle3}>
+          <Animated.View style={animatedHeartStyle}>
             <Icon
               name="IconTicketHeart"
               size={9}
