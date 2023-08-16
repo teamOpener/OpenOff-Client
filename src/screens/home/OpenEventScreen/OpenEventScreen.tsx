@@ -18,6 +18,7 @@ import useDialog from 'hooks/app/useDialog';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import getNonEmptyStrings from 'utils/common';
+import { colors } from 'styles/theme';
 import openEventScreenStyles from './OpenEventScreen.style';
 
 const OpenEventScreen = () => {
@@ -85,53 +86,49 @@ const OpenEventScreen = () => {
       return;
     }
 
-    try {
-      // 2. 이미지 업로드
-      const imageUrlList = await uploadImages();
+    // 2. 이미지 업로드
+    const imageUrlList = await uploadImages();
 
-      // TODO refactor
-      // 3. 이벤트 개설
-      if (
-        !openEvent.field.length ||
-        !openEvent.title ||
-        !openEvent.applicationStartDate ||
-        !openEvent.applicationEndDate ||
-        !openEvent.eventDates.length ||
-        !openEvent.address.roadAddress ||
-        !openEvent.cost ||
-        !openEvent.recruitmentNumber ||
-        !openEvent.description ||
-        !openEvent.imageBuilders.length ||
-        !openEvent.hostName ||
-        !openEvent.hostPhoneNumber ||
-        !openEvent.hostEmail
-      ) {
-        return;
-      }
-
-      const submitForm: CreateNewEventRequestDto = {
-        fieldTypeList: openEvent.field,
-        title: openEvent.title,
-        applicationStartDate: openEvent.applicationStartDate,
-        applicationEndDate: openEvent.applicationEndDate,
-        eventDates: openEvent.eventDates,
-        streetLoadAddress: openEvent.address.roadAddress,
-        detailAddress: openEvent.address.detailAddress ?? '',
-        eventFee: openEvent.cost,
-        maxParticipant: openEvent.recruitmentNumber,
-        description: openEvent.description,
-        imageDataList: imageUrlList,
-        extraQuestionList: getNonEmptyStrings(openEvent.additionalInformation),
-        hostName: openEvent.hostName,
-        staffIdList: openEvent.staffIdList ?? [],
-        hostPhoneNumber: openEvent.hostPhoneNumber,
-        hostEmail: openEvent.hostEmail,
-      };
-
-      await createEvent(submitForm);
-    } catch (error) {
-      handleCreateEventError(error as ApiErrorResponse);
+    // TODO refactor
+    // 3. 이벤트 개설
+    if (
+      !openEvent.field.length ||
+      !openEvent.title ||
+      !openEvent.applicationStartDate ||
+      !openEvent.applicationEndDate ||
+      !openEvent.eventDates.length ||
+      !openEvent.address.roadAddress ||
+      !openEvent.cost ||
+      !openEvent.recruitmentNumber ||
+      !openEvent.description ||
+      !openEvent.imageBuilders.length ||
+      !openEvent.hostName ||
+      !openEvent.hostPhoneNumber ||
+      !openEvent.hostEmail
+    ) {
+      return;
     }
+
+    const submitForm: CreateNewEventRequestDto = {
+      fieldTypeList: openEvent.field,
+      title: openEvent.title,
+      applicationStartDate: openEvent.applicationStartDate,
+      applicationEndDate: openEvent.applicationEndDate,
+      eventDates: openEvent.eventDates,
+      streetLoadAddress: openEvent.address.roadAddress,
+      detailAddress: openEvent.address.detailAddress ?? '',
+      eventFee: openEvent.cost,
+      maxParticipant: openEvent.recruitmentNumber,
+      description: openEvent.description,
+      imageDataList: imageUrlList,
+      extraQuestionList: getNonEmptyStrings(openEvent.additionalInformation),
+      hostName: openEvent.hostName,
+      staffIdList: openEvent.staffIdList ?? [],
+      hostPhoneNumber: openEvent.hostPhoneNumber,
+      hostEmail: openEvent.hostEmail,
+    };
+
+    await createEvent(submitForm);
   };
 
   useEffect(() => {
@@ -157,11 +154,16 @@ const OpenEventScreen = () => {
     });
   }, [isCreateEventLoading, isImageUploadLoading]);
 
-  if (isImageUploadLoading || isCreateEventLoading)
-    return <WithIconLoading isActive text={MENT_OPEN_EVENT.LOADING.CREATE} />;
-
   return (
     <View style={openEventScreenStyles.wrapper}>
+      {(isImageUploadLoading || isCreateEventLoading) && (
+        <WithIconLoading
+          isActive
+          backgroundColor={colors.background}
+          text={MENT_OPEN_EVENT.LOADING.CREATE}
+        />
+      )}
+
       <ScrollView
         style={openEventScreenStyles.container}
         contentContainerStyle={openEventScreenStyles.containerContent}
