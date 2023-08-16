@@ -35,6 +35,12 @@ const MENT_OPEN_EVENT = Object.freeze({
     CREATE: '이벤트 업로드 중이에요!',
   },
 
+  SUCCESS: {
+    CREATE_EVENT_TITLE: '이벤트 개설 신청이 완료되었습니다!',
+    CREATE_EVENT_CONTENT:
+      '해당 이벤트는 관리자 승인 이후 업로드 될 예정입니다.',
+  },
+
   ERROR: {
     MAX_FIELD: '최대 3개 장르까지 선택 가능합니다.',
     ADDRESS: '이벤트 장소를 등록해주세요.',
@@ -47,6 +53,8 @@ const MENT_OPEN_EVENT = Object.freeze({
     INVALID_HOST_PHONE: '올바른 전화번호를 입력해주세요.',
     HOST_EMAIL: '이메일을 입력해주세요.',
     INVALID_HOST_EMAIL: '유효한 이메일을 입력해주세요.',
+    CREATE_EVENT: '이벤트를 업로드하는데 실패했습니다. 다시 시도해주세요.',
+    UPLOAD_IMAGE: '이미지를 업로드하는데 실패했습니다. 다시 시도해주세요.',
   },
 
   PLACEHOLDER: {
