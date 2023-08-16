@@ -18,6 +18,7 @@ import useDialog from 'hooks/app/useDialog';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import getNonEmptyStrings from 'utils/common';
+import extractUserIds from 'utils/openEvent';
 import { colors } from 'styles/theme';
 import openEventScreenStyles from './OpenEventScreen.style';
 
@@ -123,7 +124,7 @@ const OpenEventScreen = () => {
       imageDataList: imageUrlList,
       extraQuestionList: getNonEmptyStrings(openEvent.additionalInformation),
       hostName: openEvent.hostName,
-      staffIdList: openEvent.staffIdList ?? [],
+      staffIdList: extractUserIds(openEvent.staffList),
       hostPhoneNumber: openEvent.hostPhoneNumber,
       hostEmail: openEvent.hostEmail,
     };
@@ -187,9 +188,9 @@ const OpenEventScreen = () => {
         <HeadText title={MENT_OPEN_EVENT.INFO} />
 
         <OpenEventForm.HostName />
+        <OpenEventForm.SubHost />
         <OpenEventForm.HostPhoneNumber />
         <OpenEventForm.HostEmail />
-        {/* TODO: 주최자 추가 기능 */}
 
         <Divider height={1} color="darkGrey" />
 
