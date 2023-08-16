@@ -53,15 +53,14 @@ const initializeAuthorizeState = (error?: unknown) => {
 const onRejected = async (error: ApiErrorResponse) => {
   const originalRequest = error.config;
   const data = error.response?.data;
-
+  console.log(error.response?.status);
   if (
     originalRequest &&
     data &&
-    (data.code === 601 || data.code === 403) &&
+    (data.code === 601 || error.response?.status === 403) &&
     !isTokenRenewalInProgress
   ) {
     isTokenRenewalInProgress = true;
-
     try {
       if (!token.refreshToken) {
         initializeAuthorizeState();
