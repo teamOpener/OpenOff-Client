@@ -57,7 +57,7 @@ const onRejected = async (error: ApiErrorResponse) => {
   if (
     originalRequest &&
     data &&
-    data.code === 601 &&
+    (data.code === 601 || data.code === 403) &&
     !isTokenRenewalInProgress
   ) {
     isTokenRenewalInProgress = true;
