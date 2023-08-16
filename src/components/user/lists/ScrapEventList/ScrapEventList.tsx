@@ -50,7 +50,10 @@ const ScrapEventList = ({
             isHasNextSkeleton || isLoading ? (
               <>
                 {new Array(3).fill(1).map((_, _idx) => (
-                  <EventCardSkeleton key={`eventCard-skeleton-${_idx}`} />
+                  <EventCardSkeleton
+                    key={`eventCard-skeleton-${_idx}`}
+                    type="scrap"
+                  />
                 ))}
               </>
             ) : undefined
