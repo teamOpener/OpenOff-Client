@@ -7,12 +7,14 @@ import {
   updateOnBoarding,
   uploadImage,
   uploadImages,
+  uploadProfileImage,
 } from 'apis/user';
 import queryKeys from 'constants/queryKeys';
 import AddInterestRequestDto from 'models/field/request/AddInterestRequestDto';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
 import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
 import UserOnboardingRequestDto from 'models/user/request/UserOnboardingRequestDto';
+import UserProfileUploadRequestDto from 'models/user/request/UserProfileUploadRequestDto';
 import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
 import { ApiErrorResponse } from 'types/ApiResponse';
 
@@ -82,4 +84,18 @@ export const useUploadImages = (
     onError: errorCallback,
     useErrorBoundary: false,
   });
+};
+
+export const useUploadProfileImage = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (data: UserProfileUploadRequestDto) => uploadProfileImage(data),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
+    },
+  );
 };

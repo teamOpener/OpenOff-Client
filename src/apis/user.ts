@@ -2,6 +2,7 @@ import fetcher from 'apis';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
 import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
 import UserOnboardingRequestDto from 'models/user/request/UserOnboardingRequestDto';
+import UserProfileUploadRequestDto from 'models/user/request/UserProfileUploadRequestDto';
 import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
 import { S3UploadServiceResponseDto } from 'models/user/response/S3UploadServiceResponseDto';
 import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
@@ -36,13 +37,17 @@ export const updateOnBoarding = async (
 };
 
 export const uploadImage = async (
-  dto: S3UploadServiceRequestDto,
+  data: S3UploadServiceRequestDto,
 ): Promise<ApiResponse<S3UploadServiceResponseDto>> => {
-  const response = await fetcher.post(`/user/image/upload`, dto.multipartFile, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
+  const response = await fetcher.post(
+    `/user/image/upload`,
+    data.multipartFile,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     },
-  });
+  );
   return response.data;
 };
 
@@ -54,5 +59,12 @@ export const uploadImages = async (
       'Content-Type': 'multipart/form-data',
     },
   });
+  return response.data;
+};
+
+export const uploadProfileImage = async (
+  data: UserProfileUploadRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.patch(`/user/upload/profile`, data);
   return response.data;
 };
