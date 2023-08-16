@@ -25,7 +25,7 @@ const OpenEventScreen = () => {
     Alert.alert('성공');
     stackNavigation.goBack();
     /**
- TODO
+    TODO
     openDialog({
       type: 'success',
       text: '이벤트 개설 신청이 완료되었습니다!',
@@ -70,23 +70,41 @@ const OpenEventScreen = () => {
 
     // TODO refactor
     // 3. 이벤트 개설
+    if (
+      !openEvent.field.length ||
+      !openEvent.title ||
+      !openEvent.applicationStartDate ||
+      !openEvent.applicationEndDate ||
+      !openEvent.eventDates.length ||
+      !openEvent.address.roadAddress ||
+      !openEvent.cost ||
+      !openEvent.recruitmentNumber ||
+      !openEvent.description ||
+      !openEvent.imageBuilders.length ||
+      !openEvent.hostName ||
+      !openEvent.hostPhoneNumber ||
+      !openEvent.hostEmail
+    ) {
+      return;
+    }
+
     const submitForm: CreateNewEventRequestDto = {
       fieldTypeList: openEvent.field,
-      title: openEvent.title!,
-      applicationStartDate: openEvent.applicationStartDate!,
-      applicationEndDate: openEvent.applicationEndDate!,
+      title: openEvent.title,
+      applicationStartDate: openEvent.applicationStartDate,
+      applicationEndDate: openEvent.applicationEndDate,
       eventDates: openEvent.eventDates,
-      streetLoadAddress: openEvent.address.roadAddress!,
-      detailAddress: openEvent.address.detailAddress!,
-      eventFee: openEvent.cost!,
-      maxParticipant: openEvent.recruitmentNumber!,
-      description: openEvent.description!,
+      streetLoadAddress: openEvent.address.roadAddress,
+      detailAddress: openEvent.address.detailAddress ?? '',
+      eventFee: openEvent.cost,
+      maxParticipant: openEvent.recruitmentNumber,
+      description: openEvent.description,
       imageDataList: imageUrlList,
       extraQuestionList: openEvent.additionalInformation,
-      hostName: openEvent.hostName!,
-      staffIdList: openEvent.staffIdList!,
-      hostPhoneNumber: openEvent.hostPhoneNumber!,
-      hostEmail: openEvent.hostEmail!,
+      hostName: openEvent.hostName,
+      staffIdList: openEvent.staffIdList ?? [],
+      hostPhoneNumber: openEvent.hostPhoneNumber,
+      hostEmail: openEvent.hostEmail,
     };
 
     await createEvent(submitForm);
