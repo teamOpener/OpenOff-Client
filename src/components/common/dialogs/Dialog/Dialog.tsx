@@ -1,23 +1,21 @@
 import { Pressable, TouchableOpacity, View } from 'react-native';
-import { CommonDialog } from 'types/apps/dialog';
+import { DialogEnumType } from 'types/apps/dialog';
+import useDialog from 'hooks/app/useDialog';
 import { Modal } from 'react-native-paper';
 import Icon from '../../Icon/Icon';
 import Text from '../../Text/Text';
 import dialogStyles from './Dialog.style';
 
-interface Props {
-  dialog: CommonDialog;
-  closeDialog: () => void;
-}
+const Dialog = () => {
+  const { dialog, closeDialog } = useDialog();
 
-const Dialog = ({ dialog, closeDialog }: Props) => {
   return (
     <Modal visible={dialog.isShow} style={dialogStyles.modalView}>
       <Pressable
         onPress={(event) => {
           event.stopPropagation();
           if (event.target !== event.currentTarget) return;
-          closeDialog();
+          closeDialog(DialogEnumType.Success);
         }}
         style={dialogStyles.modalBackground}
       >
@@ -61,7 +59,7 @@ const Dialog = ({ dialog, closeDialog }: Props) => {
 
           <TouchableOpacity
             style={dialogStyles.buttonContainer}
-            onPress={closeDialog}
+            onPress={() => closeDialog(DialogEnumType.Success)}
           >
             <Text style={dialogStyles.text}>{dialog.closeText}</Text>
           </TouchableOpacity>
