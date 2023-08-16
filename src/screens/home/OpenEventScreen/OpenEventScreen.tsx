@@ -15,6 +15,7 @@ import { useCreateEvent } from 'hooks/queries/event';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useImageUpload from 'hooks/openEvent/useImageUpload';
 import useDialog from 'hooks/app/useDialog';
+import useExitConfirmation from 'hooks/app/useExitConfirmation';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import getNonEmptyStrings from 'utils/common';
@@ -28,13 +29,6 @@ const OpenEventScreen = () => {
 
   const { init, openEvent, setOpenEventErrorMessage } = useOpenEventStore();
   const { hasError, errorMessage } = useOpenEventValidator({ openEvent });
-
-  const backEventCallback = () => {
-    openDialog({
-      type: 'validate',
-      text: MENT_OPEN_EVENT.LOADING.CREATE,
-    });
-  };
 
   /**
    * 이미지 업로드
@@ -140,19 +134,23 @@ const OpenEventScreen = () => {
     await createEvent(submitForm);
   };
 
-  useEffect(() => {
-    init();
-    return () => {
-      init();
-    };
-  }, []);
-
   /**
+   * 로딩 상태 제어
    * 이벤트 업로드 중, 뒤로가기 막기
    */
-  // TODO android device
+  const isUploading = isImageUploadLoading || isCreateEventLoading;
+
+  const backEventCallback = () => {
+    openDialog({
+      type: 'validate',
+      text: MENT_OPEN_EVENT.LOADING.CREATE,
+    });
+  };
+
+  useExitConfirmation({ isActive: isUploading, callback: backEventCallback });
+
   useEffect(() => {
-    if (isImageUploadLoading || isCreateEventLoading) {
+    if (isUploading) {
       stackNavigation.setOptions({
         headerLeft: () => BackEventButton({ callback: backEventCallback }),
       });
@@ -163,9 +161,16 @@ const OpenEventScreen = () => {
     });
   }, [isCreateEventLoading, isImageUploadLoading]);
 
+  useEffect(() => {
+    init();
+    return () => {
+      init();
+    };
+  }, []);
+
   return (
     <View style={openEventScreenStyles.wrapper}>
-      {(isImageUploadLoading || isCreateEventLoading) && (
+      {isUploading && (
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
