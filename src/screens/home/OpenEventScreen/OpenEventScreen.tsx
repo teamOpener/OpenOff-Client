@@ -17,6 +17,7 @@ import useImageUpload from 'hooks/openEvent/useImageUpload';
 import useDialog from 'hooks/app/useDialog';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import getNonEmptyStrings from 'utils/common';
 import openEventScreenStyles from './OpenEventScreen.style';
 
 const OpenEventScreen = () => {
@@ -120,7 +121,7 @@ const OpenEventScreen = () => {
         maxParticipant: openEvent.recruitmentNumber,
         description: openEvent.description,
         imageDataList: imageUrlList,
-        extraQuestionList: openEvent.additionalInformation,
+        extraQuestionList: getNonEmptyStrings(openEvent.additionalInformation),
         hostName: openEvent.hostName,
         staffIdList: openEvent.staffIdList ?? [],
         hostPhoneNumber: openEvent.hostPhoneNumber,

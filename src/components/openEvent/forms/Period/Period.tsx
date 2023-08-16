@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -14,30 +14,26 @@ const Period = () => {
     openEventErrorMessage,
     setOpenEventErrorMessage,
   } = useOpenEventStore();
+  const { eventDates } = openEvent;
+  const { eventDates: hasError } = openEventErrorMessage;
 
-  const [dates, setDates] = useState<Date[]>([]);
   const [newDate, setNewDate] = useState<Date>(new Date());
-
-  const { eventDates } = openEventErrorMessage;
-  const hasError = eventDates !== null;
 
   const addDate = (date: Date) => {
     if (hasError) {
       setOpenEventErrorMessage({ ...openEventErrorMessage, eventDates: null });
     }
-    setDates([...dates, date]);
+    const original = eventDates;
+    original.push(serverDateFormatter(date));
+
+    setOpenEvent({ ...openEvent, eventDates: original });
   };
 
   const removeDate = (index: number) => {
-    const updatedDates = [...dates];
+    const updatedDates = [...eventDates];
     updatedDates.splice(index, 1);
-    setDates(updatedDates);
+    setOpenEvent({ ...openEvent, eventDates: updatedDates });
   };
-
-  useEffect(() => {
-    const stringDates = dates.map((date) => serverDateFormatter(date));
-    setOpenEvent({ ...openEvent, eventDates: stringDates });
-  }, [dates]);
 
   return (
     <View>
@@ -48,14 +44,14 @@ const Period = () => {
           horizontal
           contentContainerStyle={periodStyles.horizontalScrollView}
         >
-          {dates.map((date, index) => (
+          {eventDates.map((date, index) => (
             <OpenEvent.DateTimePicker
               key={index}
-              date={date}
+              date={new Date(date)}
               setDate={(newDateTime) => {
-                const updatedDates = [...dates];
-                updatedDates[index] = newDateTime;
-                setDates(updatedDates);
+                const updatedDates = [...eventDates];
+                updatedDates[index] = serverDateFormatter(newDateTime);
+                setOpenEvent({ ...openEvent, eventDates: updatedDates });
               }}
               deletePossible
               onDelete={() => removeDate(index)}
@@ -68,12 +64,12 @@ const Period = () => {
             }}
             onAdd={addDate}
             isEmpty
-            hasError={hasError}
+            hasError={hasError !== null}
           />
         </ScrollView>
 
         {hasError && (
-          <HelpText status={StatusType.error} content={eventDates} />
+          <HelpText status={StatusType.error} content={hasError ?? ''} />
         )}
       </View>
     </View>
