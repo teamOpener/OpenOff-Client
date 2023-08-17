@@ -1,6 +1,7 @@
 import fetcher from 'apis';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
 import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
+import UserFcmTokenUploadRequestDto from 'models/user/request/UserFcmTokenUploadRequestDto';
 import UserOnboardingRequestDto from 'models/user/request/UserOnboardingRequestDto';
 import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
 import { S3UploadServiceResponseDto } from 'models/user/response/S3UploadServiceResponseDto';
@@ -54,5 +55,10 @@ export const uploadImages = async (
       'Content-Type': 'multipart/form-data',
     },
   });
+  return response.data;
+};
+
+export const permitAlert = async (data: UserFcmTokenUploadRequestDto) => {
+  const response = await fetcher.post(`/user/permit/alert`, data);
   return response.data;
 };
