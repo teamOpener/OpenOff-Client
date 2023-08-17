@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+import { useState } from 'react';
 import { ScrollView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from 'types/apps/menu';
@@ -10,8 +12,8 @@ import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import FixedButton from 'components/common/FixedButton/FixedButton';
-import { useState } from 'react';
 import useNavigator from 'hooks/navigator/useNavigator';
+import { ticketListDateFormatter } from 'utils/date';
 import eventSelectScreenStyles from './EventSelectScreen.style';
 
 type EventSelectScreenRouteProp = RouteProp<RootStackParamList, 'EventSelect'>;
@@ -20,8 +22,10 @@ const EventSelectScreen = () => {
   const { params } = useRoute<EventSelectScreenRouteProp>();
   const { stackNavigation } = useNavigator();
 
-  const { data: event, isLoading } = useEventDetail(params.id);
+  const { data: event } = useEventDetail(params.id);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+
+  const eventDateArray = event?.indexList.map((item) => item.eventDate) ?? [];
 
   const handleSelect = (idx: number) => {
     // TODO: 날짜 선택
@@ -41,11 +45,6 @@ const EventSelectScreen = () => {
   };
 
   // TODO
-  if (isLoading) {
-    return null;
-  }
-
-  // TODO
   if (!event) {
     return null;
   }
@@ -58,8 +57,9 @@ const EventSelectScreen = () => {
         <SpaceLayout size={10}>
           <EventDetail.DefaultSimpleList
             title={MENT_EVENT_DETAIL.MAIN.DATE}
-            // TODO: 시작 ~ 끝 일시
-            description={event.indexList[0].eventDate}
+            description={`${dayjs(eventDateArray[0]).format(
+              'YYYY',
+            )}.${ticketListDateFormatter(eventDateArray)}`}
           />
           <EventDetail.DefaultSimpleList
             title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
@@ -67,8 +67,9 @@ const EventSelectScreen = () => {
           />
           <EventDetail.DefaultSimpleList
             title={MENT_EVENT_DETAIL.MAIN.COST}
-            // TODO: 비용 형식
-            description={`${MENT_EVENT_DETAIL.MAIN.ADMISSION_FEES} ${event.eventFee}${MENT_EVENT_DETAIL.MAIN.WON}`}
+            description={`${
+              MENT_EVENT_DETAIL.MAIN.ADMISSION_FEES
+            } ${event.eventFee.toLocaleString()}${MENT_EVENT_DETAIL.MAIN.WON}`}
           />
         </SpaceLayout>
         <Spacing height={20} />
