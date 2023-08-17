@@ -23,10 +23,9 @@ const Period = () => {
     if (hasError) {
       setOpenEventErrorMessage({ ...openEventErrorMessage, eventDates: null });
     }
-    const original = eventDates;
-    original.push(serverDateFormatter(date));
+    const newDateArray = [...eventDates, serverDateFormatter(date)];
 
-    setOpenEvent({ ...openEvent, eventDates: original });
+    setOpenEvent({ ...openEvent, eventDates: newDateArray });
   };
 
   const removeDate = (index: number) => {

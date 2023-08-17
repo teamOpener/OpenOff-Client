@@ -80,8 +80,7 @@ const Cost = () => {
 
         <View style={costStyles.absoluteContainer}>
           <OpenEvent.Input
-            // eslint-disable-next-line no-nested-ternary
-            value={`₩ ${isFree ? '0' : cost === null ? '' : cost}`}
+            value={`₩ ${isFree ? '0' : cost ?? ''}`}
             onChangeText={handleChangeText}
             onEndEditing={handleFocusOut}
             style={costStyles.input}
