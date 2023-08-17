@@ -2,7 +2,6 @@ import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import queryKeys from 'constants/queryKeys';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import fakeApi from 'apis/test';
-import EventLadgerTotalStatusResponseData from 'mocks/ledger/user/EventLadgerTotalStatusResponseData.json';
 import MyTicketInfoResponseData from 'mocks/ledger/user/MyTicketInfoResponseData.json';
 import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
 import { ApplicationInfoResponseDto } from 'models/ledger/response/ApplicationInfoResponseDto';
@@ -17,7 +16,6 @@ import {
   permitAllApplicant,
   permitApplicant,
 } from 'apis/ledger';
-import { EventLadgerTotalStatusResponseDto } from 'models/ledger/response/EventLadgerTotalStatusResponseDto';
 import SortType from 'models/ledger/entity/SortType';
 import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
 import { EventAllApplicantPermitRequestDto } from 'models/ledger/request/EventAllApplicantPermitRequestDto';
@@ -70,23 +68,10 @@ export const useHostEventLists = (fieldType?: FieldCode) => {
   return query;
 };
 
-// TODO error 해결되면 위에껄로 수정
-// export const useLedgerStatus = (eventIndexId: number) => {
-//   return useQuery(
-//     [...queryKeys.hostKeys.statusByIndexId(eventIndexId)],
-//     () => getLedgerStatus({ eventIndexId }),
-//     {
-//       select: (data) => data.data,
-//     },
-//   );
-// };
 export const useLedgerStatus = (eventIndexId: number) => {
   return useQuery(
     [...queryKeys.hostKeys.statusByIndexId(eventIndexId)],
-    () =>
-      fakeApi<EventLadgerTotalStatusResponseDto>(
-        EventLadgerTotalStatusResponseData as unknown as EventLadgerTotalStatusResponseDto,
-      ),
+    () => getLedgerStatus({ eventIndexId }),
     {
       select: (data) => data.data,
     },
