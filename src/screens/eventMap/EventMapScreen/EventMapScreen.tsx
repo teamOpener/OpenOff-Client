@@ -119,11 +119,12 @@ const EventMapScreen = () => {
       applyable: appAble,
       capacity: part,
       eventFee: pay,
-      keyword: searchValue.current,
+      keyword:
+        searchValue.current.length === 0 ? undefined : searchValue.current,
       field: fieldMapMode?.value,
       eventId: eventIdParam.current,
-      latitude: calculateCoordinate.latitude,
-      longitude: calculateCoordinate.longitude,
+      latitude: Math.round(calculateCoordinate.latitude * 1000000) / 1000000,
+      longitude: Math.round(calculateCoordinate.longitude * 1000000) / 1000000,
     };
   };
 
