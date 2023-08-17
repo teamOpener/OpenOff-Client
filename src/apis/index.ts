@@ -25,10 +25,7 @@ const fetcher = axios.create({
 fetcher.interceptors.request.use(async (config) => {
   const value = await AsyncStorage.getItem('authorize');
   const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
-  if (
-    authorizeStore.state.token.refreshToken &&
-    fetcher.defaults.headers.Authorization === null
-  ) {
+  if (authorizeStore.state.token.refreshToken) {
     // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${authorizeStore.state.token.accessToken}`;
   }
@@ -55,11 +52,11 @@ const onRejected = async (error: ApiErrorResponse) => {
   const data = error.response?.data;
   if (
     !originalRequest ||
-    !data ||
-    !(data.code === 601 || error.response?.status === 403) ||
+    !((data && data.code === 601) || error.response?.status === 403) ||
     isTokenRenewalInProgress
-  )
+  ) {
     return Promise.reject(error);
+  }
 
   isTokenRenewalInProgress = true;
   try {
