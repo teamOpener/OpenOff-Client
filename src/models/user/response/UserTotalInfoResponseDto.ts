@@ -5,7 +5,7 @@ interface UserTotalInfoResponseDto {
   userInfo: {
     uuid: string;
     userName: string;
-    nickName: string;
+    nickname: string;
     profileImageUrl: string;
     birth: {
       year: number;

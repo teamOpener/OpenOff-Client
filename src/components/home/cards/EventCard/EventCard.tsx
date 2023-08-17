@@ -35,9 +35,10 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
 
       <SpaceLayout size={3}>
         <Text
-          color={type === 'default' ? 'white' : 'main'}
-          style={eventCardStyles.titleText}
           numberOfLines={1}
+          ellipsizeMode="tail"
+          color={type === 'default' ? 'white' : 'main'}
+          style={{ ...eventCardStyles.titleText, width: calcWidth }}
         >
           {event.eventTitle}
         </Text>
@@ -54,11 +55,12 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
           </Text>
         </View>
       </SpaceLayout>
-
-      <BookmarkButton
-        isEventBookmarked={event.isBookmarked}
-        eventInfoId={event.eventInfoId}
-      />
+      {type === 'default' && (
+        <BookmarkButton
+          isEventBookmarked={event.isBookmarked}
+          eventInfoId={event.eventInfoId}
+        />
+      )}
     </View>
   );
 };

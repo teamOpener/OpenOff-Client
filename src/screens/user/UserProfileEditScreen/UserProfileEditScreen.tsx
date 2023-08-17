@@ -1,41 +1,75 @@
-import Icon from 'components/common/Icon/Icon';
-import React from 'react';
 import Text from 'components/common/Text/Text';
-import { Pressable, ScrollView, View } from 'react-native';
-import userInfo from 'mocks/user/userInfo';
+import UserProfileImageButton from 'components/user/buttons/UserProfileImageButton/UserProfileImageButton';
 import UserInfoText from 'components/user/texts/UserInfoText/UserInfoText';
+import MENT_USER from 'constants/user/userConstants';
+import { useMyInfo } from 'hooks/queries/user';
+import { Pressable, ScrollView, View } from 'react-native';
 import userProfileEditScreenStyles from './UserProfileEditScreen.style';
 
 const UserProfileEditScreen = () => {
+  const { data: userInfo } = useMyInfo();
+
   const handleWithdrawal = () => {
     return false;
+  };
+
+  const USER_BIRTH = `${userInfo?.userInfo.birth.year}년 ${userInfo?.userInfo.birth.month}월 ${userInfo?.userInfo.birth.day}일`;
+
+  const formatPhoneNumber = (phoneNumber = '01000000000') => {
+    const numericOnly = phoneNumber.replace(/\D/g, '');
+    // 포맷팅된 번호 생성
+    const formattedNumber = numericOnly.replace(
+      /(\d{3})(\d{4})(\d{4})/,
+      '010-$2-$3',
+    );
+    return formattedNumber;
   };
 
   return (
     <ScrollView>
       <View style={userProfileEditScreenStyles.container}>
-        <View style={userProfileEditScreenStyles.profileContainer}>
-          <Pressable style={userProfileEditScreenStyles.userProfileImage}>
-            <Icon name="IconUser" size={80} fill="grey" />
-          </Pressable>
-        </View>
+        <UserProfileImageButton />
         <View style={userProfileEditScreenStyles.emailContainer}>
-          <Text style={userProfileEditScreenStyles.title}>이메일</Text>
+          <Text style={userProfileEditScreenStyles.title}>
+            {MENT_USER.PROFILE_EDIT.EMAIL}
+          </Text>
           <Text variant="body2" color="grey">
-            {userInfo.email}
+            {userInfo?.socialAccountInfoList[0].email}
           </Text>
         </View>
-        <UserInfoText title="이름" content={userInfo.name} />
-        <UserInfoText title="닉네임" content={userInfo.nickname} />
-        <UserInfoText title="비밀번호" content={userInfo.password} />
-        <UserInfoText title="휴대폰 번호" content={userInfo.phoneNumber} />
-        <UserInfoText title="생년월일" content={userInfo.birth} />
+        <UserInfoText
+          title={MENT_USER.PROFILE_EDIT.USER_NAME}
+          content={userInfo?.userInfo.userName}
+        />
+        <UserInfoText
+          title={MENT_USER.PROFILE_EDIT.NICK_NAME}
+          content={userInfo?.userInfo.nickname}
+        />
+        {userInfo?.socialAccountInfoList.find(
+          (socialAccount) => socialAccount.accountType === 'NORMAL',
+        ) && (
+          <UserInfoText
+            type="password"
+            title={MENT_USER.PROFILE_EDIT.PASSWORD}
+            content="••••••••"
+          />
+        )}
+        <UserInfoText
+          title={MENT_USER.PROFILE_EDIT.PHONENUMBER}
+          content={formatPhoneNumber(userInfo?.userInfo.phoneNumber)}
+        />
+        <UserInfoText
+          title={MENT_USER.PROFILE_EDIT.USER_BIRTH}
+          content={USER_BIRTH}
+        />
         <View style={userProfileEditScreenStyles.withdrawalContainer}>
           <Text style={userProfileEditScreenStyles.withdrawalInfo}>
-            회원정보를 삭제하시겠어요?
+            {MENT_USER.PROFILE_EDIT.WITHDRAWAL_MENT}
           </Text>
           <Pressable onPress={handleWithdrawal}>
-            <Text style={userProfileEditScreenStyles.withdrawal}>회원탈퇴</Text>
+            <Text style={userProfileEditScreenStyles.withdrawal}>
+              {MENT_USER.PROFILE_EDIT.WITHDRAWAL}
+            </Text>
           </Pressable>
         </View>
       </View>

@@ -22,12 +22,18 @@ const userProfileEditScreenStyles = StyleSheet.create({
   userProfileImage: {
     width: 100,
     height: 100,
+  },
+  userProfileContainer: {
+    width: 100,
+    height: 100,
     borderRadius: 300,
-    paddingTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
     backgroundColor: colors.darkGrey,
+  },
+  userProfileNoneImage: {
+    marginTop: 20,
   },
   withdrawalContainer: {
     gap: 5,
@@ -43,7 +49,6 @@ const userProfileEditScreenStyles = StyleSheet.create({
     lineHeight: 10 * 1.4,
     fontFamily: fonts.semibold,
     color: colors.white,
-    underline: { textDecorationLine: 'underline' },
   },
 });
 

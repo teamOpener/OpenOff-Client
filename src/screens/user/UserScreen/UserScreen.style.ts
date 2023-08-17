@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const userScreenStyles = StyleSheet.create({
@@ -18,9 +18,9 @@ const userScreenStyles = StyleSheet.create({
   },
   fieldResetText: {
     fontSize: 15,
-    lineHeight: 15,
+    lineHeight: 15 * 1.4,
     fontFamily: fonts.semibold,
-    fontColor: colors.white,
+    color: colors.white,
   },
   userInfo: {
     justifyContent: 'center',
@@ -29,7 +29,7 @@ const userScreenStyles = StyleSheet.create({
     marginBottom: 45,
   },
   emailText: {
-    fontSize: 13 * 1.4,
+    fontSize: 13,
     lineHeight: 13 * 1.4,
     fontFamily: fonts.regular,
   },
@@ -38,15 +38,30 @@ const userScreenStyles = StyleSheet.create({
     alignItems: 'center',
     gap: 2,
   },
-  userProfileImage: {
+  profileMainContainer: {
+    position: 'relative',
+  },
+  userProfileImageContainer: {
     width: 60,
     height: 60,
     borderRadius: 300,
-    paddingTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
     backgroundColor: colors.darkGrey,
+  },
+  userProfileImage: {
+    width: 60,
+    height: 60,
+  },
+  pencilPosition: {
+    zIndex: 99,
+    position: 'absolute',
+    top: 1,
+    right: -1,
+  },
+  userNoneImage: {
+    marginTop: 10,
   },
   userControllerContainer: {
     paddingTop: 20,
