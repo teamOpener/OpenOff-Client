@@ -5,4 +5,24 @@ const enum SelectStatus {
   RESET_SELECT = 'RESET_SELECT',
 }
 
-export default SelectStatus;
+const enum PayValue {
+  ALL = 'all',
+  PAY = 'pay',
+  FREE = 'free',
+}
+
+const enum ParticipantValue {
+  ALL = 'all',
+  SMALL = 'SMALL',
+  MEDIUM = 'MEDIUM',
+  LARGE = 'LARGE',
+  HUGE = 'HUGE',
+}
+
+const enum ApplicationAbleValue {
+  ALL = 'all',
+  APPLYING = 'applying',
+  DEADLINE = 'deadline',
+}
+
+export { ApplicationAbleValue, ParticipantValue, PayValue, SelectStatus };

@@ -1,6 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import SingleSelectBox from 'components/eventMap/selectboxes/SingleSelectBox/SingleSelectBox';
-import SelectStatus from 'constants/selectBox';
+import { SelectStatus } from 'constants/selectBox';
 import {
   applicationAbleOptions,
   participantOptions,

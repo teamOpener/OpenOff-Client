@@ -1,55 +1,60 @@
+import {
+  ApplicationAbleValue,
+  ParticipantValue,
+  PayValue,
+} from 'constants/selectBox';
 import { Option } from 'types/apps/selectbox';
 
 const payOptions: Option[] = [
   {
     label: '전체',
-    value: 'all',
+    value: PayValue.ALL,
   },
   {
     label: '유료',
-    value: 'pay',
+    value: PayValue.PAY,
   },
   {
     label: '무료',
-    value: 'free',
+    value: PayValue.FREE,
   },
 ];
 
 const participantOptions: Option[] = [
   {
     label: '전체',
-    value: 'all',
+    value: ParticipantValue.ALL,
   },
   {
     label: '20인 미만',
-    value: 'SMALL',
+    value: ParticipantValue.SMALL,
   },
   {
     label: '20인 ~ 50인',
-    value: 'MEDIUM',
+    value: ParticipantValue.MEDIUM,
   },
   {
     label: '50인 ~ 100인',
-    value: 'LARGE',
+    value: ParticipantValue.LARGE,
   },
   {
     label: '100인 이상',
-    value: 'HUGE',
+    value: ParticipantValue.HUGE,
   },
 ];
 
 const applicationAbleOptions: Option[] = [
   {
     label: '전체',
-    value: 'all',
+    value: ApplicationAbleValue.ALL,
   },
   {
     label: '신청중',
-    value: 'applying',
+    value: ApplicationAbleValue.APPLYING,
   },
   {
     label: '신청마감',
-    value: 'deadline',
+    value: ApplicationAbleValue.DEADLINE,
   },
 ];
 
