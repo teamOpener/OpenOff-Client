@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { Image } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import { Field } from 'types/apps/group';
 import userInterestResetScreenStyles from './UserInterestResetScreen.style';
 
 const UserInterestResetScreen = () => {
@@ -53,13 +54,14 @@ const UserInterestResetScreen = () => {
   };
 
   useEffect(() => {
-    const userInterestField = interestField.map((field) => {
+    const makeFieldActive = (field: Field) => {
       userInfo?.userInfo.fieldTypeList.forEach((userFieldValue) => {
         // eslint-disable-next-line no-param-reassign
         if (userFieldValue === field.value) field.isActive = true;
       });
       return field;
-    });
+    };
+    const userInterestField = interestField.map(makeFieldActive);
     setInterestField(userInterestField);
   }, []);
 
