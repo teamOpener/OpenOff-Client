@@ -94,8 +94,9 @@ const EventDetailScreen = () => {
           />
           <EventDetail.SmallSimpleList
             title={MENT_EVENT_DETAIL.MAIN.COST}
-            // TODO: 쉼표 추가
-            description={`입장료 ${event.eventFee}${MENT_EVENT_DETAIL.MAIN.WON}`}
+            description={`입장료 ${event.eventFee.toLocaleString()}${
+              MENT_EVENT_DETAIL.MAIN.WON
+            }`}
           />
         </SpaceLayout>
         <Spacing height={30} />
