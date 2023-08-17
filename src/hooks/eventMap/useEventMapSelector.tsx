@@ -1,4 +1,4 @@
-import SelectStatus from 'constants/selectBox';
+import { SelectStatus } from 'constants/selectBox';
 import { Reducer, useReducer, useState } from 'react';
 import { Action, SelectBox } from 'types/apps/selectbox';
 

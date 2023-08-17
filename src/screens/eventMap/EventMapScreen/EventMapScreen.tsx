@@ -32,6 +32,8 @@ import NaverMapEvent from 'types/apps/map';
 import { BottomTabParamList, RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
 import getDistanceCoordinate from 'utils/coordinate';
+import { useQueryClient } from '@tanstack/react-query';
+import queryKeys from 'constants/queryKeys';
 import {
   defaultTabBarStyles,
   eventMapScreenStyles,
@@ -40,6 +42,7 @@ import {
 type EventMapScreenRouteProp = RouteProp<BottomTabParamList, 'EventMap'>;
 
 const EventMapScreen = () => {
+  const queryClient = useQueryClient();
   const { params } = useRoute<EventMapScreenRouteProp>();
   const eventIdParam = useRef<string | undefined>(
     params ? params.eventId : undefined,
@@ -123,8 +126,12 @@ const EventMapScreen = () => {
         searchValue.current.length === 0 ? undefined : searchValue.current,
       field: fieldMapMode?.value,
       eventId: eventIdParam.current,
-      latitude: Math.round(calculateCoordinate.latitude * 1000000) / 1000000,
-      longitude: Math.round(calculateCoordinate.longitude * 1000000) / 1000000,
+      latitude: Math.abs(
+        Math.round(calculateCoordinate.latitude * 1000000) / 1000000,
+      ),
+      longitude: Math.abs(
+        Math.round(calculateCoordinate.longitude * 1000000) / 1000000,
+      ),
     };
   };
 
@@ -156,6 +163,7 @@ const EventMapScreen = () => {
     setFieldMapMode(() => {
       return undefined;
     });
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
   };
 
   const handlePressMapCoordinate = (
@@ -171,7 +179,9 @@ const EventMapScreen = () => {
       selectDispatch({ type: SelectStatus.RESET_SELECT });
       searchValue.current = '';
       resetStartEndDate();
-      setFieldMapMode(field);
+      setFieldMapMode(() => {
+        return field;
+      });
       navigation.setOptions({
         tabBarStyle: {
           ...defaultTabBarStyles,
@@ -194,6 +204,7 @@ const EventMapScreen = () => {
         },
       });
       setClickedMarker(undefined);
+      queryClient.removeQueries(queryKeys.eventKeys.mapList);
     },
     [navigation],
   );

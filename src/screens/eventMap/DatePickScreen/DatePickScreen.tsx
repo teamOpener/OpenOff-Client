@@ -9,6 +9,8 @@ import { MarkedDates } from 'react-native-calendars/src/types';
 import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
 import { dateFormatter } from 'utils/date';
+import { useQueryClient } from '@tanstack/react-query';
+import queryKeys from 'constants/queryKeys';
 import datePickScreenStyles from './DatePickScreen.style';
 
 type ParamList = {
@@ -16,6 +18,7 @@ type ParamList = {
 };
 
 const DatePickScreen = () => {
+  const queryClient = useQueryClient();
   const { setStartEndDate } = useEventMapStore();
   const navigation = useNavigation<NavigationProp<ParamList>>();
   const [startDay, setStartDay] = useState<string>('');
@@ -36,6 +39,7 @@ const DatePickScreen = () => {
       startDay,
       endDay,
     });
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
     navigation.goBack();
   };
   const handleWeek = (
@@ -55,7 +59,6 @@ const DatePickScreen = () => {
       today.getMonth(),
       today.getDate() + (endNumber - today.getDay()),
     );
-    console.log(dateFormatter(monday));
     setStartEndDate({
       startDay: dateFormatter(monday),
       endDay: dateFormatter(sunday),
