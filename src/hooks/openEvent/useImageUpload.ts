@@ -1,12 +1,13 @@
 import { useUploadImage } from 'hooks/queries/user';
 import { ImageUrlList } from 'models/event/entity/ImageUrlList';
 import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
+import { ApiErrorResponse } from 'types/ApiResponse';
 import { ImageBuilder } from 'types/openEvent/EventForm';
 
 interface Props {
   imageBuilders: ImageBuilder[];
   successCallback: () => void;
-  errorCallback: () => void;
+  errorCallback: (error: ApiErrorResponse) => void;
 }
 
 const useImageUpload = ({

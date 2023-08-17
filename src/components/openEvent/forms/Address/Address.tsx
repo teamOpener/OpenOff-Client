@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { View } from 'react-native';
-import { debounce } from 'lodash';
 import { OpenEvent } from 'components/openEvent';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -16,42 +15,39 @@ const Address = () => {
     openEventErrorMessage,
     setOpenEventErrorMessage,
   } = useOpenEventStore();
-  const [detailAddress, setDetailAddress] = useState<string>('');
+  const { address } = openEvent;
+  const hasError = !!openEventErrorMessage.address;
 
   const handleSearch = () => {
     stackNavigation.navigate('SearchAddress');
   };
 
-  const hasError = !!openEventErrorMessage.address;
-
-  const handleDetailAddress = debounce((value) => {
+  const handleChangeText = (value: string) => {
     setOpenEvent({
       ...openEvent,
-      address: {
-        roadAddress: openEvent.address.roadAddress,
-        detailAddress: value,
-      },
+      address: { roadAddress: address.roadAddress, detailAddress: value },
     });
-  }, 500);
+    setOpenEventErrorMessage({
+      ...openEventErrorMessage,
+      hostPhoneNumber: null,
+    });
+  };
 
   /**
    * 도로명 주소가 바뀔 경우, 상세 주소를 초기화합니다.
    */
   useEffect(() => {
     if (!openEvent.address.detailAddress) {
-      setDetailAddress('');
+      setOpenEvent({
+        ...openEvent,
+        address: { roadAddress: address.roadAddress, detailAddress: '' },
+      });
       setOpenEventErrorMessage({
         ...openEventErrorMessage,
         address: null,
       });
     }
   }, [openEvent.address.detailAddress]);
-
-  useEffect(() => {
-    if (!detailAddress) return;
-
-    handleDetailAddress(detailAddress);
-  }, [detailAddress]);
 
   return (
     <View>
@@ -69,8 +65,8 @@ const Address = () => {
         />
 
         <OpenEvent.Input
-          value={detailAddress}
-          onChangeText={setDetailAddress}
+          value={address.detailAddress ?? ''}
+          onChangeText={handleChangeText}
           placeholder="상세 주소를 입력해주세요."
           status={hasError ? StatusType.error : StatusType.default}
           editable={!!openEvent.address.roadAddress}

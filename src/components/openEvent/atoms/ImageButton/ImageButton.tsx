@@ -64,7 +64,7 @@ const ImageButton = ({
 
         {isMain && (
           <View style={imageButtonStyles.primaryLabel}>
-            <Text>대표</Text>
+            <Text style={imageButtonStyles.primaryLabelText}>대표</Text>
           </View>
         )}
       </TouchableOpacity>

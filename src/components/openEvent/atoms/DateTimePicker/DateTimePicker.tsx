@@ -32,7 +32,6 @@ const DateTimePicker = ({
   onDelete,
 }: Props) => {
   const [openDate, setOpenDate] = useState<boolean>(false);
-  const [openTime, setOpenTime] = useState<boolean>(false);
 
   const defaultOptions: DatePickerProps = {
     modal: true,
@@ -69,33 +68,18 @@ const DateTimePicker = ({
       <DatePicker
         {...defaultOptions}
         open={openDate}
-        mode="date"
-        title={MENT_OPEN_EVENT.DATE_PICKER_TITLE}
-        confirmText="다음"
-        onConfirm={(date) => {
-          setOpenDate(false);
-          setDate(date);
-          setOpenTime(true);
-        }}
-        onCancel={() => {
-          setOpenDate(false);
-        }}
-      />
-      <DatePicker
-        {...defaultOptions}
-        open={openTime}
-        mode="time"
-        title={MENT_OPEN_EVENT.TIME_PICKER_TITLE}
+        mode="datetime"
+        title={MENT_OPEN_EVENT.MAIN.DATA_TIME_PICKER_TITLE}
         confirmText="확인"
         onConfirm={(date) => {
-          setOpenTime(false);
+          setOpenDate(false);
           setDate(date);
           if (onAdd) {
             onAdd(date);
           }
         }}
         onCancel={() => {
-          setOpenTime(false);
+          setOpenDate(false);
         }}
       />
 

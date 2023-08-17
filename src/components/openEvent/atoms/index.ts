@@ -4,5 +4,7 @@ export { default as HelpText } from './HelpText/HelpText';
 export { default as ImageButton } from './ImageButton/ImageButton';
 export { default as Input } from './Input/Input';
 export { default as Label } from './Label/Label';
+export { default as NameTag } from './NameTag/NameTag';
+export { default as NickNameList } from './NickNameList/NickNameList';
 export { default as Tag } from './Tag/Tag';
 export { default as TagGroup } from './Tag/TagGroup';

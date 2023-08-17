@@ -10,7 +10,7 @@ export interface EventFormError {
   imageUrls: string | null;
   additionalInformation: string | null;
   hostName: string | null;
-  staffIdList: string | null;
+  staffList: string | null;
   hostPhoneNumber: string | null;
   hostEmail: string | null;
 }

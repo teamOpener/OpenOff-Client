@@ -1,10 +1,12 @@
 import fetcher from 'apis';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
 import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
+import { SearchNicknameRequestDto } from 'models/user/request/SearchNicknameRequestDto';
 import UserOnboardingRequestDto from 'models/user/request/UserOnboardingRequestDto';
 import UserProfileUploadRequestDto from 'models/user/request/UserProfileUploadRequestDto';
 import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
 import { S3UploadServiceResponseDto } from 'models/user/response/S3UploadServiceResponseDto';
+import { SearchNicknameResponseDto } from 'models/user/response/SearchNicknameResponseDto';
 import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
 import { ApiResponse } from 'types/ApiResponse';
 
@@ -66,5 +68,12 @@ export const uploadProfileImage = async (
   data: UserProfileUploadRequestDto,
 ): Promise<ApiResponse> => {
   const response = await fetcher.patch(`/user/upload/profile`, data);
+  return response.data;
+};
+
+export const findUserByNickname = async (
+  params: SearchNicknameRequestDto,
+): Promise<ApiResponse<SearchNicknameResponseDto[]>> => {
+  const response = await fetcher.get(`/user/search/nickname`, { params });
   return response.data;
 };

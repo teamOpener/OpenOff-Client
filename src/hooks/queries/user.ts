@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { updateInterestField } from 'apis/interest';
 import {
   checkSms,
+  findUserByNickname,
   getMyInfo,
   sendSms,
   updateOnBoarding,
@@ -13,6 +14,7 @@ import queryKeys from 'constants/queryKeys';
 import AddInterestRequestDto from 'models/field/request/AddInterestRequestDto';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
 import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
+import { SearchNicknameRequestDto } from 'models/user/request/SearchNicknameRequestDto';
 import UserOnboardingRequestDto from 'models/user/request/UserOnboardingRequestDto';
 import UserProfileUploadRequestDto from 'models/user/request/UserProfileUploadRequestDto';
 import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
@@ -96,6 +98,19 @@ export const useUploadProfileImage = (
       onSuccess: successCallback,
       onError: errorCallback,
       useErrorBoundary: false,
+    },
+  );
+};
+
+export const useFindUserByNickname = ({
+  keyword,
+}: SearchNicknameRequestDto) => {
+  return useQuery(
+    [...queryKeys.userKeys.findUser(keyword)],
+    () => findUserByNickname({ keyword }),
+    {
+      select: (data) => data.data,
+      suspense: false,
     },
   );
 };
