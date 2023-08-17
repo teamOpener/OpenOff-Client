@@ -44,9 +44,9 @@ const EventMapScreen = () => {
   const eventIdParam = useRef<string | undefined>(
     params ? params.eventId : undefined,
   );
-  const payValueTransform = (value: PayValue) =>
+  const payValueTransform = (value: string) =>
     value === PayValue.FREE ? 0 : 1;
-  const applyableValueTransform = (value: ApplicationAbleValue) =>
+  const applyableValueTransform = (value: string) =>
     value === ApplicationAbleValue.APPLYING;
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { startEndDate, resetStartEndDate } = useEventMapStore();
@@ -90,17 +90,17 @@ const EventMapScreen = () => {
   // 쿼리 파라메터 계산 함수
   const calculateQueryParams = (): EventSearchRequestDto => {
     const appAble =
-      selectState.applicationAbleOption.value !== ApplicationAbleValue.ALL
+      selectState.applicationAbleOption.value === ApplicationAbleValue.ALL
         ? undefined
         : applyableValueTransform(selectState.applicationAbleOption.value);
 
     const part =
-      selectState.participantOption.value !== ParticipantValue.ALL
+      selectState.participantOption.value === ParticipantValue.ALL
         ? undefined
         : selectState.participantOption.value;
 
     const pay =
-      selectState.payOption.value !== PayValue.ALL
+      selectState.payOption.value === PayValue.ALL
         ? undefined
         : payValueTransform(selectState.payOption.value);
 

@@ -8,6 +8,7 @@ import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoR
 import SearchMapEventInfoResponseDto from 'models/event/response/SearchMapEventInfoResponseDto';
 import { HostEventInfoRequestDto } from 'models/ledger/request/HostEventInfoRequestDto';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
+import Qs from 'qs';
 import { ApiResponse, InfiniteScrollApiResponse } from 'types/ApiResponse';
 
 export const getHostEventLists = async (
@@ -65,6 +66,9 @@ export const getEventMapInstance = async (
 ): Promise<ApiResponse<SearchMapEventInfoResponseDto[]>> => {
   const response = await fetcher.get(`/event-instance/search`, {
     params,
+    paramsSerializer: (queryParams) => {
+      return Qs.stringify(queryParams, { skipNulls: true });
+    },
   });
   return response.data;
 };
