@@ -74,7 +74,12 @@ const onRejected = async (error: ApiErrorResponse) => {
         accessToken: accessToken.data?.accessToken,
         refreshToken: accessToken.data?.refreshToken,
       });
-      const response = await fetcher.request(originalRequest);
+      const response = await fetcher.request(originalRequest).catch(() => {
+        resetToken();
+        setIsLogin(false);
+        fetcher.defaults.headers.Authorization = null;
+        isTokenRenewalInProgress = false;
+      });
       return response;
     }
 
