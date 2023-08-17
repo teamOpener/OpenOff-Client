@@ -49,6 +49,7 @@ const UserProfileEditScreen = () => {
           (socialAccount) => socialAccount.accountType === 'NORMAL',
         ) && (
           <UserInfoText
+            type="password"
             title={MENT_USER.PROFILE_EDIT.PASSWORD}
             content="••••••••"
           />
