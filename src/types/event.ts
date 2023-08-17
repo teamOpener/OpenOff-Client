@@ -17,6 +17,11 @@ interface Event {
   isBookmarked: boolean;
 }
 
+interface ImageType {
+  imageUrl: string;
+  isMain: boolean;
+}
+
 interface MapEvent {
   id: number;
   title: string;
@@ -25,7 +30,7 @@ interface MapEvent {
   detailAddress: string;
   latitude: number;
   longitude: number;
-  imageList: string[];
+  imageList: ImageType[];
   eventDateList: string[];
 }
 

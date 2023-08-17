@@ -45,7 +45,7 @@ const MapEventCard = ({ event }: Props) => {
             <Image
               key={index}
               style={mapEventCardStyles.eventImage}
-              source={{ uri: item }}
+              source={{ uri: item.imageUrl }}
             />
           )}
         />
