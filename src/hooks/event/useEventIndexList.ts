@@ -34,11 +34,18 @@ const useEventIndexList = ({ eventIndexList = [] }: Props) => {
     return eventIndex ? eventIndex.eventDate : undefined;
   };
 
+  const sortEventsByEventDate = (): EventIndexStatisticsDto[] => {
+    return [...eventIndexList].sort((a, b) => {
+      return new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime();
+    });
+  };
+
   return {
     eventDateArray,
     sortedEventDateArray,
     filterEventsBySelectedDate,
     getEventDateByIndexId,
+    sortEventsByEventDate,
   };
 };
 

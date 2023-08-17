@@ -9,6 +9,7 @@ import FixedButton from 'components/common/FixedButton/FixedButton';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
 import { ScrollView, View } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
+import useEventIndexList from 'hooks/event/useEventIndexList';
 import Text from 'components/common/Text/Text';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import { StackMenu } from 'constants/menu';
@@ -18,7 +19,10 @@ const EventDetailScreen = () => {
   const params = useRouteParams<StackMenu.EventDetail>();
   const { stackNavigation } = useNavigator();
 
-  const { data: event, isLoading } = useEventDetail(params?.id ?? 0);
+  const { data: event } = useEventDetail(params?.id ?? 0);
+  const { sortEventsByEventDate } = useEventIndexList({
+    eventIndexList: event?.indexList,
+  });
 
   const [activeTabName, setActiveTabName] = useState<EventDetailTabItem>(
     EventDetailTabItem.DESCRIPTION,
@@ -67,11 +71,6 @@ const EventDetailScreen = () => {
   }, []);
 
   // TODO
-  if (isLoading) {
-    return null;
-  }
-
-  // TODO
   if (!event) {
     return null;
   }
@@ -105,7 +104,7 @@ const EventDetailScreen = () => {
         <Spacing height={20} />
 
         <EventDetail.DateCardCarousel
-          indexList={event.indexList}
+          indexList={sortEventsByEventDate()}
           maxCapacity={event.maxCapacity}
         />
         <Spacing height={30} />
