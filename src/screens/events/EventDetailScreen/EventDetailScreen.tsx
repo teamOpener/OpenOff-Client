@@ -55,6 +55,12 @@ const EventDetailScreen = () => {
   );
 
   useEffect(() => {
+    if (params?.tab) {
+      setActiveTabName(params.tab);
+    }
+  }, []);
+
+  useEffect(() => {
     stackNavigation.setOptions({
       headerRight,
     });
