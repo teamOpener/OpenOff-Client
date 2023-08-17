@@ -55,12 +55,11 @@ const EventCalendar = ({
     setSelectedIndexId(idx);
   };
 
-  //   TODO click할 때마다 변경
-  useEffect(() => {
-    const newMarkedDates: MarkedDates = {};
+  const updateMarkedDates = () => {
+    let newMarkedDates: MarkedDates = {};
 
     if (markedDates !== null) {
-      return;
+      newMarkedDates = { ...markedDates };
     }
 
     eventDateArray.forEach((date) => {
@@ -74,8 +73,21 @@ const EventCalendar = ({
         },
       };
     });
-
     setMarkedDates(newMarkedDates);
+  };
+
+  useEffect(() => {
+    if (markedDates == null) {
+      return;
+    }
+    updateMarkedDates();
+  }, [selectedDate]);
+
+  useEffect(() => {
+    if (markedDates !== null) {
+      return;
+    }
+    updateMarkedDates();
   }, [eventDateArray]);
 
   return (
@@ -89,7 +101,6 @@ const EventCalendar = ({
         markedDates={markedDates ?? undefined}
         theme={theme}
         onDayPress={(date) => {
-          // TODO 없는 날짜는 클릭시 막기
           setSelectedDate(date.dateString);
         }}
       />
