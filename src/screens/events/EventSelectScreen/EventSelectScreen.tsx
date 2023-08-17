@@ -34,13 +34,12 @@ const EventSelectScreen = () => {
   );
 
   const handelNextStep = () => {
-    if (selectedIndexId == null) {
+    if (selectedIndexId == null || !params) {
       return;
     }
 
-    // TODO
     stackNavigation.navigate('EventApply', {
-      id: params?.id ?? 0,
+      id: params.id,
       idx: selectedIndexId,
     });
   };
@@ -103,7 +102,6 @@ const EventSelectScreen = () => {
       </ScrollView>
 
       <FixedButton
-        // TODO: disabled
         disabled={selectedIndexId == null}
         label={MENT_EVENT_DETAIL.MAIN.NEXT}
         onPress={handelNextStep}

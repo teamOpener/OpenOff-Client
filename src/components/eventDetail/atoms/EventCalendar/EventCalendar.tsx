@@ -51,8 +51,23 @@ const EventCalendar = ({
 
   const [markedDates, setMarkedDates] = useState<MarkedDates | null>(null);
 
-  const handleSelectIndexCard = (idx: number) => {
-    setSelectedIndexId(idx);
+  const disabledEventIndex = (
+    eventIndexItem: EventIndexStatisticsDto,
+  ): boolean => {
+    if (!eventIndexItem.isApply) {
+      return true;
+    }
+    if (eventIndexItem.approvedUserCount >= maxCapacity) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleSelectIndexCard = (eventIndexItem: EventIndexStatisticsDto) => {
+    const disabledIdx = disabledEventIndex(eventIndexItem);
+    if (!disabledIdx) {
+      setSelectedIndexId(eventIndexItem.eventIndexId);
+    }
   };
 
   const updateMarkedDates = () => {
@@ -112,12 +127,12 @@ const EventCalendar = ({
           filteredArray.map((eventIndex) => (
             <EventDetail.DateSelectButton
               key={eventIndex.eventIndexId}
-              // TODO: 신청한 날짜, 마감 날짜 등등 disabled 처리
+              disabled={disabledEventIndex(eventIndex)}
               isSelected={eventIndex.eventIndexId === selectedIndexId}
               eventDate={eventIndex.eventDate}
               approvedUserCount={eventIndex.approvedUserCount}
               maxCapacity={maxCapacity}
-              onPress={() => handleSelectIndexCard(eventIndex.eventIndexId)}
+              onPress={() => handleSelectIndexCard(eventIndex)}
             />
           ))}
       </SpaceLayout>

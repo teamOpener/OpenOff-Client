@@ -23,11 +23,11 @@ const MENT_EVENT_DETAIL = Object.freeze({
     HOST: '주최자',
     REPLY: '답글달기',
     REPORT: '신고',
-    // TODO
     BE_OPENED: '곧 오픈될 예정입니다.',
     APPLICATION_CLOSES: '신청이 마감된 이벤트입니다.',
-    RECRUITMENT_DEADLINE: '모집 인원이 다 찬 이벤트입니다.',
     ALREADY_APPLICATION: '이미 신청한 이벤트입니다.',
+    ENDED_EVENT: '종료된 이벤트입니다.',
+    CLOSED_EVENT: '신청 기간이 아닙니다.',
     INSTRUCTIONS: '유의사항',
     APPLICATION_LOADING: '이벤트 신청중입니다!',
   },

@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { colors } from 'styles/theme';
 import dateSelectButtonStyles from './DateSelectButton.style';
 
 interface Props extends TouchableOpacityProps {
@@ -14,13 +15,22 @@ interface Props extends TouchableOpacityProps {
 
 const DateSelectButton = ({
   isSelected,
-  // TODO
   disabled = false,
   eventDate,
   approvedUserCount,
   maxCapacity,
   ...rest
 }: Props) => {
+  const textColor = (): keyof typeof colors => {
+    if (isSelected) {
+      return 'main';
+    }
+    if (disabled) {
+      return 'grey';
+    }
+    return 'white';
+  };
+
   return (
     <TouchableOpacity activeOpacity={0.6} {...rest}>
       <SpaceLayout
@@ -29,12 +39,10 @@ const DateSelectButton = ({
         style={[
           dateSelectButtonStyles.container,
           isSelected && dateSelectButtonStyles.activeContainer,
+          disabled && dateSelectButtonStyles.disabledContainer,
         ]}
       >
-        <Text
-          color={isSelected ? 'main' : 'white'}
-          style={dateSelectButtonStyles.dateText}
-        >
+        <Text color={textColor()} style={dateSelectButtonStyles.dateText}>
           {dayjs(eventDate).format('YYYY.MM.DD (ddd) HH시 mm분')}
         </Text>
         <Text
