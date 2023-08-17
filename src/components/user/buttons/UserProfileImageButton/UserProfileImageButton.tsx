@@ -65,24 +65,32 @@ const UserProfileImageButton = () => {
 
   return (
     <View style={userProfileImageButtonStyles.profileContainer}>
-      <Pressable
-        style={userProfileImageButtonStyles.userProfileContainer}
-        onPress={handleProfilePress}
-      >
-        {profileImage ? (
-          <Image
-            source={{ uri: profileImage }}
-            style={userProfileImageButtonStyles.userProfileImage}
-          />
-        ) : (
-          <Icon
-            name="IconUser"
-            size={80}
-            fill="grey"
-            style={userProfileImageButtonStyles.userProfileNoneImage}
-          />
-        )}
-      </Pressable>
+      <View style={userProfileImageButtonStyles.relativeContainer}>
+        <Pressable
+          style={userProfileImageButtonStyles.userProfileContainer}
+          onPress={handleProfilePress}
+        >
+          {profileImage ? (
+            <Image
+              source={{ uri: profileImage }}
+              style={userProfileImageButtonStyles.userProfileImage}
+            />
+          ) : (
+            <Icon
+              name="IconUser"
+              size={80}
+              fill="grey"
+              style={userProfileImageButtonStyles.userProfileNoneImage}
+            />
+          )}
+        </Pressable>
+        <Icon
+          style={userProfileImageButtonStyles.pencilPosition}
+          name="IconPencilCircle"
+          size={25}
+          fill="grey"
+        />
+      </View>
     </View>
   );
 };
