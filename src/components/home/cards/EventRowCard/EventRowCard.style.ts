@@ -1,6 +1,8 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
+const PAGE_AND_CARD_INTERNAL_LENGTH = 170;
+
 const eventRowCardStyles = StyleSheet.create({
   container: {
     borderRadius: 6,
@@ -36,7 +38,7 @@ const eventRowCardStyles = StyleSheet.create({
     backgroundColor: '#d9d9d9',
   },
   eventTitle: {
-    width: Dimensions.get('window').width - 170,
+    width: Dimensions.get('window').width - PAGE_AND_CARD_INTERNAL_LENGTH,
     fontFamily: fonts.semibold,
     fontSize: 15,
     lineHeight: 21,
