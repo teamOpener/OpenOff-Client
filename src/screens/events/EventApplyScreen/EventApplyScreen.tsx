@@ -158,17 +158,21 @@ const EventApplyScreen = () => {
           <Divider height={1} color="darkGrey" />
 
           {/* 추가 정보 */}
-          <SpaceLayout size={15}>
-            <Text style={eventApplyScreenStyles.subTitle}>
-              {MENT_EVENT_DETAIL.MAIN.ADDITIONAL_INFORMATION}
-            </Text>
+          {qnaList.length > 0 && (
+            <>
+              <SpaceLayout size={15}>
+                <Text style={eventApplyScreenStyles.subTitle}>
+                  {MENT_EVENT_DETAIL.MAIN.ADDITIONAL_INFORMATION}
+                </Text>
 
-            <EventDetail.QuestionInput
-              qnaList={qnaList}
-              setQnaList={setQnaList}
-            />
-          </SpaceLayout>
-          <Divider height={1} color="darkGrey" />
+                <EventDetail.QuestionInput
+                  qnaList={qnaList}
+                  setQnaList={setQnaList}
+                />
+              </SpaceLayout>
+              <Divider height={1} color="darkGrey" />
+            </>
+          )}
 
           {/* TODO 개인정보 */}
           <HeadText title={MENT_EVENT_DETAIL.MAIN.PERSONAL_INFORMATION} />
