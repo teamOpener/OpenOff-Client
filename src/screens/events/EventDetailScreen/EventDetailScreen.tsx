@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useEventDetail } from 'hooks/queries/event';
 import useRouteParams from 'hooks/navigator/useRouteParams';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
@@ -6,11 +6,13 @@ import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import Spacing from 'components/common/Spacing/Spacing';
 import FixedButton from 'components/common/FixedButton/FixedButton';
-import { ScrollView } from 'react-native';
+import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
+import { ScrollView, View } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
 import Text from 'components/common/Text/Text';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import { StackMenu } from 'constants/menu';
+import eventDetailScreenStyles from './EventDetailScreen.style';
 
 const EventDetailScreen = () => {
   const params = useRouteParams<StackMenu.EventDetail>();
@@ -24,10 +26,6 @@ const EventDetailScreen = () => {
 
   const handleShare = () => {
     // TODO 공유하기
-  };
-
-  const handleSave = () => {
-    // TODO 찜하기
   };
 
   const handleTab = (name: EventDetailTabItem) => {
@@ -46,6 +44,21 @@ const EventDetailScreen = () => {
       id: params.id,
     });
   };
+
+  const headerRight = () => (
+    <View style={eventDetailScreenStyles.bookmarkButtonWrapper}>
+      <BookmarkButton
+        isEventBookmarked={event?.isBookmarked ?? false}
+        eventInfoId={params?.id ?? 0}
+      />
+    </View>
+  );
+
+  useEffect(() => {
+    stackNavigation.setOptions({
+      headerRight,
+    });
+  }, []);
 
   // TODO
   if (isLoading) {
