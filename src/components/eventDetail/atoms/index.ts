@@ -11,6 +11,7 @@ export { default as DateCardCarousel } from './DateCard/DateCardCarousel';
 export { default as DefaultSimpleList } from './lists/DefaultSimpleList/DefaultSimpleList';
 export { default as SmallSimpleList } from './lists/SmallSimpleList/SmallSimpleList';
 export { default as PosterCarousel } from './PosterCarousel/PosterCarousel';
+export { default as QuestionInput } from './QuestionInput/QuestionInput';
 export { default as Tab } from './Tab/Tab';
 export { default as TabItem } from './Tab/TabItem';
 export { default as TitleText } from './TitleText/TitleText';
