@@ -1,8 +1,6 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { ScrollView } from 'react-native';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { RootStackParamList } from 'types/apps/menu';
 import { useEventDetail } from 'hooks/queries/event';
 import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
@@ -13,53 +11,56 @@ import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import useNavigator from 'hooks/navigator/useNavigator';
+import useEventIndexList from 'hooks/event/useEventIndexList';
+import useRouteParams from 'hooks/navigator/useRouteParams';
+import { StackMenu } from 'constants/menu';
 import { ticketListDateFormatter } from 'utils/date';
 import eventSelectScreenStyles from './EventSelectScreen.style';
 
-type EventSelectScreenRouteProp = RouteProp<RootStackParamList, 'EventSelect'>;
-
 const EventSelectScreen = () => {
-  const { params } = useRoute<EventSelectScreenRouteProp>();
+  const params = useRouteParams<StackMenu.EventSelect>();
   const { stackNavigation } = useNavigator();
 
-  const { data: event } = useEventDetail(params.id);
-  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const { data: event } = useEventDetail(params?.id ?? 0);
 
-  const eventDateArray = event?.indexList.map((item) => item.eventDate) ?? [];
+  const { sortedEventDateArray } = useEventIndexList({
+    eventIndexList: event?.indexList,
+  });
 
-  const handleSelect = (idx: number) => {
-    // TODO: 날짜 선택
-    setSelectedIdx(idx);
-  };
+  const [selectedIndexId, setSelectedIndexId] = useState<number | null>(null);
+
+  const [selectedDate, setSelectedDate] = useState<string>(
+    dayjs(event?.indexList[0].eventDate ?? '').format('YYYY-MM-DD'),
+  );
 
   const handelNextStep = () => {
-    if (selectedIdx == null) {
+    if (selectedIndexId == null) {
       return;
     }
 
     // TODO
     stackNavigation.navigate('EventApply', {
-      id: params.id,
-      idx: selectedIdx,
+      id: params?.id ?? 0,
+      idx: selectedIndexId,
     });
   };
 
   // TODO
-  if (!event) {
+  if (!event || !params) {
     return null;
   }
 
   return (
     <EventDetailScreenLayout>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <EventDetail.TitleText title={event?.title} color="main" />
 
         <SpaceLayout size={10}>
           <EventDetail.DefaultSimpleList
             title={MENT_EVENT_DETAIL.MAIN.DATE}
-            description={`${dayjs(eventDateArray[0]).format(
+            description={`${dayjs(sortedEventDateArray[0]).format(
               'YYYY',
-            )}.${ticketListDateFormatter(eventDateArray)}`}
+            )}.${ticketListDateFormatter(sortedEventDateArray)}`}
           />
           <EventDetail.DefaultSimpleList
             title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
@@ -87,30 +88,23 @@ const EventSelectScreen = () => {
           </Text>
         </SpaceLayout>
 
-        {/* <Spacing height={10} /> */}
+        <Spacing height={10} />
 
-        {/* TODO: calendar */}
-        <Spacing height={20} />
+        <EventDetail.EventCalendar
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          selectedIndexId={selectedIndexId}
+          setSelectedIndexId={setSelectedIndexId}
+          eventIndexList={event.indexList}
+          maxCapacity={event.maxCapacity}
+        />
 
-        {/* TODO: calendar 날짜별 filter */}
-        <SpaceLayout size={10}>
-          {event.indexList.map((eventIndex) => (
-            <EventDetail.DateSelectButton
-              key={eventIndex.eventIndexId}
-              // TODO: 신청한 날짜, 마감 날짜 등등 disabled 처리
-              isSelected={eventIndex.eventIndexId === selectedIdx}
-              eventDate={eventIndex.eventDate}
-              approvedUserCount={eventIndex.approvedUserCount}
-              maxCapacity={event.maxCapacity}
-              onPress={() => handleSelect(eventIndex.eventIndexId)}
-            />
-          ))}
-        </SpaceLayout>
+        <Spacing height={200} />
       </ScrollView>
 
       <FixedButton
         // TODO: disabled
-        disabled={selectedIdx == null}
+        disabled={selectedIndexId == null}
         label={MENT_EVENT_DETAIL.MAIN.NEXT}
         onPress={handelNextStep}
       />
