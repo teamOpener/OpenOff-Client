@@ -10,6 +10,7 @@ import ApplicationInfoResponseData from 'mocks/ledger/user/ApplicationInfoRespon
 import { getHostEventLists } from 'apis/eventInstance';
 import { FieldCode } from 'constants/code';
 import {
+  applyEvent,
   cancelPermittedApplicant,
   getLedgerStatus,
   getLedgerUserList,
@@ -20,6 +21,7 @@ import { EventLadgerTotalStatusResponseDto } from 'models/ledger/response/EventL
 import SortType from 'models/ledger/entity/SortType';
 import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
 import { EventAllApplicantPermitRequestDto } from 'models/ledger/request/EventAllApplicantPermitRequestDto';
+import { ApplyEventRequestDto } from 'models/ledger/request/ApplyEventRequestDto';
 
 // TODO: 이벤트 상세 정보 조회
 export const useUserTickets = (eventId: number) => {
@@ -31,17 +33,6 @@ export const useUserTickets = (eventId: number) => {
       ),
     { select: (data) => data.data },
   );
-};
-
-// TODO 삭제
-export const useApplyEvent = (
-  successCallback?: () => void,
-  errorCallback?: () => void,
-) => {
-  return useMutation(() => fakeApi(), {
-    onSuccess: successCallback,
-    onError: errorCallback,
-  });
 };
 
 // TODO: 내 이벤트 - 참여 이벤트 리스트 조회
@@ -165,4 +156,15 @@ export const usePermitAllApplicant = (
       useErrorBoundary: false,
     },
   );
+};
+
+export const useApplyEvent = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((data: ApplyEventRequestDto) => applyEvent(data), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
+  });
 };
