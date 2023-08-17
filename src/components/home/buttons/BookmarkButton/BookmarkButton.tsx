@@ -21,9 +21,8 @@ const BookmarkButton = ({
   const queryClient = useQueryClient();
 
   const handleSuccessBookmark = () => {
-    queryClient.invalidateQueries(queryKeys.bookmarkKeys.list);
-    queryClient.invalidateQueries(queryKeys.eventKeys.personalList);
-    queryClient.invalidateQueries(queryKeys.eventKeys.vogueList);
+    queryClient.invalidateQueries(queryKeys.bookmarkKeys.all);
+    queryClient.invalidateQueries(queryKeys.eventKeys.all);
   };
 
   const { mutate: bookmark } = useBookmark(handleSuccessBookmark);
