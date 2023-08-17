@@ -12,10 +12,16 @@ import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
-import SelectStatus from 'constants/selectBox';
+import {
+  ApplicationAbleValue,
+  ParticipantValue,
+  PayValue,
+  SelectStatus,
+} from 'constants/selectBox';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
-import eventList from 'mocks/lists/eventList';
+import { useEventMapInstance } from 'hooks/queries/event';
+import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { BackHandler, Dimensions, Pressable, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
@@ -38,6 +44,10 @@ const EventMapScreen = () => {
   const eventIdParam = useRef<string | undefined>(
     params ? params.eventId : undefined,
   );
+  const payValueTransform = (value: PayValue) =>
+    value === PayValue.FREE ? 0 : 1;
+  const applyableValueTransform = (value: ApplicationAbleValue) =>
+    value === ApplicationAbleValue.APPLYING;
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { startEndDate, resetStartEndDate } = useEventMapStore();
   const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
@@ -78,21 +88,21 @@ const EventMapScreen = () => {
   };
 
   // 쿼리 파라메터 계산 함수
-  const calculateQueryParams = () => {
+  const calculateQueryParams = (): EventSearchRequestDto => {
     const appAble =
-      selectState.applicationAbleOption.value !== 'all'
+      selectState.applicationAbleOption.value !== ApplicationAbleValue.ALL
         ? undefined
-        : selectState.applicationAbleOption.value;
+        : applyableValueTransform(selectState.applicationAbleOption.value);
 
     const part =
-      selectState.participantOption.value !== 'all'
+      selectState.participantOption.value !== ParticipantValue.ALL
         ? undefined
         : selectState.participantOption.value;
 
     const pay =
-      selectState.payOption.value !== 'all'
+      selectState.payOption.value !== PayValue.ALL
         ? undefined
-        : selectState.participantOption.value === 'applying';
+        : payValueTransform(selectState.payOption.value);
 
     const commonCoordinate: Coordinate =
       searchValue || !startEndDate.startDay
@@ -109,13 +119,15 @@ const EventMapScreen = () => {
       applyable: appAble,
       capacity: part,
       eventFee: pay,
-      keyword: searchValue,
+      keyword: searchValue.current,
       field: fieldMapMode?.value,
       eventId: eventIdParam.current,
       latitude: calculateCoordinate.latitude,
       longitude: calculateCoordinate.longitude,
     };
   };
+
+  const { data: eventList } = useEventMapInstance(calculateQueryParams());
 
   const handleCameraEvent = (event: NaverMapEvent) => {
     screenCoordinate.current = {
@@ -196,6 +208,7 @@ const EventMapScreen = () => {
   };
 
   const computedEventList = useMemo(() => {
+    if (!eventList) return [];
     if (!clickedMarker) return eventList;
     return eventList.filter((event) => event.id === clickedMarker);
   }, [clickedMarker]);
@@ -255,7 +268,7 @@ const EventMapScreen = () => {
             coordinate={currentCoordinate}
             pinColor={colors.black}
           />
-          {eventList.map((event) => (
+          {eventList?.map((event) => (
             <EventMarker
               key={event.id}
               clickedMarker={clickedMarker}
