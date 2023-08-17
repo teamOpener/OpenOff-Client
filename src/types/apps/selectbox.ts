@@ -1,4 +1,4 @@
-import SelectStatus from 'constants/selectBox';
+import { SelectStatus } from 'constants/selectBox';
 
 interface Option {
   label: string;

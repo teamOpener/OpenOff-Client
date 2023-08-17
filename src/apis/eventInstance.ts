@@ -1,12 +1,14 @@
 import fetcher from 'apis';
-import { ApiResponse, InfiniteScrollApiResponse } from 'types/ApiResponse';
+import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 import EventFieldListRequestDto from 'models/event/request/EventFieldListRequestDto';
+import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 import EventVogueListRequestDto from 'models/event/request/EventVogueListRequestDto';
 import { DetailEventInfoResponseDto } from 'models/event/response/DetailEventInfoResponseDto';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
+import SearchMapEventInfoResponseDto from 'models/event/response/SearchMapEventInfoResponseDto';
 import { HostEventInfoRequestDto } from 'models/ledger/request/HostEventInfoRequestDto';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
-import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
+import { ApiResponse, InfiniteScrollApiResponse } from 'types/ApiResponse';
 
 export const getHostEventLists = async (
   params: HostEventInfoRequestDto,
@@ -55,5 +57,14 @@ export const createEvent = async (
   data: CreateNewEventRequestDto,
 ): Promise<ApiResponse> => {
   const response = await fetcher.post(`/event-instance/create`, data);
+  return response.data;
+};
+
+export const getEventMapInstance = async (
+  params: EventSearchRequestDto,
+): Promise<ApiResponse<SearchMapEventInfoResponseDto[]>> => {
+  const response = await fetcher.get(`/event-instance/search`, {
+    params,
+  });
   return response.data;
 };

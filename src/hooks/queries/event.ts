@@ -2,6 +2,7 @@ import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import {
   createEvent,
   getEventDetailInfo,
+  getEventMapInstance,
   getFieldEventLists,
   getPersonalEventLists,
   getVogueEventLists,
@@ -10,6 +11,7 @@ import fakeApi from 'apis/test';
 import { FieldCode } from 'constants/code';
 import queryKeys from 'constants/queryKeys';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
+import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 
 export const useCreateEvent = (
   successCallback?: () => void,
@@ -108,6 +110,17 @@ export const usePersonalEventLists = () => {
     {
       select: (data) => data.data,
       suspense: false,
+    },
+  );
+};
+
+export const useEventMapInstance = (params: EventSearchRequestDto) => {
+  return useQuery(
+    [...queryKeys.eventKeys.mapList],
+    () => getEventMapInstance(params),
+    {
+      select: (data) => data.data,
+      staleTime: 1000 * 5,
     },
   );
 };
