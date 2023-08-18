@@ -1,18 +1,18 @@
 import Icon from 'components/common/Icon/Icon';
 import { Pressable } from 'react-native';
 import Text from '../../../common/Text/Text';
-import currentFindButtonStyles from './CurrentFindButton.style';
+import currentFieldFindButtonStyles from './CurrentFieldFindButton.style';
 
 interface Props {
   handlePress: () => void;
   isFindActive: boolean;
 }
 
-const CurrentFindButton = ({ isFindActive, handlePress }: Props) => {
+const CurrentFieldFindButton = ({ isFindActive, handlePress }: Props) => {
   return (
     isFindActive && (
       <Pressable
-        style={currentFindButtonStyles.container}
+        style={currentFieldFindButtonStyles.container}
         onPress={handlePress}
       >
         <Icon name="IconSend" fill="main" size={20} />
@@ -24,4 +24,4 @@ const CurrentFindButton = ({ isFindActive, handlePress }: Props) => {
   );
 };
 
-export default CurrentFindButton;
+export default CurrentFieldFindButton;
