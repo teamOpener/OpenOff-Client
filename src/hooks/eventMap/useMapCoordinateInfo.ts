@@ -3,20 +3,20 @@ import { Platform } from 'react-native';
 import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
 import NaverMapView from 'react-native-nmap';
 import { PERMISSIONS } from 'react-native-permissions';
-import { Coordinate } from 'types/event';
 import { requestSinglePermission } from 'services/permission';
+import { Coordinate } from 'types/event';
 
 const useMapCoordinateInfo = () => {
   const naverMapRef = useRef<NaverMapView>(null);
   // 사용자의 스크린 위치정보
   const screenCoordinate = useRef<Coordinate>({
-    latitude: 126.98795373156224,
-    longitude: 37.56278008163968,
+    latitude: 37.56278008163968,
+    longitude: 126.98795373156224,
   });
   // 지도초기 위치정보(1회성 값)
   const [firstPlaceCoordinate, setFirstPlaceCoordinate] = useState<Coordinate>({
-    latitude: 126.98795373156224,
-    longitude: 37.56278008163968,
+    latitude: 37.56278008163968,
+    longitude: 126.98795373156224,
   });
   // 현 지도위치 검색을 위한 상태
   const [focusCoordinate, setFocusCoordinate] = useState<Coordinate>({

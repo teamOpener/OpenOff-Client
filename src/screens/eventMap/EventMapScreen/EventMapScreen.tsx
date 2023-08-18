@@ -5,23 +5,19 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
-import CurrentFindButton from 'components/eventMap/buttons/CurrentFindButton/CurrentFindButton';
+import CurrentFieldFindButton from 'components/eventMap/buttons/CurrentFieldFindButton/CurrentFieldFindButton';
 import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
-import {
-  ApplicationAbleValue,
-  ParticipantValue,
-  PayValue,
-  SelectStatus,
-} from 'constants/selectBox';
+import queryKeys from 'constants/queryKeys';
+import { SelectStatus } from 'constants/selectBox';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
 import { useEventMapInstance } from 'hooks/queries/event';
-import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { BackHandler, Dimensions, Pressable, View } from 'react-native';
 import NaverMapView, { Marker } from 'react-native-nmap';
@@ -32,8 +28,6 @@ import NaverMapEvent from 'types/apps/map';
 import { BottomTabParamList, RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
 import getDistanceCoordinate from 'utils/coordinate';
-import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
 import {
   defaultTabBarStyles,
   eventMapScreenStyles,
@@ -47,12 +41,9 @@ const EventMapScreen = () => {
   const eventIdParam = useRef<string | undefined>(
     params ? params.eventId : undefined,
   );
-  const payValueTransform = (value: string) =>
-    value === PayValue.FREE ? 0 : 1;
-  const applyableValueTransform = (value: string) =>
-    value === ApplicationAbleValue.APPLYING;
+
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { startEndDate, resetStartEndDate } = useEventMapStore();
+  const { resetStartEndDate } = useEventMapStore();
   const [fieldMapMode, setFieldMapMode] = useState<Field | undefined>(
     undefined,
   );
@@ -70,69 +61,36 @@ const EventMapScreen = () => {
     setFocusCoordinate,
   } = useMapCoordinateInfo();
 
-  // 거리순, 날짜순 정렬 및 선택자(비용 & 참여인원 & 신청현황)
-  const { sort, setSort, selectState, selectDispatch } = useEventMapSelector();
+  // 거리순, 날짜순 정렬 및 선택자(비용 & 참여인원 & 신청현황), 검색어값 setter, 쿼리파라미터
+  const {
+    sort,
+    setSort,
+    selectState,
+    selectDispatch,
+    setSearchValue,
+    calculateQueryParams,
+  } = useEventMapSelector(
+    screenCoordinate.current,
+    currentCoordinate,
+    focusCoordinate,
+    eventIdParam.current,
+    fieldMapMode,
+  );
 
   // 클릭된 마커의 아이디값
   const [clickedMarker, setClickedMarker] = useState<number | undefined>(
     undefined,
   );
 
-  // 검색어값
-  const searchValue = useRef<string>('');
-
   // search값 반영함수
-  const handleEventSearch = useCallback((value: string) => {
-    searchValue.current = value;
-  }, []);
+  const handleEventSearch = (value: string) => {
+    setSearchValue(value);
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
+  };
 
   const handleMoveCurrentCoordinate = () => {
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
-  };
-
-  // 쿼리 파라메터 계산 함수
-  const calculateQueryParams = (): EventSearchRequestDto => {
-    const appAble =
-      selectState.applicationAbleOption.value === ApplicationAbleValue.ALL
-        ? undefined
-        : applyableValueTransform(selectState.applicationAbleOption.value);
-
-    const part =
-      selectState.participantOption.value === ParticipantValue.ALL
-        ? undefined
-        : selectState.participantOption.value;
-
-    const pay =
-      selectState.payOption.value === PayValue.ALL
-        ? undefined
-        : payValueTransform(selectState.payOption.value);
-
-    const commonCoordinate: Coordinate =
-      searchValue || !startEndDate.startDay
-        ? screenCoordinate.current
-        : currentCoordinate;
-
-    const calculateCoordinate: Coordinate = fieldMapMode?.value
-      ? focusCoordinate
-      : commonCoordinate;
-
-    return {
-      startDate: startEndDate.startDay,
-      endDate: startEndDate.endDay,
-      applyable: appAble,
-      capacity: part,
-      eventFee: pay,
-      keyword:
-        searchValue.current.length === 0 ? undefined : searchValue.current,
-      field: fieldMapMode?.value,
-      eventId: eventIdParam.current,
-      latitude: Math.abs(
-        Math.round(calculateCoordinate.latitude * 1000000) / 1000000,
-      ),
-      longitude: Math.abs(
-        Math.round(calculateCoordinate.longitude * 1000000) / 1000000,
-      ),
-    };
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
   };
 
   const { data: eventList } = useEventMapInstance(calculateQueryParams());
@@ -166,6 +124,30 @@ const EventMapScreen = () => {
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
   };
 
+  const makeScreenHeader = (field: Field) => {
+    navigation.setOptions({
+      tabBarStyle: {
+        ...defaultTabBarStyles,
+        display: 'none',
+      },
+      headerTitle: field.label,
+      headerShown: true,
+      headerTintColor: colors.white,
+      // eslint-disable-next-line react/no-unstable-nested-components
+      headerLeft: () => (
+        <Pressable
+          style={eventMapScreenStyles.backButton}
+          onPress={recallEventMap}
+        >
+          <Icon name="IconArrowLeft" fill="white" />
+        </Pressable>
+      ),
+      headerStyle: {
+        backgroundColor: colors.background,
+      },
+    });
+  };
+
   const handlePressMapCoordinate = (
     eventId: number,
     eventCoordinate: Coordinate,
@@ -177,32 +159,15 @@ const EventMapScreen = () => {
   const handleShowFieldEvent = useCallback(
     (field: Field) => {
       selectDispatch({ type: SelectStatus.RESET_SELECT });
-      searchValue.current = '';
+      setSearchValue('');
       resetStartEndDate();
       setFieldMapMode(() => {
         return field;
       });
-      navigation.setOptions({
-        tabBarStyle: {
-          ...defaultTabBarStyles,
-          display: 'none',
-        },
-        headerTitle: field.label,
-        headerShown: true,
-        headerTintColor: colors.white,
-        // eslint-disable-next-line react/no-unstable-nested-components
-        headerLeft: () => (
-          <Pressable
-            style={eventMapScreenStyles.backButton}
-            onPress={recallEventMap}
-          >
-            <Icon name="IconArrowLeft" fill="white" />
-          </Pressable>
-        ),
-        headerStyle: {
-          backgroundColor: colors.background,
-        },
+      setFocusCoordinate(() => {
+        return screenCoordinate.current;
       });
+      makeScreenHeader(field);
       setClickedMarker(undefined);
       queryClient.removeQueries(queryKeys.eventKeys.mapList);
     },
@@ -223,7 +188,7 @@ const EventMapScreen = () => {
     if (!eventList) return [];
     if (!clickedMarker) return eventList;
     return eventList.filter((event) => event.id === clickedMarker);
-  }, [clickedMarker]);
+  }, [clickedMarker, eventList]);
 
   useFocusEffect(
     useCallback(() => {
@@ -252,7 +217,7 @@ const EventMapScreen = () => {
       )}
       <View style={eventMapScreenStyles.mapContainer}>
         {fieldMapMode ? (
-          <CurrentFindButton
+          <CurrentFieldFindButton
             handlePress={() => {
               setCurrentFindActive(false);
               setFocusCoordinate(screenCoordinate.current);
