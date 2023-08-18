@@ -26,7 +26,7 @@ const MapEventCard = ({ event }: Props) => {
           color="grey"
           style={mapEventCardStyles.textMargin}
         >
-          22km
+          {event.distance}km
         </Text>
         <Text variant="body2" color="white">
           {`${event.streetLoadAddress} ${event.detailAddress}`}
@@ -39,7 +39,7 @@ const MapEventCard = ({ event }: Props) => {
           loop={false}
           overscrollEnabled={false}
           style={{ width: Dimensions.get('window').width - 20 }}
-          panGestureHandlerProps={{ minDist: 10 }}
+          panGestureHandlerProps={{ minDist: 20 }}
           data={event.imageList}
           renderItem={({ item, index }) => (
             <Image

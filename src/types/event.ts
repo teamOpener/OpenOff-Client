@@ -30,6 +30,7 @@ interface MapEvent {
   detailAddress: string;
   latitude: number;
   longitude: number;
+  distance?: number;
   imageList: ImageType[];
   eventDateList: string[];
 }
