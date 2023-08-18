@@ -12,6 +12,9 @@ const dateSelectButtonStyles = StyleSheet.create({
   activeContainer: {
     borderColor: colors.main,
   },
+  disabledContainer: {
+    borderColor: colors.darkGrey,
+  },
   dateText: {
     fontFamily: fonts.bold,
     fontSize: 14,
@@ -24,6 +27,9 @@ const dateSelectButtonStyles = StyleSheet.create({
   } as TextStyle,
   activeText: {
     color: colors.main,
+  } as TextStyle,
+  disabledText: {
+    colors: colors.darkGrey,
   } as TextStyle,
 });
 

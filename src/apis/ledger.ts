@@ -6,6 +6,7 @@ import { EventApplicantInfoRequestDto } from 'models/ledger/request/EventApplica
 import { EventApplicantInfoResponseDto } from 'models/ledger/response/EventApplicantInfoResponseDto';
 import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
 import { EventAllApplicantPermitRequestDto } from 'models/ledger/request/EventAllApplicantPermitRequestDto';
+import { ApplyEventRequestDto } from 'models/ledger/request/ApplyEventRequestDto';
 
 export const getLedgerStatus = async (
   params: EventLadgerTotalStatusRequestDto,
@@ -45,5 +46,12 @@ export const permitAllApplicant = async (
   const response = await fetcher.patch(
     `/ladger/permit/all?eventIndexId=${data.eventIndexId}`,
   );
+  return response.data;
+};
+
+export const applyEvent = async (
+  data: ApplyEventRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.post(`/ladger/apply`, data);
   return response.data;
 };

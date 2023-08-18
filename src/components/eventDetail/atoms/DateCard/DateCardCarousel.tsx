@@ -24,6 +24,16 @@ const DateCardCarousel = ({ indexList, maxCapacity }: Props) => {
     setCarouselHeight(height);
   };
 
+  if (indexList.length === 1) {
+    return (
+      <DateCard
+        key={indexList[0].eventIndexId}
+        indexList={indexList[0]}
+        maxCapacity={maxCapacity}
+      />
+    );
+  }
+
   return (
     <Carousel
       loop={false}
