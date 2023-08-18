@@ -34,7 +34,7 @@ const EventSelectScreen = () => {
   );
 
   const handelNextStep = () => {
-    if (selectedIndexId == null || !params) {
+    if (selectedIndexId === null || !params) {
       return;
     }
 
@@ -102,7 +102,7 @@ const EventSelectScreen = () => {
       </ScrollView>
 
       <FixedButton
-        disabled={selectedIndexId == null}
+        disabled={selectedIndexId === null}
         label={MENT_EVENT_DETAIL.MAIN.NEXT}
         onPress={handelNextStep}
       />

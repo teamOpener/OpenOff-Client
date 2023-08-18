@@ -92,14 +92,14 @@ const EventCalendar = ({
   };
 
   useEffect(() => {
-    if (markedDates == null) {
+    if (markedDates === null) {
       return;
     }
     updateMarkedDates();
   }, [selectedDate]);
 
   useEffect(() => {
-    if (markedDates !== null) {
+    if (markedDates) {
       return;
     }
     updateMarkedDates();

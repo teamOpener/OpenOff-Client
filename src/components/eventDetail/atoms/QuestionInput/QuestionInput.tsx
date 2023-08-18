@@ -25,7 +25,7 @@ const QuestionInput = ({ qnaList, setQnaList }: Props) => {
   return (
     <SpaceLayout size={8}>
       {qnaList.map((question) => (
-        <SpaceLayout size={7}>
+        <SpaceLayout key={question[0].eventExtraQuestionId} size={7}>
           <Text style={questionInputStyles.label}>{question[0].question}</Text>
 
           <TextInput

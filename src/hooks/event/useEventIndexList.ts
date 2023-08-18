@@ -30,8 +30,8 @@ const useEventIndexList = ({ eventIndexList = [] }: Props) => {
   const getEventDateByIndexId = (eventIndexId: number): string | undefined => {
     const eventIndex = eventIndexList.find(
       (item) => item.eventIndexId === eventIndexId,
-    );
-    return eventIndex ? eventIndex.eventDate : undefined;
+    )?.eventDate;
+    return eventIndex;
   };
 
   const sortEventsByEventDate = (): EventIndexStatisticsDto[] => {
