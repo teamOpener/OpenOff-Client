@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
-import {
-  Alert,
-  FlatList,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, TextInput, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
+import { colors } from 'styles/theme';
 import { StackMenu } from 'constants/menu';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import Text from 'components/common/Text/Text';
@@ -22,7 +17,6 @@ import {
   UserCard,
 } from 'components/userEvent/host';
 import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
-import useRouteParams from 'hooks/navigator/useRouteParams';
 import {
   useLedgerStatus,
   useLedgerUserList,
@@ -31,18 +25,25 @@ import {
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useEventDetail } from 'hooks/queries/event';
 import useBottomSheet from 'hooks/ledger/useBottomSheet';
+import useDialog from 'hooks/app/useDialog';
+import useStackRoute from 'hooks/navigator/useStackRoute';
 import SortType from 'models/ledger/entity/SortType';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
 import queryKeys from 'constants/queryKeys';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import hostLedgerScreenStyles from './HostLedgerScreen.style';
 
-const HostLedgerScreen = () => {
-  const { stackNavigation } = useNavigator();
-  const params = useRouteParams<StackMenu.HostLedger>();
+// TODO 무한 스크롤 테스트
 
-  const { data: eventStatus } = useLedgerStatus(params?.eventIndex ?? 0);
-  const { data: eventInfo } = useEventDetail(params?.eventId ?? 0);
+const HostLedgerScreen = () => {
+  const queryClient = useQueryClient();
+  const { stackNavigation } = useNavigator();
+  const { params } = useStackRoute<StackMenu.HostLedger>();
+  const { openDialog } = useDialog();
+
+  const { data: eventStatus } = useLedgerStatus(params.eventIndex);
+  const { data: eventInfo } = useEventDetail(params.eventId);
 
   const [searchName, onChangeSearchName] = useState<string>('');
 
@@ -59,7 +60,7 @@ const HostLedgerScreen = () => {
     data: ledgerUserList,
     hasNextPage,
     fetchNextPage,
-  } = useLedgerUserList(params?.eventIndex ?? 0, selectedSortType);
+  } = useLedgerUserList(params.eventIndex, selectedSortType);
   const flatLedgerUserList = ledgerUserList?.pages.flatMap(
     (page) => page.data.content,
   );
@@ -73,33 +74,63 @@ const HostLedgerScreen = () => {
     }
   };
 
-  const queryClient = useQueryClient();
+  /**
+   * 일괄 승인
+   */
 
   const handlePermitSuccess = () => {
+    openDialog({
+      type: 'success',
+      text: MENT_HOST.SUCCESS.PERMIT_ALL,
+      closeText: '확인',
+    });
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
+    queryClient.invalidateQueries(
+      queryKeys.hostKeys.statusByIndexId(params.eventIndex),
+    );
   };
 
   const handlePermitError = (error: ApiErrorResponse) => {
-    // TODO
-    Alert.alert(error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT);
+    openDialog({
+      type: 'validate',
+      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+    });
   };
 
-  const { mutateAsync: permitAllApplicant } = usePermitAllApplicant(
-    handlePermitSuccess,
-    handlePermitError,
-  );
+  const { mutateAsync: permitAllApplicant, isLoading: isPermitAllLoading } =
+    usePermitAllApplicant(handlePermitSuccess, handlePermitError);
 
-  const handleBatchApproval = async () => {
-    if (!params || !eventStatus) {
-      return;
-    }
-    const availableCount = eventStatus.maxCount - eventStatus.approvedCount;
-    if (availableCount < eventStatus.notApprovedCount) {
-      Alert.alert(MENT_HOST.ERROR.OVERFLOW_AVAILABLE); // TODO dialog로
-      return;
-    }
+  // TODO 500 error
+  const handlePermitAll = async () => {
     await permitAllApplicant({ eventIndexId: params.eventIndex });
   };
+
+  const handlePermitAllButtonPress = async () => {
+    if (!eventStatus) {
+      return;
+    }
+
+    const availableCount = eventStatus.maxCount - eventStatus.approvedCount;
+    if (availableCount < eventStatus.notApprovedCount) {
+      openDialog({
+        type: 'validate',
+        text: MENT_HOST.ERROR.OVERFLOW_AVAILABLE,
+      });
+      return;
+    }
+
+    openDialog({
+      type: 'confirm',
+      text: MENT_HOST.MAIN.PERMIT_ALL,
+      apply: handlePermitAll,
+      applyText: '예',
+      closeText: '아니오',
+    });
+  };
+
+  /**
+   * 검색
+   */
 
   const handleSearch = () => {
     // TODO
@@ -122,12 +153,15 @@ const HostLedgerScreen = () => {
     });
   }, []);
 
-  if (!eventStatus || !params?.eventId || !params?.eventIndex) {
+  if (!eventStatus) {
     return null;
   }
 
   return (
     <LedgerScreenLayout>
+      {isPermitAllLoading && (
+        <WithIconLoading isActive backgroundColor={colors.background} />
+      )}
       <SpaceLayout size={23} style={hostLedgerScreenStyles.statusContainer}>
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <IconText
@@ -148,7 +182,7 @@ const HostLedgerScreen = () => {
             disabled={eventStatus.notApprovedCount === 0}
             label="일괄 승인"
             style={hostLedgerScreenStyles.totalApproveBtn}
-            onPress={handleBatchApproval}
+            onPress={handlePermitAllButtonPress}
           />
         </View>
 
@@ -211,7 +245,12 @@ const HostLedgerScreen = () => {
             contentContainerStyle={hostLedgerScreenStyles.flatListContentStyle}
             onEndReachedThreshold={0.2}
             onEndReached={onEndReached}
-            renderItem={({ item }) => <UserCard eventApplicantInfo={item} />}
+            renderItem={({ item }) => (
+              <UserCard
+                eventApplicantInfo={item}
+                eventIndexId={params.eventIndex}
+              />
+            )}
           />
         </View>
       )}
