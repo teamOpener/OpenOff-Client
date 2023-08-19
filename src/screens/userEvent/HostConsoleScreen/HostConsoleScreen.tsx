@@ -124,7 +124,7 @@ const HostConsoleScreen = () => {
           />
           <LargeIconButton
             disabled={eventStatus.isClosed}
-            iconName="IconPeople"
+            iconName="IconAddressBook"
             label={MENT_HOST.MAIN.LEDGER}
             onPress={() => handleNavigation(StackMenu.HostLedger)}
           />
@@ -132,8 +132,8 @@ const HostConsoleScreen = () => {
         <SpaceLayout direction="row" size={0}>
           <LargeIconButton
             disabled={eventStatus.isClosed}
-            iconName="IconBellLing"
-            label={MENT_HOST.MAIN.ALARM}
+            iconName="IconUserGear"
+            label={MENT_HOST.MAIN.STAFF_MANAGEMENT}
             onPress={() => handleNavigation(StackMenu.HostAlarm)}
           />
           <LargeIconButton

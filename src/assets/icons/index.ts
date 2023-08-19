@@ -1,3 +1,4 @@
+export { default as IconAddressBook } from './IconAddressBook.svg';
 export { default as IconAlertComment } from './IconAlertComment.svg';
 export { default as IconArrowDown } from './IconArrowDown.svg';
 export { default as IconArrowLeft } from './IconArrowLeft.svg';
@@ -42,5 +43,6 @@ export { default as IconTicketCircles } from './IconTicketCircles.svg';
 export { default as IconTicketHeart } from './IconTicketHeart.svg';
 export { default as IconTicketStar } from './IconTicketStar.svg';
 export { default as IconUser } from './IconUser.svg';
+export { default as IconUserGear } from './IconUserGear.svg';
 export { default as IconVoidTicket } from './IconVoidTicket.svg';
 export { default as IconWarning } from './IconWarning.svg';
