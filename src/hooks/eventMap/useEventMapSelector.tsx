@@ -41,6 +41,8 @@ const selectReducer = (state: SelectBox, action: Action): SelectBox => {
       return { ...state, applicationAbleOption: action.option };
     case SelectStatus.RESET_SELECT:
       return { ...initSelect };
+    case SelectStatus.REMIND_SELECT:
+      return state;
     default:
       return state;
   }

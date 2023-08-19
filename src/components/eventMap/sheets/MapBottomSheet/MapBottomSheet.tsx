@@ -44,6 +44,12 @@ const MapBottomSheet = ({
   clickedMarker,
 }: Props) => {
   const [isDetail, setIsDetail] = useState<boolean>(false);
+
+  const handleCloseGroupDetail = () => {
+    setIsDetail(() => {
+      return false;
+    });
+  };
   return (
     <>
       <BottomSheet
@@ -90,8 +96,12 @@ const MapBottomSheet = ({
                   </>
                 ) : null
               }
-              renderItem={(item) => (
-                <MapEventCard key={item.item.id} event={item.item} />
+              renderItem={(mapEventList) => (
+                <MapEventCard
+                  key={mapEventList.item.id}
+                  event={mapEventList.item}
+                  distance={mapEventList.item.distance ?? 0}
+                />
               )}
             />
           </>
@@ -102,9 +112,7 @@ const MapBottomSheet = ({
             <SelectDetailGroup
               selectState={selectState}
               selectDispatch={selectDispatch}
-              closeDetailGroup={() => {
-                setIsDetail(false);
-              }}
+              closeDetailGroup={handleCloseGroupDetail}
             />
           </BottomSheetScrollView>
         )}

@@ -27,19 +27,23 @@ const SelectDetailGroup = ({
   selectDispatch,
   closeDetailGroup,
 }: Props) => {
-  const TIME_DELAY = 500;
   const queryClient = useQueryClient();
-  const initializeSelect = () => {
-    selectDispatch({ type: SelectStatus.RESET_SELECT });
+
+  const refetchEventList = () => {
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
     closeDetailGroup();
   };
-  const applySelect = () => {
-    queryClient.removeQueries(queryKeys.eventKeys.mapList);
-    setTimeout(() => {
-      closeDetailGroup();
-    }, TIME_DELAY);
+
+  const initializeSelect = () => {
+    selectDispatch({ type: SelectStatus.RESET_SELECT });
+    refetchEventList();
   };
+
+  const applySelect = () => {
+    selectDispatch({ type: SelectStatus.REMIND_SELECT });
+    refetchEventList();
+  };
+
   return (
     <View style={selectDetailGroupStyles.container}>
       <View style={selectDetailGroupStyles.detailTitle}>
