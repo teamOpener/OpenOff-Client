@@ -117,13 +117,13 @@ const HostConsoleScreen = () => {
       <View style={hostConsoleStyles.buttonContainer}>
         <SpaceLayout direction="row" size={0}>
           <LargeIconButton
-            disabled={eventStatus.isClosed}
+            disabled={eventStatus.isEnded}
             iconName="IconQR"
             label={MENT_HOST.MAIN.QR_SCAN_BTN}
             onPress={() => handleNavigation(StackMenu.HostQRScan)}
           />
           <LargeIconButton
-            disabled={eventStatus.isClosed}
+            disabled={eventStatus.isEnded}
             iconName="IconAddressBook"
             label={MENT_HOST.MAIN.LEDGER}
             onPress={() => handleNavigation(StackMenu.HostLedger)}
@@ -131,13 +131,13 @@ const HostConsoleScreen = () => {
         </SpaceLayout>
         <SpaceLayout direction="row" size={0}>
           <LargeIconButton
-            disabled={eventStatus.isClosed}
+            disabled={eventStatus.isEnded}
             iconName="IconUserGear"
             label={MENT_HOST.MAIN.STAFF_MANAGEMENT}
             onPress={() => handleNavigation(StackMenu.HostAlarm)}
           />
           <LargeIconButton
-            disabled={eventStatus.isClosed}
+            disabled={eventStatus.isEnded}
             iconName="IconStopCircle"
             label={MENT_HOST.MAIN.STOP_APPLICATION}
             onPress={handleStopApplication}
@@ -146,7 +146,7 @@ const HostConsoleScreen = () => {
       </View>
 
       <Spacing height={80} />
-      {eventStatus.isClosed && (
+      {eventStatus.isEnded && (
         <FixedButton disabled label={MENT_HOST.MAIN.ENDED} />
       )}
     </ConsoleScreenLayout>
