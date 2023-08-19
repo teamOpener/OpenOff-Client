@@ -8,7 +8,7 @@ const tabItemStyles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 5,
     borderBottomWidth: 3,
-    borderBottomColor: colors.white,
+    borderBottomColor: colors.grey,
   },
   activeContainer: {
     borderBottomColor: colors.point,

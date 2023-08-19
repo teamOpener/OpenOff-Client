@@ -23,25 +23,24 @@ const MENT_EVENT_DETAIL = Object.freeze({
     HOST: '주최자',
     REPLY: '답글달기',
     REPORT: '신고',
-    // TODO
     BE_OPENED: '곧 오픈될 예정입니다.',
     APPLICATION_CLOSES: '신청이 마감된 이벤트입니다.',
-    RECRUITMENT_DEADLINE: '모집 인원이 다 찬 이벤트입니다.',
     ALREADY_APPLICATION: '이미 신청한 이벤트입니다.',
+    ENDED_EVENT: '종료된 이벤트입니다.',
+    CLOSED_EVENT: '신청 기간이 아닙니다.',
     INSTRUCTIONS: '유의사항',
+    APPLICATION_LOADING: '이벤트 신청중입니다!',
   },
-
   SUCCESS: {
     APPLICATION: '이벤트 신청이 완료되었습니다!',
     APPLICATION_DETAIL:
-      '주최자 승인 이후 QR 티켓이 생성될 예정이며,\n티켓은 내가 참여하는 이벤트에서 확인 가능합니다.',
+      '주최자 승인 이후 QR 티켓이 생성될 예정이며, 티켓은 내가 참여하는 이벤트에서 확인 가능합니다.',
     TO_HOME: '홈으로',
   },
-
   ERROR: {
     ADDITIONAL_INFORMATION: '추가 정보를 입력해주세요.',
+    APPLICATION: '이벤트 신청에 실패했습니다.',
   },
-
   PLACEHOLDER: {
     COMMENT: '댓글을 남겨보세요.',
     CHILD_COMMENT: '대댓글을 입력하세요.',

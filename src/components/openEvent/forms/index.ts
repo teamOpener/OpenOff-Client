@@ -9,5 +9,6 @@ export { default as HostName } from './HostName/HostName';
 export { default as HostPhoneNumber } from './HostPhoneNumber/HostPhoneNumber';
 export { default as Period } from './Period/Period';
 export { default as RecruitmentNumber } from './RecruitmentNumber/RecruitmentNumber';
+export { default as SubHost } from './SubHost/SubHost';
 export { default as Title } from './Title/Title';
 export { default as UploadImage } from './UploadImage/UploadImage';

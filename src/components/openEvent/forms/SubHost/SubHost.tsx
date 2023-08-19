@@ -1,0 +1,105 @@
+import { useEffect, useState } from 'react';
+import { View, ScrollView, TextInput } from 'react-native';
+import Spacing from 'components/common/Spacing/Spacing';
+import Text from 'components/common/Text/Text';
+import { OpenEvent } from 'components/openEvent';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
+import { useOpenEventStore } from 'stores/OpenEventStore';
+import { useFindUserByNickname } from 'hooks/queries/user';
+import { SearchNicknameResponseDto } from 'models/user/response/SearchNicknameResponseDto';
+import subHostStyles from './SubHost.style';
+
+const SubHost = () => {
+  const { openEvent, setOpenEvent } = useOpenEventStore();
+  const { staffList } = openEvent;
+
+  const [nickName, setNickname] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const handleChangeText = (value: string) => {
+    setNickname(value);
+  };
+
+  const { data: others } = useFindUserByNickname({
+    keyword: nickName.slice(1),
+  });
+
+  const handleAddStaff = (user: SearchNicknameResponseDto) => {
+    const newStaffList = [...openEvent.staffList, user];
+
+    setOpenEvent({
+      ...openEvent,
+      staffList: newStaffList,
+    });
+    setNickname('');
+  };
+
+  const handleRemoveStaff = (idx: number) => {
+    const newStaffList = [...staffList];
+
+    if (idx >= 0 && idx < newStaffList.length) {
+      newStaffList.splice(idx, 1);
+      setOpenEvent({ ...openEvent, staffList: newStaffList });
+    }
+  };
+
+  useEffect(() => {
+    if (nickName.startsWith('@') && !isSearching) {
+      setIsSearching(true);
+    } else if (nickName === '') {
+      setIsSearching(false);
+    }
+  }, [nickName]);
+
+  return (
+    <View>
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.STAFF} />
+      <View
+        style={[
+          subHostStyles.container,
+          isSearching && subHostStyles.searchingContainer,
+        ]}
+      >
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={subHostStyles.contentContainer}
+        >
+          {staffList.map((staff, idx) => (
+            <OpenEvent.NameTag
+              label={staff.nickname}
+              onPress={() => handleRemoveStaff(idx)}
+            />
+          ))}
+          <TextInput
+            style={[subHostStyles.inputContainer, subHostStyles.inputText]}
+            placeholderTextColor="#A4A4A4"
+            value={nickName}
+            onChangeText={handleChangeText}
+            placeholder={MENT_OPEN_EVENT.PLACEHOLDER.STAFF}
+          />
+        </ScrollView>
+      </View>
+
+      {isSearching && (
+        <ScrollView style={subHostStyles.searchContainer}>
+          {others &&
+            others.map((other) => (
+              <OpenEvent.NickNameList
+                label={other.nickname}
+                onPress={() => handleAddStaff(other)}
+              />
+            ))}
+          {others && !others.length && (
+            <Text style={subHostStyles.inputText}>
+              {MENT_OPEN_EVENT.MAIN.EMPTY_NICKNAME}
+            </Text>
+          )}
+          <Spacing height={30} />
+        </ScrollView>
+      )}
+    </View>
+  );
+};
+
+export default SubHost;

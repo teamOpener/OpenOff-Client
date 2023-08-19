@@ -7,8 +7,10 @@ import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
 import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButtonGroup/SocialLoginButtonGroup';
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import Text from 'components/common/Text/Text';
-import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import useDialog from 'hooks/app/useDialog';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
+import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
 import { useEffect, useState } from 'react';
 import {
   Image,
@@ -21,9 +23,7 @@ import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
-import useDialog from 'hooks/app/useDialog';
 import { validateEmail, validatePassword } from 'utils/validate';
-import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
 import loginScreenStyles from './LoginScreen.style';
 
 const LoginScreen = () => {
@@ -104,7 +104,7 @@ const LoginScreen = () => {
   }, []);
 
   if (isSocialLoginLoading || isNormalLoginLoading)
-    return <CommonLoading isActive backgroundColor={colors.background} />;
+    return <WithIconLoading isActive backgroundColor={colors.background} />;
 
   return (
     <KeyboardAvoidingView

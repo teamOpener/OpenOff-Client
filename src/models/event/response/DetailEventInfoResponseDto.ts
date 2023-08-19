@@ -10,6 +10,7 @@ export interface DetailEventInfoResponseDto {
   eventFee: number;
   maxCapacity: number;
   description: string;
+  isBookmarked: boolean;
   imageList: ImageUrlList[];
   indexList: EventIndexStatisticsDto[];
   extraQuestionList: ExtraQuestionInfo[];

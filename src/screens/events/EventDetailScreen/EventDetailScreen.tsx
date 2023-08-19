@@ -1,24 +1,28 @@
-import { useState } from 'react';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { RootStackParamList } from 'types/apps/menu';
+import { useEffect, useState } from 'react';
 import { useEventDetail } from 'hooks/queries/event';
+import useRouteParams from 'hooks/navigator/useRouteParams';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import Spacing from 'components/common/Spacing/Spacing';
 import FixedButton from 'components/common/FixedButton/FixedButton';
-import { ScrollView } from 'react-native';
+import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
+import { ScrollView, View } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
+import useEventIndexList from 'hooks/event/useEventIndexList';
 import Text from 'components/common/Text/Text';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
-
-type EventDetailScreenRouteProp = RouteProp<RootStackParamList, 'EventDetail'>;
+import { StackMenu } from 'constants/menu';
+import eventDetailScreenStyles from './EventDetailScreen.style';
 
 const EventDetailScreen = () => {
-  const { params } = useRoute<EventDetailScreenRouteProp>();
+  const params = useRouteParams<StackMenu.EventDetail>();
   const { stackNavigation } = useNavigator();
 
-  const { data: event, isLoading } = useEventDetail(params.id);
+  const { data: event } = useEventDetail(params?.id ?? 0);
+  const { sortEventsByEventDate } = useEventIndexList({
+    eventIndexList: event?.indexList,
+  });
 
   const [activeTabName, setActiveTabName] = useState<EventDetailTabItem>(
     EventDetailTabItem.DESCRIPTION,
@@ -26,10 +30,6 @@ const EventDetailScreen = () => {
 
   const handleShare = () => {
     // TODO 공유하기
-  };
-
-  const handleSave = () => {
-    // TODO 찜하기
   };
 
   const handleTab = (name: EventDetailTabItem) => {
@@ -42,15 +42,33 @@ const EventDetailScreen = () => {
 
   const handleApply = () => {
     // TODO: 참여 버튼 막기, 얼마 안남았을 경우 timer 걸기
+    if (!params) return;
+
     stackNavigation.navigate('EventSelect', {
       id: params.id,
     });
   };
 
-  // TODO
-  if (isLoading) {
-    return null;
-  }
+  const headerRight = () => (
+    <View style={eventDetailScreenStyles.bookmarkButtonWrapper}>
+      <BookmarkButton
+        isEventBookmarked={event?.isBookmarked ?? false}
+        eventInfoId={params?.id ?? 0}
+      />
+    </View>
+  );
+
+  useEffect(() => {
+    if (params?.tab) {
+      setActiveTabName(params.tab);
+    }
+  }, []);
+
+  useEffect(() => {
+    stackNavigation.setOptions({
+      headerRight,
+    });
+  }, []);
 
   // TODO
   if (!event) {
@@ -75,8 +93,9 @@ const EventDetailScreen = () => {
           />
           <EventDetail.SmallSimpleList
             title={MENT_EVENT_DETAIL.MAIN.COST}
-            // TODO: 쉼표 추가
-            description={`입장료 ${event.eventFee}${MENT_EVENT_DETAIL.MAIN.WON}`}
+            description={`입장료 ${event.eventFee.toLocaleString()}${
+              MENT_EVENT_DETAIL.MAIN.WON
+            }`}
           />
         </SpaceLayout>
         <Spacing height={30} />
@@ -85,7 +104,7 @@ const EventDetailScreen = () => {
         <Spacing height={20} />
 
         <EventDetail.DateCardCarousel
-          indexList={event.indexList}
+          indexList={sortEventsByEventDate()}
           maxCapacity={event.maxCapacity}
         />
         <Spacing height={30} />

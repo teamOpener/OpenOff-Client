@@ -6,14 +6,14 @@ import {
   getPersonalEventLists,
   getVogueEventLists,
 } from 'apis/eventInstance';
-import fakeApi from 'apis/test';
 import { FieldCode } from 'constants/code';
 import queryKeys from 'constants/queryKeys';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
+import { ApiErrorResponse } from 'types/ApiResponse';
 
 export const useCreateEvent = (
   successCallback?: () => void,
-  errorCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
 ) => {
   return useMutation((data: CreateNewEventRequestDto) => createEvent(data), {
     onSuccess: successCallback,
@@ -30,18 +30,6 @@ export const useEventDetail = (eventInfoId: number) => {
       select: (data) => data.data,
     },
   );
-};
-
-// TODO 신청
-export const useApplyEvent = (
-  successCallback?: () => void,
-  errorCallback?: () => void,
-) => {
-  // TODO dto 추가
-  return useMutation(() => fakeApi(), {
-    onSuccess: successCallback,
-    onError: errorCallback,
-  });
 };
 
 export const useFieldEventLists = (field: FieldCode) => {

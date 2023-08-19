@@ -8,8 +8,6 @@ const eventCardSkeletonStyles = StyleSheet.create({
     gap: 4,
   },
   image: {
-    width: 200,
-    height: 200,
     borderRadius: 5,
   },
   title: {

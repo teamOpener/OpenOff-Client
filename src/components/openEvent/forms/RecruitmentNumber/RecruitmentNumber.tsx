@@ -1,8 +1,6 @@
-import { OpenEvent } from 'components/openEvent';
-import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import { HelpText } from 'components/openEvent/atoms';
+import { OpenEvent } from 'components/openEvent';
 import StatusType from 'constants/status';
 import recruitmentNumberStyles from './RecruitmentNumber.style';
 
@@ -13,23 +11,14 @@ const RecruitmentNumber = () => {
     openEventErrorMessage,
     setOpenEventErrorMessage,
   } = useOpenEventStore();
+  const { recruitmentNumber } = openEvent;
   const hasError = !!openEventErrorMessage.recruitmentNumber;
-
-  const [maxParticipant, setMaxParticipant] = useState<string>('');
 
   const handleChangeText = (value: string) => {
     const numericValue = Number(value);
     if (Number.isNaN(numericValue)) {
       return;
     }
-    if (numericValue === 0) {
-      setMaxParticipant('');
-      return;
-    }
-    setMaxParticipant(numericValue.toString());
-  };
-
-  useEffect(() => {
     if (hasError) {
       setOpenEventErrorMessage({
         ...openEventErrorMessage,
@@ -37,13 +26,18 @@ const RecruitmentNumber = () => {
       });
     }
 
-    const numericValue = Number(maxParticipant);
-
-    if (!numericValue) {
-      setOpenEvent({ ...openEvent, recruitmentNumber: null });
+    if (numericValue === 0) {
+      setOpenEvent({
+        ...openEvent,
+        recruitmentNumber: null,
+      });
+      return;
     }
-    setOpenEvent({ ...openEvent, recruitmentNumber: numericValue });
-  }, [maxParticipant]);
+    setOpenEvent({
+      ...openEvent,
+      recruitmentNumber: numericValue,
+    });
+  };
 
   return (
     <View>
@@ -54,12 +48,12 @@ const RecruitmentNumber = () => {
           placeholder="80"
           style={recruitmentNumberStyles.input}
           keyboardType="numeric"
-          value={maxParticipant}
+          value={recruitmentNumber ? recruitmentNumber.toString() : ''}
           onChangeText={handleChangeText}
         />
 
         {hasError && (
-          <HelpText
+          <OpenEvent.HelpText
             status={StatusType.error}
             content={openEventErrorMessage.recruitmentNumber ?? ''}
           />

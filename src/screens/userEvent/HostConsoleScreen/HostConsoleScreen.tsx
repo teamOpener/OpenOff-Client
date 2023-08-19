@@ -11,6 +11,7 @@ import {
   SmallIconButton,
 } from 'components/userEvent/host';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
+import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import { ConsoleScreenLayout } from 'components/userEvent/host/layout';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -62,6 +63,7 @@ const HostConsoleScreen = () => {
     }
     stackNavigation.navigate('EventDetail', {
       id: params.eventId,
+      tab: EventDetailTabItem.COMMENTS,
     });
   };
 

@@ -1,8 +1,6 @@
 import { View } from 'react-native';
-import { debounce } from 'lodash';
 import { OpenEvent } from 'components/openEvent';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import { useEffect, useState } from 'react';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import StatusType from 'constants/status';
 import { HelpText } from 'components/openEvent/atoms';
@@ -15,27 +13,16 @@ const Description = () => {
     openEventErrorMessage,
     setOpenEventErrorMessage,
   } = useOpenEventStore();
-  const hasError = !!openEventErrorMessage.description;
+  const { description } = openEvent;
+  const { description: errMsg } = openEventErrorMessage;
 
-  const [content, setContent] = useState<string>('');
-
-  const handleContent = debounce((value) => {
-    setOpenEvent({
-      ...openEvent,
-      description: value,
+  const handleChangeText = (value: string) => {
+    setOpenEvent({ ...openEvent, description: value });
+    setOpenEventErrorMessage({
+      ...openEventErrorMessage,
+      description: null,
     });
-  }, 500);
-
-  useEffect(() => {
-    if (hasError) {
-      setOpenEventErrorMessage({
-        ...openEventErrorMessage,
-        description: null,
-      });
-    }
-
-    handleContent(content);
-  }, [content]);
+  };
 
   return (
     <View>
@@ -47,11 +34,11 @@ const Description = () => {
           editable
           multiline
           style={descriptionStyles.input}
-          value={content}
-          onChangeText={setContent}
-          status={hasError ? StatusType.error : StatusType.default}
+          value={description ?? ''}
+          onChangeText={handleChangeText}
+          status={errMsg ? StatusType.error : StatusType.default}
         />
-        {hasError && (
+        {!!errMsg && (
           <HelpText
             status={StatusType.error}
             content={openEventErrorMessage.description ?? ''}

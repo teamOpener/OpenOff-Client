@@ -4,15 +4,14 @@ import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/Field
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
-import fieldData from 'data/lists/fieldData';
 import { useConcludeOnBoarding } from 'hooks/queries/user';
-import { Dispatch, useEffect, useState } from 'react';
+import { Dispatch, useEffect } from 'react';
 import { Image } from 'react-native';
 import { colors } from 'styles/theme';
-import { Field } from 'types/apps/group';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action, JoinInfo } from 'types/join';
 import Spacing from 'components/common/Spacing/Spacing';
+import useInterestField from 'hooks/authorize/useInterestField';
 import interestFieldScreenStyles from './InterestFieldScreen.style';
 
 interface Props {
@@ -22,23 +21,13 @@ interface Props {
 
 const InterestFieldScreen = ({ state, dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
-  const [interestField, setInterestField] = useState<Field[]>(fieldData);
+  const { computedCount, setInterestField, interestField } = useInterestField();
   const { mutateAsync: concludeOnBoarding, isLoading } =
     useConcludeOnBoarding();
 
   useEffect(() => {
     setInterestField(interestField);
   }, [interestField]);
-
-  const computedCount = () => {
-    let count = 0;
-    interestField.forEach((mappingField) => {
-      if (mappingField.isActive) {
-        count += 1;
-      }
-    });
-    return count;
-  };
 
   const handleAuthorize = async () => {
     const params = {
@@ -75,7 +64,7 @@ const InterestFieldScreen = ({ state, dispatch }: Props) => {
       titleElements={['관심 분야를 설정해주세요.']}
       authorizeButton={{
         handlePress: handleAuthorize,
-        label: '확인',
+        label: '다음',
         isActive: computedCount() >= 1,
       }}
     >

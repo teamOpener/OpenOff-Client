@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
 import Icon from 'components/common/Icon/Icon';
@@ -8,39 +7,24 @@ import additionalInfoStyles from './AdditionalInfo.style';
 
 const AdditionalInfo = () => {
   const { openEvent, setOpenEvent } = useOpenEventStore();
-  const [additionalInfo, setAdditionalInfo] = useState<string[]>(['']);
+  const { additionalInformation } = openEvent;
 
-  // TODO: 빈 정보 갯수 제한
   const addInfo = () => {
-    const newInfo = [...additionalInfo, ''];
-    setAdditionalInfo(newInfo);
+    const newInfo = [...additionalInformation, ''];
+    setOpenEvent({ ...openEvent, additionalInformation: newInfo });
   };
 
   const removeInfo = (idx: number) => {
-    // TODO: 없어도 될 것 같긴함
-    // if (additionalInfo.length === 1) {
-    //   return;
-    // }
-    const newInfo = [...additionalInfo];
+    const newInfo = [...additionalInformation];
     newInfo.splice(idx, 1);
-    setAdditionalInfo(newInfo);
+    setOpenEvent({ ...openEvent, additionalInformation: newInfo });
   };
 
   const handleChangeText = (value: string, idx: number) => {
-    const newInfo = [...additionalInfo];
+    const newInfo = [...additionalInformation];
     newInfo[idx] = value;
-    setAdditionalInfo(newInfo);
+    setOpenEvent({ ...openEvent, additionalInformation: newInfo });
   };
-
-  // 공백인 데이터들 빼고 저장합니다.
-  useEffect(() => {
-    const nonEmptyStrings = additionalInfo.filter((item) => item.trim() !== '');
-
-    setOpenEvent({
-      ...openEvent,
-      additionalInformation: nonEmptyStrings,
-    });
-  }, [additionalInfo]);
 
   return (
     <View>
@@ -56,7 +40,7 @@ const AdditionalInfo = () => {
       </View>
 
       <View style={additionalInfoStyles.infoGroup}>
-        {additionalInfo.map((info, idx) => (
+        {additionalInformation.map((info, idx) => (
           <View key={idx} style={additionalInfoStyles.inputContainer}>
             <View
               style={[

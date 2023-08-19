@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -11,38 +10,30 @@ const Title = () => {
     setOpenEvent,
     setOpenEventErrorMessage,
   } = useOpenEventStore();
+  const { title } = openEvent;
+  const { title: errMsg } = openEventErrorMessage;
 
-  const [title, onChangeTitle] = useState<string>('');
-
-  useEffect(() => {
-    if (title === '') {
-      setOpenEvent({
-        ...openEvent,
-        title: null,
-      });
-      return;
-    }
-
-    if (!openEventErrorMessage.title) {
-      setOpenEventErrorMessage({ ...openEventErrorMessage, title: null });
-    }
-
-    setOpenEvent({ ...openEvent, title });
-  }, [title]);
+  const handleChangeText = (value: string) => {
+    setOpenEvent({ ...openEvent, title: value });
+    setOpenEventErrorMessage({
+      ...openEventErrorMessage,
+      title: null,
+    });
+  };
 
   return (
     <View>
       <OpenEvent.Label content="이벤트 제목" />
       <OpenEvent.Input
-        value={title}
-        onChangeText={onChangeTitle}
+        value={title ?? ''}
+        onChangeText={handleChangeText}
         placeholder="제목"
         status={
           openEventErrorMessage.title == null
             ? StatusType.default
             : StatusType.error
         }
-        helpText={openEventErrorMessage.title ?? undefined}
+        helpText={errMsg ?? undefined}
       />
     </View>
   );
