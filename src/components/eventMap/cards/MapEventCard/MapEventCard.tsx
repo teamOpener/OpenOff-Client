@@ -1,5 +1,4 @@
 import Text from 'components/common/Text/Text';
-import { memo } from 'react';
 import { Dimensions, Image, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { MapEvent } from 'types/event';
@@ -54,4 +53,4 @@ const MapEventCard = ({ event }: Props) => {
   );
 };
 
-export default memo(MapEventCard);
+export default MapEventCard;

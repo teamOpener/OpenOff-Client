@@ -66,9 +66,8 @@ export const getEventMapInstance = async (
 ): Promise<ApiResponse<SearchMapEventInfoResponseDto[]>> => {
   const response = await fetcher.get(`/event-instance/search`, {
     params,
-    paramsSerializer: (queryParams) => {
-      return Qs.stringify(queryParams, { skipNulls: true });
-    },
+    paramsSerializer: (queryParams) =>
+      Qs.stringify(queryParams, { skipNulls: true }),
   });
   return response.data;
 };
