@@ -80,6 +80,7 @@ const MapBottomSheet = ({
             <BottomSheetFlatList
               style={mapBottomSheetStyles.bottomSheetContainer}
               data={eventList}
+              showsVerticalScrollIndicator={false}
               ListFooterComponent={
                 isLoading ? (
                   <>
