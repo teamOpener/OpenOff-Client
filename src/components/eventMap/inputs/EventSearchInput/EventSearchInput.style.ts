@@ -30,6 +30,7 @@ const eventSearchInput = StyleSheet.create({
     paddingVertical: 0,
   },
   searchButton: {
+    width: 21,
     zIndex: 16,
   },
   calendarButton: {

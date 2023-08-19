@@ -40,7 +40,7 @@ const EventSearchInput = ({ handleSearch }: Props) => {
             onPress={handleResetPress}
             style={eventSearchInput.searchButton}
           >
-            <Icon name="IconExit" size={21} fill="background" />
+            <Icon name="IconExit" size={15} fill="background" />
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
@@ -53,7 +53,10 @@ const EventSearchInput = ({ handleSearch }: Props) => {
 
         <TextInput
           value={searchValue}
-          onChangeText={(value) => setSearchValue(value)}
+          onChangeText={(value) => {
+            setSearchValue(value);
+            if (isSearched) setIsSearched(false);
+          }}
           style={eventSearchInput.searchInput}
           placeholder="지역, 이벤트 이름, 주최자 검색"
           placeholderTextColor={colors.grey}
