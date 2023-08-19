@@ -55,6 +55,7 @@ const BookmarkCardList = ({
       ) : (
         <FlatList
           numColumns={1}
+          style={bookmarkCardListStyles.flatListcontainer}
           data={flatEventRowList}
           renderItem={(event) => (
             <EventRowCard
