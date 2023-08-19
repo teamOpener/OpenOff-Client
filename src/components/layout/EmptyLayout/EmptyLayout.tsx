@@ -9,7 +9,7 @@ interface Props {
 const EmptyLayout = ({ helpText }: Props) => {
   return (
     <View style={emptyLayoutStyles.container}>
-      <Text>{helpText}</Text>
+      <Text variant="body2">{helpText}</Text>
     </View>
   );
 };

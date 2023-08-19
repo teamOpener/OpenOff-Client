@@ -192,6 +192,20 @@ const HostLedgerScreen = () => {
             hostLedgerScreenStyles.searchContainerGap,
           ]}
         >
+          <TouchableOpacity
+            style={hostLedgerScreenStyles.sortBtn}
+            onPress={presentModal}
+          >
+            <Text style={hostLedgerScreenStyles.sortBtnText}>
+              {selectedSortType === SortType.DATE ? '신청순' : '이름순'}
+            </Text>
+            <Icon
+              name={openBottomSheet ? 'IconArrowUp' : 'IconArrowDown'}
+              fill="white"
+              size={15}
+            />
+          </TouchableOpacity>
+
           <SpaceLayout
             direction="row"
             size={8}
@@ -218,20 +232,6 @@ const HostLedgerScreen = () => {
 
             <Icon name="IconSearch" fill="white" onPress={handleSearch} />
           </SpaceLayout>
-
-          <TouchableOpacity
-            style={hostLedgerScreenStyles.sortBtn}
-            onPress={presentModal}
-          >
-            <Text style={hostLedgerScreenStyles.sortBtnText}>
-              {selectedSortType === SortType.DATE ? '신청순' : '이름순'}
-            </Text>
-            <Icon
-              name={openBottomSheet ? 'IconArrowUp' : 'IconArrowDown'}
-              fill="white"
-              size={15}
-            />
-          </TouchableOpacity>
         </View>
       </SpaceLayout>
 
