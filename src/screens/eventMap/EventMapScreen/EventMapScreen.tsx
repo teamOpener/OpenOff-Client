@@ -11,6 +11,7 @@ import CurrentFieldFindButton from 'components/eventMap/buttons/CurrentFieldFind
 import MyCoordinateButton from 'components/eventMap/buttons/MyCoordinateButton/MyCoordinateButton';
 import MapFieldButtonGroup from 'components/eventMap/groups/MapFieldButtonGroup/MapFieldButtonGroup';
 import EventSearchInput from 'components/eventMap/inputs/EventSearchInput/EventSearchInput';
+import CurrentMarker from 'components/eventMap/maps/CurrentMarker/CurrentMarker';
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
@@ -22,7 +23,7 @@ import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
 import { useEventMapInstance } from 'hooks/queries/event';
 import { useCallback, useRef, useState } from 'react';
 import { BackHandler, Dimensions, Pressable, View } from 'react-native';
-import NaverMapView, { Marker } from 'react-native-nmap';
+import NaverMapView from 'react-native-nmap';
 import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
 import { Field } from 'types/apps/group';
@@ -89,7 +90,9 @@ const EventMapScreen = () => {
   );
 
   const firstMapLoadChecker =
-    currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0;
+    currentCoordinate.latitude === 0 &&
+    currentCoordinate.longitude === 0 &&
+    isLoading;
 
   const { computedEventList } = useEventListFormatter(
     sort,
@@ -134,6 +137,7 @@ const EventMapScreen = () => {
     setFieldMapMode(() => {
       return undefined;
     });
+    selectDispatch({ type: SelectStatus.RESET_SELECT });
     navigation.setOptions({
       tabBarStyle: {
         ...defaultTabBarStyles,
@@ -201,8 +205,15 @@ const EventMapScreen = () => {
         : 100,
     snapBottom: fieldMapMode
       ? Dimensions.get('window').height - 90
-      : (2 / 3) * Dimensions.get('window').height,
+      : (2 / 3) * Dimensions.get('window').height - 125,
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      if (currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0)
+        queryClient.removeQueries(queryKeys.eventKeys.mapList);
+    }, []),
+  );
 
   useFocusEffect(
     useCallback(() => {
@@ -248,18 +259,13 @@ const EventMapScreen = () => {
             center={{ ...firstPlaceCoordinate, zoom: 17 }}
             onCameraChange={handleCameraEvent}
             minZoomLevel={7}
+            compass={false}
             onMapClick={() => {
               setClickedMarker(undefined);
               eventIdParam.current = undefined;
             }}
           >
-            <Marker
-              image={require('../../../assets/images/currentCoordinate.png')}
-              width={50}
-              height={50}
-              coordinate={currentCoordinate}
-              pinColor={colors.black}
-            />
+            <CurrentMarker currentCoordinate={currentCoordinate} />
             {eventList?.map((event) => (
               <EventMarker
                 key={event.id}

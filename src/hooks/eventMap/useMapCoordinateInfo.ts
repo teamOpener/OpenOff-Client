@@ -43,10 +43,10 @@ const useMapCoordinateInfo = () => {
           longitude: position.coords.longitude,
         });
       },
-      (error) => {
+      () => {
         openDialog({
           type: 'validate',
-          text: error.message,
+          text: '오픈오프에 위치정보를 허용해주세요!',
         });
       },
       {
@@ -74,8 +74,11 @@ const useMapCoordinateInfo = () => {
           longitude: position.coords.longitude,
         });
       },
-      (error) => {
-        console.log(error.message);
+      () => {
+        openDialog({
+          type: 'validate',
+          text: '오픈오프에 위치정보를 허용해주세요!',
+        });
       },
       watchOptions,
     );
@@ -112,6 +115,10 @@ const useMapCoordinateInfo = () => {
       }
       return () => {
         Geolocation.clearWatch(watchValue);
+        setCurrentCoordinate({
+          latitude: 0,
+          longitude: 0,
+        });
       };
     }, []),
   );
