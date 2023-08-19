@@ -13,7 +13,7 @@ const dateSelectorStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 5,
-    paddingVertical: 16,
+    paddingVertical: 14,
     paddingLeft: 5,
   },
   dateText: {
@@ -30,7 +30,7 @@ const dateSelectorStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.main,
     borderRadius: 5,
-    paddingVertical: 6,
+    paddingVertical: 2,
     paddingHorizontal: 18,
   },
   dateList: {
