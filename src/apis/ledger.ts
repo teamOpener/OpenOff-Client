@@ -7,6 +7,15 @@ import { EventApplicantInfoResponseDto } from 'models/ledger/response/EventAppli
 import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
 import { EventAllApplicantPermitRequestDto } from 'models/ledger/request/EventAllApplicantPermitRequestDto';
 import { ApplyEventRequestDto } from 'models/ledger/request/ApplyEventRequestDto';
+import { EventApplicationDenyRequestDto } from 'models/ledger/request/EventApplicationDenyRequestDto';
+import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
+import { ApplicantApplyDetailRequestDto } from 'models/ledger/request/ApplicantApplyDetailRequestDto';
+import { ApplicationInfoRequestDto } from 'models/ledger/request/ApplicationInfoRequestDto';
+import { ApplicationInfoResponseDto } from 'models/ledger/response/ApplicationInfoResponseDto';
+import { MyTicketInfoRequestDto } from 'models/ledger/request/MyTicketInfoRequestDto';
+import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
+import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
+import { QRCheckRequestDto } from 'models/ledger/request/QRCheckRequestDto';
 
 export const getLedgerStatus = async (
   params: EventLadgerTotalStatusRequestDto,
@@ -53,5 +62,42 @@ export const applyEvent = async (
   data: ApplyEventRequestDto,
 ): Promise<ApiResponse> => {
   const response = await fetcher.post(`/ladger/apply`, data);
+  return response.data;
+};
+
+export const denyApplicationUser = async (
+  data: EventApplicationDenyRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.delete(`/ladger/reject/${data.ledgerId}`);
+  return response.data;
+};
+
+export const getApplicantQnA = async (
+  data: ApplicantApplyDetailRequestDto,
+): Promise<ApiResponse<ApplicantApplyDetailResponseDto>> => {
+  const response = await fetcher.get(
+    `/ladger/application/info/${data.ledgerId}`,
+  );
+  return response.data;
+};
+
+export const getApplicationInfo = async (
+  params: ApplicationInfoRequestDto,
+): Promise<InfiniteScrollApiResponse<ApplicationInfoResponseDto>> => {
+  const response = await fetcher.get(`/ladger/tickets`, { params });
+  return response.data;
+};
+
+export const getEventTickets = async (
+  params: MyTicketInfoRequestDto,
+): Promise<ApiResponse<MyTicketInfoResponseDto[]>> => {
+  const response = await fetcher.get(`/ladger/tickets/${params.eventInfoId}`);
+  return response.data;
+};
+
+export const checkQR = async (
+  data: QRCheckRequestDto,
+): Promise<ApiResponse<QRCheckResponseDto>> => {
+  const response = await fetcher.patch(`/ladger/qr/check`, data);
   return response.data;
 };

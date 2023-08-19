@@ -11,8 +11,6 @@ export interface MyTicketInfoResponseDto {
   ticketType: TicketType;
   eventDate: string;
   isAccepted: boolean;
-  qrImageUrl: string;
-  ledger: number;
+  isJoined: boolean;
+  qrImageUrl: string; // null이면 승인 전
 }
-
-// get ladger/tickets/eventInfoId -> MyTicketInfoResponseDto[]

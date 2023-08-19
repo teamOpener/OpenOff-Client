@@ -10,6 +10,7 @@ import { HostEventInfoRequestDto } from 'models/ledger/request/HostEventInfoRequ
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
 import Qs from 'qs';
 import { ApiResponse, InfiniteScrollApiResponse } from 'types/ApiResponse';
+import { EventSuspensionRequestDto } from 'models/event/request/EventSuspensionRequestDto';
 
 export const getHostEventLists = async (
   params: HostEventInfoRequestDto,
@@ -69,5 +70,12 @@ export const getEventMapInstance = async (
     paramsSerializer: (queryParams) =>
       Qs.stringify(queryParams, { skipNulls: true }),
   });
+  return response.data;
+};
+
+export const suspensionEvent = async (data: EventSuspensionRequestDto) => {
+  const response = await fetcher.patch(
+    `/event-instance/suspension?eventInfoId=${data.eventInfoId}`,
+  );
   return response.data;
 };
