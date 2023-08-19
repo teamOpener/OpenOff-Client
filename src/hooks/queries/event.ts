@@ -120,7 +120,6 @@ export const useEventMapInstance = (params: EventSearchRequestDto) => {
     () => getEventMapInstance(params),
     {
       select: (data) => data.data,
-      refetchInterval: 1000 * 5,
       suspense: false,
     },
   );

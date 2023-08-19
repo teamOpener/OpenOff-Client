@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import useDialog from 'hooks/app/useDialog';
+import { useCallback, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
 import NaverMapView from 'react-native-nmap';
@@ -7,6 +9,7 @@ import { requestSinglePermission } from 'services/permission';
 import { Coordinate } from 'types/event';
 
 const useMapCoordinateInfo = () => {
+  const { openDialog } = useDialog();
   const naverMapRef = useRef<NaverMapView>(null);
   // 사용자의 스크린 위치정보
   const screenCoordinate = useRef<Coordinate>({
@@ -35,9 +38,16 @@ const useMapCoordinateInfo = () => {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
+        setCurrentCoordinate({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
       },
       (error) => {
-        console.warn('Location error:', error.message);
+        openDialog({
+          type: 'validate',
+          text: error.message,
+        });
       },
       {
         enableHighAccuracy: true,
@@ -65,31 +75,46 @@ const useMapCoordinateInfo = () => {
         });
       },
       (error) => {
-        console.log(error);
+        console.log(error.message);
       },
       watchOptions,
     );
   };
-  useEffect(() => {
-    if (Platform.OS === 'ios')
-      requestSinglePermission(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(() => {
-        getFirstCoordinate();
-        setGPSCoordinate();
-      });
-    if (Platform.OS === 'android') {
-      requestSinglePermission(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
-        .then(() => {
-          requestSinglePermission(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION);
-        })
-        .then(() => {
-          getFirstCoordinate();
-          setGPSCoordinate();
-        });
-    }
-    return () => {
-      Geolocation.clearWatch(setGPSCoordinate());
-    };
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      let watchValue = 0;
+      if (Platform.OS === 'ios')
+        requestSinglePermission(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(
+          () => {
+            if (
+              currentCoordinate.latitude === 0 &&
+              currentCoordinate.longitude === 0
+            ) {
+              getFirstCoordinate();
+              watchValue = setGPSCoordinate();
+            }
+          },
+        );
+      if (Platform.OS === 'android') {
+        requestSinglePermission(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+          .then(() => {
+            requestSinglePermission(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION);
+          })
+          .then(() => {
+            if (
+              currentCoordinate.latitude === 0 &&
+              currentCoordinate.longitude === 0
+            ) {
+              getFirstCoordinate();
+              watchValue = setGPSCoordinate();
+            }
+          });
+      }
+      return () => {
+        Geolocation.clearWatch(watchValue);
+      };
+    }, []),
+  );
   return {
     screenCoordinate,
     firstPlaceCoordinate,

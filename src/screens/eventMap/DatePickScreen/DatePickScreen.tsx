@@ -1,16 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useQueryClient } from '@tanstack/react-query';
 import Text from 'components/common/Text/Text';
 import CalendarButton from 'components/eventMap/buttons/CalendarButton/CalendarButton';
 import CalendarCard from 'components/eventMap/cards/CalendarCard/CalendarCard';
+import queryKeys from 'constants/queryKeys';
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { MarkedDates } from 'react-native-calendars/src/types';
 import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
 import { dateFormatter } from 'utils/date';
-import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
 import datePickScreenStyles from './DatePickScreen.style';
 
 type ParamList = {
@@ -33,6 +33,8 @@ const DatePickScreen = () => {
       startDay: '',
       endDay: '',
     });
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
+    navigation.goBack();
   };
   const handleApply = () => {
     setStartEndDate({

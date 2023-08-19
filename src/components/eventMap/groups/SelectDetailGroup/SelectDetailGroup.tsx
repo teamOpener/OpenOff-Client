@@ -1,7 +1,9 @@
+import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SelectControlButton from 'components/eventMap/buttons/SelectControlButton/SelectControlButton';
 import SelectDetailBox from 'components/eventMap/selectboxes/SelectDetailBox/SelectDetailBox';
+import queryKeys from 'constants/queryKeys';
 import { SelectStatus } from 'constants/selectBox';
 import {
   applicationAbleOptions,
@@ -12,8 +14,6 @@ import { Dispatch } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { Action, Option, SelectBox } from 'types/apps/selectbox';
-import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
 import selectDetailGroupStyles from './SelectDetailGroup.style';
 
 interface Props {
@@ -27,13 +27,18 @@ const SelectDetailGroup = ({
   selectDispatch,
   closeDetailGroup,
 }: Props) => {
+  const TIME_DELAY = 500;
   const queryClient = useQueryClient();
   const initializeSelect = () => {
     selectDispatch({ type: SelectStatus.RESET_SELECT });
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
     closeDetailGroup();
   };
   const applySelect = () => {
-    closeDetailGroup();
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
+    setTimeout(() => {
+      closeDetailGroup();
+    }, TIME_DELAY);
   };
   return (
     <View style={selectDetailGroupStyles.container}>
@@ -55,7 +60,6 @@ const SelectDetailGroup = ({
             type: SelectStatus.SET_PAY_OPTION,
             option,
           });
-          queryClient.removeQueries(queryKeys.eventKeys.mapList);
         }}
       />
       <View style={selectDetailGroupStyles.boxLine} />
@@ -68,7 +72,6 @@ const SelectDetailGroup = ({
             type: SelectStatus.SET_PARTICIPANT_OPTION,
             option,
           });
-          queryClient.removeQueries(queryKeys.eventKeys.mapList);
         }}
       />
       <View style={selectDetailGroupStyles.boxLine} />
@@ -81,7 +84,6 @@ const SelectDetailGroup = ({
             type: SelectStatus.SET_APPLICATION_ABLE_OPTION,
             option,
           });
-          queryClient.removeQueries(queryKeys.eventKeys.mapList);
         }}
       />
       <View style={selectDetailGroupStyles.controlContainer}>
