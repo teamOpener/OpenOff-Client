@@ -1,4 +1,5 @@
 import Text from 'components/common/Text/Text';
+import { memo } from 'react';
 import { Dimensions, Image, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { MapEvent } from 'types/event';
@@ -6,9 +7,10 @@ import mapEventCardStyles from './MapEventCard.style';
 
 interface Props {
   event: MapEvent;
+  distance: number;
 }
 
-const MapEventCard = ({ event }: Props) => {
+const MapEventCard = ({ event, distance }: Props) => {
   return (
     <View style={mapEventCardStyles.container}>
       <View style={mapEventCardStyles.textContainer}>
@@ -25,7 +27,7 @@ const MapEventCard = ({ event }: Props) => {
           color="grey"
           style={mapEventCardStyles.textMargin}
         >
-          {event.distance}km
+          {distance}km
         </Text>
         <Text variant="body2" color="white">
           {`${event.streetLoadAddress} ${event.detailAddress}`}
@@ -53,4 +55,4 @@ const MapEventCard = ({ event }: Props) => {
   );
 };
 
-export default MapEventCard;
+export default memo(MapEventCard);
