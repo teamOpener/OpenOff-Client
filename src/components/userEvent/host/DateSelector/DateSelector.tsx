@@ -12,7 +12,7 @@ interface Props {
   eventIndexInfoList: EventIndexInfo[];
   selectedEventIndexInfo: EventIndexInfo;
   setSelectedEventIndexInfo: React.Dispatch<
-    React.SetStateAction<EventIndexInfo | undefined>
+    React.SetStateAction<EventIndexInfo>
   >;
 }
 
