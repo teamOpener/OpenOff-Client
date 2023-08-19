@@ -30,15 +30,15 @@ const commonDialogStyles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    columnGap: 2,
   },
   subTextContainer: {
     paddingTop: 20,
   },
   contentsText: {
-    fontFamily: fonts.semibold,
+    fontFamily: fonts.regular,
     fontSize: 13,
     lineHeight: 13 * 1.4,
+    textAlign: 'center',
   } as TextStyle,
   buttonContainer: {
     paddingVertical: 9,

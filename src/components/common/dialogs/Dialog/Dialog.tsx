@@ -9,6 +9,8 @@ import dialogStyles from './Dialog.style';
 const Dialog = () => {
   const { dialog, closeDialog } = useDialog();
 
+  const contentsWords = dialog.contents.split(/ |\n/);
+
   return (
     <Modal visible={dialog.isShow} style={dialogStyles.modalView}>
       <Pressable
@@ -48,11 +50,15 @@ const Dialog = () => {
                   dialogStyles.subTextContainer,
                 ]}
               >
-                {dialog.contents.split(' ').map((word: string, _id) => (
-                  <Text key={_id} style={dialogStyles.contentsText}>
-                    {`${word} `}
-                  </Text>
-                ))}
+                {contentsWords.map((word: string, id) =>
+                  word.trim() === '' ? (
+                    <View style={{ width: '100%', height: 13 }} />
+                  ) : (
+                    <Text key={id} style={dialogStyles.contentsText}>
+                      {`${word} `}
+                    </Text>
+                  ),
+                )}
               </View>
             )}
           </View>
