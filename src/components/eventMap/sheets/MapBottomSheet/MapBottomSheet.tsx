@@ -7,6 +7,7 @@ import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
 import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
 import SelectBoxGroup from 'components/eventMap/groups/SelectBoxGroup/SelectBoxGroup';
 import SelectDetailGroup from 'components/eventMap/groups/SelectDetailGroup/SelectDetailGroup';
+import MapEventCardSkeleton from 'components/suspense/skeleton/MapEventCardSkeleton/MapEventCardSkeleton';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
@@ -20,6 +21,7 @@ interface SortInfo {
 }
 
 interface Props {
+  isLoading: boolean;
   snapTop: number;
   snapBottom: number;
   sort: SortInfo;
@@ -31,6 +33,7 @@ interface Props {
 }
 
 const MapBottomSheet = ({
+  isLoading,
   snapTop,
   snapBottom,
   sort,
@@ -77,6 +80,15 @@ const MapBottomSheet = ({
             <BottomSheetFlatList
               style={mapBottomSheetStyles.bottomSheetContainer}
               data={eventList}
+              ListFooterComponent={
+                isLoading ? (
+                  <>
+                    <MapEventCardSkeleton />
+                    <MapEventCardSkeleton />
+                    <MapEventCardSkeleton />
+                  </>
+                ) : null
+              }
               renderItem={(item) => (
                 <MapEventCard key={item.item.id} event={item.item} />
               )}
