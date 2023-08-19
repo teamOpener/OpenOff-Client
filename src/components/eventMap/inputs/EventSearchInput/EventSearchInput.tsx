@@ -14,21 +14,45 @@ interface Props {
 const EventSearchInput = ({ handleSearch }: Props) => {
   const { stackNavigation } = useNavigator();
   const { startEndDate } = useEventMapStore();
+  const [isSearched, setIsSearched] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
+
   const handleCalendar = () => {
     stackNavigation.navigate(StackMenu.DatePick);
   };
+
+  const handleSearchPress = () => {
+    handleSearch(searchValue);
+    setIsSearched(true);
+  };
+
+  const handleResetPress = () => {
+    handleSearch('');
+    setSearchValue('');
+    setIsSearched(false);
+  };
+
   return (
     <View style={eventSearchInput.absoluteContainer}>
       <View style={eventSearchInput.container}>
-        <TouchableOpacity
-          onPress={() => handleSearch(searchValue)}
-          style={eventSearchInput.searchButton}
-        >
-          <Icon name="IconSearch" size={21} fill="background" />
-        </TouchableOpacity>
+        {isSearched ? (
+          <TouchableOpacity
+            onPress={handleResetPress}
+            style={eventSearchInput.searchButton}
+          >
+            <Icon name="IconExit" size={21} fill="background" />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={handleSearchPress}
+            style={eventSearchInput.searchButton}
+          >
+            <Icon name="IconSearch" size={21} fill="background" />
+          </TouchableOpacity>
+        )}
 
         <TextInput
+          value={searchValue}
           onChangeText={(value) => setSearchValue(value)}
           style={eventSearchInput.searchInput}
           placeholder="지역, 이벤트 이름, 주최자 검색"
