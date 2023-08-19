@@ -16,7 +16,7 @@ const ActionButton = ({ label, disabled = false, style, ...rest }: Props) => {
         style,
         disabled && actionButtonStyles.container,
       ]}
-      disabled
+      disabled={disabled}
       {...rest}
     >
       <Text style={actionButtonStyles.labelText}>{label}</Text>
