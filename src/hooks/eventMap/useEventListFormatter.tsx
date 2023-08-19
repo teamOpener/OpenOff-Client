@@ -39,7 +39,6 @@ const useEventListFormatter = (
   };
 
   const makeDistance = (eventDistanceList?: MapEvent[]) => {
-    console.log(currentCoordinate);
     if (!eventDistanceList) return [];
     return eventDistanceList.map((eventElement) => {
       // eslint-disable-next-line no-param-reassign

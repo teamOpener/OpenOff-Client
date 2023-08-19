@@ -245,8 +245,9 @@ const EventMapScreen = () => {
             ref={naverMapRef}
             showsMyLocationButton={false}
             style={eventMapScreenStyles.map}
-            center={{ ...firstPlaceCoordinate, zoom: 16 }}
+            center={{ ...firstPlaceCoordinate, zoom: 17 }}
             onCameraChange={handleCameraEvent}
+            minZoomLevel={7}
             onMapClick={() => {
               setClickedMarker(undefined);
               eventIdParam.current = undefined;
