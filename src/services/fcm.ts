@@ -1,12 +1,23 @@
+import notifee, { AndroidImportance } from '@notifee/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
-import { PERMISSIONS } from 'react-native-permissions';
+import { permitAlert } from 'apis/user';
 import { Platform } from 'react-native';
+import { PERMISSIONS } from 'react-native-permissions';
+import { useAuthorizeStore } from 'stores/Authorize';
+import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
 import { requestSinglePermission } from './permission';
 
+const { setFcmToken } = useAuthorizeStore.getState();
+
 export const getToken = async () => {
-  const fcmToken = await messaging().getToken();
-  // TODO 서버로 token 전송
-  console.log(fcmToken);
+  const value = await AsyncStorage.getItem('authorize');
+  const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
+  if (!authorizeStore.state.fcmToken) {
+    const fcmDeviceToken = await messaging().getToken();
+    await permitAlert({ fcmToken: fcmDeviceToken });
+    setFcmToken(fcmDeviceToken);
+  }
 };
 
 // foreground alarm
@@ -26,8 +37,33 @@ export const requestAlarmPermission = async () => {
   }
 };
 
+const handleDisplayNotification = async ({
+  title = '',
+  body = '',
+}: {
+  title?: string;
+  body?: string;
+}) => {
+  const channelId = await notifee.createChannel({
+    id: 'default',
+    name: 'OpenOffChannel',
+    importance: AndroidImportance.HIGH,
+  });
+
+  await notifee.displayNotification({
+    title,
+    body,
+    android: {
+      channelId,
+      smallIcon: 'ic_launcher',
+    },
+  });
+};
+
 export const foregroundListener = () => {
   messaging().onMessage(async (message) => {
-    console.log('foreground message', message);
+    const title = message?.notification?.title;
+    const body = message?.notification?.body;
+    handleDisplayNotification({ title, body });
   });
 };
