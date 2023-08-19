@@ -1,7 +1,9 @@
 import { Pressable, TouchableOpacity, View } from 'react-native';
-import { DialogEnumType } from 'types/apps/dialog';
+import { DialogEnumType, DialogType } from 'types/apps/dialog';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import useDialog from 'hooks/app/useDialog';
 import { Modal } from 'react-native-paper';
+import * as Icons from 'assets/icons';
 import Icon from '../../Icon/Icon';
 import Text from '../../Text/Text';
 import dialogStyles from './Dialog.style';
@@ -10,6 +12,23 @@ const Dialog = () => {
   const { dialog, closeDialog } = useDialog();
 
   const contentsWords = dialog.contents.split(/ |\n/);
+
+  const handleConfirm = () => {
+    dialog.apply();
+    closeDialog(DialogEnumType.Success);
+  };
+
+  const iconType = (type: DialogType): keyof typeof Icons => {
+    switch (type) {
+      case DialogEnumType.Validate:
+        return 'IconExit';
+      case DialogEnumType.Warning:
+        return 'IconWarning';
+      case DialogEnumType.Success:
+      default:
+        return 'IconCheck';
+    }
+  };
 
   return (
     <Modal visible={dialog.isShow} style={dialogStyles.modalView}>
@@ -25,11 +44,7 @@ const Dialog = () => {
           {dialog.type !== 'confirm' && (
             <View style={dialogStyles.typeShow}>
               <View style={dialogStyles.iconContainer}>
-                {dialog.type === 'success' ? (
-                  <Icon name="IconCheck" fill="white" size={30} />
-                ) : (
-                  <Icon name="IconExit" fill="white" size={25} />
-                )}
+                <Icon name={iconType(dialog.type)} fill="white" size={25} />
               </View>
             </View>
           )}
@@ -63,12 +78,23 @@ const Dialog = () => {
             )}
           </View>
 
-          <TouchableOpacity
-            style={dialogStyles.buttonContainer}
-            onPress={() => closeDialog(DialogEnumType.Success)}
-          >
-            <Text style={dialogStyles.text}>{dialog.closeText}</Text>
-          </TouchableOpacity>
+          <SpaceLayout direction="row" size={10}>
+            {dialog.applyText !== '적용' && (
+              <TouchableOpacity
+                style={dialogStyles.buttonContainer}
+                onPress={handleConfirm}
+              >
+                <Text style={dialogStyles.text}>{dialog.applyText}</Text>
+              </TouchableOpacity>
+            )}
+
+            <TouchableOpacity
+              style={dialogStyles.buttonContainer}
+              onPress={() => closeDialog(DialogEnumType.Success)}
+            >
+              <Text style={dialogStyles.text}>{dialog.closeText}</Text>
+            </TouchableOpacity>
+          </SpaceLayout>
         </View>
       </Pressable>
     </Modal>

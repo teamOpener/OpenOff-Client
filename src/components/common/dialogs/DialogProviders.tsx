@@ -31,8 +31,10 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
         contents: '',
         callback: () => {},
         closeText: '닫기',
+        apply: () => {},
+        applyText: '',
       });
-    }, 100);
+    }, 200);
   };
 
   const resetConfirmDialog = () => {
@@ -62,6 +64,7 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
   }: OpenDialog) => {
     switch (type) {
       case DialogEnumType.Validate:
+      case DialogEnumType.Warning:
       case DialogEnumType.Success:
         setDialog({
           text,
@@ -70,6 +73,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
           callback,
           closeText,
           isShow: true,
+          apply,
+          applyText,
         });
         break;
       case DialogEnumType.Confirm:
