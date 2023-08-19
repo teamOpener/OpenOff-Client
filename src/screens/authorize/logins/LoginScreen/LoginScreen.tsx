@@ -96,7 +96,7 @@ const LoginScreen = () => {
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
     const socialLoginResult = await socialLogin({
-      socialType: 'kakao',
+      socialType: 'apple',
       token: appleAuthRequestResponse.identityToken ?? '',
     });
     divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
