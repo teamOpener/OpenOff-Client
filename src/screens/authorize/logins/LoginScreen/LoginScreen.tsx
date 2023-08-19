@@ -1,3 +1,4 @@
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { clearToken } from 'apis';
@@ -89,6 +90,18 @@ const LoginScreen = () => {
     divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
   };
 
+  const handleAppleLogin = async () => {
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+    const socialLoginResult = await socialLogin({
+      socialType: 'kakao',
+      token: appleAuthRequestResponse.identityToken ?? '',
+    });
+    divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
+  };
+
   const handleCommonLogin = async () => {
     if (!isActive) return;
     const normalLoginResult = await normalLogin({
@@ -142,9 +155,7 @@ const LoginScreen = () => {
             googleLogin={() => {
               return false;
             }}
-            appleLogin={() => {
-              return false;
-            }}
+            appleLogin={handleAppleLogin}
           />
 
           <JoinButton />
