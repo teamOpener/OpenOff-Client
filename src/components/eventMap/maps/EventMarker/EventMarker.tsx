@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Marker } from 'react-native-nmap';
 import { colors } from 'styles/theme';
 import { Coordinate, MapEvent } from 'types/event';
@@ -24,6 +25,8 @@ const EventMarker = ({
   return (
     <Marker
       key={event.id}
+      zIndex={10}
+      animated
       image={require('../../../../assets/images/eventCoordinate.png')}
       width={event.id === clickedMarker ? 80 : 50}
       height={event.id === clickedMarker ? 80 : 50}
@@ -36,4 +39,4 @@ const EventMarker = ({
   );
 };
 
-export default EventMarker;
+export default memo(EventMarker);
