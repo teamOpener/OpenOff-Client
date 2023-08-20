@@ -75,7 +75,7 @@ const UserEventScreen = () => {
   };
 
   const handlePressHostEvent = (event: HostEventInfoResponseDto) => {
-    if (event.isApproved) {
+    if (!event.isApproved) {
       openDialog({
         type: 'validate',
         text: '아직 승인되지 않은 이벤트입니다.',
