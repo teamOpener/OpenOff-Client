@@ -21,7 +21,6 @@ const useTicketStatus = () => {
   const getEventTicketStatusHelpText = (
     status: UserTicketStatus,
   ): string | null => {
-    console.log(status);
     switch (status) {
       case UserTicketStatus.ENDED:
         return MENT_PARTICIPANT.MAIN.ENDED_INFO;
