@@ -18,16 +18,17 @@ import {
   Text,
   TextInput,
 } from 'react-native';
+import CodePush, { CodePushOptions } from 'react-native-code-push';
 import ErrorBoundary from 'react-native-error-boundary';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { MyTheme, colors } from 'styles/theme';
 
 // dayjs setting
+import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useAuthorizeStore } from 'stores/Authorize';
-import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 
 dayjs.locale('ko');
 
@@ -121,4 +122,14 @@ interface TextInputWithDefaultProps extends TextInput {
 ).defaultProps!.allowFontScaling = false;
 (TextInput as unknown as TextInputWithDefaultProps).defaultProps!.padding = 0;
 
-export default App;
+const codePushOptions: CodePushOptions = {
+  checkFrequency: CodePush.CheckFrequency.MANUAL,
+  // 언제 업데이트를 체크하고 반영할지를 정한다.
+  // ON_APP_RESUME은 Background에서 Foreground로 오는 것을 의미
+  // ON_APP_START은 앱이 실행되는(켜지는) 순간을 의미
+  installMode: CodePush.InstallMode.IMMEDIATE,
+  mandatoryInstallMode: CodePush.InstallMode.IMMEDIATE,
+  // 업데이트를 어떻게 설치할 것인지 (IMMEDIATE는 강제설치를 의미)
+};
+
+export default CodePush(codePushOptions)(App);
