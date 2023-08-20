@@ -38,9 +38,8 @@ const TicketCard = ({ ticketInfo, style, ...rest }: Props) => {
   };
 
   const handlePressDetail = (eventInfoId: number) => {
-    // TODO eventInfoId 가지고 이동. stack 적절할 때 비워주기
     stackNavigation.navigate('EventDetail', {
-      id: 1,
+      id: eventInfoId,
     });
   };
 

@@ -15,15 +15,14 @@ const userQRScreenStyles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: colors.main,
-    paddingVertical: 10,
+    borderColor: colors.error,
+    paddingVertical: 8,
     paddingHorizontal: 14,
   },
   topInfoText: {
     fontFamily: fonts.semibold,
     fontSize: 15,
     lineHeight: 15 * 1.4,
-    color: colors.main,
   } as TextStyle,
   cancelBtn: {
     borderBottomWidth: 1,
