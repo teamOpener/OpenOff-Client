@@ -125,6 +125,7 @@ const UserEventScreen = () => {
         ) : (
           <View style={userEventScreenStyles.scrollContainer}>
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={flatUserTicketList}
               contentContainerStyle={userEventScreenStyles.flatListContentStyle}
               ItemSeparatorComponent={ItemSeparatorComponent}
@@ -152,6 +153,7 @@ const UserEventScreen = () => {
         ) : (
           <View style={userEventScreenStyles.scrollContainer}>
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={flatHostEventList}
               contentContainerStyle={userEventScreenStyles.flatListContentStyle}
               ItemSeparatorComponent={ItemSeparatorComponent}
