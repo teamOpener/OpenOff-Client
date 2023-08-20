@@ -5,6 +5,7 @@ import { getHostEventLists } from 'apis/eventInstance';
 import { FieldCode } from 'constants/code';
 import {
   applyEvent,
+  cancelApplicationEvent,
   cancelPermittedApplicant,
   checkQR,
   denyApplicationUser,
@@ -24,6 +25,7 @@ import { EventApplicationDenyRequestDto } from 'models/ledger/request/EventAppli
 import { ApplicantApplyDetailRequestDto } from 'models/ledger/request/ApplicantApplyDetailRequestDto';
 import { MyTicketInfoRequestDto } from 'models/ledger/request/MyTicketInfoRequestDto';
 import { QRCheckRequestDto } from 'models/ledger/request/QRCheckRequestDto';
+import { ApplicationCancelRequestDto } from 'models/ledger/request/ApplicationCancelRequestDto';
 
 export const useUserTickets = ({ eventInfoId }: MyTicketInfoRequestDto) => {
   return useQuery(
@@ -201,4 +203,18 @@ export const useCheckQR = (
     onError: errorCallback,
     useErrorBoundary: false,
   });
+};
+
+export const useCancelApplicationEvent = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (data: ApplicationCancelRequestDto) => cancelApplicationEvent(data),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
+    },
+  );
 };

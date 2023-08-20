@@ -16,6 +16,7 @@ import { MyTicketInfoRequestDto } from 'models/ledger/request/MyTicketInfoReques
 import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
 import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 import { QRCheckRequestDto } from 'models/ledger/request/QRCheckRequestDto';
+import { ApplicationCancelRequestDto } from 'models/ledger/request/ApplicationCancelRequestDto';
 
 export const getLedgerStatus = async (
   params: EventLadgerTotalStatusRequestDto,
@@ -99,5 +100,14 @@ export const checkQR = async (
   data: QRCheckRequestDto,
 ): Promise<ApiResponse<QRCheckResponseDto>> => {
   const response = await fetcher.patch(`/ladger/qr/check`, data);
+  return response.data;
+};
+
+export const cancelApplicationEvent = async (
+  params: ApplicationCancelRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.delete(
+    `/ladger/own/cancel/${params.ledgerId}`,
+  );
   return response.data;
 };
