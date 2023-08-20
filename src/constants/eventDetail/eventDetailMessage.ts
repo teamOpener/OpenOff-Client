@@ -3,6 +3,7 @@ const MENT_EVENT_DETAIL = Object.freeze({
     ADDRESS: '장소',
     LOCATION: '위치보기',
     COST: '비용',
+    APPLICATION_DATE: '신청 기간',
     ADMISSION_FEES: '입장료',
     WON: '원',
     PERSONNEL: '인원',
