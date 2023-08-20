@@ -91,15 +91,30 @@ const LoginScreen = () => {
   };
 
   const handleAppleLogin = async () => {
-    const appleAuthRequestResponse = await appleAuth.performRequest({
-      requestedOperation: appleAuth.Operation.LOGIN,
-      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    });
-    const socialLoginResult = await socialLogin({
-      socialType: 'apple',
-      token: appleAuthRequestResponse.identityToken ?? '',
-    });
-    divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
+    try {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
+
+      const credentialState = await appleAuth.getCredentialStateForUser(
+        appleAuthRequestResponse.user,
+      );
+
+      if (credentialState === appleAuth.State.AUTHORIZED) {
+        const socialLoginResult = await socialLogin({
+          socialType: 'apple',
+          token: appleAuthRequestResponse.identityToken ?? '',
+        });
+        divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
+      }
+    } catch (error) {
+      if ((error as AxiosError).code === appleAuth.Error.CANCELED) {
+        console.log('canceled');
+      } else {
+        console.log('error');
+      }
+    }
   };
 
   const handleCommonLogin = async () => {
