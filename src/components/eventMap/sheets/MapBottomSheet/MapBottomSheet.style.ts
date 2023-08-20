@@ -10,6 +10,12 @@ const mapBottomSheetStyles = StyleSheet.create({
     flexDirection: 'column',
     marginBottom: 50,
   },
+  bottomEmptyScreenStyle: {
+    height: 180,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
+  },
 });
 
 export default mapBottomSheetStyles;

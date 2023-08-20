@@ -9,14 +9,10 @@ const mapEventCardStyles = StyleSheet.create({
     zIndex: 1,
   },
   titleText: {
-    maxWidth: '60%',
-    flexWrap: 'wrap',
+    maxWidth: '50%',
   },
   eventFieldContainer: {
-    flexWrap: 'wrap',
-    maxWidth: '60%',
-    gap: 10,
-    flexDirection: 'row',
+    maxWidth: '47%',
   },
   textContainer: {
     marginTop: 5,

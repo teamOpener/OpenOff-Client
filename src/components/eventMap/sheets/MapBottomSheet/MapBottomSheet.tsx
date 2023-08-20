@@ -2,6 +2,7 @@ import BottomSheet, {
   BottomSheetFlatList,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
+import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import Text from 'components/common/Text/Text';
 import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
 import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
@@ -50,6 +51,7 @@ const MapBottomSheet = ({
       return false;
     });
   };
+
   return (
     <>
       <BottomSheet
@@ -83,27 +85,36 @@ const MapBottomSheet = ({
                 </View>
               </>
             )}
-            <BottomSheetFlatList
-              style={mapBottomSheetStyles.bottomSheetContainer}
-              data={eventList}
-              showsVerticalScrollIndicator={false}
-              ListFooterComponent={
-                isLoading ? (
-                  <>
-                    <MapEventCardSkeleton />
-                    <MapEventCardSkeleton />
-                    <MapEventCardSkeleton />
-                  </>
-                ) : null
-              }
-              renderItem={(mapEventList) => (
-                <MapEventCard
-                  key={mapEventList.item.id}
-                  event={mapEventList.item}
-                  distance={mapEventList.item.distance ?? 0}
+            {eventList.length === 0 ? (
+              <View>
+                <EmptyScreen
+                  style={mapBottomSheetStyles.bottomEmptyScreenStyle}
+                  content="이벤트 검색결과가 없습니다!"
                 />
-              )}
-            />
+              </View>
+            ) : (
+              <BottomSheetFlatList
+                style={mapBottomSheetStyles.bottomSheetContainer}
+                data={eventList}
+                showsVerticalScrollIndicator={false}
+                ListFooterComponent={
+                  isLoading ? (
+                    <>
+                      <MapEventCardSkeleton />
+                      <MapEventCardSkeleton />
+                      <MapEventCardSkeleton />
+                    </>
+                  ) : null
+                }
+                renderItem={(mapEventList) => (
+                  <MapEventCard
+                    key={mapEventList.item.id}
+                    event={mapEventList.item}
+                    distance={mapEventList.item.distance ?? 0}
+                  />
+                )}
+              />
+            )}
           </>
         ) : (
           <BottomSheetScrollView
