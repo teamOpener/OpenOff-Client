@@ -1,5 +1,5 @@
 import { View, FlatList } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
 import fieldInitData from 'constants/userEvent/participant/fieldData';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
@@ -7,6 +7,7 @@ import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage
 import { useHostEventLists, useUserTicketLists } from 'hooks/queries/ledger';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useDialog from 'hooks/app/useDialog';
+import useTabRoute from 'hooks/navigator/useTabRoute';
 import { FieldDataType } from 'types/event/filedDataType';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
@@ -17,11 +18,13 @@ import {
   TicketList,
 } from 'components/userEvent/participant';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
+import { BottomTabMenu } from 'constants/menu';
 import userEventScreenStyles from './UserEventScreen.style';
 
 // TODO skeleton
 
 const UserEventScreen = () => {
+  const { params } = useTabRoute<BottomTabMenu.UserEvent>();
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
 
@@ -84,6 +87,12 @@ const UserEventScreen = () => {
     }
     stackNavigation.navigate('HostConsole', { eventId: event.eventInfoId });
   };
+
+  useEffect(() => {
+    if (params && params.tab) {
+      setActiveTabName(params.tab);
+    }
+  }, []);
 
   // TODO
   if (!ticketLists) {
