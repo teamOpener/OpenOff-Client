@@ -10,6 +10,7 @@ export { default as IconBookmark } from './IconBookmark.svg';
 export { default as IconCalendar } from './IconCalendar.svg';
 export { default as IconCamera } from './IconCamera.svg';
 export { default as IconCheck } from './IconCheck.svg';
+export { default as IconCheckCircle } from './IconCheckCircle.svg';
 export { default as IconClose } from './IconClose.svg';
 export { default as IconComment } from './IconComment.svg';
 export { default as IconCommentCircle } from './IconCommentCircle.svg';

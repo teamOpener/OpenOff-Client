@@ -25,6 +25,14 @@ const hostQRScanScreenStyles = StyleSheet.create({
     borderColor: colors.main,
     justifyContent: 'center',
   },
+  successCameraWrapper: {
+    borderWidth: 5,
+    borderColor: colors.lightGreen,
+  },
+  errorCameraWrapper: {
+    borderWidth: 5,
+    borderColor: colors.error,
+  },
   mainText: {
     fontFamily: fonts.semibold,
     fontSize: 18,
@@ -54,6 +62,12 @@ const hostQRScanScreenStyles = StyleSheet.create({
   requestCameraPermission: {
     textAlign: 'center',
   } as TextStyle,
+  absoluteContainer: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '50%',
+    marginTop: -63.5,
+  },
 });
 
 export default hostQRScanScreenStyles;
