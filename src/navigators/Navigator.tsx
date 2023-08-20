@@ -225,7 +225,8 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          ...noTextOptions,
+          headerTitle: '',
+          ...defaultOptions,
         }}
         name={StackMenu.HostLedgerDetail}
         component={HostLedgerDetailScreen}

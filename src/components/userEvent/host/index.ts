@@ -6,5 +6,7 @@ export { default as DateSelector } from './DateSelector/DateSelector';
 export { default as IconText } from './IconText/IconText';
 export { default as DonutChartInfo } from './DonutChart/DonutChartInfo';
 export { default as LedgerHeader } from './LedgerHeader/LedgerHeader';
+export { default as QnAItem } from './QnAItem/QnAItem';
 export { default as SelectBottomSheet } from './SelectBottomSheet/SelectBottomSheet';
 export { default as UserCard } from './UserCard/UserCard';
+export { default as UserHeader } from './UserHeader/UserHeader';

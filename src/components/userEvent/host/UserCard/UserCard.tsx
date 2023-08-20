@@ -39,6 +39,9 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
     queryClient.invalidateQueries(
       queryKeys.hostKeys.statusByIndexId(eventIndexId),
     );
+    queryClient.invalidateQueries(
+      queryKeys.hostKeys.applicantQnAbyLedgerId(eventApplicantInfo.ladgerId),
+    );
   };
 
   const handlePermitError = (error: ApiErrorResponse) => {
