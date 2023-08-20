@@ -42,7 +42,9 @@ const EventRowCardList = ({
       ) : (
         <FlatList
           numColumns={1}
+          style={eventRowCardListStyles.flatListcontainer}
           data={flatEventRowList}
+          showsVerticalScrollIndicator={false}
           renderItem={(event) => (
             <EventRowCard
               key={`eventCard-${event.index}`}

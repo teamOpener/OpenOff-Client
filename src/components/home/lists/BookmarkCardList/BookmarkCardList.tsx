@@ -35,7 +35,8 @@ const BookmarkCardList = ({
       ) : (
         <FlatList
           numColumns={1}
-          data={flatEventList}
+          style={bookmarkCardListStyles.flatListcontainer}
+          data={flatEventRowList}
           renderItem={(event) => (
             <EventRowCard
               key={`eventCard-${event.index}`}

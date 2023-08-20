@@ -1,8 +1,10 @@
+import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SelectControlButton from 'components/eventMap/buttons/SelectControlButton/SelectControlButton';
 import SelectDetailBox from 'components/eventMap/selectboxes/SelectDetailBox/SelectDetailBox';
-import SelectStatus from 'constants/selectBox';
+import queryKeys from 'constants/queryKeys';
+import { SelectStatus } from 'constants/selectBox';
 import {
   applicationAbleOptions,
   participantOptions,
@@ -25,13 +27,23 @@ const SelectDetailGroup = ({
   selectDispatch,
   closeDetailGroup,
 }: Props) => {
+  const queryClient = useQueryClient();
+
+  const refetchEventList = () => {
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
+    closeDetailGroup();
+  };
+
   const initializeSelect = () => {
     selectDispatch({ type: SelectStatus.RESET_SELECT });
-    closeDetailGroup();
+    refetchEventList();
   };
+
   const applySelect = () => {
-    closeDetailGroup();
+    selectDispatch({ type: SelectStatus.REMIND_SELECT });
+    refetchEventList();
   };
+
   return (
     <View style={selectDetailGroupStyles.container}>
       <View style={selectDetailGroupStyles.detailTitle}>

@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
 interface StartEndDate {
-  startDay: string;
-  endDay: string;
+  startDay?: string;
+  endDay?: string;
 }
 
 export interface EventMapStore {
@@ -13,8 +13,8 @@ export interface EventMapStore {
 
 const initEventMap = {
   startEndDate: {
-    startDay: '',
-    endDay: '',
+    startDay: undefined,
+    endDay: undefined,
   },
 };
 
@@ -32,8 +32,8 @@ export const useEventMapStore = create<EventMapStore>((set) => ({
     set((state) => ({
       ...state,
       startEndDate: {
-        startDay: '',
-        endDay: '',
+        startDay: undefined,
+        endDay: undefined,
       },
     })),
 }));

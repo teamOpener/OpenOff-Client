@@ -1,8 +1,8 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
-import useDialog from 'hooks/app/useDialog';
 import fieldData from 'data/lists/fieldData';
+import useDialog from 'hooks/app/useDialog';
 import { useId } from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { Event } from 'types/event';
@@ -45,7 +45,7 @@ const EventRowCard = ({ event, handleEventPress }: Props) => {
       </Pressable>
       <View style={eventRowCardStyles.eventInfo}>
         <View style={eventRowCardStyles.fieldBoxContainer}>
-          {event.fieldTypes.map((field, _id) => (
+          {event.fieldTypeList.map((field, _id) => (
             <View key={`${fieldId}${_id}`} style={eventRowCardStyles.fieldBox}>
               <Text variant="body3" color="darkGrey">
                 {

@@ -1,6 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import SingleSelectBox from 'components/eventMap/selectboxes/SingleSelectBox/SingleSelectBox';
-import SelectStatus from 'constants/selectBox';
+import { SelectStatus } from 'constants/selectBox';
 import {
   applicationAbleOptions,
   participantOptions,
@@ -9,6 +9,8 @@ import {
 import { Dispatch } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Action, Option, SelectBox } from 'types/apps/selectbox';
+import { useQueryClient } from '@tanstack/react-query';
+import queryKeys from 'constants/queryKeys';
 import selectBoxGroup from './SelectBoxGroup.style';
 
 interface Props {
@@ -22,6 +24,7 @@ const SelectBoxGroup = ({
   selectDispatch,
   openDetailGroup,
 }: Props) => {
+  const queryClient = useQueryClient();
   return (
     <View style={selectBoxGroup.selectContainer}>
       <TouchableOpacity
@@ -39,6 +42,7 @@ const SelectBoxGroup = ({
             type: SelectStatus.SET_PAY_OPTION,
             option,
           });
+          queryClient.removeQueries(queryKeys.eventKeys.mapList);
         }}
       />
       <SingleSelectBox
@@ -50,6 +54,7 @@ const SelectBoxGroup = ({
             type: SelectStatus.SET_PARTICIPANT_OPTION,
             option,
           });
+          queryClient.removeQueries(queryKeys.eventKeys.mapList);
         }}
       />
       <SingleSelectBox
@@ -61,6 +66,7 @@ const SelectBoxGroup = ({
             type: SelectStatus.SET_APPLICATION_ABLE_OPTION,
             option,
           });
+          queryClient.removeQueries(queryKeys.eventKeys.mapList);
         }}
       />
     </View>

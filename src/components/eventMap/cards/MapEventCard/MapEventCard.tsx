@@ -1,34 +1,58 @@
 import Text from 'components/common/Text/Text';
+import { getFieldName } from 'constants/code';
+import useNavigator from 'hooks/navigator/useNavigator';
 import { memo } from 'react';
-import { Dimensions, Image, View } from 'react-native';
+import { Dimensions, Image, Pressable, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { MapEvent } from 'types/event';
 import mapEventCardStyles from './MapEventCard.style';
 
 interface Props {
   event: MapEvent;
+  distance: number;
 }
 
-const MapEventCard = ({ event }: Props) => {
+const MapEventCard = ({ event, distance }: Props) => {
+  const { stackNavigation } = useNavigator();
+  const handleShowDetailEventInfo = () => {
+    stackNavigation.navigate('EventDetail', {
+      id: event.id,
+    });
+  };
+
   return (
     <View style={mapEventCardStyles.container}>
       <View style={mapEventCardStyles.textContainer}>
-        <Text variant="h3" color="white" style={mapEventCardStyles.textMargin}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          variant="h3"
+          color="white"
+          style={mapEventCardStyles.titleText}
+        >
           {event.title}
         </Text>
-        <Text variant="body2" color="grey">
-          {event.fieldTypes}
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          variant="body2"
+          color="grey"
+          style={mapEventCardStyles.eventFieldContainer}
+        >
+          {event.fieldTypeList?.map((field) => getFieldName(field)).join('  ')}
         </Text>
       </View>
       <View style={mapEventCardStyles.textContainer}>
-        <Text
-          variant="body2"
-          color="grey"
-          style={mapEventCardStyles.textMargin}
-        >
-          22km
+        <Text variant="body2" color="grey" style={mapEventCardStyles.titleText}>
+          {distance}km
         </Text>
-        <Text variant="body2" color="white">
+        <Text
+          style={mapEventCardStyles.streetLoadText}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          variant="body2"
+          color="white"
+        >
           {`${event.streetLoadAddress} ${event.detailAddress}`}
         </Text>
       </View>
@@ -39,14 +63,16 @@ const MapEventCard = ({ event }: Props) => {
           loop={false}
           overscrollEnabled={false}
           style={{ width: Dimensions.get('window').width - 20 }}
-          panGestureHandlerProps={{ minDist: 10 }}
+          panGestureHandlerProps={{ minDist: 20 }}
           data={event.imageList}
           renderItem={({ item, index }) => (
-            <Image
-              key={index}
-              style={mapEventCardStyles.eventImage}
-              source={{ uri: item }}
-            />
+            <Pressable onPress={handleShowDetailEventInfo} key={index}>
+              <Image
+                key={index}
+                style={mapEventCardStyles.eventImage}
+                source={{ uri: item.imageUrl }}
+              />
+            </Pressable>
           )}
         />
       </View>

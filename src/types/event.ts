@@ -9,7 +9,7 @@ interface Event {
   eventInfoId?: number;
   bookmarkId?: number;
   eventTitle: string;
-  fieldTypes: FieldCode[];
+  fieldTypeList: FieldCode[];
   eventDate: string;
   mainImageUrl: string;
   streetRoadAddress: string;
@@ -17,15 +17,21 @@ interface Event {
   isBookmarked: boolean;
 }
 
+interface ImageType {
+  imageUrl: string;
+  isMain: boolean;
+}
+
 interface MapEvent {
   id: number;
   title: string;
-  fieldTypes: FieldCode[];
+  fieldTypeList: FieldCode[];
   streetLoadAddress: string;
   detailAddress: string;
   latitude: number;
   longitude: number;
-  imageList: string[];
+  distance?: number;
+  imageList: ImageType[];
   eventDateList: string[];
 }
 

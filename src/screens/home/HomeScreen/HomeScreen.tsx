@@ -53,7 +53,10 @@ const HomeScreen = () => {
   return (
     <View style={homeScreenStyles.wrapper}>
       <FloatingButton />
-      <ScrollView style={homeScreenStyles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={homeScreenStyles.container}
+      >
         <View style={homeScreenStyles.homeHeader}>
           <Image
             style={homeScreenStyles.logo}

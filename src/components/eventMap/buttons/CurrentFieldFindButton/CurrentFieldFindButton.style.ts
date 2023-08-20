@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { colors } from 'styles/theme';
 
-const currentFindButtonStyles = StyleSheet.create({
+const currentFieldFindButtonStyles = StyleSheet.create({
   container: {
     position: 'absolute',
     zIndex: 3,
@@ -20,4 +20,4 @@ const currentFindButtonStyles = StyleSheet.create({
   },
 });
 
-export default currentFindButtonStyles;
+export default currentFieldFindButtonStyles;

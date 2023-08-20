@@ -1,8 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useQueryClient } from '@tanstack/react-query';
 import Text from 'components/common/Text/Text';
 import CalendarButton from 'components/eventMap/buttons/CalendarButton/CalendarButton';
 import CalendarCard from 'components/eventMap/cards/CalendarCard/CalendarCard';
+import queryKeys from 'constants/queryKeys';
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { MarkedDates } from 'react-native-calendars/src/types';
@@ -16,6 +18,7 @@ type ParamList = {
 };
 
 const DatePickScreen = () => {
+  const queryClient = useQueryClient();
   const { setStartEndDate } = useEventMapStore();
   const navigation = useNavigation<NavigationProp<ParamList>>();
   const [startDay, setStartDay] = useState<string>('');
@@ -30,12 +33,15 @@ const DatePickScreen = () => {
       startDay: '',
       endDay: '',
     });
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
+    navigation.goBack();
   };
   const handleApply = () => {
     setStartEndDate({
       startDay,
       endDay,
     });
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
     navigation.goBack();
   };
   const handleWeek = (
@@ -55,7 +61,6 @@ const DatePickScreen = () => {
       today.getMonth(),
       today.getDate() + (endNumber - today.getDay()),
     );
-    console.log(dateFormatter(monday));
     setStartEndDate({
       startDay: dateFormatter(monday),
       endDay: dateFormatter(sunday),

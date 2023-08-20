@@ -24,7 +24,7 @@ const getDistanceCoordinate = (
   const result =
     2 * Math.atan2(Math.sqrt(calcDegree), Math.sqrt(1 - calcDegree));
   const distance = RADIUSE * result; // Distance in km
-  return distance;
+  return parseFloat(distance.toFixed(1));
 };
 
 export default getDistanceCoordinate;

@@ -18,8 +18,7 @@ const mapCardSkeletonStyles = StyleSheet.create({
     height: 18,
   },
   imageContainer: {
-    width: '100%',
-    justifyContent: 'space-between',
+    gap: 10,
     alignItems: 'center',
     flexDirection: 'row',
   },

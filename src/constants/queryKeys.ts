@@ -21,6 +21,7 @@ const eventKeys = {
   personalList: [DOMAIN.EVENT, 'personal-list'],
   vogueList: [DOMAIN.EVENT, 'vogue-list'],
   vogueInfiniteList: [DOMAIN.EVENT, 'vogue-infinite-list'],
+  mapList: [DOMAIN.EVENT, 'map-list'],
   listByField: (type: FieldCode) => [DOMAIN.EVENT, 'list', type],
 };
 
