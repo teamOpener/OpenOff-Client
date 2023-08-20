@@ -8,17 +8,19 @@ const mapEventCardStyles = StyleSheet.create({
     margin: 20,
     zIndex: 1,
   },
-  textMargin: {
-    marginRight: 10,
+  titleText: {
+    maxWidth: '60%',
+    flexWrap: 'wrap',
   },
   eventFieldContainer: {
-    marginHorizontal: 10,
+    flexWrap: 'wrap',
+    maxWidth: '60%',
     gap: 10,
     flexDirection: 'row',
   },
   textContainer: {
     marginTop: 5,
-    maxWidth: '50%',
+    gap: 10,
     alignItems: 'center',
     flexDirection: 'row',
   },
@@ -28,6 +30,10 @@ const mapEventCardStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  streetLoadText: {
+    maxWidth: '80%',
+    flexWrap: 'wrap',
   },
   eventImage: {
     width: 114,

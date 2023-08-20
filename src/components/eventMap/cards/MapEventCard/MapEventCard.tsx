@@ -28,27 +28,34 @@ const MapEventCard = ({ event, distance }: Props) => {
           ellipsizeMode="tail"
           variant="h3"
           color="white"
-          style={mapEventCardStyles.textMargin}
+          style={mapEventCardStyles.titleText}
         >
           {event.title}
         </Text>
         <View style={mapEventCardStyles.eventFieldContainer}>
-          {event.fieldTypeList?.map((field, _idx) => (
-            <Text variant="body2" color="grey" key={field + _idx}>
-              {getFieldName(field)}
-            </Text>
-          ))}
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            variant="body2"
+            color="grey"
+          >
+            {event.fieldTypeList
+              ?.map((field) => getFieldName(field))
+              .join('  ')}
+          </Text>
         </View>
       </View>
       <View style={mapEventCardStyles.textContainer}>
-        <Text
-          variant="body2"
-          color="grey"
-          style={mapEventCardStyles.textMargin}
-        >
+        <Text variant="body2" color="grey" style={mapEventCardStyles.titleText}>
           {distance}km
         </Text>
-        <Text variant="body2" color="white">
+        <Text
+          style={mapEventCardStyles.streetLoadText}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          variant="body2"
+          color="white"
+        >
           {`${event.streetLoadAddress} ${event.detailAddress}`}
         </Text>
       </View>
