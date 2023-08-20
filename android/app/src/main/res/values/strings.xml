@@ -3,4 +3,6 @@
     <string name="kakao_app_key">@string/REACT_APP_KAKAO_APP_KEY</string>
     <string name="logo">logo</string>
     <string name="splash_app_name">OPEN;OFF</string>
+    <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
+    <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
 </resources>

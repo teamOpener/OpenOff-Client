@@ -70,3 +70,6 @@ ios/tmp.xcconfig
 #fcm
 ios/GoogleService-Info.plist
 android/app/google-services.json
+
+#code-push
+android/app/src/main/assets/appcenter-config.json
