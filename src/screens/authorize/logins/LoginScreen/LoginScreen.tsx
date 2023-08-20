@@ -1,3 +1,4 @@
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { clearToken } from 'apis';
@@ -89,6 +90,33 @@ const LoginScreen = () => {
     divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
   };
 
+  const handleAppleLogin = async () => {
+    try {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
+
+      const credentialState = await appleAuth.getCredentialStateForUser(
+        appleAuthRequestResponse.user,
+      );
+
+      if (credentialState === appleAuth.State.AUTHORIZED) {
+        const socialLoginResult = await socialLogin({
+          socialType: 'apple',
+          token: appleAuthRequestResponse.identityToken ?? '',
+        });
+        divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
+      }
+    } catch (error) {
+      if ((error as AxiosError).code === appleAuth.Error.CANCELED) {
+        console.log('canceled');
+      } else {
+        console.log('error');
+      }
+    }
+  };
+
   const handleCommonLogin = async () => {
     if (!isActive) return;
     const normalLoginResult = await normalLogin({
@@ -142,9 +170,7 @@ const LoginScreen = () => {
             googleLogin={() => {
               return false;
             }}
-            appleLogin={() => {
-              return false;
-            }}
+            appleLogin={handleAppleLogin}
           />
 
           <JoinButton />
