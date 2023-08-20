@@ -12,5 +12,14 @@ export interface MyTicketInfoResponseDto {
   eventDate: string;
   isAccepted: boolean;
   isJoined: boolean;
-  qrImageUrl: string; // null이면 승인 전
+  qrImageUrl: string | null;
 }
+
+/**
+ * 승인대기: qrImageUrl === null
+ * 승인거부
+ * 승인완료: qrImageUrl !== null
+ * 참석완료: isJoined === true
+ * 종료된 이벤트: eventDate > new Date()
+ * 취소: 없음
+ */
