@@ -1,6 +1,8 @@
 import Text from 'components/common/Text/Text';
+import { getFieldName } from 'constants/code';
+import useNavigator from 'hooks/navigator/useNavigator';
 import { memo } from 'react';
-import { Dimensions, Image, View } from 'react-native';
+import { Dimensions, Image, Pressable, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { MapEvent } from 'types/event';
 import mapEventCardStyles from './MapEventCard.style';
@@ -11,15 +13,32 @@ interface Props {
 }
 
 const MapEventCard = ({ event, distance }: Props) => {
+  const { stackNavigation } = useNavigator();
+  const handleShowDetailEventInfo = () => {
+    stackNavigation.navigate('EventDetail', {
+      id: event.id,
+    });
+  };
+
   return (
     <View style={mapEventCardStyles.container}>
       <View style={mapEventCardStyles.textContainer}>
-        <Text variant="h3" color="white" style={mapEventCardStyles.textMargin}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          variant="h3"
+          color="white"
+          style={mapEventCardStyles.textMargin}
+        >
           {event.title}
         </Text>
-        <Text variant="body2" color="grey">
-          {event.fieldTypes}
-        </Text>
+        <View style={mapEventCardStyles.eventFieldContainer}>
+          {event.fieldTypeList?.map((field, _idx) => (
+            <Text variant="body2" color="grey" key={field + _idx}>
+              {getFieldName(field)}
+            </Text>
+          ))}
+        </View>
       </View>
       <View style={mapEventCardStyles.textContainer}>
         <Text
@@ -43,11 +62,13 @@ const MapEventCard = ({ event, distance }: Props) => {
           panGestureHandlerProps={{ minDist: 20 }}
           data={event.imageList}
           renderItem={({ item, index }) => (
-            <Image
-              key={index}
-              style={mapEventCardStyles.eventImage}
-              source={{ uri: item.imageUrl }}
-            />
+            <Pressable onPress={handleShowDetailEventInfo} key={index}>
+              <Image
+                key={index}
+                style={mapEventCardStyles.eventImage}
+                source={{ uri: item.imageUrl }}
+              />
+            </Pressable>
           )}
         />
       </View>

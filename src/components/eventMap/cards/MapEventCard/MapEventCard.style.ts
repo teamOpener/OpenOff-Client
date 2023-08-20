@@ -11,9 +11,14 @@ const mapEventCardStyles = StyleSheet.create({
   textMargin: {
     marginRight: 10,
   },
+  eventFieldContainer: {
+    marginHorizontal: 10,
+    gap: 10,
+    flexDirection: 'row',
+  },
   textContainer: {
     marginTop: 5,
-    justifyContent: 'center',
+    maxWidth: '50%',
     alignItems: 'center',
     flexDirection: 'row',
   },
