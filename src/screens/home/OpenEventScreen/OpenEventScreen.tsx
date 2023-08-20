@@ -100,7 +100,7 @@ const OpenEventScreen = () => {
       !openEvent.applicationEndDate ||
       !openEvent.eventDates.length ||
       !openEvent.address.roadAddress ||
-      openEvent.cost == null ||
+      openEvent.cost === null ||
       !openEvent.recruitmentNumber ||
       !openEvent.description ||
       !openEvent.imageBuilders.length ||
@@ -120,7 +120,7 @@ const OpenEventScreen = () => {
       eventDates: openEvent.eventDates,
       streetLoadAddress: openEvent.address.roadAddress,
       detailAddress: openEvent.address.detailAddress ?? '',
-      eventFee: openEvent.cost,
+      eventFee: openEvent.cost ?? 0,
       maxParticipant: openEvent.recruitmentNumber,
       description: openEvent.description,
       imageDataList: imageUrlList,
@@ -205,11 +205,11 @@ const OpenEventScreen = () => {
         <OpenEventForm.HostPhoneNumber />
         <OpenEventForm.HostEmail />
 
-        <Divider height={1} color="darkGrey" />
+        {/* <Divider height={1} color="darkGrey" /> */}
 
         {/* TODO 개인정보, 유의사항 */}
-        <HeadText title="개인정보 수집 및 이용" />
-        <HeadText title="유의사항" />
+        {/* <HeadText title="개인정보 수집 및 이용" /> */}
+        {/* <HeadText title="유의사항" /> */}
 
         <Spacing height={156} />
       </ScrollView>
