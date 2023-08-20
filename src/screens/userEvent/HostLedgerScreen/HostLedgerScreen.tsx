@@ -23,7 +23,6 @@ import {
   usePermitAllApplicant,
 } from 'hooks/queries/ledger';
 import useNavigator from 'hooks/navigator/useNavigator';
-import { useEventDetail } from 'hooks/queries/event';
 import useBottomSheet from 'hooks/ledger/useBottomSheet';
 import useDialog from 'hooks/app/useDialog';
 import useStackRoute from 'hooks/navigator/useStackRoute';
@@ -43,7 +42,6 @@ const HostLedgerScreen = () => {
   const { openDialog } = useDialog();
 
   const { data: eventStatus } = useLedgerStatus(params.eventIndex);
-  const { data: eventInfo } = useEventDetail(params.eventId);
 
   const [searchName, onChangeSearchName] = useState<string>('');
 
@@ -142,7 +140,7 @@ const HostLedgerScreen = () => {
 
   const headerTitle = () => (
     <LedgerHeader
-      title={eventInfo?.title ?? ''}
+      title={eventStatus?.eventTitle ?? ''}
       date={eventStatus?.eventDate ?? ''}
     />
   );
