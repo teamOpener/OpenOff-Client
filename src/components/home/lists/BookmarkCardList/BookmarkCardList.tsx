@@ -2,10 +2,10 @@ import { InfiniteData } from '@tanstack/react-query';
 import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import EventRowCard from 'components/home/cards/EventRowCard/EventRowCard';
 import EventRowCardSkeleton from 'components/suspense/skeleton/EventRowCardSkeleton/EventRowCardSkeleton';
-import useNavigator from 'hooks/navigator/useNavigator';
 import { MyBookmarkEventResponseDto } from 'models/event/response/MyBookmarkEventResponseDto';
 import { FlatList, View } from 'react-native';
 import { InfiniteScrollApiResponse } from 'types/ApiResponse';
+import useBookmarkEvent from 'hooks/bookmark/useBookmarkEvent';
 import bookmarkCardListStyles from './BookmarkCardList.style';
 
 interface Props {
@@ -25,32 +25,12 @@ const BookmarkCardList = ({
   hasNextPage,
   handleEndReached,
 }: Props) => {
-  const { stackNavigation } = useNavigator();
-
-  const flatEventRowList = pageData?.pages.flatMap((page) => page.data.content);
-
-  const isHasNextSkeleton = hasNextPage && isFetching;
-
-  const handleEventPress = (eventId: number) => {
-    stackNavigation.navigate('EventDetail', {
-      id: eventId,
-    });
-  };
-
-  const formattedEvent = (event: MyBookmarkEventResponseDto) => ({
-    eventInfoId: event.eventInfoId,
-    eventTitle: event.eventTitle,
-    streetRoadAddress: event.streetRoadAddress,
-    totalApplicantCount: event.totalApplicantCount,
-    isBookmarked: true,
-    fieldTypes: event.fieldTypeList,
-    mainImageUrl: event.eventMainImageUrl,
-    eventDate: event.eventDateList[0],
-  });
+  const { flatEventList, handleEventPress, formattedEvent, isHasNextSkeleton } =
+    useBookmarkEvent(isFetching, pageData, hasNextPage);
 
   return (
     <View style={bookmarkCardListStyles.container}>
-      {flatEventRowList?.length === 0 ? (
+      {flatEventList?.length === 0 ? (
         <EmptyScreen content="이런! 아직 이벤트가 존재하지 않아요!" />
       ) : (
         <FlatList

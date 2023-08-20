@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Coordinate } from 'types/event';
+import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import { Field } from './group';
 
 export type AuthStackParamList = {
@@ -48,6 +49,7 @@ export type RootStackParamList = {
   Alert: undefined;
   EventDetail: {
     id: number;
+    tab?: EventDetailTabItem;
   };
   EventSelect: {
     id: number;
@@ -82,6 +84,11 @@ export type RootStackParamList = {
     eventId: number;
     eventIndex: number;
   };
+  UserProfileEdit: undefined;
+  UserInterest: undefined;
+  UserComment: undefined;
+  UserPasswordReset: undefined;
+  Scrap: undefined;
 };
 
 export type RootStackNavigationProp =

@@ -9,8 +9,6 @@ const eventCardStyles = StyleSheet.create({
     gap: 5,
   },
   image: {
-    width: 200,
-    height: 200,
     borderRadius: 5,
   },
   titleText: {

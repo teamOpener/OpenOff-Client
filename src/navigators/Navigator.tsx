@@ -26,6 +26,11 @@ import HostLedgerScreen from 'screens/userEvent/HostLedgerScreen/HostLedgerScree
 import HostAlarmScreen from 'screens/userEvent/HostAlarmScreen/HostAlarmScreen';
 import HostLedgerDetailScreen from 'screens/userEvent/HostLedgerDetailScreen/HostLedgerDetailScreen';
 import PopularEventScreen from 'screens/home/PopularEventScreen/PopularEventScreen';
+import UserProfileEditScreen from 'screens/user/UserProfileEditScreen/UserProfileEditScreen';
+import UserInterestResetScreen from 'screens/user/UserInterestResetScreen/UserInterestResetScreen';
+import UserCommentScreen from 'screens/user/UserCommentScreen/UserCommentScreen';
+import ScrapScreen from 'screens/user/ScrapScreen/ScrapScreen';
+import UserPasswordResetScreen from 'screens/user/UserPasswordResetScreen/UserPasswordResetScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -230,6 +235,44 @@ const Navigator = () => {
         }}
         name={StackMenu.HostAlarm}
         component={HostAlarmScreen}
+      />
+      {/* user */}
+      <Stack.Screen
+        options={{
+          headerTitle: '회원 정보 수정',
+          ...defaultOptions,
+        }}
+        name={StackMenu.UserProfileEdit}
+        component={UserProfileEditScreen}
+      />
+      <Stack.Screen
+        options={{
+          ...noTextOptions,
+        }}
+        name={StackMenu.UserInterest}
+        component={UserInterestResetScreen}
+      />
+      <Stack.Screen
+        options={{
+          ...noTextOptions,
+        }}
+        name={StackMenu.UserComment}
+        component={UserCommentScreen}
+      />
+      <Stack.Screen
+        options={{
+          ...noTextOptions,
+        }}
+        name={StackMenu.UserPasswordReset}
+        component={UserPasswordResetScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerTitle: '스크랩',
+          ...defaultOptions,
+        }}
+        name={StackMenu.Scrap}
+        component={ScrapScreen}
       />
     </Stack.Navigator>
   );

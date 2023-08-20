@@ -1,4 +1,5 @@
 import { FieldCode } from 'constants/code';
+import { SearchNicknameResponseDto } from 'models/user/response/SearchNicknameResponseDto';
 import { Image } from 'react-native-image-crop-picker';
 
 export interface ImageBuilder {
@@ -22,7 +23,7 @@ export interface EventForm {
   imageBuilders: ImageBuilder[];
   additionalInformation: string[];
   hostName: string | null;
-  staffIdList: string[] | null;
+  staffList: SearchNicknameResponseDto[];
   hostPhoneNumber: string | null;
   hostEmail: string | null;
 }

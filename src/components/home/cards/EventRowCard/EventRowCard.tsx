@@ -56,10 +56,13 @@ const EventRowCard = ({ event, handleEventPress }: Props) => {
             </View>
           ))}
         </View>
-        <Text style={eventRowCardStyles.eventTitle} numberOfLines={1}>
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={eventRowCardStyles.eventTitle}
+        >
           {event.eventTitle}
         </Text>
-
         <Text variant="body3" color="background">
           {event.eventDate.substring(0, 10).replaceAll('-', '.')}
         </Text>

@@ -1,5 +1,5 @@
 import SocialLoginButton from 'components/authorize/buttons/SocialLoginButton/SocialLoginButton';
-import { View, Image } from 'react-native';
+import { Image, Platform, View } from 'react-native';
 import socialLoginButtonGroupStyles from './SocialLoginButtonGroup.style';
 
 interface Props {
@@ -29,13 +29,15 @@ const SocialLoginButtonGroup = ({
           source={require('../../../../assets/images/naver.png')}
         />
       </SocialLoginButton>
+      {Platform.OS === 'ios' && (
+        <SocialLoginButton color="#FFF" handlePress={appleLogin}>
+          <Image
+            style={socialLoginButtonGroupStyles.socialLogo}
+            source={require('../../../../assets/images/apple.png')}
+          />
+        </SocialLoginButton>
+      )}
       <SocialLoginButton color="#FFF" handlePress={googleLogin}>
-        <Image
-          style={socialLoginButtonGroupStyles.socialLogo}
-          source={require('../../../../assets/images/apple.png')}
-        />
-      </SocialLoginButton>
-      <SocialLoginButton color="#FFF" handlePress={appleLogin}>
         <Image
           style={socialLoginButtonGroupStyles.socialLogo}
           source={require('../../../../assets/images/google.png')}

@@ -1,3 +1,4 @@
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { clearToken } from 'apis';
@@ -7,8 +8,10 @@ import LoginButton from 'components/authorize/buttons/LoginButton/LoginButton';
 import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButtonGroup/SocialLoginButtonGroup';
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import Text from 'components/common/Text/Text';
-import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import useDialog from 'hooks/app/useDialog';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
+import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
 import { useEffect, useState } from 'react';
 import {
   Image,
@@ -21,9 +24,7 @@ import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
-import useDialog from 'hooks/app/useDialog';
 import { validateEmail, validatePassword } from 'utils/validate';
-import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
 import loginScreenStyles from './LoginScreen.style';
 
 const LoginScreen = () => {
@@ -89,6 +90,33 @@ const LoginScreen = () => {
     divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
   };
 
+  const handleAppleLogin = async () => {
+    try {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
+
+      const credentialState = await appleAuth.getCredentialStateForUser(
+        appleAuthRequestResponse.user,
+      );
+
+      if (credentialState === appleAuth.State.AUTHORIZED) {
+        const socialLoginResult = await socialLogin({
+          socialType: 'apple',
+          token: appleAuthRequestResponse.identityToken ?? '',
+        });
+        divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
+      }
+    } catch (error) {
+      if ((error as AxiosError).code === appleAuth.Error.CANCELED) {
+        console.log('canceled');
+      } else {
+        console.log('error');
+      }
+    }
+  };
+
   const handleCommonLogin = async () => {
     if (!isActive) return;
     const normalLoginResult = await normalLogin({
@@ -104,7 +132,7 @@ const LoginScreen = () => {
   }, []);
 
   if (isSocialLoginLoading || isNormalLoginLoading)
-    return <CommonLoading isActive backgroundColor={colors.background} />;
+    return <WithIconLoading isActive backgroundColor={colors.background} />;
 
   return (
     <KeyboardAvoidingView
@@ -142,9 +170,7 @@ const LoginScreen = () => {
             googleLogin={() => {
               return false;
             }}
-            appleLogin={() => {
-              return false;
-            }}
+            appleLogin={handleAppleLogin}
           />
 
           <JoinButton />

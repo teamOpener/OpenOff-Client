@@ -12,6 +12,7 @@ const DOMAIN = {
 const userKeys = {
   all: [DOMAIN.USER],
   myInfo: [DOMAIN.USER, 'my-info'],
+  findUser: (keyword: string) => [DOMAIN.USER, 'others-info', keyword],
 };
 
 const eventKeys = {

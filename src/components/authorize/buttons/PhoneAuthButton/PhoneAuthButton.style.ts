@@ -1,11 +1,10 @@
 import { Platform, StyleSheet, TextStyle } from 'react-native';
-import { getPixelSize } from 'styles/styleUtils';
 import { colors, fonts } from 'styles/theme';
 
 const phoneAuthButtonStyles = StyleSheet.create({
   buttonWrapper: {
     marginTop: Platform.select({
-      android: getPixelSize(5),
+      android: -2,
       ios: 5,
     }),
     paddingHorizontal: 17,

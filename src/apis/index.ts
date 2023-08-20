@@ -1,6 +1,6 @@
 /* eslint-disable no-return-assign */
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import Config from 'react-native-config';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiErrorResponse } from 'types/ApiResponse';
@@ -24,13 +24,10 @@ const fetcher = axios.create({
 // TODO 사용안하면 지우기
 fetcher.interceptors.request.use(async (config) => {
   const value = await AsyncStorage.getItem('authorize');
-  const data: AsyncAuthorizeStorage = JSON.parse(value ?? '');
-  if (
-    data.state.token.refreshToken &&
-    fetcher.defaults.headers.Authorization === null
-  ) {
+  const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
+  if (authorizeStore.state.token.refreshToken) {
     // eslint-disable-next-line no-param-reassign
-    config.headers.Authorization = `Bearer ${data.state.token.accessToken}`;
+    config.headers.Authorization = `Bearer ${authorizeStore.state.token.accessToken}`;
   }
   return config;
 });
@@ -53,35 +50,42 @@ const initializeAuthorizeState = (error?: unknown) => {
 const onRejected = async (error: ApiErrorResponse) => {
   const originalRequest = error.config;
   const data = error.response?.data;
-
   if (
-    originalRequest &&
-    data &&
-    data.code === 601 &&
-    !isTokenRenewalInProgress
+    !originalRequest ||
+    !((data && data.code === 601) || error.response?.status === 403) ||
+    isTokenRenewalInProgress
   ) {
-    isTokenRenewalInProgress = true;
+    return Promise.reject(error);
+  }
 
-    try {
-      if (!token.refreshToken) {
-        initializeAuthorizeState();
-      }
+  isTokenRenewalInProgress = true;
+  try {
+    const value = await AsyncStorage.getItem('authorize');
+    const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
 
-      if (token.refreshToken) {
-        const accessToken = await refresh();
-        originalRequest.headers.Authorization = `Bearer ${accessToken.data?.accessToken}`;
-        setToken({
-          accessToken: accessToken.data?.accessToken,
-          refreshToken: accessToken.data?.refreshToken,
-        });
-      }
-
-      const response = await fetcher.request(originalRequest);
-      isTokenRenewalInProgress = false;
-      return response;
-    } catch (refreshError) {
-      initializeAuthorizeState(refreshError);
+    if (!authorizeStore.state.token.refreshToken) {
+      initializeAuthorizeState();
     }
+
+    if (authorizeStore.state.token.refreshToken) {
+      const accessToken = await refresh();
+      originalRequest.headers.Authorization = `Bearer ${accessToken.data?.accessToken}`;
+      setToken({
+        accessToken: accessToken.data?.accessToken,
+        refreshToken: accessToken.data?.refreshToken,
+      });
+      const response = await fetcher.request(originalRequest).catch(() => {
+        resetToken();
+        setIsLogin(false);
+        fetcher.defaults.headers.Authorization = null;
+        isTokenRenewalInProgress = false;
+      });
+      return response;
+    }
+
+    isTokenRenewalInProgress = false;
+  } catch (refreshError) {
+    initializeAuthorizeState(refreshError);
   }
   return Promise.reject(error);
 };
@@ -89,8 +93,5 @@ const onRejected = async (error: ApiErrorResponse) => {
 fetcher.interceptors.response.use(onFulfilled, onRejected);
 
 export default fetcher;
-
-export const applyToken = (accessToken: string) =>
-  (fetcher.defaults.headers.Authorization = `Bearer ${accessToken}`);
 
 export const clearToken = () => (fetcher.defaults.headers.Authorization = null);

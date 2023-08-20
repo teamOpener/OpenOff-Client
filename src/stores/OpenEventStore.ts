@@ -16,9 +16,9 @@ export const initEventForm: EventForm = {
   recruitmentNumber: null,
   description: null,
   imageBuilders: [],
-  additionalInformation: [],
+  additionalInformation: [''],
   hostName: null,
-  staffIdList: [],
+  staffList: [],
   hostPhoneNumber: null,
   hostEmail: null,
 };
@@ -35,7 +35,7 @@ export const initEventFormErrMsg: EventFormError = {
   imageUrls: null,
   additionalInformation: null,
   hostName: null,
-  staffIdList: null,
+  staffList: null,
   hostPhoneNumber: null,
   hostEmail: null,
 };
@@ -56,7 +56,12 @@ export const useOpenEventStore = create<OpenEventStore>((set) => ({
     set(() => ({ openEventErrorMessage })),
   init: () =>
     set(() => ({
-      openEvent: { ...initEventForm, imageBuilders: [] },
+      openEvent: {
+        ...initEventForm,
+        imageBuilders: [],
+        eventDates: [],
+        staffList: [],
+      },
       openEventErrorMessage: initEventFormErrMsg,
     })),
 }));

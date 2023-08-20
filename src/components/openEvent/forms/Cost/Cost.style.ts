@@ -8,6 +8,8 @@ const costStyles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    width: '74%',
+    alignSelf: 'flex-end',
   },
   absoluteContainer: {
     flex: 1,
