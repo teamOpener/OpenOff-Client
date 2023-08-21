@@ -31,18 +31,12 @@ const SocialLoginButtonGroup = ({
           source={require('../../../../assets/images/kakao.png')}
         />
       </SocialLoginButton>
-      <SocialLoginButton color="#1EC800" handlePress={naverLogin}>
-        {recentLogin === 'NAVER' && (
-          <Image
-            style={socialLoginButtonGroupStyles.recentLogin}
-            source={require('../../../../assets/images/recentLogin.png')}
-          />
-        )}
+      {/* <SocialLoginButton color="#1EC800" handlePress={naverLogin}>
         <Image
           style={socialLoginButtonGroupStyles.socialLogo}
           source={require('../../../../assets/images/naver.png')}
         />
-      </SocialLoginButton>
+      </SocialLoginButton> */}
       {Platform.OS === 'ios' && (
         <SocialLoginButton color="#FFF" handlePress={appleLogin}>
           {recentLogin === 'APPLE' && (
@@ -57,18 +51,12 @@ const SocialLoginButtonGroup = ({
           />
         </SocialLoginButton>
       )}
-      <SocialLoginButton color="#FFF" handlePress={googleLogin}>
-        {recentLogin === 'GOOGLE' && (
-          <Image
-            style={socialLoginButtonGroupStyles.recentLogin}
-            source={require('../../../../assets/images/recentLogin.png')}
-          />
-        )}
+      {/* <SocialLoginButton color="#FFF" handlePress={googleLogin}>
         <Image
           style={socialLoginButtonGroupStyles.socialLogo}
           source={require('../../../../assets/images/google.png')}
         />
-      </SocialLoginButton>
+      </SocialLoginButton> */}
     </View>
   );
 };
