@@ -12,6 +12,7 @@ import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
 import Text from 'components/common/Text/Text';
 import Icon from 'components/common/Icon/Icon';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
+import API_ERROR_MESSAGE from 'constants/errorMessage';
 import { useCheckQR } from 'hooks/queries/ledger';
 import queryKeys from 'constants/queryKeys';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
@@ -55,7 +56,8 @@ const HostQRScanScreen = () => {
     showQRCheckType();
   };
 
-  const handleErrorQRCheck = () => {
+  const handleErrorQRCheck = (error: ApiErrorResponse) => {
+    setText(error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT);
     setQRCheckType('error');
     showQRCheckType();
   };
@@ -76,13 +78,9 @@ const HostQRScanScreen = () => {
       return;
     }
 
-    checkQR({ content: barcodes[0].displayValue })
-      .then((res) => {
-        setText(res.message);
-      })
-      .catch((err) => {
-        setText((err as ApiErrorResponse).message);
-      });
+    checkQR({ content: barcodes[0].displayValue }).then((res) => {
+      setText(res.message);
+    });
   }, [barcodes]);
 
   useEffect(() => {
