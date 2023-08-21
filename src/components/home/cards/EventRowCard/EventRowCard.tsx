@@ -3,7 +3,7 @@ import Text from 'components/common/Text/Text';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
 import fieldData from 'data/lists/fieldData';
 import useDialog from 'hooks/app/useDialog';
-import { useId } from 'react';
+import { memo, useId } from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { Event } from 'types/event';
 import eventRowCardStyles from './EventRowCard.style';
@@ -11,9 +11,10 @@ import eventRowCardStyles from './EventRowCard.style';
 interface Props {
   event: Event;
   handleEventPress: (eventId: number) => void;
+  type?: 'default' | 'bookmark';
 }
 
-const EventRowCard = ({ event, handleEventPress }: Props) => {
+const EventRowCard = ({ event, handleEventPress, type = 'default' }: Props) => {
   const { openDialog } = useDialog();
   const city = event.streetRoadAddress.split(' ');
   const fieldId = useId();
@@ -45,7 +46,7 @@ const EventRowCard = ({ event, handleEventPress }: Props) => {
       </Pressable>
       <View style={eventRowCardStyles.eventInfo}>
         <View style={eventRowCardStyles.fieldBoxContainer}>
-          {event.fieldTypeList.map((field, _id) => (
+          {event.fieldTypes.map((field, _id) => (
             <View key={`${fieldId}${_id}`} style={eventRowCardStyles.fieldBox}>
               <Text variant="body3" color="darkGrey">
                 {
@@ -84,12 +85,12 @@ const EventRowCard = ({ event, handleEventPress }: Props) => {
       <View style={eventRowCardStyles.bookmarkButtonWrapper}>
         <BookmarkButton
           eventInfoId={event.eventInfoId}
-          isEventBookmarked={event.isBookmarked}
-          type="rowEvent"
+          isEventBookmarked={type === 'bookmark' ? true : event.isBookmarked}
+          type={type === 'default' ? 'rowEvent' : 'bookmark'}
         />
       </View>
     </View>
   );
 };
 
-export default EventRowCard;
+export default memo(EventRowCard);

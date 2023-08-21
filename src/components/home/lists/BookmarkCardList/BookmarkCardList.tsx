@@ -2,10 +2,10 @@ import { InfiniteData } from '@tanstack/react-query';
 import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import EventRowCard from 'components/home/cards/EventRowCard/EventRowCard';
 import EventRowCardSkeleton from 'components/suspense/skeleton/EventRowCardSkeleton/EventRowCardSkeleton';
+import useBookmarkEvent from 'hooks/bookmark/useBookmarkEvent';
 import { MyBookmarkEventResponseDto } from 'models/event/response/MyBookmarkEventResponseDto';
 import { FlatList, View } from 'react-native';
 import { InfiniteScrollApiResponse } from 'types/ApiResponse';
-import useBookmarkEvent from 'hooks/bookmark/useBookmarkEvent';
 import bookmarkCardListStyles from './BookmarkCardList.style';
 
 interface Props {
@@ -36,12 +36,13 @@ const BookmarkCardList = ({
         <FlatList
           numColumns={1}
           style={bookmarkCardListStyles.flatListcontainer}
-          data={flatEventRowList}
+          data={flatEventList}
           renderItem={(event) => (
             <EventRowCard
               key={`eventCard-${event.index}`}
               handleEventPress={handleEventPress}
               event={formattedEvent(event.item)}
+              type="bookmark"
             />
           )}
           ListFooterComponent={
