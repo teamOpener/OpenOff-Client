@@ -8,6 +8,7 @@ export const enum StackMenu {
   SearchAddress = 'SearchAddress',
   Alert = 'Alert',
   EventDetail = 'EventDetail',
+  EventComment = 'EventComment',
   EventSelect = 'EventSelect',
   EventApply = 'EventApply',
   UserTicket = 'UserTicket',

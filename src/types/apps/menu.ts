@@ -61,6 +61,10 @@ export type RootStackParamList = {
     id: number;
     idx: number;
   };
+  EventComment: {
+    infoId: number;
+    commentId: number;
+  };
   SearchAddress: undefined;
   UserTicket: {
     eventId: number;
