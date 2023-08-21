@@ -21,6 +21,8 @@ const EventDetailScreen = () => {
   const { params } = useStackRoute<StackMenu.EventDetail>();
   const { stackNavigation } = useNavigator();
 
+  const [isScrolling, setIsScrolling] = useState<boolean>(false);
+
   const { data: event } = useEventDetail(params.id);
   const { sortEventsByEventDate } = useEventIndexList({
     eventIndexList: event?.indexList,
@@ -67,8 +69,10 @@ const EventDetailScreen = () => {
   useEffect(() => {
     if (params.tab) {
       setActiveTabName(params.tab);
+    } else {
+      setActiveTabName(EventDetailTabItem.DESCRIPTION);
     }
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     stackNavigation.setOptions({
@@ -83,7 +87,11 @@ const EventDetailScreen = () => {
 
   return (
     <EventDetailScreenLayout>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        onScrollBeginDrag={() => setIsScrolling(true)}
+        onScrollEndDrag={() => setIsScrolling(false)}
+      >
         <EventDetail.TitleText title={event.title} />
 
         <SpaceLayout size={10}>
@@ -135,18 +143,27 @@ const EventDetailScreen = () => {
         </EventDetail.Tab>
         <Spacing height={30} />
 
-        {/* TODO: 댓글 탭 만들기 */}
         {/* TODO: 개행 처리 어캐할지 */}
-        <Text variant="body2">{event.description}</Text>
+        {activeTabName === EventDetailTabItem.DESCRIPTION ? (
+          <Text variant="body2">{event.description}</Text>
+        ) : (
+          <EventDetail.CommentList
+            eventInfoId={event.eventId}
+            isScrolling={isScrolling}
+          />
+        )}
 
-        <Spacing height={200} />
+        <Spacing height={100} />
       </ScrollView>
-
-      <FixedButton
-        disabled={disabledEvent(event).disabled}
-        label={disabledEvent(event).label}
-        onPress={handleApply}
-      />
+      {activeTabName === EventDetailTabItem.DESCRIPTION ? (
+        <FixedButton
+          disabled={disabledEvent(event).disabled}
+          label={disabledEvent(event).label}
+          onPress={handleApply}
+        />
+      ) : (
+        <EventDetail.CommentInput eventInfoId={event.eventId} />
+      )}
     </EventDetailScreenLayout>
   );
 };
