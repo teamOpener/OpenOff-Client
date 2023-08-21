@@ -11,6 +11,12 @@ export interface DetailEventInfoResponseDto {
   maxCapacity: number;
   description: string;
   isBookmarked: boolean;
+  longitude: number;
+  latitude: number;
+  eventApplyStartDate: string;
+  eventApplyEndDate: string;
+  isApplyPermit: boolean; // false면 중단됨
+  isEnded: boolean; // eventIndex date 다 지나갔으면 true
   imageList: ImageUrlList[];
   indexList: EventIndexStatisticsDto[];
   extraQuestionList: ExtraQuestionInfo[];

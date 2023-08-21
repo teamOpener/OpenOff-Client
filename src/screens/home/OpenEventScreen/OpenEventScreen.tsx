@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
+import { useQueryClient } from '@tanstack/react-query';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
+import queryKeys from 'constants/queryKeys';
 import Spacing from 'components/common/Spacing/Spacing';
 import Divider from 'components/common/Divider/Divider';
 import FixedButton from 'components/common/FixedButton/FixedButton';
@@ -26,6 +28,7 @@ import openEventScreenStyles from './OpenEventScreen.style';
 const OpenEventScreen = () => {
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
+  const queryClient = useQueryClient();
 
   const { init, openEvent, setOpenEventErrorMessage } = useOpenEventStore();
   const { hasError, errorMessage } = useOpenEventValidator({ openEvent });
@@ -60,6 +63,7 @@ const OpenEventScreen = () => {
       contents: MENT_OPEN_EVENT.SUCCESS.CREATE_EVENT_CONTENT,
       callback: () => {
         stackNavigation.goBack();
+        queryClient.invalidateQueries(queryKeys.hostKeys.list);
       },
     });
   };
@@ -100,7 +104,7 @@ const OpenEventScreen = () => {
       !openEvent.applicationEndDate ||
       !openEvent.eventDates.length ||
       !openEvent.address.roadAddress ||
-      openEvent.cost == null ||
+      openEvent.cost === null ||
       !openEvent.recruitmentNumber ||
       !openEvent.description ||
       !openEvent.imageBuilders.length ||
@@ -120,7 +124,7 @@ const OpenEventScreen = () => {
       eventDates: openEvent.eventDates,
       streetLoadAddress: openEvent.address.roadAddress,
       detailAddress: openEvent.address.detailAddress ?? '',
-      eventFee: openEvent.cost,
+      eventFee: openEvent.cost ?? 0,
       maxParticipant: openEvent.recruitmentNumber,
       description: openEvent.description,
       imageDataList: imageUrlList,
@@ -205,11 +209,11 @@ const OpenEventScreen = () => {
         <OpenEventForm.HostPhoneNumber />
         <OpenEventForm.HostEmail />
 
-        <Divider height={1} color="darkGrey" />
+        {/* <Divider height={1} color="darkGrey" /> */}
 
         {/* TODO 개인정보, 유의사항 */}
-        <HeadText title="개인정보 수집 및 이용" />
-        <HeadText title="유의사항" />
+        {/* <HeadText title="개인정보 수집 및 이용" /> */}
+        {/* <HeadText title="유의사항" /> */}
 
         <Spacing height={156} />
       </ScrollView>

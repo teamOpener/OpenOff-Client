@@ -1,8 +1,9 @@
-type DialogType = 'success' | 'validate' | 'confirm';
+type DialogType = 'success' | 'validate' | 'warning' | 'confirm';
 
 export const enum DialogEnumType {
   Validate = 'validate',
   Success = 'success',
+  Warning = 'warning',
   Confirm = 'confirm',
 }
 
@@ -16,6 +17,8 @@ interface CommonDialog extends Dialog {
   type: DialogType;
   contents: string;
   callback: () => void;
+  apply: () => void;
+  applyText: string;
 }
 
 interface ConfirmDialog extends Dialog {

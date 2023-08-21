@@ -1,7 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 const hostLedgerDetailScreenStyles = StyleSheet.create({
-  container: {},
+  scrollContainer: {
+    flex: 1,
+  },
+  flatListContentStyle: {
+    paddingTop: 30,
+    paddingBottom: 100,
+  },
 });
 
 export default hostLedgerDetailScreenStyles;

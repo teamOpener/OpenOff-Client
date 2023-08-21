@@ -1,5 +1,5 @@
 import { StyleSheet, TextStyle } from 'react-native';
-import { colors, fonts } from 'styles/theme';
+import { colors, fonts, layouts } from 'styles/theme';
 
 const hostQRScanScreenStyles = StyleSheet.create({
   barcodeTextURL: {
@@ -25,6 +25,14 @@ const hostQRScanScreenStyles = StyleSheet.create({
     borderColor: colors.main,
     justifyContent: 'center',
   },
+  successCameraWrapper: {
+    borderWidth: 5,
+    borderColor: colors.lightGreen,
+  },
+  errorCameraWrapper: {
+    borderWidth: 5,
+    borderColor: colors.error,
+  },
   mainText: {
     fontFamily: fonts.semibold,
     fontSize: 18,
@@ -44,16 +52,24 @@ const hostQRScanScreenStyles = StyleSheet.create({
     borderColor: colors.main,
     position: 'absolute',
     bottom: 70,
-    maxWidth: '90%',
+    marginHorizontal: layouts.PADDING,
   },
   resultText: {
     fontFamily: fonts.semibold,
     fontSize: 15,
     lineHeight: 15 * 1.4,
+    textAlign: 'center',
   } as TextStyle,
   requestCameraPermission: {
     textAlign: 'center',
   } as TextStyle,
+  absoluteContainer: {
+    zIndex: 9999,
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '50%',
+    marginTop: -63.5,
+  },
 });
 
 export default hostQRScanScreenStyles;

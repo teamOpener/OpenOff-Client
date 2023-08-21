@@ -6,11 +6,13 @@ import {
   getFieldEventLists,
   getPersonalEventLists,
   getVogueEventLists,
+  suspensionEvent,
 } from 'apis/eventInstance';
 import { FieldCode } from 'constants/code';
 import queryKeys from 'constants/queryKeys';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
+import { EventSuspensionRequestDto } from 'models/event/request/EventSuspensionRequestDto';
 import { ApiErrorResponse } from 'types/ApiResponse';
 
 export const useCreateEvent = (
@@ -109,6 +111,21 @@ export const useEventMapInstance = (params: EventSearchRequestDto) => {
     {
       select: (data) => data.data,
       suspense: false,
+    },
+  );
+};
+
+export const useSuspensionEvent = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (data: EventSuspensionRequestDto) =>
+      suspensionEvent({ eventInfoId: data.eventInfoId }),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
     },
   );
 };

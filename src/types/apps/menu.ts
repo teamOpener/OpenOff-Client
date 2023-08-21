@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Coordinate } from 'types/event';
+import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import { Field } from './group';
 
@@ -26,7 +27,9 @@ export type BottomTabParamList = {
   EventMap: {
     eventId?: string;
   };
-  UserEvent: undefined;
+  UserEvent: {
+    tab?: UserEventTabItem;
+  };
   User: undefined;
 };
 

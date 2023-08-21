@@ -1,16 +1,17 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import queryKeys from 'constants/queryKeys';
-import { ApiErrorResponse } from 'types/ApiResponse';
-import fakeApi from 'apis/test';
-import MyTicketInfoResponseData from 'mocks/ledger/user/MyTicketInfoResponseData.json';
-import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
-import { ApplicationInfoResponseDto } from 'models/ledger/response/ApplicationInfoResponseDto';
-import ApplicationInfoResponseData from 'mocks/ledger/user/ApplicationInfoResponseData.json';
+import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { getHostEventLists } from 'apis/eventInstance';
 import { FieldCode } from 'constants/code';
 import {
   applyEvent,
+  cancelApplicationEvent,
   cancelPermittedApplicant,
+  checkQR,
+  denyApplicationUser,
+  getApplicantQnA,
+  getApplicationInfo,
+  getEventTickets,
   getLedgerStatus,
   getLedgerUserList,
   permitAllApplicant,
@@ -20,29 +21,43 @@ import SortType from 'models/ledger/entity/SortType';
 import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
 import { EventAllApplicantPermitRequestDto } from 'models/ledger/request/EventAllApplicantPermitRequestDto';
 import { ApplyEventRequestDto } from 'models/ledger/request/ApplyEventRequestDto';
+import { EventApplicationDenyRequestDto } from 'models/ledger/request/EventApplicationDenyRequestDto';
+import { ApplicantApplyDetailRequestDto } from 'models/ledger/request/ApplicantApplyDetailRequestDto';
+import { MyTicketInfoRequestDto } from 'models/ledger/request/MyTicketInfoRequestDto';
+import { QRCheckRequestDto } from 'models/ledger/request/QRCheckRequestDto';
+import { ApplicationCancelRequestDto } from 'models/ledger/request/ApplicationCancelRequestDto';
+import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 
-// TODO: 이벤트 상세 정보 조회
-export const useUserTickets = (eventId: number) => {
+export const useUserTickets = ({ eventInfoId }: MyTicketInfoRequestDto) => {
   return useQuery(
-    [...queryKeys.participantKeys.cardById(eventId)],
-    () =>
-      fakeApi<MyTicketInfoResponseDto[]>(
-        MyTicketInfoResponseData as MyTicketInfoResponseDto[],
-      ),
+    [...queryKeys.participantKeys.cardById(eventInfoId)],
+    () => getEventTickets({ eventInfoId }),
     { select: (data) => data.data },
   );
 };
 
 // TODO: 내 이벤트 - 참여 이벤트 리스트 조회
-export const useUserTicketLists = () => {
-  return useQuery(
-    [...queryKeys.participantKeys.list],
-    () =>
-      fakeApi<ApplicationInfoResponseDto[]>(
-        ApplicationInfoResponseData as unknown as ApplicationInfoResponseDto[],
-      ),
-    { select: (data) => data.data },
+export const useUserTicketLists = (fieldType?: FieldCode) => {
+  const query = useInfiniteQuery(
+    fieldType
+      ? [...queryKeys.participantKeys.listByFieldCode(fieldType)]
+      : [...queryKeys.participantKeys.list],
+    ({ pageParam = null }) =>
+      getApplicationInfo({
+        eventInfoId: pageParam ?? undefined,
+        fieldType,
+      }),
+    {
+      getNextPageParam: (lastPage) => {
+        const lastIdx = lastPage.data?.content.length;
+        if (!lastIdx || !lastPage.data?.hasNext) {
+          return false;
+        }
+        return lastPage.data?.content[lastIdx - 1].eventInfoId;
+      },
+    },
   );
+  return query;
 };
 
 export const useHostEventLists = (fieldType?: FieldCode) => {
@@ -152,4 +167,55 @@ export const useApplyEvent = (
     onError: errorCallback,
     useErrorBoundary: false,
   });
+};
+
+export const useDenyApplicationUser = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (data: EventApplicationDenyRequestDto) => denyApplicationUser(data),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
+    },
+  );
+};
+
+export const useApplicantQnA = ({
+  ledgerId,
+}: ApplicantApplyDetailRequestDto) => {
+  return useQuery(
+    [...queryKeys.hostKeys.applicantQnAbyLedgerId(ledgerId)],
+    () => getApplicantQnA({ ledgerId }),
+    {
+      select: (data) => data.data,
+    },
+  );
+};
+
+export const useCheckQR = (
+  successCallback?: (data: ApiResponse<QRCheckResponseDto>) => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((data: QRCheckRequestDto) => checkQR(data), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
+  });
+};
+
+export const useCancelApplicationEvent = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation(
+    (data: ApplicationCancelRequestDto) => cancelApplicationEvent(data),
+    {
+      onSuccess: successCallback,
+      onError: errorCallback,
+      useErrorBoundary: false,
+    },
+  );
 };

@@ -1,57 +1,56 @@
 import { useState } from 'react';
 import { Dimensions, LayoutChangeEvent, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { RouteProp, useRoute } from '@react-navigation/native';
 import { useUserTickets } from 'hooks/queries/ledger';
 import useNavigator from 'hooks/navigator/useNavigator';
-import {
-  CONSTANT_PARTICIPANT,
-  UserTicketStatus,
-} from 'constants/userEvent/participant/participantConstants';
-import { RootStackParamList } from 'types/apps/menu';
+import useStackRoute from 'hooks/navigator/useStackRoute';
+import useTicketStatus from 'hooks/event/useTicketStatus';
+import { CONSTANT_PARTICIPANT } from 'constants/userEvent/participant/participantConstants';
 import { StatusButton, TicketCard } from 'components/userEvent/participant';
+import { StackMenu } from 'constants/menu';
 import userTicketScreenStyles from './UserTicketScreen.style';
 
-type UserTicketScreenRouteProp = RouteProp<RootStackParamList, 'UserTicket'>;
-
 const UserTicketScreen = () => {
-  const { params } = useRoute<UserTicketScreenRouteProp>();
+  const { params } = useStackRoute<StackMenu.UserTicket>();
   const { stackNavigation } = useNavigator();
-  const { data: tickets, isLoading } = useUserTickets(params.eventId);
 
-  const [curTicketStatus, setCurTicketStatus] = useState<UserTicketStatus>(
-    UserTicketStatus.WAITING,
-  );
-
+  /**
+   * carousel ui 관련
+   */
   const { width } = Dimensions.get('window');
   const [carouselHeight, setCarouselHeight] = useState<number>(
     CONSTANT_PARTICIPANT.CAROUSEL_INITIAL_HEIGHT,
   );
-
   const handleHeight = (e: LayoutChangeEvent) => {
     const { height } = e.nativeEvent.layout;
-    setCarouselHeight(height);
+    setCarouselHeight(height + CONSTANT_PARTICIPANT.QR_BUTTON_HEIGHT);
   };
 
-  const handleStatus = (index: number) => {
-    // TODO: status 뭘로 알아낼지, 처음 꺼는 바로 받아오기
-    setCurTicketStatus(UserTicketStatus.APPROVED);
-  };
+  /**
+   * ticket 정보
+   */
 
-  const handlePressQR = () => {
-    // TODO: QR 보러가기
+  const { data: tickets } = useUserTickets({
+    eventInfoId: params.eventId,
+  });
+
+  const { getEventTicketStatus } = useTicketStatus();
+
+  /**
+   * qr 보러가기
+   */
+
+  const handlePressQR = (ticketIndex: string) => {
+    if (!tickets) {
+      return;
+    }
+
     stackNavigation.navigate('UserQR', {
-      eventId: 1,
-      ticketId: 'E-D6A8F11F26',
+      eventId: params.eventId,
+      ticketId: ticketIndex,
     });
   };
 
-  // TODO
-  if (isLoading) {
-    return null;
-  }
-
-  // TODO
   if (!tickets) {
     return null;
   }
@@ -68,23 +67,26 @@ const UserTicketScreen = () => {
         style={[userTicketScreenStyles.carousel, { width }]}
         mode="parallax"
         modeConfig={{
-          // TODO: 기기별 UI 테스트 필요
           parallaxScrollingOffset: 64,
           parallaxScrollingScale: 0.9,
           parallaxAdjacentItemScale: 0.77,
         }}
-        onScrollEnd={handleStatus}
         data={tickets}
         renderItem={({ item }) => (
-          <TicketCard
-            key={item.eventIndexId}
-            onLayout={handleHeight}
-            ticketInfo={item}
-          />
+          <>
+            <TicketCard
+              key={item.eventIndexId}
+              onLayout={handleHeight}
+              ticketInfo={item}
+            />
+            <StatusButton
+              status={getEventTicketStatus(item)}
+              ticketType={item.ticketType}
+              onPress={() => handlePressQR(item.ticketIndex)}
+            />
+          </>
         )}
       />
-
-      <StatusButton status={curTicketStatus} onPress={handlePressQR} />
     </View>
   );
 };

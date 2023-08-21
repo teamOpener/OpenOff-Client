@@ -20,23 +20,37 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
 
   const resetCommonDialog = () => {
     setDialog({
-      text: '',
-      type: DialogEnumType.Validate,
+      ...dialog,
       isShow: false,
-      contents: '',
-      callback: () => {},
-      closeText: '닫기',
     });
+    setTimeout(() => {
+      setDialog({
+        text: '',
+        type: DialogEnumType.Validate,
+        isShow: false,
+        contents: '',
+        callback: () => {},
+        closeText: '닫기',
+        apply: () => {},
+        applyText: '',
+      });
+    }, 200);
   };
 
   const resetConfirmDialog = () => {
     setConfirmDialog({
-      text: '',
+      ...confirmDialog,
       isShow: false,
-      apply: () => {},
-      applyText: '적용',
-      closeText: '닫기',
     });
+    setTimeout(() => {
+      setConfirmDialog({
+        isShow: false,
+        text: '',
+        apply: () => {},
+        applyText: '적용',
+        closeText: '닫기',
+      });
+    }, 100);
   };
 
   const openDialog = ({
@@ -50,6 +64,7 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
   }: OpenDialog) => {
     switch (type) {
       case DialogEnumType.Validate:
+      case DialogEnumType.Warning:
       case DialogEnumType.Success:
         setDialog({
           text,
@@ -58,6 +73,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
           callback,
           closeText,
           isShow: true,
+          apply,
+          applyText,
         });
         break;
       case DialogEnumType.Confirm:

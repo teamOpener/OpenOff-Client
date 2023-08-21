@@ -17,6 +17,7 @@ const userKeys = {
 
 const eventKeys = {
   all: [DOMAIN.EVENT],
+  details: [DOMAIN.EVENT, 'detail'],
   byId: (id: number) => [DOMAIN.EVENT, 'detail', id],
   personalList: [DOMAIN.EVENT, 'personal-list'],
   vogueList: [DOMAIN.EVENT, 'vogue-list'],
@@ -28,6 +29,7 @@ const eventKeys = {
 const participantKeys = {
   all: [DOMAIN.PARTICIPANT],
   list: [DOMAIN.PARTICIPANT, 'list'],
+  listByFieldCode: (type: FieldCode) => [DOMAIN.PARTICIPANT, 'list', type],
   cardById: (eventId: number) => [DOMAIN.PARTICIPANT, 'list', eventId, 'card'],
 };
 
@@ -47,6 +49,7 @@ const hostKeys = {
     sortType,
     eventIndexId,
   ],
+  applicantQnAbyLedgerId: (ledgerId: number) => [DOMAIN.HOST, 'qna', ledgerId],
 };
 
 const bookmarkKeys = {

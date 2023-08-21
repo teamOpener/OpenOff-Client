@@ -26,7 +26,7 @@ const SelectBottomSheet = React.forwardRef<BottomSheetModal, Props>(
     const fallbackRef = useRef<BottomSheetModal>(null);
     const ref = forwardedRef || fallbackRef;
 
-    const snapPoints = useMemo<string[]>(() => ['24%'], []);
+    const snapPoints = useMemo<string[]>(() => ['30%'], []);
 
     const handleSortType = (type: SortType) => {
       setSelectedSortType(type);

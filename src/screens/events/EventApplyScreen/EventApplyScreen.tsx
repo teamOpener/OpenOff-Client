@@ -6,16 +6,17 @@ import { useEventDetail } from 'hooks/queries/event';
 import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import Divider from 'components/common/Divider/Divider';
-import HeadText from 'components/common/HeadText/HeadText';
+// import HeadText from 'components/common/HeadText/HeadText';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import queryKeys from 'constants/queryKeys';
+import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import { ScrollView } from 'react-native';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Spacing from 'components/common/Spacing/Spacing';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useEventIndexList from 'hooks/event/useEventIndexList';
-import useRouteParams from 'hooks/navigator/useRouteParams';
+import useStackRoute from 'hooks/navigator/useStackRoute';
 import useDialog from 'hooks/app/useDialog';
 import { useMyInfo } from 'hooks/queries/user';
 import { useApplyEvent } from 'hooks/queries/ledger';
@@ -28,11 +29,11 @@ import eventApplyScreenStyles from './EventApplyScreen.style';
 
 const EventApplyScreen = () => {
   const queryClient = useQueryClient();
-  const params = useRouteParams<StackMenu.EventApply>();
+  const { params } = useStackRoute<StackMenu.EventApply>();
   const { tabNavigation } = useNavigator();
   const { openDialog } = useDialog();
 
-  const { data: event } = useEventDetail(params?.id ?? 0);
+  const { data: event } = useEventDetail(params.id);
   const { data: user } = useMyInfo();
 
   const { getEventDateByIndexId } = useEventIndexList({
@@ -50,10 +51,13 @@ const EventApplyScreen = () => {
       text: MENT_EVENT_DETAIL.SUCCESS.APPLICATION,
       contents: MENT_EVENT_DETAIL.SUCCESS.APPLICATION_DETAIL,
       callback: () => {
-        tabNavigation.navigate(BottomTabMenu.UserEvent);
+        tabNavigation.navigate(BottomTabMenu.UserEvent, {
+          tab: UserEventTabItem.PARTICIPANT,
+        });
         queryClient.invalidateQueries(queryKeys.eventKeys.all);
         queryClient.invalidateQueries(queryKeys.bookmarkKeys.all);
         queryClient.invalidateQueries(queryKeys.participantKeys.all);
+        queryClient.invalidateQueries(queryKeys.hostKeys.list);
       },
     });
   };
@@ -76,9 +80,6 @@ const EventApplyScreen = () => {
   };
 
   const handleApply = async () => {
-    if (!params) {
-      return;
-    }
     if (isEmptyAnswer(qnaList)) {
       openDialog({
         type: 'validate',
@@ -87,12 +88,12 @@ const EventApplyScreen = () => {
       return;
     }
     await applyEvent({
-      eventIndexId: params.id,
+      eventIndexId: params.idx,
       answerInfoList: convertToAnswerInfoArray(qnaList),
     });
   };
 
-  if (!event || !params) {
+  if (!event) {
     return null;
   }
 
@@ -170,21 +171,19 @@ const EventApplyScreen = () => {
                   setQnaList={setQnaList}
                 />
               </SpaceLayout>
-              <Divider height={1} color="darkGrey" />
+              {/* <Divider height={1} color="darkGrey" /> */}
             </>
           )}
 
           {/* TODO 개인정보 */}
-          <HeadText title={MENT_EVENT_DETAIL.MAIN.PERSONAL_INFORMATION} />
-          <HeadText title={MENT_EVENT_DETAIL.MAIN.INSTRUCTIONS} />
+          {/* <HeadText title={MENT_EVENT_DETAIL.MAIN.PERSONAL_INFORMATION} /> */}
+          {/* <HeadText title={MENT_EVENT_DETAIL.MAIN.INSTRUCTIONS} /> */}
         </SpaceLayout>
 
         <Spacing height={200} />
       </ScrollView>
 
       <FixedButton
-        // TODO: disabled
-        // disabled={selectedIdx == null}
         label={MENT_EVENT_DETAIL.MAIN.APPLICATION}
         onPress={handleApply}
       />

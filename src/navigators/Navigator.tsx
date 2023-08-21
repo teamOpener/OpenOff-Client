@@ -200,7 +200,8 @@ const Navigator = () => {
       {/* host event */}
       <Stack.Screen
         options={{
-          ...noTextOptions,
+          headerTitle: '주최 이벤트 관리',
+          ...defaultOptions,
         }}
         name={StackMenu.HostConsole}
         component={HostConsoleScreen}
@@ -224,7 +225,8 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          ...noTextOptions,
+          headerTitle: '',
+          ...defaultOptions,
         }}
         name={StackMenu.HostLedgerDetail}
         component={HostLedgerDetailScreen}

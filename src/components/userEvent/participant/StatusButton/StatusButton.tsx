@@ -1,16 +1,30 @@
+import { colors } from 'styles/theme';
+import { TouchableOpacity, View } from 'react-native';
+import TicketType from 'models/ledger/entity/TicketType';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { UserTicketStatus } from 'constants/userEvent/participant/participantConstants';
 import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
-import { TouchableOpacity, View } from 'react-native';
 import statusButtonStyles from './StatusButton.style';
 
 interface Props {
   status: UserTicketStatus;
+  ticketType: TicketType;
   onPress: () => void;
 }
 
-const StatusButton = ({ status, onPress }: Props) => {
+const StatusButton = ({ status, ticketType, onPress }: Props) => {
+  const getColorType = (type: TicketType): keyof typeof colors => {
+    switch (ticketType) {
+      case TicketType.A:
+      case TicketType.C:
+      case TicketType.E:
+        return 'main';
+      default:
+        return 'white';
+    }
+  };
+
   const getMessage = (ticketStatus: UserTicketStatus): string => {
     switch (ticketStatus) {
       case UserTicketStatus.CANCELED:
@@ -33,10 +47,20 @@ const StatusButton = ({ status, onPress }: Props) => {
         style={statusButtonStyles.container}
         onPress={onPress}
       >
-        <View style={statusButtonStyles.qrWrapper}>
+        <View
+          style={[
+            statusButtonStyles.qrWrapper,
+            {
+              backgroundColor: colors[getColorType(ticketType)],
+            },
+          ]}
+        >
           <Icon name="IconQR" fill="black" size={32} />
         </View>
-        <Text color="main" style={statusButtonStyles.qrText}>
+        <Text
+          color={getColorType(ticketType)}
+          style={statusButtonStyles.qrText}
+        >
           {MENT_PARTICIPANT.MAIN.QR}
         </Text>
       </TouchableOpacity>

@@ -1,4 +1,4 @@
-import { Alert, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import queryKeys from 'constants/queryKeys';
@@ -7,8 +7,10 @@ import Icon from 'components/common/Icon/Icon';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import Text from 'components/common/Text/Text';
 import useNavigator from 'hooks/navigator/useNavigator';
+import useDialog from 'hooks/app/useDialog';
 import {
   useCancelPermittedApplicant,
+  useDenyApplicationUser,
   usePermitApplicant,
 } from 'hooks/queries/ledger';
 import { EventApplicantInfoResponseDto } from 'models/ledger/response/EventApplicantInfoResponseDto';
@@ -17,10 +19,13 @@ import ActionButton from '../buttons/ActionButton/ActionButton';
 
 interface Props {
   eventApplicantInfo: EventApplicantInfoResponseDto;
+  eventIndexId: number;
 }
 
-const UserCard = ({ eventApplicantInfo }: Props) => {
+const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
+  const queryClient = useQueryClient();
   const { stackNavigation } = useNavigator();
+  const { openDialog } = useDialog();
 
   const handleMoveDetailPage = () => {
     stackNavigation.navigate('HostLedgerDetail', {
@@ -28,38 +33,61 @@ const UserCard = ({ eventApplicantInfo }: Props) => {
     });
   };
 
-  const queryClient = useQueryClient();
-
   const handlePermitSuccess = () => {
-    // TODO list update
-    // queryClient.invalidateQueries(queryKeys.hostKeys.ledgerListByIndexId(eventApplicantInfo))
+    // TODO isAccpeted가 느리게 반영될 때
+    queryClient.invalidateQueries(queryKeys.participantKeys.all);
+    queryClient.invalidateQueries(queryKeys.eventKeys.details);
+    queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
+    queryClient.invalidateQueries(
+      queryKeys.hostKeys.statusByIndexId(eventIndexId),
+    );
+    queryClient.invalidateQueries(
+      queryKeys.hostKeys.applicantQnAbyLedgerId(eventApplicantInfo.ladgerId),
+    );
   };
 
   const handlePermitError = (error: ApiErrorResponse) => {
-    // TODO
-    Alert.alert(error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT);
+    openDialog({
+      type: 'validate',
+      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+    });
   };
+
+  /**
+   * 승인
+   */
 
   const { mutateAsync: permitApplicant } = usePermitApplicant(
     handlePermitSuccess,
     handlePermitError,
   );
 
+  const handleApprove = async () => {
+    await permitApplicant({ ladgerId: eventApplicantInfo.ladgerId });
+  };
+
+  /**
+   * 거절
+   */
+
+  const { mutateAsync: denyApplicationUser } = useDenyApplicationUser(
+    handlePermitSuccess,
+    handlePermitError,
+  );
+
+  const handleDeny = async () => {
+    await denyApplicationUser({ ledgerId: eventApplicantInfo.ladgerId });
+  };
+
+  /**
+   * 승인 취소
+   */
+
   const { mutateAsync: cancelPermittedApplicant } = useCancelPermittedApplicant(
     handlePermitSuccess,
     handlePermitError,
   );
 
-  // TODO
-  const handleApprove = async () => {
-    await permitApplicant({ ladgerId: eventApplicantInfo.ladgerId });
-  };
-
-  const handleDeny = () => {
-    // TODO
-  };
-
-  // TODO
   const handleCancel = async () => {
     await cancelPermittedApplicant({ ladgerId: eventApplicantInfo.ladgerId });
   };
@@ -122,7 +150,7 @@ const UserCard = ({ eventApplicantInfo }: Props) => {
               />
             </>
           )}
-          {/* TODO 승인 거부 */}
+
           {/* 승인 후 */}
           {eventApplicantInfo.isAccepted && !eventApplicantInfo.isJoined && (
             <ActionButton label="승인취소" onPress={handleCancel} />

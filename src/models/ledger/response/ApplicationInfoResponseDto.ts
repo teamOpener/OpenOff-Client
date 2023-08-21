@@ -1,18 +1,10 @@
 import { FieldCode } from 'constants/code';
+import { EventApplicantLadgerInfo } from '../entity/EventApplicantLadgerInfo';
 
 export interface ApplicationInfoResponseDto {
   eventInfoId: number;
   eventTitle: string;
   eventDateList: string[];
   fieldTypeList: FieldCode[];
-  //   eventApplicantLadgerInfoList: EventApplicantLadgerInfo[];
+  eventApplicantLadgerInfoList: EventApplicantLadgerInfo[];
 }
-
-// get ladger/tickets
-
-// type params = {
-//   fieldType: FieldType;
-//   eventInfoId: number;
-//   page: 0;
-//   size: 10;
-// };

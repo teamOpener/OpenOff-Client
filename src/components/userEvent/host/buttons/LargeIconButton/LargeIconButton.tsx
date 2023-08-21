@@ -28,7 +28,7 @@ const LargeIconButton = ({
       {...rest}
     >
       <View style={largeIconButtonStyles.iconWrapper}>
-        <Icon name={iconName} size={57} color="white" />
+        <Icon name={iconName} size={57} fill="white" />
       </View>
       <Text style={largeIconButtonStyles.labelText}>{label}</Text>
     </TouchableOpacity>

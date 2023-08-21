@@ -13,6 +13,8 @@ export const dialogInitialValue: CommonDialog = {
   contents: '',
   callback: () => {},
   closeText: '닫기',
+  apply: () => {},
+  applyText: '적용',
 };
 
 export const confirmDialogInitialValue: ConfirmDialog = {
