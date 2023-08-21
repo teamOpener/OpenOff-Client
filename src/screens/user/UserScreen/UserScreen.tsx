@@ -15,9 +15,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useAuthorizeStore } from 'stores/Authorize';
 import userScreenStyles from './UserScreen.style';
 
 const UserScreen = () => {
+  const { resetToken, setIsLogin } = useAuthorizeStore();
   const { data: userInfo } = useMyInfo();
   const { stackNavigation } = useNavigator();
 
@@ -27,6 +29,11 @@ const UserScreen = () => {
 
   const handleResetInterest = () => {
     stackNavigation.navigate('UserInterest');
+  };
+
+  const handleLogout = () => {
+    resetToken();
+    setIsLogin(false);
   };
 
   return (
@@ -103,9 +110,9 @@ const UserScreen = () => {
         <Pressable>
           <Text variant="body2">{MENT_USER.MAIN.FAQ}</Text>
         </Pressable>
-        <Pressable>
+        {/* <Pressable>
           <Text variant="body2">{MENT_USER.MAIN.ANNOUNCEMENT}</Text>
-        </Pressable>
+        </Pressable> */}
         <Pressable>
           <Text variant="body2">{MENT_USER.MAIN.INQUIRY}</Text>
         </Pressable>
@@ -116,7 +123,7 @@ const UserScreen = () => {
         <Pressable>
           <Text variant="body2">{MENT_USER.MAIN.SERVICE_SETTING}</Text>
         </Pressable>
-        <Pressable>
+        <Pressable onPress={handleLogout}>
           <Text variant="body2">{MENT_USER.MAIN.LOGOUT}</Text>
         </Pressable>
       </ScrollView>

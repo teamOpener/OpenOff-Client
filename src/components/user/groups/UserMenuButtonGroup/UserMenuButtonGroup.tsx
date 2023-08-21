@@ -45,12 +45,12 @@ const UserMenuButtonGroup = () => {
           {MENT_USER.MAIN.HOST_EVENT}
         </Text>
       </Pressable>
-      <Pressable style={userMenuButtonGroupStyles.menuButton}>
+      {/* <Pressable style={userMenuButtonGroupStyles.menuButton}>
         <Icon name="IconComment" size={30} fill="white" />
         <Text variant="bodySB" color="white">
           {MENT_USER.MAIN.MY_COMMENT}
         </Text>
-      </Pressable>
+      </Pressable> */}
     </View>
   );
 };
