@@ -1,4 +1,3 @@
-import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
@@ -84,9 +83,6 @@ const FormPasswordInput = ({
                   <Text variant="body1" color="error">
                     !
                   </Text>
-                )}
-                {!errors[name] && value && (
-                  <Icon name="IconCheck" size={20} fill="green" />
                 )}
               </View>
             </View>
