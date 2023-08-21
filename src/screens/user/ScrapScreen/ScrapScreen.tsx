@@ -1,9 +1,6 @@
-import { FlatList, ScrollView, View } from 'react-native';
-import EventCard from 'components/home/cards/EventCard/EventCard';
-import eventList from 'mocks/lists/eventList';
-import Spacing from 'components/common/Spacing/Spacing';
-import { useBookmarkEventLists } from 'hooks/queries/bookmark';
 import ScrapEventList from 'components/user/lists/ScrapEventList/ScrapEventList';
+import { useBookmarkEventLists } from 'hooks/queries/bookmark';
+import { View } from 'react-native';
 import scrapScreenStyles from './ScrapScreen.style';
 
 const ScrapScreen = () => {
@@ -27,8 +24,6 @@ const ScrapScreen = () => {
         isLoading={isLoading}
         handleEndReached={handleEndReached}
       />
-
-      <Spacing height={100} />
     </View>
   );
 };

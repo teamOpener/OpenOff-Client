@@ -1,6 +1,8 @@
+import { ScrollView, TouchableOpacity, View } from 'react-native';
+import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
+import Spacing from 'components/common/Spacing/Spacing';
 import { FieldCode } from 'constants/code';
-import { ImageBackground, TouchableOpacity, View } from 'react-native';
 import categoryButtonGroupStyles from './CategoryButtonGroup.style';
 
 interface Props {
@@ -17,134 +19,139 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
       >
         카테고리
       </Text>
-      <View style={categoryButtonGroupStyles.groupContainer}>
+      <Spacing height={10} />
+
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={categoryButtonGroupStyles.groupContainer}
+        contentContainerStyle={categoryButtonGroupStyles.groupContentContainer}
+      >
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.FD)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
-          <ImageBackground
-            source={require('../../../../assets/images/field/food&drink.png')}
-            resizeMode="cover"
-            style={categoryButtonGroupStyles.categoryImage}
-          >
-            <View style={categoryButtonGroupStyles.textContainer}>
-              <Text variant="body3" color="white">
-                푸드
-              </Text>
-              <Text variant="body3" color="white">
-                ·
-              </Text>
-              <Text variant="body3" color="white">
-                드링크
-              </Text>
-            </View>
-          </ImageBackground>
+          <Icon name="IconTicketCircles" size={45} fill="main" />
+          <View style={categoryButtonGroupStyles.textContainer}>
+            <Text variant="bodySB" color="white">
+              푸드
+            </Text>
+            <Text
+              variant="bodySB"
+              color="white"
+              style={categoryButtonGroupStyles.centerDot}
+            >
+              •
+            </Text>
+            <Text variant="bodySB" color="white">
+              드링크
+            </Text>
+          </View>
         </TouchableOpacity>
+
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.EE)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
-          <ImageBackground
-            source={require('../../../../assets/images/field/exhibition&fleaMarket.png')}
-            resizeMode="cover"
-            style={categoryButtonGroupStyles.categoryImage}
-          >
-            <View style={categoryButtonGroupStyles.textContainer}>
-              <Text variant="body3" color="white">
-                전시회
-              </Text>
-              <Text variant="body3" color="white">
-                ·
-              </Text>
-              <Text variant="body3" color="white">
-                플리마켓
-              </Text>
-            </View>
-          </ImageBackground>
+          <Icon name="IconTicketStar" size={45} fill="main" />
+          <View style={categoryButtonGroupStyles.textContainer}>
+            <Text variant="bodySB" color="white">
+              전시회
+            </Text>
+            <Text
+              variant="bodySB"
+              color="white"
+              style={categoryButtonGroupStyles.centerDot}
+            >
+              •
+            </Text>
+            <Text variant="bodySB" color="white">
+              플리마켓
+            </Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.S)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
-          <ImageBackground
-            source={require('../../../../assets/images/field/performance.png')}
-            resizeMode="cover"
-            style={categoryButtonGroupStyles.categoryImage}
-          >
-            <View style={categoryButtonGroupStyles.textContainer}>
-              <Text variant="body3" color="white">
-                공연
-              </Text>
-            </View>
-          </ImageBackground>
+          <Icon name="IconTicketHeart" size={45} fill="main" />
+          <View style={categoryButtonGroupStyles.textContainer}>
+            <Text variant="bodySB" color="white">
+              공연
+            </Text>
+          </View>
         </TouchableOpacity>
+
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.PF)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
-          <ImageBackground
-            source={require('../../../../assets/images/field/concert.png')}
-            resizeMode="cover"
-            style={categoryButtonGroupStyles.categoryImage}
-          >
-            <View style={categoryButtonGroupStyles.textContainer}>
-              <Text variant="body3" color="white">
-                파티
-              </Text>
-              <Text variant="body3" color="white">
-                ·
-              </Text>
-              <Text variant="body3" color="white">
-                페스티벌
-              </Text>
-            </View>
-          </ImageBackground>
+          <Icon name="IconShuriken" size={45} fill="main" />
+          <View style={categoryButtonGroupStyles.textContainer}>
+            <Text variant="bodySB" color="white">
+              파티
+            </Text>
+            <Text
+              variant="bodySB"
+              color="white"
+              style={categoryButtonGroupStyles.centerDot}
+            >
+              •
+            </Text>
+            <Text variant="bodySB" color="white">
+              페스티벌
+            </Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.EA)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
-          <ImageBackground
-            source={require('../../../../assets/images/field/exercise&activity.png')}
-            resizeMode="cover"
-            style={categoryButtonGroupStyles.categoryImage}
-          >
-            <View style={categoryButtonGroupStyles.textContainer}>
-              <Text variant="body3" color="white">
-                운동
-              </Text>
-              <Text variant="body3" color="white">
-                ·
-              </Text>
-              <Text variant="body3" color="white">
-                액티비티
-              </Text>
-            </View>
-          </ImageBackground>
+          <Icon name="IconFourCircle" size={45} fill="main" />
+          <View style={categoryButtonGroupStyles.textContainer}>
+            <Text variant="body3" color="white">
+              운동
+            </Text>
+            <Text
+              variant="bodySB"
+              color="white"
+              style={categoryButtonGroupStyles.centerDot}
+            >
+              •
+            </Text>
+            <Text variant="body3" color="white">
+              액티비티
+            </Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.FSDH)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
-          <ImageBackground
-            source={require('../../../../assets/images/field/sociable.png')}
-            resizeMode="cover"
-            style={categoryButtonGroupStyles.categoryImage}
-          >
-            <View style={categoryButtonGroupStyles.textContainer}>
-              <Text variant="body3" color="white">
-                친목
-              </Text>
-              <Text variant="body3" color="white">
-                ·
-              </Text>
-              <Text variant="body3" color="white">
-                일일호프
-              </Text>
-            </View>
-          </ImageBackground>
+          <Icon name="IconSnow" size={45} fill="main" />
+          <View style={categoryButtonGroupStyles.textContainer}>
+            <Text variant="body3" color="white">
+              친목
+            </Text>
+            <Text
+              variant="bodySB"
+              color="white"
+              style={categoryButtonGroupStyles.centerDot}
+            >
+              •
+            </Text>
+            <Text variant="body3" color="white">
+              일일호프
+            </Text>
+          </View>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </View>
   );
 };

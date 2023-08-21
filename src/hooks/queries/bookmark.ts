@@ -11,7 +11,7 @@ export const useBookmarkEventLists = () => {
       getNextPageParam: (lastPage) => {
         const lastIdx = lastPage.data?.content.length;
         if (!lastPage.data?.hasNext) {
-          return false;
+          return undefined;
         }
         return lastPage.data?.content[lastIdx - 1].bookmarkId;
       },

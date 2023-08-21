@@ -17,7 +17,7 @@ const CarouselCard = <T extends Advertisement>({
   length,
 }: Props<T>) => {
   return (
-    <TouchableOpacity style={carouselCardStyle.container}>
+    <TouchableOpacity activeOpacity={0.7} style={carouselCardStyle.container}>
       <ImageBackground
         style={carouselCardStyle.backgroundImage}
         source={{ uri: item.image }}

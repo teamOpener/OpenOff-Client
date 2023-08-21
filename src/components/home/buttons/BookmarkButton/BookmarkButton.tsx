@@ -9,7 +9,7 @@ import bookmarkButtonStyles from './BookmarkButton.style';
 interface Props {
   eventInfoId?: number;
   isEventBookmarked: boolean;
-  type?: 'default' | 'scrap' | 'rowEvent';
+  type?: 'default' | 'scrap' | 'bookmark' | 'rowEvent';
 }
 
 const BookmarkButton = ({
@@ -41,7 +41,10 @@ const BookmarkButton = ({
       style={bookmarkButtonStyles.bookmarkButton}
       onPress={handleBookmark}
     >
-      {(type === 'default' || type === 'rowEvent') &&
+      {type === 'bookmark' && (
+        <Icon name="IconFillHeart" size={20} fill="main" />
+      )}
+      {(type === 'rowEvent' || type === 'default') &&
         (isBookmarked ? (
           <Icon
             name="IconFillHeart"

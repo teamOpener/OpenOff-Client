@@ -1,9 +1,11 @@
+type SocialType = 'KAKAO' | 'NAVER' | 'GOOGLE' | 'APPLE' | 'NORMAL';
+
 interface SocialAccountInfo {
   id: string;
-  accountType: 'KAKAO' | 'GOOGLE' | 'APPLE' | 'NORMAL';
+  accountType: SocialType;
   socialId: string;
   email: string;
   socialName: string;
 }
 
-export default SocialAccountInfo;
+export type { SocialAccountInfo, SocialType };

@@ -1,6 +1,7 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import MENT_USER from 'constants/user/userConstants';
+import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { Pressable, View } from 'react-native';
 import userMenuButtonGroupStyles from './UserMenuButtonGroup.style';
@@ -13,7 +14,15 @@ const UserMenuButtonGroup = () => {
   };
 
   const handleShowMyTicket = () => {
-    tabNavigation.navigate('UserEvent');
+    tabNavigation.navigate('UserEvent', {
+      tab: UserEventTabItem.PARTICIPANT,
+    });
+  };
+
+  const handleShowMyHostEvent = () => {
+    tabNavigation.navigate('UserEvent', {
+      tab: UserEventTabItem.HOST,
+    });
   };
 
   return (
@@ -38,19 +47,19 @@ const UserMenuButtonGroup = () => {
       </Pressable>
       <Pressable
         style={userMenuButtonGroupStyles.menuButton}
-        onPress={handleShowMyTicket}
+        onPress={handleShowMyHostEvent}
       >
         <Icon name="IconCongrates" size={30} fill="white" />
         <Text variant="bodySB" color="white">
           {MENT_USER.MAIN.HOST_EVENT}
         </Text>
       </Pressable>
-      <Pressable style={userMenuButtonGroupStyles.menuButton}>
+      {/* <Pressable style={userMenuButtonGroupStyles.menuButton}>
         <Icon name="IconComment" size={30} fill="white" />
         <Text variant="bodySB" color="white">
           {MENT_USER.MAIN.MY_COMMENT}
         </Text>
-      </Pressable>
+      </Pressable> */}
     </View>
   );
 };

@@ -92,7 +92,7 @@ const UserEventScreen = () => {
     if (params && params.tab) {
       setActiveTabName(params.tab);
     }
-  }, []);
+  }, [params]);
 
   // TODO
   if (!ticketLists) {

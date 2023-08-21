@@ -9,7 +9,7 @@ interface Event {
   eventInfoId?: number;
   bookmarkId?: number;
   eventTitle: string;
-  fieldTypeList: FieldCode[];
+  fieldTypes: FieldCode[];
   eventDate: string;
   mainImageUrl: string;
   streetRoadAddress: string;

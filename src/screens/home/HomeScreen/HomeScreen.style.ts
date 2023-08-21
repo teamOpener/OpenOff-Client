@@ -9,7 +9,7 @@ const homeScreenStyles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
     flexDirection: 'column',
-    paddingLeft: 25,
+    paddingLeft: 20,
     marginBottom: 30,
   },
   logo: {

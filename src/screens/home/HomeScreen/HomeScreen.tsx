@@ -4,6 +4,7 @@ import FloatingButton from 'components/home/floatingbutton/FloatingButton';
 import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/CategoryButtonGroup';
 import EventCardList from 'components/home/lists/EventCardList/EventCardList';
 import { StackMenu } from 'constants/menu';
+import Spacing from 'components/common/Spacing/Spacing';
 import fieldData from 'data/lists/fieldData';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { usePersonalEventLists, useVogueEventLists } from 'hooks/queries/event';
@@ -77,6 +78,9 @@ const HomeScreen = () => {
         </View>
         <AdvertisementCarousel carouselData={advertisementList} />
         <CategoryButtonGroup handlePress={handleCategoryPress} />
+
+        <Spacing height={20} />
+
         <EventCardList
           isLoading={isPersonalLoading}
           events={personalEventLists}
@@ -90,6 +94,7 @@ const HomeScreen = () => {
           subTitle="지금 핫한 인기 이벤트를 둘러보세요."
           type="popular"
         />
+        <Spacing height={20} />
       </ScrollView>
     </View>
   );

@@ -9,6 +9,12 @@ const socialLoginButtonGroupStyles = StyleSheet.create({
     width: 40,
     height: 34.7,
   },
+  recentLogin: {
+    width: 116,
+    height: 29,
+    position: 'absolute',
+    top: -40,
+  },
 });
 
 export default socialLoginButtonGroupStyles;
