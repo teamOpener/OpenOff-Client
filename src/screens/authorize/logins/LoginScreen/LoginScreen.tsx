@@ -31,13 +31,13 @@ import loginScreenStyles from './LoginScreen.style';
 const LoginScreen = () => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [emailAddress, setEmailAddress] = useState<string>('');
+  const [firstLoginShow, setFirstLoginShow] = useState<boolean>(true);
+  const [password, setPassword] = useState<string>('');
 
   const { setIsLogin, resetToken, setRecentLogin, recentLogin } =
     useAuthorizeStore();
 
   const { openDialog } = useDialog();
-
-  const [password, setPassword] = useState<string>('');
 
   const handleLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
@@ -135,7 +135,12 @@ const LoginScreen = () => {
     clearToken();
   }, []);
 
-  if (isSocialLoginLoading || isNormalLoginLoading)
+  useEffect(() => {
+    const timer = setTimeout(() => setFirstLoginShow(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isSocialLoginLoading || isNormalLoginLoading || firstLoginShow)
     return <WithIconLoading isActive backgroundColor={colors.background} />;
 
   return (
