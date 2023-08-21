@@ -17,7 +17,7 @@ const AdvertisementCarousel = <T extends Advertisement>({
       autoPlay
       autoPlayInterval={2000}
       style={advertisementCarouselStyles.container}
-      width={Dimensions.get('window').width - 25}
+      width={Dimensions.get('window').width - 20}
       height={300}
       vertical={false}
       data={carouselData}

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { colors, fonts } from 'styles/theme';
 
 const categoryButtonGroupStyles = StyleSheet.create({
   titleContainer: {
@@ -9,28 +9,40 @@ const categoryButtonGroupStyles = StyleSheet.create({
     alignItems: 'center',
   },
   groupContainer: {
-    width: 285,
-    marginRight: 25,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginLeft: -5,
   },
   categoryImage: {
-    width: 85,
-    height: 85,
+    width: 107,
+    height: 107,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.background,
   },
+  centerDot: {
+    textAlign: 'center',
+    lineHeight: 6 * 1.2,
+    fontSize: 6,
+    fontFamily: fonts.bold,
+  },
   buttonContainer: {
     margin: 5,
+    width: 112,
+    height: 112,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+    borderColor: colors.darkGrey,
+    borderWidth: 1,
+    borderRadius: 3,
   },
   textContainer: {
-    width: 85,
-    height: 85,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
     backgroundColor: 'rgba(30, 30, 30, 0.70)',
+    height: 36 * 1.2,
   },
 });
 
