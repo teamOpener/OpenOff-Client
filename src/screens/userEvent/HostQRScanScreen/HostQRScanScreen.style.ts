@@ -58,6 +58,8 @@ const hostQRScanScreenStyles = StyleSheet.create({
     fontFamily: fonts.semibold,
     fontSize: 15,
     lineHeight: 15 * 1.4,
+    flexShrink: 1,
+    textAlign: 'center',
   } as TextStyle,
   requestCameraPermission: {
     textAlign: 'center',
