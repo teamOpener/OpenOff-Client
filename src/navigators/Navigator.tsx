@@ -31,6 +31,7 @@ import UserInterestResetScreen from 'screens/user/UserInterestResetScreen/UserIn
 import UserCommentScreen from 'screens/user/UserCommentScreen/UserCommentScreen';
 import ScrapScreen from 'screens/user/ScrapScreen/ScrapScreen';
 import UserPasswordResetScreen from 'screens/user/UserPasswordResetScreen/UserPasswordResetScreen';
+import EventCommentScreen from 'screens/events/EventCommentScreen/EventCommentScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -173,6 +174,14 @@ const Navigator = () => {
         }}
         name={StackMenu.EventApply}
         component={EventApplyScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerTitle: '댓글',
+          ...defaultOptions,
+        }}
+        name={StackMenu.EventComment}
+        component={EventCommentScreen}
       />
       {/* user event */}
       <Stack.Screen
