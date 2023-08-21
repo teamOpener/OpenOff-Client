@@ -14,6 +14,7 @@ const ErrorText = ({ validation, value, width = 350 }: Props) => {
     if (!validate) return 11;
     return validate.length > 20 ? 10 : 11;
   };
+
   return (
     <View>
       {validation(value) ? (

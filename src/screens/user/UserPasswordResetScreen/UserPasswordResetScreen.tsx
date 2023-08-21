@@ -1,5 +1,5 @@
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
-import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
+import FormPasswordInput from 'components/authorize/inputs/FormPasswordInput/FormPasswordInput';
 import Text from 'components/common/Text/Text';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import MENT_USER from 'constants/user/userConstants';
@@ -7,17 +7,16 @@ import useDialog from 'hooks/app/useDialog';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useResetPassword } from 'hooks/queries/auth';
 import { useMyInfo } from 'hooks/queries/user';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import { PasswordValue } from 'types/join';
 import { validatePassword, validatePasswordCheck } from 'utils/validate';
 import userPasswordResetScreenStyles from './UserPasswordResetScreen.style';
 
 const UserPasswordResetScreen = () => {
   const { stackNavigation } = useNavigator();
-  const [password, setPassword] = useState<string>('');
-  const [passwordCheck, setPasswordCheck] = useState<string>('');
   const { openDialog } = useDialog();
   const { data: userInfo } = useMyInfo();
 
@@ -28,6 +27,13 @@ const UserPasswordResetScreen = () => {
       callback: () => stackNavigation.goBack(),
     });
   };
+
+  const {
+    handleSubmit,
+    control,
+    watch,
+    formState: { errors },
+  } = useForm<PasswordValue>();
 
   const handleErrorCallback = (error: ApiErrorResponse) => {
     openDialog({
@@ -41,32 +47,24 @@ const UserPasswordResetScreen = () => {
     handleErrorCallback,
   );
 
-  const handleChangePassword = () => {
-    resetPassword({
-      email:
-        userInfo?.socialAccountInfoList.find(
-          (socialAccount) => socialAccount.accountType === 'NORMAL',
-        )?.email ?? '',
-      phoneNum: userInfo?.userInfo.phoneNumber ?? '',
-      newPassword: passwordCheck,
-    });
-  };
-
-  const isConfirmPassword =
-    !validatePassword(password) &&
-    password.length > 1 &&
-    !validatePasswordCheck(password, passwordCheck) &&
-    passwordCheck.length > 1;
-
   if (isLoading)
     return <CommonLoading isActive backgroundColor={colors.background} />;
 
   return (
     <ScreenCover
       authorizeButton={{
-        handlePress: handleChangePassword,
+        handlePress: handleSubmit((data) => {
+          resetPassword({
+            email:
+              userInfo?.socialAccountInfoList.find(
+                (socialAccount) => socialAccount.accountType === 'NORMAL',
+              )?.email ?? '',
+            phoneNum: userInfo?.userInfo.phoneNumber ?? '',
+            newPassword: data.passwordCheck,
+          });
+        }),
         label: MENT_USER.AUTHORIZE_BUTTON_TEXT,
-        isActive: isConfirmPassword,
+        isActive: true,
       }}
     >
       <View style={userPasswordResetScreenStyles.passwordResetTitle}>
@@ -74,19 +72,24 @@ const UserPasswordResetScreen = () => {
           {MENT_USER.PASSWORD_RESET.PASSWORD_RESET_MENT}
         </Text>
       </View>
-      <EssentialInput
-        validation={validatePassword}
-        label={MENT_USER.PASSWORD_RESET.NEW_PASSWORD}
-        value={password}
-        setValue={setPassword}
-        type="password"
+      <FormPasswordInput
+        control={control}
+        errors={errors}
+        name="password"
+        label="새 비밀번호"
+        validate={(value: string) => validatePassword(value)}
+        requiredMessage="비밀번호를 입력해주세요"
       />
-      <EssentialInput
-        validation={(check: string) => validatePasswordCheck(password, check)}
-        label={MENT_USER.PASSWORD_RESET.NEW_PASSWORD_CONFIRM}
-        value={passwordCheck}
-        setValue={setPasswordCheck}
-        type="password"
+      <FormPasswordInput
+        control={control}
+        errors={errors}
+        name="passwordCheck"
+        label="새 비밀번호 확인"
+        validate={(check: string) => {
+          const changedPassword = watch('password');
+          return validatePasswordCheck(changedPassword, check);
+        }}
+        requiredMessage="비밀번호 확인을 입력해주세요"
       />
     </ScreenCover>
   );
