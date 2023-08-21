@@ -7,5 +7,7 @@
 */
 "CFBundleDisplayName" = "OpenOff";
 "NSCameraUsageDescription" = "Authorization is required to provide ticket authentication service through QR scanning.";
-"NSLocation" = "Permission is required to determine your location on a map to provide location-based places functionality.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Permission is required to determine your location on a map to provide location-based places functionality.";
+"NSLocationAlwaysUsageDescription" = "Permission is required to determine your location on a map to provide location-based places functionality.";
+"NSLocationWhenInUseUsageDescription" = "Permission is required to determine your location on a map to provide location-based places functionality.";
 "NSPhotoLibraryUsageDescription" = "Permission is required to upload event promotional posters.";

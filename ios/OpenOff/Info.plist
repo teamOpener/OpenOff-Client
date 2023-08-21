@@ -59,11 +59,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>NSCameraUsageDescription</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>NSLocation</string>
+	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>NSLocation</string>
+	<string>NSLocationAlwaysUsageDescription</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>NSLocation</string>
+	<string>NSLocationWhenInUseUsageDescription</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>NSPhotoLibraryUsageDescription</string>
 	<key>UIAppFonts</key>
