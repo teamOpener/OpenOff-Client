@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import queryKeys from 'constants/queryKeys';
-import { ApiErrorResponse } from 'types/ApiResponse';
+import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { getHostEventLists } from 'apis/eventInstance';
 import { FieldCode } from 'constants/code';
 import {
@@ -26,6 +26,7 @@ import { ApplicantApplyDetailRequestDto } from 'models/ledger/request/ApplicantA
 import { MyTicketInfoRequestDto } from 'models/ledger/request/MyTicketInfoRequestDto';
 import { QRCheckRequestDto } from 'models/ledger/request/QRCheckRequestDto';
 import { ApplicationCancelRequestDto } from 'models/ledger/request/ApplicationCancelRequestDto';
+import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 
 export const useUserTickets = ({ eventInfoId }: MyTicketInfoRequestDto) => {
   return useQuery(
@@ -195,7 +196,7 @@ export const useApplicantQnA = ({
 };
 
 export const useCheckQR = (
-  successCallback?: () => void,
+  successCallback?: (data: ApiResponse<QRCheckResponseDto>) => void,
   errorCallback?: (error: ApiErrorResponse) => void,
 ) => {
   return useMutation((data: QRCheckRequestDto) => checkQR(data), {

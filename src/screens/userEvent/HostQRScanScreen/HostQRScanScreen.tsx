@@ -16,8 +16,9 @@ import API_ERROR_MESSAGE from 'constants/errorMessage';
 import { useCheckQR } from 'hooks/queries/ledger';
 import queryKeys from 'constants/queryKeys';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 import { colors } from 'styles/theme';
-import { ApiErrorResponse } from 'types/ApiResponse';
+import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { QRCheckType } from 'types/hostQr/QRCheck';
 import hostQRScanScreenStyles from './HostQRScanScreen.style';
 
@@ -51,7 +52,8 @@ const HostQRScanScreen = () => {
     queryClient.invalidateQueries(queryKeys.hostKeys.all);
   };
 
-  const handleSuccessQRCheck = () => {
+  const handleSuccessQRCheck = (data: ApiResponse<QRCheckResponseDto>) => {
+    setText(data.message);
     setQRCheckType('success');
     showQRCheckType();
   };
@@ -78,9 +80,7 @@ const HostQRScanScreen = () => {
       return;
     }
 
-    checkQR({ content: barcodes[0].displayValue }).then((res) => {
-      setText(res.message);
-    });
+    checkQR({ content: barcodes[0].displayValue });
   }, [barcodes]);
 
   useEffect(() => {
