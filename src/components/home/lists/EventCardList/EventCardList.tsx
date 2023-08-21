@@ -24,7 +24,6 @@ const EventCardList = ({
   type = 'custom',
   isLoading,
 }: Props) => {
-  // FIXME: 임의로 넣어놨습니다!! - 제인
   const { stackNavigation } = useNavigator();
 
   const eventCardListid = useId();
