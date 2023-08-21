@@ -24,6 +24,7 @@ import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
+import { SocialType } from 'types/user';
 import { validateEmail, validatePassword } from 'utils/validate';
 import loginScreenStyles from './LoginScreen.style';
 
@@ -31,7 +32,8 @@ const LoginScreen = () => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [emailAddress, setEmailAddress] = useState<string>('');
 
-  const { setIsLogin, resetToken } = useAuthorizeStore();
+  const { setIsLogin, resetToken, setRecentLogin, recentLogin } =
+    useAuthorizeStore();
 
   const { openDialog } = useDialog();
 
@@ -69,8 +71,10 @@ const LoginScreen = () => {
 
   const divergeAuthorizeFlow = (
     userInfo?: UserTotalInfoResponseDto['userInfo'],
+    socialInfo?: SocialType,
   ) => {
     if (userInfo?.userName) {
+      setRecentLogin(!socialInfo ? recentLogin : socialInfo);
       setIsLogin(true);
       return;
     }
@@ -87,7 +91,7 @@ const LoginScreen = () => {
       socialType: 'kakao',
       token: kakaoResult.idToken,
     });
-    divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
+    divergeAuthorizeFlow(socialLoginResult.data?.userInfo, 'KAKAO');
   };
 
   const handleAppleLogin = async () => {
@@ -106,7 +110,7 @@ const LoginScreen = () => {
           socialType: 'apple',
           token: appleAuthRequestResponse.identityToken ?? '',
         });
-        divergeAuthorizeFlow(socialLoginResult.data?.userInfo);
+        divergeAuthorizeFlow(socialLoginResult.data?.userInfo, 'APPLE');
       }
     } catch (error) {
       if ((error as AxiosError).code === appleAuth.Error.CANCELED) {

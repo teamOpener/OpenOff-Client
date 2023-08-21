@@ -1,5 +1,5 @@
 import { FieldCode } from 'constants/code';
-import SocialAccountInfo from 'types/user';
+import { SocialAccountInfo } from 'types/user';
 
 interface UserTotalInfoResponseDto {
   userInfo: {

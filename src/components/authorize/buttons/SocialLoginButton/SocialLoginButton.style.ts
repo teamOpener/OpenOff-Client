@@ -7,6 +7,7 @@ const socialLoginButtonStyles = StyleSheet.create({
     borderRadius: 200,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
 });
 

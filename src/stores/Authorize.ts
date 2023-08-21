@@ -1,5 +1,6 @@
-import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SocialType } from 'types/user';
+import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface Token {
@@ -9,12 +10,14 @@ interface Token {
 
 export interface AuthorizeStore {
   token: Token;
-  fcmToken: string | undefined;
+  fcmToken?: string;
   isLogin: boolean;
+  recentLogin?: SocialType;
   setToken: (token: Token) => void;
   resetToken: () => void;
   setFcmToken: (fcmToken?: string) => void;
   setIsLogin: (loginStatus: boolean) => void;
+  setRecentLogin: (recentLoginInfo?: SocialType) => void;
 }
 
 const initAuthorize = {
@@ -24,6 +27,7 @@ const initAuthorize = {
   },
   fcmToken: undefined,
   isLogin: false,
+  recentLogin: undefined,
 };
 
 export const useAuthorizeStore = create<AuthorizeStore>()(
@@ -55,6 +59,11 @@ export const useAuthorizeStore = create<AuthorizeStore>()(
         set((state) => ({
           ...state,
           isLogin: payload,
+        })),
+      setRecentLogin: (payload) =>
+        set((state) => ({
+          ...state,
+          recentLogin: payload,
         })),
     }),
     {

@@ -32,4 +32,9 @@ interface JoinInfo {
   interestField: Field[];
 }
 
-export type { Action, Gender, JoinInfo };
+interface PasswordValue {
+  password: string;
+  passwordCheck: string;
+}
+
+export type { Action, Gender, JoinInfo, PasswordValue };
