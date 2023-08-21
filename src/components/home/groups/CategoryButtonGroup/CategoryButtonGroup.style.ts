@@ -41,7 +41,7 @@ const categoryButtonGroupStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    backgroundColor: 'rgba(30, 30, 30, 0.70)',
+    backgroundColor: colors.background,
     height: 36 * 1.2,
   },
 });
