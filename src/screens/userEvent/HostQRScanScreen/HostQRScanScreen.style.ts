@@ -65,6 +65,7 @@ const hostQRScanScreenStyles = StyleSheet.create({
     textAlign: 'center',
   } as TextStyle,
   absoluteContainer: {
+    zIndex: 9999,
     position: 'absolute',
     alignSelf: 'center',
     top: '50%',
