@@ -39,8 +39,7 @@ const HostQRScanScreen = () => {
     openSettings();
   };
 
-  const handleSuccess = () => {
-    setQRCheckType('success');
+  const showQRCheckType = () => {
     setIsPausing(true);
     setTimeout(() => {
       setIsPausing(false);
@@ -49,19 +48,19 @@ const HostQRScanScreen = () => {
     }, 3000);
   };
 
-  const handleError = () => {
+  const handleSuccessQRCheck = () => {
+    setQRCheckType('success');
+    showQRCheckType();
+  };
+
+  const handleErrorQRCheck = () => {
     setQRCheckType('error');
-    setIsPausing(true);
-    setTimeout(() => {
-      setIsPausing(false);
-      setText('');
-      setQRCheckType('default');
-    }, 3000);
+    showQRCheckType();
   };
 
   const { mutateAsync: checkQR, isLoading } = useCheckQR(
-    handleSuccess,
-    handleError,
+    handleSuccessQRCheck,
+    handleErrorQRCheck,
   );
 
   useEffect(() => {
