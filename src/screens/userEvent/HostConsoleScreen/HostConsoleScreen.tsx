@@ -58,6 +58,7 @@ const HostConsoleScreen = () => {
   const handleSuspenseSuccess = () => {
     queryClient.invalidateQueries(queryKeys.hostKeys.all);
     queryClient.invalidateQueries(queryKeys.eventKeys.byId(params.eventId));
+    queryClient.invalidateQueries(queryKeys.eventKeys.details);
     openDialog({
       type: 'success',
       text: MENT_HOST.SUCCESS.SUSPENSE_EVENT,

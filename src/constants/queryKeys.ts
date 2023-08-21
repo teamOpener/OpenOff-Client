@@ -17,6 +17,7 @@ const userKeys = {
 
 const eventKeys = {
   all: [DOMAIN.EVENT],
+  details: [DOMAIN.EVENT, 'detail'],
   byId: (id: number) => [DOMAIN.EVENT, 'detail', id],
   personalList: [DOMAIN.EVENT, 'personal-list'],
   vogueList: [DOMAIN.EVENT, 'vogue-list'],

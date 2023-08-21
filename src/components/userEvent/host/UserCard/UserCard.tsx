@@ -35,6 +35,8 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
 
   const handlePermitSuccess = () => {
     // TODO isAccpeted가 느리게 반영될 때
+    queryClient.invalidateQueries(queryKeys.participantKeys.all);
+    queryClient.invalidateQueries(queryKeys.eventKeys.details);
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
     queryClient.invalidateQueries(
       queryKeys.hostKeys.statusByIndexId(eventIndexId),

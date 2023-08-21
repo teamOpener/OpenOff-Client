@@ -38,6 +38,7 @@ const UserHeader = ({
 
   const successCallback = (text: string) => {
     // TODO isAccpeted가 느리게 반영될 때
+    queryClient.invalidateQueries(queryKeys.participantKeys.all);
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
     queryClient.invalidateQueries(
       queryKeys.hostKeys.statusByIndexId(eventIndexId),
@@ -45,6 +46,7 @@ const UserHeader = ({
     queryClient.invalidateQueries(
       queryKeys.hostKeys.applicantQnAbyLedgerId(ledgerId),
     );
+    queryClient.invalidateQueries(queryKeys.eventKeys.details);
 
     openDialog({
       type: 'success',

@@ -10,6 +10,7 @@ import Divider from 'components/common/Divider/Divider';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import queryKeys from 'constants/queryKeys';
+import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import { ScrollView } from 'react-native';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -50,10 +51,13 @@ const EventApplyScreen = () => {
       text: MENT_EVENT_DETAIL.SUCCESS.APPLICATION,
       contents: MENT_EVENT_DETAIL.SUCCESS.APPLICATION_DETAIL,
       callback: () => {
-        tabNavigation.navigate(BottomTabMenu.UserEvent);
+        tabNavigation.navigate(BottomTabMenu.UserEvent, {
+          tab: UserEventTabItem.PARTICIPANT,
+        });
         queryClient.invalidateQueries(queryKeys.eventKeys.all);
         queryClient.invalidateQueries(queryKeys.bookmarkKeys.all);
         queryClient.invalidateQueries(queryKeys.participantKeys.all);
+        queryClient.invalidateQueries(queryKeys.hostKeys.list);
       },
     });
   };

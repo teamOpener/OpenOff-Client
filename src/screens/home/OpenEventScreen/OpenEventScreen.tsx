@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
+import { useQueryClient } from '@tanstack/react-query';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
+import queryKeys from 'constants/queryKeys';
 import Spacing from 'components/common/Spacing/Spacing';
 import Divider from 'components/common/Divider/Divider';
 import FixedButton from 'components/common/FixedButton/FixedButton';
@@ -26,6 +28,7 @@ import openEventScreenStyles from './OpenEventScreen.style';
 const OpenEventScreen = () => {
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
+  const queryClient = useQueryClient();
 
   const { init, openEvent, setOpenEventErrorMessage } = useOpenEventStore();
   const { hasError, errorMessage } = useOpenEventValidator({ openEvent });
@@ -60,6 +63,7 @@ const OpenEventScreen = () => {
       contents: MENT_OPEN_EVENT.SUCCESS.CREATE_EVENT_CONTENT,
       callback: () => {
         stackNavigation.goBack();
+        queryClient.invalidateQueries(queryKeys.hostKeys.list);
       },
     });
   };
