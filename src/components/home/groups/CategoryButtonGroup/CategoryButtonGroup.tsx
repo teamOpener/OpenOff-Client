@@ -1,7 +1,8 @@
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
+import Spacing from 'components/common/Spacing/Spacing';
 import { FieldCode } from 'constants/code';
-import { TouchableOpacity, View } from 'react-native';
 import categoryButtonGroupStyles from './CategoryButtonGroup.style';
 
 interface Props {
@@ -18,8 +19,16 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
       >
         카테고리
       </Text>
-      <View style={categoryButtonGroupStyles.groupContainer}>
+      <Spacing height={10} />
+
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={categoryButtonGroupStyles.groupContainer}
+        contentContainerStyle={categoryButtonGroupStyles.groupContentContainer}
+      >
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.FD)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
@@ -40,7 +49,9 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
             </Text>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.EE)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
@@ -62,6 +73,7 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.S)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
@@ -72,7 +84,9 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
             </Text>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.PF)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
@@ -94,6 +108,7 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.EA)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
@@ -115,6 +130,7 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => handlePress(FieldCode.FSDH)}
           style={categoryButtonGroupStyles.buttonContainer}
         >
@@ -135,7 +151,7 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
             </Text>
           </View>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </View>
   );
 };

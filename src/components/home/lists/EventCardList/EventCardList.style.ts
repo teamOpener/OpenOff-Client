@@ -14,7 +14,7 @@ const eventCardListStyles = StyleSheet.create({
   },
   container: {
     marginTop: 23,
-    marginBottom: 50,
+    marginBottom: 24,
   },
   scrollConatiner: {
     marginTop: 15,
