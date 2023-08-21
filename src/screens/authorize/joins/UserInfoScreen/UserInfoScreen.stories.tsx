@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { View } from 'react-native';
+import { colors } from 'styles/theme';
 import UserInfoScreen from './UserInfoScreen';
 
 export default {
@@ -10,7 +11,7 @@ export default {
 export const UserInfoScreenTest: ComponentStory<typeof UserInfoScreen> = (
   args,
 ) => (
-  <View style={{ flex: 1 }}>
+  <View style={{ flex: 1, backgroundColor: colors.background }}>
     <UserInfoScreen {...args} />
   </View>
 );

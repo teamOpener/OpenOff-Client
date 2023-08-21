@@ -1,6 +1,7 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import BaseInfoInput from 'components/authorize/inputs/BaseInfoInput/BaseInfoInput';
+import BirthSettingInput from 'components/authorize/inputs/BirthSettingInput/BirthSettingInput';
 import GenderInput from 'components/authorize/inputs/GenderInput/GenderInput';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
@@ -47,12 +48,11 @@ const UserInfoScreen = ({ dispatch }: Props) => {
         validation={validateName}
       />
       <View style={userInfoScreenStyles.detailUserInfo}>
-        <BaseInfoInput
+        <BirthSettingInput
           label="생일"
           value={birth}
           setValue={setBirth}
           validation={validateBirthday}
-          focusMode
         />
         <GenderInput value={gender} setValue={setGender} />
       </View>
