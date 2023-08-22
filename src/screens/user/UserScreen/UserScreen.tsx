@@ -20,7 +20,6 @@ import {
 
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useMyInfo } from 'hooks/queries/user';
-
 import { useAuthorizeStore } from 'stores/Authorize';
 import userScreenStyles from './UserScreen.style';
 

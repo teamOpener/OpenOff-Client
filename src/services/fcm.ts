@@ -6,16 +6,21 @@ import { Platform } from 'react-native';
 import { PERMISSIONS } from 'react-native-permissions';
 import { useAuthorizeStore } from 'stores/Authorize';
 import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
+import DeviceInfo from 'react-native-device-info';
 import { requestSinglePermission } from './permission';
 
 const { setFcmToken } = useAuthorizeStore.getState();
 
 export const getToken = async () => {
+  const deviceInfo = await DeviceInfo.getUniqueId();
   const value = await AsyncStorage.getItem('authorize');
   const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
   if (!authorizeStore.state.fcmToken) {
     const fcmDeviceToken = await messaging().getToken();
-    await permitAlert({ fcmToken: fcmDeviceToken });
+    await permitAlert({
+      fcmToken: fcmDeviceToken,
+      deviceId: deviceInfo,
+    });
     setFcmToken(fcmDeviceToken);
   }
 };
