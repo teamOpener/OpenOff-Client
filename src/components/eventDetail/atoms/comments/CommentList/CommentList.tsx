@@ -49,7 +49,6 @@ const CommentList = ({ eventInfoId, isScrolling }: Props) => {
           onEndReachedThreshold={0.2}
           onEndReached={onEndReached}
           scrollEnabled={false}
-          contentContainerStyle={commentListStyles.scrollContent}
           renderItem={({ item }) => (
             <ParentCommentListItem
               key={item.commentId}

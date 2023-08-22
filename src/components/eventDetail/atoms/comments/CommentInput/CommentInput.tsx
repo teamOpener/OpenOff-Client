@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextInput, TouchableOpacity, View } from 'react-native';
+import { Keyboard, TextInput, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { colors } from 'styles/theme';
 import Text from 'components/common/Text/Text';
@@ -30,6 +30,7 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
   const [comment, setComment] = useState<string>('');
 
   const handleSuccessPostComment = () => {
+    Keyboard.dismiss();
     queryClient.invalidateQueries(
       queryKeys.commentKeys.byEventInfoId(eventInfoId),
     );
@@ -87,35 +88,33 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
   };
 
   return (
-    <View style={commentInputStyles.absoluteContainer}>
-      <View style={commentInputStyles.inputWrapper}>
-        <TextInput
-          style={commentInputStyles.inputText}
-          placeholder={
-            mode === 'child' ? '대댓글을 남겨보세요.' : '댓글을 남겨보세요.'
-          }
-          placeholderTextColor={colors.grey}
-          value={comment}
-          onChangeText={setComment}
-        />
+    <View style={commentInputStyles.inputWrapper}>
+      <TextInput
+        style={commentInputStyles.inputText}
+        placeholder={
+          mode === 'child' ? '대댓글을 남겨보세요.' : '댓글을 남겨보세요.'
+        }
+        placeholderTextColor={colors.grey}
+        value={comment}
+        onChangeText={setComment}
+      />
 
-        <TouchableOpacity
-          disabled={!comment}
-          activeOpacity={0.8}
-          style={[
-            commentInputStyles.button,
-            !!comment && commentInputStyles.activeButton,
-          ]}
-          onPress={handleRegisterComment}
+      <TouchableOpacity
+        disabled={!comment}
+        activeOpacity={0.8}
+        style={[
+          commentInputStyles.button,
+          !!comment && commentInputStyles.activeButton,
+        ]}
+        onPress={handleRegisterComment}
+      >
+        <Text
+          color={comment ? 'white' : 'grey'}
+          style={commentInputStyles.buttonText}
         >
-          <Text
-            color={comment ? 'white' : 'grey'}
-            style={commentInputStyles.buttonText}
-          >
-            등록
-          </Text>
-        </TouchableOpacity>
-      </View>
+          등록
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
