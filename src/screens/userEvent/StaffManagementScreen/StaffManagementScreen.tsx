@@ -4,18 +4,18 @@ import Text from 'components/common/Text/Text';
 import { StackMenu } from 'constants/menu';
 import useRouteParams from 'hooks/navigator/useRouteParams';
 
-const HostAlarmScreen = () => {
-  const params = useRouteParams<StackMenu.HostAlarm>();
+const StaffManagementScreen = () => {
+  const params = useRouteParams<StackMenu.StaffManagement>();
 
   useEffect(() => {
-    console.log(params?.eventId, params?.eventIndex);
+    console.log(params?.eventInfoId);
   }, [params]);
 
   return (
     <View>
-      <Text>알림 전송</Text>
+      <Text>스태프 관리</Text>
     </View>
   );
 };
 
-export default HostAlarmScreen;
+export default StaffManagementScreen;

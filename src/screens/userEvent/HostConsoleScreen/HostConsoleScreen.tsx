@@ -99,7 +99,7 @@ const HostConsoleScreen = () => {
 
   const handleNavigation = (
     screenName:
-      | StackMenu.HostAlarm
+      | StackMenu.StaffManagement
       | StackMenu.HostQRScan
       | StackMenu.HostLedger,
   ) => {
@@ -184,7 +184,7 @@ const HostConsoleScreen = () => {
             disabled={eventStatus.isEnded}
             iconName="IconUserGear"
             label={MENT_HOST.MAIN.STAFF_MANAGEMENT}
-            onPress={() => handleNavigation(StackMenu.HostAlarm)}
+            onPress={() => handleNavigation(StackMenu.StaffManagement)}
           />
           <LargeIconButton
             disabled={eventStatus.isEnded}
