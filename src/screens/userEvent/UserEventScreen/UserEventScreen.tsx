@@ -1,5 +1,6 @@
 import { View, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
+import TicketListSkeleton from 'components/suspense/skeleton/TicketListSkeleton/TicketListSkeleton';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
 import fieldInitData from 'constants/userEvent/participant/fieldData';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
@@ -19,9 +20,8 @@ import {
 } from 'components/userEvent/participant';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import { BottomTabMenu } from 'constants/menu';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import userEventScreenStyles from './UserEventScreen.style';
-
-// TODO skeleton
 
 const UserEventScreen = () => {
   const { params } = useTabRoute<BottomTabMenu.UserEvent>();
@@ -36,7 +36,12 @@ const UserEventScreen = () => {
   const activeField = field.find((fieldData) => fieldData.isActive);
 
   // TODO: 무한스크롤 test 필요
-  const { data: ticketLists } = useUserTicketLists(
+  const {
+    data: ticketLists,
+    isLoading: isUserTicketLoading,
+    hasNextPage: hasUserTicketNextPage,
+    fetchNextPage: fetchNextPageUserTicket,
+  } = useUserTicketLists(
     activeTabName === UserEventTabItem.PARTICIPANT
       ? activeField?.value
       : undefined,
@@ -48,8 +53,9 @@ const UserEventScreen = () => {
 
   const {
     data: hostEventList,
-    hasNextPage,
-    fetchNextPage,
+    isLoading: isHostTicketLoading,
+    hasNextPage: hasHostTicketNextPage,
+    fetchNextPage: fetchNextPageHostTicket,
   } = useHostEventLists(
     activeTabName === UserEventTabItem.HOST ? activeField?.value : undefined,
   );
@@ -62,8 +68,15 @@ const UserEventScreen = () => {
   const ItemSeparatorComponent = () => <Spacing height={15} />;
 
   const onEndReached = () => {
-    if (hasNextPage) {
-      fetchNextPage();
+    if (activeTabName === UserEventTabItem.HOST && hasHostTicketNextPage) {
+      fetchNextPageHostTicket();
+      return;
+    }
+    if (
+      activeTabName === UserEventTabItem.PARTICIPANT &&
+      hasUserTicketNextPage
+    ) {
+      fetchNextPageUserTicket();
     }
   };
 
@@ -88,21 +101,18 @@ const UserEventScreen = () => {
     stackNavigation.navigate('HostConsole', { eventId: event.eventInfoId });
   };
 
+  const ticketSkeleton = () => (
+    <SpaceLayout size={15} style={userEventScreenStyles.skeletonContainer}>
+      <TicketListSkeleton />
+      <TicketListSkeleton />
+    </SpaceLayout>
+  );
+
   useEffect(() => {
     if (params && params.tab) {
       setActiveTabName(params.tab);
     }
   }, [params]);
-
-  // TODO
-  if (!ticketLists) {
-    return null;
-  }
-
-  // TODO
-  if (!hostEventList) {
-    return null;
-  }
 
   return (
     <View style={userEventScreenStyles.container}>
@@ -147,8 +157,13 @@ const UserEventScreen = () => {
                   onPress={() => handlePressTicket(item.eventInfoId)}
                 />
               )}
-              onEndReachedThreshold={0.2}
+              onEndReachedThreshold={0.5}
               onEndReached={onEndReached}
+              ListFooterComponent={
+                hasUserTicketNextPage || isUserTicketLoading
+                  ? ticketSkeleton
+                  : null
+              }
             />
           </View>
         ))}
@@ -177,8 +192,13 @@ const UserEventScreen = () => {
                   onPress={() => handlePressHostEvent(item)}
                 />
               )}
-              onEndReachedThreshold={0.2}
+              onEndReachedThreshold={0.5}
               onEndReached={onEndReached}
+              ListFooterComponent={
+                hasHostTicketNextPage || isHostTicketLoading
+                  ? ticketSkeleton
+                  : null
+              }
             />
           </View>
         ))}
