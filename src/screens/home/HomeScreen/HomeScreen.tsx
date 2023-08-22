@@ -65,12 +65,12 @@ const HomeScreen = () => {
           />
           <View />
           <View style={homeScreenStyles.controllerContainer}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={homeScreenStyles.controllerButton}
               onPress={handleShowAlertList}
             >
               <Icon name="IconBell" fill="white" size={20} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity onPress={handleShowBookmarkEvent}>
               <Icon name="IconHeart" fill="white" size={20} />
             </TouchableOpacity>
