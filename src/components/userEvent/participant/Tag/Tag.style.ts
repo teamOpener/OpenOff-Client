@@ -3,7 +3,7 @@ import { colors, fonts } from 'styles/theme';
 
 const tagStyles = StyleSheet.create({
   container: {
-    paddingVertical: 4,
+    paddingVertical: 5,
     paddingHorizontal: 15,
     borderColor: colors.main,
     borderWidth: 1,
