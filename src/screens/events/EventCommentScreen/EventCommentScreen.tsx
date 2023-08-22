@@ -82,7 +82,7 @@ const EventCommentScreen = () => {
 
         <SpaceLayout size={15}>
           {childrenComments?.map((child) => (
-            <ChildCommentListItem comment={child} />
+            <ChildCommentListItem key={child.commentId} comment={child} />
           ))}
         </SpaceLayout>
       </ScrollView>
