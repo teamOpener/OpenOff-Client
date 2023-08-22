@@ -121,6 +121,10 @@ const useMapCoordinateInfo = () => {
       }
       return () => {
         Geolocation.clearWatch(watchValue);
+        setCurrentCoordinate({
+          latitude: 0,
+          longitude: 0,
+        });
       };
     }, []),
   );
