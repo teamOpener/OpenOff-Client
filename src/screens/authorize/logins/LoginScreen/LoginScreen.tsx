@@ -140,6 +140,8 @@ const LoginScreen = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  if (firstLoginShow) return null;
+
   if (isSocialLoginLoading || isNormalLoginLoading || firstLoginShow)
     return <WithIconLoading isActive backgroundColor={colors.background} />;
 
