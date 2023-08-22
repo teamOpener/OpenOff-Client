@@ -1,23 +1,27 @@
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEventDetail } from 'hooks/queries/event';
 import useStackRoute from 'hooks/navigator/useStackRoute';
+import queryKeys from 'constants/queryKeys';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import Spacing from 'components/common/Spacing/Spacing';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
-import { ScrollView, View } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useEventIndexList from 'hooks/event/useEventIndexList';
 import useEventApplyStatus from 'hooks/event/useEventApplyStatus';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
 import Text from 'components/common/Text/Text';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import { StackMenu } from 'constants/menu';
 import eventDetailScreenStyles from './EventDetailScreen.style';
 
 const EventDetailScreen = () => {
+  const queryClient = useQueryClient();
   const { params } = useStackRoute<StackMenu.EventDetail>();
   const { stackNavigation } = useNavigator();
 
@@ -57,6 +61,12 @@ const EventDetailScreen = () => {
     });
   };
 
+  const refreshData = () => {
+    queryClient.invalidateQueries(queryKeys.eventKeys.byId(params.id));
+  };
+
+  const { refreshing, onRefresh } = usePullToRefresh({ callback: refreshData });
+
   const headerRight = () => (
     <View style={eventDetailScreenStyles.bookmarkButtonWrapper}>
       <BookmarkButton
@@ -88,9 +98,13 @@ const EventDetailScreen = () => {
   return (
     <EventDetailScreenLayout>
       <ScrollView
+        style={eventDetailScreenStyles.full}
         showsVerticalScrollIndicator={false}
         onScrollBeginDrag={() => setIsScrolling(true)}
         onScrollEndDrag={() => setIsScrolling(false)}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         <EventDetail.TitleText title={event.title} />
 
@@ -145,7 +159,9 @@ const EventDetailScreen = () => {
 
         {/* TODO: 개행 처리 어캐할지 */}
         {activeTabName === EventDetailTabItem.DESCRIPTION ? (
-          <Text variant="body2">{event.description}</Text>
+          <View style={eventDetailScreenStyles.descriptionWrapper}>
+            <Text variant="body2">{event.description}</Text>
+          </View>
         ) : (
           <EventDetail.CommentList
             eventInfoId={event.eventId}
@@ -153,7 +169,7 @@ const EventDetailScreen = () => {
           />
         )}
 
-        <Spacing height={100} />
+        <Spacing height={80} />
       </ScrollView>
       {activeTabName === EventDetailTabItem.DESCRIPTION ? (
         <FixedButton

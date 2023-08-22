@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { ScrollView } from 'react-native';
+import { RefreshControl, ScrollView } from 'react-native';
+import { useQueryClient } from '@tanstack/react-query';
+import queryKeys from 'constants/queryKeys';
 import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
 import {
   ChildCommentListItem,
@@ -10,10 +12,12 @@ import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import CommentRowSkeleton from 'components/suspense/skeleton/CommentRowSkeleton/CommentRowSkeleton';
 import { StackMenu } from 'constants/menu';
 import useStackRoute from 'hooks/navigator/useStackRoute';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
 import { useChildComments, useParentComments } from 'hooks/queries/comment';
 import eventCommentScreenStyles from './EventCommentScreen.style';
 
 const EventCommentScreen = () => {
+  const queryClient = useQueryClient();
   const { params } = useStackRoute<StackMenu.EventComment>();
   const { data: parentComments, isLoading: isParentLoading } =
     useParentComments({
@@ -36,6 +40,19 @@ const EventCommentScreen = () => {
       commentId: params.commentId,
     });
 
+  const refreshComments = () => {
+    queryClient.invalidateQueries(
+      queryKeys.commentKeys.childCommentsByEventInfoId(
+        params.infoId,
+        params.commentId,
+      ),
+    );
+  };
+
+  const { refreshing, onRefresh } = usePullToRefresh({
+    callback: refreshComments,
+  });
+
   if (!filterData) {
     return null;
   }
@@ -48,6 +65,9 @@ const EventCommentScreen = () => {
         onScrollEndDrag={() => {
           setIsScrolling(true);
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         {(isParentLoading || isChildLoading) && <CommentRowSkeleton />}
 
