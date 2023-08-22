@@ -123,14 +123,16 @@ const EventMapScreen = () => {
       latitude: event.latitude,
       longitude: event.longitude,
     };
-    setCurrentFindActive(() => {
-      return (
-        getDistanceCoordinate(focusCoordinate, {
-          latitude: event.latitude,
-          longitude: event.longitude,
-        }) > 0.1
-      );
-    });
+    if (fieldMapMode) {
+      setCurrentFindActive(() => {
+        return (
+          getDistanceCoordinate(focusCoordinate, {
+            latitude: event.latitude,
+            longitude: event.longitude,
+          }) > 0.1
+        );
+      });
+    }
   };
 
   const recallEventMap = () => {
@@ -210,7 +212,11 @@ const EventMapScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      if (currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0)
+      if (
+        currentCoordinate.latitude === 0 &&
+        currentCoordinate.longitude === 0 &&
+        !isLoading
+      )
         queryClient.removeQueries(queryKeys.eventKeys.mapList);
     }, []),
   );
@@ -231,6 +237,7 @@ const EventMapScreen = () => {
       return () => backHandler.remove();
     }, [!fieldMapMode]),
   );
+
   return (
     <>
       {firstMapLoadChecker && (
