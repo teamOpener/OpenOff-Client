@@ -3,8 +3,8 @@ import { colors, fonts } from 'styles/theme';
 
 const tagStyles = StyleSheet.create({
   container: {
-    paddingVertical: 7,
-    paddingHorizontal: 16,
+    paddingVertical: 4,
+    paddingHorizontal: 15,
     borderColor: colors.main,
     borderWidth: 1,
     borderRadius: 100,
