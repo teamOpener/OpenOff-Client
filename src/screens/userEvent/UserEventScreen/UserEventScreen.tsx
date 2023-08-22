@@ -1,6 +1,5 @@
-import { View, FlatList } from 'react-native';
+import { View, FlatList, ActivityIndicator } from 'react-native';
 import { useEffect, useState } from 'react';
-import TicketListSkeleton from 'components/suspense/skeleton/TicketListSkeleton/TicketListSkeleton';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
 import fieldInitData from 'constants/userEvent/participant/fieldData';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
@@ -20,7 +19,6 @@ import {
 } from 'components/userEvent/participant';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import { BottomTabMenu } from 'constants/menu';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import userEventScreenStyles from './UserEventScreen.style';
 
 const UserEventScreen = () => {
@@ -101,11 +99,10 @@ const UserEventScreen = () => {
     stackNavigation.navigate('HostConsole', { eventId: event.eventInfoId });
   };
 
-  const ticketSkeleton = () => (
-    <SpaceLayout size={15} style={userEventScreenStyles.skeletonContainer}>
-      <TicketListSkeleton />
-      <TicketListSkeleton />
-    </SpaceLayout>
+  const ticketLoading = () => (
+    <View style={userEventScreenStyles.loadingContainer}>
+      <ActivityIndicator />
+    </View>
   );
 
   useEffect(() => {
@@ -161,7 +158,7 @@ const UserEventScreen = () => {
               onEndReached={onEndReached}
               ListFooterComponent={
                 hasUserTicketNextPage || isUserTicketLoading
-                  ? ticketSkeleton
+                  ? ticketLoading
                   : null
               }
             />
@@ -196,7 +193,7 @@ const UserEventScreen = () => {
               onEndReached={onEndReached}
               ListFooterComponent={
                 hasHostTicketNextPage || isHostTicketLoading
-                  ? ticketSkeleton
+                  ? ticketLoading
                   : null
               }
             />
