@@ -69,7 +69,7 @@ const CommentList = ({ eventInfoId, isScrolling }: Props) => {
       ) : (
         <View style={commentListStyles.emptyContainer}>
           <Text variant="body2" style={commentListStyles.emptyText}>
-            댓글을 작성해주세요.
+            문의사항이나 댓글을 남겨주세요!
           </Text>
         </View>
       )}
