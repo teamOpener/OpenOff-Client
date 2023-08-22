@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -21,6 +22,7 @@ import userScreenStyles from './UserScreen.style';
 const UserScreen = () => {
   const { resetToken, setIsLogin } = useAuthorizeStore();
   const { data: userInfo } = useMyInfo();
+  const queryClient = useQueryClient();
   const { stackNavigation } = useNavigator();
 
   const handleEditProfile = () => {
@@ -33,6 +35,7 @@ const UserScreen = () => {
 
   const handleLogout = () => {
     resetToken();
+    queryClient.clear();
     setIsLogin(false);
   };
 
