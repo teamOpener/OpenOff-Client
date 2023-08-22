@@ -7,15 +7,20 @@ import UserFieldBoxGroup from 'components/user/groups/UserFieldBoxGroup/UserFiel
 import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
 import MENT_USER from 'constants/user/userConstants';
 import fieldData from 'data/lists/fieldData';
-import useNavigator from 'hooks/navigator/useNavigator';
-import { useMyInfo } from 'hooks/queries/user';
 import {
+  Linking,
+  Platform,
+  NativeModules,
   Image,
   Pressable,
   ScrollView,
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import useNavigator from 'hooks/navigator/useNavigator';
+import { useMyInfo } from 'hooks/queries/user';
+
 import { useAuthorizeStore } from 'stores/Authorize';
 import userScreenStyles from './UserScreen.style';
 
@@ -31,6 +36,13 @@ const UserScreen = () => {
 
   const handleResetInterest = () => {
     stackNavigation.navigate('UserInterest');
+  };
+
+  const handleShowSettingScreen = () => {
+    // ios 일 경우
+    if (Platform.OS === 'ios') Linking.openURL('App-Prefs:root');
+    // 안드로이드일 경우
+    else NativeModules.ExternalURLModule.linkAndroidSettings();
   };
 
   const handleLogout = () => {
@@ -120,10 +132,12 @@ const UserScreen = () => {
           <Text variant="body2">{MENT_USER.MAIN.INQUIRY}</Text>
         </Pressable>
         <Divider height={1} color="darkGrey" />
-        <Text variant="bodySB" color="darkGrey">
-          {MENT_USER.MAIN.SETTING}
-        </Text>
         <Pressable>
+          <Text variant="bodySB" color="darkGrey">
+            {MENT_USER.MAIN.SETTING}
+          </Text>
+        </Pressable>
+        <Pressable onPress={handleShowSettingScreen}>
           <Text variant="body2">{MENT_USER.MAIN.SERVICE_SETTING}</Text>
         </Pressable>
         <Pressable onPress={handleLogout}>
