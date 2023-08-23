@@ -11,6 +11,12 @@ const eventDetailScreenStyles = StyleSheet.create({
     marginBottom: 4,
     marginRight: layouts.PADDING,
   },
+  full: {
+    flex: 1,
+  },
+  descriptionWrapper: {
+    paddingBottom: 60,
+  },
 });
 
 export default eventDetailScreenStyles;

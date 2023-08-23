@@ -7,6 +7,7 @@ const DOMAIN = {
   PARTICIPANT: 'PARTICIPANT',
   HOST: 'HOST',
   BOOKMARK: 'BOOKMARK',
+  COMMENT: 'COMMENT',
 };
 
 const userKeys = {
@@ -57,12 +58,29 @@ const bookmarkKeys = {
   list: [DOMAIN.BOOKMARK, 'list'],
 };
 
+const commentKeys = {
+  all: [DOMAIN.COMMENT],
+  byEventInfoId: (eventInfoId: number) => [DOMAIN.COMMENT, eventInfoId],
+  parentCommentsByEventInfoId: (eventInfoId: number) => [
+    DOMAIN.COMMENT,
+    eventInfoId,
+    'parents',
+  ],
+  childCommentsByEventInfoId: (eventInfoId: number, parentId: number) => [
+    DOMAIN.COMMENT,
+    eventInfoId,
+    'children',
+    parentId,
+  ],
+};
+
 const queryKeys = {
   userKeys,
   eventKeys,
   participantKeys,
   hostKeys,
   bookmarkKeys,
+  commentKeys,
 };
 
 export default queryKeys;

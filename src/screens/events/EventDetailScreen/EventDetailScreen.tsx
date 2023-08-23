@@ -1,25 +1,31 @@
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEventDetail } from 'hooks/queries/event';
 import useStackRoute from 'hooks/navigator/useStackRoute';
+import queryKeys from 'constants/queryKeys';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import Spacing from 'components/common/Spacing/Spacing';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
-import { ScrollView, View } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useEventIndexList from 'hooks/event/useEventIndexList';
 import useEventApplyStatus from 'hooks/event/useEventApplyStatus';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
 import Text from 'components/common/Text/Text';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import { StackMenu } from 'constants/menu';
 import eventDetailScreenStyles from './EventDetailScreen.style';
 
 const EventDetailScreen = () => {
+  const queryClient = useQueryClient();
   const { params } = useStackRoute<StackMenu.EventDetail>();
   const { stackNavigation } = useNavigator();
+
+  const [isScrolling, setIsScrolling] = useState<boolean>(false);
 
   const { data: event } = useEventDetail(params.id);
   const { sortEventsByEventDate } = useEventIndexList({
@@ -55,6 +61,12 @@ const EventDetailScreen = () => {
     });
   };
 
+  const refreshData = () => {
+    queryClient.invalidateQueries(queryKeys.eventKeys.byId(params.id));
+  };
+
+  const { refreshing, onRefresh } = usePullToRefresh({ callback: refreshData });
+
   const headerRight = () => (
     <View style={eventDetailScreenStyles.bookmarkButtonWrapper}>
       <BookmarkButton
@@ -67,8 +79,10 @@ const EventDetailScreen = () => {
   useEffect(() => {
     if (params.tab) {
       setActiveTabName(params.tab);
+    } else {
+      setActiveTabName(EventDetailTabItem.DESCRIPTION);
     }
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     stackNavigation.setOptions({
@@ -83,7 +97,15 @@ const EventDetailScreen = () => {
 
   return (
     <EventDetailScreenLayout>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={eventDetailScreenStyles.full}
+        showsVerticalScrollIndicator={false}
+        onScrollBeginDrag={() => setIsScrolling(true)}
+        onScrollEndDrag={() => setIsScrolling(false)}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <EventDetail.TitleText title={event.title} />
 
         <SpaceLayout size={10}>
@@ -135,18 +157,29 @@ const EventDetailScreen = () => {
         </EventDetail.Tab>
         <Spacing height={30} />
 
-        {/* TODO: 댓글 탭 만들기 */}
         {/* TODO: 개행 처리 어캐할지 */}
-        <Text variant="body2">{event.description}</Text>
+        {activeTabName === EventDetailTabItem.DESCRIPTION ? (
+          <View style={eventDetailScreenStyles.descriptionWrapper}>
+            <Text variant="body2">{event.description}</Text>
+          </View>
+        ) : (
+          <EventDetail.CommentList
+            eventInfoId={event.eventId}
+            isScrolling={isScrolling}
+          />
+        )}
 
-        <Spacing height={200} />
+        <Spacing height={80} />
       </ScrollView>
-
-      <FixedButton
-        disabled={disabledEvent(event).disabled}
-        label={disabledEvent(event).label}
-        onPress={handleApply}
-      />
+      {activeTabName === EventDetailTabItem.DESCRIPTION ? (
+        <FixedButton
+          disabled={disabledEvent(event).disabled}
+          label={disabledEvent(event).label}
+          onPress={handleApply}
+        />
+      ) : (
+        <EventDetail.CommentInput eventInfoId={event.eventId} />
+      )}
     </EventDetailScreenLayout>
   );
 };
