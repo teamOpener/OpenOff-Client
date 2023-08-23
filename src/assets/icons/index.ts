@@ -1,5 +1,6 @@
 export { default as IconAddressBook } from './IconAddressBook.svg';
 export { default as IconAlertComment } from './IconAlertComment.svg';
+export { default as IconApple } from './IconApple.svg';
 export { default as IconArrowDown } from './IconArrowDown.svg';
 export { default as IconArrowLeft } from './IconArrowLeft.svg';
 export { default as IconArrowRight } from './IconArrowRight.svg';

@@ -8,6 +8,7 @@ const socialLoginButtonStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
+    overflow: 'hidden',
   },
 });
 

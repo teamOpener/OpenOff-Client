@@ -1,5 +1,6 @@
 import SocialLoginButton from 'components/authorize/buttons/SocialLoginButton/SocialLoginButton';
 import { Image, Platform, View } from 'react-native';
+import Icon from 'components/common/Icon/Icon';
 import { useAuthorizeStore } from 'stores/Authorize';
 import socialLoginButtonGroupStyles from './SocialLoginButtonGroup.style';
 
@@ -45,10 +46,7 @@ const SocialLoginButtonGroup = ({
               source={require('../../../../assets/images/recentLogin.png')}
             />
           )}
-          <Image
-            style={socialLoginButtonGroupStyles.socialLogo}
-            source={require('../../../../assets/images/apple.png')}
-          />
+          <Icon name="IconApple" size={70} />
         </SocialLoginButton>
       )}
       {/* <SocialLoginButton color="#FFF" handlePress={googleLogin}>
