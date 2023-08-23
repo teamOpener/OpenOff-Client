@@ -6,6 +6,7 @@ import {
   View,
   RefreshControl,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { colors } from 'styles/theme';
@@ -70,6 +71,7 @@ const HostLedgerScreen = () => {
     data: ledgerUserList,
     hasNextPage,
     fetchNextPage,
+    isLoading,
   } = useLedgerUserList(params.eventIndex, selectedSortType);
   const flatLedgerUserList = ledgerUserList?.pages.flatMap(
     (page) => page.data.content,
@@ -121,7 +123,6 @@ const HostLedgerScreen = () => {
   const { mutateAsync: permitAllApplicant, isLoading: isPermitAllLoading } =
     usePermitAllApplicant(handlePermitSuccess, handlePermitError);
 
-  // TODO 500 error
   const handlePermitAll = async () => {
     await permitAllApplicant({ eventIndexId: params.eventIndex });
   };
@@ -166,6 +167,12 @@ const HostLedgerScreen = () => {
       title={eventStatus?.eventTitle ?? ''}
       date={eventStatus?.eventDate ?? ''}
     />
+  );
+
+  const ticketLoading = () => (
+    <View style={hostLedgerScreenStyles.loadingContainer}>
+      <ActivityIndicator />
+    </View>
   );
 
   useEffect(() => {
@@ -270,7 +277,7 @@ const HostLedgerScreen = () => {
             data={flatLedgerUserList}
             ItemSeparatorComponent={ItemSeparatorComponent}
             contentContainerStyle={hostLedgerScreenStyles.flatListContentStyle}
-            onEndReachedThreshold={0.2}
+            onEndReachedThreshold={0.5}
             onEndReached={onEndReached}
             renderItem={({ item }) => (
               <UserCard
@@ -278,6 +285,9 @@ const HostLedgerScreen = () => {
                 eventIndexId={params.eventIndex}
               />
             )}
+            ListFooterComponent={
+              hasNextPage || isLoading ? ticketLoading : null
+            }
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
