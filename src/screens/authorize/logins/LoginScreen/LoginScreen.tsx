@@ -157,16 +157,18 @@ const LoginScreen = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (firstLoginShow) return null;
-
-  if (isSocialLoginLoading || isNormalLoginLoading || firstLoginShow)
-    return <WithIconLoading isActive backgroundColor={colors.background} />;
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={loginScreenStyles.container}
     >
+      {(isSocialLoginLoading || isNormalLoginLoading || firstLoginShow) && (
+        <WithIconLoading
+          isActive
+          backgroundColor={colors.background}
+          text="로그인 중입니다."
+        />
+      )}
       <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>
         <Image
           style={loginScreenStyles.logo}
