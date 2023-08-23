@@ -1,3 +1,4 @@
+import { openSettings } from 'react-native-permissions';
 import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -6,22 +7,27 @@ import UserFieldBoxGroup from 'components/user/groups/UserFieldBoxGroup/UserFiel
 import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
 import MENT_USER from 'constants/user/userConstants';
 import fieldData from 'data/lists/fieldData';
-import useNavigator from 'hooks/navigator/useNavigator';
-import { useMyInfo } from 'hooks/queries/user';
 import {
+  Platform,
+  NativeModules,
   Image,
   Pressable,
   ScrollView,
   TouchableOpacity,
   View,
+  Linking,
 } from 'react-native';
-import { useAuthorizeStore } from 'stores/Authorize';
+import useNavigator from 'hooks/navigator/useNavigator';
+import { useLogout, useMyInfo } from 'hooks/queries/user';
+import useDialog from 'hooks/app/useDialog';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { colors } from 'styles/theme';
 import userScreenStyles from './UserScreen.style';
 
 const UserScreen = () => {
-  const { resetToken, setIsLogin } = useAuthorizeStore();
   const { data: userInfo } = useMyInfo();
   const { stackNavigation } = useNavigator();
+  const { openDialog } = useDialog();
 
   const handleEditProfile = () => {
     stackNavigation.navigate('UserProfileEdit');
@@ -31,13 +37,53 @@ const UserScreen = () => {
     stackNavigation.navigate('UserInterest');
   };
 
-  const handleLogout = () => {
-    resetToken();
-    setIsLogin(false);
+  const handleShowSettingScreen = () => {
+    if (Platform.OS === 'ios') {
+      openSettings();
+    } else {
+      NativeModules.ExternalURLModule.linkAndroidSettings();
+    }
+  };
+
+  const { mutateAsync: logout, isLoading: isLogoutLoading } = useLogout();
+
+  const handleLogout = async () => {
+    openDialog({
+      type: 'warning',
+      text: '로그아웃하시겠습니까?',
+      applyText: '예',
+      closeText: '아니오',
+      apply: async () => {
+        await logout();
+      },
+    });
+  };
+
+  const handleShowFAQ = () => {
+    Linking.openURL(
+      'https://navy-web.notion.site/FAQ-0449b749375646c4b3a55fccc1e44ff7?pvs=4',
+    );
+  };
+
+  const handleShowAnnoincement = () => {
+    Linking.openURL(
+      'https://navy-web.notion.site/9ff02822c01c4a5a905e197389d8b3e4?pvs=4',
+    );
+  };
+
+  const handleShowInquiry = () => {
+    Linking.openURL('http://pf.kakao.com/_QuKlG');
   };
 
   return (
     <View style={userScreenStyles.container}>
+      {isLogoutLoading && (
+        <WithIconLoading
+          isActive
+          backgroundColor={colors.background}
+          text="로그아웃 중입니다."
+        />
+      )}
       <View style={userScreenStyles.userInfo}>
         <View style={userScreenStyles.userBasicContainer}>
           <Pressable
@@ -107,20 +153,22 @@ const UserScreen = () => {
         <Text variant="bodySB" color="darkGrey">
           {MENT_USER.MAIN.CUSTOMER_SERVICE_CENTER}
         </Text>
-        <Pressable>
+        <Pressable onPress={handleShowFAQ}>
           <Text variant="body2">{MENT_USER.MAIN.FAQ}</Text>
         </Pressable>
-        {/* <Pressable>
+        <Pressable onPress={handleShowAnnoincement}>
           <Text variant="body2">{MENT_USER.MAIN.ANNOUNCEMENT}</Text>
-        </Pressable> */}
-        <Pressable>
+        </Pressable>
+        <Pressable onPress={handleShowInquiry}>
           <Text variant="body2">{MENT_USER.MAIN.INQUIRY}</Text>
         </Pressable>
         <Divider height={1} color="darkGrey" />
-        <Text variant="bodySB" color="darkGrey">
-          {MENT_USER.MAIN.SETTING}
-        </Text>
         <Pressable>
+          <Text variant="bodySB" color="darkGrey">
+            {MENT_USER.MAIN.SETTING}
+          </Text>
+        </Pressable>
+        <Pressable onPress={handleShowSettingScreen}>
           <Text variant="body2">{MENT_USER.MAIN.SERVICE_SETTING}</Text>
         </Pressable>
         <Pressable onPress={handleLogout}>

@@ -16,6 +16,7 @@ export interface AuthorizeStore {
   setToken: (token: Token) => void;
   resetToken: () => void;
   setFcmToken: (fcmToken?: string) => void;
+  resetFcmToken: () => void;
   setIsLogin: (loginStatus: boolean) => void;
   setRecentLogin: (recentLoginInfo?: SocialType) => void;
 }
@@ -54,6 +55,11 @@ export const useAuthorizeStore = create<AuthorizeStore>()(
         set((state) => ({
           ...state,
           fcmToken: payload,
+        })),
+      resetFcmToken: () =>
+        set((state) => ({
+          ...state,
+          fcmToken: undefined,
         })),
       setIsLogin: (payload) =>
         set((state) => ({

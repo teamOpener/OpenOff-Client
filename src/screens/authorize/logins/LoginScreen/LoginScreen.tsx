@@ -19,6 +19,7 @@ import {
   Platform,
   ScrollView,
   View,
+  StyleSheet,
 } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
@@ -26,6 +27,11 @@ import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
 import { SocialType } from 'types/user';
 import { validateEmail, validatePassword } from 'utils/validate';
+import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
+import { permitAlert } from 'apis/user';
+import DeviceInfo from 'react-native-device-info';
 import loginScreenStyles from './LoginScreen.style';
 
 const LoginScreen = () => {
@@ -34,7 +40,7 @@ const LoginScreen = () => {
   const [firstLoginShow, setFirstLoginShow] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('');
 
-  const { setIsLogin, resetToken, setRecentLogin, recentLogin } =
+  const { setIsLogin, resetToken, setFcmToken, setRecentLogin, recentLogin } =
     useAuthorizeStore();
 
   const { openDialog } = useDialog();
@@ -53,15 +59,27 @@ const LoginScreen = () => {
     });
   };
 
+  const handleLoginSuccess = async () => {
+    const deviceInfo = await DeviceInfo.getUniqueId();
+    const value = await AsyncStorage.getItem('authorize');
+    const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
+    if (authorizeStore.state.fcmToken) {
+      if (Platform.OS === 'ios') messaging().registerDeviceForRemoteMessages();
+      messaging().onTokenRefresh(async (token) => {
+        await permitAlert({
+          fcmToken: token,
+          deviceId: deviceInfo,
+        });
+        setFcmToken(token);
+      });
+    }
+  };
+
   const { mutateAsync: normalLogin, isLoading: isNormalLoginLoading } =
-    useNormalLogin(() => {
-      return false;
-    }, handleLoginError);
+    useNormalLogin(handleLoginSuccess, handleLoginError);
 
   const { mutateAsync: socialLogin, isLoading: isSocialLoginLoading } =
-    useSocialLogin(() => {
-      return false;
-    }, handleSocialLoginError);
+    useSocialLogin(handleLoginSuccess, handleSocialLoginError);
 
   const isActive =
     !validateEmail(emailAddress) &&
@@ -140,14 +158,23 @@ const LoginScreen = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (isSocialLoginLoading || isNormalLoginLoading || firstLoginShow)
-    return <WithIconLoading isActive backgroundColor={colors.background} />;
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={loginScreenStyles.container}
     >
+      {firstLoginShow && (
+        <View
+          style={[StyleSheet.absoluteFill, loginScreenStyles.loadingContainer]}
+        />
+      )}
+      {(isSocialLoginLoading || isNormalLoginLoading) && (
+        <WithIconLoading
+          isActive
+          backgroundColor={colors.background}
+          text="로그인 중입니다."
+        />
+      )}
       <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>
         <Image
           style={loginScreenStyles.logo}

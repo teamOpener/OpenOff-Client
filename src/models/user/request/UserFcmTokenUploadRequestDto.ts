@@ -1,4 +1,5 @@
 interface UserFcmTokenUploadRequestDto {
+  deviceId: string;
   fcmToken: string;
 }
 

@@ -32,7 +32,7 @@ const validateCount = (count: number) => {
 
 const validateBirthday = (birthday: string) => {
   if (birthday)
-    return /^(19|20)\d\d-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/.test(birthday)
+    return /^(19|20)\d\d-(0[1-9]|1[0-2])-([0-2][0-9]|3[0-1])$/.test(birthday)
       ? undefined
       : '생년월일 형식으로 작성해주세요!';
   return undefined;

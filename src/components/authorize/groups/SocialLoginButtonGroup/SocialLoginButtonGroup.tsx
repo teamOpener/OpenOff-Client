@@ -1,5 +1,6 @@
 import SocialLoginButton from 'components/authorize/buttons/SocialLoginButton/SocialLoginButton';
 import { Image, Platform, View } from 'react-native';
+import Icon from 'components/common/Icon/Icon';
 import { useAuthorizeStore } from 'stores/Authorize';
 import socialLoginButtonGroupStyles from './SocialLoginButtonGroup.style';
 
@@ -31,18 +32,12 @@ const SocialLoginButtonGroup = ({
           source={require('../../../../assets/images/kakao.png')}
         />
       </SocialLoginButton>
-      <SocialLoginButton color="#1EC800" handlePress={naverLogin}>
-        {recentLogin === 'NAVER' && (
-          <Image
-            style={socialLoginButtonGroupStyles.recentLogin}
-            source={require('../../../../assets/images/recentLogin.png')}
-          />
-        )}
+      {/* <SocialLoginButton color="#1EC800" handlePress={naverLogin}>
         <Image
           style={socialLoginButtonGroupStyles.socialLogo}
           source={require('../../../../assets/images/naver.png')}
         />
-      </SocialLoginButton>
+      </SocialLoginButton> */}
       {Platform.OS === 'ios' && (
         <SocialLoginButton color="#FFF" handlePress={appleLogin}>
           {recentLogin === 'APPLE' && (
@@ -51,24 +46,15 @@ const SocialLoginButtonGroup = ({
               source={require('../../../../assets/images/recentLogin.png')}
             />
           )}
-          <Image
-            style={socialLoginButtonGroupStyles.socialLogo}
-            source={require('../../../../assets/images/apple.png')}
-          />
+          <Icon name="IconApple" size={70} />
         </SocialLoginButton>
       )}
-      <SocialLoginButton color="#FFF" handlePress={googleLogin}>
-        {recentLogin === 'GOOGLE' && (
-          <Image
-            style={socialLoginButtonGroupStyles.recentLogin}
-            source={require('../../../../assets/images/recentLogin.png')}
-          />
-        )}
+      {/* <SocialLoginButton color="#FFF" handlePress={googleLogin}>
         <Image
           style={socialLoginButtonGroupStyles.socialLogo}
           source={require('../../../../assets/images/google.png')}
         />
-      </SocialLoginButton>
+      </SocialLoginButton> */}
     </View>
   );
 };

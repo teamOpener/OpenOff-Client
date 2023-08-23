@@ -6,11 +6,13 @@ import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
 import NaverMapView from 'react-native-nmap';
 import { PERMISSIONS } from 'react-native-permissions';
 import { requestSinglePermission } from 'services/permission';
+import { useEventMapStore } from 'stores/EventMap';
 import { Coordinate } from 'types/event';
 
 const useMapCoordinateInfo = () => {
   const { openDialog } = useDialog();
   const naverMapRef = useRef<NaverMapView>(null);
+  const { startEndDate } = useEventMapStore();
   // 사용자의 스크린 위치정보
   const screenCoordinate = useRef<Coordinate>({
     latitude: 37.56278008163968,
@@ -54,6 +56,7 @@ const useMapCoordinateInfo = () => {
       },
     );
   };
+
   const setGPSCoordinate = () => {
     const watchOptions: GeoWatchOptions = {
       accuracy: {
@@ -83,6 +86,7 @@ const useMapCoordinateInfo = () => {
       watchOptions,
     );
   };
+
   useFocusEffect(
     useCallback(() => {
       let watchValue = 0;
@@ -91,7 +95,8 @@ const useMapCoordinateInfo = () => {
           () => {
             if (
               currentCoordinate.latitude === 0 &&
-              currentCoordinate.longitude === 0
+              currentCoordinate.longitude === 0 &&
+              startEndDate.endDay === undefined
             ) {
               getFirstCoordinate();
               watchValue = setGPSCoordinate();
@@ -106,7 +111,8 @@ const useMapCoordinateInfo = () => {
           .then(() => {
             if (
               currentCoordinate.latitude === 0 &&
-              currentCoordinate.longitude === 0
+              currentCoordinate.longitude === 0 &&
+              startEndDate.endDay === undefined
             ) {
               getFirstCoordinate();
               watchValue = setGPSCoordinate();

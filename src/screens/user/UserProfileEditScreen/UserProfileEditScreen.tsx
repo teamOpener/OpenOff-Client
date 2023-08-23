@@ -1,16 +1,29 @@
 import Text from 'components/common/Text/Text';
 import UserProfileImageButton from 'components/user/buttons/UserProfileImageButton/UserProfileImageButton';
 import UserInfoText from 'components/user/texts/UserInfoText/UserInfoText';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import MENT_USER from 'constants/user/userConstants';
-import { useMyInfo } from 'hooks/queries/user';
+import { useLogout, useMyInfo } from 'hooks/queries/user';
+import useDialog from 'hooks/app/useDialog';
 import { Pressable, ScrollView, View } from 'react-native';
+import { colors } from 'styles/theme';
 import userProfileEditScreenStyles from './UserProfileEditScreen.style';
 
 const UserProfileEditScreen = () => {
   const { data: userInfo } = useMyInfo();
+  const { openDialog } = useDialog();
+  const { mutateAsync: logout, isLoading: isWithdrawalLoading } = useLogout();
 
-  const handleWithdrawal = () => {
-    return false;
+  const handleWithdrawal = async () => {
+    openDialog({
+      type: 'warning',
+      text: '정말로 탈퇴하시겠습니까?',
+      applyText: '예',
+      closeText: '아니오',
+      apply: async () => {
+        await logout();
+      },
+    });
   };
 
   const USER_BIRTH = `${userInfo?.userInfo.birth.year}년 ${userInfo?.userInfo.birth.month}월 ${userInfo?.userInfo.birth.day}일`;
@@ -27,6 +40,13 @@ const UserProfileEditScreen = () => {
 
   return (
     <ScrollView>
+      {isWithdrawalLoading && (
+        <WithIconLoading
+          isActive
+          backgroundColor={colors.background}
+          text="회원탈퇴 중입니다."
+        />
+      )}
       <View style={userProfileEditScreenStyles.container}>
         <UserProfileImageButton />
         <View style={userProfileEditScreenStyles.emailContainer}>

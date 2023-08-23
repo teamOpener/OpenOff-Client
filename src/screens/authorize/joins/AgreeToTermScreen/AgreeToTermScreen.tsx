@@ -8,7 +8,7 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import { UserInfoStatus } from 'constants/join';
 import { AuthorizeMenu } from 'constants/menu';
 import { Dispatch, useCallback, useEffect, useState } from 'react';
-import { BackHandler, View } from 'react-native';
+import { BackHandler, Linking, View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import agreeToTermScreenStyles from './AgreeToTermScreen.style';
@@ -109,16 +109,31 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
           value={term.termToUse}
           handlePress={() => handleSingleTerm('termToUse')}
           label="(필수) 서비스 이용약관"
+          handleDetailPress={() => {
+            Linking.openURL(
+              'https://navy-web.notion.site/fa8cb5d161d143409c331f4e3e7f30b1?pvs=4',
+            );
+          }}
         />
         <CheckButton
           value={term.termToPrivacy}
           handlePress={() => handleSingleTerm('termToPrivacy')}
           label="(필수) 개인정보 수집 이용"
+          handleDetailPress={() => {
+            Linking.openURL(
+              'https://navy-web.notion.site/efa559e8c07e40f484705b2fdca06524?pvs=4',
+            );
+          }}
         />
         <CheckButton
           value={term.termToMarketing}
           handlePress={() => handleSingleTerm('termToMarketing')}
           label="(선택) 마케팅 정보 수신동의"
+          handleDetailPress={() => {
+            Linking.openURL(
+              'https://navy-web.notion.site/4da0a8c248094ce9ba3faf76d96466ab?pvs=4',
+            );
+          }}
         />
       </View>
     </ScreenCover>

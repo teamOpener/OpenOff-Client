@@ -5,6 +5,7 @@ const checkButtonStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   checkContainer: {
     width: 18,
@@ -21,6 +22,10 @@ const checkButtonStyles = StyleSheet.create({
     lineHeight: 17 * 1.4,
     fontFamily: fonts.semibold,
   } as TextStyle,
+  checkContent: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
 });
 
 export default checkButtonStyles;
