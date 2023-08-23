@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { updateInterestField } from 'apis/interest';
 import {
   checkSms,
@@ -18,6 +18,8 @@ import { SearchNicknameRequestDto } from 'models/user/request/SearchNicknameRequ
 import UserOnboardingRequestDto from 'models/user/request/UserOnboardingRequestDto';
 import UserProfileUploadRequestDto from 'models/user/request/UserProfileUploadRequestDto';
 import UserSmsCheckRequestDto from 'models/user/request/UserSmsCheckRequestDto';
+import { removeToken } from 'services/fcm';
+import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiErrorResponse } from 'types/ApiResponse';
 
 export const useSendSms = (
@@ -113,4 +115,19 @@ export const useFindUserByNickname = ({
       suspense: false,
     },
   );
+};
+
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+  const { resetToken, resetFcmToken, setIsLogin } = useAuthorizeStore();
+
+  const logout = async () => {
+    resetToken();
+    resetFcmToken();
+    await removeToken();
+    queryClient.clear();
+    setIsLogin(false);
+  };
+
+  return useMutation(() => logout());
 };

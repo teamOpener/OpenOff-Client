@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { openSettings } from 'react-native-permissions';
 import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
@@ -17,16 +16,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { removeToken } from 'services/fcm';
 import useNavigator from 'hooks/navigator/useNavigator';
-import { useMyInfo } from 'hooks/queries/user';
-import { useAuthorizeStore } from 'stores/Authorize';
+import { useLogout, useMyInfo } from 'hooks/queries/user';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { colors } from 'styles/theme';
 import userScreenStyles from './UserScreen.style';
 
 const UserScreen = () => {
-  const { resetToken, resetFcmToken, setIsLogin } = useAuthorizeStore();
   const { data: userInfo } = useMyInfo();
-  const queryClient = useQueryClient();
   const { stackNavigation } = useNavigator();
 
   const handleEditProfile = () => {
@@ -45,16 +42,21 @@ const UserScreen = () => {
     }
   };
 
+  const { mutateAsync, isLoading: isLogoutLoading } = useLogout();
+
   const handleLogout = async () => {
-    resetToken();
-    resetFcmToken();
-    await removeToken();
-    queryClient.clear();
-    setIsLogin(false);
+    await mutateAsync();
   };
 
   return (
     <View style={userScreenStyles.container}>
+      {isLogoutLoading && (
+        <WithIconLoading
+          isActive
+          backgroundColor={colors.background}
+          text="로그아웃중입니다."
+        />
+      )}
       <View style={userScreenStyles.userInfo}>
         <View style={userScreenStyles.userBasicContainer}>
           <Pressable
