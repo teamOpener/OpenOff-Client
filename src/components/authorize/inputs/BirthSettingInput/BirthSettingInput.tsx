@@ -71,6 +71,8 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
         textColor="white"
         theme="dark"
         open={open}
+        minimumDate={new Date('1910-01-01')}
+        maximumDate={new Date()}
         date={new Date(value)}
         confirmText="적용"
         cancelText="닫기"
