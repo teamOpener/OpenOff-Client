@@ -2,7 +2,7 @@ import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { View } from 'react-native';
-
+import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
 import { useQueryClient } from '@tanstack/react-query';
 import useNavigator from 'hooks/navigator/useNavigator';
@@ -18,20 +18,11 @@ import userHeaderStyles from './UserHeader.style';
 import ActionButton from '../buttons/ActionButton/ActionButton';
 
 interface Props {
-  username: string;
-  birth: string;
+  userInfo: ApplicantApplyDetailResponseDto;
   ledgerId: number;
-  eventIndexId: number;
-  isAccepted: boolean;
 }
 
-const UserHeader = ({
-  username,
-  birth,
-  ledgerId,
-  eventIndexId,
-  isAccepted,
-}: Props) => {
+const UserHeader = ({ userInfo, ledgerId }: Props) => {
   const queryClient = useQueryClient();
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
@@ -41,7 +32,7 @@ const UserHeader = ({
     queryClient.invalidateQueries(queryKeys.participantKeys.all);
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
     queryClient.invalidateQueries(
-      queryKeys.hostKeys.statusByIndexId(eventIndexId),
+      queryKeys.hostKeys.statusByIndexId(userInfo.eventIndexId),
     );
     queryClient.invalidateQueries(
       queryKeys.hostKeys.applicantQnAbyLedgerId(ledgerId),
@@ -111,21 +102,31 @@ const UserHeader = ({
   return (
     <View style={userHeaderStyles.container}>
       <SpaceLayout direction="row" size={5} style={userHeaderStyles.userInfo}>
-        <Text>{username}</Text>
-        <Text>{birth}</Text>
-        {/* TODO dto 성별없음 */}
-        {/* <Icon name="IconFemale" size={17} fill="error" /> */}
+        <Text>{userInfo.username}</Text>
+        <Text>{userInfo.birth}</Text>
+        <Icon
+          name={userInfo.genderType === 'MAN' ? 'IconMale' : 'IconFemale'}
+          size={17}
+          fill={userInfo.genderType === 'MAN' ? 'blue' : 'error'}
+        />
       </SpaceLayout>
 
       <SpaceLayout direction="row" size={5}>
-        {/* TODO 입장완료 */}
-        {isAccepted ? (
+        {userInfo.isJoined && (
+          <View style={userHeaderStyles.admissionTextWrapper}>
+            <Text color="lightGreen" style={userHeaderStyles.admissionText}>
+              입장완료
+            </Text>
+          </View>
+        )}
+        {!userInfo.isJoined && userInfo.isAccepted && (
           <ActionButton
             label="승인 취소"
             style={userHeaderStyles.approveBtn}
             onPress={handleCancel}
           />
-        ) : (
+        )}
+        {!userInfo.isJoined && !userInfo.isAccepted && (
           <>
             <ActionButton label="거절" onPress={handleDeny} />
             <ActionButton

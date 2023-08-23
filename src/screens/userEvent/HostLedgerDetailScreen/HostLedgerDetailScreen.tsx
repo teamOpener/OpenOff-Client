@@ -31,13 +31,7 @@ const HostLedgerDetailScreen = () => {
 
   return (
     <LedgerScreenLayout>
-      <UserHeader
-        username={qna.username}
-        birth={qna.birth}
-        ledgerId={params.ledgerId}
-        eventIndexId={qna.eventIndexId}
-        isAccepted={qna.isAccepted}
-      />
+      <UserHeader userInfo={qna} ledgerId={params.ledgerId} />
       {qna.qnAInfoList.length === 0 ? (
         <EmptyLayout helpText="추가질문이 없습니다." />
       ) : (
