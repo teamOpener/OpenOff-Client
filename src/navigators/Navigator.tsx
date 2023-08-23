@@ -23,7 +23,7 @@ import UserQRScreen from 'screens/userEvent/UserQRScreen/UserQRScreen';
 import HostConsoleScreen from 'screens/userEvent/HostConsoleScreen/HostConsoleScreen';
 import HostQRScanScreen from 'screens/userEvent/HostQRScanScreen/HostQRScanScreen';
 import HostLedgerScreen from 'screens/userEvent/HostLedgerScreen/HostLedgerScreen';
-import HostAlarmScreen from 'screens/userEvent/HostAlarmScreen/HostAlarmScreen';
+import StaffManagementScreen from 'screens/userEvent/StaffManagementScreen/StaffManagementScreen';
 import HostLedgerDetailScreen from 'screens/userEvent/HostLedgerDetailScreen/HostLedgerDetailScreen';
 import PopularEventScreen from 'screens/home/PopularEventScreen/PopularEventScreen';
 import UserProfileEditScreen from 'screens/user/UserProfileEditScreen/UserProfileEditScreen';
@@ -242,10 +242,11 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          ...noTextOptions,
+          headerTitle: '스태프 관리',
+          ...defaultOptions,
         }}
-        name={StackMenu.HostAlarm}
-        component={HostAlarmScreen}
+        name={StackMenu.StaffManagement}
+        component={StaffManagementScreen}
       />
       {/* user */}
       <Stack.Screen

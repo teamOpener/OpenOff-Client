@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import Text from 'components/common/Text/Text';
 import { useEventDetail } from 'hooks/queries/event';
 import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
@@ -9,12 +8,13 @@ import Divider from 'components/common/Divider/Divider';
 // import HeadText from 'components/common/HeadText/HeadText';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
-import queryKeys from 'constants/queryKeys';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import { ScrollView } from 'react-native';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Spacing from 'components/common/Spacing/Spacing';
 import useNavigator from 'hooks/navigator/useNavigator';
+import useResetQueries from 'hooks/queries/useResetQueries';
 import useEventIndexList from 'hooks/event/useEventIndexList';
 import useStackRoute from 'hooks/navigator/useStackRoute';
 import useDialog from 'hooks/app/useDialog';
@@ -28,10 +28,10 @@ import { colors } from 'styles/theme';
 import eventApplyScreenStyles from './EventApplyScreen.style';
 
 const EventApplyScreen = () => {
-  const queryClient = useQueryClient();
   const { params } = useStackRoute<StackMenu.EventApply>();
   const { tabNavigation } = useNavigator();
   const { openDialog } = useDialog();
+  const { resetQueries } = useResetQueries();
 
   const { data: event } = useEventDetail(params.id);
   const { data: user } = useMyInfo();
@@ -54,10 +54,7 @@ const EventApplyScreen = () => {
         tabNavigation.navigate(BottomTabMenu.UserEvent, {
           tab: UserEventTabItem.PARTICIPANT,
         });
-        queryClient.invalidateQueries(queryKeys.eventKeys.all);
-        queryClient.invalidateQueries(queryKeys.bookmarkKeys.all);
-        queryClient.invalidateQueries(queryKeys.participantKeys.all);
-        queryClient.invalidateQueries(queryKeys.hostKeys.list);
+        resetQueries(resetQueryKeys.applyEvent);
       },
     });
   };
@@ -156,11 +153,11 @@ const EventApplyScreen = () => {
               />
             </SpaceLayout>
           </SpaceLayout>
-          <Divider height={1} color="darkGrey" />
 
           {/* 추가 정보 */}
           {qnaList.length > 0 && (
             <>
+              <Divider height={1} color="darkGrey" />
               <SpaceLayout size={15}>
                 <Text style={eventApplyScreenStyles.subTitle}>
                   {MENT_EVENT_DETAIL.MAIN.ADDITIONAL_INFORMATION}

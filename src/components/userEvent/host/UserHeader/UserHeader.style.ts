@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const userHeaderStyles = StyleSheet.create({
@@ -19,6 +19,16 @@ const userHeaderStyles = StyleSheet.create({
   approveBtn: {
     backgroundColor: colors.main,
   },
+  admissionTextWrapper: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightGreen,
+    marginRight: 7,
+  },
+  admissionText: {
+    fontFamily: fonts.semibold,
+    fontSize: 15,
+    lineHeight: 17.9,
+  } as TextStyle,
 });
 
 export default userHeaderStyles;

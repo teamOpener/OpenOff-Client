@@ -10,7 +10,7 @@ const categorySelectorStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
-    paddingVertical: 15,
+    paddingVertical: 10,
   },
   title: {
     fontFamily: fonts.semibold,

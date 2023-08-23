@@ -16,6 +16,9 @@ const userEventScreenStyles = StyleSheet.create({
   flatListContentStyle: {
     paddingBottom: 100,
   },
+  loadingContainer: {
+    paddingVertical: 40,
+  },
 });
 
 export default userEventScreenStyles;

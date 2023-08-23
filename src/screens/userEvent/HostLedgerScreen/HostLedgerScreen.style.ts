@@ -67,6 +67,9 @@ const hostLedgerScreenStyles = StyleSheet.create({
   flatListContentStyle: {
     paddingBottom: 100,
   },
+  loadingContainer: {
+    paddingVertical: 40,
+  },
 });
 
 export default hostLedgerScreenStyles;

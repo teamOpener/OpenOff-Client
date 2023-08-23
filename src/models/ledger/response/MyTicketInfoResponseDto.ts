@@ -5,6 +5,7 @@ export interface MyTicketInfoResponseDto {
   birth: string;
   eventInfoId: number;
   eventIndexId: number;
+  ladgerId: number;
   eventTitle: string;
   streetRoadAddress: string;
   ticketIndex: string;

@@ -8,6 +8,7 @@ const DOMAIN = {
   HOST: 'HOST',
   BOOKMARK: 'BOOKMARK',
   COMMENT: 'COMMENT',
+  LEDGER: 'LEDGER',
 };
 
 const userKeys = {
@@ -74,6 +75,15 @@ const commentKeys = {
   ],
 };
 
+const ledgerKeys = {
+  all: [DOMAIN.LEDGER],
+  staffByEventInfoId: (eventInfoId: number) => [
+    DOMAIN.LEDGER,
+    'staff',
+    eventInfoId,
+  ],
+};
+
 const queryKeys = {
   userKeys,
   eventKeys,
@@ -81,6 +91,7 @@ const queryKeys = {
   hostKeys,
   bookmarkKeys,
   commentKeys,
+  ledgerKeys,
 };
 
 export default queryKeys;

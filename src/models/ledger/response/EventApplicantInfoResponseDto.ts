@@ -1,4 +1,4 @@
-export type GenderType = 'MAN' | 'WOMAN';
+import { GenderType } from 'models/user/entity/GenderType';
 
 export interface EventApplicantInfoResponseDto {
   userId: string;

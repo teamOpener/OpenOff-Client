@@ -87,7 +87,7 @@ export type RootStackParamList = {
   HostLedgerDetail: {
     ledgerId: number;
   };
-  HostAlarm: {
+  StaffManagement: {
     eventId: number;
     eventIndex: number;
   };

@@ -14,8 +14,11 @@ import {
   getEventTickets,
   getLedgerStatus,
   getLedgerUserList,
+  getStaffs,
+  minusStaff,
   permitAllApplicant,
   permitApplicant,
+  plusStaff,
 } from 'apis/ledger';
 import SortType from 'models/ledger/entity/SortType';
 import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
@@ -27,6 +30,9 @@ import { MyTicketInfoRequestDto } from 'models/ledger/request/MyTicketInfoReques
 import { QRCheckRequestDto } from 'models/ledger/request/QRCheckRequestDto';
 import { ApplicationCancelRequestDto } from 'models/ledger/request/ApplicationCancelRequestDto';
 import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
+import { EventStaffInfoRequestDto } from 'models/ledger/request/EventStaffInfoRequestDto';
+import { EventStaffCreateRequestDto } from 'models/ledger/request/EventStaffCreateRequestDto';
+import { StaffMinusRequestDto } from 'models/ledger/request/StaffMinusRequestDto';
 
 export const useUserTickets = ({ eventInfoId }: MyTicketInfoRequestDto) => {
   return useQuery(
@@ -36,7 +42,6 @@ export const useUserTickets = ({ eventInfoId }: MyTicketInfoRequestDto) => {
   );
 };
 
-// TODO: 내 이벤트 - 참여 이벤트 리스트 조회
 export const useUserTicketLists = (fieldType?: FieldCode) => {
   const query = useInfiniteQuery(
     fieldType
@@ -55,6 +60,7 @@ export const useUserTicketLists = (fieldType?: FieldCode) => {
         }
         return lastPage.data?.content[lastIdx - 1].eventInfoId;
       },
+      suspense: false,
     },
   );
   return query;
@@ -78,6 +84,7 @@ export const useHostEventLists = (fieldType?: FieldCode) => {
         }
         return lastPage.data?.content[lastIdx - 1].eventInfoId;
       },
+      suspense: false,
     },
   );
   return query;
@@ -218,4 +225,37 @@ export const useCancelApplicationEvent = (
       useErrorBoundary: false,
     },
   );
+};
+
+export const useStaffLists = ({ eventInfoId }: EventStaffInfoRequestDto) => {
+  return useQuery(
+    [...queryKeys.ledgerKeys.staffByEventInfoId(eventInfoId)],
+    () => getStaffs({ eventInfoId }),
+    {
+      select: (data) => data.data,
+      suspense: false,
+    },
+  );
+};
+
+export const usePlusStaff = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((data: EventStaffCreateRequestDto) => plusStaff(data), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
+  });
+};
+
+export const useMinusStaff = (
+  successCallback?: () => void,
+  errorCallback?: (error: ApiErrorResponse) => void,
+) => {
+  return useMutation((params: StaffMinusRequestDto) => minusStaff(params), {
+    onSuccess: successCallback,
+    onError: errorCallback,
+    useErrorBoundary: false,
+  });
 };
