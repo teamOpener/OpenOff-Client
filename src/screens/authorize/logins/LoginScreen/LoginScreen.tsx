@@ -19,6 +19,7 @@ import {
   Platform,
   ScrollView,
   View,
+  StyleSheet,
 } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
@@ -162,11 +163,16 @@ const LoginScreen = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={loginScreenStyles.container}
     >
-      {(isSocialLoginLoading || isNormalLoginLoading || firstLoginShow) && (
+      {firstLoginShow && (
+        <View
+          style={[StyleSheet.absoluteFill, loginScreenStyles.loadingContainer]}
+        />
+      )}
+      {(isSocialLoginLoading || isNormalLoginLoading) && (
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text={!firstLoginShow ? '로그인 중입니다.' : ''}
+          text="로그인 중입니다."
         />
       )}
       <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>

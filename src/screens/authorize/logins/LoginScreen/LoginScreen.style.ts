@@ -11,6 +11,10 @@ const loginScreenStyles = StyleSheet.create({
   contentContainer: {
     alignItems: 'center',
   },
+  loadingContainer: {
+    backgroundColor: colors.background,
+    zIndex: 1,
+  },
   mainContainer: {
     flex: 1,
     width: '100%',
