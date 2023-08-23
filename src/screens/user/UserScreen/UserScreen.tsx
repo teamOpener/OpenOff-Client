@@ -71,6 +71,10 @@ const UserScreen = () => {
     );
   };
 
+  const handleShowInquiry = () => {
+    Linking.openURL('http://pf.kakao.com/_QuKlG');
+  };
+
   return (
     <View style={userScreenStyles.container}>
       {isLogoutLoading && (
@@ -152,10 +156,10 @@ const UserScreen = () => {
         <Pressable onPress={handleShowFAQ}>
           <Text variant="body2">{MENT_USER.MAIN.FAQ}</Text>
         </Pressable>
-        <Pressable onPress={handleShowFAQ}>
+        <Pressable onPress={handleShowAnnoincement}>
           <Text variant="body2">{MENT_USER.MAIN.ANNOUNCEMENT}</Text>
         </Pressable>
-        <Pressable onPress={handleShowAnnoincement}>
+        <Pressable onPress={handleShowInquiry}>
           <Text variant="body2">{MENT_USER.MAIN.INQUIRY}</Text>
         </Pressable>
         <Divider height={1} color="darkGrey" />
