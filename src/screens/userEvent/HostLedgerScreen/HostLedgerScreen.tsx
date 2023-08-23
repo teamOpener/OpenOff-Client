@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { FlatList, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  TextInput,
+  TouchableOpacity,
+  View,
+  RefreshControl,
+  ScrollView,
+} from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { colors } from 'styles/theme';
 import { StackMenu } from 'constants/menu';
@@ -22,14 +29,17 @@ import {
   useLedgerUserList,
   usePermitAllApplicant,
 } from 'hooks/queries/ledger';
+import useResetQueries from 'hooks/queries/useResetQueries';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useBottomSheet from 'hooks/ledger/useBottomSheet';
 import useDialog from 'hooks/app/useDialog';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
 import useStackRoute from 'hooks/navigator/useStackRoute';
 import SortType from 'models/ledger/entity/SortType';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
 import queryKeys from 'constants/queryKeys';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import hostLedgerScreenStyles from './HostLedgerScreen.style';
 
@@ -44,6 +54,8 @@ const HostLedgerScreen = () => {
   const { data: eventStatus } = useLedgerStatus(params.eventIndex);
 
   const [searchName, onChangeSearchName] = useState<string>('');
+
+  const { resetQueries } = useResetQueries();
 
   const {
     bottomSheetModalRef,
@@ -71,6 +83,17 @@ const HostLedgerScreen = () => {
       fetchNextPage();
     }
   };
+
+  const refreshData = () => {
+    resetQueries(
+      resetQueryKeys.refreshLedgerList({
+        eventIndexId: params.eventIndex,
+        sortType: selectedSortType,
+      }),
+    );
+  };
+
+  const { refreshing, onRefresh } = usePullToRefresh({ callback: refreshData });
 
   /**
    * 일괄 승인
@@ -234,7 +257,13 @@ const HostLedgerScreen = () => {
       </SpaceLayout>
 
       {flatLedgerUserList?.length === 0 ? (
-        <EmptyLayout helpText={MENT_HOST.MAIN.EMPTY_LEDGER} />
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <EmptyLayout helpText={MENT_HOST.MAIN.EMPTY_LEDGER} />
+        </ScrollView>
       ) : (
         <View style={hostLedgerScreenStyles.scrollContainer}>
           <FlatList
@@ -249,6 +278,9 @@ const HostLedgerScreen = () => {
                 eventIndexId={params.eventIndex}
               />
             )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
           />
         </View>
       )}

@@ -1,4 +1,5 @@
 import queryKeys from 'constants/queryKeys';
+import SortType from 'models/ledger/entity/SortType';
 
 /**
  * 이벤트 신청 후에 갱신되어야 합니다.
@@ -27,9 +28,24 @@ const cancelParticipantEvent = ({
   queryKeys.hostKeys.ledgerList,
 ];
 
+/**
+ * 이벤트 신청 명단를 밀어당겨 refresh할 때 갱신합니다.
+ */
+const refreshLedgerList = ({
+  eventIndexId,
+  sortType,
+}: {
+  eventIndexId: number;
+  sortType: SortType;
+}) => [
+  queryKeys.hostKeys.statusByIndexId(eventIndexId),
+  queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType),
+];
+
 const resetQueryKeys = {
   applyEvent,
   cancelParticipantEvent,
+  refreshLedgerList,
 };
 
 export default resetQueryKeys;
