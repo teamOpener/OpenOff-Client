@@ -1,4 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
+import { openSettings } from 'react-native-permissions';
 import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -8,7 +9,6 @@ import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/User
 import MENT_USER from 'constants/user/userConstants';
 import fieldData from 'data/lists/fieldData';
 import {
-  Linking,
   Platform,
   NativeModules,
   Image,
@@ -39,7 +39,7 @@ const UserScreen = () => {
 
   const handleShowSettingScreen = () => {
     // ios 일 경우
-    if (Platform.OS === 'ios') Linking.openURL('App-Prefs:root');
+    if (Platform.OS === 'ios') openSettings();
     // 안드로이드일 경우
     else NativeModules.ExternalURLModule.linkAndroidSettings();
   };
