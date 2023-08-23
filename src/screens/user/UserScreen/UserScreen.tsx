@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useLogout, useMyInfo } from 'hooks/queries/user';
+import useDialog from 'hooks/app/useDialog';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import { colors } from 'styles/theme';
 import userScreenStyles from './UserScreen.style';
@@ -25,6 +26,7 @@ import userScreenStyles from './UserScreen.style';
 const UserScreen = () => {
   const { data: userInfo } = useMyInfo();
   const { stackNavigation } = useNavigator();
+  const { openDialog } = useDialog();
 
   const handleEditProfile = () => {
     stackNavigation.navigate('UserProfileEdit');
@@ -42,10 +44,18 @@ const UserScreen = () => {
     }
   };
 
-  const { mutateAsync, isLoading: isLogoutLoading } = useLogout();
+  const { mutateAsync: logout, isLoading: isLogoutLoading } = useLogout();
 
   const handleLogout = async () => {
-    await mutateAsync();
+    openDialog({
+      type: 'warning',
+      text: '로그아웃하시겠습니까?',
+      applyText: '예',
+      closeText: '아니오',
+      apply: async () => {
+        await logout();
+      },
+    });
   };
 
   return (
@@ -54,7 +64,7 @@ const UserScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text="로그아웃중입니다."
+          text="로그아웃 중입니다."
         />
       )}
       <View style={userScreenStyles.userInfo}>
