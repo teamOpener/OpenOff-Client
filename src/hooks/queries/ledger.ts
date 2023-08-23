@@ -118,6 +118,7 @@ export const useLedgerUserList = (eventIndexId: number, sortType: SortType) => {
         const page = lastPage.data.pageNumber;
         return page + 1;
       },
+      suspense: false,
     },
   );
   return query;

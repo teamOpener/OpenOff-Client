@@ -6,7 +6,6 @@ import {
   View,
   RefreshControl,
   ScrollView,
-  ActivityIndicator,
 } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { colors } from 'styles/theme';
@@ -42,6 +41,7 @@ import API_ERROR_MESSAGE from 'constants/errorMessage';
 import queryKeys from 'constants/queryKeys';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import ListLoading from 'components/suspense/loading/ListLoading/ListLoading';
 import hostLedgerScreenStyles from './HostLedgerScreen.style';
 
 // TODO 무한 스크롤 테스트
@@ -71,7 +71,7 @@ const HostLedgerScreen = () => {
     data: ledgerUserList,
     hasNextPage,
     fetchNextPage,
-    isLoading,
+    isLoading: isLedgerListLoading,
   } = useLedgerUserList(params.eventIndex, selectedSortType);
   const flatLedgerUserList = ledgerUserList?.pages.flatMap(
     (page) => page.data.content,
@@ -169,21 +169,11 @@ const HostLedgerScreen = () => {
     />
   );
 
-  const ticketLoading = () => (
-    <View style={hostLedgerScreenStyles.loadingContainer}>
-      <ActivityIndicator />
-    </View>
-  );
-
   useEffect(() => {
     stackNavigation.setOptions({
       headerTitle,
     });
   }, []);
-
-  if (!eventStatus) {
-    return null;
-  }
 
   return (
     <LedgerScreenLayout>
@@ -194,20 +184,24 @@ const HostLedgerScreen = () => {
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <IconText
             iconName="IconUser"
-            label={`승인완료 ${eventStatus.approvedCount}/${eventStatus.maxCount}`}
+            label={`승인완료 ${eventStatus?.approvedCount ?? 0}/${
+              eventStatus?.maxCount ?? 0
+            }`}
           />
           <IconText
             iconName="IconUser"
-            label={`입장완료 ${eventStatus.joinedCount}/${eventStatus.maxCount}`}
+            label={`입장완료 ${eventStatus?.joinedCount ?? 0}/${
+              eventStatus?.maxCount ?? 0
+            }`}
           />
         </View>
 
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <Text color="main" style={hostLedgerScreenStyles.approveText}>
-            {`${eventStatus.notApprovedCount}명 승인 대기중`}
+            {`${eventStatus?.notApprovedCount ?? 0}명 승인 대기중`}
           </Text>
           <ActionButton
-            disabled={eventStatus.notApprovedCount === 0}
+            disabled={eventStatus?.notApprovedCount === 0}
             label="일괄 승인"
             style={hostLedgerScreenStyles.totalApproveBtn}
             onPress={handlePermitAllButtonPress}
@@ -286,7 +280,7 @@ const HostLedgerScreen = () => {
               />
             )}
             ListFooterComponent={
-              hasNextPage || isLoading ? ticketLoading : null
+              hasNextPage || isLedgerListLoading ? <ListLoading /> : null
             }
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
