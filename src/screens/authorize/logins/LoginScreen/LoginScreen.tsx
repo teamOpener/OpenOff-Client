@@ -166,7 +166,7 @@ const LoginScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text="로그인 중입니다."
+          text={!firstLoginShow ? '로그인 중입니다.' : ''}
         />
       )}
       <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>
