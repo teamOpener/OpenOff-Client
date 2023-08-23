@@ -89,7 +89,7 @@ const useEventMapSelector = (
         : payValueTransform(selectState.payOption.value);
 
     const commonCoordinate: Coordinate =
-      searchValue || !startEndDate.startDay
+      searchValue || startEndDate.startDay
         ? screenCoordinate
         : currentCoordinate;
 

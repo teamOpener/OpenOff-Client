@@ -111,6 +111,7 @@ export const useEventMapInstance = (params: EventSearchRequestDto) => {
     {
       select: (data) => data.data,
       suspense: false,
+      refetchOnMount: false,
     },
   );
 };
