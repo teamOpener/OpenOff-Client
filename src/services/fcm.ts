@@ -10,14 +10,26 @@ import { requestSinglePermission } from './permission';
 const { setFcmToken } = useAuthorizeStore.getState();
 
 export const getToken = async () => {
-  const deviceInfo = await DeviceInfo.getUniqueId();
-  const fcmDeviceToken = await messaging().getToken();
+  try {
+    const deviceInfo = await DeviceInfo.getUniqueId();
+    const fcmDeviceToken = await messaging().getToken();
 
-  await permitAlert({
-    fcmToken: fcmDeviceToken,
-    deviceId: deviceInfo,
-  });
-  setFcmToken(fcmDeviceToken);
+    await permitAlert({
+      fcmToken: fcmDeviceToken,
+      deviceId: deviceInfo,
+    });
+    setFcmToken(fcmDeviceToken);
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
+export const removeToken = async () => {
+  try {
+    await messaging().deleteToken();
+  } catch (e) {
+    console.warn(e);
+  }
 };
 
 // foreground alarm
@@ -45,26 +57,34 @@ const handleDisplayNotification = async ({
   title?: string;
   body?: string;
 }) => {
-  const channelId = await notifee.createChannel({
-    id: 'default',
-    name: 'OpenOffChannel',
-    importance: AndroidImportance.HIGH,
-  });
+  try {
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'OpenOffChannel',
+      importance: AndroidImportance.HIGH,
+    });
 
-  await notifee.displayNotification({
-    title,
-    body,
-    android: {
-      channelId,
-      smallIcon: 'ic_launcher',
-    },
-  });
+    await notifee.displayNotification({
+      title,
+      body,
+      android: {
+        channelId,
+        smallIcon: 'ic_launcher',
+      },
+    });
+  } catch (e) {
+    console.warn(e);
+  }
 };
 
 export const foregroundListener = () => {
-  messaging().onMessage(async (message) => {
-    const title = message?.notification?.title;
-    const body = message?.notification?.body;
-    handleDisplayNotification({ title, body });
-  });
+  try {
+    messaging().onMessage(async (message) => {
+      const title = message?.notification?.title;
+      const body = message?.notification?.body;
+      handleDisplayNotification({ title, body });
+    });
+  } catch (e) {
+    console.warn(e);
+  }
 };

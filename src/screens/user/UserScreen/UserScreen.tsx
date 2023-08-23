@@ -17,14 +17,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
+import { removeToken } from 'services/fcm';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useMyInfo } from 'hooks/queries/user';
 import { useAuthorizeStore } from 'stores/Authorize';
 import userScreenStyles from './UserScreen.style';
 
 const UserScreen = () => {
-  const { resetToken, setIsLogin } = useAuthorizeStore();
+  const { resetToken, resetFcmToken, setIsLogin } = useAuthorizeStore();
   const { data: userInfo } = useMyInfo();
   const queryClient = useQueryClient();
   const { stackNavigation } = useNavigator();
@@ -38,14 +38,17 @@ const UserScreen = () => {
   };
 
   const handleShowSettingScreen = () => {
-    // ios 일 경우
-    if (Platform.OS === 'ios') openSettings();
-    // 안드로이드일 경우
-    else NativeModules.ExternalURLModule.linkAndroidSettings();
+    if (Platform.OS === 'ios') {
+      openSettings();
+    } else {
+      NativeModules.ExternalURLModule.linkAndroidSettings();
+    }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     resetToken();
+    resetFcmToken();
+    await removeToken();
     queryClient.clear();
     setIsLogin(false);
   };
