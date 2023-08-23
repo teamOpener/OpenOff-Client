@@ -17,6 +17,10 @@ import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResp
 import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 import { QRCheckRequestDto } from 'models/ledger/request/QRCheckRequestDto';
 import { ApplicationCancelRequestDto } from 'models/ledger/request/ApplicationCancelRequestDto';
+import { EventStaffInfoResponseDto } from 'models/ledger/response/EventStaffInfoResponseDto';
+import { StaffMinusRequestDto } from 'models/ledger/request/StaffMinusRequestDto';
+import { EventStaffCreateRequestDto } from 'models/ledger/request/EventStaffCreateRequestDto';
+import { EventStaffInfoRequestDto } from 'models/ledger/request/EventStaffInfoRequestDto';
 
 export const getLedgerStatus = async (
   params: EventLadgerTotalStatusRequestDto,
@@ -109,5 +113,26 @@ export const cancelApplicationEvent = async (
   const response = await fetcher.delete(
     `/ladger/own/cancel/${params.ledgerId}`,
   );
+  return response.data;
+};
+
+export const getStaffs = async (
+  params: EventStaffInfoRequestDto,
+): Promise<ApiResponse<EventStaffInfoResponseDto[]>> => {
+  const response = await fetcher.get(`/staff/list`, { params });
+  return response.data;
+};
+
+export const minusStaff = async (
+  params: StaffMinusRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.delete(`/staff/minus`, { params });
+  return response.data;
+};
+
+export const plusStaff = async (
+  data: EventStaffCreateRequestDto,
+): Promise<ApiResponse> => {
+  const response = await fetcher.post(`/staff/plus`, data);
   return response.data;
 };
