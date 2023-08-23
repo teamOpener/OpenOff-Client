@@ -10,8 +10,26 @@ const applyEvent = [
   queryKeys.hostKeys.all,
 ];
 
+/**
+ * 신청자가 이벤트 신청 취소시
+ */
+const cancelParticipantEvent = ({
+  eventInfoId,
+  eventIndexId,
+}: {
+  eventInfoId: number;
+  eventIndexId: number;
+}) => [
+  queryKeys.hostKeys.all,
+  queryKeys.eventKeys.byId(eventInfoId),
+  queryKeys.participantKeys.list,
+  queryKeys.hostKeys.statusByIndexId(eventIndexId),
+  queryKeys.hostKeys.ledgerList,
+];
+
 const resetQueryKeys = {
   applyEvent,
+  cancelParticipantEvent,
 };
 
 export default resetQueryKeys;
