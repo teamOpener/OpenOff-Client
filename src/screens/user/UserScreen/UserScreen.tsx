@@ -15,6 +15,7 @@ import {
   ScrollView,
   TouchableOpacity,
   View,
+  Linking,
 } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useLogout, useMyInfo } from 'hooks/queries/user';
@@ -56,6 +57,18 @@ const UserScreen = () => {
         await logout();
       },
     });
+  };
+
+  const handleShowFAQ = () => {
+    Linking.openURL(
+      'https://navy-web.notion.site/FAQ-0449b749375646c4b3a55fccc1e44ff7?pvs=4',
+    );
+  };
+
+  const handleShowAnnoincement = () => {
+    Linking.openURL(
+      'https://navy-web.notion.site/9ff02822c01c4a5a905e197389d8b3e4?pvs=4',
+    );
   };
 
   return (
@@ -136,13 +149,13 @@ const UserScreen = () => {
         <Text variant="bodySB" color="darkGrey">
           {MENT_USER.MAIN.CUSTOMER_SERVICE_CENTER}
         </Text>
-        <Pressable>
+        <Pressable onPress={handleShowFAQ}>
           <Text variant="body2">{MENT_USER.MAIN.FAQ}</Text>
         </Pressable>
-        {/* <Pressable>
+        <Pressable onPress={handleShowFAQ}>
           <Text variant="body2">{MENT_USER.MAIN.ANNOUNCEMENT}</Text>
-        </Pressable> */}
-        <Pressable>
+        </Pressable>
+        <Pressable onPress={handleShowAnnoincement}>
           <Text variant="body2">{MENT_USER.MAIN.INQUIRY}</Text>
         </Pressable>
         <Divider height={1} color="darkGrey" />

@@ -69,7 +69,7 @@ const handleDisplayNotification = async ({
       body,
       android: {
         channelId,
-        smallIcon: 'ic_launcher',
+        smallIcon: 'ic_notification',
       },
     });
   } catch (e) {
