@@ -3,10 +3,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import { permitAlert } from 'apis/user';
 import { Platform } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 import { PERMISSIONS } from 'react-native-permissions';
 import { useAuthorizeStore } from 'stores/Authorize';
 import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
-import DeviceInfo from 'react-native-device-info';
 import { requestSinglePermission } from './permission';
 
 const { setFcmToken } = useAuthorizeStore.getState();
@@ -22,6 +22,16 @@ export const getToken = async () => {
       deviceId: deviceInfo,
     });
     setFcmToken(fcmDeviceToken);
+    return;
+  }
+  if (authorizeStore.state.fcmToken) {
+    messaging().onTokenRefresh(async (refreshFcmToken) => {
+      await permitAlert({
+        fcmToken: refreshFcmToken,
+        deviceId: deviceInfo,
+      });
+      setFcmToken(refreshFcmToken);
+    });
   }
 };
 
