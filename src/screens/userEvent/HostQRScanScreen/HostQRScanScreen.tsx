@@ -13,6 +13,7 @@ import Text from 'components/common/Text/Text';
 import Icon from 'components/common/Icon/Icon';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
+import { StackMenu } from 'constants/menu';
 import { useCheckQR } from 'hooks/queries/ledger';
 import queryKeys from 'constants/queryKeys';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
@@ -20,10 +21,12 @@ import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { QRCheckType } from 'types/hostQr/QRCheck';
+import useStackRoute from 'hooks/navigator/useStackRoute';
 import hostQRScanScreenStyles from './HostQRScanScreen.style';
 
 const HostQRScanScreen = () => {
   const queryClient = useQueryClient();
+  const { params } = useStackRoute<StackMenu.HostQRScan>();
 
   const [hasPermission, setHasPermission] = useState(false);
   const devices = useCameraDevices();
@@ -80,7 +83,10 @@ const HostQRScanScreen = () => {
       return;
     }
 
-    checkQR({ content: barcodes[0].displayValue });
+    checkQR({
+      eventIndexId: params.eventIndex,
+      content: barcodes[0].displayValue,
+    });
   }, [barcodes]);
 
   useEffect(() => {
