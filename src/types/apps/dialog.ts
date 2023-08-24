@@ -24,7 +24,10 @@ interface CommonDialog extends Dialog {
 interface ConfirmDialog extends Dialog {
   apply: () => void;
   applyText: string;
+  deny: (rejectReason: string) => void;
+  denyText: string;
 }
+
 interface OpenDialog {
   text: string;
   type: DialogType;
@@ -33,6 +36,8 @@ interface OpenDialog {
   apply?: () => void;
   applyText?: string;
   closeText?: string;
+  deny?: (rejectReason: string) => void;
+  denyText?: string;
 }
 
 export type DialogContextType = {

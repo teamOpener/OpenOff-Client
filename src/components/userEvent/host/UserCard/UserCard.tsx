@@ -87,7 +87,19 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
   );
 
   const handleDeny = async () => {
-    await denyApplicationUser({ ledgerId: eventApplicantInfo.ladgerId });
+    openDialog({
+      type: 'confirm',
+      text: '승인을 거절하시겠습니까?',
+      contents: '사유를 선택해주세요.',
+      denyText: '예',
+      closeText: '아니오',
+      deny: async (rejectReason: string) => {
+        await denyApplicationUser({
+          ledgerId: eventApplicantInfo.ladgerId,
+          rejectReason,
+        });
+      },
+    });
   };
 
   /**

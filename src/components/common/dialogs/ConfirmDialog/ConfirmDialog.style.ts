@@ -25,6 +25,22 @@ const confirmDialogStyles = StyleSheet.create({
     backgroundColor: colors.main,
     borderRadius: 25,
   },
+  reasonContainer: {
+    paddingVertical: 6,
+    flexDirection: 'row',
+    gap: 8,
+  },
+  circle: {
+    marginLeft: 14,
+    borderRadius: 100,
+    width: 18,
+    height: 18,
+    borderWidth: 1,
+    borderColor: colors.grey,
+  },
+  activeCircle: {
+    backgroundColor: colors.grey,
+  },
 });
 
 export default confirmDialogStyles;

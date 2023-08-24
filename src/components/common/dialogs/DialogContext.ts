@@ -21,6 +21,8 @@ export const confirmDialogInitialValue: ConfirmDialog = {
   text: '',
   isShow: false,
   apply: () => {},
+  deny: () => {},
+  denyText: '',
   applyText: '적용',
   closeText: '닫기',
 };
