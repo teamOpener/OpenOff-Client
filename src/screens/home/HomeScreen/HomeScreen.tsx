@@ -63,7 +63,6 @@ const HomeScreen = () => {
             style={homeScreenStyles.logo}
             source={require('../../../assets/images/logo.png')}
           />
-          <View />
           <View style={homeScreenStyles.controllerContainer}>
             {/* <TouchableOpacity
               style={homeScreenStyles.controllerButton}
@@ -76,7 +75,7 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <AdvertisementCarousel carouselData={advertisementList} />
+        <AdvertisementCarousel />
         <CategoryButtonGroup handlePress={handleCategoryPress} />
 
         <Spacing height={20} />
