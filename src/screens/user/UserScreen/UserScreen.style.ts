@@ -63,12 +63,6 @@ const userScreenStyles = StyleSheet.create({
   userNoneImage: {
     marginTop: 10,
   },
-  userControllerContainer: {
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    paddingBottom: 100,
-    gap: 20,
-  },
 });
 
 export default userScreenStyles;
