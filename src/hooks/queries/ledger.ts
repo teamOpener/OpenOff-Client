@@ -100,16 +100,22 @@ export const useLedgerStatus = (eventIndexId: number) => {
   );
 };
 
-export const useLedgerUserList = (eventIndexId: number, sortType: SortType) => {
+export const useLedgerUserList = (
+  eventIndexId: number,
+  sortType: SortType,
+  keyword?: string,
+) => {
   const query = useInfiniteQuery(
     [...queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType)],
-    ({ pageParam = null }) =>
-      getLedgerUserList({
+    ({ pageParam = null }) => {
+      return getLedgerUserList({
         eventIndexId,
         sort: sortType,
         username: pageParam ? pageParam.username : undefined,
         time: pageParam ? pageParam.time : undefined,
-      }),
+        keyword,
+      });
+    },
     {
       getNextPageParam: (lastPage) => {
         if (lastPage.data.last) {

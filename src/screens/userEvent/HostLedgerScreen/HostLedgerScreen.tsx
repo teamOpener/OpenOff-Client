@@ -70,7 +70,11 @@ const HostLedgerScreen = () => {
     hasNextPage,
     fetchNextPage,
     isLoading: isLedgerListLoading,
-  } = useLedgerUserList(params.eventIndex, selectedSortType);
+  } = useLedgerUserList(
+    params.eventIndex,
+    selectedSortType,
+    searchName ?? undefined,
+  );
   const flatLedgerUserList = ledgerUserList?.pages.flatMap(
     (page) => page.data.content,
   );
@@ -84,11 +88,12 @@ const HostLedgerScreen = () => {
     }
   };
 
-  const refreshData = () => {
+  const refreshData = (keyword?: string) => {
     resetQueries(
       resetQueryKeys.refreshLedgerList({
         eventIndexId: params.eventIndex,
         sortType: selectedSortType,
+        keyword,
       }),
     );
   };
@@ -154,10 +159,13 @@ const HostLedgerScreen = () => {
 
   const handleSearch = () => {
     // TODO
+    console.log('refresh');
+    refreshData(searchName);
   };
 
   const handleEraser = () => {
     onChangeSearchName('');
+    refreshData();
   };
 
   const headerTitle = () => (
@@ -249,14 +257,16 @@ const HostLedgerScreen = () => {
                 />
               )}
             </View>
-
-            <Icon name="IconSearch" fill="white" onPress={handleSearch} />
+            <TouchableOpacity activeOpacity={0.8} onPress={handleSearch}>
+              <Icon name="IconSearch" fill="white" />
+            </TouchableOpacity>
           </SpaceLayout>
         </View>
       </SpaceLayout>
 
       {flatLedgerUserList?.length === 0 ? (
         <ScrollView
+          showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
@@ -269,6 +279,7 @@ const HostLedgerScreen = () => {
             data={flatLedgerUserList}
             ItemSeparatorComponent={ItemSeparatorComponent}
             contentContainerStyle={hostLedgerScreenStyles.flatListContentStyle}
+            showsVerticalScrollIndicator={false}
             onEndReachedThreshold={0.5}
             onEndReached={onEndReached}
             renderItem={({ item }) => (

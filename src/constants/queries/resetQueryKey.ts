@@ -34,12 +34,14 @@ const cancelParticipantEvent = ({
 const refreshLedgerList = ({
   eventIndexId,
   sortType,
+  keyword,
 }: {
   eventIndexId: number;
   sortType: SortType;
+  keyword?: string;
 }) => [
   queryKeys.hostKeys.statusByIndexId(eventIndexId),
-  queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType),
+  queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType, keyword),
 ];
 
 const resetQueryKeys = {

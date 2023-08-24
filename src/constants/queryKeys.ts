@@ -45,12 +45,11 @@ const hostKeys = {
     eventIndexId,
   ],
   ledgerList: [DOMAIN.HOST, 'ledger-list'],
-  ledgerListByIndexId: (eventIndexId: number, sortType: SortType) => [
-    DOMAIN.HOST,
-    'ledger-list',
-    sortType,
-    eventIndexId,
-  ],
+  ledgerListByIndexId: (
+    eventIndexId: number,
+    sortType: SortType,
+    keyword?: string,
+  ) => [DOMAIN.HOST, 'ledger-list', sortType, eventIndexId, keyword],
   applicantQnAbyLedgerId: (ledgerId: number) => [DOMAIN.HOST, 'qna', ledgerId],
 };
 
