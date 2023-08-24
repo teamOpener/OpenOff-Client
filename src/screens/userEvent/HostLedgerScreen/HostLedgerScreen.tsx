@@ -6,7 +6,6 @@ import {
   View,
   RefreshControl,
   ScrollView,
-  ActivityIndicator,
 } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { colors } from 'styles/theme';
@@ -42,9 +41,8 @@ import API_ERROR_MESSAGE from 'constants/errorMessage';
 import queryKeys from 'constants/queryKeys';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import ListLoading from 'components/suspense/loading/ListLoading/ListLoading';
 import hostLedgerScreenStyles from './HostLedgerScreen.style';
-
-// TODO 무한 스크롤 테스트
 
 const HostLedgerScreen = () => {
   const queryClient = useQueryClient();
@@ -71,8 +69,12 @@ const HostLedgerScreen = () => {
     data: ledgerUserList,
     hasNextPage,
     fetchNextPage,
-    isLoading,
-  } = useLedgerUserList(params.eventIndex, selectedSortType);
+    isLoading: isLedgerListLoading,
+  } = useLedgerUserList(
+    params.eventIndex,
+    selectedSortType,
+    searchName ?? undefined,
+  );
   const flatLedgerUserList = ledgerUserList?.pages.flatMap(
     (page) => page.data.content,
   );
@@ -86,11 +88,12 @@ const HostLedgerScreen = () => {
     }
   };
 
-  const refreshData = () => {
+  const refreshData = (keyword?: string) => {
     resetQueries(
       resetQueryKeys.refreshLedgerList({
         eventIndexId: params.eventIndex,
         sortType: selectedSortType,
+        keyword,
       }),
     );
   };
@@ -132,15 +135,6 @@ const HostLedgerScreen = () => {
       return;
     }
 
-    const availableCount = eventStatus.maxCount - eventStatus.approvedCount;
-    if (availableCount < eventStatus.notApprovedCount) {
-      openDialog({
-        type: 'validate',
-        text: MENT_HOST.ERROR.OVERFLOW_AVAILABLE,
-      });
-      return;
-    }
-
     openDialog({
       type: 'confirm',
       text: MENT_HOST.MAIN.PERMIT_ALL,
@@ -156,10 +150,13 @@ const HostLedgerScreen = () => {
 
   const handleSearch = () => {
     // TODO
+    console.log('refresh');
+    refreshData(searchName);
   };
 
   const handleEraser = () => {
     onChangeSearchName('');
+    refreshData();
   };
 
   const headerTitle = () => (
@@ -169,21 +166,11 @@ const HostLedgerScreen = () => {
     />
   );
 
-  const ticketLoading = () => (
-    <View style={hostLedgerScreenStyles.loadingContainer}>
-      <ActivityIndicator />
-    </View>
-  );
-
   useEffect(() => {
     stackNavigation.setOptions({
       headerTitle,
     });
   }, []);
-
-  if (!eventStatus) {
-    return null;
-  }
 
   return (
     <LedgerScreenLayout>
@@ -194,20 +181,24 @@ const HostLedgerScreen = () => {
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <IconText
             iconName="IconUser"
-            label={`승인완료 ${eventStatus.approvedCount}/${eventStatus.maxCount}`}
+            label={`승인완료 ${eventStatus?.approvedCount ?? 0}/${
+              eventStatus?.maxCount ?? 0
+            }`}
           />
           <IconText
             iconName="IconUser"
-            label={`입장완료 ${eventStatus.joinedCount}/${eventStatus.maxCount}`}
+            label={`입장완료 ${eventStatus?.joinedCount ?? 0}/${
+              eventStatus?.maxCount ?? 0
+            }`}
           />
         </View>
 
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <Text color="main" style={hostLedgerScreenStyles.approveText}>
-            {`${eventStatus.notApprovedCount}명 승인 대기중`}
+            {`${eventStatus?.notApprovedCount ?? 0}명 승인 대기중`}
           </Text>
           <ActionButton
-            disabled={eventStatus.notApprovedCount === 0}
+            disabled={eventStatus?.notApprovedCount === 0}
             label="일괄 승인"
             style={hostLedgerScreenStyles.totalApproveBtn}
             onPress={handlePermitAllButtonPress}
@@ -234,7 +225,8 @@ const HostLedgerScreen = () => {
             />
           </TouchableOpacity>
 
-          <SpaceLayout
+          {/* TODO 검색기능 */}
+          {/* <SpaceLayout
             direction="row"
             size={8}
             style={[
@@ -257,14 +249,16 @@ const HostLedgerScreen = () => {
                 />
               )}
             </View>
-
-            <Icon name="IconSearch" fill="white" onPress={handleSearch} />
-          </SpaceLayout>
+            <TouchableOpacity activeOpacity={0.8} onPress={handleSearch}>
+              <Icon name="IconSearch" fill="white" />
+            </TouchableOpacity>
+          </SpaceLayout> */}
         </View>
       </SpaceLayout>
 
       {flatLedgerUserList?.length === 0 ? (
         <ScrollView
+          showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
@@ -277,6 +271,7 @@ const HostLedgerScreen = () => {
             data={flatLedgerUserList}
             ItemSeparatorComponent={ItemSeparatorComponent}
             contentContainerStyle={hostLedgerScreenStyles.flatListContentStyle}
+            showsVerticalScrollIndicator={false}
             onEndReachedThreshold={0.5}
             onEndReached={onEndReached}
             renderItem={({ item }) => (
@@ -286,7 +281,7 @@ const HostLedgerScreen = () => {
               />
             )}
             ListFooterComponent={
-              hasNextPage || isLoading ? ticketLoading : null
+              hasNextPage || isLedgerListLoading ? <ListLoading /> : null
             }
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

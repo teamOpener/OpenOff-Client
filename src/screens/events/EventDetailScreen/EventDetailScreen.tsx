@@ -112,12 +112,13 @@ const EventDetailScreen = () => {
           <EventDetail.SmallSimpleList
             title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
             description={`${event.streetLoadAddress} ${event.detailAddress}`}
-            action={
-              <EventDetail.TextButton
-                label={MENT_EVENT_DETAIL.MAIN.LOCATION}
-                onPress={handleLocation}
-              />
-            }
+            // TODO
+            // action={
+            //   <EventDetail.TextButton
+            //     label={MENT_EVENT_DETAIL.MAIN.LOCATION}
+            //     onPress={handleLocation}
+            //   />
+            // }
           />
           <EventDetail.SmallSimpleList
             title={MENT_EVENT_DETAIL.MAIN.COST}

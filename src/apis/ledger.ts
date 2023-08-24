@@ -73,7 +73,9 @@ export const applyEvent = async (
 export const denyApplicationUser = async (
   data: EventApplicationDenyRequestDto,
 ): Promise<ApiResponse> => {
-  const response = await fetcher.delete(`/ladger/reject/${data.ledgerId}`);
+  const response = await fetcher.delete(
+    `/ladger/reject/${data.ledgerId}?rejectReason=${data.rejectReason}`,
+  );
   return response.data;
 };
 

@@ -1,4 +1,10 @@
-import { View, FlatList, ActivityIndicator } from 'react-native';
+import {
+  View,
+  FlatList,
+  ActivityIndicator,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 import { useEffect, useState } from 'react';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
 import fieldInitData from 'constants/userEvent/participant/fieldData';
@@ -10,7 +16,7 @@ import useDialog from 'hooks/app/useDialog';
 import useTabRoute from 'hooks/navigator/useTabRoute';
 import { FieldDataType } from 'types/event/filedDataType';
 import Spacing from 'components/common/Spacing/Spacing';
-import Text from 'components/common/Text/Text';
+import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
 import {
   CategorySelector,
   Tab,
@@ -19,6 +25,9 @@ import {
 } from 'components/userEvent/participant';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import { BottomTabMenu } from 'constants/menu';
+import useResetQueries from 'hooks/queries/useResetQueries';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
 import userEventScreenStyles from './UserEventScreen.style';
 
 const UserEventScreen = () => {
@@ -99,6 +108,18 @@ const UserEventScreen = () => {
     stackNavigation.navigate('HostConsole', { eventId: event.eventInfoId });
   };
 
+  const { resetQueries } = useResetQueries();
+
+  const refreshData = () => {
+    if (activeTabName === UserEventTabItem.PARTICIPANT) {
+      resetQueries(resetQueryKeys.refreshUserEventList(activeField?.value));
+    } else {
+      resetQueries(resetQueryKeys.refreshHostEventList(activeField?.value));
+    }
+  };
+
+  const { refreshing, onRefresh } = usePullToRefresh({ callback: refreshData });
+
   const ticketLoading = () => (
     <View style={userEventScreenStyles.loadingContainer}>
       <ActivityIndicator />
@@ -135,9 +156,14 @@ const UserEventScreen = () => {
       {/* 참여 이벤트 */}
       {activeTabName === UserEventTabItem.PARTICIPANT &&
         (flatUserTicketList?.length === 0 ? (
-          <View style={userEventScreenStyles.emptyContainer}>
-            <Text>{MENT_PARTICIPANT.MAIN.EMPTY}</Text>
-          </View>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          >
+            <EmptyLayout helpText={MENT_PARTICIPANT.MAIN.EMPTY} />
+          </ScrollView>
         ) : (
           <View style={userEventScreenStyles.scrollContainer}>
             <FlatList
@@ -154,6 +180,9 @@ const UserEventScreen = () => {
                   onPress={() => handlePressTicket(item.eventInfoId)}
                 />
               )}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
               onEndReachedThreshold={0.5}
               onEndReached={onEndReached}
               ListFooterComponent={
@@ -168,9 +197,14 @@ const UserEventScreen = () => {
       {/* 주최 이벤트 */}
       {activeTabName === UserEventTabItem.HOST &&
         (flatHostEventList?.length === 0 ? (
-          <View style={userEventScreenStyles.emptyContainer}>
-            <Text>{MENT_HOST.MAIN.EMPTY}</Text>
-          </View>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          >
+            <EmptyLayout helpText={MENT_HOST.MAIN.EMPTY} />
+          </ScrollView>
         ) : (
           <View style={userEventScreenStyles.scrollContainer}>
             <FlatList
@@ -189,6 +223,9 @@ const UserEventScreen = () => {
                   onPress={() => handlePressHostEvent(item)}
                 />
               )}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
               onEndReachedThreshold={0.5}
               onEndReached={onEndReached}
               ListFooterComponent={

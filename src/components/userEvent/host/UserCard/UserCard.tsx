@@ -1,4 +1,5 @@
-import { TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import queryKeys from 'constants/queryKeys';
@@ -27,14 +28,15 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
 
+  const [isPermitLoading, setIsPermitLoading] = useState<boolean>(false);
+
   const handleMoveDetailPage = () => {
     stackNavigation.navigate('HostLedgerDetail', {
       ledgerId: eventApplicantInfo.ladgerId,
     });
   };
 
-  const handlePermitSuccess = () => {
-    // TODO isAccpeted가 느리게 반영될 때
+  const resetQueries = () => {
     queryClient.invalidateQueries(queryKeys.participantKeys.all);
     queryClient.invalidateQueries(queryKeys.eventKeys.details);
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
@@ -44,6 +46,15 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
     queryClient.invalidateQueries(
       queryKeys.hostKeys.applicantQnAbyLedgerId(eventApplicantInfo.ladgerId),
     );
+  };
+
+  const handlePermitSuccess = () => {
+    setIsPermitLoading(true);
+    resetQueries();
+    setTimeout(() => {
+      resetQueries();
+      setIsPermitLoading(false);
+    }, 1000);
   };
 
   const handlePermitError = (error: ApiErrorResponse) => {
@@ -76,7 +87,19 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
   );
 
   const handleDeny = async () => {
-    await denyApplicationUser({ ledgerId: eventApplicantInfo.ladgerId });
+    openDialog({
+      type: 'confirm',
+      text: '승인을 거절하시겠습니까?',
+      contents: '사유를 선택해주세요.',
+      denyText: '예',
+      closeText: '아니오',
+      deny: async (rejectReason: string) => {
+        await denyApplicationUser({
+          ledgerId: eventApplicantInfo.ladgerId,
+          rejectReason,
+        });
+      },
+    });
   };
 
   /**
@@ -139,25 +162,35 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
           size={5}
           style={userCardStyles.buttonsContainer}
         >
-          {/* 승인전 */}
-          {!eventApplicantInfo.isAccepted && !eventApplicantInfo.isJoined && (
-            <>
-              <ActionButton label="거절" onPress={handleDeny} />
-              <ActionButton
-                label="승인"
-                style={userCardStyles.approveBtn}
-                onPress={handleApprove}
-              />
-            </>
+          {isPermitLoading && (
+            <View style={{ marginRight: 30 }}>
+              <ActivityIndicator />
+            </View>
           )}
+
+          {/* 승인전 */}
+          {!isPermitLoading &&
+            !eventApplicantInfo.isAccepted &&
+            !eventApplicantInfo.isJoined && (
+              <>
+                <ActionButton label="거절" onPress={handleDeny} />
+                <ActionButton
+                  label="승인"
+                  style={userCardStyles.approveBtn}
+                  onPress={handleApprove}
+                />
+              </>
+            )}
 
           {/* 승인 후 */}
-          {eventApplicantInfo.isAccepted && !eventApplicantInfo.isJoined && (
-            <ActionButton label="승인취소" onPress={handleCancel} />
-          )}
+          {!isPermitLoading &&
+            eventApplicantInfo.isAccepted &&
+            !eventApplicantInfo.isJoined && (
+              <ActionButton label="승인취소" onPress={handleCancel} />
+            )}
 
           {/* 입장완료 */}
-          {eventApplicantInfo.isJoined && (
+          {!isPermitLoading && eventApplicantInfo.isJoined && (
             <View style={userCardStyles.admissionTextWrapper}>
               <Text color="lightGreen" style={userCardStyles.admissionText}>
                 입장완료

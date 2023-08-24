@@ -18,13 +18,6 @@ const UserTicketScreen = () => {
    * carousel ui 관련
    */
   const { width } = Dimensions.get('window');
-  const [carouselHeight, setCarouselHeight] = useState<number>(
-    CONSTANT_PARTICIPANT.CAROUSEL_INITIAL_HEIGHT,
-  );
-  const handleHeight = (e: LayoutChangeEvent) => {
-    const { height } = e.nativeEvent.layout;
-    setCarouselHeight(height + CONSTANT_PARTICIPANT.QR_BUTTON_HEIGHT);
-  };
 
   /**
    * ticket 정보
@@ -51,17 +44,13 @@ const UserTicketScreen = () => {
     });
   };
 
-  if (!tickets) {
-    return null;
-  }
-
   return (
     <View style={userTicketScreenStyles.container}>
       <Carousel
         // TODO: loop아닌척하기 - 후순위
         loop
         width={width * 0.86}
-        height={carouselHeight}
+        height={485}
         overscrollEnabled={false}
         panGestureHandlerProps={{ minDist: 24 }}
         style={[userTicketScreenStyles.carousel, { width }]}
@@ -71,14 +60,10 @@ const UserTicketScreen = () => {
           parallaxScrollingScale: 0.9,
           parallaxAdjacentItemScale: 0.77,
         }}
-        data={tickets}
+        data={tickets ?? []}
         renderItem={({ item }) => (
           <>
-            <TicketCard
-              key={item.eventIndexId}
-              onLayout={handleHeight}
-              ticketInfo={item}
-            />
+            <TicketCard key={item.eventIndexId} ticketInfo={item} />
             <StatusButton
               status={getEventTicketStatus(item)}
               ticketType={item.ticketType}

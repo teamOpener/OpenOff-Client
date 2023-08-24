@@ -49,6 +49,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
         apply: () => {},
         applyText: '적용',
         closeText: '닫기',
+        deny: () => {},
+        denyText: '',
       });
     }, 100);
   };
@@ -61,6 +63,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
     contents = '',
     applyText = '적용',
     closeText = '닫기',
+    deny = () => {},
+    denyText = '',
   }: OpenDialog) => {
     switch (type) {
       case DialogEnumType.Validate:
@@ -84,6 +88,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
           applyText,
           closeText,
           isShow: true,
+          deny,
+          denyText,
         });
         break;
       default:

@@ -3,7 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 const useResetQueries = () => {
   const queryClient = useQueryClient();
 
-  const resetQueries = (keys: Array<Array<string | number>>) => {
+  const resetQueries = (keys: Array<Array<string | number | undefined>>) => {
     if (!Array.isArray(keys)) {
       return;
     }

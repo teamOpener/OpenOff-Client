@@ -27,8 +27,7 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
 
-  const successCallback = (text: string) => {
-    // TODO isAccpeted가 느리게 반영될 때
+  const resetQueries = () => {
     queryClient.invalidateQueries(queryKeys.participantKeys.all);
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
     queryClient.invalidateQueries(
@@ -38,6 +37,13 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
       queryKeys.hostKeys.applicantQnAbyLedgerId(ledgerId),
     );
     queryClient.invalidateQueries(queryKeys.eventKeys.details);
+  };
+
+  const successCallback = (text: string) => {
+    resetQueries();
+    setTimeout(() => {
+      resetQueries();
+    }, 1000);
 
     openDialog({
       type: 'success',

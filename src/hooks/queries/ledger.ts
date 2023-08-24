@@ -100,24 +100,47 @@ export const useLedgerStatus = (eventIndexId: number) => {
   );
 };
 
-// TODO 무한 스크롤을 위한 query parameter 수정
-export const useLedgerUserList = (eventIndexId: number, sortType: SortType) => {
+export const useLedgerUserList = (
+  eventIndexId: number,
+  sortType: SortType,
+  keyword?: string,
+) => {
   const query = useInfiniteQuery(
     [...queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType)],
-    ({ pageParam = null }) =>
-      getLedgerUserList({
+    ({ pageParam = null }) => {
+      return getLedgerUserList({
         eventIndexId,
         sort: sortType,
-      }),
+        ladgerId: pageParam ? pageParam.ladgerId : undefined,
+        username: pageParam ? pageParam.username : undefined,
+        time: pageParam ? pageParam.time : undefined,
+        keyword,
+      });
+    },
     {
       getNextPageParam: (lastPage) => {
         if (lastPage.data.last) {
           return false;
         }
+        const lastIdx = lastPage.data?.content.length;
+        if (!lastPage.data) {
+          return false;
+        }
 
-        const page = lastPage.data.pageNumber;
-        return page + 1;
+        if (sortType === SortType.DATE) {
+          const { ladgerId } = lastPage.data.content[lastIdx - 1];
+          return {
+            ladgerId,
+          };
+        }
+
+        const { username, createdAt } = lastPage.data.content[lastIdx - 1];
+        return {
+          username,
+          time: createdAt,
+        };
       },
+      suspense: false,
     },
   );
   return query;
