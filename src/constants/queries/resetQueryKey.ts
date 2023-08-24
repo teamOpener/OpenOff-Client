@@ -1,3 +1,4 @@
+import { FieldCode } from 'constants/code';
 import queryKeys from 'constants/queryKeys';
 import SortType from 'models/ledger/entity/SortType';
 
@@ -44,10 +45,32 @@ const refreshLedgerList = ({
   queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType, keyword),
 ];
 
+/**
+ * 유저가 내 이벤트 탭 참여 이벤트 리스트를 밀어당겨 refresh할 때 갱신합니다.
+ */
+const refreshUserEventList = (code?: FieldCode) => {
+  if (code) {
+    return [queryKeys.participantKeys.listByFieldCode(code)];
+  }
+  return [queryKeys.participantKeys.list];
+};
+
+/**
+ * 유저가 내 이벤트 탭 주최 이벤트 리스트를 밀어당겨 refresh할 때 갱신합니다.
+ */
+const refreshHostEventList = (code?: FieldCode) => {
+  if (code) {
+    return [queryKeys.hostKeys.listByFieldCode(code)];
+  }
+  return [queryKeys.hostKeys.list];
+};
+
 const resetQueryKeys = {
   applyEvent,
   cancelParticipantEvent,
   refreshLedgerList,
+  refreshUserEventList,
+  refreshHostEventList,
 };
 
 export default resetQueryKeys;
