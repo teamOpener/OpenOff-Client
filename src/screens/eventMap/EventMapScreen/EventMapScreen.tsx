@@ -59,13 +59,11 @@ const EventMapScreen = () => {
     screenCoordinate,
     currentCoordinate,
     firstPlaceCoordinate,
+    coordinateZeroChecker,
     naverMapRef,
     focusCoordinate,
     setFocusCoordinate,
   } = useMapCoordinateInfo();
-
-  const coordinateZeroChecker =
-    currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0;
 
   // 거리순, 날짜순 정렬 및 선택자(비용 & 참여인원 & 신청현황), 검색어값 setter, 쿼리파라미터
   const {
@@ -218,10 +216,6 @@ const EventMapScreen = () => {
       ? Dimensions.get('window').height - 90
       : (2 / 3) * Dimensions.get('window').height - 125,
   };
-
-  useEffect(() => {
-    queryClient.removeQueries(queryKeys.eventKeys.mapList);
-  }, [!coordinateZeroChecker]);
 
   useFocusEffect(
     useCallback(() => {

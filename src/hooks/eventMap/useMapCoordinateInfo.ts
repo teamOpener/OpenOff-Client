@@ -1,6 +1,8 @@
 import { useFocusEffect } from '@react-navigation/native';
+import { useQueryClient } from '@tanstack/react-query';
+import queryKeys from 'constants/queryKeys';
 import useDialog from 'hooks/app/useDialog';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
 import NaverMapView from 'react-native-nmap';
@@ -11,6 +13,7 @@ import { Coordinate } from 'types/event';
 
 const useMapCoordinateInfo = () => {
   const { openDialog } = useDialog();
+  const queryClient = useQueryClient();
   const naverMapRef = useRef<NaverMapView>(null);
   const { startEndDate } = useEventMapStore();
   // 사용자의 스크린 위치정보
@@ -33,6 +36,14 @@ const useMapCoordinateInfo = () => {
     latitude: 0,
     longitude: 0,
   });
+
+  const coordinateZeroChecker =
+    currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0;
+
+  useEffect(() => {
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
+  }, [!coordinateZeroChecker]);
+
   const getFirstCoordinate = () => {
     Geolocation.getCurrentPosition(
       (position) => {
@@ -134,6 +145,7 @@ const useMapCoordinateInfo = () => {
     setFirstPlaceCoordinate,
     currentCoordinate,
     setCurrentCoordinate,
+    coordinateZeroChecker,
     naverMapRef,
     focusCoordinate,
     setFocusCoordinate,
