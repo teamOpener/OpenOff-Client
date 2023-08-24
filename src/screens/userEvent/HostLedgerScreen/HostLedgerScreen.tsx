@@ -44,8 +44,6 @@ import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIco
 import ListLoading from 'components/suspense/loading/ListLoading/ListLoading';
 import hostLedgerScreenStyles from './HostLedgerScreen.style';
 
-// TODO 무한 스크롤 테스트
-
 const HostLedgerScreen = () => {
   const queryClient = useQueryClient();
   const { stackNavigation } = useNavigator();

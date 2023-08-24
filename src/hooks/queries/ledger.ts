@@ -100,7 +100,6 @@ export const useLedgerStatus = (eventIndexId: number) => {
   );
 };
 
-// TODO 무한 스크롤을 위한 query parameter 수정
 export const useLedgerUserList = (eventIndexId: number, sortType: SortType) => {
   const query = useInfiniteQuery(
     [...queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType)],
@@ -108,15 +107,23 @@ export const useLedgerUserList = (eventIndexId: number, sortType: SortType) => {
       getLedgerUserList({
         eventIndexId,
         sort: sortType,
+        username: pageParam ? pageParam.username : undefined,
+        time: pageParam ? pageParam.time : undefined,
       }),
     {
       getNextPageParam: (lastPage) => {
         if (lastPage.data.last) {
           return false;
         }
-
-        const page = lastPage.data.pageNumber;
-        return page + 1;
+        const lastIdx = lastPage.data?.content.length;
+        if (!lastPage.data) {
+          return false;
+        }
+        const { username, createdAt } = lastPage.data.content[lastIdx - 1];
+        return {
+          username,
+          time: createdAt,
+        };
       },
       suspense: false,
     },
