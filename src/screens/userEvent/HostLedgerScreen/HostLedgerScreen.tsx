@@ -225,7 +225,8 @@ const HostLedgerScreen = () => {
             />
           </TouchableOpacity>
 
-          <SpaceLayout
+          {/* TODO 검색기능 */}
+          {/* <SpaceLayout
             direction="row"
             size={8}
             style={[
@@ -251,7 +252,7 @@ const HostLedgerScreen = () => {
             <TouchableOpacity activeOpacity={0.8} onPress={handleSearch}>
               <Icon name="IconSearch" fill="white" />
             </TouchableOpacity>
-          </SpaceLayout>
+          </SpaceLayout> */}
         </View>
       </SpaceLayout>
 
