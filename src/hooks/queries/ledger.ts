@@ -111,6 +111,7 @@ export const useLedgerUserList = (
       return getLedgerUserList({
         eventIndexId,
         sort: sortType,
+        ladgerId: pageParam ? pageParam.ladgerId : undefined,
         username: pageParam ? pageParam.username : undefined,
         time: pageParam ? pageParam.time : undefined,
         keyword,
@@ -125,6 +126,14 @@ export const useLedgerUserList = (
         if (!lastPage.data) {
           return false;
         }
+
+        if (sortType === SortType.DATE) {
+          const { ladgerId } = lastPage.data.content[lastIdx - 1];
+          return {
+            ladgerId,
+          };
+        }
+
         const { username, createdAt } = lastPage.data.content[lastIdx - 1];
         return {
           username,
