@@ -14,6 +14,10 @@ const socialLoginButtonGroupStyles = StyleSheet.create({
     height: 29,
     position: 'absolute',
     top: -40,
+    right: -28,
+  },
+  absoluteContainer: {
+    position: 'relative',
   },
 });
 
