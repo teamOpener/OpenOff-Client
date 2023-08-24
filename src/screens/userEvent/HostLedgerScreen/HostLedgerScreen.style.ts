@@ -58,7 +58,6 @@ const hostLedgerScreenStyles = StyleSheet.create({
     flex: 1,
     fontFamily: fonts.semibold,
     fontSize: 15,
-    lineHeight: 15 * 1.4,
     color: colors.white,
   },
   scrollContainer: {
