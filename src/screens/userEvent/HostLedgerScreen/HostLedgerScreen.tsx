@@ -135,15 +135,6 @@ const HostLedgerScreen = () => {
       return;
     }
 
-    const availableCount = eventStatus.maxCount - eventStatus.approvedCount;
-    if (availableCount < eventStatus.notApprovedCount) {
-      openDialog({
-        type: 'validate',
-        text: MENT_HOST.ERROR.OVERFLOW_AVAILABLE,
-      });
-      return;
-    }
-
     openDialog({
       type: 'confirm',
       text: MENT_HOST.MAIN.PERMIT_ALL,
