@@ -112,6 +112,7 @@ export const useEventMapInstance = (params: EventSearchRequestDto) => {
       select: (data) => data.data,
       suspense: false,
       refetchOnMount: false,
+      enabled: params.longitude !== 0 && params.latitude !== 0,
     },
   );
 };
