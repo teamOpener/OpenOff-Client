@@ -33,6 +33,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>KAKAO_APP_KEY</key>
 	<string>$(REACT_APP_KAKAO_APP_KEY)</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -57,15 +59,15 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>NSCameraUsageDescription</string>
+	<string>QR 스캔을 통해 이벤트 참여자의 티켓이 유효한 티켓인지를 검증하기위해 권한이 필요합니다.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<string>지도 기능을 사용하는 동안 혹은 애플리케이션을 사용하지 않을 때에도 사용자의 위치정보를 활용해서 주변 이벤트 정보를 제공하기 위해 권한이 필요합니다.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>NSLocationAlwaysUsageDescription</string>
+	<string>애플리케이션을 사용하지 않을 때에도 항상 사용자의 위치정보를 활용해 주변 이벤트 정보를 제공하기 위해 권한이 필요합니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>NSLocationWhenInUseUsageDescription</string>
+	<string>지도 기능을 사용하는 동안 사용자의 위치정보를 활용해서 주변 이벤트 정보를 제공하기 위해 권한이 필요합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>NSPhotoLibraryUsageDescription</string>
+	<string>이벤트 주최자가 이벤트 홍보를 위한 포스터 업로드를 위해서 그리고 애플리케이션을 이용하는 사용자의 프로필 사진을 업로드 하기위해 권한이 필요합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Bold.ttf</string>
@@ -92,8 +94,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>
 </plist>
