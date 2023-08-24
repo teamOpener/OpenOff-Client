@@ -39,4 +39,4 @@ const EventMarker = ({
   );
 };
 
-export default memo(EventMarker);
+export default EventMarker;

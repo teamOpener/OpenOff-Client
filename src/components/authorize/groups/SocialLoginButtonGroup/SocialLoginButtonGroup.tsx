@@ -1,6 +1,7 @@
 import SocialLoginButton from 'components/authorize/buttons/SocialLoginButton/SocialLoginButton';
-import { Image, Platform, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
+import { useEffect } from 'react';
+import { Image, Platform, View } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import socialLoginButtonGroupStyles from './SocialLoginButtonGroup.style';
 
@@ -18,20 +19,25 @@ const SocialLoginButtonGroup = ({
   appleLogin,
 }: Props) => {
   const { recentLogin } = useAuthorizeStore();
+  useEffect(() => {
+    console.log(recentLogin);
+  }, []);
   return (
     <View style={socialLoginButtonGroupStyles.container}>
-      <SocialLoginButton color="#FDE500" handlePress={kakaoLogin}>
+      <View style={socialLoginButtonGroupStyles.absoluteContainer}>
         {recentLogin === 'KAKAO' && (
           <Image
             style={socialLoginButtonGroupStyles.recentLogin}
             source={require('../../../../assets/images/recentLogin.png')}
           />
         )}
-        <Image
-          style={socialLoginButtonGroupStyles.socialLogo}
-          source={require('../../../../assets/images/kakao.png')}
-        />
-      </SocialLoginButton>
+        <SocialLoginButton color="#FDE500" handlePress={kakaoLogin}>
+          <Image
+            style={socialLoginButtonGroupStyles.socialLogo}
+            source={require('../../../../assets/images/kakao.png')}
+          />
+        </SocialLoginButton>
+      </View>
       {/* <SocialLoginButton color="#1EC800" handlePress={naverLogin}>
         <Image
           style={socialLoginButtonGroupStyles.socialLogo}
@@ -39,15 +45,17 @@ const SocialLoginButtonGroup = ({
         />
       </SocialLoginButton> */}
       {Platform.OS === 'ios' && (
-        <SocialLoginButton color="#FFF" handlePress={appleLogin}>
+        <View style={socialLoginButtonGroupStyles.absoluteContainer}>
           {recentLogin === 'APPLE' && (
             <Image
               style={socialLoginButtonGroupStyles.recentLogin}
               source={require('../../../../assets/images/recentLogin.png')}
             />
           )}
-          <Icon name="IconApple" size={70} />
-        </SocialLoginButton>
+          <SocialLoginButton color="#FFF" handlePress={appleLogin}>
+            <Icon name="IconApple" size={70} />
+          </SocialLoginButton>
+        </View>
       )}
       {/* <SocialLoginButton color="#FFF" handlePress={googleLogin}>
         <Image

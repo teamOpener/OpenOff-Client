@@ -59,6 +59,7 @@ const EventMapScreen = () => {
     screenCoordinate,
     currentCoordinate,
     firstPlaceCoordinate,
+    coordinateZeroChecker,
     naverMapRef,
     focusCoordinate,
     setFocusCoordinate,
@@ -106,6 +107,9 @@ const EventMapScreen = () => {
 
   // search값 반영함수
   const handleEventSearch = (value: string) => {
+    if (!value) {
+      return;
+    }
     setSearchValue(value);
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
   };
@@ -215,11 +219,7 @@ const EventMapScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      if (
-        currentCoordinate.latitude === 0 &&
-        currentCoordinate.longitude === 0 &&
-        !isLoading
-      )
+      if (coordinateZeroChecker && !isLoading)
         queryClient.removeQueries(queryKeys.eventKeys.mapList);
     }, []),
   );
@@ -240,8 +240,10 @@ const EventMapScreen = () => {
       return () => backHandler.remove();
     }, [!fieldMapMode]),
   );
+
   if (firstMapLoadChecker)
     return <WithIconLoading isActive backgroundColor={colors.background} />;
+
   return (
     <View style={eventMapScreenStyles.container}>
       {!fieldMapMode && (
