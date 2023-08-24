@@ -6,6 +6,7 @@ const DOMAIN = {
   EVENT: 'EVENT',
   PARTICIPANT: 'PARTICIPANT',
   HOST: 'HOST',
+  BANNER: 'BANNER',
   BOOKMARK: 'BOOKMARK',
   COMMENT: 'COMMENT',
   LEDGER: 'LEDGER',
@@ -15,6 +16,10 @@ const userKeys = {
   all: [DOMAIN.USER],
   myInfo: [DOMAIN.USER, 'my-info'],
   findUser: (keyword: string) => [DOMAIN.USER, 'others-info', keyword],
+};
+
+const bannerKeys = {
+  all: [DOMAIN.BANNER],
 };
 
 const eventKeys = {
@@ -91,6 +96,7 @@ const queryKeys = {
   bookmarkKeys,
   commentKeys,
   ledgerKeys,
+  bannerKeys,
 };
 
 export default queryKeys;

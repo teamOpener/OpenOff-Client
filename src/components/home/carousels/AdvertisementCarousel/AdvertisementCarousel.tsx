@@ -1,16 +1,12 @@
 import CarouselCard from 'components/home/cards/CarouselCard/CarouselCard';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { Advertisement } from 'types/apps/advertisement';
+import { useGetBannerImages } from 'hooks/queries/banner';
 import advertisementCarouselStyles from './AdvertisementCarousel.style';
 
-interface Props<T> {
-  carouselData: T[];
-}
+const AdvertisementCarousel = () => {
+  const { data: bannerImageLists } = useGetBannerImages();
 
-const AdvertisementCarousel = <T extends Advertisement>({
-  carouselData,
-}: Props<T>) => {
   return (
     <Carousel
       loop
@@ -20,13 +16,13 @@ const AdvertisementCarousel = <T extends Advertisement>({
       width={Dimensions.get('window').width - 20}
       height={280}
       vertical={false}
-      data={carouselData}
+      data={bannerImageLists ?? []}
       renderItem={({ item, index }) => (
-        <CarouselCard<T>
+        <CarouselCard
           key={index}
           item={item}
           index={index}
-          length={carouselData.length}
+          length={bannerImageLists ? bannerImageLists.length : 0}
         />
       )}
     />
