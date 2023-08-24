@@ -9,7 +9,6 @@ import fieldData from 'data/lists/fieldData';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { usePersonalEventLists, useVogueEventLists } from 'hooks/queries/event';
 import { useMyInfo } from 'hooks/queries/user';
-import advertisementList from 'mocks/lists/advertisementList';
 import { useCallback, useEffect } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { foregroundListener, requestAlarmPermission } from 'services/fcm';

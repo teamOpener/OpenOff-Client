@@ -18,6 +18,7 @@ const carouselCardStyle = StyleSheet.create({
   backgroundImage: {
     width: '100%',
     height: '100%',
+    backgroundColor: colors.background,
   },
   fieldContainer: {
     marginTop: 10,

@@ -50,7 +50,7 @@ const UserTicketScreen = () => {
         // TODO: loop아닌척하기 - 후순위
         loop
         width={width * 0.86}
-        height={485}
+        height={520}
         overscrollEnabled={false}
         panGestureHandlerProps={{ minDist: 24 }}
         style={[userTicketScreenStyles.carousel, { width }]}

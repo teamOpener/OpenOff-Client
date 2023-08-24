@@ -15,11 +15,11 @@ const CarouselCard = ({ item, length, index }: Props) => {
       <ImageBackground
         style={carouselCardStyle.backgroundImage}
         source={{ uri: item }}
-        resizeMode="cover"
+        resizeMode="contain"
       >
-        <LinearGradient colors={['#19191900', '#191919AB', '#191919E5']}>
-          <View style={carouselCardStyle.carouselInfo}>
-            {/* <Text variant="h3" color="white">
+        {/* <LinearGradient colors={['#19191900', '#191919AB', '#191919E5']}> */}
+        <View style={carouselCardStyle.carouselInfo}>
+          {/* <Text variant="h3" color="white">
               {item.title}
             </Text>
             <View style={carouselCardStyle.fieldContainer}>
@@ -31,13 +31,13 @@ const CarouselCard = ({ item, length, index }: Props) => {
                 }
               </Text>
             </View> */}
-            <View style={carouselCardStyle.pageInfo}>
-              <Text style={carouselCardStyle.pageText} color="white">
-                {index + 1}/{length}
-              </Text>
-            </View>
+          <View style={carouselCardStyle.pageInfo}>
+            <Text style={carouselCardStyle.pageText} color="white">
+              {index + 1}/{length}
+            </Text>
           </View>
-        </LinearGradient>
+        </View>
+        {/* </LinearGradient> */}
       </ImageBackground>
     </TouchableOpacity>
   );
