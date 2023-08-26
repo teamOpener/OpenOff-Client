@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">오픈오프</string>
+    <string name="app_name">OpenOff</string>
     <string name="kakao_app_key">@string/REACT_APP_KAKAO_APP_KEY</string>
     <string name="logo">logo</string>
     <string name="splash_app_name">OPEN;OFF</string>
