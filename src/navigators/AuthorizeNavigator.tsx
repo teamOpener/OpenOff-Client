@@ -100,7 +100,7 @@ const AuthorizeNavigator = () => {
         }}
         name={AuthorizeMenu.Login}
       >
-        {() => <LoginScreen />}
+        {() => <LoginScreen dispatch={dispatch} />}
       </Stack.Screen>
       <Stack.Screen
         options={{

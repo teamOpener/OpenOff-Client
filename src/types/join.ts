@@ -1,4 +1,5 @@
 import { UserInfoStatus } from 'constants/join';
+import { AppleRequestResponseFullName } from '@invertase/react-native-apple-authentication';
 import { Field } from './apps/group';
 
 interface EmailPassword {
@@ -9,7 +10,10 @@ interface EmailPassword {
 type Gender = 'MAN' | 'WOMAN';
 
 type Action =
-  | { type: UserInfoStatus.SET_NAME; username: string }
+  | {
+      type: UserInfoStatus.SET_NAME;
+      username: string | AppleRequestResponseFullName;
+    }
   | { type: UserInfoStatus.SET_BIRTH; birth: string }
   | {
       type: UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD;
