@@ -23,10 +23,11 @@ const UserInfoScreen = ({ state, dispatch }: Props) => {
   const [birth, setBirth] = useState<string>('2000-00-00');
   const [gender, setGender] = useState<Gender>('MAN');
 
-  const isAppleLoginMode = state.username ? true : !validateName(username);
+  const isAppleLoginMode = state.username
+    ? true
+    : !validateName(username) && username.length > 1;
 
-  const isActive =
-    isAppleLoginMode && !validateBirthday(birth) && username.length > 1;
+  const isActive = isAppleLoginMode && !validateBirthday(birth);
 
   const handleAuthorizeFlow = () => {
     if (!state.username) {
