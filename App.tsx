@@ -88,7 +88,10 @@ const App = () => {
                 <DialogPortalProvider>
                   {/* <StorybookUIRoot /> */}
                   {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
-                  <StatusBar backgroundColor={colors.background} />
+                  <StatusBar
+                    backgroundColor={colors.background}
+                    barStyle="light-content"
+                  />
                   {isLogin ? <Navigator /> : <AuthorizeNavigator />}
                 </DialogPortalProvider>
               </NavigationContainer>
