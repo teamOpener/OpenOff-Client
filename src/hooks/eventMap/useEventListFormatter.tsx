@@ -40,6 +40,12 @@ const useEventListFormatter = (
 
   const makeDistance = (eventDistanceList?: MapEvent[]) => {
     if (!eventDistanceList) return [];
+    if (currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0)
+      return eventDistanceList.map((eventElement) => {
+        // eslint-disable-next-line no-param-reassign
+        eventElement.distance = 0;
+        return eventElement;
+      });
     return eventDistanceList.map((eventElement) => {
       // eslint-disable-next-line no-param-reassign
       eventElement.distance = getDistanceCoordinate(
