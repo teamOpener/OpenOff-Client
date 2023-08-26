@@ -115,6 +115,7 @@ const EventMapScreen = () => {
   };
 
   const handleMoveUserCurrentCoordinate = () => {
+    setClickedMarker(undefined);
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
   };
@@ -221,6 +222,9 @@ const EventMapScreen = () => {
     useCallback(() => {
       if (coordinateZeroChecker && !isLoading)
         queryClient.removeQueries(queryKeys.eventKeys.mapList);
+      return () => {
+        setClickedMarker(undefined);
+      };
     }, []),
   );
 
@@ -265,7 +269,12 @@ const EventMapScreen = () => {
           ref={naverMapRef}
           showsMyLocationButton={false}
           style={eventMapScreenStyles.map}
-          center={{ ...firstPlaceCoordinate, zoom: 17 }}
+          center={{
+            ...(coordinateZeroChecker
+              ? firstPlaceCoordinate
+              : screenCoordinate.current),
+            zoom: 17,
+          }}
           onCameraChange={handleCameraEvent}
           minZoomLevel={7}
           compass={false}
