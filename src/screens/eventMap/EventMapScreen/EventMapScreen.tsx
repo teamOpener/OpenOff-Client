@@ -59,7 +59,6 @@ const EventMapScreen = () => {
     screenCoordinate,
     currentCoordinate,
     firstPlaceCoordinate,
-    coordinateZeroChecker,
     naverMapRef,
     focusCoordinate,
     setFocusCoordinate,
@@ -114,11 +113,11 @@ const EventMapScreen = () => {
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
   };
 
-  const handleMoveUserCurrentCoordinate = () => {
+  const handleMoveUserCurrentCoordinate = useCallback(() => {
     setClickedMarker(undefined);
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
-  };
+  }, []);
 
   const handleFieldFindCoordinate = () => {
     setCurrentFindActive(false);
@@ -182,13 +181,13 @@ const EventMapScreen = () => {
     });
   };
 
-  const handlePressMapCoordinate = (
-    eventId: number,
-    eventCoordinate: Coordinate,
-  ) => {
-    setClickedMarker(eventId);
-    naverMapRef.current?.animateToCoordinate(eventCoordinate);
-  };
+  const handlePressMapCoordinate = useCallback(
+    (eventId: number, eventCoordinate: Coordinate) => {
+      setClickedMarker(eventId);
+      naverMapRef.current?.animateToCoordinate(eventCoordinate);
+    },
+    [],
+  );
 
   const handleShowFieldEvent = useCallback(
     (field: Field) => {
@@ -220,8 +219,6 @@ const EventMapScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      if (coordinateZeroChecker && !isLoading)
-        queryClient.removeQueries(queryKeys.eventKeys.mapList);
       return () => {
         setClickedMarker(undefined);
       };
@@ -270,9 +267,7 @@ const EventMapScreen = () => {
           showsMyLocationButton={false}
           style={eventMapScreenStyles.map}
           center={{
-            ...(coordinateZeroChecker
-              ? firstPlaceCoordinate
-              : screenCoordinate.current),
+            ...firstPlaceCoordinate,
             zoom: 17,
           }}
           onCameraChange={handleCameraEvent}
