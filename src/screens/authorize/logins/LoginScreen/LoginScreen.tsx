@@ -132,7 +132,7 @@ const LoginScreen = ({ dispatch }: Props) => {
       if (credentialState === appleAuth.State.AUTHORIZED) {
         dispatch({
           type: UserInfoStatus.SET_NAME,
-          username: appleAuthRequestResponse.fullName ?? '',
+          username: `${appleAuthRequestResponse.fullName?.familyName}${appleAuthRequestResponse.fullName?.givenName}`,
         });
         const socialLoginResult = await socialLogin({
           socialType: 'apple',
