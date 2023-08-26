@@ -85,7 +85,7 @@ const MapBottomSheet = ({
                 </View>
               </>
             )}
-            {eventList.length === 0 ? (
+            {eventList.length === 0 && !isLoading ? (
               <View>
                 <EmptyScreen
                   style={mapBottomSheetStyles.bottomEmptyScreenStyle}
