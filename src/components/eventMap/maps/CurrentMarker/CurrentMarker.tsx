@@ -1,4 +1,5 @@
-import { memo } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { memo, useCallback, useState } from 'react';
 import { Marker } from 'react-native-nmap';
 import { colors } from 'styles/theme';
 import { Coordinate } from 'types/event';
@@ -8,9 +9,17 @@ interface Props {
 }
 
 const CurrentMarker = ({ currentCoordinate }: Props) => {
+  const [rerender, setRerender] = useState<boolean>(false);
+  useFocusEffect(
+    useCallback(() => {
+      setRerender(true);
+      return () => {
+        setRerender(false);
+      };
+    }, []),
+  );
   return (
-    currentCoordinate.latitude !== 0 &&
-    currentCoordinate.longitude !== 0 && (
+    rerender && (
       <Marker
         image={require('../../../../assets/images/currentCoordinate.png')}
         width={50}
