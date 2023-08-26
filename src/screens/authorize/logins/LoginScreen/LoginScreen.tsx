@@ -12,7 +12,7 @@ import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIco
 import useDialog from 'hooks/app/useDialog';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
 import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
-import { useEffect, useState } from 'react';
+import { Dispatch, useEffect, useState } from 'react';
 import {
   Image,
   KeyboardAvoidingView,
@@ -32,9 +32,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
 import { permitAlert } from 'apis/user';
 import DeviceInfo from 'react-native-device-info';
+import { Action } from 'types/join';
+import { UserInfoStatus } from 'constants/join';
 import loginScreenStyles from './LoginScreen.style';
 
-const LoginScreen = () => {
+interface Props {
+  dispatch: Dispatch<Action>;
+}
+
+const LoginScreen = ({ dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [firstLoginShow, setFirstLoginShow] = useState<boolean>(true);
@@ -124,6 +130,10 @@ const LoginScreen = () => {
       );
 
       if (credentialState === appleAuth.State.AUTHORIZED) {
+        dispatch({
+          type: UserInfoStatus.SET_NAME,
+          username: `${appleAuthRequestResponse.fullName?.familyName}${appleAuthRequestResponse.fullName?.givenName}`,
+        });
         const socialLoginResult = await socialLogin({
           socialType: 'apple',
           token: appleAuthRequestResponse.identityToken ?? '',
