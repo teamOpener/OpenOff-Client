@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const scrapEventListStyles = StyleSheet.create({
   container: {
@@ -6,6 +6,12 @@ const scrapEventListStyles = StyleSheet.create({
   },
   rowGap: {
     paddingVertical: 10,
+  },
+  scrapSkeletonLayout: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
   },
 });
 
