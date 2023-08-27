@@ -4,6 +4,11 @@
 #import <React/RCTBundleURLProvider.h>
 
 #import <RNKakaoLogins.h>
+#import <CodePush/CodePush.h>
+#import <AppCenterReactNativeShared/AppCenterReactNativeShared.h>
+#import <AppCenterReactNative.h>
+#import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNativeCrashes.h>
 
 @implementation AppDelegate
 
@@ -12,7 +17,11 @@
   if ([FIRApp defaultApp] == nil) {     
     [FIRApp configure];
   }
-  
+  [AppCenterReactNativeShared setStartAutomatically:YES];
+  [AppCenterReactNativeShared setAppSecret:@"{APP_SECRET_VALUE}"];
+  [AppCenterReactNative register];
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   self.moduleName = @"OpenOff";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
@@ -26,7 +35,7 @@
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
 #else
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  return [CodePush bundleURL];
 #endif
 }
 
