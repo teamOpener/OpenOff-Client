@@ -18,9 +18,7 @@ const initCoordinate = {
 
 const useMapCoordinateInfo = () => {
   const { openDialog } = useDialog();
-  const queryClient = useQueryClient();
   const naverMapRef = useRef<NaverMapView>(null);
-  const { startEndDate } = useEventMapStore();
   // 사용자의 스크린 위치정보
   const screenCoordinate = useRef<Coordinate>(initCoordinate);
   // 지도초기 위치정보(1회성 값)
@@ -56,10 +54,6 @@ const useMapCoordinateInfo = () => {
             longitude: position.coords.longitude,
           });
         }
-        setCurrentCoordinate({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
       },
       () => {
         openDialog({

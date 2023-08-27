@@ -113,11 +113,11 @@ const EventMapScreen = () => {
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
   };
 
-  const handleMoveUserCurrentCoordinate = useCallback(() => {
+  const handleMoveUserCurrentCoordinate = () => {
     setClickedMarker(undefined);
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
-  }, []);
+  };
 
   const handleFieldFindCoordinate = () => {
     setCurrentFindActive(false);
@@ -146,6 +146,7 @@ const EventMapScreen = () => {
     setFieldMapMode(() => {
       return undefined;
     });
+    setClickedMarker(undefined);
     selectDispatch({ type: SelectStatus.RESET_SELECT });
     navigation.setOptions({
       tabBarStyle: {
@@ -181,31 +182,28 @@ const EventMapScreen = () => {
     });
   };
 
-  const handlePressMapCoordinate = useCallback(
-    (eventId: number, eventCoordinate: Coordinate) => {
-      setClickedMarker(eventId);
-      naverMapRef.current?.animateToCoordinate(eventCoordinate);
-    },
-    [],
-  );
+  const handlePressMapCoordinate = (
+    eventId: number,
+    eventCoordinate: Coordinate,
+  ) => {
+    setClickedMarker(eventId);
+    naverMapRef.current?.animateToCoordinate(eventCoordinate);
+  };
 
-  const handleShowFieldEvent = useCallback(
-    (field: Field) => {
-      selectDispatch({ type: SelectStatus.RESET_SELECT });
-      setSearchValue('');
-      resetStartEndDate();
-      setFieldMapMode(() => {
-        return field;
-      });
-      setFocusCoordinate(() => {
-        return screenCoordinate.current;
-      });
-      makeScreenHeader(field);
-      setClickedMarker(undefined);
-      queryClient.removeQueries(queryKeys.eventKeys.mapList);
-    },
-    [navigation],
-  );
+  const handleShowFieldEvent = (field: Field) => {
+    selectDispatch({ type: SelectStatus.RESET_SELECT });
+    setSearchValue('');
+    resetStartEndDate();
+    setFieldMapMode(() => {
+      return field;
+    });
+    setFocusCoordinate(() => {
+      return screenCoordinate.current;
+    });
+    makeScreenHeader(field);
+    setClickedMarker(undefined);
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
+  };
 
   const bottomSheetLength = {
     snapTop:
