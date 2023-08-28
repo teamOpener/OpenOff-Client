@@ -5,6 +5,8 @@ import { memo } from 'react';
 import { Dimensions, Image, Pressable, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { MapEvent } from 'types/event';
+import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
+import dayjs from 'dayjs';
 import mapEventCardStyles from './MapEventCard.style';
 
 interface Props {
@@ -20,18 +22,34 @@ const MapEventCard = ({ event, distance }: Props) => {
     });
   };
 
+  const calcDate = event.eventDateList
+    ?.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1))
+    .map((date) => dayjs(date).format('MM월 YY일'));
+
   return (
     <View style={mapEventCardStyles.container}>
       <View style={mapEventCardStyles.textContainer}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          variant="h3"
-          color="white"
-          style={mapEventCardStyles.titleText}
-        >
-          {event.title}
+        <Text color="main" variant="body2">
+          {event.eventDateList.length === 1
+            ? calcDate[0]
+            : `${calcDate[0]} - ${calcDate[event.eventDateList.length - 1]}`}
         </Text>
+      </View>
+      <View style={mapEventCardStyles.textContainer}>
+        <Pressable onPress={handleShowDetailEventInfo}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            variant="h3"
+            color="white"
+            style={mapEventCardStyles.titleText}
+          >
+            {event.title}
+          </Text>
+        </Pressable>
+        <BookmarkButton isEventBookmarked={false} eventInfoId={event.id} />
+      </View>
+      <View style={mapEventCardStyles.textContainer}>
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"

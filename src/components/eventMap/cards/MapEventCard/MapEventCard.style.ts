@@ -1,7 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const mapEventCardStyles = StyleSheet.create({
   container: {
+    width: '100%',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -9,16 +10,18 @@ const mapEventCardStyles = StyleSheet.create({
     zIndex: 1,
   },
   titleText: {
-    maxWidth: '50%',
+    maxWidth: (Dimensions.get('window').width * 85) / 100,
   },
   eventFieldContainer: {
-    maxWidth: '47%',
+    maxWidth: (Dimensions.get('window').width * 85) / 100,
   },
   textContainer: {
+    width: '93%',
     marginTop: 5,
     gap: 10,
     alignItems: 'center',
     flexDirection: 'row',
+    position: 'relative',
   },
   imageContainer: {
     width: '100%',
