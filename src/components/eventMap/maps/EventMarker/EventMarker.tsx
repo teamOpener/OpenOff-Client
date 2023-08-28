@@ -4,7 +4,7 @@ import { colors } from 'styles/theme';
 import { Coordinate, MapEvent } from 'types/event';
 
 interface Props {
-  clickedMarker: number | undefined;
+  clickedMarker: Coordinate | undefined;
   handlePressMapCoordinate: (
     eventId: number,
     eventCoordinate: Coordinate,
@@ -17,23 +17,13 @@ const EventMarker = ({
   handlePressMapCoordinate,
   event,
 }: Props) => {
-  const generateRandomLatitude = useMemo(() => {
-    const min = 0.00001;
-    const max = 0.00006;
-    const randomNumber = Math.random() * (max - min) + min;
-    return randomNumber;
-  }, []);
+  const isMatchedCoordinate =
+    clickedMarker?.latitude === event.latitude &&
+    clickedMarker?.longitude === event.longitude;
 
-  const generateRandomLongitude = useMemo(() => {
-    const min = 0.00001;
-    const max = 0.00006;
-    const randomNumber = Math.random() * (max - min) + min;
-    return randomNumber;
-  }, []);
-
-  const eventCoordinate = {
-    latitude: event.latitude - generateRandomLatitude,
-    longitude: event.longitude - generateRandomLongitude,
+  const markerCoordinate = {
+    latitude: event.latitude,
+    longitude: event.longitude,
   };
 
   return (
@@ -42,11 +32,11 @@ const EventMarker = ({
       zIndex={10}
       animated
       image={require('../../../../assets/images/eventCoordinate.png')}
-      width={event.id === clickedMarker ? 60 : 30}
-      height={event.id === clickedMarker ? 60 : 30}
-      coordinate={eventCoordinate}
+      width={isMatchedCoordinate ? 60 : 30}
+      height={isMatchedCoordinate ? 60 : 30}
+      coordinate={markerCoordinate}
       onClick={() => {
-        handlePressMapCoordinate(event.id, eventCoordinate);
+        handlePressMapCoordinate(event.id, markerCoordinate);
       }}
       pinColor={colors.main}
     />

@@ -11,7 +11,7 @@ interface SortInfo {
 const useEventListFormatter = (
   sort: SortInfo,
   currentCoordinate: Coordinate,
-  clickedMarker?: number,
+  clickedMarker?: Coordinate,
   eventList?: MapEvent[],
 ) => {
   const firstMapLoadChecker =
@@ -62,7 +62,11 @@ const useEventListFormatter = (
   const computedEventList = useMemo<MapEvent[]>(() => {
     if (!clickedMarker) return sortEventList(makeDistance(eventList));
     return makeDistance(
-      eventList?.filter((event) => event.id === clickedMarker),
+      eventList?.filter(
+        (event) =>
+          event.latitude === clickedMarker.latitude &&
+          event.longitude === clickedMarker.longitude,
+      ),
     );
   }, [clickedMarker, eventList, sort.value, firstMapLoadChecker]);
 
