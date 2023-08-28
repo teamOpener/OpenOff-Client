@@ -116,6 +116,8 @@ const EventMapScreen = () => {
   };
 
   const handleMoveUserCurrentCoordinate = () => {
+    if (currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0)
+      return;
     setClickedMarker(undefined);
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
     queryClient.removeQueries(queryKeys.eventKeys.mapList);

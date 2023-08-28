@@ -19,7 +19,8 @@ const CurrentMarker = ({ currentCoordinate }: Props) => {
     }, []),
   );
   return (
-    rerender && (
+    currentCoordinate.latitude !== 0 &&
+    currentCoordinate.longitude !== 0 && (
       <Marker
         image={require('../../../../assets/images/currentCoordinate.png')}
         width={50}
