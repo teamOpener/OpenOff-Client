@@ -10,7 +10,6 @@ const myCoordinateButtonStyles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     left: 20,
-    bottom: 120,
     zIndex: 2,
     backgroundColor: colors.white,
     ...Platform.select({

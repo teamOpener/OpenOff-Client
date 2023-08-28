@@ -13,7 +13,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { Action, SelectBox } from 'types/apps/selectbox';
-import { MapEvent } from 'types/event';
+import { Coordinate, MapEvent } from 'types/event';
 import mapBottomSheetStyles from './MapBottomSheet.style';
 
 interface SortInfo {
@@ -27,10 +27,11 @@ interface Props {
   snapBottom: number;
   sort: SortInfo;
   setSort: Dispatch<SetStateAction<SortInfo>>;
+  setBottomSheetChecker: Dispatch<SetStateAction<number>>;
   selectState: SelectBox;
   selectDispatch: Dispatch<Action>;
   eventList: MapEvent[];
-  clickedMarker: number | undefined;
+  clickedMarker: Coordinate | undefined;
 }
 
 const MapBottomSheet = ({
@@ -40,6 +41,7 @@ const MapBottomSheet = ({
   sort,
   setSort,
   selectState,
+  setBottomSheetChecker,
   eventList,
   selectDispatch,
   clickedMarker,
@@ -62,6 +64,7 @@ const MapBottomSheet = ({
         handleIndicatorStyle={{
           backgroundColor: colors.white,
         }}
+        onChange={(active) => setBottomSheetChecker(active)}
       >
         {!isDetail ? (
           <>

@@ -81,13 +81,15 @@ const EventMapScreen = () => {
   );
 
   // 클릭된 마커의 아이디값
-  const [clickedMarker, setClickedMarker] = useState<number | undefined>(
+  const [clickedMarker, setClickedMarker] = useState<Coordinate | undefined>(
     undefined,
   );
 
   const { data: eventList, isLoading } = useEventMapInstance(
     calculateQueryParams(),
   );
+
+  const [bottomSheetChecker, setBottomSheetChecker] = useState<number>(-1);
 
   const [firstMapLoadChecker, setFirstMapLoadChecker] = useState<boolean>(true);
 
@@ -186,7 +188,7 @@ const EventMapScreen = () => {
     eventId: number,
     eventCoordinate: Coordinate,
   ) => {
-    setClickedMarker(eventId);
+    setClickedMarker(eventCoordinate);
     naverMapRef.current?.animateToCoordinate(eventCoordinate);
   };
 
@@ -258,7 +260,10 @@ const EventMapScreen = () => {
             isFindActive={currentFindActive}
           />
         ) : (
-          <MyCoordinateButton handlePress={handleMoveUserCurrentCoordinate} />
+          <MyCoordinateButton
+            handlePress={handleMoveUserCurrentCoordinate}
+            bottomSheetChecker={bottomSheetChecker}
+          />
         )}
         <NaverMapView
           ref={naverMapRef}
@@ -292,6 +297,7 @@ const EventMapScreen = () => {
         snapBottom={bottomSheetLength.snapBottom}
         sort={sort}
         setSort={setSort}
+        setBottomSheetChecker={setBottomSheetChecker}
         selectState={selectState}
         selectDispatch={selectDispatch}
         clickedMarker={clickedMarker}
