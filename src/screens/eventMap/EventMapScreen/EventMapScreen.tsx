@@ -220,6 +220,9 @@ const EventMapScreen = () => {
   useFocusEffect(
     useCallback(() => {
       return () => {
+        resetStartEndDate();
+        queryClient.removeQueries(queryKeys.eventKeys.mapList);
+        setSearchValue('');
         setClickedMarker(undefined);
       };
     }, []),
