@@ -112,6 +112,7 @@ const EventCalendar = ({
         minDate={sortedEventDateArray[0]}
         maxDate={sortedEventDateArray[sortedEventDateArray.length - 1]}
         hideExtraDays
+        enableSwipeMonths
         markingType="custom"
         markedDates={markedDates ?? undefined}
         theme={theme}
