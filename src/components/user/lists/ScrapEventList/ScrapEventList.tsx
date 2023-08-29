@@ -49,14 +49,14 @@ const ScrapEventList = ({
           )}
           ListFooterComponent={
             isHasNextSkeleton || isLoading ? (
-              <View style={scrapEventListStyles.scrapSkeletonLayout}>
+              <>
                 {new Array(3).fill(1).map((_, _idx) => (
                   <EventCardSkeleton
                     key={`eventCard-skeleton-${_idx}`}
                     type="scrap"
                   />
                 ))}
-              </View>
+              </>
             ) : undefined
           }
           onEndReachedThreshold={0.5}
