@@ -1,4 +1,3 @@
-import { FieldName } from 'constants/interest';
 import { useInterestFieldLists } from 'hooks/queries/interest';
 import { Field } from 'types/interest';
 
@@ -12,7 +11,7 @@ const useInterestFields = () => {
     return interestFields.map((field) => ({
       value: field.interestConstName,
       isActive: false,
-      label: field.interestValue as FieldName,
+      label: field.interestValue,
     }));
   };
 
