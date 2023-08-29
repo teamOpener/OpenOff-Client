@@ -46,6 +46,13 @@ const UserProfileImageButton = () => {
   const handleProfilePress = async () => {
     const selectedImages = await openImagePicker(PROFILE_IMAGE_COUNT);
     const imageFormData = new FormData();
+    if (selectedImages.length > 1) {
+      openDialog({
+        type: 'validate',
+        text: MENT_USER.ERROR.IMAGE_OVERFLOW,
+      });
+      return;
+    }
     setProfileImage(selectedImages[0].path);
     const uploadFile = {
       name: `${userInfo?.userInfo.nickname}_${new Date().getTime()}.png`,
