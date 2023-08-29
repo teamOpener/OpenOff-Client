@@ -42,7 +42,7 @@ const UserMenuButtonGroup = () => {
       >
         <Icon name="IconBookmark" size={30} fill="white" />
         <Text variant="bodySB" color="white">
-          {MENT_USER.MAIN.MY_SCRAP}
+          {MENT_USER.MAIN.MY_BOOKMARK}
         </Text>
       </Pressable>
       <Pressable

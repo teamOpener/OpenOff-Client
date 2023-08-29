@@ -35,6 +35,7 @@ const ScrapEventList = ({
       ) : (
         <FlatList
           nestedScrollEnabled
+          showsVerticalScrollIndicator={false}
           numColumns={2}
           data={flatEventList}
           columnWrapperStyle={scrapEventListStyles.rowGap}
