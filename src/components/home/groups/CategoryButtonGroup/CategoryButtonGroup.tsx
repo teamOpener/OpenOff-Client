@@ -32,6 +32,7 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
         {interestFields &&
           interestFields.map((interestField) => (
             <CategoryButton
+              key={interestField.interestConstName}
               fieldData={interestField}
               onPress={() => handlePress(interestField.interestConstName)}
             />
