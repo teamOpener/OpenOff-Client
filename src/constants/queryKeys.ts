@@ -1,5 +1,5 @@
 import SortType from 'models/ledger/entity/SortType';
-import { FieldCode } from './code';
+import { FieldCode } from './interest';
 
 const DOMAIN = {
   USER: 'USER',

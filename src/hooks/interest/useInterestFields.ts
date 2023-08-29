@@ -1,4 +1,4 @@
-import { FieldName } from 'constants/code';
+import { FieldName } from 'constants/interest';
 import { InterestInfoResponseDto } from 'models/interest/response/InterestInfoResponseDto';
 import { Field } from 'types/interest';
 

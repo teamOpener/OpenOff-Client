@@ -1,6 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { FieldCode, getFieldName } from 'constants/code';
+import { FieldCode, getFieldName } from 'constants/interest';
 import { TouchableOpacity, View } from 'react-native';
 import { ticketListDateFormatter } from 'utils/date';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';

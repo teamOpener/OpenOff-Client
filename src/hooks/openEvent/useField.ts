@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/code';
+import { FieldCode } from 'constants/interest';
 import { Field as FieldType } from 'types/interest';
 
 interface Props {

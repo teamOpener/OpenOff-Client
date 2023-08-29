@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/code';
+import { FieldCode } from 'constants/interest';
 import { EventIndexInfo } from '../entity/EventIndexInfo';
 
 export interface HostEventInfoResponseDto {

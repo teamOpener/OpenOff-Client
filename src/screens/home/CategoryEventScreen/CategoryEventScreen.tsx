@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Field } from 'types/interest';
 import { useFieldEventLists } from 'hooks/queries/event';
-import { FieldCode } from 'constants/code';
+import { FieldCode } from 'constants/interest';
 import { useInterestFieldLists } from 'hooks/queries/interest';
 import useInterestFields from 'hooks/interest/useInterestFields';
 import categoryEventScreenStyles from './CategoryEventScreen.style';

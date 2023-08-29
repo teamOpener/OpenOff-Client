@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { LayoutChangeEvent, TouchableOpacity, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { FieldCode } from 'constants/code';
+import { FieldCode } from 'constants/interest';
 import { Field } from 'types/interest';
 import { CONSTANT_PARTICIPANT } from 'constants/userEvent/participant/participantConstants';
 import categorySelectorStyles from './CategorySelector.style';
