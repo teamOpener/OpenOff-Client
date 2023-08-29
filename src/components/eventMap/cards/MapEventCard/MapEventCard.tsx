@@ -1,5 +1,6 @@
 import Text from 'components/common/Text/Text';
 import { getFieldName } from 'constants/interest';
+import Spacing from 'components/common/Spacing/Spacing';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { memo } from 'react';
 import { Dimensions, Image, Pressable, View } from 'react-native';
@@ -29,7 +30,7 @@ const MapEventCard = ({ event, distance }: Props) => {
   return (
     <View style={mapEventCardStyles.container}>
       <View style={mapEventCardStyles.textContainer}>
-        <Text color="main" variant="body2">
+        <Text color="main" style={mapEventCardStyles.dateText}>
           {event.eventDateList.length === 1
             ? calcDate[0]
             : `${calcDate[0]} - ${calcDate[event.eventDateList.length - 1]}`}
@@ -60,6 +61,7 @@ const MapEventCard = ({ event, distance }: Props) => {
           {event.fieldTypeList?.map((field) => getFieldName(field)).join('  ')}
         </Text>
       </View>
+      <Spacing height={5} />
       <View style={mapEventCardStyles.textContainer}>
         <Text variant="body2" color="grey" style={mapEventCardStyles.titleText}>
           {distance}km
@@ -74,6 +76,7 @@ const MapEventCard = ({ event, distance }: Props) => {
           {`${event.streetLoadAddress} ${event.detailAddress}`}
         </Text>
       </View>
+      <Spacing height={9} />
       <View style={mapEventCardStyles.imageContainer}>
         <Carousel
           width={124}

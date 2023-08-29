@@ -4,6 +4,7 @@ const mapCardSkeletonStyles = StyleSheet.create({
   container: {
     justifyContent: 'flex-start',
     margin: 20,
+    marginTop: 0,
     rowGap: 4,
     zIndex: 1,
   },

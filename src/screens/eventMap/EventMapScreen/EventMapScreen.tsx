@@ -215,7 +215,7 @@ const EventMapScreen = () => {
         ? (1 / 3) * Dimensions.get('window').height
         : 100,
     snapBottom: fieldMapMode
-      ? Dimensions.get('window').height - 90
+      ? Dimensions.get('window').height - 140
       : (2 / 3) * Dimensions.get('window').height - 125,
   };
 

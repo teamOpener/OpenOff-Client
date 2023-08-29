@@ -1,22 +1,31 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { StyleSheet } from 'react-native';
+import { colors, fonts } from 'styles/theme';
 
 const currentFieldFindButtonStyles = StyleSheet.create({
-  container: {
+  wrapper: {
     position: 'absolute',
     zIndex: 3,
+    top: 30,
+    left: 0,
+    right: 0,
+  },
+  container: {
     gap: 15,
-    top: 50,
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderColor: colors.main,
-    left: Dimensions.get('window').width / 2 - 87.5,
-    width: 175,
+    borderColor: colors.black,
     borderRadius: 17,
-    height: 33,
+    paddingHorizontal: 12.5,
+    paddingVertical: 5.5,
+  },
+  label: {
+    fontFamily: fonts.semibold,
+    fontSize: 13,
+    lineHeight: 13 * 1.4,
   },
 });
 

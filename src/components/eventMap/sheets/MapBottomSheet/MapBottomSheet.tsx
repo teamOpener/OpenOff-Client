@@ -4,6 +4,7 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import Text from 'components/common/Text/Text';
+import Divider from 'components/common/Divider/Divider';
 import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
 import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
 import SelectBoxGroup from 'components/eventMap/groups/SelectBoxGroup/SelectBoxGroup';
@@ -14,6 +15,8 @@ import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { Action, SelectBox } from 'types/apps/selectbox';
 import { Coordinate, MapEvent } from 'types/event';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import Icon from 'components/common/Icon/Icon';
 import mapBottomSheetStyles from './MapBottomSheet.style';
 
 interface SortInfo {
@@ -54,6 +57,13 @@ const MapBottomSheet = ({
     });
   };
 
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const ItemSeparatorComponent = () => (
+    <View style={mapBottomSheetStyles.bottomSheetSeparatorContainer}>
+      <Divider height={1} color="darkGrey" />
+    </View>
+  );
+
   return (
     <>
       <BottomSheet
@@ -61,15 +71,13 @@ const MapBottomSheet = ({
         snapPoints={[snapTop, snapBottom]}
         animateOnMount
         backgroundStyle={{ backgroundColor: colors.background }}
-        handleIndicatorStyle={{
-          backgroundColor: colors.white,
-        }}
+        handleIndicatorStyle={mapBottomSheetStyles.bottomSheetIndicatorStyle}
         onChange={(active) => setBottomSheetChecker(active)}
       >
         {!isDetail ? (
           <>
             {!clickedMarker && (
-              <>
+              <SpaceLayout size={12} style={{ zIndex: 99 }}>
                 <SelectBoxGroup
                   selectState={selectState}
                   selectDispatch={selectDispatch}
@@ -77,16 +85,21 @@ const MapBottomSheet = ({
                     setIsDetail(true);
                   }}
                 />
+                <View style={mapBottomSheetStyles.dividerWrapper}>
+                  <Divider height={1} color="darkGrey" />
+                </View>
                 <View style={mapBottomSheetStyles.sortButton}>
                   <TouchableOpacity
+                    style={mapBottomSheetStyles.sortButtonWrapper}
                     onPress={() => setSort({ ...sort, dialog: true })}
                   >
                     <Text variant="body2" color="white">
                       {sort.value === 'distance' ? '거리순' : '날짜순'}
                     </Text>
+                    <Icon name="IconArrowDown" size={12} />
                   </TouchableOpacity>
                 </View>
-              </>
+              </SpaceLayout>
             )}
             {eventList.length === 0 && !isLoading ? (
               <View>
@@ -100,6 +113,7 @@ const MapBottomSheet = ({
                 style={mapBottomSheetStyles.bottomSheetContainer}
                 data={eventList}
                 showsVerticalScrollIndicator={false}
+                ItemSeparatorComponent={ItemSeparatorComponent}
                 ListFooterComponent={
                   isLoading ? (
                     <>

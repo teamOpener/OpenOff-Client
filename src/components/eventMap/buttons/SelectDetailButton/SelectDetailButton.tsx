@@ -20,6 +20,7 @@ const SelectDetailButton = ({ option, isActive, handlePress }: Props) => {
   };
   return (
     <TouchableOpacity
+      activeOpacity={0.7}
       style={{
         ...selectDetailButtonStyles.container,
         backgroundColor: computedActiveStyle.backgroundColor,

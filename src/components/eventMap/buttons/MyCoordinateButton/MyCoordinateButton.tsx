@@ -20,7 +20,7 @@ const MyCoordinateButton = ({ handlePress, bottomSheetChecker }: Props) => {
             : 120,
       }}
     >
-      <Icon name="IconMyCoordinate" size={40} fill="main" />
+      <Icon name="IconMyCoordinate" size={38} fill="black" />
     </TouchableOpacity>
   );
 };

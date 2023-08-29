@@ -12,10 +12,11 @@ interface Props {
 const MapFieldButton = ({ field, handlePress }: Props) => {
   return (
     <TouchableOpacity
+      activeOpacity={0.7}
       style={mapFieldButtonStyles.container}
       onPress={() => handlePress(field)}
     >
-      <Text variant="body1" color="main">
+      <Text style={mapFieldButtonStyles.label} color="black">
         {field.label}
       </Text>
     </TouchableOpacity>

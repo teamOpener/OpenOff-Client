@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { colors, fonts } from 'styles/theme';
 
 const sortDialogStyles = StyleSheet.create({
   modalView: {
@@ -17,33 +17,35 @@ const sortDialogStyles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.70)',
   },
   modalContainer: {
+    width: 300,
     borderRadius: 20,
-    padding: 35,
+    paddingVertical: 20,
     justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
     backgroundColor: colors.background,
   },
   buttonContainer: {
-    paddingVertical: 20,
-    justifyContent: 'center',
+    paddingTop: 20,
+    paddingRight: 25,
+    paddingBottom: 10,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    position: 'relative',
     flexDirection: 'row',
   },
   title: {
-    width: 200,
+    paddingHorizontal: 25,
+    paddingBottom: 10,
   },
   textContainer: {
-    width: 200,
-  },
-  emptySpace: {
-    width: 15,
-    height: 15,
+    paddingHorizontal: 25,
   },
   cancelContainer: {
-    width: 200,
+    paddingRight: 25,
     alignItems: 'flex-end',
+  },
+  cancelText: {
+    fontFamily: fonts.semibold,
+    fontSize: 15,
+    lineHeight: 15 * 1.4,
   },
 });
 

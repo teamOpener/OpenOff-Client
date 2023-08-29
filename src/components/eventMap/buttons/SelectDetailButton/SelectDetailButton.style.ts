@@ -8,7 +8,7 @@ const selectDetailButtonStyles = StyleSheet.create({
     paddingVertical: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 5,
+    marginRight: 5,
     marginTop: 10,
   },
 });

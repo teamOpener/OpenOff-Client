@@ -13,6 +13,7 @@ const MapFieldButtonGroup = ({ handleShowFieldEvent }: Props) => {
   return (
     <ScrollView
       style={mapFieldButtonGroup.container}
+      contentContainerStyle={mapFieldButtonGroup.contentContainer}
       horizontal
       showsHorizontalScrollIndicator={false}
     >

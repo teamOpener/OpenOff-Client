@@ -3,8 +3,7 @@ import { colors } from 'styles/theme';
 
 const myCoordinateButtonStyles = StyleSheet.create({
   container: {
-    width: 65,
-    height: 65,
+    padding: 10,
     borderRadius: 300,
     justifyContent: 'center',
     alignItems: 'center',

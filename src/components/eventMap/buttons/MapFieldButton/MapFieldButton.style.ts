@@ -1,17 +1,22 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'styles/theme';
+import { colors, fonts } from 'styles/theme';
 
 const mapFieldButtonStyles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    height: 34,
     borderRadius: 17,
-    borderColor: colors.main,
+    borderColor: colors.black,
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 15,
-    marginHorizontal: 5,
+    paddingHorizontal: 12.5,
+    paddingVertical: 5.5,
+    marginRight: 5,
+  },
+  label: {
+    fontFamily: fonts.semibold,
+    fontSize: 13,
+    lineHeight: 13 * 1.4,
   },
 });
 

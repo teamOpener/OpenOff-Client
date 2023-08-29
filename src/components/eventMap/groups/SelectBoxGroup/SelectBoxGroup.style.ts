@@ -4,7 +4,6 @@ import { colors } from 'styles/theme';
 const selectBoxGroup = StyleSheet.create({
   selectContainer: {
     flexDirection: 'row',
-    marginTop: 20,
     zIndex: 1,
   },
   buttonContainer: {
