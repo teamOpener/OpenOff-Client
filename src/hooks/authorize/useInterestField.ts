@@ -1,9 +1,13 @@
-import fieldData from 'data/lists/fieldData';
 import { useState } from 'react';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import { Field } from 'types/interest';
 
 const useInterestField = () => {
-  const [interestField, setInterestField] = useState<Field[]>(fieldData);
+  const { clickableInterestTags } = useInterestFields();
+
+  const [interestField, setInterestField] = useState<Field[]>(
+    clickableInterestTags(),
+  );
 
   const computedCount = () => {
     let count = 0;
