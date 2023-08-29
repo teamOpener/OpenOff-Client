@@ -1,6 +1,6 @@
-import EventRowCardList from 'components/home/lists/EventRowCardList/EventRowCardList';
 import { View } from 'react-native';
 import { useVogueEventInfiniteLists } from 'hooks/queries/event';
+import InfinityEventCardList from 'components/home/lists/InfinityEventCardList/InfinityEventCardList';
 import popularEventScreenStyles from './PopularEventScreen.style';
 
 const PopularEventScreen = () => {
@@ -18,12 +18,13 @@ const PopularEventScreen = () => {
 
   return (
     <View style={popularEventScreenStyles.container}>
-      <EventRowCardList
+      <InfinityEventCardList
         pageData={vogueEventList}
         isFetching={isFetching}
         isLoading={isLoading}
         hasNextPage={hasNextPage}
         handleEndReached={handleEndReached}
+        type="popular"
       />
     </View>
   );
