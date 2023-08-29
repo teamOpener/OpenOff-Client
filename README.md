@@ -2,7 +2,7 @@
 
 오프라인 이벤트의 새로운 시대를 열 오픈;오프
 
-### How to Run the Project
+## How to Run the Project
 
 1. Clone this repository: `git clone https://github.com/Central-MakeUs/OpenOff-Client.git`
 2. Obtain the necessary environment files (located on the Notion page) and save them in the project directory:
@@ -12,7 +12,7 @@
 3. Install project dependencies: `yarn`
 4. Run the app on iOS or Android: `yarn ios` or `yarn android`
 
-### Build
+## Build
 
 #### Android
 
@@ -28,7 +28,7 @@
 2. Modify both the `Version` and `Build` as necessary.
 3. Navigate to `Product > Archive` to initiate the build process.
 
-### Folder Structure
+## Folder Structure
 
 ```
 📦 OpenOff-Client
