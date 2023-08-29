@@ -3,7 +3,7 @@ import TopFieldButtonGroup from 'components/home/groups/TopFieldButtonGroup/TopF
 import EventRowCardList from 'components/home/lists/EventRowCardList/EventRowCardList';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import { useFieldEventLists } from 'hooks/queries/event';
 import { FieldCode } from 'constants/code';
 import { useInterestFieldLists } from 'hooks/queries/interest';

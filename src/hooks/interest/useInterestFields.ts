@@ -1,6 +1,6 @@
 import { FieldName } from 'constants/code';
 import { InterestInfoResponseDto } from 'models/interest/response/InterestInfoResponseDto';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 
 interface Props {
   interestFields?: InterestInfoResponseDto[];

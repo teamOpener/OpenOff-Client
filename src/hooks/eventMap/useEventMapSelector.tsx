@@ -7,7 +7,7 @@ import {
 import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 import { Reducer, useReducer, useState } from 'react';
 import { useEventMapStore } from 'stores/EventMap';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import { Action, SelectBox } from 'types/apps/selectbox';
 import { Coordinate } from 'types/event';
 

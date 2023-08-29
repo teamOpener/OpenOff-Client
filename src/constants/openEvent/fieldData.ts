@@ -1,5 +1,5 @@
 import { FieldCode } from 'constants/code';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 
 const fieldData: Field[] = [
   {

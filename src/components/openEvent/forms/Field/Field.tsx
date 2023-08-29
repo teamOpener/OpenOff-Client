@@ -4,7 +4,7 @@ import { OpenEvent } from 'components/openEvent';
 import Spacing from 'components/common/Spacing/Spacing';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import StatusType from 'constants/status';
-import { Field as FieldType } from 'types/apps/group';
+import { Field as FieldType } from 'types/interest';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import useField from 'hooks/openEvent/useField';
 import fieldData from 'constants/openEvent/fieldData';

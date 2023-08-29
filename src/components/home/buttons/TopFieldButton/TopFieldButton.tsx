@@ -1,7 +1,7 @@
 import Text from 'components/common/Text/Text';
 import { Pressable, View } from 'react-native';
 import { colors } from 'styles/theme';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import topFieldButtonStyles from './TopFieldButton.style';
 
 interface Props {

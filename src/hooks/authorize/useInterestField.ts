@@ -1,6 +1,6 @@
 import fieldData from 'data/lists/fieldData';
 import { useState } from 'react';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 
 const useInterestField = () => {
   const [interestField, setInterestField] = useState<Field[]>(fieldData);

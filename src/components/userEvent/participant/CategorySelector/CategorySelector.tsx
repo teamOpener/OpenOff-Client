@@ -3,7 +3,7 @@ import { LayoutChangeEvent, TouchableOpacity, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { FieldCode } from 'constants/code';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import { CONSTANT_PARTICIPANT } from 'constants/userEvent/participant/participantConstants';
 import categorySelectorStyles from './CategorySelector.style';
 import TagGroup from '../Tag/TagGroup';

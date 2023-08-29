@@ -2,7 +2,7 @@ import MapFieldButton from 'components/eventMap/buttons/MapFieldButton/MapFieldB
 import fieldData from 'data/lists/fieldData';
 import { memo } from 'react';
 import { ScrollView } from 'react-native';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import mapFieldButtonGroup from './MapFieldButtonGroup.style';
 
 interface Props {

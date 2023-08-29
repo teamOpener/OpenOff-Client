@@ -28,7 +28,7 @@ import useResetQueries from 'hooks/queries/useResetQueries';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
 import { useInterestFieldLists } from 'hooks/queries/interest';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import userEventScreenStyles from './UserEventScreen.style';
 
 const UserEventScreen = () => {

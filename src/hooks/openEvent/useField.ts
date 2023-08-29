@@ -1,5 +1,5 @@
 import { FieldCode } from 'constants/code';
-import { Field as FieldType } from 'types/apps/group';
+import { Field as FieldType } from 'types/interest';
 
 interface Props {
   eventField: FieldType[];
