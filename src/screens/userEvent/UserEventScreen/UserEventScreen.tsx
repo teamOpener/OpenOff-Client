@@ -7,13 +7,13 @@ import {
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
-import fieldInitData from 'constants/userEvent/participant/fieldData';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
 import { useHostEventLists, useUserTicketLists } from 'hooks/queries/ledger';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useDialog from 'hooks/app/useDialog';
 import useTabRoute from 'hooks/navigator/useTabRoute';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import { FieldDataType } from 'types/event/filedDataType';
 import Spacing from 'components/common/Spacing/Spacing';
 import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
@@ -27,6 +27,7 @@ import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import { BottomTabMenu } from 'constants/menu';
 import useResetQueries from 'hooks/queries/useResetQueries';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import { useInterestFieldLists } from 'hooks/queries/interest';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
 import userEventScreenStyles from './UserEventScreen.style';
 
@@ -39,7 +40,10 @@ const UserEventScreen = () => {
     UserEventTabItem.PARTICIPANT,
   );
 
-  const [field, setField] = useState<FieldDataType[]>(fieldInitData);
+  const { data: interestFields } = useInterestFieldLists();
+  const { clickableInterestTags } = useInterestFields({ interestFields });
+
+  const [field, setField] = useState<FieldDataType[]>(clickableInterestTags());
   const activeField = field.find((fieldData) => fieldData.isActive);
 
   // TODO: 무한스크롤 test 필요
