@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import queryKeys from 'constants/queryKeys';
-import ScreenLayout from 'components/openEvent/layout/ScreenLayout';
+import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
 import Spacing from 'components/common/Spacing/Spacing';
 import Divider from 'components/common/Divider/Divider';
 import FixedButton from 'components/common/FixedButton/FixedButton';
@@ -174,7 +174,7 @@ const OpenEventScreen = () => {
   }, []);
 
   return (
-    <ScreenLayout>
+    <KeyboardAvoidingScreenLayout>
       {isUploading && (
         <WithIconLoading
           isActive
@@ -224,7 +224,7 @@ const OpenEventScreen = () => {
         label={MENT_OPEN_EVENT.MAIN.SUBMIT}
         onPress={handleCreateEventPress}
       />
-    </ScreenLayout>
+    </KeyboardAvoidingScreenLayout>
   );
 };
 

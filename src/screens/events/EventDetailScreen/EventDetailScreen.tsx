@@ -5,9 +5,11 @@ import { useEventDetail } from 'hooks/queries/event';
 import useStackRoute from 'hooks/navigator/useStackRoute';
 import queryKeys from 'constants/queryKeys';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
+import { EventDetail } from 'components/eventDetail';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
+import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
 import Spacing from 'components/common/Spacing/Spacing';
+import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
 import { RefreshControl, ScrollView, View } from 'react-native';
@@ -90,98 +92,100 @@ const EventDetailScreen = () => {
     });
   }, []);
 
-  // TODO
-  if (!event) {
-    return null;
-  }
-
   return (
-    <EventDetailScreenLayout>
-      <ScrollView
-        style={eventDetailScreenStyles.full}
-        showsVerticalScrollIndicator={false}
-        onScrollBeginDrag={() => setIsScrolling(true)}
-        onScrollEndDrag={() => setIsScrolling(false)}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <EventDetail.TitleText title={event.title} />
+    <KeyboardAvoidingScreenLayout>
+      {!event && <EventEmptyLayout />}
 
-        <SpaceLayout size={10}>
-          <EventDetail.SmallSimpleList
-            title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
-            description={`${event.streetLoadAddress} ${event.detailAddress}`}
-            // TODO
-            // action={
-            //   <EventDetail.TextButton
-            //     label={MENT_EVENT_DETAIL.MAIN.LOCATION}
-            //     onPress={handleLocation}
-            //   />
-            // }
-          />
-          <EventDetail.SmallSimpleList
-            title={MENT_EVENT_DETAIL.MAIN.COST}
-            description={`입장료 ${event.eventFee.toLocaleString()}${
-              MENT_EVENT_DETAIL.MAIN.WON
-            }`}
-          />
-          <EventDetail.SmallSimpleList
-            title={MENT_EVENT_DETAIL.MAIN.APPLICATION_DATE}
-            description={`${dayjs(event.eventApplyStartDate).format(
-              'YYYY.MM.DD HH:mm',
-            )} - ${dayjs(event.eventApplyEndDate).format('YYYY.MM.DD HH:mm')}`}
-          />
-        </SpaceLayout>
-        <Spacing height={30} />
+      {event && (
+        <>
+          <ScrollView
+            style={eventDetailScreenStyles.full}
+            showsVerticalScrollIndicator={false}
+            onScrollBeginDrag={() => setIsScrolling(true)}
+            onScrollEndDrag={() => setIsScrolling(false)}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          >
+            <EventDetail.TitleText title={event.title} />
 
-        <EventDetail.PosterCarousel images={event.imageList} />
-        <Spacing height={20} />
+            <SpaceLayout size={10}>
+              <EventDetail.SmallSimpleList
+                title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
+                description={`${event.streetLoadAddress} ${event.detailAddress}`}
+                // TODO
+                // action={
+                //   <EventDetail.TextButton
+                //     label={MENT_EVENT_DETAIL.MAIN.LOCATION}
+                //     onPress={handleLocation}
+                //   />
+                // }
+              />
+              <EventDetail.SmallSimpleList
+                title={MENT_EVENT_DETAIL.MAIN.COST}
+                description={`입장료 ${event.eventFee.toLocaleString()}${
+                  MENT_EVENT_DETAIL.MAIN.WON
+                }`}
+              />
+              <EventDetail.SmallSimpleList
+                title={MENT_EVENT_DETAIL.MAIN.APPLICATION_DATE}
+                description={`${dayjs(event.eventApplyStartDate).format(
+                  'YYYY.MM.DD HH:mm',
+                )} - ${dayjs(event.eventApplyEndDate).format(
+                  'YYYY.MM.DD HH:mm',
+                )}`}
+              />
+            </SpaceLayout>
+            <Spacing height={30} />
 
-        <EventDetail.DateCardCarousel
-          indexList={sortEventsByEventDate()}
-          maxCapacity={event.maxCapacity}
-        />
-        <Spacing height={30} />
+            <EventDetail.PosterCarousel images={event.imageList} />
+            <Spacing height={20} />
 
-        <EventDetail.Tab>
-          <EventDetail.TabItem
-            label={MENT_EVENT_DETAIL.MAIN.INTRODUCTION_EVENT}
-            isActive={activeTabName === EventDetailTabItem.DESCRIPTION}
-            onPress={() => handleTab(EventDetailTabItem.DESCRIPTION)}
-          />
-          <EventDetail.TabItem
-            label={MENT_EVENT_DETAIL.MAIN.COMMENTS}
-            isActive={activeTabName === EventDetailTabItem.COMMENTS}
-            onPress={() => handleTab(EventDetailTabItem.COMMENTS)}
-          />
-        </EventDetail.Tab>
-        <Spacing height={30} />
+            <EventDetail.DateCardCarousel
+              indexList={sortEventsByEventDate()}
+              maxCapacity={event.maxCapacity}
+            />
+            <Spacing height={30} />
 
-        {/* TODO: 개행 처리 어캐할지 */}
-        {activeTabName === EventDetailTabItem.DESCRIPTION ? (
-          <View style={eventDetailScreenStyles.descriptionWrapper}>
-            <Text variant="body2">{event.description}</Text>
-          </View>
-        ) : (
-          <EventDetail.CommentList
-            eventInfoId={event.eventId}
-            isScrolling={isScrolling}
-          />
-        )}
+            <EventDetail.Tab>
+              <EventDetail.TabItem
+                label={MENT_EVENT_DETAIL.MAIN.INTRODUCTION_EVENT}
+                isActive={activeTabName === EventDetailTabItem.DESCRIPTION}
+                onPress={() => handleTab(EventDetailTabItem.DESCRIPTION)}
+              />
+              <EventDetail.TabItem
+                label={MENT_EVENT_DETAIL.MAIN.COMMENTS}
+                isActive={activeTabName === EventDetailTabItem.COMMENTS}
+                onPress={() => handleTab(EventDetailTabItem.COMMENTS)}
+              />
+            </EventDetail.Tab>
+            <Spacing height={30} />
 
-        <Spacing height={80} />
-      </ScrollView>
-      {activeTabName === EventDetailTabItem.DESCRIPTION ? (
-        <FixedButton
-          disabled={disabledEvent(event).disabled}
-          label={disabledEvent(event).label}
-          onPress={handleApply}
-        />
-      ) : (
-        <EventDetail.CommentInput eventInfoId={event.eventId} />
+            {activeTabName === EventDetailTabItem.DESCRIPTION ? (
+              <View style={eventDetailScreenStyles.descriptionWrapper}>
+                <Text variant="body2">{event.description}</Text>
+              </View>
+            ) : (
+              <EventDetail.CommentList
+                eventInfoId={event.eventId}
+                isScrolling={isScrolling}
+              />
+            )}
+
+            <Spacing height={80} />
+          </ScrollView>
+          {activeTabName === EventDetailTabItem.DESCRIPTION ? (
+            <FixedButton
+              disabled={disabledEvent(event).disabled}
+              label={disabledEvent(event).label}
+              onPress={handleApply}
+            />
+          ) : (
+            <EventDetail.CommentInput eventInfoId={event.eventId} />
+          )}
+        </>
       )}
-    </EventDetailScreenLayout>
+    </KeyboardAvoidingScreenLayout>
   );
 };
 

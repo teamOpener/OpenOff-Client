@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
+import { layouts } from 'styles/theme';
 
 const userEventScreenStyles = StyleSheet.create({
   container: {
-    paddingHorizontal: 25,
+    paddingHorizontal: layouts.PADDING,
     flex: 1,
   },
   scrollContainer: {

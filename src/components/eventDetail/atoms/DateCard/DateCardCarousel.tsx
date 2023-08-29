@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Dimensions, LayoutChangeEvent } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { EventIndexStatisticsDto } from 'models/event/response/EventIndexStatisticsDto';
+import { layouts } from 'styles/theme';
 import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailConstants';
+import { EventIndexStatisticsDto } from 'models/event/response/EventIndexStatisticsDto';
 import DateCard from './DateCard';
 import dateCardCarouselStyles from './DateCardCarousel.style';
 
@@ -12,8 +13,7 @@ interface Props {
 }
 
 const DateCardCarousel = ({ indexList, maxCapacity }: Props) => {
-  const width =
-    Dimensions.get('window').width - CONSTANT_EVENT_DETAIL.SCREEN_PADDING * 2;
+  const width = Dimensions.get('window').width - layouts.PADDING * 2;
 
   const [carouselHeight, setCarouselHeight] = useState<number>(
     CONSTANT_EVENT_DETAIL.DATE_CAROUSEL_INITIAL_HEIGHT,

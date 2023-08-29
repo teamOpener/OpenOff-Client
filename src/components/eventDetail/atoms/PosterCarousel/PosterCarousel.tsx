@@ -1,16 +1,15 @@
 import Image from 'components/common/Image/Image';
-import { CONSTANT_EVENT_DETAIL } from 'constants/eventDetail/eventDetailConstants';
 import { ImageUrlList } from 'models/event/entity/ImageUrlList';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
+import { layouts } from 'styles/theme';
 
 interface Props {
   images: ImageUrlList[];
 }
 
 const PosterCarousel = ({ images }: Props) => {
-  const width =
-    Dimensions.get('window').width - CONSTANT_EVENT_DETAIL.SCREEN_PADDING * 2;
+  const width = Dimensions.get('window').width - layouts.PADDING * 2;
 
   return (
     <Carousel

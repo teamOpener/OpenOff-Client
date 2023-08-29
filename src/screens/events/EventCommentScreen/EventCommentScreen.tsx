@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { RefreshControl, ScrollView } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import queryKeys from 'constants/queryKeys';
-import { EventDetail, EventDetailScreenLayout } from 'components/eventDetail';
+import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
+import { EventDetail } from 'components/eventDetail';
 import {
   ChildCommentListItem,
   ParentCommentListItem,
@@ -10,6 +11,8 @@ import {
 import Spacing from 'components/common/Spacing/Spacing';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import CommentRowSkeleton from 'components/suspense/skeleton/CommentRowSkeleton/CommentRowSkeleton';
+import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
+import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
 import { StackMenu } from 'constants/menu';
 import useStackRoute from 'hooks/navigator/useStackRoute';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
@@ -53,46 +56,50 @@ const EventCommentScreen = () => {
     callback: refreshComments,
   });
 
-  if (!filterData) {
-    return null;
-  }
-
   return (
-    <EventDetailScreenLayout>
-      <ScrollView
-        style={eventCommentScreenStyles.scrollContainer}
-        onScrollBeginDrag={() => setIsScrolling(false)}
-        onScrollEndDrag={() => {
-          setIsScrolling(true);
-        }}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        {(isParentLoading || isChildLoading) && <CommentRowSkeleton />}
+    <KeyboardAvoidingScreenLayout>
+      {!filterData && (
+        <EventEmptyLayout helpText={MENT_EVENT_DETAIL.ERROR.EMPTY_COMMENT} />
+      )}
 
-        <ParentCommentListItem
-          eventInfoId={params.infoId}
-          comment={filterData}
-          mode="detail"
-          isScrolling={isScrolling}
-        />
+      {filterData && (
+        <>
+          <ScrollView
+            style={eventCommentScreenStyles.scrollContainer}
+            onScrollBeginDrag={() => setIsScrolling(false)}
+            onScrollEndDrag={() => {
+              setIsScrolling(true);
+            }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          >
+            {(isParentLoading || isChildLoading) && <CommentRowSkeleton />}
 
-        <Spacing height={15} />
+            <ParentCommentListItem
+              eventInfoId={params.infoId}
+              comment={filterData}
+              mode="detail"
+              isScrolling={isScrolling}
+            />
 
-        <SpaceLayout size={15}>
-          {childrenComments?.map((child) => (
-            <ChildCommentListItem key={child.commentId} comment={child} />
-          ))}
-        </SpaceLayout>
-      </ScrollView>
+            <Spacing height={15} />
 
-      <EventDetail.CommentInput
-        eventInfoId={params.infoId}
-        mode="child"
-        parentId={filterData.commentId}
-      />
-    </EventDetailScreenLayout>
+            <SpaceLayout size={15}>
+              {childrenComments?.map((child) => (
+                <ChildCommentListItem key={child.commentId} comment={child} />
+              ))}
+            </SpaceLayout>
+          </ScrollView>
+
+          <EventDetail.CommentInput
+            eventInfoId={params.infoId}
+            mode="child"
+            parentId={filterData.commentId}
+          />
+        </>
+      )}
+    </KeyboardAvoidingScreenLayout>
   );
 };
 
