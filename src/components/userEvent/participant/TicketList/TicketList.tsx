@@ -1,9 +1,10 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { FieldCode, getFieldName } from 'constants/interest';
+import { FieldCode } from 'constants/interest';
 import { TouchableOpacity, View } from 'react-native';
 import { ticketListDateFormatter } from 'utils/date';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import ticketListStyles from './TicketList.style';
 import XSmallTag from '../XSmallTag/XSmallTag';
 
@@ -20,6 +21,8 @@ const TicketList = ({
   fieldTypeList,
   onPress,
 }: Props) => {
+  const { getInterestFieldName } = useInterestFields();
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -37,7 +40,10 @@ const TicketList = ({
         </View>
         <SpaceLayout direction="row" size={5}>
           {fieldTypeList.map((fieldType, idx) => (
-            <XSmallTag key={idx} label={getFieldName(fieldType)} />
+            <XSmallTag
+              key={idx}
+              label={getInterestFieldName(fieldType) ?? ''}
+            />
           ))}
         </SpaceLayout>
       </View>

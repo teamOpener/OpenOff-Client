@@ -1,3 +1,4 @@
+import { FieldCode } from 'constants/interest';
 import { useInterestFieldLists } from 'hooks/queries/interest';
 import { Field } from 'types/interest';
 
@@ -15,7 +16,13 @@ const useInterestFields = () => {
     }));
   };
 
-  return { generateInterestFieldTags };
+  const getInterestFieldName = (fieldCode: FieldCode): string | undefined => {
+    return interestFields?.find(
+      (field) => field.interestConstName === fieldCode,
+    )?.interestValue;
+  };
+
+  return { generateInterestFieldTags, getInterestFieldName };
 };
 
 export default useInterestFields;
