@@ -6,6 +6,8 @@ import useBookmarkEvent from 'hooks/bookmark/useBookmarkEvent';
 import { MyBookmarkEventResponseDto } from 'models/event/response/MyBookmarkEventResponseDto';
 import { FlatList, View } from 'react-native';
 import { InfiniteScrollApiResponse } from 'types/ApiResponse';
+import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
+import EventCard from 'components/home/cards/EventCard/EventCard';
 import bookmarkCardListStyles from './BookmarkCardList.style';
 
 interface Props {
@@ -34,24 +36,30 @@ const BookmarkCardList = ({
         <EmptyScreen content="이런! 아직 이벤트가 존재하지 않아요!" />
       ) : (
         <FlatList
-          numColumns={1}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
           style={bookmarkCardListStyles.flatListcontainer}
           data={flatEventList}
+          columnWrapperStyle={bookmarkCardListStyles.rowGap}
           renderItem={(event) => (
-            <EventRowCard
-              key={`eventCard-${event.index}`}
-              handleEventPress={handleEventPress}
-              event={formattedEvent(event.item)}
+            <EventCard
+              key={event.index}
               type="bookmark"
+              event={formattedEvent(event.item)}
+              handlePress={handleEventPress}
             />
           )}
           ListFooterComponent={
             isHasNextSkeleton || isLoading ? (
-              <>
-                {new Array(3).fill(1).map((_, _idx) => (
-                  <EventRowCardSkeleton key={`eventCard-skeleton-${_idx}`} />
+              <View style={bookmarkCardListStyles.skeletonContainer}>
+                {new Array(4).fill(1).map((_, _idx) => (
+                  <EventCardSkeleton
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`eventCard-skeleton-${_idx}`}
+                    type="scrap"
+                  />
                 ))}
-              </>
+              </View>
             ) : undefined
           }
           onEndReachedThreshold={0.5}
