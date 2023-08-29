@@ -109,6 +109,7 @@ const EventCalendar = ({
     <>
       <Calendar
         monthFormat="yyyy.MM"
+        initialDate={sortedEventDateArray[0]}
         minDate={sortedEventDateArray[0]}
         maxDate={sortedEventDateArray[sortedEventDateArray.length - 1]}
         hideExtraDays
