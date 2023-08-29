@@ -36,18 +36,18 @@
 	├─ android	// Android-specific project files.
 	├─ ios		// iOS-specific project files.
 	├─ src
-	│   ├─ apis/		// Responsible for fetching data from APIs.
-	│   ├─ assets/		// Static assets (images, fonts, etc.).
-	│	├─ components/	// Reusable UI components.
-	│	├─ constants/	// Constants used throughout the application.
-	│	├─ hooks/	// Custom hooks and queries.
-	│	├─ models/	// Data Transfer Object (DTO) type definitions.
-	│	├─ navigators/	// Navigation-related code.
-	│	├─ screens/	// React Native screens.
-	│	├─ services/	// Integration with third-party services and APIs.
-	│	├─ stores/	// State management using Async Storage and Zustand.
-	│	├─ styles/	// Common styles.
-	│	├─ types/	// Type definitions used by clients.
-	│	├─ utils/	// Utility functions.
+	│  ├─ apis/		// Responsible for fetching data from APIs.
+	│  ├─ assets/		// Static assets (images, fonts, etc.).
+	│  ├─ components/	// Reusable UI components.
+	│  ├─ constants/	// Constants used throughout the application.
+	│  ├─ hooks/		// Custom hooks and queries.
+	│  ├─ models/		// Data Transfer Object (DTO) type definitions.
+	│  ├─ navigators/	// Navigation-related code.
+	│  ├─ screens/		// React Native screens.
+	│  ├─ services/		// Integration with third-party services and APIs.
+	│  ├─ stores/		// State management using Async Storage and Zustand.
+	│  ├─ styles/		// Common styles.
+	│  ├─ types/		// Type definitions used by clients.
+	│  ├─ utils/		// Utility functions.
 	├─ ...
 ```
