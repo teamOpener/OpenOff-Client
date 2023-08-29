@@ -22,7 +22,8 @@ const iconMapping: Record<FieldCode, IconName> = {
 
 const CategoryButton = ({ fieldData, ...rest }: Props) => {
   const names = fieldData.interestValue.split('/');
-  const selectedIcon = iconMapping[fieldData.interestConstName];
+  const selectedIcon =
+    iconMapping[fieldData.interestConstName] ?? 'IconTicketStar';
 
   return (
     <TouchableOpacity
