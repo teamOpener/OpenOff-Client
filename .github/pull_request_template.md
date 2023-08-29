@@ -1,4 +1,6 @@
-<!-- ⭐️ PR 제목은 한글로 적어주세요 -->
+<!-- ⭐️ PR 제목은 아래 타입으로 시작하게 적어주세요 -->
+<!-- feat, fix, chore, improvement, design, refactor, test, ci -->
+<!-- EX) fix: 홈 화면 버그 수정 -->
 
 ### PR Type
 

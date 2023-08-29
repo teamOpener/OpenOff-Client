@@ -1,0 +1,143 @@
+import {
+  NavigationProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
+import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
+import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
+import { UserInfoStatus } from 'constants/join';
+import { AuthorizeMenu } from 'constants/menu';
+import { Dispatch, useCallback, useEffect, useState } from 'react';
+import { BackHandler, Linking, View } from 'react-native';
+import { AuthStackParamList } from 'types/apps/menu';
+import { Action } from 'types/join';
+import agreeToTermScreenStyles from './AgreeToTermScreen.style';
+
+interface AgreeList {
+  [key: string]: boolean;
+}
+
+interface Props {
+  dispatch: Dispatch<Action>;
+}
+
+const AgreeToTermScreen = ({ dispatch }: Props) => {
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const [term, setTerm] = useState<AgreeList>({
+    allAgree: false,
+    termToTeenager: false,
+    termToUse: false,
+    termToPrivacy: false,
+    termToMarketing: false,
+  });
+
+  const handleSingleTerm = (key: string) => {
+    setTerm((checkTerm) => {
+      return { ...checkTerm, [key]: !checkTerm[key] };
+    });
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        () => {
+          BackHandler.exitApp();
+          return true;
+        },
+      );
+      return () => backHandler.remove();
+    }, []),
+  );
+
+  useEffect(() => {
+    if (
+      term.termToMarketing &&
+      term.termToPrivacy &&
+      term.termToTeenager &&
+      term.termToUse
+    ) {
+      setTerm((checkTerm) => {
+        return { ...checkTerm, allAgree: true };
+      });
+    } else {
+      setTerm((checkTerm) => {
+        return { ...checkTerm, allAgree: false };
+      });
+    }
+  }, [
+    term.termToMarketing,
+    term.termToPrivacy,
+    term.termToTeenager,
+    term.termToUse,
+  ]);
+
+  const isActive = term.termToPrivacy && term.termToTeenager && term.termToUse;
+  return (
+    <ScreenCover
+      authorizeButton={{
+        handlePress: () => {
+          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+          navigation.navigate(AuthorizeMenu.PhoneCertification);
+        },
+        label: '확인',
+        isActive,
+      }}
+      titleElements={['서비스 이용 약관에', '동의해 주세요.']}
+    >
+      <View style={agreeToTermScreenStyles.checkButtonContainer}>
+        <CheckButton
+          value={term.allAgree}
+          handlePress={() => {
+            setTerm({
+              allAgree: !term.allAgree,
+              termToTeenager: !term.allAgree,
+              termToUse: !term.allAgree,
+              termToPrivacy: !term.allAgree,
+              termToMarketing: !term.allAgree,
+            });
+          }}
+          marginBottom={17}
+          label="네, 모두 동의합니다."
+        />
+        <CheckButton
+          value={term.termToTeenager}
+          handlePress={() => handleSingleTerm('termToTeenager')}
+          label="(필수) 만 14세 이상입니다."
+        />
+        <CheckButton
+          value={term.termToUse}
+          handlePress={() => handleSingleTerm('termToUse')}
+          label="(필수) 서비스 이용약관"
+          handleDetailPress={() => {
+            Linking.openURL(
+              'https://navy-web.notion.site/fa8cb5d161d143409c331f4e3e7f30b1?pvs=4',
+            );
+          }}
+        />
+        <CheckButton
+          value={term.termToPrivacy}
+          handlePress={() => handleSingleTerm('termToPrivacy')}
+          label="(필수) 개인정보 수집 이용"
+          handleDetailPress={() => {
+            Linking.openURL(
+              'https://navy-web.notion.site/efa559e8c07e40f484705b2fdca06524?pvs=4',
+            );
+          }}
+        />
+        <CheckButton
+          value={term.termToMarketing}
+          handlePress={() => handleSingleTerm('termToMarketing')}
+          label="(선택) 마케팅 정보 수신동의"
+          handleDetailPress={() => {
+            Linking.openURL(
+              'https://navy-web.notion.site/4da0a8c248094ce9ba3faf76d96466ab?pvs=4',
+            );
+          }}
+        />
+      </View>
+    </ScreenCover>
+  );
+};
+
+export default AgreeToTermScreen;

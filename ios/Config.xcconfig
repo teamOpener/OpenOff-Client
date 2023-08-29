@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  OpenOff
+//
+//  Created by 조연주 on 2023/07/18.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include? "tmp.xcconfig"

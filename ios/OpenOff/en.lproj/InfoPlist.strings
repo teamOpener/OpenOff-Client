@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  OpenOff
+
+  Created by 조연주 on 2023/07/29.
+  
+*/
+"CFBundleDisplayName" = "OpenOff";
+"NSCameraUsageDescription" = "Permission is required to validate whether the participant's ticket is valid through QR scanning for event participation.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Permission is required to utilize the user's location information to provide nearby event information to the user, even during the use of the map feature or when the application is not in use.";
+"NSLocationAlwaysUsageDescription" = "Authorization is needed to consistently provide the user with nearby event information by utilizing their location, even when the application is not actively being used.";
+"NSLocationWhenInUseUsageDescription" = "Permission is necessary to use the user's location information during the usage of the map feature to offer nearby event information to the user.";
+"NSPhotoLibraryUsageDescription" = "Permission is necessary for event organizers to upload posters for event promotion and for users utilizing the application to upload profile pictures.";
