@@ -26,7 +26,6 @@ import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import { BottomTabMenu } from 'constants/menu';
 import useResetQueries from 'hooks/queries/useResetQueries';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
-import { useInterestFieldLists } from 'hooks/queries/interest';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
 import { Field } from 'types/interest';
 import userEventScreenStyles from './UserEventScreen.style';
@@ -40,8 +39,7 @@ const UserEventScreen = () => {
     UserEventTabItem.PARTICIPANT,
   );
 
-  const { data: interestFields } = useInterestFieldLists();
-  const { clickableInterestTags } = useInterestFields({ interestFields });
+  const { clickableInterestTags } = useInterestFields();
 
   const [field, setField] = useState<Field[]>(clickableInterestTags());
   const activeField = field.find((fieldData) => fieldData.isActive);

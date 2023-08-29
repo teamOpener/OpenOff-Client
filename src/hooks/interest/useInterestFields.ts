@@ -1,13 +1,14 @@
 import { FieldName } from 'constants/interest';
-import { InterestInfoResponseDto } from 'models/interest/response/InterestInfoResponseDto';
+import { useInterestFieldLists } from 'hooks/queries/interest';
 import { Field } from 'types/interest';
 
-interface Props {
-  interestFields?: InterestInfoResponseDto[];
-}
+const useInterestFields = () => {
+  const { data: interestFields } = useInterestFieldLists();
 
-const useInterestFields = ({ interestFields = [] }: Props) => {
   const clickableInterestTags = (): Field[] => {
+    if (!interestFields) {
+      return [];
+    }
     return interestFields.map((field) => ({
       value: field.interestConstName,
       isActive: false,

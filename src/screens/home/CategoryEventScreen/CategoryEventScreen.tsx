@@ -6,7 +6,6 @@ import { View } from 'react-native';
 import { Field } from 'types/interest';
 import { useFieldEventLists } from 'hooks/queries/event';
 import { FieldCode } from 'constants/interest';
-import { useInterestFieldLists } from 'hooks/queries/interest';
 import useInterestFields from 'hooks/interest/useInterestFields';
 import categoryEventScreenStyles from './CategoryEventScreen.style';
 
@@ -19,8 +18,7 @@ type ParamList = {
 const CategoryEventScreen = () => {
   const { params } = useRoute<RouteProp<ParamList, 'categoryData'>>();
 
-  const { data: interestFields } = useInterestFieldLists();
-  const { clickableInterestTags } = useInterestFields({ interestFields });
+  const { clickableInterestTags } = useInterestFields();
 
   const [eventFields, setFields] = useState<Field[]>(clickableInterestTags());
   const {

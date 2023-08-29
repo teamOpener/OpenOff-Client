@@ -7,7 +7,6 @@ import StatusType from 'constants/status';
 import { Field as FieldType } from 'types/interest';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import useField from 'hooks/openEvent/useField';
-import { useInterestFieldLists } from 'hooks/queries/interest';
 import useInterestFields from 'hooks/interest/useInterestFields';
 
 const Field = () => {
@@ -18,8 +17,7 @@ const Field = () => {
     setOpenEventErrorMessage,
   } = useOpenEventStore();
 
-  const { data: interestFields } = useInterestFieldLists();
-  const { clickableInterestTags } = useInterestFields({ interestFields });
+  const { clickableInterestTags } = useInterestFields();
 
   const [eventField, setEventField] = useState<FieldType[]>(
     clickableInterestTags(),
