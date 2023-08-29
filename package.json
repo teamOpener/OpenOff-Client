@@ -1,6 +1,6 @@
 {
   "name": "OpenOff",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -17,7 +17,8 @@
     "postinstall": "react-native setup-ios-permissions && pod-install",
     "lint-fix": "eslint '**/*.{ts,tsx,js,jsx}' --ext .ts,.tsx --fix",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "release": "standard-version"
   },
   "dependencies": {
     "@actbase/react-daum-postcode": "1.0.4",
@@ -132,6 +133,7 @@
     "react-native-svg-transformer": "1.0.0",
     "react-query-native-devtools": "4.0.0",
     "react-test-renderer": "18.2.0",
+    "standard-version": "9.5.0",
     "tsconfig-paths-webpack-plugin": "4.0.1",
     "typescript": "4.8.4"
   },
