@@ -14,7 +14,6 @@ import useNavigator from 'hooks/navigator/useNavigator';
 import useDialog from 'hooks/app/useDialog';
 import useTabRoute from 'hooks/navigator/useTabRoute';
 import useInterestFields from 'hooks/interest/useInterestFields';
-import { FieldDataType } from 'types/event/filedDataType';
 import Spacing from 'components/common/Spacing/Spacing';
 import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
 import {
@@ -29,6 +28,7 @@ import useResetQueries from 'hooks/queries/useResetQueries';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
 import { useInterestFieldLists } from 'hooks/queries/interest';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
+import { Field } from 'types/apps/group';
 import userEventScreenStyles from './UserEventScreen.style';
 
 const UserEventScreen = () => {
@@ -43,7 +43,7 @@ const UserEventScreen = () => {
   const { data: interestFields } = useInterestFieldLists();
   const { clickableInterestTags } = useInterestFields({ interestFields });
 
-  const [field, setField] = useState<FieldDataType[]>(clickableInterestTags());
+  const [field, setField] = useState<Field[]>(clickableInterestTags());
   const activeField = field.find((fieldData) => fieldData.isActive);
 
   // TODO: 무한스크롤 test 필요

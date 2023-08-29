@@ -1,13 +1,13 @@
 import { FieldName } from 'constants/code';
 import { InterestInfoResponseDto } from 'models/interest/response/InterestInfoResponseDto';
-import { FieldDataType } from 'types/event/filedDataType';
+import { Field } from 'types/apps/group';
 
 interface Props {
   interestFields?: InterestInfoResponseDto[];
 }
 
 const useInterestFields = ({ interestFields = [] }: Props) => {
-  const clickableInterestTags = (): FieldDataType[] => {
+  const clickableInterestTags = (): Field[] => {
     return interestFields.map((field) => ({
       value: field.interestConstName,
       isActive: false,
