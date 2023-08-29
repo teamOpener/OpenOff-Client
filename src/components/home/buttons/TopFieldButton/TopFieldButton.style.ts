@@ -5,6 +5,7 @@ const topFieldButtonStyles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 7,
   },
   fieldText: {
     marginHorizontal: 6,
