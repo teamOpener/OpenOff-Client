@@ -35,13 +35,4 @@ const getFieldName = (fieldCode: FieldCode): FieldName => {
   }
 };
 
-/** 
- *- CA: Comment Alert
-  - EA: Event Alert
- */
-const enum AlertCode {
-  CA = 'CA',
-  EA = 'EA',
-}
-
-export { AlertCode, FieldCode, FieldName, getFieldName };
+export { FieldCode, FieldName, getFieldName };

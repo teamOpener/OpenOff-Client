@@ -1,6 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { AlertCode } from 'constants/code';
+import AlertCode from 'constants/alertCode';
 import { SelectUserAlertResponse } from 'models/alert/response/SelectUserAlertResponse.Dto';
 import { View } from 'react-native';
 import alertCardStyles from './AlertCard.style';
