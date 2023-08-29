@@ -18,9 +18,11 @@ type ParamList = {
 const CategoryEventScreen = () => {
   const { params } = useRoute<RouteProp<ParamList, 'categoryData'>>();
 
-  const { clickableInterestTags } = useInterestFields();
+  const { generateInterestFieldTags } = useInterestFields();
 
-  const [eventFields, setFields] = useState<Field[]>(clickableInterestTags());
+  const [eventFields, setFields] = useState<Field[]>(
+    generateInterestFieldTags(),
+  );
   const {
     data: fieldEventList,
     isFetching,
@@ -53,7 +55,7 @@ const CategoryEventScreen = () => {
   };
 
   useEffect(() => {
-    setEventFields(clickableInterestTags(), params.fieldValue);
+    setEventFields(generateInterestFieldTags(), params.fieldValue);
   }, [params.fieldValue]);
 
   return (

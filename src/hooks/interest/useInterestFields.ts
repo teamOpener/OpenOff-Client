@@ -5,7 +5,7 @@ import { Field } from 'types/interest';
 const useInterestFields = () => {
   const { data: interestFields } = useInterestFieldLists();
 
-  const clickableInterestTags = (): Field[] => {
+  const generateInterestFieldTags = (): Field[] => {
     if (!interestFields) {
       return [];
     }
@@ -16,7 +16,7 @@ const useInterestFields = () => {
     }));
   };
 
-  return { clickableInterestTags };
+  return { generateInterestFieldTags };
 };
 
 export default useInterestFields;

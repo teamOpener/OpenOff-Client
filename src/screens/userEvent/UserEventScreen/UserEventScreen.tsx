@@ -39,9 +39,9 @@ const UserEventScreen = () => {
     UserEventTabItem.PARTICIPANT,
   );
 
-  const { clickableInterestTags } = useInterestFields();
+  const { generateInterestFieldTags } = useInterestFields();
 
-  const [field, setField] = useState<Field[]>(clickableInterestTags());
+  const [field, setField] = useState<Field[]>(generateInterestFieldTags());
   const activeField = field.find((fieldData) => fieldData.isActive);
 
   // TODO: 무한스크롤 test 필요

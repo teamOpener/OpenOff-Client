@@ -18,7 +18,7 @@ const UserScreen = () => {
   const { data: userInfo } = useMyInfo();
   const { stackNavigation } = useNavigator();
 
-  const { clickableInterestTags } = useInterestFields();
+  const { generateInterestFieldTags } = useInterestFields();
 
   const handleEditProfile = () => {
     stackNavigation.navigate('UserProfileEdit');
@@ -88,7 +88,7 @@ const UserScreen = () => {
             <Icon name="IconArrowRight" size={16} fill="white" />
           </TouchableOpacity>
           <UserFieldBoxGroup
-            fieldLabels={clickableInterestTags()
+            fieldLabels={generateInterestFieldTags()
               .filter((field) =>
                 userInfo?.userInfo.fieldTypeList.find(
                   (userField) => userField === field.value,

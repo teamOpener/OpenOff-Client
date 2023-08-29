@@ -1,5 +1,5 @@
 import { UserInfoStatus } from 'constants/join';
-import { Field } from './apps/group';
+import { Field } from './interest';
 
 interface EmailPassword {
   email: string;

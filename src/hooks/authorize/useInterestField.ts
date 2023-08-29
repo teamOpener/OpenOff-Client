@@ -3,10 +3,10 @@ import useInterestFields from 'hooks/interest/useInterestFields';
 import { Field } from 'types/interest';
 
 const useInterestField = () => {
-  const { clickableInterestTags } = useInterestFields();
+  const { generateInterestFieldTags } = useInterestFields();
 
   const [interestField, setInterestField] = useState<Field[]>(
-    clickableInterestTags(),
+    generateInterestFieldTags(),
   );
 
   const computedCount = () => {

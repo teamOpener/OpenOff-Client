@@ -19,7 +19,7 @@ const EventRowCard = ({ event, handleEventPress, type = 'default' }: Props) => {
   const city = event.streetRoadAddress.split(' ');
   const fieldId = useId();
 
-  const { clickableInterestTags } = useInterestFields();
+  const { generateInterestFieldTags } = useInterestFields();
 
   const handlePress = () => {
     if (!event.bookmarkId && !event.eventInfoId) {
@@ -52,7 +52,7 @@ const EventRowCard = ({ event, handleEventPress, type = 'default' }: Props) => {
             <View key={`${fieldId}${_id}`} style={eventRowCardStyles.fieldBox}>
               <Text variant="body3" color="darkGrey">
                 {
-                  clickableInterestTags().find(
+                  generateInterestFieldTags().find(
                     (fieldElement) => fieldElement.value === field,
                   )?.label
                 }

@@ -23,11 +23,11 @@ const HomeScreen = () => {
     usePersonalEventLists();
   const { data: userInfo } = useMyInfo();
 
-  const { clickableInterestTags } = useInterestFields();
+  const { generateInterestFieldTags } = useInterestFields();
 
   const userInterest = userInfo?.userInfo.fieldTypeList.map((field) => {
     return `#${
-      clickableInterestTags().find(
+      generateInterestFieldTags().find(
         (fieldElement) => fieldElement.value === field,
       )?.label
     }   `;

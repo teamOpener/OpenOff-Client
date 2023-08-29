@@ -17,10 +17,10 @@ const Field = () => {
     setOpenEventErrorMessage,
   } = useOpenEventStore();
 
-  const { clickableInterestTags } = useInterestFields();
+  const { generateInterestFieldTags } = useInterestFields();
 
   const [eventField, setEventField] = useState<FieldType[]>(
-    clickableInterestTags(),
+    generateInterestFieldTags(),
   );
   const { toggleFieldIsActive, getActiveFieldCodes } = useField({
     eventField,
