@@ -1,12 +1,13 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import TopFieldButtonGroup from 'components/home/groups/TopFieldButtonGroup/TopFieldButtonGroup';
 import EventRowCardList from 'components/home/lists/EventRowCardList/EventRowCardList';
-import fieldData from 'data/lists/fieldData';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Field } from 'types/apps/group';
 import { useFieldEventLists } from 'hooks/queries/event';
 import { FieldCode } from 'constants/code';
+import { useInterestFieldLists } from 'hooks/queries/interest';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import categoryEventScreenStyles from './CategoryEventScreen.style';
 
 type ParamList = {
@@ -17,7 +18,11 @@ type ParamList = {
 
 const CategoryEventScreen = () => {
   const { params } = useRoute<RouteProp<ParamList, 'categoryData'>>();
-  const [eventFields, setFields] = useState<Field[]>(fieldData);
+
+  const { data: interestFields } = useInterestFieldLists();
+  const { clickableInterestTags } = useInterestFields({ interestFields });
+
+  const [eventFields, setFields] = useState<Field[]>(clickableInterestTags());
   const {
     data: fieldEventList,
     isFetching,
@@ -50,7 +55,7 @@ const CategoryEventScreen = () => {
   };
 
   useEffect(() => {
-    setEventFields(fieldData, params.fieldValue);
+    setEventFields(clickableInterestTags(), params.fieldValue);
   }, [params.fieldValue]);
 
   return (
