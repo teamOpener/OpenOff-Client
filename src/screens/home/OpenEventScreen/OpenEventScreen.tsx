@@ -185,6 +185,7 @@ const OpenEventScreen = () => {
 
       <ScrollView
         style={openEventScreenStyles.container}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={openEventScreenStyles.containerContent}
       >
         <HeadText title={MENT_OPEN_EVENT.INFO} />
