@@ -9,7 +9,7 @@ interface Props {
 
 const EventCardSkeleton = ({ type = 'default' }: Props) => {
   const calcWidth =
-    type === 'default' ? 200 : Dimensions.get('window').width / 2 - 30;
+    type === 'default' ? 200 : Dimensions.get('window').width / 2 - 35;
   return (
     <SkeletonPlaceholder backgroundColor={colors.grey}>
       <View style={eventCardSkeletonStyles.container}>

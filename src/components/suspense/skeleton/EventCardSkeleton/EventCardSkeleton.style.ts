@@ -6,6 +6,7 @@ const eventCardSkeletonStyles = StyleSheet.create({
     marginRight: 20,
     justifyContent: 'flex-start',
     gap: 4,
+    marginBottom: 10,
   },
   image: {
     borderRadius: 5,
@@ -17,12 +18,12 @@ const eventCardSkeletonStyles = StyleSheet.create({
   },
   date: {
     width: 59,
-    height: 14,
+    height: 10,
     borderRadius: 5,
   },
   contents: {
     width: 102,
-    height: 14,
+    height: 10,
     borderRadius: 5,
   },
   likeButton: {
