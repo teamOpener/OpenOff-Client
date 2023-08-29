@@ -10,6 +10,7 @@ const DOMAIN = {
   BOOKMARK: 'BOOKMARK',
   COMMENT: 'COMMENT',
   LEDGER: 'LEDGER',
+  INTEREST: 'INTEREST',
 };
 
 const userKeys = {
@@ -88,6 +89,11 @@ const ledgerKeys = {
   ],
 };
 
+const interestKeys = {
+  all: [DOMAIN.INTEREST],
+  info: [DOMAIN.INTEREST, 'info'],
+};
+
 const queryKeys = {
   userKeys,
   eventKeys,
@@ -97,6 +103,7 @@ const queryKeys = {
   commentKeys,
   ledgerKeys,
   bannerKeys,
+  interestKeys,
 };
 
 export default queryKeys;

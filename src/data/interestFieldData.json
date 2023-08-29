@@ -1,0 +1,32 @@
+[
+  {
+    "interestConstName": "PF",
+    "interestCode": "Party/Festival",
+    "interestValue": "파티/페스티벌"
+  },
+  {
+    "interestConstName": "FSDH",
+    "interestCode": "FellowShip/DailyHope",
+    "interestValue": "친목/네트워킹"
+  },
+  {
+    "interestConstName": "FD",
+    "interestCode": "Food/Drink",
+    "interestValue": "푸드/드링크"
+  },
+  {
+    "interestConstName": "S",
+    "interestCode": "Show",
+    "interestValue": "공연"
+  },
+  {
+    "interestConstName": "EE",
+    "interestCode": "Exhibition/Expo",
+    "interestValue": "전시/박람회"
+  },
+  {
+    "interestConstName": "EA",
+    "interestCode": "Exercise/Activity",
+    "interestValue": "운동/액티비티"
+  }
+]
