@@ -18,6 +18,7 @@ const MENT_HOST = Object.freeze({
     CANCEL_DESCRIPTION: `개설된 이벤트가 삭제되며, 신청자들에게 취소 알림이 발송됩니다. \n*잦은 취소는 서비스 정지 사유에 해당됩니다`,
     SUSPENSE_EVENT: '이벤트 신청을 중단하시겠습니까?',
     PERMIT_ALL: '일괄 승인하시겠습니까?',
+    NO_PERMISSION: '카메라 권한을 허용해주세요.',
   },
   SUCCESS: {
     SUSPENSE_EVENT: '이벤트 신청이 중단되었습니다.',

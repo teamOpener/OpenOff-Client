@@ -1,9 +1,9 @@
 import { PropsWithChildren, SetStateAction, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, NativeModules, Platform } from 'react-native';
-import screenLayoutStyles from './ScreenLayout.style';
+import keyboardAvoidingScreenLayoutStyles from './KeyboardAvoidingScreenLayout.style';
 
-const ScreenLayout = ({ children }: PropsWithChildren) => {
-  const [statusBarHeight, setStatusBarHeight] = useState<number>(0);
+const KeyboardAvoidingScreenLayout = ({ children }: PropsWithChildren) => {
+  const [statusBarHeight, setStatusBarHeight] = useState<number>(54);
   const { StatusBarManager } = NativeModules;
 
   useEffect(() => {
@@ -20,11 +20,11 @@ const ScreenLayout = ({ children }: PropsWithChildren) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={statusBarHeight + 50}
-      style={[screenLayoutStyles.container]}
+      style={keyboardAvoidingScreenLayoutStyles.container}
     >
       {children}
     </KeyboardAvoidingView>
   );
 };
 
-export default ScreenLayout;
+export default KeyboardAvoidingScreenLayout;

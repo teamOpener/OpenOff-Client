@@ -24,7 +24,7 @@ export const fonts = {
 };
 
 export const layouts = {
-  PADDING: 25,
+  PADDING: 20,
 };
 
 export const MyTheme = {

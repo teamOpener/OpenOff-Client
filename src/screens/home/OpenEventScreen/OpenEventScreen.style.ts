@@ -8,7 +8,6 @@ const openEventScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: layouts.PADDING,
-    paddingHorizontal: layouts.PADDING,
   },
   containerContent: {
     rowGap: 20,

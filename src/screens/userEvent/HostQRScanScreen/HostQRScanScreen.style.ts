@@ -10,12 +10,14 @@ const hostQRScanScreenStyles = StyleSheet.create({
     backgroundColor: 'red',
   },
   container: {
-    backgroundColor: '#19191910',
-    tintColor: '#000000',
-    marginTop: '-10%',
     justifyContent: 'center',
     alignItems: 'center',
     gap: 42,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
   cameraWrapper: {
     width: 300,
@@ -44,22 +46,6 @@ const hostQRScanScreenStyles = StyleSheet.create({
     lineHeight: 15 * 1.4,
     textAlign: 'center',
   } as TextStyle,
-  resultWrapper: {
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: colors.main,
-    position: 'absolute',
-    bottom: 70,
-    marginHorizontal: layouts.PADDING,
-  },
-  resultText: {
-    fontFamily: fonts.semibold,
-    fontSize: 15,
-    lineHeight: 15 * 1.4,
-    textAlign: 'center',
-  } as TextStyle,
   requestCameraPermission: {
     textAlign: 'center',
   } as TextStyle,
@@ -69,6 +55,11 @@ const hostQRScanScreenStyles = StyleSheet.create({
     alignSelf: 'center',
     top: '50%',
     marginTop: -63.5,
+  },
+  noPermissionContainer: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    height: '100%',
   },
 });
 
