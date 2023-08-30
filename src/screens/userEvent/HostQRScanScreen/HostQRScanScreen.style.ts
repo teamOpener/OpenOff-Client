@@ -10,12 +10,14 @@ const hostQRScanScreenStyles = StyleSheet.create({
     backgroundColor: 'red',
   },
   container: {
-    backgroundColor: '#19191910',
-    tintColor: '#000000',
-    marginTop: '-10%',
     justifyContent: 'center',
     alignItems: 'center',
     gap: 42,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
   cameraWrapper: {
     width: 300,

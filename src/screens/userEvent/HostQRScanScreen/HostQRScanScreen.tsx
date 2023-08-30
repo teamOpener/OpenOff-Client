@@ -99,38 +99,40 @@ const HostQRScanScreen = () => {
   }, []);
 
   return device != null && hasPermission ? (
-    <Camera
-      style={[hostQRScanScreenStyles.container, StyleSheet.absoluteFill]}
-      device={device}
-      isActive
-      zoom={1.2}
-      frameProcessor={frameProcessor}
-      frameProcessorFps={5}
-    >
-      {isLoading && (
-        <WithIconLoading isActive backgroundColor={colors.background} />
-      )}
-      <Text style={hostQRScanScreenStyles.mainText}>
-        {MENT_HOST.MAIN.QR_SCAN_MAIN_INFO}
-      </Text>
+    <>
+      <Camera
+        style={hostQRScanScreenStyles.container}
+        device={device}
+        isActive
+        frameProcessor={frameProcessor}
+        frameProcessorFps={5}
+      />
+      <View style={hostQRScanScreenStyles.container}>
+        {isLoading && (
+          <WithIconLoading isActive backgroundColor={colors.background} />
+        )}
+        <Text style={hostQRScanScreenStyles.mainText}>
+          {MENT_HOST.MAIN.QR_SCAN_MAIN_INFO}
+        </Text>
 
-      <View style={cameraWrapperStyles}>
-        <View style={hostQRScanScreenStyles.absoluteContainer}>
-          {qrCheckType === 'success' && (
-            <Icon name="IconCheckCircle" size={127} fill="lightGreen" />
-          )}
-          {qrCheckType === 'error' && (
-            <Icon name="IconExitCircle" size={127} fill="error" />
-          )}
+        <View style={cameraWrapperStyles}>
+          <View style={hostQRScanScreenStyles.absoluteContainer}>
+            {qrCheckType === 'success' && (
+              <Icon name="IconCheckCircle" size={127} fill="lightGreen" />
+            )}
+            {qrCheckType === 'error' && (
+              <Icon name="IconExitCircle" size={127} fill="error" />
+            )}
+          </View>
         </View>
+
+        <Text style={hostQRScanScreenStyles.subText}>
+          {MENT_HOST.MAIN.QR_SCAN_SUB_INFO}
+        </Text>
+
+        <QRResultView qrCheckType={qrCheckType} text={text} />
       </View>
-
-      <Text style={hostQRScanScreenStyles.subText}>
-        {MENT_HOST.MAIN.QR_SCAN_SUB_INFO}
-      </Text>
-
-      <QRResultView qrCheckType={qrCheckType} text={text} />
-    </Camera>
+    </>
   ) : (
     <View style={StyleSheet.absoluteFill}>
       <TouchableOpacity
