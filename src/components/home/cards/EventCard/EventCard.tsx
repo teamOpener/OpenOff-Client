@@ -1,3 +1,4 @@
+import { layouts } from 'styles/theme';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
@@ -23,7 +24,9 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
   const TOTAL_APPLICANT_MENT = '명 신청완료';
   const city = event.streetRoadAddress.split(' ');
   const calcWidth =
-    type === 'default' ? 200 : Dimensions.get('window').width / 2 - 35;
+    type === 'default'
+      ? 200
+      : Dimensions.get('window').width / 2 - layouts.PADDING - 10;
 
   return (
     <View style={[eventCardStyles.container, { width: calcWidth }]}>
