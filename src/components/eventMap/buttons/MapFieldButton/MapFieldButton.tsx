@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import Text from '../../../common/Text/Text';
 import mapFieldButtonStyles from './MapFieldButton.style';
 

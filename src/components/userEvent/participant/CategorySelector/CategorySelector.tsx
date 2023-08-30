@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { LayoutChangeEvent, TouchableOpacity, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { FieldDataType } from 'types/event/filedDataType';
-import { FieldCode } from 'constants/code';
+import { FieldCode } from 'constants/interest';
+import { Field } from 'types/interest';
 import { CONSTANT_PARTICIPANT } from 'constants/userEvent/participant/participantConstants';
 import categorySelectorStyles from './CategorySelector.style';
 import TagGroup from '../Tag/TagGroup';
 import Tag from '../Tag/Tag';
 
 interface Props {
-  field: FieldDataType[];
-  setField: React.Dispatch<FieldDataType[]>;
+  field: Field[];
+  setField: React.Dispatch<Field[]>;
 }
 
 const CategorySelector = ({ field, setField }: Props) => {

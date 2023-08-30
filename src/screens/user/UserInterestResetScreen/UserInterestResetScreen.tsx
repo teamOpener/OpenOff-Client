@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import { Image } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import userInterestResetScreenStyles from './UserInterestResetScreen.style';
 
 const UserInterestResetScreen = () => {

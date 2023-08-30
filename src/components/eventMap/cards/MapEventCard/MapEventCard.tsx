@@ -1,5 +1,5 @@
 import Text from 'components/common/Text/Text';
-import { getFieldName } from 'constants/code';
+import { getFieldName } from 'constants/interest';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { memo } from 'react';
 import { Dimensions, Image, Pressable, View } from 'react-native';

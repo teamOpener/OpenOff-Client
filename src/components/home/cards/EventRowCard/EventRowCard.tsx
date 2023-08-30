@@ -1,8 +1,8 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
-import fieldData from 'data/lists/fieldData';
 import useDialog from 'hooks/app/useDialog';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import { memo, useId } from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { Event } from 'types/event';
@@ -18,6 +18,8 @@ const EventRowCard = ({ event, handleEventPress, type = 'default' }: Props) => {
   const { openDialog } = useDialog();
   const city = event.streetRoadAddress.split(' ');
   const fieldId = useId();
+
+  const { generateInterestFieldTags } = useInterestFields();
 
   const handlePress = () => {
     if (!event.bookmarkId && !event.eventInfoId) {
@@ -50,8 +52,9 @@ const EventRowCard = ({ event, handleEventPress, type = 'default' }: Props) => {
             <View key={`${fieldId}${_id}`} style={eventRowCardStyles.fieldBox}>
               <Text variant="body3" color="darkGrey">
                 {
-                  fieldData.find((fieldElement) => fieldElement.value === field)
-                    ?.label
+                  generateInterestFieldTags().find(
+                    (fieldElement) => fieldElement.value === field,
+                  )?.label
                 }
               </Text>
             </View>

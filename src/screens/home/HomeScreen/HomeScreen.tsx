@@ -5,8 +5,8 @@ import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/Cate
 import EventCardList from 'components/home/lists/EventCardList/EventCardList';
 import { StackMenu } from 'constants/menu';
 import Spacing from 'components/common/Spacing/Spacing';
-import fieldData from 'data/lists/fieldData';
 import useNavigator from 'hooks/navigator/useNavigator';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import { usePersonalEventLists, useVogueEventLists } from 'hooks/queries/event';
 import { useMyInfo } from 'hooks/queries/user';
 import { useCallback, useEffect } from 'react';
@@ -23,9 +23,13 @@ const HomeScreen = () => {
     usePersonalEventLists();
   const { data: userInfo } = useMyInfo();
 
+  const { generateInterestFieldTags } = useInterestFields();
+
   const userInterest = userInfo?.userInfo.fieldTypeList.map((field) => {
     return `#${
-      fieldData.find((fieldElement) => fieldElement.value === field)?.label
+      generateInterestFieldTags().find(
+        (fieldElement) => fieldElement.value === field,
+      )?.label
     }   `;
   });
 

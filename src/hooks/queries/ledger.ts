@@ -2,7 +2,7 @@ import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import queryKeys from 'constants/queryKeys';
 import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { getHostEventLists } from 'apis/eventInstance';
-import { FieldCode } from 'constants/code';
+import { FieldCode } from 'constants/interest';
 import {
   applyEvent,
   cancelApplicationEvent,

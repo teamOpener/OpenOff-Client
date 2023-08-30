@@ -1,7 +1,7 @@
 import TopFieldButton from 'components/home/buttons/TopFieldButton/TopFieldButton';
 import { useId } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import topFieldButtonGroupStyles from './TopFieldButtonGroup.style';
 
 interface Props {

@@ -26,7 +26,7 @@ import { BackHandler, Dimensions, Pressable, View } from 'react-native';
 import NaverMapView from 'react-native-nmap';
 import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import NaverMapEvent from 'types/apps/map';
 import { BottomTabParamList, RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
