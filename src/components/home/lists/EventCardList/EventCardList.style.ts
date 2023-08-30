@@ -16,8 +16,12 @@ const eventCardListStyles = StyleSheet.create({
     marginTop: 23,
     marginBottom: 24,
   },
-  scrollConatiner: {
+  scrollContainer: {
     marginTop: 15,
+  },
+  gapContainer: {
+    flexDirection: 'row',
+    gap: 20,
   },
 });
 

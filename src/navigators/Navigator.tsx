@@ -280,7 +280,7 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerTitle: '스크랩',
+          headerTitle: '찜한 목록',
           ...defaultOptions,
         }}
         name={StackMenu.Scrap}

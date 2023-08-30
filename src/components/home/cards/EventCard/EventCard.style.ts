@@ -8,6 +8,9 @@ const eventCardStyles = StyleSheet.create({
     justifyContent: 'flex-start',
     gap: 5,
   },
+  imageContainer: {
+    position: 'relative',
+  },
   image: {
     borderRadius: 5,
   },
@@ -22,6 +25,17 @@ const eventCardStyles = StyleSheet.create({
     alignItems: 'center',
     gap: 3,
     paddingRight: 4,
+  },
+  fieldBox: {
+    position: 'absolute',
+    bottom: 5,
+    left: 5,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    backgroundColor: '#d9d9d9',
   },
 });
 

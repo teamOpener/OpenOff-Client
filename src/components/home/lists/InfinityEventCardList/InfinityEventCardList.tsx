@@ -2,34 +2,45 @@ import { InfiniteData } from '@tanstack/react-query';
 import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import EventCard from 'components/home/cards/EventCard/EventCard';
 import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
-import useBookmarkEvent from 'hooks/bookmark/useBookmarkEvent';
-import { MyBookmarkEventResponseDto } from 'models/event/response/MyBookmarkEventResponseDto';
 import { FlatList, View } from 'react-native';
 import { InfiniteScrollApiResponse } from 'types/ApiResponse';
-import scrapEventListStyles from './ScrapEventList.style';
+import useNavigator from 'hooks/navigator/useNavigator';
+import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
+import infinityEventCardList from './InfinityEventCardList.style';
 
 interface Props {
   pageData?: InfiniteData<
-    InfiniteScrollApiResponse<MyBookmarkEventResponseDto>
+    InfiniteScrollApiResponse<MainTapEventInfoResponseDto>
   >;
   isFetching: boolean;
   isLoading: boolean;
   hasNextPage?: boolean;
   handleEndReached: () => void;
+  type: 'popular' | 'category';
 }
 
-const ScrapEventList = ({
+const InfinityEventCardList = ({
   pageData,
   isFetching,
   isLoading,
   hasNextPage,
   handleEndReached,
+  type,
 }: Props) => {
-  const { flatEventList, handleEventPress, formattedEvent, isHasNextSkeleton } =
-    useBookmarkEvent(isFetching, pageData, hasNextPage);
+  const { stackNavigation } = useNavigator();
+
+  const flatEventList = pageData?.pages.flatMap((page) => page.data.content);
+
+  const isHasNextSkeleton = hasNextPage && isFetching;
+
+  const handleEventPress = (eventId: number) => {
+    stackNavigation.navigate('EventDetail', {
+      id: eventId,
+    });
+  };
 
   return (
-    <View style={scrapEventListStyles.container}>
+    <View style={infinityEventCardList.container}>
       {flatEventList?.length === 0 ? (
         <EmptyScreen content="이런! 아직 이벤트가 존재하지 않아요!" />
       ) : (
@@ -38,25 +49,26 @@ const ScrapEventList = ({
           showsVerticalScrollIndicator={false}
           numColumns={2}
           data={flatEventList}
-          columnWrapperStyle={scrapEventListStyles.rowGap}
+          columnWrapperStyle={infinityEventCardList.rowGap}
           renderItem={(event) => (
             <EventCard
               key={event.index}
-              type="scrap"
-              event={formattedEvent(event.item)}
+              type={type}
+              event={event.item}
               handlePress={handleEventPress}
             />
           )}
           ListFooterComponent={
             isHasNextSkeleton || isLoading ? (
-              <>
-                {new Array(3).fill(1).map((_, _idx) => (
+              <View style={infinityEventCardList.skeletonContainer}>
+                {new Array(4).fill(1).map((_, _idx) => (
                   <EventCardSkeleton
+                    // eslint-disable-next-line react/no-array-index-key
                     key={`eventCard-skeleton-${_idx}`}
                     type="scrap"
                   />
                 ))}
-              </>
+              </View>
             ) : undefined
           }
           onEndReachedThreshold={0.5}
@@ -67,4 +79,4 @@ const ScrapEventList = ({
   );
 };
 
-export default ScrapEventList;
+export default InfinityEventCardList;

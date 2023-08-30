@@ -61,21 +61,25 @@ const EventCardList = ({
         {subTitle}
       </Text>
       <ScrollView
-        style={eventCardListStyles.scrollConatiner}
+        style={eventCardListStyles.scrollContainer}
         horizontal
         showsHorizontalScrollIndicator={false}
       >
-        {isLoading
-          ? new Array(3)
-              .fill(1)
-              .map((key, _idx) => <EventCardSkeleton key={_idx} />)
-          : events.map((event, eventId) => (
-              <EventCard
-                key={`eventCard-${eventCardListid}${eventId}`}
-                event={event}
-                handlePress={handleEventPress}
-              />
+        {isLoading ? (
+          <View style={eventCardListStyles.gapContainer}>
+            {new Array(3).fill(1).map((key, _idx) => (
+              <EventCardSkeleton key={_idx} />
             ))}
+          </View>
+        ) : (
+          events.map((event, eventId) => (
+            <EventCard
+              key={`eventCard-${eventCardListid}${eventId}`}
+              event={event}
+              handlePress={handleEventPress}
+            />
+          ))
+        )}
       </ScrollView>
     </View>
   );

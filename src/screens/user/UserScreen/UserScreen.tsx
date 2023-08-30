@@ -36,7 +36,7 @@ const UserScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text="로그아웃 중입니다."
+          text={MENT_USER.MAIN.LOGOUT_MENT}
         />
       )}
       <View style={userScreenStyles.userInfo}>

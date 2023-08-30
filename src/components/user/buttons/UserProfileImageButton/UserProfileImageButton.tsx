@@ -10,7 +10,7 @@ import {
 } from 'hooks/queries/user';
 import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
 import { useState } from 'react';
-import { Image, Pressable, View } from 'react-native';
+import { Image, Platform, Pressable, View } from 'react-native';
 import { openImagePicker } from 'services/ImageCropPicker';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import userProfileImageButtonStyles from './UserProfileImageButton.style';
@@ -46,6 +46,13 @@ const UserProfileImageButton = () => {
   const handleProfilePress = async () => {
     const selectedImages = await openImagePicker(PROFILE_IMAGE_COUNT);
     const imageFormData = new FormData();
+    if (selectedImages.length > 1 && Platform.OS === 'android') {
+      openDialog({
+        type: 'validate',
+        text: MENT_USER.ERROR.IMAGE_OVERFLOW,
+      });
+      return;
+    }
     setProfileImage(selectedImages[0].path);
     const uploadFile = {
       name: `${userInfo?.userInfo.nickname}_${new Date().getTime()}.png`,
