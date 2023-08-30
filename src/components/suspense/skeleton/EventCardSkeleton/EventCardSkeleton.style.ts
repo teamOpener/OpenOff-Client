@@ -3,10 +3,9 @@ import { StyleSheet } from 'react-native';
 const eventCardSkeletonStyles = StyleSheet.create({
   container: {
     position: 'relative',
-    marginRight: 20,
     justifyContent: 'flex-start',
     gap: 4,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   image: {
     borderRadius: 5,

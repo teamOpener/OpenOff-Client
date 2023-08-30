@@ -15,6 +15,7 @@ const bookmarkCardListStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    gap: 20,
   },
 });
 

@@ -10,6 +10,7 @@ const infinityEventCardList = StyleSheet.create({
   skeletonContainer: {
     width: Dimensions.get('window').width,
     flex: 1,
+    gap: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
