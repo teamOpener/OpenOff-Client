@@ -47,7 +47,7 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
           ]}
         >
           <Pressable
-            style={birthSettingInputStyles.input}
+            style={[birthSettingInputStyles.input]}
             onPress={handleShowDatePicker}
           >
             <Text
