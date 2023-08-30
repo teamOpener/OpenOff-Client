@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { openSettings } from 'react-native-permissions';
 import { useCameraDevices, Camera } from 'react-native-vision-camera';
 import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
 import Text from 'components/common/Text/Text';
 import Icon from 'components/common/Icon/Icon';
+import QRResultView from 'components/userEvent/host/QRResultView/QRResultView';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
 import { StackMenu } from 'constants/menu';
@@ -72,6 +68,12 @@ const HostQRScanScreen = () => {
     handleErrorQRCheck,
   );
 
+  const cameraWrapperStyles = [
+    hostQRScanScreenStyles.cameraWrapper,
+    qrCheckType === 'success' && hostQRScanScreenStyles.successCameraWrapper,
+    qrCheckType === 'error' && hostQRScanScreenStyles.errorCameraWrapper,
+  ];
+
   useEffect(() => {
     if (
       !barcodes ||
@@ -96,10 +98,14 @@ const HostQRScanScreen = () => {
     })();
   }, []);
 
-  return (
-    <ImageBackground
-      source={require('../../../assets/images/QRBackground.png')}
+  return device != null && hasPermission ? (
+    <Camera
       style={[hostQRScanScreenStyles.container, StyleSheet.absoluteFill]}
+      device={device}
+      isActive
+      zoom={1.2}
+      frameProcessor={frameProcessor}
+      frameProcessorFps={5}
     >
       {isLoading && (
         <WithIconLoading isActive backgroundColor={colors.background} />
@@ -108,7 +114,7 @@ const HostQRScanScreen = () => {
         {MENT_HOST.MAIN.QR_SCAN_MAIN_INFO}
       </Text>
 
-      <View>
+      <View style={cameraWrapperStyles}>
         <View style={hostQRScanScreenStyles.absoluteContainer}>
           {qrCheckType === 'success' && (
             <Icon name="IconCheckCircle" size={127} fill="lightGreen" />
@@ -117,56 +123,24 @@ const HostQRScanScreen = () => {
             <Icon name="IconExitCircle" size={127} fill="error" />
           )}
         </View>
-        {device != null && hasPermission ? (
-          <Camera
-            style={[
-              hostQRScanScreenStyles.cameraWrapper,
-              qrCheckType === 'success' &&
-                hostQRScanScreenStyles.successCameraWrapper,
-              qrCheckType === 'error' &&
-                hostQRScanScreenStyles.errorCameraWrapper,
-            ]}
-            device={device}
-            isActive
-            frameProcessor={frameProcessor}
-            frameProcessorFps={5}
-          />
-        ) : (
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={hostQRScanScreenStyles.cameraWrapper}
-            onPress={handleSetting}
-          >
-            <Text style={hostQRScanScreenStyles.requestCameraPermission}>
-              카메라 권한을 허용해주세요.
-            </Text>
-          </TouchableOpacity>
-        )}
       </View>
 
       <Text style={hostQRScanScreenStyles.subText}>
         {MENT_HOST.MAIN.QR_SCAN_SUB_INFO}
       </Text>
 
-      {qrCheckType !== 'default' && text !== '' && (
-        <View
-          style={[
-            hostQRScanScreenStyles.resultWrapper,
-            {
-              borderColor:
-                qrCheckType === 'success' ? colors.lightGreen : colors.error,
-            },
-          ]}
-        >
-          <Text
-            color={qrCheckType === 'success' ? 'lightGreen' : 'error'}
-            style={hostQRScanScreenStyles.resultText}
-          >
-            {text}
-          </Text>
-        </View>
-      )}
-    </ImageBackground>
+      <QRResultView qrCheckType={qrCheckType} text={text} />
+    </Camera>
+  ) : (
+    <View style={StyleSheet.absoluteFill}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={hostQRScanScreenStyles.noPermissionContainer}
+        onPress={handleSetting}
+      >
+        <Text variant="body2">{MENT_HOST.MAIN.NO_PERMISSION}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
