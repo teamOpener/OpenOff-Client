@@ -59,7 +59,6 @@ const EventMapScreen = () => {
     screenCoordinate,
     currentCoordinate,
     firstPlaceCoordinate,
-    coordinateZeroChecker,
     naverMapRef,
     focusCoordinate,
     setFocusCoordinate,
@@ -82,13 +81,15 @@ const EventMapScreen = () => {
   );
 
   // 클릭된 마커의 아이디값
-  const [clickedMarker, setClickedMarker] = useState<number | undefined>(
+  const [clickedMarker, setClickedMarker] = useState<Coordinate | undefined>(
     undefined,
   );
 
   const { data: eventList, isLoading } = useEventMapInstance(
     calculateQueryParams(),
   );
+
+  const [bottomSheetChecker, setBottomSheetChecker] = useState<number>(-1);
 
   const [firstMapLoadChecker, setFirstMapLoadChecker] = useState<boolean>(true);
 
@@ -115,6 +116,9 @@ const EventMapScreen = () => {
   };
 
   const handleMoveUserCurrentCoordinate = () => {
+    if (currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0)
+      return;
+    setClickedMarker(undefined);
     naverMapRef.current?.animateToCoordinate(currentCoordinate);
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
   };
@@ -146,6 +150,7 @@ const EventMapScreen = () => {
     setFieldMapMode(() => {
       return undefined;
     });
+    setClickedMarker(undefined);
     selectDispatch({ type: SelectStatus.RESET_SELECT });
     navigation.setOptions({
       tabBarStyle: {
@@ -185,27 +190,24 @@ const EventMapScreen = () => {
     eventId: number,
     eventCoordinate: Coordinate,
   ) => {
-    setClickedMarker(eventId);
+    setClickedMarker(eventCoordinate);
     naverMapRef.current?.animateToCoordinate(eventCoordinate);
   };
 
-  const handleShowFieldEvent = useCallback(
-    (field: Field) => {
-      selectDispatch({ type: SelectStatus.RESET_SELECT });
-      setSearchValue('');
-      resetStartEndDate();
-      setFieldMapMode(() => {
-        return field;
-      });
-      setFocusCoordinate(() => {
-        return screenCoordinate.current;
-      });
-      makeScreenHeader(field);
-      setClickedMarker(undefined);
-      queryClient.removeQueries(queryKeys.eventKeys.mapList);
-    },
-    [navigation],
-  );
+  const handleShowFieldEvent = (field: Field) => {
+    selectDispatch({ type: SelectStatus.RESET_SELECT });
+    setSearchValue('');
+    resetStartEndDate();
+    setFieldMapMode(() => {
+      return field;
+    });
+    setFocusCoordinate(() => {
+      return screenCoordinate.current;
+    });
+    makeScreenHeader(field);
+    setClickedMarker(undefined);
+    queryClient.removeQueries(queryKeys.eventKeys.mapList);
+  };
 
   const bottomSheetLength = {
     snapTop:
@@ -213,14 +215,18 @@ const EventMapScreen = () => {
         ? (1 / 3) * Dimensions.get('window').height
         : 100,
     snapBottom: fieldMapMode
-      ? Dimensions.get('window').height - 90
+      ? Dimensions.get('window').height - 140
       : (2 / 3) * Dimensions.get('window').height - 125,
   };
 
   useFocusEffect(
     useCallback(() => {
-      if (coordinateZeroChecker && !isLoading)
+      return () => {
+        resetStartEndDate();
         queryClient.removeQueries(queryKeys.eventKeys.mapList);
+        setSearchValue('');
+        setClickedMarker(undefined);
+      };
     }, []),
   );
 
@@ -259,13 +265,19 @@ const EventMapScreen = () => {
             isFindActive={currentFindActive}
           />
         ) : (
-          <MyCoordinateButton handlePress={handleMoveUserCurrentCoordinate} />
+          <MyCoordinateButton
+            handlePress={handleMoveUserCurrentCoordinate}
+            bottomSheetChecker={bottomSheetChecker}
+          />
         )}
         <NaverMapView
           ref={naverMapRef}
           showsMyLocationButton={false}
           style={eventMapScreenStyles.map}
-          center={{ ...firstPlaceCoordinate, zoom: 17 }}
+          center={{
+            ...firstPlaceCoordinate,
+            zoom: 17,
+          }}
           onCameraChange={handleCameraEvent}
           minZoomLevel={7}
           compass={false}
@@ -290,6 +302,7 @@ const EventMapScreen = () => {
         snapBottom={bottomSheetLength.snapBottom}
         sort={sort}
         setSort={setSort}
+        setBottomSheetChecker={setBottomSheetChecker}
         selectState={selectState}
         selectDispatch={selectDispatch}
         clickedMarker={clickedMarker}

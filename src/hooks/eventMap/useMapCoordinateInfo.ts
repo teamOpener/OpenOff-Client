@@ -11,21 +11,19 @@ import { requestSinglePermission } from 'services/permission';
 import { useEventMapStore } from 'stores/EventMap';
 import { Coordinate } from 'types/event';
 
+const initCoordinate = {
+  latitude: 37.56278008163968,
+  longitude: 126.98795373156224,
+};
+
 const useMapCoordinateInfo = () => {
   const { openDialog } = useDialog();
-  const queryClient = useQueryClient();
   const naverMapRef = useRef<NaverMapView>(null);
-  const { startEndDate } = useEventMapStore();
   // 사용자의 스크린 위치정보
-  const screenCoordinate = useRef<Coordinate>({
-    latitude: 37.56278008163968,
-    longitude: 126.98795373156224,
-  });
+  const screenCoordinate = useRef<Coordinate>(initCoordinate);
   // 지도초기 위치정보(1회성 값)
-  const [firstPlaceCoordinate, setFirstPlaceCoordinate] = useState<Coordinate>({
-    latitude: 37.56278008163968,
-    longitude: 126.98795373156224,
-  });
+  const [firstPlaceCoordinate, setFirstPlaceCoordinate] =
+    useState<Coordinate>(initCoordinate);
   // 현 지도위치 검색을 위한 상태
   const [focusCoordinate, setFocusCoordinate] = useState<Coordinate>({
     latitude: 0,
@@ -40,21 +38,22 @@ const useMapCoordinateInfo = () => {
   const coordinateZeroChecker =
     currentCoordinate.latitude === 0 && currentCoordinate.longitude === 0;
 
-  useEffect(() => {
-    queryClient.removeQueries(queryKeys.eventKeys.mapList);
-  }, [!coordinateZeroChecker]);
+  // useEffect(() => {
+  //   queryClient.removeQueries(queryKeys.eventKeys.mapList);
+  // }, [!coordinateZeroChecker]);
 
   const getFirstCoordinate = () => {
     Geolocation.getCurrentPosition(
       (position) => {
-        setFirstPlaceCoordinate({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        setCurrentCoordinate({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
+        if (
+          firstPlaceCoordinate.latitude === screenCoordinate.current.latitude &&
+          firstPlaceCoordinate.longitude === screenCoordinate.current.longitude
+        ) {
+          setFirstPlaceCoordinate({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        }
       },
       () => {
         openDialog({
@@ -104,14 +103,8 @@ const useMapCoordinateInfo = () => {
       if (Platform.OS === 'ios')
         requestSinglePermission(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(
           () => {
-            if (
-              currentCoordinate.latitude === 0 &&
-              currentCoordinate.longitude === 0 &&
-              startEndDate.endDay === undefined
-            ) {
-              getFirstCoordinate();
-              watchValue = setGPSCoordinate();
-            }
+            getFirstCoordinate();
+            watchValue = setGPSCoordinate();
           },
         );
       if (Platform.OS === 'android') {
@@ -120,22 +113,14 @@ const useMapCoordinateInfo = () => {
             requestSinglePermission(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION);
           })
           .then(() => {
-            if (
-              currentCoordinate.latitude === 0 &&
-              currentCoordinate.longitude === 0 &&
-              startEndDate.endDay === undefined
-            ) {
-              getFirstCoordinate();
-              watchValue = setGPSCoordinate();
-            }
+            getFirstCoordinate();
+            watchValue = setGPSCoordinate();
           });
       }
       return () => {
         Geolocation.clearWatch(watchValue);
-        setCurrentCoordinate({
-          latitude: 0,
-          longitude: 0,
-        });
+        setFirstPlaceCoordinate(screenCoordinate.current);
+        setCurrentCoordinate(currentCoordinate);
       };
     }, []),
   );

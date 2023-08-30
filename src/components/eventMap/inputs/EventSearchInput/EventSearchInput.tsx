@@ -1,10 +1,11 @@
 import Icon from 'components/common/Icon/Icon';
 import { StackMenu } from 'constants/menu';
 import useNavigator from 'hooks/navigator/useNavigator';
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
+import { useFocusEffect } from '@react-navigation/native';
 import eventSearchInput from './EventSearchInput.style';
 
 interface Props {
@@ -31,6 +32,14 @@ const EventSearchInput = ({ handleSearch }: Props) => {
     setSearchValue('');
     setIsSearched(false);
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        handleResetPress();
+      };
+    }, []),
+  );
 
   return (
     <View style={eventSearchInput.absoluteContainer}>

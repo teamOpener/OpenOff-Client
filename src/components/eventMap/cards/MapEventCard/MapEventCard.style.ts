@@ -1,28 +1,38 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+import { fonts } from 'styles/theme';
 
 const mapEventCardStyles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
+    width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    margin: 20,
+    marginHorizontal: 20,
+    marginBottom: 20,
     zIndex: 1,
   },
   titleText: {
-    maxWidth: '50%',
+    maxWidth: (Dimensions.get('window').width * 85) / 100,
   },
   eventFieldContainer: {
-    maxWidth: '47%',
+    maxWidth: (Dimensions.get('window').width * 85) / 100,
+    fontFamily: fonts.regular,
+    fontSize: 15,
+    lineHeight: 15 * 1.4,
   },
   textContainer: {
-    marginTop: 5,
+    width: '93%',
     gap: 10,
     alignItems: 'center',
     flexDirection: 'row',
+    position: 'relative',
+  },
+  dateText: {
+    fontFamily: fonts.semibold,
+    fontSize: 15,
+    lineHeight: 15 * 1.4,
   },
   imageContainer: {
     width: '100%',
-    marginTop: 5,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -32,8 +42,9 @@ const mapEventCardStyles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   eventImage: {
-    width: 114,
+    width: '100%',
     height: 114,
+    borderRadius: 3,
   },
 });
 

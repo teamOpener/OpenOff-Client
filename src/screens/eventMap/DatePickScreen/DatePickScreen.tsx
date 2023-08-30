@@ -27,6 +27,7 @@ const DatePickScreen = () => {
   const [active, setActive] = useState<'direct' | 'thisWeek' | 'nextWeek'>(
     'direct',
   );
+
   const handleInitialize = () => {
     setMarkedDates({});
     setStartEndDate({
@@ -36,6 +37,7 @@ const DatePickScreen = () => {
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
     navigation.goBack();
   };
+
   const handleApply = () => {
     setStartEndDate({
       startDay,
@@ -44,6 +46,25 @@ const DatePickScreen = () => {
     queryClient.removeQueries(queryKeys.eventKeys.mapList);
     navigation.goBack();
   };
+
+  const makeWeekMarker = (startDate: string, endDate: string) => {
+    const startNewDate = new Date(startDate);
+    const endNewDate = new Date(endDate);
+    const updatedMarkedDates: MarkedDates = {};
+    while (startNewDate <= endNewDate) {
+      const dateString = startNewDate.toISOString().split('T')[0];
+      updatedMarkedDates[dateString] = {
+        marked: true,
+        color: colors.main,
+        textColor: 'white',
+        startingDay: dateString === startDate,
+        endingDay: dateString === endDate,
+      };
+      startNewDate.setDate(startNewDate.getDate() + 1); // 다음 날짜로 이동
+    }
+    setMarkedDates(updatedMarkedDates);
+  };
+
   const handleWeek = (
     startNumber: number,
     endNumber: number,
@@ -61,12 +82,20 @@ const DatePickScreen = () => {
       today.getMonth(),
       today.getDate() + (endNumber - today.getDay()),
     );
+    makeWeekMarker(dateFormatter(monday), dateFormatter(sunday));
+    setStartDay(dateFormatter(monday));
+    setEndDay(dateFormatter(sunday));
     setStartEndDate({
       startDay: dateFormatter(monday),
       endDay: dateFormatter(sunday),
     });
-    navigation.goBack();
   };
+
+  const handleDirect = () => {
+    setMarkedDates({});
+    setActive('direct');
+  };
+
   return (
     <View style={datePickScreenStyles.container}>
       <Text variant="h3" color="white" style={datePickScreenStyles.dateTitle}>
@@ -102,7 +131,7 @@ const DatePickScreen = () => {
             ...datePickScreenStyles.button,
             backgroundColor: active === 'direct' ? colors.main : 'transparent',
           }}
-          onPress={() => setActive('direct')}
+          onPress={handleDirect}
         >
           <Text variant="body2" color="white">
             직접 입력

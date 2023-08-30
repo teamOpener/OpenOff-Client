@@ -4,7 +4,7 @@ import { colors } from 'styles/theme';
 const singleOptionGroupStyles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 37,
+    top: 38,
     zIndex: 99,
     width: '100%',
     flexDirection: 'column',

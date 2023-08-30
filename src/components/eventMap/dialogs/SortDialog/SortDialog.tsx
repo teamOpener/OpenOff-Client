@@ -1,6 +1,8 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { Modal, Pressable, TouchableOpacity, View } from 'react-native';
+import Divider from 'components/common/Divider/Divider';
+import Spacing from 'components/common/Spacing/Spacing';
 import sortDialogStyles from './SortDialog.style';
 
 interface Props {
@@ -30,6 +32,7 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
           <Text style={sortDialogStyles.title} color="white" variant="h3">
             정렬 기준
           </Text>
+
           <TouchableOpacity
             style={sortDialogStyles.buttonContainer}
             onPress={() => handlePress('date')}
@@ -41,12 +44,13 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
             >
               날짜순
             </Text>
-            {value === 'date' ? (
+            {value === 'date' && (
               <Icon size={15} name="IconCheck" fill="main" />
-            ) : (
-              <View style={sortDialogStyles.emptySpace} />
             )}
           </TouchableOpacity>
+
+          <Divider height={1} color="darkGrey" />
+
           <TouchableOpacity
             style={sortDialogStyles.buttonContainer}
             onPress={() => handlePress('distance')}
@@ -58,15 +62,17 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
             >
               거리순
             </Text>
-            {value === 'distance' ? (
+            {value === 'distance' && (
               <Icon size={15} name="IconCheck" fill="main" />
-            ) : (
-              <View style={sortDialogStyles.emptySpace} />
             )}
           </TouchableOpacity>
+
+          <Divider height={1} color="darkGrey" />
+          <Spacing height={20} />
+
           <View style={sortDialogStyles.cancelContainer}>
             <TouchableOpacity onPress={handleDialog}>
-              <Text color="white" variant="body1">
+              <Text color="grey" style={sortDialogStyles.cancelText}>
                 취소
               </Text>
             </TouchableOpacity>

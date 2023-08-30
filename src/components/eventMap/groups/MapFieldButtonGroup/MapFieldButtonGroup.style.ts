@@ -5,9 +5,13 @@ const mapFieldButtonGroup = StyleSheet.create({
     flexDirection: 'row',
     position: 'absolute',
     zIndex: 999,
-    top: 101,
+    top: 95,
     width: Dimensions.get('window').width,
+    paddingLeft: 20,
     right: 0,
+  },
+  contentContainer: {
+    paddingRight: 40,
   },
 });
 
