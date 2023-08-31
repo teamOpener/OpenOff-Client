@@ -4,6 +4,7 @@ import { permitAlert } from 'apis/user';
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { PERMISSIONS } from 'react-native-permissions';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { requestSinglePermission } from './permission';
 
@@ -32,7 +33,6 @@ export const removeToken = async () => {
   }
 };
 
-// foreground alarm
 export const requestAlarmPermission = async () => {
   if (Platform.OS === 'ios') {
     const authorizationStatus = await messaging().requestPermission();
@@ -53,9 +53,11 @@ export const requestAlarmPermission = async () => {
 const handleDisplayNotification = async ({
   title = '',
   body = '',
+  resetQueries,
 }: {
   title?: string;
   body?: string;
+  resetQueries: (keys: Array<Array<string | number | undefined>>) => void;
 }) => {
   try {
     const channelId = await notifee.createChannel({
@@ -63,7 +65,7 @@ const handleDisplayNotification = async ({
       name: 'OpenOffChannel',
       importance: AndroidImportance.HIGH,
     });
-
+    resetQueries(resetQueryKeys.all);
     await notifee.displayNotification({
       title,
       body,
@@ -77,12 +79,16 @@ const handleDisplayNotification = async ({
   }
 };
 
-export const foregroundListener = () => {
+export const foregroundListener = ({
+  resetQueries,
+}: {
+  resetQueries: (keys: Array<Array<string | number | undefined>>) => void;
+}) => {
   try {
     messaging().onMessage(async (message) => {
       const title = message?.notification?.title;
       const body = message?.notification?.body;
-      handleDisplayNotification({ title, body });
+      handleDisplayNotification({ title, body, resetQueries });
     });
   } catch (e) {
     console.warn(e);
