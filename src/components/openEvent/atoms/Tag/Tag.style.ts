@@ -4,7 +4,7 @@ import { colors } from 'styles/theme';
 const tagStyles = StyleSheet.create({
   container: {
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 28,
     borderColor: colors.main,
     borderWidth: 1,
     borderRadius: 100,
