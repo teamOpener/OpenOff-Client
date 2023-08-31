@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
   FlatList,
-  TextInput,
   TouchableOpacity,
   View,
   RefreshControl,
@@ -20,6 +19,7 @@ import {
   ActionButton,
   IconText,
   LedgerHeader,
+  LedgerSearchBar,
   SelectBottomSheet,
   UserCard,
 } from 'components/userEvent/host';
@@ -70,11 +70,7 @@ const HostLedgerScreen = () => {
     hasNextPage,
     fetchNextPage,
     isLoading: isLedgerListLoading,
-  } = useLedgerUserList(
-    params.eventIndex,
-    selectedSortType,
-    searchName ?? undefined,
-  );
+  } = useLedgerUserList(params.eventIndex, selectedSortType, searchName);
   const flatLedgerUserList = ledgerUserList?.pages.flatMap(
     (page) => page.data.content,
   );
@@ -144,21 +140,6 @@ const HostLedgerScreen = () => {
     });
   };
 
-  /**
-   * 검색
-   */
-
-  const handleSearch = () => {
-    // TODO
-    console.log('refresh');
-    refreshData(searchName);
-  };
-
-  const handleEraser = () => {
-    onChangeSearchName('');
-    refreshData();
-  };
-
   const headerTitle = () => (
     <LedgerHeader
       title={eventStatus?.eventTitle ?? ''}
@@ -225,34 +206,10 @@ const HostLedgerScreen = () => {
             />
           </TouchableOpacity>
 
-          {/* TODO 검색기능 */}
-          {/* <SpaceLayout
-            direction="row"
-            size={8}
-            style={[
-              hostLedgerScreenStyles.alignItemCenter,
-              hostLedgerScreenStyles.full,
-            ]}
-          >
-            <View style={hostLedgerScreenStyles.searchOuterContainer}>
-              <TextInput
-                style={hostLedgerScreenStyles.searchInnerContainer}
-                value={searchName}
-                onChangeText={onChangeSearchName}
-              />
-              {searchName && (
-                <Icon
-                  name="IconExitCircle"
-                  size={16}
-                  fill="grey"
-                  onPress={handleEraser}
-                />
-              )}
-            </View>
-            <TouchableOpacity activeOpacity={0.8} onPress={handleSearch}>
-              <Icon name="IconSearch" fill="white" />
-            </TouchableOpacity>
-          </SpaceLayout> */}
+          <LedgerSearchBar
+            value={searchName}
+            onChangeText={onChangeSearchName}
+          />
         </View>
       </SpaceLayout>
 

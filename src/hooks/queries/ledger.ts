@@ -106,7 +106,13 @@ export const useLedgerUserList = (
   keyword?: string,
 ) => {
   const query = useInfiniteQuery(
-    [...queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType)],
+    [
+      ...queryKeys.hostKeys.ledgerListByIndexId(
+        eventIndexId,
+        sortType,
+        keyword,
+      ),
+    ],
     ({ pageParam = null }) => {
       return getLedgerUserList({
         eventIndexId,
