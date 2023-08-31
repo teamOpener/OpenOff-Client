@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Text from 'components/common/Text/Text';
 import CalendarButton from 'components/eventMap/buttons/CalendarButton/CalendarButton';
 import CalendarCard from 'components/eventMap/cards/CalendarCard/CalendarCard';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { MarkedDates } from 'react-native-calendars/src/types';

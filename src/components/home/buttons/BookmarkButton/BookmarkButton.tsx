@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import { useBookmark } from 'hooks/queries/bookmark';
 import { ComponentProps, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useEventDetail } from 'hooks/queries/event';
 import useStackRoute from 'hooks/navigator/useStackRoute';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { EventDetail } from 'components/eventDetail';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';

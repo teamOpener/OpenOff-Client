@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import useDialog from 'hooks/app/useDialog';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';

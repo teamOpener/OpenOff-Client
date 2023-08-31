@@ -11,7 +11,7 @@ import { ChildCommentWriteRequestDto } from 'models/comment/request/ChildComment
 import { ParentCommentWriteRequestDto } from 'models/comment/request/ParentCommentWriteRequestDto';
 import useDialog from 'hooks/app/useDialog';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import commentInputStyles from './CommentInput.style';
 

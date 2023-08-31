@@ -38,7 +38,7 @@ import useStackRoute from 'hooks/navigator/useStackRoute';
 import SortType from 'models/ledger/entity/SortType';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import ListLoading from 'components/suspense/loading/ListLoading/ListLoading';

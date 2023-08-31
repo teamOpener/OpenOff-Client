@@ -10,7 +10,7 @@ import {
   uploadImages,
   uploadProfileImage,
 } from 'apis/user';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import AddInterestRequestDto from 'models/field/request/AddInterestRequestDto';
 import NCPSmsInfoRequestDto from 'models/user/request/NCPSmsInfoRequestDto';
 import { S3UploadServiceRequestDto } from 'models/user/request/S3UploadServiceRequestDto';
