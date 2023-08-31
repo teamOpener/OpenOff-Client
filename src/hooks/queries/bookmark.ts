@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 import { getBookmarkEventLists, updateBookmarkEvent } from 'apis/bookmark';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import { ApiErrorResponse } from 'types/ApiResponse';
 
 export const useBookmarkEventLists = () => {

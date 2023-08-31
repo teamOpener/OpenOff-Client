@@ -21,7 +21,7 @@ import useDialog from 'hooks/app/useDialog';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import useUniqueName from 'hooks/ledger/useUniqueName';
 import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
 import staffListStyles from './StaffList.style';

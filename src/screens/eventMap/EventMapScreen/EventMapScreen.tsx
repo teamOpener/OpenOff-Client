@@ -15,7 +15,7 @@ import CurrentMarker from 'components/eventMap/maps/CurrentMarker/CurrentMarker'
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import { SelectStatus } from 'constants/selectBox';
 import useEventListFormatter from 'hooks/eventMap/useEventListFormatter';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';

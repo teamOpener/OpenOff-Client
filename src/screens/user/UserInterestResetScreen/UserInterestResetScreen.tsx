@@ -3,7 +3,7 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
 import Spacing from 'components/common/Spacing/Spacing';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import MENT_USER from 'constants/user/userConstants';
 import useDialog from 'hooks/app/useDialog';
 import useInterestField from 'hooks/authorize/useInterestField';

@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { updateInterestField } from 'apis/interest';
 import fakeApi from 'apis/test';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import AddInterestRequestDto from 'models/field/request/AddInterestRequestDto';
 import { InterestInfoResponseDto } from 'models/interest/response/InterestInfoResponseDto';
 import { ApiErrorResponse } from 'types/ApiResponse';

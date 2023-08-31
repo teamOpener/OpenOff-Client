@@ -7,7 +7,7 @@ import API_ERROR_MESSAGE from 'constants/errorMessage';
 import { useQueryClient } from '@tanstack/react-query';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useDialog from 'hooks/app/useDialog';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import {
   useCancelPermittedApplicant,

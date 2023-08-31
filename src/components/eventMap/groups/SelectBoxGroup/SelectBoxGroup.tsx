@@ -10,7 +10,7 @@ import { Dispatch } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Action, Option, SelectBox } from 'types/apps/selectbox';
 import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import selectBoxGroup from './SelectBoxGroup.style';
 
 interface Props {

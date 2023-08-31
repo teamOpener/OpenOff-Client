@@ -4,6 +4,9 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import BackButton from 'components/navigator/BackButton';
+import useResetQueries from 'hooks/queries/useResetQueries';
+import useRefetchOnFocus from 'hooks/app/useRefetchOnFocus';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
 import { StackMenu } from 'constants/menu';
 import { Platform } from 'react-native';
 import DatePickScreen from 'screens/eventMap/DatePickScreen/DatePickScreen';
@@ -58,6 +61,9 @@ const Navigator = () => {
       color: 'transparent',
     },
   };
+
+  const { resetQueries } = useResetQueries();
+  useRefetchOnFocus(() => resetQueries(resetQueryKeys.all));
 
   return (
     <Stack.Navigator

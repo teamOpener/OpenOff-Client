@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
 import Spacing from 'components/common/Spacing/Spacing';
 import Divider from 'components/common/Divider/Divider';

@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import MENT_USER from 'constants/user/userConstants';
 import useDialog from 'hooks/app/useDialog';
 import {

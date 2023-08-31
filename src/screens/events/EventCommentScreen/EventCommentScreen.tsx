@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { RefreshControl, ScrollView } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import { EventDetail } from 'components/eventDetail';
 import {

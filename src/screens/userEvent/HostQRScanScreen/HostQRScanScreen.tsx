@@ -11,7 +11,7 @@ import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
 import { StackMenu } from 'constants/menu';
 import { useCheckQR } from 'hooks/queries/ledger';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 import { colors } from 'styles/theme';
