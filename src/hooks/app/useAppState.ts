@@ -18,7 +18,9 @@ export const useAppState = (
   settings?: AppStateHookSettings,
 ): AppStateHookResult => {
   const { onChange, onForeground, onBackground } = settings || {};
-  const [appState, setAppState] = useState(AppState.currentState);
+  const [appState, setAppState] = useState<AppStateStatus>(
+    AppState.currentState,
+  );
 
   useEffect(() => {
     const handleAppStateChange: Handler = (nextAppState) => {
