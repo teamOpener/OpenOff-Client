@@ -1,5 +1,5 @@
-import { Modal, View } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Modal } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
 import { colors } from 'styles/theme';
 import Icon from 'components/common/Icon/Icon';
@@ -24,13 +24,12 @@ const WithIconLoading = ({
   const animatedStarStyle = useBlinkingEffect(800);
   const animatedHeartStyle = useBlinkingEffect(600);
 
+  if (!isActive) {
+    return null;
+  }
+
   return (
-    <Modal
-      visible={isActive}
-      animationType="fade"
-      transparent
-      style={withIconLoadingStyles.modalView}
-    >
+    <Modal visible style={[StyleSheet.absoluteFill]}>
       <View
         style={[
           withIconLoadingStyles.modalBackground,
