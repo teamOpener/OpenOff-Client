@@ -1,43 +1,27 @@
 const MENT_USER = Object.freeze({
   INTEREST_RESET: {
-    /** - 관심 분야를 설정해주세요. */
     COMMENTS_ON_SETTING_INTERESTS: ['관심 분야를 설정해주세요.'],
   },
   PASSWORD_RESET: {
-    /** - 비밀번호를 재설정해주세요. */
     PASSWORD_RESET_MENT: '비밀번호를 재설정해주세요.',
-    /** - 새 비밀번호 */
     NEW_PASSWORD: '새 비밀번호',
-    /** - 새 비밀번호 확인 */
     NEW_PASSWORD_CHECK: '새 비밀번호 확인',
-    /** - 비밀번호를 입력해주세요 */
     INPUT_PASSWORD: '비밀번호를 입력해주세요',
-    /** - 비밀번호 확인을 입력해주세요 */
     INPUT_PASSWORD_CHECK: '비밀번호 확인을 입력해주세요',
   },
   PROFILE_EDIT: {
-    /** - 이메일 */
     EMAIL: '이메일',
-    /** - 이름 */
     USER_NAME: '이름',
-    /** - 닉네임 */
     NICK_NAME: '닉네임',
-    /** - 비밀번호 */
     PASSWORD: '비밀번호',
-    /** - 휴대폰 번호 */
     PHONENUMBER: '휴대폰 번호',
-    /** - 생년월일 */
     USER_BIRTH: '생년월일',
     /** YYYY월 MM월 DD일 */
     USER_BIRTH_VALUE: (year?: number, month?: number, day?: number) =>
       `${year}년 ${month}월 ${day}일`,
-    /** - 회원탈퇴 */
     WITHDRAWAL: '회원탈퇴',
-    /** - 회원정보를 삭제하시겠어요? */
     WITHDRAWAL_MENT: '회원정보를 삭제하시겠어요?',
-    /** - 정말로 탈퇴하시겠습니까? */
     WITHDRAWAL_CHECK_MENT: '정말로 탈퇴하시겠습니까?',
-    /** - 회원탈퇴 중입니다. */
     PROGRESS_WITHDRAWAL: '회원탈퇴 중입니다.',
   },
   MAIN: {
