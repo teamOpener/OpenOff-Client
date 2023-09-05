@@ -2,6 +2,7 @@ import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/app/status';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -59,7 +60,7 @@ const ApplicationPeriod = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="이벤트 신청 기간" />
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.APPLICATION_PERIOD} />
 
       <View style={applicationPeriodStyles.inputContainer}>
         <ScrollView
@@ -76,7 +77,9 @@ const ApplicationPeriod = () => {
               isEmpty={openEvent.applicationStartDate === null}
               hasError={hasError}
             />
-            <Text style={applicationPeriodStyles.text}>부터</Text>
+            <Text style={applicationPeriodStyles.text}>
+              {MENT_OPEN_EVENT.MAIN.TO}
+            </Text>
           </View>
 
           <View style={applicationPeriodStyles.dateTimePickerWrapper}>
@@ -88,7 +91,9 @@ const ApplicationPeriod = () => {
               minimumDate={startDate}
               hasError={hasError}
             />
-            <Text style={applicationPeriodStyles.text}>까지</Text>
+            <Text style={applicationPeriodStyles.text}>
+              {MENT_OPEN_EVENT.MAIN.FROM}
+            </Text>
           </View>
         </ScrollView>
 

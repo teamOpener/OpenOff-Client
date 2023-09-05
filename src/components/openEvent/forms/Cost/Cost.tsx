@@ -63,16 +63,16 @@ const Cost = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="참가 비용" />
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.PARTICIPATE_COST} />
       <SpaceLayout size={10}>
         <View style={costStyles.horizontalView}>
           <OpenEvent.Tag
-            label="무료"
+            label={MENT_OPEN_EVENT.MAIN.FREE}
             isSelected={isFree}
             onPress={() => handleIsFree(true)}
           />
           <OpenEvent.Tag
-            label="유료"
+            label={MENT_OPEN_EVENT.MAIN.PAY}
             isSelected={!isFree}
             onPress={() => handleIsFree(false)}
           />

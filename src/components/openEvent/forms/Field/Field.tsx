@@ -49,7 +49,7 @@ const Field = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="이벤트 분야" />
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.FIELD} />
       <OpenEvent.HelpText
         content={
           openEventErrorMessage.field === null

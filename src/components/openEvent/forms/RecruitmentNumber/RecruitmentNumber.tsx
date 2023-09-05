@@ -1,5 +1,6 @@
 import { OpenEvent } from 'components/openEvent';
 import StatusType from 'constants/app/status';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import recruitmentNumberStyles from './RecruitmentNumber.style';
@@ -41,7 +42,7 @@ const RecruitmentNumber = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="모집 인원" />
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.RECRUITMENT_NUMBER} />
 
       <View style={recruitmentNumberStyles.inputWithHelpText}>
         <OpenEvent.Input

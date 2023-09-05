@@ -38,7 +38,7 @@ const DateTimePicker = ({
     theme: 'dark',
     date,
     minimumDate,
-    cancelText: '취소',
+    cancelText: MENT_OPEN_EVENT.MAIN.CANCEL,
   };
 
   const onPress = () => {
@@ -70,7 +70,7 @@ const DateTimePicker = ({
         open={openDate}
         mode="datetime"
         title={MENT_OPEN_EVENT.MAIN.DATA_TIME_PICKER_TITLE}
-        confirmText="확인"
+        confirmText={MENT_OPEN_EVENT.MAIN.CONFIRM}
         onConfirm={(date) => {
           setOpenDate(false);
           setDate(date);

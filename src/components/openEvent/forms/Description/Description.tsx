@@ -26,7 +26,7 @@ const Description = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="이벤트 상세 내용" />
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.DETAIL_INFO} />
 
       <View style={descriptionStyles.inputWithHelpText}>
         <OpenEvent.Input

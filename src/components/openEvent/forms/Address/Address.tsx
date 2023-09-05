@@ -1,6 +1,7 @@
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/app/status';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useEffect } from 'react';
 import { View } from 'react-native';
@@ -52,7 +53,7 @@ const Address = () => {
   return (
     <View>
       <View style={addressStyles.horizontalView}>
-        <OpenEvent.Label content="이벤트 장소" />
+        <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.EVENT_PLACE} />
         <OpenEvent.FindButton onPress={handleSearch} />
       </View>
 
@@ -60,14 +61,14 @@ const Address = () => {
         <OpenEvent.Input
           value={openEvent.address.roadAddress ?? ''}
           editable={false}
-          placeholder="주소를 검색해주세요."
+          placeholder={MENT_OPEN_EVENT.PLACEHOLDER.ADDRESS}
           status={hasError ? StatusType.error : StatusType.default}
         />
 
         <OpenEvent.Input
           value={address.detailAddress ?? ''}
           onChangeText={handleChangeText}
-          placeholder="상세 주소를 입력해주세요."
+          placeholder={MENT_OPEN_EVENT.PLACEHOLDER.DETAIL_ADDRESS}
           status={hasError ? StatusType.error : StatusType.default}
           editable={!!openEvent.address.roadAddress}
           disabled={!openEvent.address.roadAddress}

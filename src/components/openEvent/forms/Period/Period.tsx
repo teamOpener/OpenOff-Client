@@ -1,6 +1,7 @@
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/app/status';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -36,7 +37,7 @@ const Period = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="이벤트 일시" />
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.PERIOD} />
 
       <View style={periodStyles.inputContainer}>
         <ScrollView

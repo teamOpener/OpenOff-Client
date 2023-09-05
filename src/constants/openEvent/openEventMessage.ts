@@ -17,6 +17,9 @@ const MENT_OPEN_EVENT = Object.freeze({
     SEARCH_ADDRESS: '주소를 검색해주세요.',
   },
   MAIN: {
+    PARTICIPATE_COST: '참가 비용',
+    FREE: '무료',
+    PAY: '유료',
     COST: '₩ 가격을 입력해주세요.',
     SUBMIT: '개설하기',
     IMAGE: '이벤트 관련 이미지 업로드',
@@ -26,7 +29,19 @@ const MENT_OPEN_EVENT = Object.freeze({
     HOST_PHONE: '전화번호',
     HOST_EMAIL: '이메일',
     EMPTY_NICKNAME: '검색 결과가 없습니다.',
+    DETAIL_INFO: '이벤트 상세 내용',
     DATA_TIME_PICKER_TITLE: '날짜와 시간을 선택해주세요.',
+    CONFIRM: '확인',
+    CANCEL: '취소',
+    TITLE: '이벤트 제목',
+    FIELD: '이벤트 분야',
+    PERIOD: '이벤트 일시',
+    EVENT_PLACE: '이벤트 장소',
+    FIND_ADDRESS: '주소 검색',
+    APPLICATION_PERIOD: '이벤트 신청 기간',
+    RECRUITMENT_NUMBER: '모집 인원',
+    TO: '부터',
+    FROM: '까지',
   },
   LOADING: {
     CREATE: '이벤트 업로드 중이에요!',
@@ -54,6 +69,7 @@ const MENT_OPEN_EVENT = Object.freeze({
       '이벤트를 업로드하는데 실패했습니다. 양식을 다시 확인해주세요.',
   },
   PLACEHOLDER: {
+    TITLE: '제목',
     DESCRIPTION:
       '다음과 같은 정보를 입력해주세요.\n\n-이벤트 상세 설명 및 소개\n-나이 제한 (신분증 지참)\n-이벤트 준비물\n-유료 이벤트의 경우 현장 결제 안내',
     ADDITIONAL_INFO: '추가로 수집할 정보를 입력해주세요.',
@@ -61,6 +77,8 @@ const MENT_OPEN_EVENT = Object.freeze({
     STAFF: '@닉네임을 태그해서 추가해주세요.',
     HOST_PHONE: '01012345678',
     HOST_EMAIL: 'opener@off.com',
+    ADDRESS: '주소를 검색해주세요.',
+    DETAIL_ADDRESS: '상세 주소를 입력해주세요.',
   },
   HELP_TEXT: {
     IMAGE: `최소 1장의 사진을 등록해주세요. (최대 ${MAX_POSTER}장)`,
