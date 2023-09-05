@@ -3,6 +3,7 @@ import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import EventCard from 'components/home/cards/EventCard/EventCard';
 import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
+import MENT_HOME from 'constants/home/homeMessage';
 import useNavigator from 'hooks/navigator/useNavigator';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
 import { useId } from 'react';
@@ -50,7 +51,7 @@ const EventCardList = ({
             onPress={handleShowPopularEvent}
           >
             <Text variant="body3" color="grey">
-              전체보기
+              {MENT_HOME.MAIN.SHOW_ALL}
             </Text>
             <Icon name="IconArrowRight" size={10} fill="grey" />
           </TouchableOpacity>

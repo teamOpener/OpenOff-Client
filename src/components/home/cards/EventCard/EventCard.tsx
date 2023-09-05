@@ -1,8 +1,9 @@
-import { layouts } from 'styles/theme';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import MENT_HOME from 'constants/home/homeMessage';
+import fieldData from 'data/lists/fieldData';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
 import {
   Dimensions,
@@ -11,7 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import fieldData from 'data/lists/fieldData';
+import { layouts } from 'styles/theme';
 import eventCardStyles from './EventCard.style';
 
 interface Props {
@@ -21,7 +22,6 @@ interface Props {
 }
 
 const EventCard = ({ event, type = 'default', handlePress }: Props) => {
-  const TOTAL_APPLICANT_MENT = '명 신청완료';
   const city = event.streetRoadAddress.split(' ');
   const calcWidth =
     type === 'default'
@@ -87,7 +87,7 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
           <View style={eventCardStyles.iconText}>
             <Icon name="IconUser" size={10} fill="main" />
             <Text variant="body3" numberOfLines={1}>
-              {`${event.totalApplicantCount}${TOTAL_APPLICANT_MENT}`}
+              {`${event.totalApplicantCount}${MENT_HOME.MAIN.TOTAL_APPLICANT_MENT}`}
             </Text>
           </View>
         </View>
