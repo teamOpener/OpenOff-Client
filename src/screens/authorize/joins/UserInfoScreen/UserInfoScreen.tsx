@@ -4,6 +4,7 @@ import BaseInfoInput from 'components/authorize/inputs/BaseInfoInput/BaseInfoInp
 import BirthSettingInput from 'components/authorize/inputs/BirthSettingInput/BirthSettingInput';
 import GenderInput from 'components/authorize/inputs/GenderInput/GenderInput';
 import { AuthorizeMenu } from 'constants/app/menu';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { UserInfoStatus } from 'constants/authorize/join';
 import { Dispatch, useState } from 'react';
 import { View } from 'react-native';
@@ -40,16 +41,16 @@ const UserInfoScreen = ({ state, dispatch }: Props) => {
 
   return (
     <ScreenCover
-      titleElements={['오픈오프 이용을 위해', '정보를 입력해주세요.']}
+      titleElements={MENT_AUTHORIZE.USER_INFO.TITLE}
       authorizeButton={{
         handlePress: handleAuthorizeFlow,
-        label: '확인',
+        label: MENT_AUTHORIZE.USER_INFO.CONFIRM,
         isActive,
       }}
     >
       {!state.username && (
         <BaseInfoInput
-          label="이름"
+          label={MENT_AUTHORIZE.USER_INFO.NAME}
           value={username}
           setValue={setUsername}
           validation={validateName}
@@ -57,7 +58,7 @@ const UserInfoScreen = ({ state, dispatch }: Props) => {
       )}
       <View style={userInfoScreenStyles.detailUserInfo}>
         <BirthSettingInput
-          label="생일"
+          label={MENT_AUTHORIZE.USER_INFO.BIRTH}
           value={birth}
           setValue={setBirth}
           validation={validateBirthday}

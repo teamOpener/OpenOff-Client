@@ -9,6 +9,7 @@ import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButto
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import Text from 'components/common/Text/Text';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
@@ -49,14 +50,14 @@ const LoginScreen = ({ dispatch }: Props) => {
   const handleLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? '서버에 오류가 발생했습니다.',
+      text: error.response?.data.message ?? MENT_AUTHORIZE.ERROR.SERVER_ERROR,
     });
   };
 
   const handleSocialLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? '서버에 오류가 발생했습니다.',
+      text: error.response?.data.message ?? MENT_AUTHORIZE.ERROR.SERVER_ERROR,
     });
   };
 
@@ -165,7 +166,7 @@ const LoginScreen = ({ dispatch }: Props) => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text="로그인 중입니다."
+          text={MENT_AUTHORIZE.LOGIN.LOADING}
         />
       )}
       <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>
@@ -176,21 +177,23 @@ const LoginScreen = ({ dispatch }: Props) => {
 
         <View style={loginScreenStyles.mainContainer}>
           <LoginInput
-            label="이메일"
+            label={MENT_AUTHORIZE.MAIN.EMAIL}
             value={emailAddress}
             type="emailAddress"
             validation={validateEmail}
             setValue={setEmailAddress}
           />
           <LoginInput
-            label="비밀번호"
+            label={MENT_AUTHORIZE.MAIN.PASSWORD}
             value={password}
             type="password"
             setValue={setPassword}
             validation={validatePassword}
           />
           <LoginButton isActive={isActive} handlePress={handleCommonLogin} />
-          <Text style={loginScreenStyles.middleText}>또는</Text>
+          <Text style={loginScreenStyles.middleText}>
+            {MENT_AUTHORIZE.LOGIN.OR}
+          </Text>
           <SocialLoginButtonGroup
             kakaoLogin={handleKakaoLogin}
             naverLogin={() => {

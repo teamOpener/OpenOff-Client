@@ -1,4 +1,7 @@
 const MENT_AUTHORIZE = Object.freeze({
+  ERROR: {
+    SERVER_ERROR: '서버에 오류가 발생했습니다.',
+  },
   LOGIN: {
     /** - 로그인 */
     LOGIN: '로그인',
@@ -14,6 +17,10 @@ const MENT_AUTHORIZE = Object.freeze({
     INPUT_PASSWORD: '비밀번호를',
     /** - 입력해주세요. */
     REQUEST_INPUT: '입력해주세요.',
+    /** - 로그인 중입니다. */
+    LOADING: '로그인 중입니다.',
+    /** - 또는 */
+    OR: '또는',
   },
   MAIN: {
     /** - 다음 */
@@ -55,6 +62,8 @@ const MENT_AUTHORIZE = Object.freeze({
     FIND_PASSWORD: '비밀번호 찾기',
   },
   PHONE_CERTIFICATION: {
+    /** - 휴대폰 인증을 해주세요. */
+    TITLE: ['휴대폰 인증을 해주세요.'],
     /** - 휴대폰 번호 */
     PHONE_NUMBER: '휴대폰 번호',
     /** - 재발송 */
@@ -67,10 +76,32 @@ const MENT_AUTHORIZE = Object.freeze({
     REMAINING_TIME: '남은 시간',
     /** - 인증번호를 발송하였습니다. */
     SEND_CERTIFICATION_NUMBER_MESSAGE: '인증번호를 발송하였습니다.',
+    /** - 이미 회원정보가 있는 핸드폰 번호입니다. */
+    DUPLICATED_USER_INFO: '이미 회원정보가 있는 핸드폰 번호입니다.',
   },
   INTEREST_FIELD: {
     /** - 최대 3가지 선택 가능 */
     UP_TO_THREE_CAN_BE_SELECTED: '최대 3가지 선택 가능',
+    /** - 관심 분야를 설정해주세요. */
+    TITLE: ['관심 분야를 설정해주세요.'],
+  },
+  JOIN_COMPLETE: {
+    /** - {nickname}님 회원가입을 축하합니다! */
+    TITLE: (nickname: string) => [`'${nickname}'님`, '회원가입을 축하합니다!'],
+    /** - 나의 관심사는 */
+    MY_FIELD_TITLE: '나의 관심사는',
+    /** - 시작하기 */
+    START: '시작하기',
+  },
+  NICKNAME: {
+    /** - 중복된 닉네임입니다. 다시 설정해주세요. */
+    DUPLICATED_NICKNAME: '중복된 닉네임입니다. 다시 설정해주세요.',
+    /** - 오픈오프에서 사용할 닉네임을 입력해주세요. */
+    TITLE: ['오픈오프에서 사용할', '닉네임을 입력해주세요.'],
+    /** - 확인 */
+    CONFIRM: '확인',
+    /** - 닉네임 */
+    NICKNAME: '닉네임',
   },
   AGREE_TO_TERM: {
     /** - 확인 */
@@ -89,10 +120,18 @@ const MENT_AUTHORIZE = Object.freeze({
     TERM_TO_MARKETING: '(선택) 마케팅 정보 수신동의',
   },
   USER_INFO: {
+    /** - 오픈오프 이용을 위해 정보를 입력해주세요. */
+    TITLE: ['오픈오프 이용을 위해', '정보를 입력해주세요.'],
+    /** - 이름 */
+    NAME: '이름',
+    /** - 생일 */
+    BIRTH: '생일',
     /** - 날짜를 선택해주세요. */
     SELECT_DATE: '날짜를 선택해주세요.',
+    /** - 확인 */
+    CONFIRM: '확인',
     /** - 적용 */
-    CONFIRM: '적용',
+    APPLY: '적용',
     /** - 닫기 */
     CANCEL: '닫기',
     /** - 성별 */

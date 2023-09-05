@@ -75,7 +75,7 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
         minimumDate={new Date('1910-01-01')}
         maximumDate={new Date()}
         date={new Date(value)}
-        confirmText={MENT_AUTHORIZE.USER_INFO.CONFIRM}
+        confirmText={MENT_AUTHORIZE.USER_INFO.APPLY}
         cancelText={MENT_AUTHORIZE.USER_INFO.CANCEL}
         onConfirm={(date) => {
           setValue(() => {
