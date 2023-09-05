@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/interest';
+import { FieldCode } from 'constants/interest/interest';
 import { Field } from 'types/interest';
 
 const fieldData: Field[] = [

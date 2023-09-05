@@ -1,7 +1,8 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Image, View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import emailFindCompleteScreenStyles from './EmailFindCompleteScreen.style';
@@ -16,7 +17,7 @@ const EmailFindCompleteScreen = ({ email }: Props) => {
     <ScreenCover
       authorizeButton={{
         handlePress: () => navigation.navigate(AuthorizeMenu.Login),
-        label: '로그인 화면으로',
+        label: MENT_AUTHORIZE.FIND.BACK_TO_LOGIN,
         isActive: true,
       }}
     >
@@ -26,7 +27,7 @@ const EmailFindCompleteScreen = ({ email }: Props) => {
           source={require('../../../../assets/images/check.png')}
         />
         <Text variant="h4" color="main">
-          아이디 찾기 결과입니다!
+          {MENT_AUTHORIZE.FIND.FIND_ID_RESULT}
         </Text>
         <Text variant="h3" color="white">
           {email}

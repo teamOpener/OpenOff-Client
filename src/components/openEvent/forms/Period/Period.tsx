@@ -1,10 +1,10 @@
+import { OpenEvent } from 'components/openEvent';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { OpenEvent } from 'components/openEvent';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { serverDateFormatter } from 'utils/date';
-import { HelpText } from 'components/openEvent/atoms';
-import StatusType from 'constants/status';
 import periodStyles from './Period.style';
 
 const Period = () => {

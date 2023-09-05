@@ -1,6 +1,7 @@
-import dayjs from 'dayjs';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
+import dayjs from 'dayjs';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { colors } from 'styles/theme';
 import dateSelectButtonStyles from './DateSelectButton.style';
@@ -43,7 +44,7 @@ const DateSelectButton = ({
         ]}
       >
         <Text color={textColor()} style={dateSelectButtonStyles.dateText}>
-          {dayjs(eventDate).format('YYYY.MM.DD (ddd) HH시 mm분')}
+          {dayjs(eventDate).format(MENT_EVENT_DETAIL.DATE_FORMAT.DATE_SELECT)}
         </Text>
         <Text
           color={isSelected ? 'main' : 'grey'}

@@ -1,5 +1,6 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Text from 'components/common/Text/Text';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import EmailFindScreen from '../EmailFindScreen/EmailFindScreen';
@@ -16,7 +17,10 @@ const EmailPasswordFindScreen = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: screenMode === 'id' ? '아이디 찾기' : '비밀번호 찾기',
+      title:
+        screenMode === 'id'
+          ? MENT_AUTHORIZE.FIND.FIND_ID
+          : MENT_AUTHORIZE.FIND.FIND_PASSWORD,
     });
   }, [navigation, screenMode]);
 
@@ -32,7 +36,9 @@ const EmailPasswordFindScreen = () => {
           onPress={() => setScreenMode('id')}
         >
           <View style={emailPasswordFindScreenStyles.buttonTextContainer}>
-            <Text style={emailPasswordFindScreenStyles.tabText}>아이디</Text>
+            <Text style={emailPasswordFindScreenStyles.tabText}>
+              {MENT_AUTHORIZE.MAIN.ID}
+            </Text>
           </View>
         </TouchableOpacity>
 
@@ -46,7 +52,9 @@ const EmailPasswordFindScreen = () => {
           onPress={() => setScreenMode('password')}
         >
           <View style={emailPasswordFindScreenStyles.buttonTextContainer}>
-            <Text style={emailPasswordFindScreenStyles.tabText}>비밀번호</Text>
+            <Text style={emailPasswordFindScreenStyles.tabText}>
+              {MENT_AUTHORIZE.MAIN.PASSWORD}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>

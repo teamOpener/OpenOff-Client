@@ -1,6 +1,7 @@
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Dispatch, SetStateAction, useState } from 'react';
 import {
   GestureResponderEvent,
@@ -66,7 +67,7 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
       </View>
       <DatePicker
         modal
-        title="날짜를 선택해주세요."
+        title={MENT_AUTHORIZE.USER_INFO.SELECT_DATE}
         mode="date"
         textColor="white"
         theme="dark"
@@ -74,8 +75,8 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
         minimumDate={new Date('1910-01-01')}
         maximumDate={new Date()}
         date={new Date(value)}
-        confirmText="적용"
-        cancelText="닫기"
+        confirmText={MENT_AUTHORIZE.USER_INFO.CONFIRM}
+        cancelText={MENT_AUTHORIZE.USER_INFO.CANCEL}
         onConfirm={(date) => {
           setValue(() => {
             return dateFormatter(date);

@@ -1,21 +1,21 @@
+import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import { View } from 'react-native';
-import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import { useQueryClient } from '@tanstack/react-query';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useDialog from 'hooks/app/useDialog';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
 import queryKeys from 'constants/queries/queryKeys';
-import { ApiErrorResponse } from 'types/ApiResponse';
+import useDialog from 'hooks/app/useDialog';
+import useNavigator from 'hooks/navigator/useNavigator';
 import {
   useCancelPermittedApplicant,
   useDenyApplicationUser,
   usePermitApplicant,
 } from 'hooks/queries/ledger';
-import userHeaderStyles from './UserHeader.style';
+import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
+import { View } from 'react-native';
+import { ApiErrorResponse } from 'types/ApiResponse';
 import ActionButton from '../buttons/ActionButton/ActionButton';
+import userHeaderStyles from './UserHeader.style';
 
 interface Props {
   userInfo: ApplicantApplyDetailResponseDto;

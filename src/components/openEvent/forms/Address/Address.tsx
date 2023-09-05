@@ -1,10 +1,10 @@
+import { OpenEvent } from 'components/openEvent';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
+import useNavigator from 'hooks/navigator/useNavigator';
 import { useEffect } from 'react';
 import { View } from 'react-native';
-import { OpenEvent } from 'components/openEvent';
-import useNavigator from 'hooks/navigator/useNavigator';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import StatusType from 'constants/status';
-import { HelpText } from 'components/openEvent/atoms';
 import addressStyles from './Address.style';
 
 const Address = () => {

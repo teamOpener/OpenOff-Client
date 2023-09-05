@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
 import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
+import { useEffect, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { serverDateFormatter } from 'utils/date';
-import { HelpText } from 'components/openEvent/atoms';
-import StatusType from 'constants/status';
 import applicationPeriodStyles from './ApplicationPeriod.style';
 
 const ApplicationPeriod = () => {

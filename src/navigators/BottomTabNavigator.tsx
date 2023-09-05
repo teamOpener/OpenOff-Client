@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'components/common/Icon/Icon';
-import { BottomTabMenu } from 'constants/menu';
+import { BottomTabMenu } from 'constants/app/menu';
 import EventMapScreen from 'screens/eventMap/EventMapScreen/EventMapScreen';
 import HomeScreen from 'screens/home/HomeScreen/HomeScreen';
 import UserScreen from 'screens/user/UserScreen/UserScreen';

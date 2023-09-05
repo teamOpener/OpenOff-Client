@@ -9,6 +9,7 @@ import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButto
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import Text from 'components/common/Text/Text';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
 import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
@@ -18,17 +19,16 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  View,
   StyleSheet,
+  View,
 } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
+import { Action } from 'types/join';
 import { SocialType } from 'types/user';
 import { validateEmail, validatePassword } from 'utils/validate';
-import { Action } from 'types/join';
-import { UserInfoStatus } from 'constants/join';
 import loginScreenStyles from './LoginScreen.style';
 
 interface Props {

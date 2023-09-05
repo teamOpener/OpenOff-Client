@@ -1,7 +1,7 @@
+import { OpenEvent } from 'components/openEvent';
+import StatusType from 'constants/app/status';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import { OpenEvent } from 'components/openEvent';
-import StatusType from 'constants/status';
 import recruitmentNumberStyles from './RecruitmentNumber.style';
 
 const RecruitmentNumber = () => {

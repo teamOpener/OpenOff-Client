@@ -2,7 +2,7 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FormPasswordInput from 'components/authorize/inputs/FormPasswordInput/FormPasswordInput';
 import Text from 'components/common/Text/Text';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
-import MENT_USER from 'constants/user/userConstants';
+import MENT_USER from 'constants/user/userMessage';
 import useDialog from 'hooks/app/useDialog';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useResetPassword } from 'hooks/queries/auth';

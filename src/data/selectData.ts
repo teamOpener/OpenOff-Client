@@ -2,7 +2,7 @@ import {
   ApplicationAbleValue,
   ParticipantValue,
   PayValue,
-} from 'constants/selectBox';
+} from 'constants/app/selectBox';
 import { Option } from 'types/apps/selectbox';
 
 const payOptions: Option[] = [

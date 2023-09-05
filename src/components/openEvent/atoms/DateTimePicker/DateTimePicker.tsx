@@ -1,9 +1,9 @@
+import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DatePicker, { DatePickerProps } from 'react-native-date-picker';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import Icon from 'components/common/Icon/Icon';
-import Text from 'components/common/Text/Text';
 import { formatDateTime } from 'utils/date';
 import openEventStyles from '../OpenEvent.style';
 import dateTimePickerStyles from './DateTimePicker.style';

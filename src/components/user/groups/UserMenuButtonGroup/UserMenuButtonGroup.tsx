@@ -1,6 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import MENT_USER from 'constants/user/userConstants';
+import MENT_USER from 'constants/user/userMessage';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { Pressable, View } from 'react-native';

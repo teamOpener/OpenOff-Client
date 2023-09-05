@@ -3,8 +3,8 @@ import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SelectControlButton from 'components/eventMap/buttons/SelectControlButton/SelectControlButton';
 import SelectDetailBox from 'components/eventMap/selectboxes/SelectDetailBox/SelectDetailBox';
+import { SelectStatus } from 'constants/app/selectBox';
 import queryKeys from 'constants/queries/queryKeys';
-import { SelectStatus } from 'constants/selectBox';
 import {
   applicationAbleOptions,
   participantOptions,

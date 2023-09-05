@@ -1,4 +1,4 @@
-import MAX_POSTER from 'constants/event';
+import MAX_POSTER from 'constants/event/event';
 
 const MENT_OPEN_EVENT = Object.freeze({
   // TODO: 정리

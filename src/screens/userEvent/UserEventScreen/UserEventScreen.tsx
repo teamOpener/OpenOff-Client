@@ -1,19 +1,3 @@
-import {
-  View,
-  FlatList,
-  ActivityIndicator,
-  ScrollView,
-  RefreshControl,
-} from 'react-native';
-import { useEffect, useState } from 'react';
-import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
-import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
-import { useHostEventLists, useUserTicketLists } from 'hooks/queries/ledger';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useDialog from 'hooks/app/useDialog';
-import useTabRoute from 'hooks/navigator/useTabRoute';
-import useInterestFields from 'hooks/interest/useInterestFields';
 import Spacing from 'components/common/Spacing/Spacing';
 import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
 import {
@@ -22,11 +6,27 @@ import {
   TabItem,
   TicketList,
 } from 'components/userEvent/participant';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
-import { BottomTabMenu } from 'constants/menu';
-import useResetQueries from 'hooks/queries/useResetQueries';
-import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import { BottomTabMenu } from 'constants/app/menu';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
+import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
+import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
+import useDialog from 'hooks/app/useDialog';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import useInterestFields from 'hooks/interest/useInterestFields';
+import useNavigator from 'hooks/navigator/useNavigator';
+import useTabRoute from 'hooks/navigator/useTabRoute';
+import { useHostEventLists, useUserTicketLists } from 'hooks/queries/ledger';
+import useResetQueries from 'hooks/queries/useResetQueries';
+import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
+import { useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  ScrollView,
+  View,
+} from 'react-native';
 import { Field } from 'types/interest';
 import userEventScreenStyles from './UserEventScreen.style';
 

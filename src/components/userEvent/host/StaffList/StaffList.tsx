@@ -1,3 +1,19 @@
+import { useQueryClient } from '@tanstack/react-query';
+import Icon from 'components/common/Icon/Icon';
+import Spacing from 'components/common/Spacing/Spacing';
+import Text from 'components/common/Text/Text';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
+import queryKeys from 'constants/queries/queryKeys';
+import useDialog from 'hooks/app/useDialog';
+import useUniqueName from 'hooks/ledger/useUniqueName';
+import {
+  useMinusStaff,
+  usePlusStaff,
+  useStaffLists,
+} from 'hooks/queries/ledger';
+import { useFindUserByNickname } from 'hooks/queries/user';
 import { useEffect, useState } from 'react';
 import {
   ScrollView,
@@ -6,24 +22,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Icon from 'components/common/Icon/Icon';
-import Text from 'components/common/Text/Text';
-import Spacing from 'components/common/Spacing/Spacing';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import { colors } from 'styles/theme';
-import { useFindUserByNickname } from 'hooks/queries/user';
-import {
-  useMinusStaff,
-  usePlusStaff,
-  useStaffLists,
-} from 'hooks/queries/ledger';
-import useDialog from 'hooks/app/useDialog';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import useUniqueName from 'hooks/ledger/useUniqueName';
-import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queries/queryKeys';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
 import staffListStyles from './StaffList.style';
 
 interface Props extends TextInputProps {

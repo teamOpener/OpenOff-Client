@@ -24,10 +24,10 @@ import SplashScreen from 'react-native-splash-screen';
 import { MyTheme, colors } from 'styles/theme';
 
 // dayjs setting
+import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useAuthorizeStore } from 'stores/Authorize';
-import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 
 dayjs.locale('ko');
 

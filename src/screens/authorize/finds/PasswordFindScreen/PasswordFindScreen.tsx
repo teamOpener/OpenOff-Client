@@ -2,13 +2,14 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
+import useDialog from 'hooks/app/useDialog';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckAuthSms, useSendAuthSms } from 'hooks/queries/auth';
 import { useState } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import useDialog from 'hooks/app/useDialog';
 import {
   validateAuthNumber,
   validateEmail,
@@ -29,7 +30,7 @@ const PasswordFindScreen = () => {
     if (error.response?.data.code === 800) {
       openDialog({
         type: 'validate',
-        text: '해당 핸드폰으로 등록된 아이디가 존재하지 않습니다!',
+        text: MENT_AUTHORIZE.FIND.CANNOT_FIND_ID,
       });
       return;
     }
@@ -46,7 +47,8 @@ const PasswordFindScreen = () => {
   const handleSendSmsSuccess = () => {
     openDialog({
       type: 'success',
-      text: '인증번호를 발송하였습니다.',
+      text: MENT_AUTHORIZE.PHONE_CERTIFICATION
+        .SEND_CERTIFICATION_NUMBER_MESSAGE,
     });
   };
 
@@ -82,7 +84,7 @@ const PasswordFindScreen = () => {
     } else {
       openDialog({
         type: 'validate',
-        text: '회원정보가 일치하지 않습니다. 이메일과 핸드폰 번호를 확인해주세요.',
+        text: MENT_AUTHORIZE.FIND.NOT_MATCHED_USER_INFO,
       });
     }
   };
@@ -97,13 +99,13 @@ const PasswordFindScreen = () => {
           <ScreenCover
             authorizeButton={{
               handlePress: handleAuthorizeFlow,
-              label: '다음',
+              label: MENT_AUTHORIZE.MAIN.NEXT,
               isActive: isResetButtonActive,
             }}
           >
             <EssentialInput
               validation={validateEmail}
-              label="이메일"
+              label={MENT_AUTHORIZE.MAIN.EMAIL}
               keyboardType="default"
               value={emailAddress}
               setValue={setEmailAddress}

@@ -1,9 +1,10 @@
-import { Pressable, TouchableOpacity, View } from 'react-native';
-import { DialogEnumType, DialogType } from 'types/apps/dialog';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import useDialog from 'hooks/app/useDialog';
-import { Modal } from 'react-native-paper';
 import * as Icons from 'assets/icons';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import MENT_DIALOG from 'constants/common/dialogMessage';
+import useDialog from 'hooks/app/useDialog';
+import { Pressable, TouchableOpacity, View } from 'react-native';
+import { Modal } from 'react-native-paper';
+import { DialogEnumType, DialogType } from 'types/apps/dialog';
 import Icon from '../../Icon/Icon';
 import Text from '../../Text/Text';
 import dialogStyles from './Dialog.style';
@@ -79,7 +80,7 @@ const Dialog = () => {
           </View>
 
           <SpaceLayout direction="row" size={10}>
-            {dialog.applyText !== '적용' && (
+            {dialog.applyText !== MENT_DIALOG.DIALOG.APPLY && (
               <TouchableOpacity
                 style={dialogStyles.buttonContainer}
                 onPress={handleConfirm}

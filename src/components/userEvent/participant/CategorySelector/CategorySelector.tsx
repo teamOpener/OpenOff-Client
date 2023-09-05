@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { LayoutChangeEvent, TouchableOpacity, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { FieldCode } from 'constants/interest';
-import { Field } from 'types/interest';
+import { FieldCode } from 'constants/interest/interest';
 import { CONSTANT_PARTICIPANT } from 'constants/userEvent/participant/participantConstants';
-import categorySelectorStyles from './CategorySelector.style';
-import TagGroup from '../Tag/TagGroup';
+import React, { useState } from 'react';
+import { LayoutChangeEvent, TouchableOpacity, View } from 'react-native';
+import { Field } from 'types/interest';
 import Tag from '../Tag/Tag';
+import TagGroup from '../Tag/TagGroup';
+import categorySelectorStyles from './CategorySelector.style';
 
 interface Props {
   field: Field[];

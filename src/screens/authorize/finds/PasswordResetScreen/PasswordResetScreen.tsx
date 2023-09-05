@@ -2,6 +2,7 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FormPasswordInput from 'components/authorize/inputs/FormPasswordInput/FormPasswordInput';
 import Text from 'components/common/Text/Text';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import useDialog from 'hooks/app/useDialog';
 import { useResetPassword } from 'hooks/queries/auth';
 import { useState } from 'react';
@@ -64,33 +65,33 @@ const PasswordResetScreen = ({
                   newPassword: data.passwordCheck,
                 });
               }),
-              label: '다음',
+              label: MENT_AUTHORIZE.MAIN.NEXT,
               isActive: true,
             }}
           >
             <View style={passwordResetScreenStyles.passwordResetTitle}>
               <Text variant="h3" color="white">
-                비밀번호를 재설정해주세요.
+                {MENT_AUTHORIZE.FIND.RESET_PASSWORD}
               </Text>
             </View>
             <FormPasswordInput
               control={control}
               errors={errors}
               name="password"
-              label="새 비밀번호"
+              label={MENT_AUTHORIZE.FIND.NEW_PASSWORD}
               validate={(value: string) => validatePassword(value)}
-              requiredMessage="비밀번호를 입력해주세요"
+              requiredMessage={MENT_AUTHORIZE.FIND.INPUT_PASSWORD}
             />
             <FormPasswordInput
               control={control}
               errors={errors}
               name="passwordCheck"
-              label="새 비밀번호 확인"
+              label={MENT_AUTHORIZE.FIND.NEW_PASSWORD_CHECK}
               validate={(check: string) => {
                 const changedPassword = watch('password');
                 return validatePasswordCheck(changedPassword, check);
               }}
-              requiredMessage="비밀번호 확인을 입력해주세요"
+              requiredMessage={MENT_AUTHORIZE.FIND.INPUT_PASSWORD_CHECK}
             />
           </ScreenCover>
         ) : (

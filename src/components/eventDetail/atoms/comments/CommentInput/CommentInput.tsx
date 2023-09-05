@@ -1,17 +1,18 @@
-import { useState } from 'react';
-import { Keyboard, TextInput, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
-import { colors } from 'styles/theme';
 import Text from 'components/common/Text/Text';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
+import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
+import queryKeys from 'constants/queries/queryKeys';
+import useDialog from 'hooks/app/useDialog';
 import {
   usePostChildComment,
   usePostParentComment,
 } from 'hooks/queries/comment';
 import { ChildCommentWriteRequestDto } from 'models/comment/request/ChildCommentWriteRequestDto';
 import { ParentCommentWriteRequestDto } from 'models/comment/request/ParentCommentWriteRequestDto';
-import useDialog from 'hooks/app/useDialog';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import queryKeys from 'constants/queries/queryKeys';
+import { useState } from 'react';
+import { Keyboard, TextInput, TouchableOpacity, View } from 'react-native';
+import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import commentInputStyles from './CommentInput.style';
 
@@ -37,7 +38,7 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
     setComment('');
     openDialog({
       type: 'success',
-      text: '댓글을 등록했습니다!',
+      text: MENT_EVENT_DETAIL.COMMENT.COMMENT_SUCCESS,
     });
   };
 
@@ -92,7 +93,9 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
       <TextInput
         style={commentInputStyles.inputText}
         placeholder={
-          mode === 'child' ? '대댓글을 남겨보세요.' : '댓글을 남겨보세요.'
+          mode === 'child'
+            ? MENT_EVENT_DETAIL.COMMENT.CHILD_COMMENT_INPUT
+            : MENT_EVENT_DETAIL.COMMENT.COMMENT_INPUT
         }
         placeholderTextColor={colors.grey}
         value={comment}
@@ -112,7 +115,7 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
           color={comment ? 'white' : 'grey'}
           style={commentInputStyles.buttonText}
         >
-          등록
+          {MENT_EVENT_DETAIL.COMMENT.SUBMIT}
         </Text>
       </TouchableOpacity>
     </View>

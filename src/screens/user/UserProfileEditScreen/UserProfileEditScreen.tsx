@@ -1,10 +1,10 @@
 import Text from 'components/common/Text/Text';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import UserProfileImageButton from 'components/user/buttons/UserProfileImageButton/UserProfileImageButton';
 import UserInfoText from 'components/user/texts/UserInfoText/UserInfoText';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import MENT_USER from 'constants/user/userConstants';
-import { useLogout, useMyInfo } from 'hooks/queries/user';
+import MENT_USER from 'constants/user/userMessage';
 import useDialog from 'hooks/app/useDialog';
+import { useLogout, useMyInfo } from 'hooks/queries/user';
 import { Pressable, ScrollView, View } from 'react-native';
 import { colors } from 'styles/theme';
 import userProfileEditScreenStyles from './UserProfileEditScreen.style';

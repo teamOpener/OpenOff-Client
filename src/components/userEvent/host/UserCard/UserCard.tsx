@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
-import { ApiErrorResponse } from 'types/ApiResponse';
-import queryKeys from 'constants/queries/queryKeys';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
 import Icon from 'components/common/Icon/Icon';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import Text from 'components/common/Text/Text';
-import useNavigator from 'hooks/navigator/useNavigator';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
+import queryKeys from 'constants/queries/queryKeys';
 import useDialog from 'hooks/app/useDialog';
+import useNavigator from 'hooks/navigator/useNavigator';
 import {
   useCancelPermittedApplicant,
   useDenyApplicationUser,
   usePermitApplicant,
 } from 'hooks/queries/ledger';
 import { EventApplicantInfoResponseDto } from 'models/ledger/response/EventApplicantInfoResponseDto';
-import userCardStyles from './UserCard.style';
+import { useState } from 'react';
+import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
+import { ApiErrorResponse } from 'types/ApiResponse';
 import ActionButton from '../buttons/ActionButton/ActionButton';
+import userCardStyles from './UserCard.style';
 
 interface Props {
   eventApplicantInfo: EventApplicantInfoResponseDto;

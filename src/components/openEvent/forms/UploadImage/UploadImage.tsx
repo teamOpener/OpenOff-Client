@@ -1,12 +1,12 @@
-import { OpenEvent } from 'components/openEvent';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import { ScrollView, View } from 'react-native';
 import Icon from 'components/common/Icon/Icon';
-import { useOpenEventStore } from 'stores/OpenEventStore';
+import { OpenEvent } from 'components/openEvent';
+import StatusType from 'constants/app/status';
+import MAX_POSTER from 'constants/event/event';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
+import { ScrollView, View } from 'react-native';
 import { openImagePicker } from 'services/ImageCropPicker';
+import { useOpenEventStore } from 'stores/OpenEventStore';
 import { ImageBuilder } from 'types/openEvent/EventForm';
-import StatusType from 'constants/status';
-import MAX_POSTER from 'constants/event';
 import uploadImageStyles from './UploadImage.style';
 
 const UploadImage = () => {

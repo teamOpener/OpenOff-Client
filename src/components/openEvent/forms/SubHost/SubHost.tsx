@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { View, ScrollView, TextInput } from 'react-native';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import { useOpenEventStore } from 'stores/OpenEventStore';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useFindUserByNickname } from 'hooks/queries/user';
 import { SearchNicknameResponseDto } from 'models/user/response/SearchNicknameResponseDto';
+import { useEffect, useState } from 'react';
+import { ScrollView, TextInput, View } from 'react-native';
+import { useOpenEventStore } from 'stores/OpenEventStore';
 import subHostStyles from './SubHost.style';
 
 const SubHost = () => {

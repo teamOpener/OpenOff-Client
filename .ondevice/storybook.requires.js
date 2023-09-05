@@ -52,7 +52,6 @@ const getStories = () => {
     "./src/components/common/dialogs/Dialog.stories.tsx": require("../src/components/common/dialogs/Dialog.stories.tsx"),
     "./src/components/common/Icon/Icon.stories.tsx": require("../src/components/common/Icon/Icon.stories.tsx"),
     "./src/components/common/Text/Text.stories.tsx": require("../src/components/common/Text/Text.stories.tsx"),
-    "./src/components/home/cards/EventRowCard/EventRowCard.stories.tsx": require("../src/components/home/cards/EventRowCard/EventRowCard.stories.tsx"),
     "./src/components/suspense/loading/CommonLoading/CommonLoading.stories.tsx": require("../src/components/suspense/loading/CommonLoading/CommonLoading.stories.tsx"),
     "./src/components/suspense/skeleton/AlertCardSkeleton/AlertCardSkeleton.stories.tsx": require("../src/components/suspense/skeleton/AlertCardSkeleton/AlertCardSkeleton.stories.tsx"),
     "./src/components/suspense/skeleton/CarouselCardSkeleton/CarouselCardSkeleton.stories.tsx": require("../src/components/suspense/skeleton/CarouselCardSkeleton/CarouselCardSkeleton.stories.tsx"),

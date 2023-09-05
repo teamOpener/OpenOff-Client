@@ -1,11 +1,11 @@
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import { OpenEvent } from 'components/openEvent';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { OpenEvent } from 'components/openEvent';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import { HelpText } from 'components/openEvent/atoms';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import StatusType from 'constants/status';
 import costStyles from './Cost.style';
 
 const Cost = () => {

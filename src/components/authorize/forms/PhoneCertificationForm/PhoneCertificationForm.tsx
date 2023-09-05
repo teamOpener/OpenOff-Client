@@ -1,6 +1,7 @@
 import PhoneAuthButton from 'components/authorize/buttons/PhoneAuthButton/PhoneAuthButton';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import TimerText from 'components/authorize/texts/TimerText/TimerText';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { validateAuthNumber, validatePhoneNumber } from 'utils/validate';
 
@@ -36,14 +37,18 @@ const PhoneCertificationForm = ({
     <>
       <EssentialInput
         validation={validatePhoneNumber}
-        label="휴대폰 번호"
+        label={MENT_AUTHORIZE.PHONE_CERTIFICATION.PHONE_NUMBER}
         keyboardType="number-pad"
         value={phonenumber}
         setValue={setPhonenumber}
         type="phonenumber"
       >
         <PhoneAuthButton
-          label={retry ? '재발송' : '인증받기'}
+          label={
+            retry
+              ? MENT_AUTHORIZE.PHONE_CERTIFICATION.RESEND
+              : MENT_AUTHORIZE.PHONE_CERTIFICATION.GET_CERTIFIED
+          }
           active={!(validatePhoneNumber(phonenumber) || phonenumber.length < 2)}
           handlePress={() => {
             if (!timerTrigger.active) {
@@ -60,7 +65,7 @@ const PhoneCertificationForm = ({
       </EssentialInput>
       <EssentialInput
         validation={validateAuthNumber}
-        label="인증번호"
+        label={MENT_AUTHORIZE.PHONE_CERTIFICATION.CERTIFICATION_NUMBER}
         keyboardType="number-pad"
         value={authnumber}
         setValue={setAuthnumber}

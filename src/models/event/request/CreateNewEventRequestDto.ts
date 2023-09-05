@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/interest';
+import { FieldCode } from 'constants/interest/interest';
 import { ImageUrlList } from '../entity/ImageUrlList';
 
 export interface CreateNewEventRequestDto {

@@ -1,20 +1,21 @@
+import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
+import { StackMenu } from 'constants/app/menu';
+import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import dayjs from 'dayjs';
+import useDialog from 'hooks/app/useDialog';
+import useNavigator from 'hooks/navigator/useNavigator';
+import { useReportComment } from 'hooks/queries/comment';
+import { ParentCommentInfoResponseDto } from 'models/comment/response/ParentCommentInfoResponseDto';
 import { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
-import Text from 'components/common/Text/Text';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import { ParentCommentInfoResponseDto } from 'models/comment/response/ParentCommentInfoResponseDto';
-import useNavigator from 'hooks/navigator/useNavigator';
-import { StackMenu } from 'constants/menu';
-import Icon from 'components/common/Icon/Icon';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import { useReportComment } from 'hooks/queries/comment';
-import useDialog from 'hooks/app/useDialog';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import parentCommentListItemStyles from './ParentCommentListItem.style';
 import DeclarationButton from '../DeclarationButton/DeclarationButton';
+import parentCommentListItemStyles from './ParentCommentListItem.style';
 
 type ParentCommentMode = 'count' | 'detail';
 
@@ -48,7 +49,7 @@ const ParentCommentListItem = ({
     setShowDeclarationButton(false);
     openDialog({
       type: 'success',
-      text: '댓글을 신고했습니다!',
+      text: MENT_EVENT_DETAIL.COMMENT.COMMENT_REPORT,
     });
   };
 
@@ -96,7 +97,7 @@ const ParentCommentListItem = ({
                 { color: comment.isStaff ? colors.main : colors.white },
               ]}
             >
-              {comment.isStaff ? '주최자' : comment.nickname}
+              {comment.isStaff ? MENT_EVENT_DETAIL.MAIN.HOST : comment.nickname}
             </Text>
             <Text style={parentCommentListItemStyles.content}>
               {comment.content}
@@ -121,7 +122,7 @@ const ParentCommentListItem = ({
                   color="grey"
                   style={parentCommentListItemStyles.replyButtonText}
                 >
-                  답글달기
+                  {MENT_EVENT_DETAIL.COMMENT.POSTING_REPLY}
                 </Text>
               </TouchableOpacity>
             )}
@@ -147,7 +148,9 @@ const ParentCommentListItem = ({
             color="point"
             style={parentCommentListItemStyles.replyCountText}
             onPress={handleChildComment}
-          >{`- 답글 ${comment.childCount}개 더 보기`}</Text>
+          >
+            {MENT_EVENT_DETAIL.COMMENT.READ_MORE_REPLIES(comment.childCount)}
+          </Text>
         </TouchableOpacity>
       )}
     </SpaceLayout>

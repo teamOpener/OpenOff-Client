@@ -1,4 +1,4 @@
-import { UserInfoStatus } from 'constants/join';
+import { UserInfoStatus } from 'constants/authorize/join';
 import { Field } from './interest';
 
 interface EmailPassword {

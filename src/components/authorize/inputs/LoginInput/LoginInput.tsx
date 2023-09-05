@@ -1,4 +1,5 @@
 import Text from 'components/common/Text/Text';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { TextInput, View } from 'react-native';
 import { colors } from 'styles/theme';
@@ -13,8 +14,8 @@ interface Props {
 }
 
 const LoginInput = ({ label, value, setValue, type, validation }: Props) => {
-  const PASSWORD = '비밀번호를';
-  const EMAIL = '이메일을';
+  const PASSWORD = MENT_AUTHORIZE.LOGIN.INPUT_PASSWORD;
+  const EMAIL = MENT_AUTHORIZE.LOGIN.INPUT_EMAIL;
   return (
     <View>
       <Text variant="h4" style={loginInputStyles.inputTitle}>
@@ -23,9 +24,9 @@ const LoginInput = ({ label, value, setValue, type, validation }: Props) => {
       <View>
         <TextInput
           value={value}
-          placeholder={`${
-            type === 'password' ? PASSWORD : EMAIL
-          } 입력해주세요.`}
+          placeholder={`${type === 'password' ? PASSWORD : EMAIL} ${
+            MENT_AUTHORIZE.LOGIN.REQUEST_INPUT
+          }`}
           placeholderTextColor={colors.grey}
           style={{
             ...loginInputStyles.input,

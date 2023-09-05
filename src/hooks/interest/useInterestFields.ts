@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/interest';
+import { FieldCode } from 'constants/interest/interest';
 import { useInterestFieldLists } from 'hooks/queries/interest';
 import { Field } from 'types/interest';
 

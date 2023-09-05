@@ -1,11 +1,11 @@
+import { useFocusEffect } from '@react-navigation/native';
 import Icon from 'components/common/Icon/Icon';
-import { StackMenu } from 'constants/menu';
+import { StackMenu } from 'constants/app/menu';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { memo, useCallback, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
-import { useFocusEffect } from '@react-navigation/native';
 import eventSearchInput from './EventSearchInput.style';
 
 interface Props {

@@ -1,8 +1,8 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
-import { UserInfoStatus } from 'constants/join';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckSms, useSendSms } from 'hooks/queries/user';

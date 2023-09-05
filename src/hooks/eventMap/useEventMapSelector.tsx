@@ -3,13 +3,13 @@ import {
   ParticipantValue,
   PayValue,
   SelectStatus,
-} from 'constants/selectBox';
+} from 'constants/app/selectBox';
 import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 import { Reducer, useReducer, useState } from 'react';
 import { useEventMapStore } from 'stores/EventMap';
-import { Field } from 'types/interest';
 import { Action, SelectBox } from 'types/apps/selectbox';
 import { Coordinate } from 'types/event';
+import { Field } from 'types/interest';
 
 interface SortInfo {
   dialog: boolean;
