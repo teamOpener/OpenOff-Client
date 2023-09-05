@@ -76,20 +76,20 @@ const UserPasswordResetScreen = () => {
         control={control}
         errors={errors}
         name="password"
-        label="새 비밀번호"
+        label={MENT_USER.PASSWORD_RESET.NEW_PASSWORD}
         validate={(value: string) => validatePassword(value)}
-        requiredMessage="비밀번호를 입력해주세요"
+        requiredMessage={MENT_USER.PASSWORD_RESET.INPUT_PASSWORD}
       />
       <FormPasswordInput
         control={control}
         errors={errors}
         name="passwordCheck"
-        label="새 비밀번호 확인"
+        label={MENT_USER.PASSWORD_RESET.NEW_PASSWORD_CHECK}
         validate={(check: string) => {
           const changedPassword = watch('password');
           return validatePasswordCheck(changedPassword, check);
         }}
-        requiredMessage="비밀번호 확인을 입력해주세요"
+        requiredMessage={MENT_USER.PASSWORD_RESET.INPUT_PASSWORD_CHECK}
       />
     </ScreenCover>
   );
