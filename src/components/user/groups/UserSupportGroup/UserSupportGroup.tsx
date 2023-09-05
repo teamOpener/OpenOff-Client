@@ -1,5 +1,6 @@
 import Divider from 'components/common/Divider/Divider';
 import Text from 'components/common/Text/Text';
+import MENT_DIALOG from 'constants/common/dialogMessage';
 import MENT_USER from 'constants/user/userMessage';
 import useDialog from 'hooks/app/useDialog';
 import { useLogout } from 'hooks/queries/user';
@@ -20,9 +21,9 @@ const UserSupportGroup = () => {
   const handleLogout = async () => {
     openDialog({
       type: 'warning',
-      text: '로그아웃하시겠습니까?',
-      applyText: '예',
-      closeText: '아니오',
+      text: MENT_USER.SUPPORT.LOGOUT_CONFIRM,
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
       apply: async () => {
         await logout();
       },

@@ -43,6 +43,9 @@ const MENT_USER = Object.freeze({
     LOGOUT: '로그아웃',
     LOGOUT_MENT: '로그아웃 중입니다.',
   },
+  SUPPORT: {
+    LOGOUT_CONFIRM: '로그아웃하시겠습니까?',
+  },
   SUCCESS: {
     PASSWORD_RESET_SUCCESS: '비밀번호를 성공적으로 재설정했습니다!',
     INTEREST_SETTING_SUCCESS: '관심분야 설정이 완료되었습니다!',
