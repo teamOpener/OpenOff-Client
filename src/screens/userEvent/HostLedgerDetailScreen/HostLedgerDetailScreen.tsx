@@ -8,6 +8,7 @@ import useStackRoute from 'hooks/navigator/useStackRoute';
 import { useApplicantQnA } from 'hooks/queries/ledger';
 import { useEffect } from 'react';
 import { FlatList, View } from 'react-native';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import hostLedgerDetailScreenStyles from './HostLedgerDetailScreen.style';
 
 const HostLedgerDetailScreen = () => {
@@ -33,7 +34,7 @@ const HostLedgerDetailScreen = () => {
     <LedgerScreenLayout>
       <UserHeader userInfo={qna} ledgerId={params.ledgerId} />
       {qna.qnAInfoList.length === 0 ? (
-        <EmptyLayout helpText="추가질문이 없습니다." />
+        <EmptyLayout helpText={MENT_HOST.MAIN.EMPTY_QNA} />
       ) : (
         <View style={hostLedgerDetailScreenStyles.scrollContainer}>
           <FlatList

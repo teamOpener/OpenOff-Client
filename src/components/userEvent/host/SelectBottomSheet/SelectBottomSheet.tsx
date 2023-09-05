@@ -9,6 +9,7 @@ import {
 import Text from 'components/common/Text/Text';
 import SortType from 'models/ledger/entity/SortType';
 import { colors } from 'styles/theme';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import selectBottomSheetStyles from './SelectBottomSheet.style';
 import SortOption from './SortOption';
 
@@ -66,17 +67,17 @@ const SelectBottomSheet = React.forwardRef<BottomSheetModal, Props>(
           <View style={selectBottomSheetStyles.bottomModalContainer}>
             <View style={selectBottomSheetStyles.modalTitleContainer}>
               <Text style={selectBottomSheetStyles.modalTitleText}>
-                정렬 기준
+                {MENT_HOST.MAIN.SORT.TITLE}
               </Text>
             </View>
 
             <SortOption
-              label="신청순"
+              label={MENT_HOST.MAIN.SORT.DATE}
               isSelected={selectedSortType === SortType.DATE}
               onPress={() => handleSortType(SortType.DATE)}
             />
             <SortOption
-              label="이름순"
+              label={MENT_HOST.MAIN.SORT.NAME}
               isSelected={selectedSortType === SortType.NAME}
               onPress={() => handleSortType(SortType.NAME)}
             />

@@ -103,7 +103,7 @@ const UserEventScreen = () => {
     if (!event.isApproved) {
       openDialog({
         type: 'validate',
-        text: '아직 승인되지 않은 이벤트입니다.',
+        text: MENT_PARTICIPANT.MAIN.NOT_APPROVE,
       });
       return;
     }

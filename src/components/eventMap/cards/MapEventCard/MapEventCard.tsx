@@ -79,7 +79,7 @@ const MapEventCard = ({ event, distance }: Props) => {
       <Spacing height={9} />
       <View style={mapEventCardStyles.imageContainer}>
         <Carousel
-          width={124}
+          width={144}
           height={114}
           loop={false}
           overscrollEnabled={false}

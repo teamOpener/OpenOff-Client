@@ -25,6 +25,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import MENT_DIALOG from 'constants/common/dialogMessage';
 import hostConsoleStyles from './HostConsole.style';
 
 const HostConsoleScreen = () => {
@@ -62,7 +63,7 @@ const HostConsoleScreen = () => {
     openDialog({
       type: 'success',
       text: MENT_HOST.SUCCESS.SUSPENSE_EVENT,
-      closeText: '확인',
+      closeText: MENT_DIALOG.DIALOG.CONFIRM,
     });
   };
 
@@ -70,7 +71,7 @@ const HostConsoleScreen = () => {
     openDialog({
       type: 'validate',
       text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
-      closeText: '확인',
+      closeText: MENT_DIALOG.DIALOG.CONFIRM,
     });
   };
 
@@ -88,8 +89,8 @@ const HostConsoleScreen = () => {
           eventInfoId: params.eventId,
         });
       },
-      applyText: '예',
-      closeText: '아니오',
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
     });
   };
 

@@ -14,6 +14,8 @@ import {
 import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
 import { View } from 'react-native';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
+import MENT_DIALOG from 'constants/common/dialogMessage';
 import ActionButton from '../buttons/ActionButton/ActionButton';
 import userHeaderStyles from './UserHeader.style';
 
@@ -48,7 +50,7 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
     openDialog({
       type: 'success',
       text,
-      closeText: '신청명단으로 이동',
+      closeText: MENT_HOST.APPLICANT.BACK_TO_APPLICANT,
       callback: () => {
         stackNavigation.goBack();
       },
@@ -63,7 +65,7 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
   };
 
   const { mutateAsync: permitApplicant } = usePermitApplicant(
-    () => successCallback('성공적으로 승인되었습니다!'),
+    () => successCallback(MENT_HOST.APPLICANT.APPROVE.SUCCESS),
     handlePermitError,
   );
 
@@ -72,36 +74,36 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
   };
 
   const { mutateAsync: denyApplicationUser } = useDenyApplicationUser(
-    () => successCallback('승인이 거부되었습니다'),
+    () => successCallback(MENT_HOST.APPLICANT.DENY.SUCCESS),
     handlePermitError,
   );
 
   const handleDeny = async () => {
     openDialog({
       type: 'confirm',
-      text: '승인을 거부하시겠습니까?',
+      text: MENT_HOST.APPLICANT.DENY.TITLE,
       apply: async () => {
         await denyApplicationUser({ ledgerId });
       },
-      applyText: '예',
-      closeText: '아니오',
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
     });
   };
 
   const { mutateAsync: cancelPermittedApplicant } = useCancelPermittedApplicant(
-    () => successCallback('승인이 취소되었습니다'),
+    () => successCallback(MENT_HOST.APPLICANT.CANCEL.SUCCESS),
     handlePermitError,
   );
 
   const handleCancel = async () => {
     openDialog({
       type: 'confirm',
-      text: '승인을 취소하시겠습니까?',
+      text: MENT_HOST.APPLICANT.CANCEL.TITLE,
       apply: async () => {
         await cancelPermittedApplicant({ ladgerId: ledgerId });
       },
-      applyText: '예',
-      closeText: '아니오',
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
     });
   };
 
@@ -121,22 +123,25 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
         {userInfo.isJoined && (
           <View style={userHeaderStyles.admissionTextWrapper}>
             <Text color="lightGreen" style={userHeaderStyles.admissionText}>
-              입장완료
+              {MENT_HOST.APPLICANT.ADMISSION}
             </Text>
           </View>
         )}
         {!userInfo.isJoined && userInfo.isAccepted && (
           <ActionButton
-            label="승인 취소"
+            label={MENT_HOST.APPLICANT.CANCEL.LABEL}
             style={userHeaderStyles.approveBtn}
             onPress={handleCancel}
           />
         )}
         {!userInfo.isJoined && !userInfo.isAccepted && (
           <>
-            <ActionButton label="거절" onPress={handleDeny} />
             <ActionButton
-              label="승인"
+              label={MENT_HOST.APPLICANT.DENY.LABEL}
+              onPress={handleDeny}
+            />
+            <ActionButton
+              label={MENT_HOST.APPLICANT.APPROVE.LABEL}
               style={userHeaderStyles.approveBtn}
               onPress={handleApprove}
             />

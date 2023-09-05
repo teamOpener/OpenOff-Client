@@ -3,6 +3,7 @@ const MENT_DIALOG = Object.freeze({
     REASON_SELECTION: '사유를 선택해주세요.',
   },
   DIALOG: {
+    CONFIRM: '확인',
     APPLY: '적용',
     YES: '예',
     NO: '아니오',

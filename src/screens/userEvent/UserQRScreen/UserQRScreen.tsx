@@ -22,6 +22,7 @@ import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResp
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import MENT_DIALOG from 'constants/common/dialogMessage';
 import userQRScreenStyles from './UserQRScreen.style';
 
 const UserQRScreen = () => {
@@ -59,8 +60,8 @@ const UserQRScreen = () => {
   const handleSuccessCancel = () => {
     openDialog({
       type: 'success',
-      text: '예매가 성공적으로 취소되었습니다.',
-      closeText: '홈으로',
+      text: MENT_PARTICIPANT.TICKET.CANCEL_SUCCESS,
+      closeText: MENT_PARTICIPANT.TICKET.BACK_TO_HOME,
       callback: resetTickets,
     });
   };
@@ -69,7 +70,7 @@ const UserQRScreen = () => {
     openDialog({
       type: 'validate',
       text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
-      closeText: '홈으로',
+      closeText: MENT_PARTICIPANT.TICKET.BACK_TO_HOME,
     });
   };
 
@@ -83,9 +84,9 @@ const UserQRScreen = () => {
 
     openDialog({
       type: 'confirm',
-      text: '예매를 취소하시겠습니까?',
-      applyText: '예',
-      closeText: '아니오',
+      text: MENT_PARTICIPANT.TICKET.CANCEL,
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
       apply: async () => {
         await cancelApplicationEvent({ ledgerId: currentTicket.ladgerId });
       },
@@ -108,7 +109,7 @@ const UserQRScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text="예매를 취소중입니다."
+          text={MENT_PARTICIPANT.TICKET.CANCEL_PROGRESS}
         />
       )}
       {helpText && (

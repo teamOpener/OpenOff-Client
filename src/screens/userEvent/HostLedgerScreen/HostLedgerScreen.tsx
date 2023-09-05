@@ -42,6 +42,7 @@ import {
 } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import MENT_DIALOG from 'constants/common/dialogMessage';
 import hostLedgerScreenStyles from './HostLedgerScreen.style';
 
 const HostLedgerScreen = () => {
@@ -104,7 +105,7 @@ const HostLedgerScreen = () => {
     openDialog({
       type: 'success',
       text: MENT_HOST.SUCCESS.PERMIT_ALL,
-      closeText: '확인',
+      closeText: MENT_DIALOG.DIALOG.CONFIRM,
     });
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
     queryClient.invalidateQueries(
@@ -135,8 +136,8 @@ const HostLedgerScreen = () => {
       type: 'confirm',
       text: MENT_HOST.MAIN.PERMIT_ALL,
       apply: handlePermitAll,
-      applyText: '예',
-      closeText: '아니오',
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
     });
   };
 
@@ -162,25 +163,29 @@ const HostLedgerScreen = () => {
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <IconText
             iconName="IconUser"
-            label={`승인완료 ${eventStatus?.approvedCount ?? 0}/${
-              eventStatus?.maxCount ?? 0
-            }`}
+            label={MENT_HOST.APPLICANT.APPROVE_WITH_COUNT(
+              eventStatus?.approvedCount ?? 0,
+              eventStatus?.maxCount ?? 0,
+            )}
           />
           <IconText
             iconName="IconUser"
-            label={`입장완료 ${eventStatus?.joinedCount ?? 0}/${
-              eventStatus?.maxCount ?? 0
-            }`}
+            label={MENT_HOST.APPLICANT.ADMISSION_WITH_COUNT(
+              eventStatus?.joinedCount ?? 0,
+              eventStatus?.maxCount ?? 0,
+            )}
           />
         </View>
 
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <Text color="main" style={hostLedgerScreenStyles.approveText}>
-            {`${eventStatus?.notApprovedCount ?? 0}명 승인 대기중`}
+            {MENT_HOST.APPLICANT.NOTAPPROVE_COUNT(
+              eventStatus?.notApprovedCount ?? 0,
+            )}
           </Text>
           <ActionButton
             disabled={eventStatus?.notApprovedCount === 0}
-            label="일괄 승인"
+            label={MENT_HOST.APPLICANT.ALL_APPROVE}
             style={hostLedgerScreenStyles.totalApproveBtn}
             onPress={handlePermitAllButtonPress}
           />
@@ -197,7 +202,9 @@ const HostLedgerScreen = () => {
             onPress={presentModal}
           >
             <Text style={hostLedgerScreenStyles.sortBtnText}>
-              {selectedSortType === SortType.DATE ? '신청순' : '이름순'}
+              {selectedSortType === SortType.DATE
+                ? MENT_HOST.MAIN.SORT.DATE
+                : MENT_HOST.MAIN.SORT.NAME}
             </Text>
             <Icon
               name={openBottomSheet ? 'IconArrowUp' : 'IconArrowDown'}

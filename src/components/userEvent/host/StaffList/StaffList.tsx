@@ -24,6 +24,8 @@ import {
 } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import MENT_DIALOG from 'constants/common/dialogMessage';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import staffListStyles from './StaffList.style';
 
 interface Props extends TextInputProps {
@@ -55,7 +57,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
   const handleSuccess = () => {
     openDialog({
       type: 'success',
-      text: '성공적으로 처리됐습니다!',
+      text: MENT_HOST.SUCCESS.ADD_STAFF,
       callback: () => {
         queryClient.invalidateQueries(
           queryKeys.ledgerKeys.staffByEventInfoId(eventInfoId),
@@ -85,9 +87,9 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
 
     openDialog({
       type: 'warning',
-      text: '정말 삭제하시겠습니까?',
-      applyText: '예',
-      closeText: '아니오',
+      text: MENT_HOST.STAFF.DELETE_CONFIRM,
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
       apply: async () => {
         await minusStaff({ eventInfoId, staffName: nickName });
       },
@@ -101,9 +103,9 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
 
     openDialog({
       type: 'success',
-      text: '추가하시겠습니까?',
-      applyText: '예',
-      closeText: '아니오',
+      text: MENT_HOST.STAFF.ADD_CONFIRM,
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
       apply: async () => {
         await plusStaff({ eventInfoId, nickname: searchText.slice(1) });
       },
@@ -139,7 +141,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
               staffListStyles.text,
               !searchText.startsWith('@') && staffListStyles.inActiveText,
             ]}
-            placeholder="@닉네임을 입력해주세요."
+            placeholder={MENT_HOST.STAFF.NICKNAME_PLACEHOLDER}
             placeholderTextColor={colors.grey}
             {...rest}
           />
