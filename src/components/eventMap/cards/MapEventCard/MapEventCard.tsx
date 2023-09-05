@@ -25,7 +25,7 @@ const MapEventCard = ({ event, distance }: Props) => {
 
   const calcDate = event.eventDateList
     ?.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1))
-    .map((date) => dayjs(date).format('MM월 YY일'));
+    .map((date) => dayjs(date).format('MM월 DD일'));
 
   return (
     <View style={mapEventCardStyles.container}>

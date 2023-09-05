@@ -1,4 +1,5 @@
 import Icon from 'components/common/Icon/Icon';
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import { Pressable, View } from 'react-native';
 import Text from '../../../common/Text/Text';
 import currentFieldFindButtonStyles from './CurrentFieldFindButton.style';
@@ -18,7 +19,7 @@ const CurrentFieldFindButton = ({ isFindActive, handlePress }: Props) => {
         >
           <Icon name="IconSend" fill="black" size={20} />
           <Text color="black" style={currentFieldFindButtonStyles.label}>
-            현 지도에서 검색
+            {MENT_EVENT_MAP.MAIN.CURRENT_FIELD_FIND}
           </Text>
         </Pressable>
       </View>

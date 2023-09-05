@@ -4,6 +4,7 @@ import {
   PayValue,
   SelectStatus,
 } from 'constants/app/selectBox';
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 import { Reducer, useReducer, useState } from 'react';
 import { useEventMapStore } from 'stores/EventMap';
@@ -18,15 +19,15 @@ interface SortInfo {
 
 const initSelect: SelectBox = {
   payOption: {
-    label: '전체',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
     value: 'all',
   },
   participantOption: {
-    label: '전체',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
     value: 'all',
   },
   applicationAbleOption: {
-    label: '전체',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
     value: 'all',
   },
 };

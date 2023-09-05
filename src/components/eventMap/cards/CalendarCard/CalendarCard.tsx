@@ -1,8 +1,9 @@
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import moment from 'moment';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Calendar, DateData, LocaleConfig } from 'react-native-calendars';
-import { colors } from 'styles/theme';
 import { MarkedDates } from 'react-native-calendars/src/types';
+import { colors } from 'styles/theme';
 import calendarCardStyles from './CalendarCard.style';
 
 interface Props {
@@ -14,44 +15,10 @@ interface Props {
   setMarkedDates: Dispatch<SetStateAction<MarkedDates>>;
 }
 LocaleConfig.locales.kr = {
-  monthNames: [
-    '1월',
-    '2월',
-    '3월',
-    '4월',
-    '5월',
-    '6월',
-    '7월',
-    '8월',
-    '9월',
-    '10월',
-    '11월',
-    '12월',
-  ],
-  monthNamesShort: [
-    '1월',
-    '2월',
-    '3월',
-    '4월',
-    '5월',
-    '6월',
-    '7월',
-    '8월',
-    '9월',
-    '10월',
-    '11월',
-    '12월',
-  ],
-  dayNames: [
-    '일요일',
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-  ],
-  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+  monthNames: MENT_EVENT_MAP.DATE_PICKER.MONTH_NAMES,
+  monthNamesShort: MENT_EVENT_MAP.DATE_PICKER.MONTH_NAMES_SHORT,
+  dayNames: MENT_EVENT_MAP.DATE_PICKER.DAY_NAMES,
+  dayNamesShort: MENT_EVENT_MAP.DATE_PICKER.DAY_NAMES_SHORT,
   today: 'Today',
 };
 LocaleConfig.defaultLocale = 'kr';

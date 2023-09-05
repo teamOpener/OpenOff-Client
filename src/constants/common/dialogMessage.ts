@@ -11,6 +11,12 @@ const MENT_DIALOG = Object.freeze({
     APPLY: '적용',
     CLOSE: '닫기',
   },
+  SORT_DIALOG: {
+    TITLE: '정렬 기준',
+    ORDER_BY_DATE: '날짜순',
+    ORDER_BY_DISTANCE: '거리순',
+    CANCEL: '취소',
+  },
 });
 
 export default MENT_DIALOG;
