@@ -1,10 +1,10 @@
-import CONSTANT_HOST from 'constants/userEvent/host/hostConstants';
 import { StyleSheet } from 'react-native';
+import { layouts } from 'styles/theme';
 
 const consoleScreenLayoutStyles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: CONSTANT_HOST.CONSOLE_SCREEN_PADDING,
+    paddingHorizontal: layouts.PADDING,
     justifyContent: 'space-evenly',
   },
 });

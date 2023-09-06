@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const bookmarkCardListStyles = StyleSheet.create({
   container: {
@@ -6,6 +6,16 @@ const bookmarkCardListStyles = StyleSheet.create({
   },
   flatListcontainer: {
     flex: 1,
+  },
+  rowGap: {
+    marginBottom: 35,
+  },
+  skeletonContainer: {
+    width: Dimensions.get('window').width,
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 20,
   },
 });
 

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import getBannerImages from 'apis/banner';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 
 // eslint-disable-next-line import/prefer-default-export
 export const useGetBannerImages = () => {

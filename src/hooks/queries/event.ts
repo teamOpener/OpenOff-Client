@@ -8,8 +8,8 @@ import {
   getVogueEventLists,
   suspensionEvent,
 } from 'apis/eventInstance';
-import { FieldCode } from 'constants/code';
-import queryKeys from 'constants/queryKeys';
+import { FieldCode } from 'constants/interest';
+import queryKeys from 'constants/queries/queryKeys';
 import { CreateNewEventRequestDto } from 'models/event/request/CreateNewEventRequestDto';
 import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 import { EventSuspensionRequestDto } from 'models/event/request/EventSuspensionRequestDto';

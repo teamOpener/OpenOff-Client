@@ -20,7 +20,7 @@ const MENT_USER = Object.freeze({
   MAIN: {
     USER_INTEREST_FIELD: '관심 분야',
     MY_TICKET: '내 티켓',
-    MY_SCRAP: '스크랩',
+    MY_BOOKMARK: '찜한 목록',
     HOST_EVENT: '주최 이벤트',
     MY_COMMENT: '내가 쓴 댓글',
     CUSTOMER_SERVICE_CENTER: '고객센터',
@@ -34,6 +34,7 @@ const MENT_USER = Object.freeze({
     SETTING: '설정',
     SERVICE_SETTING: '서비스 설정',
     LOGOUT: '로그아웃',
+    LOGOUT_MENT: '로그아웃 중입니다.',
   },
   SUCCESS: {
     PASSWORD_RESET_SUCCESS: '비밀번호를 성공적으로 재설정했습니다!',
@@ -42,6 +43,7 @@ const MENT_USER = Object.freeze({
   ERROR: {
     SERVER: '서버상에 알 수 없는 에러가 발생했습니다!',
     SERVER_IMAGE_ERROR: '서버상에 오류로 이미지 업로드가 실패했습니다.',
+    IMAGE_OVERFLOW: '프로필 이미지는 한장만 선택 가능합니다.',
   },
   AUTHORIZE_BUTTON_TEXT: '확인',
 });

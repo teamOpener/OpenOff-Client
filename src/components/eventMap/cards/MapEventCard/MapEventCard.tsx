@@ -1,10 +1,13 @@
 import Text from 'components/common/Text/Text';
-import { getFieldName } from 'constants/code';
+import { getFieldName } from 'constants/interest';
+import Spacing from 'components/common/Spacing/Spacing';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { memo } from 'react';
 import { Dimensions, Image, Pressable, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { MapEvent } from 'types/event';
+import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
+import dayjs from 'dayjs';
 import mapEventCardStyles from './MapEventCard.style';
 
 interface Props {
@@ -20,18 +23,34 @@ const MapEventCard = ({ event, distance }: Props) => {
     });
   };
 
+  const calcDate = event.eventDateList
+    ?.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1))
+    .map((date) => dayjs(date).format('MM월 YY일'));
+
   return (
     <View style={mapEventCardStyles.container}>
       <View style={mapEventCardStyles.textContainer}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          variant="h3"
-          color="white"
-          style={mapEventCardStyles.titleText}
-        >
-          {event.title}
+        <Text color="main" style={mapEventCardStyles.dateText}>
+          {event.eventDateList.length === 1
+            ? calcDate[0]
+            : `${calcDate[0]} - ${calcDate[event.eventDateList.length - 1]}`}
         </Text>
+      </View>
+      <View style={mapEventCardStyles.textContainer}>
+        <Pressable onPress={handleShowDetailEventInfo}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            variant="h3"
+            color="white"
+            style={mapEventCardStyles.titleText}
+          >
+            {event.title}
+          </Text>
+        </Pressable>
+        <BookmarkButton isEventBookmarked={false} eventInfoId={event.id} />
+      </View>
+      <View style={mapEventCardStyles.textContainer}>
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
@@ -42,6 +61,7 @@ const MapEventCard = ({ event, distance }: Props) => {
           {event.fieldTypeList?.map((field) => getFieldName(field)).join('  ')}
         </Text>
       </View>
+      <Spacing height={5} />
       <View style={mapEventCardStyles.textContainer}>
         <Text variant="body2" color="grey" style={mapEventCardStyles.titleText}>
           {distance}km
@@ -56,6 +76,7 @@ const MapEventCard = ({ event, distance }: Props) => {
           {`${event.streetLoadAddress} ${event.detailAddress}`}
         </Text>
       </View>
+      <Spacing height={9} />
       <View style={mapEventCardStyles.imageContainer}>
         <Carousel
           width={124}

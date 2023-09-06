@@ -1,21 +1,17 @@
 import { useEffect, useState } from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { openSettings } from 'react-native-permissions';
 import { useCameraDevices, Camera } from 'react-native-vision-camera';
 import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
 import Text from 'components/common/Text/Text';
 import Icon from 'components/common/Icon/Icon';
+import QRResultView from 'components/userEvent/host/QRResultView/QRResultView';
 import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
 import { StackMenu } from 'constants/menu';
 import { useCheckQR } from 'hooks/queries/ledger';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 import { colors } from 'styles/theme';
@@ -72,6 +68,12 @@ const HostQRScanScreen = () => {
     handleErrorQRCheck,
   );
 
+  const cameraWrapperStyles = [
+    hostQRScanScreenStyles.cameraWrapper,
+    qrCheckType === 'success' && hostQRScanScreenStyles.successCameraWrapper,
+    qrCheckType === 'error' && hostQRScanScreenStyles.errorCameraWrapper,
+  ];
+
   useEffect(() => {
     if (
       !barcodes ||
@@ -96,77 +98,51 @@ const HostQRScanScreen = () => {
     })();
   }, []);
 
-  return (
-    <ImageBackground
-      source={require('../../../assets/images/QRBackground.png')}
-      style={[hostQRScanScreenStyles.container, StyleSheet.absoluteFill]}
-    >
-      {isLoading && (
-        <WithIconLoading isActive backgroundColor={colors.background} />
-      )}
-      <Text style={hostQRScanScreenStyles.mainText}>
-        {MENT_HOST.MAIN.QR_SCAN_MAIN_INFO}
-      </Text>
-
-      <View>
-        <View style={hostQRScanScreenStyles.absoluteContainer}>
-          {qrCheckType === 'success' && (
-            <Icon name="IconCheckCircle" size={127} fill="lightGreen" />
-          )}
-          {qrCheckType === 'error' && (
-            <Icon name="IconExitCircle" size={127} fill="error" />
-          )}
-        </View>
-        {device != null && hasPermission ? (
-          <Camera
-            style={[
-              hostQRScanScreenStyles.cameraWrapper,
-              qrCheckType === 'success' &&
-                hostQRScanScreenStyles.successCameraWrapper,
-              qrCheckType === 'error' &&
-                hostQRScanScreenStyles.errorCameraWrapper,
-            ]}
-            device={device}
-            isActive
-            frameProcessor={frameProcessor}
-            frameProcessorFps={5}
-          />
-        ) : (
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={hostQRScanScreenStyles.cameraWrapper}
-            onPress={handleSetting}
-          >
-            <Text style={hostQRScanScreenStyles.requestCameraPermission}>
-              카메라 권한을 허용해주세요.
-            </Text>
-          </TouchableOpacity>
+  return device != null && hasPermission ? (
+    <>
+      <Camera
+        style={hostQRScanScreenStyles.container}
+        device={device}
+        isActive
+        frameProcessor={frameProcessor}
+        frameProcessorFps={5}
+      />
+      <View style={hostQRScanScreenStyles.container}>
+        {isLoading && (
+          <WithIconLoading isActive backgroundColor={colors.background} />
         )}
-      </View>
+        <Text style={hostQRScanScreenStyles.mainText}>
+          {MENT_HOST.MAIN.QR_SCAN_MAIN_INFO}
+        </Text>
 
-      <Text style={hostQRScanScreenStyles.subText}>
-        {MENT_HOST.MAIN.QR_SCAN_SUB_INFO}
-      </Text>
-
-      {qrCheckType !== 'default' && text !== '' && (
-        <View
-          style={[
-            hostQRScanScreenStyles.resultWrapper,
-            {
-              borderColor:
-                qrCheckType === 'success' ? colors.lightGreen : colors.error,
-            },
-          ]}
-        >
-          <Text
-            color={qrCheckType === 'success' ? 'lightGreen' : 'error'}
-            style={hostQRScanScreenStyles.resultText}
-          >
-            {text}
-          </Text>
+        <View style={cameraWrapperStyles}>
+          <View style={hostQRScanScreenStyles.absoluteContainer}>
+            {qrCheckType === 'success' && (
+              <Icon name="IconCheckCircle" size={127} fill="lightGreen" />
+            )}
+            {qrCheckType === 'error' && (
+              <Icon name="IconExitCircle" size={127} fill="error" />
+            )}
+          </View>
         </View>
-      )}
-    </ImageBackground>
+
+        <Text style={hostQRScanScreenStyles.subText}>
+          {MENT_HOST.MAIN.QR_SCAN_SUB_INFO}
+        </Text>
+
+        <QRResultView qrCheckType={qrCheckType} text={text} />
+      </View>
+    </>
+  ) : (
+    <View style={StyleSheet.absoluteFill}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={hostQRScanScreenStyles.noPermissionContainer}
+        onPress={handleSetting}
+      >
+        <Text variant="body2">{MENT_HOST.MAIN.NO_PERMISSION}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

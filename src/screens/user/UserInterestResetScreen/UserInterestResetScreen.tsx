@@ -3,7 +3,7 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
 import Spacing from 'components/common/Spacing/Spacing';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import MENT_USER from 'constants/user/userConstants';
 import useDialog from 'hooks/app/useDialog';
 import useInterestField from 'hooks/authorize/useInterestField';
@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import { Image } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import userInterestResetScreenStyles from './UserInterestResetScreen.style';
 
 const UserInterestResetScreen = () => {

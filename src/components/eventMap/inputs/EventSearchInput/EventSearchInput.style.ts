@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { colors, fonts } from 'styles/theme';
 
 const eventSearchInput = StyleSheet.create({
@@ -8,6 +8,19 @@ const eventSearchInput = StyleSheet.create({
     left: 16,
     right: 16,
     zIndex: 10,
+    ...Platform.select({
+      ios: {
+        shadowOffset: {
+          width: 2,
+          height: 4,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
   },
   container: {
     backgroundColor: colors.white,

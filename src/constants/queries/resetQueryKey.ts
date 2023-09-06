@@ -1,6 +1,19 @@
-import { FieldCode } from 'constants/code';
-import queryKeys from 'constants/queryKeys';
+import { FieldCode } from 'constants/interest';
+import queryKeys from 'constants/queries/queryKeys';
 import SortType from 'models/ledger/entity/SortType';
+
+/**
+ * 알림이 울릴 때 갱신되어야 합니다.
+ TODO 알림 종류에 따라 다르게
+ */
+const all = [
+  queryKeys.eventKeys.all,
+  queryKeys.participantKeys.all,
+  queryKeys.hostKeys.all,
+  queryKeys.bookmarkKeys.all,
+  queryKeys.commentKeys.all,
+  queryKeys.ledgerKeys.all,
+];
 
 /**
  * 이벤트 신청 후에 갱신되어야 합니다.
@@ -66,6 +79,7 @@ const refreshHostEventList = (code?: FieldCode) => {
 };
 
 const resetQueryKeys = {
+  all,
   applyEvent,
   cancelParticipantEvent,
   refreshLedgerList,

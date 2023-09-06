@@ -108,14 +108,17 @@ const CalendarCard = ({
       });
     }
   };
+
   return (
     <Calendar
+      key={startDay}
       style={calendarCardStyles.container}
       onDayPress={handleDayPress}
       monthFormat="yyyy MMM"
       hideDayNames={false}
       markingType="period"
       markedDates={markedDates}
+      current={startDay}
       theme={{
         calendarBackground: colors.background,
         backgroundColor: colors.background,

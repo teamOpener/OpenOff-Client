@@ -27,11 +27,6 @@ import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
 import { SocialType } from 'types/user';
 import { validateEmail, validatePassword } from 'utils/validate';
-import messaging from '@react-native-firebase/messaging';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
-import { permitAlert } from 'apis/user';
-import DeviceInfo from 'react-native-device-info';
 import { Action } from 'types/join';
 import { UserInfoStatus } from 'constants/join';
 import loginScreenStyles from './LoginScreen.style';
@@ -65,20 +60,8 @@ const LoginScreen = ({ dispatch }: Props) => {
     });
   };
 
-  const handleLoginSuccess = async () => {
-    const deviceInfo = await DeviceInfo.getUniqueId();
-    const value = await AsyncStorage.getItem('authorize');
-    const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
-    if (authorizeStore.state.fcmToken) {
-      if (Platform.OS === 'ios') messaging().registerDeviceForRemoteMessages();
-      messaging().onTokenRefresh(async (token) => {
-        await permitAlert({
-          fcmToken: token,
-          deviceId: deviceInfo,
-        });
-        setFcmToken(token);
-      });
-    }
+  const handleLoginSuccess = () => {
+    //
   };
 
   const { mutateAsync: normalLogin, isLoading: isNormalLoginLoading } =
@@ -168,6 +151,16 @@ const LoginScreen = ({ dispatch }: Props) => {
     return () => clearTimeout(timer);
   }, []);
 
+  if (isSocialLoginLoading || isNormalLoginLoading) {
+    return (
+      <WithIconLoading
+        isActive
+        backgroundColor={colors.background}
+        text="로그인 중입니다."
+      />
+    );
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -178,13 +171,7 @@ const LoginScreen = ({ dispatch }: Props) => {
           style={[StyleSheet.absoluteFill, loginScreenStyles.loadingContainer]}
         />
       )}
-      {(isSocialLoginLoading || isNormalLoginLoading) && (
-        <WithIconLoading
-          isActive
-          backgroundColor={colors.background}
-          text="로그인 중입니다."
-        />
-      )}
+
       <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>
         <Image
           style={loginScreenStyles.logo}

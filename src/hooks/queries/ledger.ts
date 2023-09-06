@@ -1,8 +1,8 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { getHostEventLists } from 'apis/eventInstance';
-import { FieldCode } from 'constants/code';
+import { FieldCode } from 'constants/interest';
 import {
   applyEvent,
   cancelApplicationEvent,
@@ -106,7 +106,13 @@ export const useLedgerUserList = (
   keyword?: string,
 ) => {
   const query = useInfiniteQuery(
-    [...queryKeys.hostKeys.ledgerListByIndexId(eventIndexId, sortType)],
+    [
+      ...queryKeys.hostKeys.ledgerListByIndexId(
+        eventIndexId,
+        sortType,
+        keyword,
+      ),
+    ],
     ({ pageParam = null }) => {
       return getLedgerUserList({
         eventIndexId,

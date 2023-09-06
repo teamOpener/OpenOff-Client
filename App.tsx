@@ -6,11 +6,7 @@ import {
   useNavigationContainerRef,
 } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import FallbackError from 'components/fallback/FallbackError';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
-import Navigator from 'navigators/Navigator';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -22,12 +18,15 @@ import ErrorBoundary from 'react-native-error-boundary';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { MyTheme, colors } from 'styles/theme';
-
+import { useAuthorizeStore } from 'stores/Authorize';
+import FallbackError from 'components/fallback/FallbackError';
+import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
+import CommonSuspense from 'components/suspense/loading/CommonSuspense/CommonSuspense';
+import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
+import Navigator from 'navigators/Navigator';
 // dayjs setting
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useAuthorizeStore } from 'stores/Authorize';
-import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 
 dayjs.locale('ko');
 
@@ -77,27 +76,29 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary FallbackComponent={FallbackError}>
-        <Suspense
-          fallback={
-            <WithIconLoading isActive backgroundColor={colors.background} />
-          }
-        >
-          <SafeAreaView style={appStyles.safeAreaContainer}>
-            <GestureHandlerRootView style={appStyles.gestureContainer}>
-              <NavigationContainer theme={MyTheme} ref={navigationRef}>
-                <DialogPortalProvider>
-                  {/* <StorybookUIRoot /> */}
-                  {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
-                  <StatusBar
-                    backgroundColor={colors.background}
-                    barStyle="light-content"
-                  />
-                  {isLogin ? <Navigator /> : <AuthorizeNavigator />}
-                </DialogPortalProvider>
-              </NavigationContainer>
-            </GestureHandlerRootView>
-          </SafeAreaView>
-        </Suspense>
+        <SafeAreaView style={appStyles.safeAreaContainer}>
+          <GestureHandlerRootView style={appStyles.gestureContainer}>
+            <NavigationContainer theme={MyTheme} ref={navigationRef}>
+              <DialogPortalProvider>
+                {/* <StorybookUIRoot /> */}
+                {/* 스토리북 실행을 원한다면 위 주석해제, 아래 주석처리 */}
+                <StatusBar
+                  backgroundColor={colors.background}
+                  barStyle="light-content"
+                />
+                {isLogin ? (
+                  <CommonSuspense>
+                    <Navigator />
+                  </CommonSuspense>
+                ) : (
+                  <CommonSuspense>
+                    <AuthorizeNavigator />
+                  </CommonSuspense>
+                )}
+              </DialogPortalProvider>
+            </NavigationContainer>
+          </GestureHandlerRootView>
+        </SafeAreaView>
       </ErrorBoundary>
     </QueryClientProvider>
   );

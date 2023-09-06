@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/code';
+import { FieldCode } from 'constants/interest';
 import { SocialAccountInfo } from 'types/user';
 
 interface UserTotalInfoResponseDto {

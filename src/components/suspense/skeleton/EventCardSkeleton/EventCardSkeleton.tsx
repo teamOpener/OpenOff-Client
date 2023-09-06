@@ -1,6 +1,6 @@
 import { Dimensions, View } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { colors } from 'styles/theme';
+import { colors, layouts } from 'styles/theme';
 import eventCardSkeletonStyles from './EventCardSkeleton.style';
 
 interface Props {
@@ -9,7 +9,9 @@ interface Props {
 
 const EventCardSkeleton = ({ type = 'default' }: Props) => {
   const calcWidth =
-    type === 'default' ? 200 : Dimensions.get('window').width / 2 - 30;
+    type === 'default'
+      ? 200
+      : Dimensions.get('window').width / 2 - layouts.PADDING - 10;
   return (
     <SkeletonPlaceholder backgroundColor={colors.grey}>
       <View style={eventCardSkeletonStyles.container}>

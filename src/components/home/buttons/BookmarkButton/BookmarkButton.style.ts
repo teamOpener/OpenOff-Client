@@ -6,7 +6,8 @@ const bookmarkButtonStyles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     bottom: 5,
-    right: 5,
+    right: 0,
+    padding: 6,
   },
 });
 

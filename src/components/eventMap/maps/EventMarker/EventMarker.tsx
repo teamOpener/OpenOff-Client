@@ -1,10 +1,10 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Marker } from 'react-native-nmap';
 import { colors } from 'styles/theme';
 import { Coordinate, MapEvent } from 'types/event';
 
 interface Props {
-  clickedMarker: number | undefined;
+  clickedMarker: Coordinate | undefined;
   handlePressMapCoordinate: (
     eventId: number,
     eventCoordinate: Coordinate,
@@ -17,7 +17,11 @@ const EventMarker = ({
   handlePressMapCoordinate,
   event,
 }: Props) => {
-  const eventCoordinate = {
+  const isMatchedCoordinate =
+    clickedMarker?.latitude === event.latitude &&
+    clickedMarker?.longitude === event.longitude;
+
+  const markerCoordinate = {
     latitude: event.latitude,
     longitude: event.longitude,
   };
@@ -28,13 +32,13 @@ const EventMarker = ({
       zIndex={10}
       animated
       image={require('../../../../assets/images/eventCoordinate.png')}
-      width={event.id === clickedMarker ? 80 : 50}
-      height={event.id === clickedMarker ? 80 : 50}
-      coordinate={eventCoordinate}
+      width={isMatchedCoordinate ? 60 : 30}
+      height={isMatchedCoordinate ? 60 : 30}
+      coordinate={markerCoordinate}
       onClick={() => {
-        handlePressMapCoordinate(event.id, eventCoordinate);
+        handlePressMapCoordinate(event.id, markerCoordinate);
       }}
-      pinColor={colors.main}
+      pinColor={colors.background}
     />
   );
 };

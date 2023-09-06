@@ -13,7 +13,7 @@ interface Props {
 
 const SelectDetailBox = ({ currentOption, options, label, select }: Props) => {
   return (
-    <View style={selectDetailBoxStyles.container}>
+    <View>
       <Text variant="h3" color="white">
         {label}
       </Text>

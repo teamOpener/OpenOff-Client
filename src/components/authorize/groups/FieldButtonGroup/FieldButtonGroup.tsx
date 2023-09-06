@@ -2,7 +2,7 @@ import Text from 'components/common/Text/Text';
 import FieldButton from 'components/authorize/buttons/FieldButton/FieldButton';
 import { Dispatch, SetStateAction } from 'react';
 import { View } from 'react-native';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import fieldButtonGroupStyles from './FieldButtonGroup.style';
 
 interface Props {

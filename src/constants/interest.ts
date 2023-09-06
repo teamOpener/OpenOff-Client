@@ -1,11 +1,3 @@
-/** 
-  - EE("Exhibition/Expo", "전시/박람회")
-  - S("Show", "공연")
-  - EA("Exercise/Activity", "운동/액티비티")
-  - FD("Food/Drink", "푸드/드링크")
-  - PF("Party/Festival","파티/페스티벌")
-  - FSDH("FellowShip/DailyHope","친목/일일호프")
-*/
 const enum FieldCode {
   EE = 'EE',
   S = 'S',
@@ -21,7 +13,7 @@ const enum FieldName {
   EA = '운동/액티비티',
   FD = '푸드/드링크',
   PF = '파티/페스티벌',
-  FSDH = '친목/일일호프',
+  FSDH = '친목/네트워킹',
 }
 
 const getFieldName = (fieldCode: FieldCode): FieldName => {
@@ -43,13 +35,4 @@ const getFieldName = (fieldCode: FieldCode): FieldName => {
   }
 };
 
-/** 
- *- CA: Comment Alert
-  - EA: Event Alert
- */
-const enum AlertCode {
-  CA = 'CA',
-  EA = 'EA',
-}
-
-export { AlertCode, FieldCode, FieldName, getFieldName };
+export { FieldCode, FieldName, getFieldName };

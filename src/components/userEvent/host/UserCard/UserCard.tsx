@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import queryKeys from 'constants/queryKeys';
+import queryKeys from 'constants/queries/queryKeys';
 import API_ERROR_MESSAGE from 'constants/errorMessage';
 import Icon from 'components/common/Icon/Icon';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';

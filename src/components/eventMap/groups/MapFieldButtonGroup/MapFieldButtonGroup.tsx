@@ -2,7 +2,8 @@ import MapFieldButton from 'components/eventMap/buttons/MapFieldButton/MapFieldB
 import fieldData from 'data/lists/fieldData';
 import { memo } from 'react';
 import { ScrollView } from 'react-native';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import mapFieldButtonGroup from './MapFieldButtonGroup.style';
 
 interface Props {
@@ -10,13 +11,15 @@ interface Props {
 }
 
 const MapFieldButtonGroup = ({ handleShowFieldEvent }: Props) => {
+  const { generateInterestFieldTags } = useInterestFields();
   return (
     <ScrollView
       style={mapFieldButtonGroup.container}
+      contentContainerStyle={mapFieldButtonGroup.contentContainer}
       horizontal
       showsHorizontalScrollIndicator={false}
     >
-      {fieldData.map((field) => (
+      {generateInterestFieldTags().map((field) => (
         <MapFieldButton
           field={field}
           key={field.value}

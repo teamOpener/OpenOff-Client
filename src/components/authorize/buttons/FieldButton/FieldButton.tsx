@@ -1,5 +1,4 @@
-import { Field } from 'types/apps/group';
-import { View } from 'react-native';
+import { Field } from 'types/interest';
 import { colors } from 'styles/theme';
 import ColorButton from '../ColorButton/ColorButton';
 

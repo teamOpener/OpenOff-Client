@@ -13,7 +13,6 @@ const birthSettingInputStyles = StyleSheet.create({
   input: {
     flex: 1,
     paddingVertical: 6,
-    borderBottomWidth: 1,
     backgroundColor: 'transparent',
   },
   resetPosition: {
@@ -23,7 +22,7 @@ const birthSettingInputStyles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     flexDirection: 'row',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
     alignItems: 'center',
     gap: 5,
   },

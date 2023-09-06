@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Field } from 'types/apps/group';
+import { Field } from 'types/interest';
 import Text from '../../../common/Text/Text';
 import mapFieldButtonStyles from './MapFieldButton.style';
 
@@ -12,10 +12,11 @@ interface Props {
 const MapFieldButton = ({ field, handlePress }: Props) => {
   return (
     <TouchableOpacity
+      activeOpacity={0.7}
       style={mapFieldButtonStyles.container}
       onPress={() => handlePress(field)}
     >
-      <Text variant="body1" color="main">
+      <Text style={mapFieldButtonStyles.label} color="black">
         {field.label}
       </Text>
     </TouchableOpacity>

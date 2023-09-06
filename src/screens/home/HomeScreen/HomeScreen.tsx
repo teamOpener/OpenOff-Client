@@ -5,10 +5,11 @@ import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/Cate
 import EventCardList from 'components/home/lists/EventCardList/EventCardList';
 import { StackMenu } from 'constants/menu';
 import Spacing from 'components/common/Spacing/Spacing';
-import fieldData from 'data/lists/fieldData';
 import useNavigator from 'hooks/navigator/useNavigator';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import { usePersonalEventLists, useVogueEventLists } from 'hooks/queries/event';
 import { useMyInfo } from 'hooks/queries/user';
+import useResetQueries from 'hooks/queries/useResetQueries';
 import { useCallback, useEffect } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { foregroundListener, requestAlarmPermission } from 'services/fcm';
@@ -23,9 +24,13 @@ const HomeScreen = () => {
     usePersonalEventLists();
   const { data: userInfo } = useMyInfo();
 
+  const { generateInterestFieldTags } = useInterestFields();
+
   const userInterest = userInfo?.userInfo.fieldTypeList.map((field) => {
     return `#${
-      fieldData.find((fieldElement) => fieldElement.value === field)?.label
+      generateInterestFieldTags().find(
+        (fieldElement) => fieldElement.value === field,
+      )?.label
     }   `;
   });
 
@@ -41,8 +46,10 @@ const HomeScreen = () => {
     stackNavigation.navigate(StackMenu.Alert);
   };
 
+  const { resetQueries } = useResetQueries();
+
   const foregroundListenerCallback = useCallback(() => {
-    foregroundListener();
+    foregroundListener({ resetQueries });
   }, []);
 
   useEffect(() => {

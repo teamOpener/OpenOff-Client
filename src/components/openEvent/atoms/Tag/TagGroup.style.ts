@@ -5,6 +5,7 @@ const tagGroupStyles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 10,
+    paddingRight: 50,
   },
 });
 

@@ -41,6 +41,8 @@ const MENT_EVENT_DETAIL = Object.freeze({
   ERROR: {
     ADDITIONAL_INFORMATION: '추가 정보를 입력해주세요.',
     APPLICATION: '이벤트 신청에 실패했습니다.',
+    EMPTY_EVENT: '찾으시는 이벤트 정보가 없습니다.',
+    EMPTY_COMMENT: '찾으시는 댓글이 존재하지 않습니다.',
   },
   PLACEHOLDER: {
     COMMENT: '댓글을 남겨보세요.',

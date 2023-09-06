@@ -1,4 +1,3 @@
-import { openSettings } from 'react-native-permissions';
 import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -6,9 +5,9 @@ import Text from 'components/common/Text/Text';
 import UserFieldBoxGroup from 'components/user/groups/UserFieldBoxGroup/UserFieldBoxGroup';
 import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
 import MENT_USER from 'constants/user/userConstants';
-import fieldData from 'data/lists/fieldData';
 import { Image, Pressable, TouchableOpacity, View } from 'react-native';
 import useNavigator from 'hooks/navigator/useNavigator';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import { useLogout, useMyInfo } from 'hooks/queries/user';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import { colors } from 'styles/theme';
@@ -18,6 +17,8 @@ import userScreenStyles from './UserScreen.style';
 const UserScreen = () => {
   const { data: userInfo } = useMyInfo();
   const { stackNavigation } = useNavigator();
+
+  const { generateInterestFieldTags } = useInterestFields();
 
   const handleEditProfile = () => {
     stackNavigation.navigate('UserProfileEdit');
@@ -35,7 +36,7 @@ const UserScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text="로그아웃 중입니다."
+          text={MENT_USER.MAIN.LOGOUT_MENT}
         />
       )}
       <View style={userScreenStyles.userInfo}>
@@ -87,7 +88,7 @@ const UserScreen = () => {
             <Icon name="IconArrowRight" size={16} fill="white" />
           </TouchableOpacity>
           <UserFieldBoxGroup
-            fieldLabels={fieldData
+            fieldLabels={generateInterestFieldTags()
               .filter((field) =>
                 userInfo?.userInfo.fieldTypeList.find(
                   (userField) => userField === field.value,

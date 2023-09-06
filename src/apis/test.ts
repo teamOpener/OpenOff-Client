@@ -16,7 +16,7 @@ const fakeApi = <T>(data?: T): Promise<ApiResponse<T>> =>
         data,
       };
       resolve(response);
-    }, 1000);
+    }, 100);
   });
 
 export default fakeApi;
