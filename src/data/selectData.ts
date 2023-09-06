@@ -2,58 +2,59 @@ import {
   ApplicationAbleValue,
   ParticipantValue,
   PayValue,
-} from 'constants/selectBox';
+} from 'constants/app/selectBox';
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import { Option } from 'types/apps/selectbox';
 
 const payOptions: Option[] = [
   {
-    label: '전체',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
     value: PayValue.ALL,
   },
   {
-    label: '유료',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PAY.PAY,
     value: PayValue.PAY,
   },
   {
-    label: '무료',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PAY.FREE,
     value: PayValue.FREE,
   },
 ];
 
 const participantOptions: Option[] = [
   {
-    label: '전체',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
     value: ParticipantValue.ALL,
   },
   {
-    label: '20인 미만',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.SMALL,
     value: ParticipantValue.SMALL,
   },
   {
-    label: '20인 ~ 50인',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.MEDIUM,
     value: ParticipantValue.MEDIUM,
   },
   {
-    label: '50인 ~ 100인',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.LARGE,
     value: ParticipantValue.LARGE,
   },
   {
-    label: '100인 이상',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.HUGE,
     value: ParticipantValue.HUGE,
   },
 ];
 
 const applicationAbleOptions: Option[] = [
   {
-    label: '전체',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
     value: ApplicationAbleValue.ALL,
   },
   {
-    label: '신청중',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.APPLICATION_ABLE.APPLYING,
     value: ApplicationAbleValue.APPLYING,
   },
   {
-    label: '신청마감',
+    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.APPLICATION_ABLE.DEADLINE,
     value: ApplicationAbleValue.DEADLINE,
   },
 ];

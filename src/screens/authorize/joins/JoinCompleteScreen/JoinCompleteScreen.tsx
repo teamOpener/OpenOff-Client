@@ -1,6 +1,7 @@
 import { useFocusEffect } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { useCallback } from 'react';
 import { BackHandler, View } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
@@ -32,12 +33,14 @@ const JoinCompleteScreen = ({ state }: Props) => {
         handlePress: () => {
           setIsLogin(true);
         },
-        label: '시작하기',
+        label: MENT_AUTHORIZE.JOIN_COMPLETE.START,
         isActive: true,
       }}
-      titleElements={[`'${state.nickname}'님`, '회원가입을 축하합니다!']}
+      titleElements={MENT_AUTHORIZE.JOIN_COMPLETE.TITLE(state.nickname)}
     >
-      <Text style={joinCompleteScreenStyles.myFieldTitle}>나의 관심사는</Text>
+      <Text style={joinCompleteScreenStyles.myFieldTitle}>
+        {MENT_AUTHORIZE.JOIN_COMPLETE.MY_FIELD_TITLE}
+      </Text>
       <View style={joinCompleteScreenStyles.myFieldContainer}>
         {state.interestField.map((field) =>
           field ? (

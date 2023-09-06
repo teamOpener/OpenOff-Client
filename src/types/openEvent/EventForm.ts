@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/interest';
+import { FieldCode } from 'constants/interest/interest';
 import { SearchNicknameResponseDto } from 'models/user/response/SearchNicknameResponseDto';
 import { Image } from 'react-native-image-crop-picker';
 

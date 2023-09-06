@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Text from 'components/common/Text/Text';
 import CalendarButton from 'components/eventMap/buttons/CalendarButton/CalendarButton';
 import CalendarCard from 'components/eventMap/cards/CalendarCard/CalendarCard';
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
@@ -99,7 +100,7 @@ const DatePickScreen = () => {
   return (
     <View style={datePickScreenStyles.container}>
       <Text variant="h3" color="white" style={datePickScreenStyles.dateTitle}>
-        기간
+        {MENT_EVENT_MAP.DATE_PICKER.TITLE}
       </Text>
       <View style={datePickScreenStyles.buttonContainer}>
         <TouchableOpacity
@@ -111,7 +112,7 @@ const DatePickScreen = () => {
           onPress={() => handleWeek(0, 6, 'thisWeek')}
         >
           <Text variant="body2" color="white">
-            이번 주
+            {MENT_EVENT_MAP.DATE_PICKER.THIS_WEEK}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -123,7 +124,7 @@ const DatePickScreen = () => {
           onPress={() => handleWeek(7, 13, 'nextWeek')}
         >
           <Text variant="body2" color="white">
-            다음 주
+            {MENT_EVENT_MAP.DATE_PICKER.NEXT_WEEK}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -134,7 +135,7 @@ const DatePickScreen = () => {
           onPress={handleDirect}
         >
           <Text variant="body2" color="white">
-            직접 입력
+            {MENT_EVENT_MAP.DATE_PICKER.DIRECT}
           </Text>
         </TouchableOpacity>
       </View>
@@ -148,7 +149,7 @@ const DatePickScreen = () => {
       />
       <View style={datePickScreenStyles.controlButtonContainer}>
         <CalendarButton
-          label="초기화"
+          label={MENT_EVENT_MAP.DATE_PICKER.RESET}
           backgroundColor="transparent"
           color="grey"
           borderColor={colors.grey}
@@ -156,7 +157,7 @@ const DatePickScreen = () => {
           width={130}
         />
         <CalendarButton
-          label="적용"
+          label={MENT_EVENT_MAP.DATE_PICKER.APPLY}
           backgroundColor={colors.main}
           color="white"
           marginLeft={10}

@@ -1,11 +1,11 @@
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import { OpenEvent } from 'components/openEvent';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { OpenEvent } from 'components/openEvent';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import { HelpText } from 'components/openEvent/atoms';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import StatusType from 'constants/status';
 import costStyles from './Cost.style';
 
 const Cost = () => {
@@ -63,16 +63,16 @@ const Cost = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="참가 비용" />
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.PARTICIPATE_COST} />
       <SpaceLayout size={10}>
         <View style={costStyles.horizontalView}>
           <OpenEvent.Tag
-            label="무료"
+            label={MENT_OPEN_EVENT.MAIN.FREE}
             isSelected={isFree}
             onPress={() => handleIsFree(true)}
           />
           <OpenEvent.Tag
-            label="유료"
+            label={MENT_OPEN_EVENT.MAIN.PAY}
             isSelected={!isFree}
             onPress={() => handleIsFree(false)}
           />

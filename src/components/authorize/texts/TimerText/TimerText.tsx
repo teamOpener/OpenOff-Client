@@ -1,4 +1,5 @@
 import Text from 'components/common/Text/Text';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
 import timerTextStyles from './TimerText.style';
 
@@ -54,7 +55,7 @@ const TimerText = memo(({ setTimerTrigger, timerTrigger, setRetry }: Props) => {
 
   return (
     <Text variant="body3" color="error" style={timerTextStyles.textContainer}>
-      남은 시간 {minutes} : {second}
+      {MENT_AUTHORIZE.PHONE_CERTIFICATION.REMAINING_TIME} {minutes} : {second}
     </Text>
   );
 });

@@ -2,16 +2,16 @@ import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import UserFieldBoxGroup from 'components/user/groups/UserFieldBoxGroup/UserFieldBoxGroup';
 import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
-import MENT_USER from 'constants/user/userConstants';
-import { Image, Pressable, TouchableOpacity, View } from 'react-native';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useInterestFields from 'hooks/interest/useInterestFields';
-import { useLogout, useMyInfo } from 'hooks/queries/user';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import { colors } from 'styles/theme';
 import UserSupportGroup from 'components/user/groups/UserSupportGroup/UserSupportGroup';
+import MENT_USER from 'constants/user/userMessage';
+import useInterestFields from 'hooks/interest/useInterestFields';
+import useNavigator from 'hooks/navigator/useNavigator';
+import { useLogout, useMyInfo } from 'hooks/queries/user';
+import { Image, Pressable, TouchableOpacity, View } from 'react-native';
+import { colors } from 'styles/theme';
 import userScreenStyles from './UserScreen.style';
 
 const UserScreen = () => {

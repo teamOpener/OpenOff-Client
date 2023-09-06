@@ -1,13 +1,12 @@
 import { InfiniteData } from '@tanstack/react-query';
 import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
-import EventRowCard from 'components/home/cards/EventRowCard/EventRowCard';
-import EventRowCardSkeleton from 'components/suspense/skeleton/EventRowCardSkeleton/EventRowCardSkeleton';
+import EventCard from 'components/home/cards/EventCard/EventCard';
+import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
+import MENT_HOME from 'constants/home/homeMessage';
 import useBookmarkEvent from 'hooks/bookmark/useBookmarkEvent';
 import { MyBookmarkEventResponseDto } from 'models/event/response/MyBookmarkEventResponseDto';
 import { FlatList, View } from 'react-native';
 import { InfiniteScrollApiResponse } from 'types/ApiResponse';
-import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
-import EventCard from 'components/home/cards/EventCard/EventCard';
 import bookmarkCardListStyles from './BookmarkCardList.style';
 
 interface Props {
@@ -33,7 +32,7 @@ const BookmarkCardList = ({
   return (
     <View style={bookmarkCardListStyles.container}>
       {flatEventList?.length === 0 ? (
-        <EmptyScreen content="이런! 아직 이벤트가 존재하지 않아요!" />
+        <EmptyScreen content={MENT_HOME.MAIN.EMPTY_EVENT} />
       ) : (
         <FlatList
           numColumns={2}

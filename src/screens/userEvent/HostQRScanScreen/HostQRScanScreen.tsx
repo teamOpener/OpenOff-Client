@@ -1,23 +1,23 @@
+import { useQueryClient } from '@tanstack/react-query';
+import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import QRResultView from 'components/userEvent/host/QRResultView/QRResultView';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
+import { StackMenu } from 'constants/app/menu';
+import queryKeys from 'constants/queries/queryKeys';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
+import useStackRoute from 'hooks/navigator/useStackRoute';
+import { useCheckQR } from 'hooks/queries/ledger';
+import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 import { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useQueryClient } from '@tanstack/react-query';
 import { openSettings } from 'react-native-permissions';
-import { useCameraDevices, Camera } from 'react-native-vision-camera';
-import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
-import Text from 'components/common/Text/Text';
-import Icon from 'components/common/Icon/Icon';
-import QRResultView from 'components/userEvent/host/QRResultView/QRResultView';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import { StackMenu } from 'constants/menu';
-import { useCheckQR } from 'hooks/queries/ledger';
-import queryKeys from 'constants/queries/queryKeys';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
+import { Camera, useCameraDevices } from 'react-native-vision-camera';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { QRCheckType } from 'types/hostQr/QRCheck';
-import useStackRoute from 'hooks/navigator/useStackRoute';
+import { BarcodeFormat, useScanBarcodes } from 'vision-camera-code-scanner';
 import hostQRScanScreenStyles from './HostQRScanScreen.style';
 
 const HostQRScanScreen = () => {

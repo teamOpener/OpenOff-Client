@@ -1,15 +1,16 @@
 import Icon from 'components/common/Icon/Icon';
+import Spacing from 'components/common/Spacing/Spacing';
 import AdvertisementCarousel from 'components/home/carousels/AdvertisementCarousel/AdvertisementCarousel';
 import FloatingButton from 'components/home/floatingbutton/FloatingButton';
 import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/CategoryButtonGroup';
 import EventCardList from 'components/home/lists/EventCardList/EventCardList';
-import { StackMenu } from 'constants/menu';
-import Spacing from 'components/common/Spacing/Spacing';
-import useNavigator from 'hooks/navigator/useNavigator';
+import { StackMenu } from 'constants/app/menu';
+import MENT_HOME from 'constants/home/homeMessage';
 import useInterestFields from 'hooks/interest/useInterestFields';
+import useNavigator from 'hooks/navigator/useNavigator';
 import { usePersonalEventLists, useVogueEventLists } from 'hooks/queries/event';
-import { useMyInfo } from 'hooks/queries/user';
 import useResetQueries from 'hooks/queries/useResetQueries';
+import { useMyInfo } from 'hooks/queries/user';
 import { useCallback, useEffect } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { foregroundListener, requestAlarmPermission } from 'services/fcm';
@@ -89,14 +90,14 @@ const HomeScreen = () => {
         <EventCardList
           isLoading={isPersonalLoading}
           events={personalEventLists}
-          title="맞춤 이벤트 추천"
+          title={MENT_HOME.MAIN.PERSONAL_EVENT_COMMEND}
           subTitle={userInterest?.join('') ?? ''}
         />
         <EventCardList
           isLoading={isVogueLoading}
           events={vogueEventLists?.content}
-          title="인기 이벤트"
-          subTitle="지금 핫한 인기 이벤트를 둘러보세요."
+          title={MENT_HOME.MAIN.POPULAR_EVENT}
+          subTitle={MENT_HOME.MAIN.POPULAR_EVENT_SUB_TITLE}
           type="popular"
         />
         <Spacing height={20} />

@@ -2,8 +2,9 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
-import { UserInfoStatus } from 'constants/join';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
+import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import { useNicknameCheck } from 'hooks/queries/auth';
 import { Dispatch, useState } from 'react';
@@ -30,7 +31,7 @@ const NickNameScreen = ({ dispatch }: Props) => {
     if (checkInfo.data?.isExist) {
       openDialog({
         type: 'validate',
-        text: '중복된 닉네임입니다. 다시 설정해주세요.',
+        text: MENT_AUTHORIZE.NICKNAME.DUPLICATED_NICKNAME,
       });
       return;
     }
@@ -43,16 +44,16 @@ const NickNameScreen = ({ dispatch }: Props) => {
 
   return (
     <ScreenCover
-      titleElements={['오픈오프에서 사용할', '닉네임을 입력해주세요.']}
+      titleElements={MENT_AUTHORIZE.NICKNAME.TITLE}
       authorizeButton={{
         handlePress: handleAuthorize,
-        label: '확인',
+        label: MENT_AUTHORIZE.NICKNAME.CONFIRM,
         isActive,
       }}
     >
       <EssentialInput
         validation={validateNickname}
-        label="닉네임"
+        label={MENT_AUTHORIZE.NICKNAME.NICKNAME}
         value={nickname}
         setValue={setNickname}
         type="nickname"

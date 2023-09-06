@@ -1,12 +1,12 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import TopFieldButtonGroup from 'components/home/groups/TopFieldButtonGroup/TopFieldButtonGroup';
+import InfinityEventCardList from 'components/home/lists/InfinityEventCardList/InfinityEventCardList';
+import { FieldCode } from 'constants/interest/interest';
+import useInterestFields from 'hooks/interest/useInterestFields';
+import { useFieldEventLists } from 'hooks/queries/event';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Field } from 'types/interest';
-import { useFieldEventLists } from 'hooks/queries/event';
-import { FieldCode } from 'constants/interest';
-import useInterestFields from 'hooks/interest/useInterestFields';
-import InfinityEventCardList from 'components/home/lists/InfinityEventCardList/InfinityEventCardList';
 import categoryEventScreenStyles from './CategoryEventScreen.style';
 
 type ParamList = {

@@ -1,7 +1,8 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Image, View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import passwordResetCompleteScreenStyles from './PasswordResetCompleteScreen.style';
@@ -12,7 +13,7 @@ const PasswordResetCompleteScreen = () => {
     <ScreenCover
       authorizeButton={{
         handlePress: () => navigation.navigate(AuthorizeMenu.Login),
-        label: '로그인 화면으로',
+        label: MENT_AUTHORIZE.FIND.BACK_TO_LOGIN,
         isActive: true,
       }}
     >
@@ -22,10 +23,10 @@ const PasswordResetCompleteScreen = () => {
           source={require('../../../../assets/images/check.png')}
         />
         <Text variant="h4" color="main">
-          비밀번호 변경이 완료되었습니다.
+          {MENT_AUTHORIZE.FIND.SUCCESS_RESET_PASSWORD}
         </Text>
         <Text variant="body2" color="white">
-          다시 로그인을 해주세요.
+          {MENT_AUTHORIZE.FIND.LOGIN_INTRODUCTORY_COMMENT}
         </Text>
       </View>
     </ScreenCover>

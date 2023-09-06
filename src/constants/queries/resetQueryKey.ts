@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/interest';
+import { FieldCode } from 'constants/interest/interest';
 import queryKeys from 'constants/queries/queryKeys';
 import SortType from 'models/ledger/entity/SortType';
 

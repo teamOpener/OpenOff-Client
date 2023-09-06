@@ -1,20 +1,11 @@
-import { useEffect, useState } from 'react';
-import {
-  FlatList,
-  TouchableOpacity,
-  View,
-  RefreshControl,
-  ScrollView,
-} from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
-import { colors } from 'styles/theme';
-import { StackMenu } from 'constants/menu';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
-import Text from 'components/common/Text/Text';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
-import { LedgerScreenLayout } from 'components/userEvent/host/layout';
+import Text from 'components/common/Text/Text';
+import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import ListLoading from 'components/suspense/loading/ListLoading/ListLoading';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import {
   ActionButton,
   IconText,
@@ -23,25 +14,35 @@ import {
   SelectBottomSheet,
   UserCard,
 } from 'components/userEvent/host';
-import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
+import { LedgerScreenLayout } from 'components/userEvent/host/layout';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
+import { StackMenu } from 'constants/app/menu';
+import queryKeys from 'constants/queries/queryKeys';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
+import useDialog from 'hooks/app/useDialog';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import useBottomSheet from 'hooks/ledger/useBottomSheet';
+import useNavigator from 'hooks/navigator/useNavigator';
+import useStackRoute from 'hooks/navigator/useStackRoute';
 import {
   useLedgerStatus,
   useLedgerUserList,
   usePermitAllApplicant,
 } from 'hooks/queries/ledger';
 import useResetQueries from 'hooks/queries/useResetQueries';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useBottomSheet from 'hooks/ledger/useBottomSheet';
-import useDialog from 'hooks/app/useDialog';
-import usePullToRefresh from 'hooks/app/usePullToRefresh';
-import useStackRoute from 'hooks/navigator/useStackRoute';
 import SortType from 'models/ledger/entity/SortType';
+import { useEffect, useState } from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import queryKeys from 'constants/queries/queryKeys';
-import resetQueryKeys from 'constants/queries/resetQueryKey';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import ListLoading from 'components/suspense/loading/ListLoading/ListLoading';
+import MENT_DIALOG from 'constants/common/dialogMessage';
 import hostLedgerScreenStyles from './HostLedgerScreen.style';
 
 const HostLedgerScreen = () => {
@@ -104,7 +105,7 @@ const HostLedgerScreen = () => {
     openDialog({
       type: 'success',
       text: MENT_HOST.SUCCESS.PERMIT_ALL,
-      closeText: '확인',
+      closeText: MENT_DIALOG.DIALOG.CONFIRM,
     });
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
     queryClient.invalidateQueries(
@@ -135,8 +136,8 @@ const HostLedgerScreen = () => {
       type: 'confirm',
       text: MENT_HOST.MAIN.PERMIT_ALL,
       apply: handlePermitAll,
-      applyText: '예',
-      closeText: '아니오',
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
     });
   };
 
@@ -162,25 +163,29 @@ const HostLedgerScreen = () => {
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <IconText
             iconName="IconUser"
-            label={`승인완료 ${eventStatus?.approvedCount ?? 0}/${
-              eventStatus?.maxCount ?? 0
-            }`}
+            label={MENT_HOST.APPLICANT.APPROVE_WITH_COUNT(
+              eventStatus?.approvedCount ?? 0,
+              eventStatus?.maxCount ?? 0,
+            )}
           />
           <IconText
             iconName="IconUser"
-            label={`입장완료 ${eventStatus?.joinedCount ?? 0}/${
-              eventStatus?.maxCount ?? 0
-            }`}
+            label={MENT_HOST.APPLICANT.ADMISSION_WITH_COUNT(
+              eventStatus?.joinedCount ?? 0,
+              eventStatus?.maxCount ?? 0,
+            )}
           />
         </View>
 
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <Text color="main" style={hostLedgerScreenStyles.approveText}>
-            {`${eventStatus?.notApprovedCount ?? 0}명 승인 대기중`}
+            {MENT_HOST.APPLICANT.NOTAPPROVE_COUNT(
+              eventStatus?.notApprovedCount ?? 0,
+            )}
           </Text>
           <ActionButton
             disabled={eventStatus?.notApprovedCount === 0}
-            label="일괄 승인"
+            label={MENT_HOST.APPLICANT.ALL_APPROVE}
             style={hostLedgerScreenStyles.totalApproveBtn}
             onPress={handlePermitAllButtonPress}
           />
@@ -197,7 +202,9 @@ const HostLedgerScreen = () => {
             onPress={presentModal}
           >
             <Text style={hostLedgerScreenStyles.sortBtnText}>
-              {selectedSortType === SortType.DATE ? '신청순' : '이름순'}
+              {selectedSortType === SortType.DATE
+                ? MENT_HOST.MAIN.SORT.DATE
+                : MENT_HOST.MAIN.SORT.NAME}
             </Text>
             <Icon
               name={openBottomSheet ? 'IconArrowUp' : 'IconArrowDown'}

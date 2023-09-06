@@ -4,9 +4,9 @@ import {
 } from '@react-navigation/stack';
 import BackToHomeButton from 'components/authorize/buttons/BackToHomeButton/BackToHomeButton';
 import BackButton from 'components/navigator/BackButton';
-import { GenderType, UserInfoStatus } from 'constants/join';
-import { AuthorizeMenu } from 'constants/menu';
-import React, { Reducer, useReducer } from 'react';
+import { AuthorizeMenu } from 'constants/app/menu';
+import { GenderType, UserInfoStatus } from 'constants/authorize/join';
+import { Reducer, useReducer } from 'react';
 import { Platform } from 'react-native';
 import EmailPasswordFindScreen from 'screens/authorize/finds/EmailPasswordFindScreen/EmailPasswordFindScreen';
 import AgreeToTermScreen from 'screens/authorize/joins/AgreeToTermScreen/AgreeToTermScreen';

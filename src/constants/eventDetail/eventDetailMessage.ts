@@ -1,4 +1,21 @@
 const MENT_EVENT_DETAIL = Object.freeze({
+  DATE_FORMAT: {
+    DATE_SELECT: 'YYYY.MM.DD (ddd) HH시 mm분',
+  },
+  COMMENT: {
+    COMMENT_SUCCESS: '댓글을 등록했습니다!',
+    COMMENT_REPORT: '댓글을 신고했습니다!',
+    COMMENT_INPUT: '댓글을 남겨보세요.',
+    CHILD_COMMENT_INPUT: '대댓글을 남겨보세요.',
+    SUBMIT: '등록',
+    EMPTY_COMMENT: '문의사항이나 댓글을 남겨주세요!',
+    POSTING_REPLY: '답글달기',
+    /**
+     * @param childCount 자식 댓글수
+     * @returns 답글 childCount개 더보기
+     */
+    READ_MORE_REPLIES: (childCount: number) => `- 답글 ${childCount}개 더 보기`,
+  },
   MAIN: {
     ADDRESS: '장소',
     LOCATION: '위치보기',

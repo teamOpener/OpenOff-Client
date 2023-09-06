@@ -1,12 +1,12 @@
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import { FieldCode } from 'constants/interest';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import { FieldCode } from 'constants/interest/interest';
+import useInterestFields from 'hooks/interest/useInterestFields';
 import { TouchableOpacity, View } from 'react-native';
 import { ticketListDateFormatter } from 'utils/date';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import useInterestFields from 'hooks/interest/useInterestFields';
-import ticketListStyles from './TicketList.style';
 import XSmallTag from '../XSmallTag/XSmallTag';
+import ticketListStyles from './TicketList.style';
 
 interface Props {
   eventTitle: string;

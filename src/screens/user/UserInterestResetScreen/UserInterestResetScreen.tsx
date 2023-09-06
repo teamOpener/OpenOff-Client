@@ -4,7 +4,7 @@ import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/Field
 import Spacing from 'components/common/Spacing/Spacing';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import queryKeys from 'constants/queries/queryKeys';
-import MENT_USER from 'constants/user/userConstants';
+import MENT_USER from 'constants/user/userMessage';
 import useDialog from 'hooks/app/useDialog';
 import useInterestField from 'hooks/authorize/useInterestField';
 import useNavigator from 'hooks/navigator/useNavigator';

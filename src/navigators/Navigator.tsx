@@ -4,37 +4,37 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import BackButton from 'components/navigator/BackButton';
-import useResetQueries from 'hooks/queries/useResetQueries';
-import useRefetchOnFocus from 'hooks/app/useRefetchOnFocus';
+import ExitButton from 'components/navigator/ExitButton/ExitButton';
+import { StackMenu } from 'constants/app/menu';
+import MENT_NAVIGATOR from 'constants/navigator/navigatorMessage';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
-import { StackMenu } from 'constants/menu';
+import useRefetchOnFocus from 'hooks/app/useRefetchOnFocus';
+import useResetQueries from 'hooks/queries/useResetQueries';
 import { Platform } from 'react-native';
 import DatePickScreen from 'screens/eventMap/DatePickScreen/DatePickScreen';
-import CategoryEventScreen from 'screens/home/CategoryEventScreen/CategoryEventScreen';
-import OpenEventScreen from 'screens/home/OpenEventScreen/OpenEventScreen';
-import BookmarkEventScreen from 'screens/home/BookmarkEventScreen/BookmarkEventScreen';
-import { colors, fonts } from 'styles/theme';
-import SearchAddressScreen from 'screens/home/SearchAddressScreen/SearchAddressScreen';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import AlertScreen from 'screens/home/AlertScreen/AlertScreen';
+import EventApplyScreen from 'screens/events/EventApplyScreen/EventApplyScreen';
+import EventCommentScreen from 'screens/events/EventCommentScreen/EventCommentScreen';
 import EventDetailScreen from 'screens/events/EventDetailScreen/EventDetailScreen';
 import EventSelectScreen from 'screens/events/EventSelectScreen/EventSelectScreen';
-import EventApplyScreen from 'screens/events/EventApplyScreen/EventApplyScreen';
-import UserTicketScreen from 'screens/userEvent/UserTicketScreen/UserTicketScreen';
-import ExitButton from 'components/navigator/ExitButton/ExitButton';
-import UserQRScreen from 'screens/userEvent/UserQRScreen/UserQRScreen';
-import HostConsoleScreen from 'screens/userEvent/HostConsoleScreen/HostConsoleScreen';
-import HostQRScanScreen from 'screens/userEvent/HostQRScanScreen/HostQRScanScreen';
-import HostLedgerScreen from 'screens/userEvent/HostLedgerScreen/HostLedgerScreen';
-import StaffManagementScreen from 'screens/userEvent/StaffManagementScreen/StaffManagementScreen';
-import HostLedgerDetailScreen from 'screens/userEvent/HostLedgerDetailScreen/HostLedgerDetailScreen';
+import AlertScreen from 'screens/home/AlertScreen/AlertScreen';
+import BookmarkEventScreen from 'screens/home/BookmarkEventScreen/BookmarkEventScreen';
+import CategoryEventScreen from 'screens/home/CategoryEventScreen/CategoryEventScreen';
+import OpenEventScreen from 'screens/home/OpenEventScreen/OpenEventScreen';
 import PopularEventScreen from 'screens/home/PopularEventScreen/PopularEventScreen';
-import UserProfileEditScreen from 'screens/user/UserProfileEditScreen/UserProfileEditScreen';
-import UserInterestResetScreen from 'screens/user/UserInterestResetScreen/UserInterestResetScreen';
-import UserCommentScreen from 'screens/user/UserCommentScreen/UserCommentScreen';
+import SearchAddressScreen from 'screens/home/SearchAddressScreen/SearchAddressScreen';
 import ScrapScreen from 'screens/user/ScrapScreen/ScrapScreen';
+import UserCommentScreen from 'screens/user/UserCommentScreen/UserCommentScreen';
+import UserInterestResetScreen from 'screens/user/UserInterestResetScreen/UserInterestResetScreen';
 import UserPasswordResetScreen from 'screens/user/UserPasswordResetScreen/UserPasswordResetScreen';
-import EventCommentScreen from 'screens/events/EventCommentScreen/EventCommentScreen';
+import UserProfileEditScreen from 'screens/user/UserProfileEditScreen/UserProfileEditScreen';
+import HostConsoleScreen from 'screens/userEvent/HostConsoleScreen/HostConsoleScreen';
+import HostLedgerDetailScreen from 'screens/userEvent/HostLedgerDetailScreen/HostLedgerDetailScreen';
+import HostLedgerScreen from 'screens/userEvent/HostLedgerScreen/HostLedgerScreen';
+import HostQRScanScreen from 'screens/userEvent/HostQRScanScreen/HostQRScanScreen';
+import StaffManagementScreen from 'screens/userEvent/StaffManagementScreen/StaffManagementScreen';
+import UserQRScreen from 'screens/userEvent/UserQRScreen/UserQRScreen';
+import UserTicketScreen from 'screens/userEvent/UserTicketScreen/UserTicketScreen';
+import { colors, fonts } from 'styles/theme';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
@@ -108,7 +108,7 @@ const Navigator = () => {
         component={CategoryEventScreen}
         options={{
           ...TransitionPresets.SlideFromRightIOS,
-          headerTitle: '카테고리',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.CATEGORY_EVENT,
           ...defaultOptions,
         }}
       />
@@ -117,7 +117,7 @@ const Navigator = () => {
         component={BookmarkEventScreen}
         options={{
           ...TransitionPresets.SlideFromRightIOS,
-          headerTitle: '찜한 이벤트',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.BOOKMARK_EVENT,
           ...defaultOptions,
         }}
       />
@@ -127,7 +127,7 @@ const Navigator = () => {
             backgroundColor: colors.background,
           },
           headerTintColor: colors.white,
-          headerTitle: MENT_OPEN_EVENT.HEADER.SEARCH_ADDRESS,
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.SEARCH_ADDRESS,
           headerLeft: BackButton,
         }}
         name={StackMenu.SearchAddress}
@@ -135,7 +135,7 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerTitle: '알림',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.ALERT,
           ...defaultOptions,
         }}
         name={StackMenu.Alert}
@@ -143,7 +143,7 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerTitle: '인기 이벤트',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.POPULAR_EVENT,
           ...defaultOptions,
         }}
         name={StackMenu.PopularEvent}
@@ -152,7 +152,7 @@ const Navigator = () => {
       {/* map */}
       <Stack.Screen
         options={{
-          headerTitle: '날짜 선택',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.DATE_PICK,
           ...defaultOptions,
         }}
         name={StackMenu.DatePick}
@@ -183,7 +183,7 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerTitle: '댓글',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.EVENT_COMMENT,
           ...defaultOptions,
         }}
         name={StackMenu.EventComment}
@@ -215,7 +215,7 @@ const Navigator = () => {
       {/* host event */}
       <Stack.Screen
         options={{
-          headerTitle: '주최 이벤트 관리',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.HOST_CONSOLE,
           ...defaultOptions,
         }}
         name={StackMenu.HostConsole}
@@ -226,7 +226,7 @@ const Navigator = () => {
           headerTransparent: true,
           headerTintColor: colors.white,
           headerLeft: BackButton,
-          headerTitle: '스캔',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.HOST_QR,
         }}
         name={StackMenu.HostQRScan}
         component={HostQRScanScreen}
@@ -248,7 +248,7 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerTitle: '스태프 관리',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.STAFF_MANAGEMENT,
           ...defaultOptions,
         }}
         name={StackMenu.StaffManagement}
@@ -257,7 +257,7 @@ const Navigator = () => {
       {/* user */}
       <Stack.Screen
         options={{
-          headerTitle: '회원 정보 수정',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.USER_PROFILE_EDIT,
           ...defaultOptions,
         }}
         name={StackMenu.UserProfileEdit}
@@ -286,7 +286,7 @@ const Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerTitle: '찜한 목록',
+          headerTitle: MENT_NAVIGATOR.HEADER_TITLE.SCRAP,
           ...defaultOptions,
         }}
         name={StackMenu.Scrap}

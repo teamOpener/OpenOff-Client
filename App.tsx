@@ -25,8 +25,10 @@ import CommonSuspense from 'components/suspense/loading/CommonSuspense/CommonSus
 import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
 // dayjs setting
+import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import { useAuthorizeStore } from 'stores/Authorize';
 
 dayjs.locale('ko');
 

@@ -1,9 +1,9 @@
-import React from 'react';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
+import { FieldCode } from 'constants/interest/interest';
 import { InterestInfoResponseDto } from 'models/interest/response/InterestInfoResponseDto';
+import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
-import { FieldCode } from 'constants/interest';
 import { IconName } from 'types/icon';
 import categoryButtonStyles from './CategoryButton.style';
 

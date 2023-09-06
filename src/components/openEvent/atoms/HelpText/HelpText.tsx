@@ -1,5 +1,5 @@
 import Text from 'components/common/Text/Text';
-import StatusType from 'constants/status';
+import StatusType from 'constants/app/status';
 
 interface Props {
   content: string;

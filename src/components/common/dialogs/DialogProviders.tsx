@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import MENT_DIALOG from 'constants/common/dialogMessage';
 import { PropsWithChildren, useMemo, useState } from 'react';
 import {
   CommonDialog,
@@ -30,7 +31,7 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
         isShow: false,
         contents: '',
         callback: () => {},
-        closeText: '닫기',
+        closeText: MENT_DIALOG.DIALOG_CONTEXT.CLOSE,
         apply: () => {},
         applyText: '',
       });
@@ -47,8 +48,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
         isShow: false,
         text: '',
         apply: () => {},
-        applyText: '적용',
-        closeText: '닫기',
+        applyText: MENT_DIALOG.DIALOG_CONTEXT.APPLY,
+        closeText: MENT_DIALOG.DIALOG_CONTEXT.CLOSE,
         deny: () => {},
         denyText: '',
       });
@@ -61,8 +62,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
     callback = () => {},
     apply = () => {},
     contents = '',
-    applyText = '적용',
-    closeText = '닫기',
+    applyText = MENT_DIALOG.DIALOG_CONTEXT.APPLY,
+    closeText = MENT_DIALOG.DIALOG_CONTEXT.CLOSE,
     deny = () => {},
     denyText = '',
   }: OpenDialog) => {

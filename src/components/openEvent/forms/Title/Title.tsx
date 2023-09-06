@@ -1,7 +1,8 @@
-import { View } from 'react-native';
 import { OpenEvent } from 'components/openEvent';
+import StatusType from 'constants/app/status';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
+import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import StatusType from 'constants/status';
 
 const Title = () => {
   const {
@@ -23,11 +24,11 @@ const Title = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="이벤트 제목" />
+      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.TITLE} />
       <OpenEvent.Input
         value={title ?? ''}
         onChangeText={handleChangeText}
-        placeholder="제목"
+        placeholder={MENT_OPEN_EVENT.PLACEHOLDER.TITLE}
         status={
           openEventErrorMessage.title == null
             ? StatusType.default

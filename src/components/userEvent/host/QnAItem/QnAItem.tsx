@@ -2,6 +2,7 @@ import { ScrollView } from 'react-native';
 import Text from 'components/common/Text/Text';
 import { QnAInfo } from 'models/ledger/entity/QnAInfo';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import qnAItemStyles from './QnAItem.style';
 
 interface Props {
@@ -12,7 +13,9 @@ interface Props {
 const QnAItem = ({ index, qnaInfo }: Props) => {
   return (
     <SpaceLayout direction="row" size={10} style={qnAItemStyles.full}>
-      <Text color="main" style={qnAItemStyles.text}>{`질문${index + 1}`}</Text>
+      <Text color="main" style={qnAItemStyles.text}>
+        {MENT_HOST.MAIN.QNA_COUNT(index + 1)}
+      </Text>
 
       <SpaceLayout size={9} style={qnAItemStyles.full}>
         <Text style={qnAItemStyles.text}>{qnaInfo.question}</Text>

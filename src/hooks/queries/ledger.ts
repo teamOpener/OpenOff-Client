@@ -1,8 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import queryKeys from 'constants/queries/queryKeys';
-import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { getHostEventLists } from 'apis/eventInstance';
-import { FieldCode } from 'constants/interest';
 import {
   applyEvent,
   cancelApplicationEvent,
@@ -20,19 +17,22 @@ import {
   permitApplicant,
   plusStaff,
 } from 'apis/ledger';
+import { FieldCode } from 'constants/interest/interest';
+import queryKeys from 'constants/queries/queryKeys';
 import SortType from 'models/ledger/entity/SortType';
-import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
-import { EventAllApplicantPermitRequestDto } from 'models/ledger/request/EventAllApplicantPermitRequestDto';
-import { ApplyEventRequestDto } from 'models/ledger/request/ApplyEventRequestDto';
-import { EventApplicationDenyRequestDto } from 'models/ledger/request/EventApplicationDenyRequestDto';
 import { ApplicantApplyDetailRequestDto } from 'models/ledger/request/ApplicantApplyDetailRequestDto';
+import { ApplicationCancelRequestDto } from 'models/ledger/request/ApplicationCancelRequestDto';
+import { ApplyEventRequestDto } from 'models/ledger/request/ApplyEventRequestDto';
+import { EventAllApplicantPermitRequestDto } from 'models/ledger/request/EventAllApplicantPermitRequestDto';
+import { EventApplicantPermitRequestDto } from 'models/ledger/request/EventApplicantPermitRequestDto';
+import { EventApplicationDenyRequestDto } from 'models/ledger/request/EventApplicationDenyRequestDto';
+import { EventStaffCreateRequestDto } from 'models/ledger/request/EventStaffCreateRequestDto';
+import { EventStaffInfoRequestDto } from 'models/ledger/request/EventStaffInfoRequestDto';
 import { MyTicketInfoRequestDto } from 'models/ledger/request/MyTicketInfoRequestDto';
 import { QRCheckRequestDto } from 'models/ledger/request/QRCheckRequestDto';
-import { ApplicationCancelRequestDto } from 'models/ledger/request/ApplicationCancelRequestDto';
-import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
-import { EventStaffInfoRequestDto } from 'models/ledger/request/EventStaffInfoRequestDto';
-import { EventStaffCreateRequestDto } from 'models/ledger/request/EventStaffCreateRequestDto';
 import { StaffMinusRequestDto } from 'models/ledger/request/StaffMinusRequestDto';
+import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
+import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 
 export const useUserTickets = ({ eventInfoId }: MyTicketInfoRequestDto) => {
   return useQuery(

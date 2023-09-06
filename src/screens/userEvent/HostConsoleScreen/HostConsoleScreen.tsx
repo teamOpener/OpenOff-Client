@@ -1,30 +1,31 @@
-import { useEffect, useState } from 'react';
-import { View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
-import { StackMenu } from 'constants/menu';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useDialog from 'hooks/app/useDialog';
-import { useHostEventLists, useLedgerStatus } from 'hooks/queries/ledger';
+import FixedButton from 'components/common/FixedButton/FixedButton';
+import Spacing from 'components/common/Spacing/Spacing';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import {
   DateSelector,
   DonutChartInfo,
   LargeIconButton,
   SmallIconButton,
 } from 'components/userEvent/host';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
+import { ConsoleScreenLayout } from 'components/userEvent/host/layout';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
+import { StackMenu } from 'constants/app/menu';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import queryKeys from 'constants/queries/queryKeys';
-import { ConsoleScreenLayout } from 'components/userEvent/host/layout';
-import FixedButton from 'components/common/FixedButton/FixedButton';
-import Spacing from 'components/common/Spacing/Spacing';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import { EventIndexInfo } from 'models/ledger/entity/EventIndexInfo';
-import { useSuspensionEvent } from 'hooks/queries/event';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
+import useDialog from 'hooks/app/useDialog';
+import useNavigator from 'hooks/navigator/useNavigator';
 import useStackRoute from 'hooks/navigator/useStackRoute';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import { ApiErrorResponse } from 'types/ApiResponse';
+import { useSuspensionEvent } from 'hooks/queries/event';
+import { useHostEventLists, useLedgerStatus } from 'hooks/queries/ledger';
+import { EventIndexInfo } from 'models/ledger/entity/EventIndexInfo';
+import { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import { colors } from 'styles/theme';
+import { ApiErrorResponse } from 'types/ApiResponse';
+import MENT_DIALOG from 'constants/common/dialogMessage';
 import hostConsoleStyles from './HostConsole.style';
 
 const HostConsoleScreen = () => {
@@ -62,7 +63,7 @@ const HostConsoleScreen = () => {
     openDialog({
       type: 'success',
       text: MENT_HOST.SUCCESS.SUSPENSE_EVENT,
-      closeText: '확인',
+      closeText: MENT_DIALOG.DIALOG.CONFIRM,
     });
   };
 
@@ -70,7 +71,7 @@ const HostConsoleScreen = () => {
     openDialog({
       type: 'validate',
       text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
-      closeText: '확인',
+      closeText: MENT_DIALOG.DIALOG.CONFIRM,
     });
   };
 
@@ -88,8 +89,8 @@ const HostConsoleScreen = () => {
           eventInfoId: params.eventId,
         });
       },
-      applyText: '예',
-      closeText: '아니오',
+      applyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
     });
   };
 

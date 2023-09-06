@@ -1,13 +1,13 @@
-import Text from 'components/common/Text/Text';
-import { getFieldName } from 'constants/interest';
 import Spacing from 'components/common/Spacing/Spacing';
+import Text from 'components/common/Text/Text';
+import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
+import { getFieldName } from 'constants/interest/interest';
+import dayjs from 'dayjs';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { memo } from 'react';
 import { Dimensions, Image, Pressable, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { MapEvent } from 'types/event';
-import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
-import dayjs from 'dayjs';
 import mapEventCardStyles from './MapEventCard.style';
 
 interface Props {
@@ -25,7 +25,7 @@ const MapEventCard = ({ event, distance }: Props) => {
 
   const calcDate = event.eventDateList
     ?.sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1))
-    .map((date) => dayjs(date).format('MM월 YY일'));
+    .map((date) => dayjs(date).format('MM월 DD일'));
 
   return (
     <View style={mapEventCardStyles.container}>
@@ -79,7 +79,7 @@ const MapEventCard = ({ event, distance }: Props) => {
       <Spacing height={9} />
       <View style={mapEventCardStyles.imageContainer}>
         <Carousel
-          width={124}
+          width={144}
           height={114}
           loop={false}
           overscrollEnabled={false}

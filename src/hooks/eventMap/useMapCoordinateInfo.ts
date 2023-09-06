@@ -1,14 +1,12 @@
 import { useFocusEffect } from '@react-navigation/native';
-import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queries/queryKeys';
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import useDialog from 'hooks/app/useDialog';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
 import NaverMapView from 'react-native-nmap';
 import { PERMISSIONS } from 'react-native-permissions';
 import { requestSinglePermission } from 'services/permission';
-import { useEventMapStore } from 'stores/EventMap';
 import { Coordinate } from 'types/event';
 
 const initCoordinate = {
@@ -58,7 +56,7 @@ const useMapCoordinateInfo = () => {
       () => {
         openDialog({
           type: 'validate',
-          text: '오픈오프에 위치정보를 허용해주세요!',
+          text: MENT_EVENT_MAP.PERMISSION.LOCATION,
         });
       },
       {
@@ -90,7 +88,7 @@ const useMapCoordinateInfo = () => {
       () => {
         openDialog({
           type: 'validate',
-          text: '오픈오프에 위치정보를 허용해주세요!',
+          text: MENT_EVENT_MAP.PERMISSION.LOCATION,
         });
       },
       watchOptions,

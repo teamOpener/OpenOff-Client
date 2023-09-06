@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/interest';
+import { FieldCode } from 'constants/interest/interest';
 
 export interface HostEventInfoRequestDto {
   eventInfoId?: number;

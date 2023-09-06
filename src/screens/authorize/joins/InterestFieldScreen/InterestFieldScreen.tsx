@@ -1,17 +1,18 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
+import Spacing from 'components/common/Spacing/Spacing';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
-import { UserInfoStatus } from 'constants/join';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
+import { UserInfoStatus } from 'constants/authorize/join';
+import useInterestField from 'hooks/authorize/useInterestField';
 import { useConcludeOnBoarding } from 'hooks/queries/user';
 import { Dispatch, useEffect } from 'react';
 import { Image } from 'react-native';
 import { colors } from 'styles/theme';
 import { AuthStackParamList } from 'types/apps/menu';
 import { Action, JoinInfo } from 'types/join';
-import Spacing from 'components/common/Spacing/Spacing';
-import useInterestField from 'hooks/authorize/useInterestField';
 import interestFieldScreenStyles from './InterestFieldScreen.style';
 
 interface Props {
@@ -61,10 +62,10 @@ const InterestFieldScreen = ({ state, dispatch }: Props) => {
 
   return (
     <ScreenCover
-      titleElements={['관심 분야를 설정해주세요.']}
+      titleElements={MENT_AUTHORIZE.INTEREST_FIELD.TITLE}
       authorizeButton={{
         handlePress: handleAuthorize,
-        label: '다음',
+        label: MENT_AUTHORIZE.MAIN.NEXT,
         isActive: computedCount() >= 1,
       }}
     >

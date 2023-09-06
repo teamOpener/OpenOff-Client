@@ -1,5 +1,6 @@
-import { TouchableOpacity } from 'react-native';
 import Text from 'components/common/Text/Text';
+import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
+import { TouchableOpacity } from 'react-native';
 import findButtonStyles from './FindButton.style';
 
 interface Props {
@@ -13,7 +14,9 @@ const FindButton = ({ onPress }: Props) => {
       activeOpacity={0.6}
       onPress={onPress}
     >
-      <Text style={findButtonStyles.text}>주소 검색</Text>
+      <Text style={findButtonStyles.text}>
+        {MENT_OPEN_EVENT.MAIN.FIND_ADDRESS}
+      </Text>
     </TouchableOpacity>
   );
 };

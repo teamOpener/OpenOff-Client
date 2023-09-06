@@ -1,5 +1,6 @@
 import ColorButton from 'components/authorize/buttons/ColorButton/ColorButton';
-import { GenderType } from 'constants/join';
+import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
+import { GenderType } from 'constants/authorize/join';
 import { Dispatch, SetStateAction } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
@@ -31,10 +32,12 @@ const GenderInput = ({ value, setValue }: Props) => {
   };
   return (
     <View style={genderInputStyles.container}>
-      <Text style={genderInputStyles.title}>성별</Text>
+      <Text style={genderInputStyles.title}>
+        {MENT_AUTHORIZE.USER_INFO.GENDER}
+      </Text>
       <View style={genderInputStyles.genderButtonContainer}>
         <ColorButton
-          label="남성"
+          label={MENT_AUTHORIZE.USER_INFO.MAN}
           color={computedGenderAction(GenderType.MAN).color}
           marginRight={10}
           borderColor={computedGenderAction(GenderType.MAN).borderColor}
@@ -42,7 +45,7 @@ const GenderInput = ({ value, setValue }: Props) => {
           handleClick={computedGenderAction(GenderType.MAN).handlePress}
         />
         <ColorButton
-          label="여성"
+          label={MENT_AUTHORIZE.USER_INFO.WOMAN}
           color={computedGenderAction(GenderType.WOMAN).color}
           marginRight={10}
           borderColor={computedGenderAction(GenderType.WOMAN).borderColor}

@@ -1,3 +1,4 @@
+import MENT_IMAGE_CROP from 'constants/app/imageCropMessage';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
 
 const cropperOptions = {
@@ -5,8 +6,8 @@ const cropperOptions = {
   cropperStatusBarColor: 'black',
   cropperToolbarColor: 'black',
   cropperToolbarWidgetColor: 'white',
-  cropperCancelText: '취소',
-  cropperChooseText: '선택',
+  cropperCancelText: MENT_IMAGE_CROP.CANCEL,
+  cropperChooseText: MENT_IMAGE_CROP.CHOOSE,
 };
 
 export const openImagePicker = async (maxNumber: number): Promise<Image[]> => {

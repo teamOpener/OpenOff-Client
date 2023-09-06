@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { RefreshControl, ScrollView } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queries/queryKeys';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
+import Spacing from 'components/common/Spacing/Spacing';
 import { EventDetail } from 'components/eventDetail';
 import {
   ChildCommentListItem,
   ParentCommentListItem,
 } from 'components/eventDetail/atoms';
-import Spacing from 'components/common/Spacing/Spacing';
+import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
+import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import CommentRowSkeleton from 'components/suspense/skeleton/CommentRowSkeleton/CommentRowSkeleton';
-import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
-import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
-import { StackMenu } from 'constants/menu';
-import useStackRoute from 'hooks/navigator/useStackRoute';
+import { StackMenu } from 'constants/app/menu';
+import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
+import queryKeys from 'constants/queries/queryKeys';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import useStackRoute from 'hooks/navigator/useStackRoute';
 import { useChildComments, useParentComments } from 'hooks/queries/comment';
+import { useState } from 'react';
+import { RefreshControl, ScrollView } from 'react-native';
 import eventCommentScreenStyles from './EventCommentScreen.style';
 
 const EventCommentScreen = () => {

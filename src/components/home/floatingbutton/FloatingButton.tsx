@@ -1,8 +1,8 @@
-import { TouchableOpacity } from 'react-native';
-import { useCallback } from 'react';
 import Icon from 'components/common/Icon/Icon';
-import { StackMenu } from 'constants/menu';
+import { StackMenu } from 'constants/app/menu';
 import useNavigator from 'hooks/navigator/useNavigator';
+import { useCallback } from 'react';
+import { TouchableOpacity } from 'react-native';
 import floatingButtonStyles from './FloatingButton.style';
 
 const FloatingButton = () => {

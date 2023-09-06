@@ -1,13 +1,11 @@
-import { useState } from 'react';
-import { Dimensions, LayoutChangeEvent, View } from 'react-native';
-import Carousel from 'react-native-reanimated-carousel';
-import { useUserTickets } from 'hooks/queries/ledger';
+import { StatusButton, TicketCard } from 'components/userEvent/participant';
+import { StackMenu } from 'constants/app/menu';
+import useTicketStatus from 'hooks/event/useTicketStatus';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useStackRoute from 'hooks/navigator/useStackRoute';
-import useTicketStatus from 'hooks/event/useTicketStatus';
-import { CONSTANT_PARTICIPANT } from 'constants/userEvent/participant/participantConstants';
-import { StatusButton, TicketCard } from 'components/userEvent/participant';
-import { StackMenu } from 'constants/menu';
+import { useUserTickets } from 'hooks/queries/ledger';
+import { Dimensions, View } from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 import userTicketScreenStyles from './UserTicketScreen.style';
 
 const UserTicketScreen = () => {

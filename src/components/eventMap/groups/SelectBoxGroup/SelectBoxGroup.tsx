@@ -1,6 +1,9 @@
+import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import SingleSelectBox from 'components/eventMap/selectboxes/SingleSelectBox/SingleSelectBox';
-import { SelectStatus } from 'constants/selectBox';
+import { SelectStatus } from 'constants/app/selectBox';
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
+import queryKeys from 'constants/queries/queryKeys';
 import {
   applicationAbleOptions,
   participantOptions,
@@ -9,8 +12,6 @@ import {
 import { Dispatch } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Action, Option, SelectBox } from 'types/apps/selectbox';
-import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queries/queryKeys';
 import selectBoxGroup from './SelectBoxGroup.style';
 
 interface Props {
@@ -36,7 +37,7 @@ const SelectBoxGroup = ({
       <SingleSelectBox
         currentOption={selectState.payOption}
         options={payOptions}
-        label="비용"
+        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.PAY.LABEL}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_PAY_OPTION,
@@ -48,7 +49,7 @@ const SelectBoxGroup = ({
       <SingleSelectBox
         currentOption={selectState.participantOption}
         options={participantOptions}
-        label="참여 인원"
+        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.LABEL}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_PARTICIPANT_OPTION,
@@ -60,7 +61,7 @@ const SelectBoxGroup = ({
       <SingleSelectBox
         currentOption={selectState.applicationAbleOption}
         options={applicationAbleOptions}
-        label="신청 현황"
+        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.APPLICATION_ABLE.LABEL}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_APPLICATION_ABLE_OPTION,

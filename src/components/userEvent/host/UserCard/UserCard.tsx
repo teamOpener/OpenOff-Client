@@ -1,22 +1,24 @@
-import { useState } from 'react';
-import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { useQueryClient } from '@tanstack/react-query';
-import { ApiErrorResponse } from 'types/ApiResponse';
-import queryKeys from 'constants/queries/queryKeys';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
 import Icon from 'components/common/Icon/Icon';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import Text from 'components/common/Text/Text';
-import useNavigator from 'hooks/navigator/useNavigator';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import API_ERROR_MESSAGE from 'constants/app/errorMessage';
+import queryKeys from 'constants/queries/queryKeys';
 import useDialog from 'hooks/app/useDialog';
+import useNavigator from 'hooks/navigator/useNavigator';
 import {
   useCancelPermittedApplicant,
   useDenyApplicationUser,
   usePermitApplicant,
 } from 'hooks/queries/ledger';
 import { EventApplicantInfoResponseDto } from 'models/ledger/response/EventApplicantInfoResponseDto';
-import userCardStyles from './UserCard.style';
+import { useState } from 'react';
+import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
+import { ApiErrorResponse } from 'types/ApiResponse';
+import MENT_DIALOG from 'constants/common/dialogMessage';
+import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import ActionButton from '../buttons/ActionButton/ActionButton';
+import userCardStyles from './UserCard.style';
 
 interface Props {
   eventApplicantInfo: EventApplicantInfoResponseDto;
@@ -89,10 +91,10 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
   const handleDeny = async () => {
     openDialog({
       type: 'confirm',
-      text: '승인을 거절하시겠습니까?',
-      contents: '사유를 선택해주세요.',
-      denyText: '예',
-      closeText: '아니오',
+      text: MENT_HOST.APPLICANT.DENY.TITLE,
+      contents: MENT_HOST.APPLICANT.DENY.CONTENT,
+      denyText: MENT_DIALOG.DIALOG.YES,
+      closeText: MENT_DIALOG.DIALOG.NO,
       deny: async (rejectReason: string) => {
         await denyApplicationUser({
           ledgerId: eventApplicantInfo.ladgerId,
@@ -151,7 +153,7 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
             onPress={handleMoveDetailPage}
           >
             <Text color="main" style={userCardStyles.detailText}>
-              상세보기
+              {MENT_HOST.APPLICANT.SHOW_DETAIL}
             </Text>
             <Icon name="IconArrowRight" size={10} fill="main" />
           </TouchableOpacity>
@@ -173,9 +175,12 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
             !eventApplicantInfo.isAccepted &&
             !eventApplicantInfo.isJoined && (
               <>
-                <ActionButton label="거절" onPress={handleDeny} />
                 <ActionButton
-                  label="승인"
+                  label={MENT_HOST.APPLICANT.DENY.LABEL}
+                  onPress={handleDeny}
+                />
+                <ActionButton
+                  label={MENT_HOST.APPLICANT.APPROVE.LABEL}
                   style={userCardStyles.approveBtn}
                   onPress={handleApprove}
                 />
@@ -186,14 +191,17 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
           {!isPermitLoading &&
             eventApplicantInfo.isAccepted &&
             !eventApplicantInfo.isJoined && (
-              <ActionButton label="승인취소" onPress={handleCancel} />
+              <ActionButton
+                label={MENT_HOST.APPLICANT.CANCEL.LABEL}
+                onPress={handleCancel}
+              />
             )}
 
           {/* 입장완료 */}
           {!isPermitLoading && eventApplicantInfo.isJoined && (
             <View style={userCardStyles.admissionTextWrapper}>
               <Text color="lightGreen" style={userCardStyles.admissionText}>
-                입장완료
+                {MENT_HOST.APPLICANT.ADMISSION}
               </Text>
             </View>
           )}
