@@ -6,6 +6,10 @@ import {
   useNavigationContainerRef,
 } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import FallbackError from 'components/fallback/FallbackError';
+import CommonSuspense from 'components/suspense/loading/CommonSuspense/CommonSuspense';
+import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
+import Navigator from 'navigators/Navigator';
 import { useEffect } from 'react';
 import {
   SafeAreaView,
@@ -18,12 +22,6 @@ import ErrorBoundary from 'react-native-error-boundary';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { MyTheme, colors } from 'styles/theme';
-import { useAuthorizeStore } from 'stores/Authorize';
-import FallbackError from 'components/fallback/FallbackError';
-import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
-import CommonSuspense from 'components/suspense/loading/CommonSuspense/CommonSuspense';
-import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
-import Navigator from 'navigators/Navigator';
 // dayjs setting
 import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 import dayjs from 'dayjs';
