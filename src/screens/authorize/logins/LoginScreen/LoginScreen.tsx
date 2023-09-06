@@ -152,6 +152,16 @@ const LoginScreen = ({ dispatch }: Props) => {
     return () => clearTimeout(timer);
   }, []);
 
+  if (isSocialLoginLoading || isNormalLoginLoading) {
+    return (
+      <WithIconLoading
+        isActive
+        backgroundColor={colors.background}
+        text="로그인 중입니다."
+      />
+    );
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -160,13 +170,6 @@ const LoginScreen = ({ dispatch }: Props) => {
       {firstLoginShow && (
         <View
           style={[StyleSheet.absoluteFill, loginScreenStyles.loadingContainer]}
-        />
-      )}
-      {(isSocialLoginLoading || isNormalLoginLoading) && (
-        <WithIconLoading
-          isActive
-          backgroundColor={colors.background}
-          text={MENT_AUTHORIZE.LOGIN.LOADING}
         />
       )}
       <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>
