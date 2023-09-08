@@ -1,5 +1,7 @@
 const MENT_HOME = Object.freeze({
-  CATEGORY: {},
+  CATEGORY: {
+    LABEL: '카테고리',
+  },
   BOOKMARK: {},
   MAIN: {
     TOTAL_APPLICANT_MENT: '명 신청완료',

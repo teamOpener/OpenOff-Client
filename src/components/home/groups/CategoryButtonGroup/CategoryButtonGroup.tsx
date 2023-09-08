@@ -1,8 +1,9 @@
-import { ScrollView, View } from 'react-native';
-import Text from 'components/common/Text/Text';
 import Spacing from 'components/common/Spacing/Spacing';
-import { useInterestFieldLists } from 'hooks/queries/interest';
+import Text from 'components/common/Text/Text';
 import CategoryButton from 'components/home/buttons/CategoryButton/CategoryButton';
+import MENT_HOME from 'constants/home/homeMessage';
+import { useInterestFieldLists } from 'hooks/queries/interest';
+import { ScrollView, View } from 'react-native';
 import categoryButtonGroupStyles from './CategoryButtonGroup.style';
 
 interface Props {
@@ -19,7 +20,7 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
         color="white"
         style={categoryButtonGroupStyles.titleContainer}
       >
-        카테고리
+        {MENT_HOME.CATEGORY.LABEL}
       </Text>
       <Spacing height={10} />
 
