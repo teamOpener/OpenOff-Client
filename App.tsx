@@ -7,8 +7,6 @@ import {
 } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import FallbackError from 'components/fallback/FallbackError';
-import CommonSuspense from 'components/suspense/loading/CommonSuspense/CommonSuspense';
-import AuthorizeNavigator from 'navigators/AuthorizeNavigator';
 import Navigator from 'navigators/Navigator';
 import { useEffect } from 'react';
 import {
@@ -26,7 +24,6 @@ import { MyTheme, colors } from 'styles/theme';
 import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useAuthorizeStore } from 'stores/Authorize';
 
 dayjs.locale('ko');
 
@@ -66,8 +63,6 @@ const App = () => {
   const navigationRef = useNavigationContainerRef();
   useFlipper(navigationRef);
 
-  const { isLogin } = useAuthorizeStore();
-
   useEffect(() => {
     const timer = setTimeout(() => SplashScreen.hide(), 2000);
     return () => clearTimeout(timer);
@@ -86,15 +81,7 @@ const App = () => {
                   backgroundColor={colors.background}
                   barStyle="light-content"
                 />
-                {isLogin ? (
-                  <CommonSuspense>
-                    <Navigator />
-                  </CommonSuspense>
-                ) : (
-                  <CommonSuspense>
-                    <AuthorizeNavigator />
-                  </CommonSuspense>
-                )}
+                <Navigator />
               </DialogPortalProvider>
             </NavigationContainer>
           </GestureHandlerRootView>
