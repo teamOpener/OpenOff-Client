@@ -6,7 +6,7 @@
 > 특별한 날, 특별한 장소에서, 특별한 경험을 위한 <br/>
 오프라인 이벤트 올인원 플랫폼 오픈오프
 <br/>
-<img align="right" width="600" style="margin-top: 100px;" src="https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/5deb3a4b-42a7-4c9b-b4f6-b671cf173f5c"/>
+<img align="right" width="500" style="margin-top: 100px;" src="https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/5deb3a4b-42a7-4c9b-b4f6-b671cf173f5c"/>
 
 
 👀 
@@ -66,6 +66,14 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 
 ![24](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/73dfe167-e479-4ba5-9ac9-0c7ec5feae25)
 
+<br/>
+<br/>
+
+## 🎪 Tech Stack
+![프론트엔드 기술스택 (2)](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/ed0000e8-00d0-4198-836e-4364274b352d)
+
+<br/>
+<br/>
 
 ## 🎪 Authors
 
