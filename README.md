@@ -100,6 +100,26 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 <br/>
 <br/>
 
+## 🎪 Commit Convention
+
+| option           | content                                               |
+| ---------------- | ----------------------------------------------------- |
+| ✨ feat           | 새로운 기능 추가                             |
+| 🐛 fix            | 버그를 고친 경우                                      |
+| 📝 docs           | 리드미 수정                          |
+| 💅 design         | UI, UX 관련 코드 수정                                |
+| 💄 style          | 코드 format 수정 (not production, UI,UX code)                |
+| 🫧 refactor         | 코드 리팩토링 작업 |
+| 🔧 chore          | 작은 범위 수정 (ex. 코멘트, 주석)                              |
+| 🚚 move           | 파일 및 폴더 이름 변경                              |
+| 🚚 rename         | 파일 및 폴더 삭제                                   |
+| 👷 ci             | CI/CD 관련 수정사항                                 |
+| 🚧 wip            | 작업중인 사항                                       |
+| ✅ test           | 테스트 코드 관련                                    |
+
+<br/>
+<br/>
+
 ## 🎪 How to Run the Project
 
 1. Clone this repository: `git clone https://github.com/Central-MakeUs/OpenOff-Client.git`
@@ -129,6 +149,7 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 3. Navigate to `Product > Archive` to initiate the build process.
 <br/>
 <br/>
+
 
 ## 🎪 Folder Structure
 
