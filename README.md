@@ -1,64 +1,56 @@
-# OpenOff-Client
+# 오프라인 이벤트의 새로운 시대를 열 오픈오프
 
-오프라인 이벤트의 새로운 시대를 열 오픈;오프
+> <div>
+> <a href="https://apps.apple.com/kr/app/%EC%98%A4%ED%94%88%EC%98%A4%ED%94%84/id6451419698" target="_blank"><img src="https://img.shields.io/badge/App_Store-0D96F6?style=flat-square&logo=app-store&logoColor=FFFFFF"/></a>
+> <a href="https://play.google.com/store/apps/details?id=com.opener.openoff" target="_blank"><img src="https://img.shields.io/badge/Google_Play-414141?style=flat-square&logo=google-play.Ru&logoColor=FFFFFF"/></a>
+>
+> “매번 다른 플랫폼으로 옮겨 다니는 건 이제 그만! 오프라인 이벤트를 탐색 혹은 개설하고 홍보, 신청, 참석 인원 관리까지 한 번에 진행하세요. “
 
-## 🎪 Introduce
-> 특별한 날, 특별한 장소에서, 특별한 경험을 위한 <br/>
-오프라인 이벤트 올인원 플랫폼 오픈오프
-<br/>
-<img align="right" width="500" style="margin-top: 100px;" src="https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/5deb3a4b-42a7-4c9b-b4f6-b671cf173f5c"/>
+</div>
 
+<img width="4068" alt="Openoff" src="https://github.com/teamOpener/OpenOff-Client/assets/97719273/42860b78-65cd-4848-a684-9558e7b2c5d5">
 
-👀 
-*“오프라인 이벤트 추천”* <br/>
+<br />
+<br />
+
+## 🎪 Features
+
+### _👀 오프라인 이벤트 추천_
+
 공연, 파티, 액티비티 등 관심 분야별 오프라인 이벤트 정보를 한 눈에!
 
-<br/>
-
-🗺️ 
-*“오프라인 이벤트 맵”* <br/>
-장소별 오프라인 이벤트 현황을 손쉽게 탐색
-
-<br/>
-
-✏️ 
-*“오프라인 이벤트 개설”* <br/>
-오프라인 이벤트 개설부터 홍보까지
-
-<br/>
-
-📒
-*“이벤트 명단관리”* <br/>
-이벤트 신청 승인 현황, 입장 현황 등을 파악 가능 <br/>
-QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
-
-<br/>
-
-🎯
-*“오프라인 이벤트 신청”* <br/>
-오프라인 이벤트 신청 미리 입력한 정보의 <br/>
-자동 입력을 통해 편리한 이벤트 신청
-
-<br/>
-<br/>
-
-## 🎪 Feature
-
 ![14](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/b500bfba-214c-455d-94f7-cbf53ee5b90e)
+
+<br />
+
+### _🗺️ 오프라인 이벤트 맵_
+
+장소별 오프라인 이벤트 현황을 손쉽게 탐색
 
 ![15](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/879c76c0-ae98-41b5-b8cf-3ec2b50248c8)
 
 ![16](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/f0f7e1dc-81ec-4032-88f1-cbd4e48ff74e)
 
-![17](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/c66d3c17-792d-417f-b447-2deca277439c)
+<br />
 
-![18](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/9fa3f39a-b969-44f3-8fc6-bdc782512126)
+### _🎯 오프라인 이벤트 신청_
+
+오프라인 이벤트 신청 미리 입력한 정보의 자동 입력을 통해 편리한 이벤트 신청
+
+![17](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/c66d3c17-792d-417f-b447-2deca277439c)
 
 ![19](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/64345c2f-116a-46fa-a5ba-b0e3f395e9bf)
 
 ![20](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/3fc34b86-f1c0-48ab-b9d9-a8fca44c984a)
 
-![21](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/c4f15d51-08c7-4389-bc1e-e43a22806468)
+<br />
+
+### _📒 이벤트 개설 및 명단관리_
+
+오프라인 이벤트 개설부터 이벤트 신청 승인 현황, 입장 현황 등을 파악 가능 <br />
+QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
+
+![63](https://github.com/yeonju0110/opic-helper/assets/97719273/c17cb45a-3568-4eb7-826d-cfd74f9cdc33)
 
 ![22](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/7c2e51fc-e919-4938-ac00-0875a60f65b6)
 
@@ -67,12 +59,11 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 ![24](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/73dfe167-e479-4ba5-9ac9-0c7ec5feae25)
 
 <br/>
-<br/>
 
-## 🎪 Tech Stack
-![프론트엔드 기술스택 (2)](https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/ed0000e8-00d0-4198-836e-4364274b352d)
+## 🎪 Tech Stacks
 
-<br/>
+<img width="1260" alt="프론트엔드 기술스택" src="https://github.com/yeonju0110/opic-helper/assets/97719273/90d6b1ce-20d7-48d2-aa81-504576ebc8b2">
+
 <br/>
 
 ## 🎪 Authors
@@ -80,16 +71,16 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 <table class="tg">
 	<tbody>
 	    <tr>
-	        <td></td>
-	        <td><img width="250" src="https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/699c4a4f-3da5-4e08-bda2-9efa4c9f210b" /></td>
+	        <td><img width="150" src="https://github.com/yeonju0110.png" /></td>
+	        <td><img width="150" src="https://github.com/jostar33.png" /></td>
 	    </tr>
 	    <tr>
-	        <td>조연주(Yeonju Cho)</td>
+	        <td>조연주(Yeonju Jo)</td>
 	        <td>황호세(Jose Hwang)</td>
 	    </tr>
 	    <tr>
-	        <td>QR코드 인식기능, 사용자 티켓화면, 알림기능,</br> 이벤트 주최페이지, 주최자 페이지</td>
-	        <td>회원가입 & 로그인, 메인페이지,</br> 지도페이지, 마이페이지</td>
+	        <td>QR코드 인식기능, 알림기능, <br>이벤트 개설 및 명단관리 페이지, 티켓 페이지</td>
+	        <td>회원가입 & 로그인, 메인페이지, </br> 지도페이지, 마이페이지</td>
 	    </tr>
 	    <tr>
 	        <td><a href="https://github.com/yeonju0110">@yeonju0110</a></td>
@@ -97,27 +88,7 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 	    </tr>
 	</tbody>
 </table>
-<br/>
-<br/>
 
-## 🎪 Commit Convention
-
-| option           | content                                               |
-| ---------------- | ----------------------------------------------------- |
-| ✨ feat           | 새로운 기능 추가                             |
-| 🐛 fix            | 버그를 고친 경우                                      |
-| 📝 docs           | 리드미 수정                          |
-| 💅 design         | UI, UX 관련 코드 수정                                |
-| 💄 style          | 코드 format 수정 (not production, UI,UX code)                |
-| 🫧 refactor         | 코드 리팩토링 작업 |
-| 🔧 chore          | 작은 범위 수정 (ex. 코멘트, 주석)                              |
-| 🚚 move           | 파일 및 폴더 이름 변경                              |
-| 🚚 rename         | 파일 및 폴더 삭제                                   |
-| 👷 ci             | CI/CD 관련 수정사항                                 |
-| 🚧 wip            | 작업중인 사항                                       |
-| ✅ test           | 테스트 코드 관련                                    |
-
-<br/>
 <br/>
 
 ## 🎪 How to Run the Project
@@ -129,8 +100,8 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
    - `ios/GoogleService-Info.plist`
 3. Install project dependencies: `yarn`
 4. Run the app on iOS or Android: `yarn ios` or `yarn android`
-<br/>
-<br/>
+   <br/>
+   <br/>
 
 ## 🎪 Build
 
@@ -147,9 +118,8 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 1. In the project settings, ensure that the Team is correctly set in `OpenOff > Signing & Capabilities > Signing`.
 2. Modify both the `Version` and `Build` as necessary.
 3. Navigate to `Product > Archive` to initiate the build process.
-<br/>
-<br/>
-
+   <br/>
+   <br/>
 
 ## 🎪 Folder Structure
 
@@ -174,3 +144,22 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 	│  ├─ utils/		// Utility functions.
 	├─ ...
 ```
+
+<br />
+
+## 🎪 Commit Convention
+
+| option     | content                                       |
+| ---------- | --------------------------------------------- |
+| ✨ feat    | 새로운 기능 추가                              |
+| 🐛 fix     | 버그를 고친 경우                              |
+| 📝 docs    | 리드미 수정                                   |
+| 💅 design  | UI, UX 관련 코드 수정                         |
+| 💄 style   | 코드 format 수정 (not production, UI,UX code) |
+| 🫧 refactor | 코드 리팩토링 작업                            |
+| 🔧 chore   | 작은 범위 수정 (ex. 코멘트, 주석)             |
+| 🚚 move    | 파일 및 폴더 이름 변경                        |
+| 🚚 rename  | 파일 및 폴더 삭제                             |
+| 👷 ci      | CI/CD 관련 수정사항                           |
+| 🚧 wip     | 작업중인 사항                                 |
+| ✅ test    | 테스트 코드 관련                              |
