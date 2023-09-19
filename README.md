@@ -80,14 +80,14 @@ QR 코드 입장권 스캔 및 참석 명단 관리까지 한번에!
 <table class="tg">
 	<tbody>
 	    <tr>
-	        <td>조연주(yeonju0110)</td>
-	        <td>황호세(JoStar33)</td>
+	        <td></td>
+	        <td><img width="250" src="https://github.com/Central-MakeUs/OpenOff-Client/assets/52379503/699c4a4f-3da5-4e08-bda2-9efa4c9f210b" /></td>
 	    </tr>
 	    <tr>
-	        <td>FE Developer</td>
-	        <td>FE Developer</td>
+	        <td>조연주(Yeonju Cho)</td>
+	        <td>황호세(Jose Hwang)</td>
 	    </tr>
-	      <tr>
+	    <tr>
 	        <td>QR코드 인식기능, 사용자 티켓화면, 알림기능,</br> 이벤트 주최페이지, 주최자 페이지</td>
 	        <td>회원가입 & 로그인, 메인페이지,</br> 지도페이지, 마이페이지</td>
 	    </tr>
