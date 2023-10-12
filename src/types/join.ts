@@ -1,5 +1,6 @@
 import { UserInfoStatus } from 'constants/authorize/join';
 import { Field } from './interest';
+import { SocialType } from './user';
 
 interface EmailPassword {
   email: string;
@@ -22,7 +23,8 @@ type Action =
   | { type: UserInfoStatus.SET_INTEREST_FIELD; interestField: Field[] }
   | { type: UserInfoStatus.SET_AGREE_TO_TERM; term: 'Y' | 'N' }
   | { type: UserInfoStatus.SET_NICK_NAME; nickname: string }
-  | { type: UserInfoStatus.SET_PHONE_NUMBER; phoneNumber: string };
+  | { type: UserInfoStatus.SET_PHONE_NUMBER; phoneNumber: string }
+  | { type: UserInfoStatus.SET_ACCOUNT_TYPE; accountType: SocialType };
 interface JoinInfo {
   username: string;
   birth: string;
@@ -33,6 +35,7 @@ interface JoinInfo {
   emailAddress: string;
   password: string;
   interestField: Field[];
+  accountType: SocialType;
 }
 
 interface PasswordValue {
