@@ -67,16 +67,18 @@ const UserProfileEditScreen = () => {
         {userInfo?.socialAccountInfoList.find(
           (socialAccount) => socialAccount.accountType === 'NORMAL',
         ) && (
-          <UserInfoText
-            type="password"
-            title={MENT_USER.PROFILE_EDIT.PASSWORD}
-            content="••••••••"
-          />
+          <>
+            <UserInfoText
+              type="password"
+              title={MENT_USER.PROFILE_EDIT.PASSWORD}
+              content="••••••••"
+            />
+            <UserInfoText
+              title={MENT_USER.PROFILE_EDIT.PHONENUMBER}
+              content={formatPhoneNumber(userInfo?.userInfo.phoneNumber)}
+            />
+          </>
         )}
-        <UserInfoText
-          title={MENT_USER.PROFILE_EDIT.PHONENUMBER}
-          content={formatPhoneNumber(userInfo?.userInfo.phoneNumber)}
-        />
         <UserInfoText
           title={MENT_USER.PROFILE_EDIT.USER_BIRTH}
           content={MENT_USER.PROFILE_EDIT.USER_BIRTH_VALUE(
