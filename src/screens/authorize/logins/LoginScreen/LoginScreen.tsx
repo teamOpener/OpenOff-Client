@@ -82,15 +82,15 @@ const LoginScreen = ({ state, dispatch }: Props) => {
     userInfo?: UserTotalInfoResponseDto['userInfo'],
     socialInfo?: SocialType,
   ) => {
-    const priviousKakao = userInfo?.nickname && state.accountType === 'KAKAO';
-    const priviousNormal =
+    const previousKakao = userInfo?.nickname && state.accountType === 'KAKAO';
+    const previousNormal =
       userInfo?.phoneNumber && state.accountType === 'NORMAL';
     if (userInfo?.userName) {
       setRecentLogin(!socialInfo ? recentLogin : socialInfo);
       setIsLogin(true);
       return;
     }
-    if (priviousKakao || priviousNormal) {
+    if (previousKakao || previousNormal) {
       navigation.navigate('UserInfo');
       return;
     }
