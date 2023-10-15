@@ -11,7 +11,7 @@ import { UserInfoStatus } from 'constants/authorize/join';
 import { Dispatch, useCallback, useEffect, useState } from 'react';
 import { BackHandler, Linking, View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
-import { Action } from 'types/join';
+import { Action, JoinInfo } from 'types/join';
 import agreeToTermScreenStyles from './AgreeToTermScreen.style';
 
 interface AgreeList {
@@ -19,10 +19,11 @@ interface AgreeList {
 }
 
 interface Props {
+  state: JoinInfo;
   dispatch: Dispatch<Action>;
 }
 
-const AgreeToTermScreen = ({ dispatch }: Props) => {
+const AgreeToTermScreen = ({ dispatch, state }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [term, setTerm] = useState<AgreeList>({
     allAgree: false,
@@ -36,6 +37,15 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
     setTerm((checkTerm) => {
       return { ...checkTerm, [key]: !checkTerm[key] };
     });
+  };
+
+  const handleAuthorizeFlow = () => {
+    dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+    if (state.accountType === 'NORMAL') {
+      navigation.navigate(AuthorizeMenu.PhoneCertification);
+      return;
+    }
+    navigation.navigate(AuthorizeMenu.Nickname);
   };
 
   useFocusEffect(
@@ -77,10 +87,7 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
   return (
     <ScreenCover
       authorizeButton={{
-        handlePress: () => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
-          navigation.navigate(AuthorizeMenu.PhoneCertification);
-        },
+        handlePress: handleAuthorizeFlow,
         label: MENT_AUTHORIZE.AGREE_TO_TERM.CONFIRM,
         isActive,
       }}

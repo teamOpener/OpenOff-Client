@@ -45,13 +45,18 @@ const userInfoReducer = (state: JoinInfo, action: Action): JoinInfo => {
       };
     case UserInfoStatus.SET_INTEREST_FIELD:
       return { ...state, interestField: action.interestField };
+    case UserInfoStatus.SET_ACCOUNT_TYPE:
+      return {
+        ...state,
+        accountType: action.accountType,
+      };
     default:
       return state;
   }
 };
 
 const AuthorizeNavigator = () => {
-  const initialState = {
+  const initialState: JoinInfo = {
     username: '',
     birth: '',
     agreeToTerm: '',
@@ -61,6 +66,7 @@ const AuthorizeNavigator = () => {
     emailAddress: '',
     password: '',
     interestField: [],
+    accountType: 'NORMAL',
   };
   const [state, dispatch] = useReducer<Reducer<JoinInfo, Action>>(
     userInfoReducer,
@@ -100,7 +106,7 @@ const AuthorizeNavigator = () => {
         }}
         name={AuthorizeMenu.Login}
       >
-        {() => <LoginScreen dispatch={dispatch} />}
+        {() => <LoginScreen state={state} dispatch={dispatch} />}
       </Stack.Screen>
       <Stack.Screen
         options={{
@@ -118,7 +124,7 @@ const AuthorizeNavigator = () => {
         }}
         name={AuthorizeMenu.AgreeToTerm}
       >
-        {() => <AgreeToTermScreen dispatch={dispatch} />}
+        {() => <AgreeToTermScreen state={state} dispatch={dispatch} />}
       </Stack.Screen>
       <Stack.Screen
         options={{

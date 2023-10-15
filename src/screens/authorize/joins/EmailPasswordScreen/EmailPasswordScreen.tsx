@@ -40,6 +40,10 @@ const EmailPasswordScreen = ({ dispatch }: Props) => {
       type: UserInfoStatus.SET_EMAIL_ADDRESS_PASSWORD,
       emailPassword: { email, password },
     });
+    dispatch({
+      type: UserInfoStatus.SET_ACCOUNT_TYPE,
+      accountType: 'NORMAL',
+    });
     navigation.navigate(AuthorizeMenu.AgreeToTerm);
   };
 

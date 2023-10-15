@@ -27,22 +27,23 @@ import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
-import { Action } from 'types/join';
+import { Action, JoinInfo } from 'types/join';
 import { SocialType } from 'types/user';
 import { validateEmail, validatePassword } from 'utils/validate';
 import loginScreenStyles from './LoginScreen.style';
 
 interface Props {
+  state: JoinInfo;
   dispatch: Dispatch<Action>;
 }
 
-const LoginScreen = ({ dispatch }: Props) => {
+const LoginScreen = ({ state, dispatch }: Props) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [firstLoginShow, setFirstLoginShow] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('');
 
-  const { setIsLogin, resetToken, setFcmToken, setRecentLogin, recentLogin } =
+  const { setIsLogin, resetToken, setRecentLogin, recentLogin } =
     useAuthorizeStore();
 
   const { openDialog } = useDialog();
@@ -81,13 +82,16 @@ const LoginScreen = ({ dispatch }: Props) => {
     userInfo?: UserTotalInfoResponseDto['userInfo'],
     socialInfo?: SocialType,
   ) => {
+    const previousKakao = userInfo?.nickname && state.accountType === 'KAKAO';
+    const previousNormal =
+      userInfo?.phoneNumber && state.accountType === 'NORMAL';
     if (userInfo?.userName) {
       setRecentLogin(!socialInfo ? recentLogin : socialInfo);
       setIsLogin(true);
       return;
     }
-    if (userInfo?.phoneNumber) {
-      navigation.navigate('Nickname');
+    if (previousKakao || previousNormal) {
+      navigation.navigate('UserInfo');
       return;
     }
     navigation.navigate('AgreeToTerm');
@@ -99,6 +103,7 @@ const LoginScreen = ({ dispatch }: Props) => {
       socialType: 'kakao',
       token: kakaoResult.idToken,
     });
+    dispatch({ type: UserInfoStatus.SET_ACCOUNT_TYPE, accountType: 'KAKAO' });
     divergeAuthorizeFlow(socialLoginResult.data?.userInfo, 'KAKAO');
   };
 
@@ -139,6 +144,7 @@ const LoginScreen = ({ dispatch }: Props) => {
       email: emailAddress,
       password,
     });
+    dispatch({ type: UserInfoStatus.SET_ACCOUNT_TYPE, accountType: 'NORMAL' });
     divergeAuthorizeFlow(normalLoginResult.data?.userInfo);
   };
 

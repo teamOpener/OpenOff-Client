@@ -4,10 +4,8 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Coordinate } from 'types/event';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
-import { Field } from './group';
 
 export type AuthStackParamList = {
   Login: undefined;
@@ -40,10 +38,6 @@ export type RootStackParamList = {
   BottomTabNavigator: BottomTabNavigationScreenParams;
   DatePick: undefined;
   OpenEvent: undefined;
-  FieldEventMap: {
-    field: Field;
-    coordinate: Coordinate;
-  };
   CategoryEvent: {
     fieldValue: string;
   };
