@@ -11,6 +11,7 @@ import {
   useDenyApplicationUser,
   usePermitApplicant,
 } from 'hooks/queries/ledger';
+import getPartOfUserName from 'utils/text';
 import { EventApplicantInfoResponseDto } from 'models/ledger/response/EventApplicantInfoResponseDto';
 import { useState } from 'react';
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
@@ -132,7 +133,7 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
         <SpaceLayout size={13} style={userCardStyles.userInfoContainer}>
           <SpaceLayout direction="row" size={5} style={userCardStyles.userInfo}>
             <Text style={userCardStyles.nameText}>
-              {eventApplicantInfo.username}
+              {getPartOfUserName(eventApplicantInfo.username)}
             </Text>
             <Text style={userCardStyles.birthText}>
               {eventApplicantInfo.birth}

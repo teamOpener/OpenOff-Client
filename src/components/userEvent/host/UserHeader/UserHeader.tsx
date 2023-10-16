@@ -14,6 +14,7 @@ import {
 import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
 import { View } from 'react-native';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import getPartOfUserName from 'utils/text';
 import ActionButton from '../buttons/ActionButton/ActionButton';
 import userHeaderStyles from './UserHeader.style';
 
@@ -111,7 +112,7 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
   return (
     <View style={userHeaderStyles.container}>
       <SpaceLayout direction="row" size={5} style={userHeaderStyles.userInfo}>
-        <Text>{userInfo.username}</Text>
+        <Text>{getPartOfUserName(userInfo.username)}</Text>
         <Text>{userInfo.birth}</Text>
         <Icon
           name={userInfo.genderType === 'MAN' ? 'IconMale' : 'IconFemale'}

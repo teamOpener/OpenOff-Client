@@ -20,6 +20,7 @@ const largeIconButtonStyles = StyleSheet.create({
     fontFamily: fonts.semibold,
     fontSize: 15,
     lineHeight: 15 * 1.4,
+    textAlign: 'center',
   } as TextStyle,
 });
 
