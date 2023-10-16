@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -6,7 +7,6 @@ import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIco
 import UserFieldBoxGroup from 'components/user/groups/UserFieldBoxGroup/UserFieldBoxGroup';
 import UserMenuButtonGroup from 'components/user/groups/UserMenuButtonGroup/UserMenuButtonGroup';
 import UserSupportGroup from 'components/user/groups/UserSupportGroup/UserSupportGroup';
-import MENT_USER from 'constants/user/userMessage';
 import useInterestFields from 'hooks/interest/useInterestFields';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useLogout, useMyInfo } from 'hooks/queries/user';
@@ -36,7 +36,7 @@ const UserScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text={MENT_USER.MAIN.LOGOUT_MENT}
+          text={i18n.t('logout_ment')}
         />
       )}
       <View style={userScreenStyles.userInfo}>
@@ -83,7 +83,7 @@ const UserScreen = () => {
           >
             <Icon name="IconPlace" size={16} fill="main" />
             <Text style={userScreenStyles.fieldResetText}>
-              {MENT_USER.MAIN.USER_INTEREST_FIELD}
+              {i18n.t('user_interest_field')}
             </Text>
             <Icon name="IconArrowRight" size={16} fill="white" />
           </TouchableOpacity>

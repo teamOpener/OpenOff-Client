@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -9,7 +10,6 @@ import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButto
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import Text from 'components/common/Text/Text';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
@@ -51,14 +51,14 @@ const LoginScreen = ({ state, dispatch }: Props) => {
   const handleLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? MENT_AUTHORIZE.ERROR.SERVER_ERROR,
+      text: error.response?.data.message ?? i18n.t('server_error'),
     });
   };
 
   const handleSocialLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? MENT_AUTHORIZE.ERROR.SERVER_ERROR,
+      text: error.response?.data.message ?? i18n.t('server_error'),
     });
   };
 
@@ -163,7 +163,7 @@ const LoginScreen = ({ state, dispatch }: Props) => {
       <WithIconLoading
         isActive
         backgroundColor={colors.background}
-        text="로그인 중입니다."
+        text={i18n.t('authorize.loading')}
       />
     );
   }
@@ -186,23 +186,21 @@ const LoginScreen = ({ state, dispatch }: Props) => {
 
         <View style={loginScreenStyles.mainContainer}>
           <LoginInput
-            label={MENT_AUTHORIZE.MAIN.EMAIL}
+            label={i18n.t('email')}
             value={emailAddress}
             type="emailAddress"
             validation={validateEmail}
             setValue={setEmailAddress}
           />
           <LoginInput
-            label={MENT_AUTHORIZE.MAIN.PASSWORD}
+            label={i18n.t('password')}
             value={password}
             type="password"
             setValue={setPassword}
             validation={validatePassword}
           />
           <LoginButton isActive={isActive} handlePress={handleCommonLogin} />
-          <Text style={loginScreenStyles.middleText}>
-            {MENT_AUTHORIZE.LOGIN.OR}
-          </Text>
+          <Text style={loginScreenStyles.middleText}>{i18n.t('or')}</Text>
           <SocialLoginButtonGroup
             kakaoLogin={handleKakaoLogin}
             naverLogin={() => {

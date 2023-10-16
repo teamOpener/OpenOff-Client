@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import API_ERROR_MESSAGE from 'constants/app/errorMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import useDialog from 'hooks/app/useDialog';
 import useNavigator from 'hooks/navigator/useNavigator';
@@ -15,8 +15,6 @@ import { EventApplicantInfoResponseDto } from 'models/ledger/response/EventAppli
 import { useState } from 'react';
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import MENT_DIALOG from 'constants/common/dialogMessage';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import ActionButton from '../buttons/ActionButton/ActionButton';
 import userCardStyles from './UserCard.style';
 
@@ -62,7 +60,7 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
   const handlePermitError = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
@@ -91,10 +89,10 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
   const handleDeny = async () => {
     openDialog({
       type: 'confirm',
-      text: MENT_HOST.APPLICANT.DENY.TITLE,
-      contents: MENT_HOST.APPLICANT.DENY.CONTENT,
-      denyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      text: i18n.t('title_decline'),
+      contents: i18n.t('reason_selection'),
+      denyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       deny: async (rejectReason: string) => {
         await denyApplicationUser({
           ledgerId: eventApplicantInfo.ladgerId,
@@ -153,7 +151,7 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
             onPress={handleMoveDetailPage}
           >
             <Text color="main" style={userCardStyles.detailText}>
-              {MENT_HOST.APPLICANT.SHOW_DETAIL}
+              {i18n.t('show_detail')}
             </Text>
             <Icon name="IconArrowRight" size={10} fill="main" />
           </TouchableOpacity>
@@ -175,12 +173,9 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
             !eventApplicantInfo.isAccepted &&
             !eventApplicantInfo.isJoined && (
               <>
+                <ActionButton label={i18n.t('deny')} onPress={handleDeny} />
                 <ActionButton
-                  label={MENT_HOST.APPLICANT.DENY.LABEL}
-                  onPress={handleDeny}
-                />
-                <ActionButton
-                  label={MENT_HOST.APPLICANT.APPROVE.LABEL}
+                  label={i18n.t('label_approve')}
                   style={userCardStyles.approveBtn}
                   onPress={handleApprove}
                 />
@@ -192,7 +187,7 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
             eventApplicantInfo.isAccepted &&
             !eventApplicantInfo.isJoined && (
               <ActionButton
-                label={MENT_HOST.APPLICANT.CANCEL.LABEL}
+                label={i18n.t('label_cancel_approval')}
                 onPress={handleCancel}
               />
             )}
@@ -201,7 +196,7 @@ const UserCard = ({ eventApplicantInfo, eventIndexId }: Props) => {
           {!isPermitLoading && eventApplicantInfo.isJoined && (
             <View style={userCardStyles.admissionTextWrapper}>
               <Text color="lightGreen" style={userCardStyles.admissionText}>
-                {MENT_HOST.APPLICANT.ADMISSION}
+                {i18n.t('attended')}
               </Text>
             </View>
           )}

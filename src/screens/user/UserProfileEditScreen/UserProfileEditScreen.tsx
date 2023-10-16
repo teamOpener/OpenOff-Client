@@ -1,9 +1,8 @@
+import i18n from 'locales';
 import Text from 'components/common/Text/Text';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import UserProfileImageButton from 'components/user/buttons/UserProfileImageButton/UserProfileImageButton';
 import UserInfoText from 'components/user/texts/UserInfoText/UserInfoText';
-import MENT_DIALOG from 'constants/common/dialogMessage';
-import MENT_USER from 'constants/user/userMessage';
 import useDialog from 'hooks/app/useDialog';
 import { useLogout, useMyInfo } from 'hooks/queries/user';
 import { Pressable, ScrollView, View } from 'react-native';
@@ -18,9 +17,9 @@ const UserProfileEditScreen = () => {
   const handleWithdrawal = async () => {
     openDialog({
       type: 'warning',
-      text: MENT_USER.PROFILE_EDIT.WITHDRAWAL_CHECK_MENT,
-      applyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      text: i18n.t('withdrawal_check_ment'),
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       apply: async () => {
         await logout();
       },
@@ -43,25 +42,25 @@ const UserProfileEditScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text={MENT_USER.PROFILE_EDIT.PROGRESS_WITHDRAWAL}
+          text={i18n.t('progress_withdrawal')}
         />
       )}
       <View style={userProfileEditScreenStyles.container}>
         <UserProfileImageButton />
         <View style={userProfileEditScreenStyles.emailContainer}>
           <Text style={userProfileEditScreenStyles.title}>
-            {MENT_USER.PROFILE_EDIT.EMAIL}
+            {i18n.t('email')}
           </Text>
           <Text variant="body2" color="grey">
             {userInfo?.socialAccountInfoList[0].email}
           </Text>
         </View>
         <UserInfoText
-          title={MENT_USER.PROFILE_EDIT.USER_NAME}
+          title={i18n.t('name')}
           content={userInfo?.userInfo.userName}
         />
         <UserInfoText
-          title={MENT_USER.PROFILE_EDIT.NICK_NAME}
+          title={i18n.t('nickname')}
           content={userInfo?.userInfo.nickname}
         />
         {userInfo?.socialAccountInfoList.find(
@@ -70,30 +69,30 @@ const UserProfileEditScreen = () => {
           <>
             <UserInfoText
               type="password"
-              title={MENT_USER.PROFILE_EDIT.PASSWORD}
+              title={i18n.t('password')}
               content="••••••••"
             />
             <UserInfoText
-              title={MENT_USER.PROFILE_EDIT.PHONENUMBER}
+              title={i18n.t('phone_number')}
               content={formatPhoneNumber(userInfo?.userInfo.phoneNumber)}
             />
           </>
         )}
         <UserInfoText
-          title={MENT_USER.PROFILE_EDIT.USER_BIRTH}
-          content={MENT_USER.PROFILE_EDIT.USER_BIRTH_VALUE(
-            userInfo?.userInfo.birth.year,
-            userInfo?.userInfo.birth.month,
-            userInfo?.userInfo.birth.day,
-          )}
+          title={i18n.t('user_birth')}
+          content={i18n.t('user_birth_value', {
+            year: userInfo?.userInfo.birth.year,
+            month: userInfo?.userInfo.birth.month,
+            day: userInfo?.userInfo.birth.day,
+          })}
         />
         <View style={userProfileEditScreenStyles.withdrawalContainer}>
           <Text style={userProfileEditScreenStyles.withdrawalInfo}>
-            {MENT_USER.PROFILE_EDIT.WITHDRAWAL_MENT}
+            {i18n.t('withdrawal_ment')}
           </Text>
           <Pressable onPress={handleWithdrawal}>
             <Text style={userProfileEditScreenStyles.withdrawal}>
-              {MENT_USER.PROFILE_EDIT.WITHDRAWAL}
+              {i18n.t('withdrawal')}
             </Text>
           </Pressable>
         </View>

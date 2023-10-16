@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import { InfiniteData } from '@tanstack/react-query';
 import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import EventCard from 'components/home/cards/EventCard/EventCard';
 import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
-import MENT_HOME from 'constants/home/homeMessage';
 import useBookmarkEvent from 'hooks/bookmark/useBookmarkEvent';
 import { MyBookmarkEventResponseDto } from 'models/event/response/MyBookmarkEventResponseDto';
 import { FlatList, View } from 'react-native';
@@ -32,7 +32,7 @@ const BookmarkCardList = ({
   return (
     <View style={bookmarkCardListStyles.container}>
       {flatEventList?.length === 0 ? (
-        <EmptyScreen content={MENT_HOME.MAIN.EMPTY_EVENT} />
+        <EmptyScreen content={i18n.t('empty_event')} />
       ) : (
         <FlatList
           numColumns={2}

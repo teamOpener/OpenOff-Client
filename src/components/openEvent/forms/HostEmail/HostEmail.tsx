@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/app/status';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import openEventFormStyles from '../OpenEventForm.style';
@@ -27,10 +27,10 @@ const HostEmail = () => {
 
   return (
     <View>
-      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.HOST_EMAIL} />
+      <OpenEvent.Label content={i18n.t('email')} />
       <View style={openEventFormStyles.inputWithHelpText}>
         <OpenEvent.Input
-          placeholder={MENT_OPEN_EVENT.PLACEHOLDER.HOST_EMAIL}
+          placeholder={i18n.t('host_email_input')}
           status={errMsg ? StatusType.error : StatusType.default}
           value={hostEmail ?? ''}
           onChangeText={handleChangeText}

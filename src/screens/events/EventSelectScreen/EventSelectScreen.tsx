@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Divider from 'components/common/Divider/Divider';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Icon from 'components/common/Icon/Icon';
@@ -8,7 +9,6 @@ import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
 import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { StackMenu } from 'constants/app/menu';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import dayjs from 'dayjs';
 import useEventIndexList from 'hooks/event/useEventIndexList';
 import useNavigator from 'hooks/navigator/useNavigator';
@@ -57,22 +57,22 @@ const EventSelectScreen = () => {
 
             <SpaceLayout size={10}>
               <EventDetail.DefaultSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.DATE}
+                title={i18n.t('date_time')}
                 description={`${dayjs(sortedEventDateArray[0]).format(
                   'YYYY',
                 )}.${ticketListDateFormatter(sortedEventDateArray)}`}
               />
               <EventDetail.DefaultSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
+                title={i18n.t('event_detail.address')}
                 description={`${event.streetLoadAddress} ${event.detailAddress}`}
               />
               <EventDetail.DefaultSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.COST}
-                description={`${
-                  MENT_EVENT_DETAIL.MAIN.ADMISSION_FEES
-                } ${event.eventFee.toLocaleString()}${
-                  MENT_EVENT_DETAIL.MAIN.WON
-                }`}
+                title={i18n.t('cost')}
+                description={`${i18n.t(
+                  'event_detail.admission_fees',
+                )} ${event.eventFee.toLocaleString()}${i18n.t(
+                  'event_detail.won',
+                )}`}
               />
             </SpaceLayout>
             <Spacing height={20} />
@@ -86,7 +86,7 @@ const EventSelectScreen = () => {
             >
               <Icon name="IconCalendar" size={18} fill="white" />
               <Text style={eventSelectScreenStyles.selectDateText}>
-                {MENT_EVENT_DETAIL.MAIN.SELECT_DATE}
+                {i18n.t('event_detail.select_date')}
               </Text>
             </SpaceLayout>
 
@@ -106,7 +106,7 @@ const EventSelectScreen = () => {
 
           <FixedButton
             disabled={selectedIndexId === null}
-            label={MENT_EVENT_DETAIL.MAIN.NEXT}
+            label={i18n.t('next')}
             onPress={handelNextStep}
           />
         </>

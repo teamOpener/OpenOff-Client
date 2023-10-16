@@ -1,6 +1,6 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Text from 'components/common/Text/Text';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import EmailFindScreen from '../EmailFindScreen/EmailFindScreen';
@@ -17,10 +17,7 @@ const EmailPasswordFindScreen = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title:
-        screenMode === 'id'
-          ? MENT_AUTHORIZE.FIND.FIND_ID
-          : MENT_AUTHORIZE.FIND.FIND_PASSWORD,
+      title: screenMode === 'id' ? i18n.t('find_id') : i18n.t('find_password'),
     });
   }, [navigation, screenMode]);
 
@@ -37,7 +34,7 @@ const EmailPasswordFindScreen = () => {
         >
           <View style={emailPasswordFindScreenStyles.buttonTextContainer}>
             <Text style={emailPasswordFindScreenStyles.tabText}>
-              {MENT_AUTHORIZE.MAIN.ID}
+              {i18n.t('id')}
             </Text>
           </View>
         </TouchableOpacity>
@@ -53,7 +50,7 @@ const EmailPasswordFindScreen = () => {
         >
           <View style={emailPasswordFindScreenStyles.buttonTextContainer}>
             <Text style={emailPasswordFindScreenStyles.tabText}>
-              {MENT_AUTHORIZE.MAIN.PASSWORD}
+              {i18n.t('password')}
             </Text>
           </View>
         </TouchableOpacity>

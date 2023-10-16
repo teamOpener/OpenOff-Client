@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import dayjs from 'dayjs';
 import { ChildCommentInfoResponseDto } from 'models/comment/response/ChildCommentInfoResponseDto';
 import childCommentListItemStyles from './ChildCommentListItem.style';
@@ -27,7 +27,7 @@ const ChildCommentListItem = ({ comment }: Props) => {
             style={childCommentListItemStyles.nickName}
             color={comment.isStaff ? 'main' : 'white'}
           >
-            {comment.isStaff ? MENT_EVENT_DETAIL.MAIN.HOST : comment.nickname}
+            {comment.isStaff ? i18n.t('host') : comment.nickname}
           </Text>
           <Text style={childCommentListItemStyles.dateText} color="grey">
             {dayjs(comment.createdAt).format('YYYY.MM.DD')}

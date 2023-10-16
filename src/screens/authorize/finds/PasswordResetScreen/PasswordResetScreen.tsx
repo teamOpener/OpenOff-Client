@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FormPasswordInput from 'components/authorize/inputs/FormPasswordInput/FormPasswordInput';
 import Text from 'components/common/Text/Text';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import useDialog from 'hooks/app/useDialog';
 import { useResetPassword } from 'hooks/queries/auth';
 import { useState } from 'react';
@@ -65,33 +65,33 @@ const PasswordResetScreen = ({
                   newPassword: data.passwordCheck,
                 });
               }),
-              label: MENT_AUTHORIZE.MAIN.NEXT,
+              label: i18n.t('next'),
               isActive: true,
             }}
           >
             <View style={passwordResetScreenStyles.passwordResetTitle}>
               <Text variant="h3" color="white">
-                {MENT_AUTHORIZE.FIND.RESET_PASSWORD}
+                {i18n.t('authorize.reset_password')}
               </Text>
             </View>
             <FormPasswordInput
               control={control}
               errors={errors}
               name="password"
-              label={MENT_AUTHORIZE.FIND.NEW_PASSWORD}
+              label={i18n.t('authorize.new_password')}
               validate={(value: string) => validatePassword(value)}
-              requiredMessage={MENT_AUTHORIZE.FIND.INPUT_PASSWORD}
+              requiredMessage={i18n.t('authorize.input_password')}
             />
             <FormPasswordInput
               control={control}
               errors={errors}
               name="passwordCheck"
-              label={MENT_AUTHORIZE.FIND.NEW_PASSWORD_CHECK}
+              label={i18n.t('authorize.new_password')}
               validate={(check: string) => {
                 const changedPassword = watch('password');
                 return validatePasswordCheck(changedPassword, check);
               }}
-              requiredMessage={MENT_AUTHORIZE.FIND.INPUT_PASSWORD_CHECK}
+              requiredMessage={i18n.t('authorize.input_password_check')}
             />
           </ScreenCover>
         ) : (

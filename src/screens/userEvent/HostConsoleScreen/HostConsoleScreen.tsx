@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -10,11 +11,9 @@ import {
   SmallIconButton,
 } from 'components/userEvent/host';
 import { ConsoleScreenLayout } from 'components/userEvent/host/layout';
-import API_ERROR_MESSAGE from 'constants/app/errorMessage';
 import { StackMenu } from 'constants/app/menu';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 import queryKeys from 'constants/queries/queryKeys';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import useDialog from 'hooks/app/useDialog';
 import useNavigator from 'hooks/navigator/useNavigator';
 import useStackRoute from 'hooks/navigator/useStackRoute';
@@ -25,7 +24,6 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import MENT_DIALOG from 'constants/common/dialogMessage';
 import hostConsoleStyles from './HostConsole.style';
 
 const HostConsoleScreen = () => {
@@ -62,16 +60,16 @@ const HostConsoleScreen = () => {
     queryClient.invalidateQueries(queryKeys.eventKeys.details);
     openDialog({
       type: 'success',
-      text: MENT_HOST.SUCCESS.SUSPENSE_EVENT,
-      closeText: MENT_DIALOG.DIALOG.CONFIRM,
+      text: i18n.t('suspense_event_message'),
+      closeText: i18n.t('confirm'),
     });
   };
 
   const handleSuspenseError = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
-      closeText: MENT_DIALOG.DIALOG.CONFIRM,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
+      closeText: i18n.t('confirm'),
     });
   };
 
@@ -83,14 +81,14 @@ const HostConsoleScreen = () => {
   const handleStopApplication = () => {
     openDialog({
       type: 'warning',
-      text: MENT_HOST.MAIN.SUSPENSE_EVENT,
+      text: i18n.t('suspense_event'),
       apply: () => {
         suspenseEvent({
           eventInfoId: params.eventId,
         });
       },
-      applyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
     });
   };
 
@@ -124,7 +122,7 @@ const HostConsoleScreen = () => {
   const headerRight = () => (
     <SmallIconButton
       iconName="IconCommentCircle"
-      label={MENT_HOST.MAIN.COMMENT}
+      label={i18n.t('comment')}
       onPress={handleNavigationDetailPage}
     />
   );
@@ -154,13 +152,13 @@ const HostConsoleScreen = () => {
         <DonutChartInfo
           numerator={eventStatus.approvedCount}
           denominator={eventStatus.maxCount}
-          label={MENT_HOST.MAIN.APPROVED}
+          label={i18n.t('approved')}
           color="lightGreen"
         />
         <DonutChartInfo
           numerator={eventStatus.joinedCount}
           denominator={eventStatus.maxCount}
-          label={MENT_HOST.MAIN.ATTENDED}
+          label={i18n.t('attended')}
           color="main"
         />
       </View>
@@ -170,13 +168,13 @@ const HostConsoleScreen = () => {
           <LargeIconButton
             disabled={eventStatus.isEnded}
             iconName="IconQR"
-            label={MENT_HOST.MAIN.QR_SCAN_BTN}
+            label={i18n.t('qr_scan_btn')}
             onPress={() => handleNavigation(StackMenu.HostQRScan)}
           />
           <LargeIconButton
             disabled={eventStatus.isEnded}
             iconName="IconAddressBook"
-            label={MENT_HOST.MAIN.LEDGER}
+            label={i18n.t('ledger')}
             onPress={() => handleNavigation(StackMenu.HostLedger)}
           />
         </SpaceLayout>
@@ -184,22 +182,20 @@ const HostConsoleScreen = () => {
           <LargeIconButton
             disabled={eventStatus.isEnded}
             iconName="IconUserGear"
-            label={MENT_HOST.MAIN.STAFF_MANAGEMENT}
+            label={i18n.t('staff_management')}
             onPress={() => handleNavigation(StackMenu.StaffManagement)}
           />
           <LargeIconButton
             disabled={eventStatus.isEnded}
             iconName="IconStopCircle"
-            label={MENT_HOST.MAIN.STOP_APPLICATION}
+            label={i18n.t('stop_application')}
             onPress={handleStopApplication}
           />
         </SpaceLayout>
       </View>
 
       <Spacing height={80} />
-      {eventStatus.isEnded && (
-        <FixedButton disabled label={MENT_HOST.MAIN.ENDED} />
-      )}
+      {eventStatus.isEnded && <FixedButton disabled label={i18n.t('ended')} />}
 
       {/* TODO 이벤트 개설 취소 api 생기면 추가 */}
       {/* {eventStatus.isEnded ? (

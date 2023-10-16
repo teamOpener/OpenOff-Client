@@ -1,10 +1,10 @@
+import i18n from 'locales';
 import {
   useQueryClient,
   useQueryErrorResetBoundary,
 } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import MENT_FALLBACK from 'constants/fallback/fallbackErrorMessage';
 import { TouchableOpacity, View } from 'react-native';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import fallbackErrorStyles from './FallbackError.style';
@@ -35,7 +35,7 @@ const FallbackError = ({
         <Icon name="IconExit" fill="white" />
       </View>
       <Text variant="h4" style={fallbackErrorStyles.errorText}>
-        {errorMessage ?? MENT_FALLBACK.DEFAULT_ERROR_MESSAGE}
+        {errorMessage ?? i18n.t('default_error_message')}
       </Text>
 
       <TouchableOpacity
@@ -43,7 +43,7 @@ const FallbackError = ({
         style={fallbackErrorStyles.button}
         onPress={resetErrors}
       >
-        <Text variant="h4">{MENT_FALLBACK.BACK_TO_HOME}</Text>
+        <Text variant="h4">{i18n.t('back_to_home')}</Text>
       </TouchableOpacity>
     </View>
   );

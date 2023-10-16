@@ -1,4 +1,5 @@
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
+import MAX_POSTER from 'constants/event/event';
+import i18n from 'locales';
 import { initEventFormErrMsg } from 'stores/OpenEventStore';
 import { EventForm } from 'types/openEvent/EventForm';
 import { EventFormError } from 'types/openEvent/EventFormError';
@@ -18,51 +19,56 @@ const useOpenEventValidator = ({ openEvent }: Props) => {
   };
 
   if (!openEvent.field.length) {
-    setError('field', MENT_OPEN_EVENT.ERROR_FIELD);
+    setError('field', i18n.t('error_field'));
   }
 
   if (!openEvent.title) {
-    setError('title', MENT_OPEN_EVENT.ERROR_TITLE);
+    setError('title', i18n.t('error_title'));
   }
 
   if (!openEvent.applicationStartDate || !openEvent.applicationEndDate) {
-    setError('applicationPeriod', MENT_OPEN_EVENT.ERROR_APPLICATION_DATE);
+    setError('applicationPeriod', i18n.t('error_application_date'));
   }
 
   if (!openEvent.eventDates.length) {
-    setError('eventDates', MENT_OPEN_EVENT.ERROR_DATE);
+    setError('eventDates', i18n.t('error_date'));
   }
 
   if (!openEvent.address.roadAddress) {
-    setError('address', MENT_OPEN_EVENT.ERROR.ADDRESS);
+    setError('address', i18n.t('input_event_place'));
   }
 
   if (!openEvent.recruitmentNumber) {
-    setError('recruitmentNumber', MENT_OPEN_EVENT.ERROR.RECRUITMENT);
+    setError('recruitmentNumber', i18n.t('recruitment_input'));
   }
 
   if (!openEvent.description) {
-    setError('description', MENT_OPEN_EVENT.ERROR.DESCRIPTION);
+    setError('description', i18n.t('description_input'));
   }
 
   if (!openEvent.imageBuilders.length) {
-    setError('imageUrls', MENT_OPEN_EVENT.HELP_TEXT.IMAGE);
+    setError(
+      'imageUrls',
+      i18n.t('image_upload', {
+        max_poster: MAX_POSTER,
+      }),
+    );
   }
 
   if (!openEvent.hostName) {
-    setError('hostName', MENT_OPEN_EVENT.ERROR.HOST_NAME);
+    setError('hostName', i18n.t('host_name_input'));
   }
 
   if (!openEvent.hostPhoneNumber) {
-    setError('hostPhoneNumber', MENT_OPEN_EVENT.ERROR.HOST_PHONE);
+    setError('hostPhoneNumber', i18n.t('host_phone_input'));
   } else if (!validatorOnlyPhoneNumber(openEvent.hostPhoneNumber)) {
-    setError('hostPhoneNumber', MENT_OPEN_EVENT.ERROR.INVALID_HOST_PHONE);
+    setError('hostPhoneNumber', i18n.t('input_valid_phone'));
   }
 
   if (!openEvent.hostEmail) {
-    setError('hostEmail', MENT_OPEN_EVENT.ERROR.HOST_EMAIL);
+    setError('hostEmail', i18n.t('input_email'));
   } else if (validateEmail(openEvent.hostEmail)) {
-    setError('hostEmail', MENT_OPEN_EVENT.ERROR.INVALID_HOST_EMAIL);
+    setError('hostEmail', i18n.t('input_valid_email'));
   }
 
   return { hasError, errorMessage };

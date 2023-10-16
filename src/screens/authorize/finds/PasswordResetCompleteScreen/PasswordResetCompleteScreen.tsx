@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
 import { AuthorizeMenu } from 'constants/app/menu';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Image, View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import passwordResetCompleteScreenStyles from './PasswordResetCompleteScreen.style';
@@ -13,7 +13,7 @@ const PasswordResetCompleteScreen = () => {
     <ScreenCover
       authorizeButton={{
         handlePress: () => navigation.navigate(AuthorizeMenu.Login),
-        label: MENT_AUTHORIZE.FIND.BACK_TO_LOGIN,
+        label: i18n.t('authorize.back_to_login'),
         isActive: true,
       }}
     >
@@ -23,10 +23,10 @@ const PasswordResetCompleteScreen = () => {
           source={require('../../../../assets/images/check.png')}
         />
         <Text variant="h4" color="main">
-          {MENT_AUTHORIZE.FIND.SUCCESS_RESET_PASSWORD}
+          {i18n.t('authorize.success_reset_password')}
         </Text>
         <Text variant="body2" color="white">
-          {MENT_AUTHORIZE.FIND.LOGIN_INTRODUCTORY_COMMENT}
+          {i18n.t('authorize.login_introductory_comment')}
         </Text>
       </View>
     </ScreenCover>

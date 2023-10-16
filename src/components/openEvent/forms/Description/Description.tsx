@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/app/status';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import descriptionStyles from './Description.style';
@@ -26,11 +26,11 @@ const Description = () => {
 
   return (
     <View>
-      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.DETAIL_INFO} />
+      <OpenEvent.Label content={i18n.t('detail_info')} />
 
       <View style={descriptionStyles.inputWithHelpText}>
         <OpenEvent.Input
-          placeholder={MENT_OPEN_EVENT.PLACEHOLDER.DESCRIPTION}
+          placeholder={i18n.t('description_placeholder')}
           editable
           multiline
           style={descriptionStyles.input}

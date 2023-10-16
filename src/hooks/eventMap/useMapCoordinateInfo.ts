@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
-import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import useDialog from 'hooks/app/useDialog';
+import i18n from 'locales';
 import { useCallback, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import Geolocation, { GeoWatchOptions } from 'react-native-geolocation-service';
@@ -56,7 +56,7 @@ const useMapCoordinateInfo = () => {
       () => {
         openDialog({
           type: 'validate',
-          text: MENT_EVENT_MAP.PERMISSION.LOCATION,
+          text: i18n.t('event_map.location'),
         });
       },
       {
@@ -88,7 +88,7 @@ const useMapCoordinateInfo = () => {
       () => {
         openDialog({
           type: 'validate',
-          text: MENT_EVENT_MAP.PERMISSION.LOCATION,
+          text: i18n.t('event_map.location'),
         });
       },
       watchOptions,

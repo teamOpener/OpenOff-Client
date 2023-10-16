@@ -1,10 +1,10 @@
+import i18n from 'locales';
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import dayjs from 'dayjs';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { EventIndexInfo } from 'models/ledger/entity/EventIndexInfo';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import dateSelectorStyles from './DateSelector.style';
 
 // TODO 한개일때는 안열리게
@@ -42,7 +42,7 @@ const DateSelector = ({
       >
         <Text style={dateSelectorStyles.dateText} color="main">
           {dayjs(selectedEventIndexInfo.eventDate).format(
-            MENT_HOST.MAIN.DATE_FORMAT,
+            i18n.t('date_selector_format'),
           )}
         </Text>
         <Icon
@@ -72,7 +72,9 @@ const DateSelector = ({
                     : 'grey'
                 }
               >
-                {dayjs(dateList.eventDate).format(MENT_HOST.MAIN.DATE_FORMAT)}
+                {dayjs(dateList.eventDate).format(
+                  i18n.t('date_selector_format'),
+                )}
               </Text>
             </TouchableOpacity>
           ))}

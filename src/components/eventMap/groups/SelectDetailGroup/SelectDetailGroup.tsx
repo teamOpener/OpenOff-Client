@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
@@ -49,7 +50,7 @@ const SelectDetailGroup = ({
     <View style={selectDetailGroupStyles.container}>
       <View style={selectDetailGroupStyles.detailTitle}>
         <Text variant="h2" color="white">
-          {MENT_EVENT_MAP.MAIN.SELECT_BOX.FILTER}
+          {i18n.t('event_map.filter')}
         </Text>
         <View />
         <TouchableOpacity onPress={closeDetailGroup}>
@@ -59,7 +60,7 @@ const SelectDetailGroup = ({
       <SelectDetailBox
         currentOption={selectState.payOption}
         options={payOptions}
-        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.PAY.LABEL}
+        label={i18n.t('event_map.label_cost')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_PAY_OPTION,
@@ -71,7 +72,7 @@ const SelectDetailGroup = ({
       <SelectDetailBox
         currentOption={selectState.participantOption}
         options={participantOptions}
-        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.LABEL}
+        label={i18n.t('event_map.label_participants')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_PARTICIPANT_OPTION,
@@ -83,7 +84,7 @@ const SelectDetailGroup = ({
       <SelectDetailBox
         currentOption={selectState.applicationAbleOption}
         options={applicationAbleOptions}
-        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.APPLICATION_ABLE.LABEL}
+        label={i18n.t('event_map.label_application_status')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_APPLICATION_ABLE_OPTION,
@@ -95,14 +96,14 @@ const SelectDetailGroup = ({
         <SelectControlButton
           handlePress={initializeSelect}
           borderColor={colors.grey}
-          label={MENT_EVENT_MAP.MAIN.SELECT_BOX.RESET}
+          label={i18n.t('event_map.reset')}
           color="grey"
         />
         <SelectControlButton
           handlePress={applySelect}
           borderColor={colors.main}
           backgroundColor={colors.main}
-          label={MENT_EVENT_MAP.MAIN.SELECT_BOX.APPLY}
+          label={i18n.t('event_map.apply')}
           color="white"
         />
       </View>

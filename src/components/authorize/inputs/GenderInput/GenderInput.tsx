@@ -1,5 +1,5 @@
+import i18n from 'locales';
 import ColorButton from 'components/authorize/buttons/ColorButton/ColorButton';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { GenderType } from 'constants/authorize/join';
 import { Dispatch, SetStateAction } from 'react';
 import { View } from 'react-native';
@@ -32,12 +32,10 @@ const GenderInput = ({ value, setValue }: Props) => {
   };
   return (
     <View style={genderInputStyles.container}>
-      <Text style={genderInputStyles.title}>
-        {MENT_AUTHORIZE.USER_INFO.GENDER}
-      </Text>
+      <Text style={genderInputStyles.title}>{i18n.t('gender')}</Text>
       <View style={genderInputStyles.genderButtonContainer}>
         <ColorButton
-          label={MENT_AUTHORIZE.USER_INFO.MAN}
+          label={i18n.t('man')}
           color={computedGenderAction(GenderType.MAN).color}
           marginRight={10}
           borderColor={computedGenderAction(GenderType.MAN).borderColor}
@@ -45,7 +43,7 @@ const GenderInput = ({ value, setValue }: Props) => {
           handleClick={computedGenderAction(GenderType.MAN).handlePress}
         />
         <ColorButton
-          label={MENT_AUTHORIZE.USER_INFO.WOMAN}
+          label={i18n.t('woman')}
           color={computedGenderAction(GenderType.WOMAN).color}
           marginRight={10}
           borderColor={computedGenderAction(GenderType.WOMAN).borderColor}

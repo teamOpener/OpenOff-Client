@@ -1,6 +1,6 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DatePicker, { DatePickerProps } from 'react-native-date-picker';
@@ -38,7 +38,7 @@ const DateTimePicker = ({
     theme: 'dark',
     date,
     minimumDate,
-    cancelText: MENT_OPEN_EVENT.MAIN.CANCEL,
+    cancelText: i18n.t('cancel'),
   };
 
   const onPress = () => {
@@ -61,16 +61,14 @@ const DateTimePicker = ({
       <Text
         style={[openEventStyles.text, isEmpty && openEventStyles.placeholder]}
       >
-        {isEmpty
-          ? MENT_OPEN_EVENT.DATE_PICKER_PLACEHOLDER
-          : formatDateTime(date)}
+        {isEmpty ? i18n.t('date_picker_placeholder') : formatDateTime(date)}
       </Text>
       <DatePicker
         {...defaultOptions}
         open={openDate}
         mode="datetime"
-        title={MENT_OPEN_EVENT.MAIN.DATA_TIME_PICKER_TITLE}
-        confirmText={MENT_OPEN_EVENT.MAIN.CONFIRM}
+        title={i18n.t('select_date_and_time')}
+        confirmText={i18n.t('confirm')}
         onConfirm={(date) => {
           setOpenDate(false);
           setDate(date);

@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { FieldCode } from 'constants/interest/interest';
@@ -5,7 +6,6 @@ import { CONSTANT_PARTICIPANT } from 'constants/userEvent/participant/participan
 import React, { useState } from 'react';
 import { LayoutChangeEvent, TouchableOpacity, View } from 'react-native';
 import { Field } from 'types/interest';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
 import Tag from '../Tag/Tag';
 import TagGroup from '../Tag/TagGroup';
 import categorySelectorStyles from './CategorySelector.style';
@@ -52,7 +52,7 @@ const CategorySelector = ({ field, setField }: Props) => {
         onLayout={handleHeight}
       >
         <Text style={categorySelectorStyles.title}>
-          {activeField?.label ?? MENT_PARTICIPANT.MAIN.ALL}
+          {activeField?.label ?? i18n.t('all')}
         </Text>
         <Icon
           name={isOpen ? 'IconArrowUp' : 'IconArrowDown'}
@@ -64,7 +64,7 @@ const CategorySelector = ({ field, setField }: Props) => {
       {isOpen && (
         <TagGroup style={{ top: barHeight }}>
           <Tag
-            label={MENT_PARTICIPANT.MAIN.ALL}
+            label={i18n.t('all')}
             isSelected={!activeField}
             onPress={() => handleField(null)}
           />

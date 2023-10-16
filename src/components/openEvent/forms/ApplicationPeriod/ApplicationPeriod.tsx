@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/app/status';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -60,7 +60,7 @@ const ApplicationPeriod = () => {
 
   return (
     <View>
-      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.APPLICATION_PERIOD} />
+      <OpenEvent.Label content={i18n.t('application_period')} />
 
       <View style={applicationPeriodStyles.inputContainer}>
         <ScrollView
@@ -77,9 +77,7 @@ const ApplicationPeriod = () => {
               isEmpty={openEvent.applicationStartDate === null}
               hasError={hasError}
             />
-            <Text style={applicationPeriodStyles.text}>
-              {MENT_OPEN_EVENT.MAIN.TO}
-            </Text>
+            <Text style={applicationPeriodStyles.text}>{i18n.t('to')}</Text>
           </View>
 
           <View style={applicationPeriodStyles.dateTimePickerWrapper}>
@@ -91,9 +89,7 @@ const ApplicationPeriod = () => {
               minimumDate={startDate}
               hasError={hasError}
             />
-            <Text style={applicationPeriodStyles.text}>
-              {MENT_OPEN_EVENT.MAIN.FROM}
-            </Text>
+            <Text style={applicationPeriodStyles.text}>{i18n.t('from')}</Text>
           </View>
         </ScrollView>
 

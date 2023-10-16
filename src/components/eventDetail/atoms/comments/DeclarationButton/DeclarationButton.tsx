@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import Text from 'components/common/Text/Text';
 import Icon from 'components/common/Icon/Icon';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import declarationButtonStyles from './DeclarationButton.style';
 
 const DeclarationButton = ({ onPress, ...rest }: TouchableOpacityProps) => {
@@ -13,9 +13,7 @@ const DeclarationButton = ({ onPress, ...rest }: TouchableOpacityProps) => {
       {...rest}
     >
       <Icon name="IconSiren" size={14} fill="white" />
-      <Text style={declarationButtonStyles.label}>
-        {MENT_EVENT_DETAIL.MAIN.REPORT}
-      </Text>
+      <Text style={declarationButtonStyles.label}>{i18n.t('report')}</Text>
     </TouchableOpacity>
   );
 };

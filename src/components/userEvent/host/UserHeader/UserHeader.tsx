@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import API_ERROR_MESSAGE from 'constants/app/errorMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import useDialog from 'hooks/app/useDialog';
 import useNavigator from 'hooks/navigator/useNavigator';
@@ -14,8 +14,6 @@ import {
 import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
 import { View } from 'react-native';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
-import MENT_DIALOG from 'constants/common/dialogMessage';
 import ActionButton from '../buttons/ActionButton/ActionButton';
 import userHeaderStyles from './UserHeader.style';
 
@@ -50,7 +48,7 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
     openDialog({
       type: 'success',
       text,
-      closeText: MENT_HOST.APPLICANT.BACK_TO_APPLICANT,
+      closeText: i18n.t('back_to_applicant'),
       callback: () => {
         stackNavigation.goBack();
       },
@@ -60,12 +58,12 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
   const handlePermitError = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
   const { mutateAsync: permitApplicant } = usePermitApplicant(
-    () => successCallback(MENT_HOST.APPLICANT.APPROVE.SUCCESS),
+    () => successCallback(i18n.t('success_approve')),
     handlePermitError,
   );
 
@@ -74,36 +72,39 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
   };
 
   const { mutateAsync: denyApplicationUser } = useDenyApplicationUser(
-    () => successCallback(MENT_HOST.APPLICANT.DENY.SUCCESS),
+    () => successCallback(i18n.t('success_decline')),
     handlePermitError,
   );
 
   const handleDeny = async () => {
     openDialog({
       type: 'confirm',
-      text: MENT_HOST.APPLICANT.DENY.TITLE,
+      text: i18n.t('title_decline'),
       apply: async () => {
-        await denyApplicationUser({ ledgerId });
+        await denyApplicationUser({
+          ledgerId,
+          rejectReason: '',
+        });
       },
-      applyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
     });
   };
 
   const { mutateAsync: cancelPermittedApplicant } = useCancelPermittedApplicant(
-    () => successCallback(MENT_HOST.APPLICANT.CANCEL.SUCCESS),
+    () => successCallback(i18n.t('success_cancel_approval')),
     handlePermitError,
   );
 
   const handleCancel = async () => {
     openDialog({
       type: 'confirm',
-      text: MENT_HOST.APPLICANT.CANCEL.TITLE,
+      text: i18n.t('title_cancel_approval'),
       apply: async () => {
         await cancelPermittedApplicant({ ladgerId: ledgerId });
       },
-      applyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
     });
   };
 
@@ -123,25 +124,22 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
         {userInfo.isJoined && (
           <View style={userHeaderStyles.admissionTextWrapper}>
             <Text color="lightGreen" style={userHeaderStyles.admissionText}>
-              {MENT_HOST.APPLICANT.ADMISSION}
+              {i18n.t('admission')}
             </Text>
           </View>
         )}
         {!userInfo.isJoined && userInfo.isAccepted && (
           <ActionButton
-            label={MENT_HOST.APPLICANT.CANCEL.LABEL}
+            label={i18n.t('label_cancel_approval')}
             style={userHeaderStyles.approveBtn}
             onPress={handleCancel}
           />
         )}
         {!userInfo.isJoined && !userInfo.isAccepted && (
           <>
+            <ActionButton label={i18n.t('deny')} onPress={handleDeny} />
             <ActionButton
-              label={MENT_HOST.APPLICANT.DENY.LABEL}
-              onPress={handleDeny}
-            />
-            <ActionButton
-              label={MENT_HOST.APPLICANT.APPROVE.LABEL}
+              label={i18n.t('label_approve')}
               style={userHeaderStyles.approveBtn}
               onPress={handleApprove}
             />

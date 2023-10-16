@@ -1,5 +1,5 @@
+import i18n from 'locales';
 /* eslint-disable @typescript-eslint/no-empty-function */
-import MENT_DIALOG from 'constants/common/dialogMessage';
 import { PropsWithChildren, useMemo, useState } from 'react';
 import {
   CommonDialog,
@@ -31,7 +31,7 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
         isShow: false,
         contents: '',
         callback: () => {},
-        closeText: MENT_DIALOG.DIALOG_CONTEXT.CLOSE,
+        closeText: i18n.t('close'),
         apply: () => {},
         applyText: '',
       });
@@ -48,8 +48,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
         isShow: false,
         text: '',
         apply: () => {},
-        applyText: MENT_DIALOG.DIALOG_CONTEXT.APPLY,
-        closeText: MENT_DIALOG.DIALOG_CONTEXT.CLOSE,
+        applyText: i18n.t('apply'),
+        closeText: i18n.t('close'),
         deny: () => {},
         denyText: '',
       });
@@ -62,8 +62,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
     callback = () => {},
     apply = () => {},
     contents = '',
-    applyText = MENT_DIALOG.DIALOG_CONTEXT.APPLY,
-    closeText = MENT_DIALOG.DIALOG_CONTEXT.CLOSE,
+    applyText = i18n.t('apply'),
+    closeText = i18n.t('close'),
     deny = () => {},
     denyText = '',
   }: OpenDialog) => {

@@ -1,9 +1,9 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import EventCard from 'components/home/cards/EventCard/EventCard';
 import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
-import MENT_HOME from 'constants/home/homeMessage';
 import useNavigator from 'hooks/navigator/useNavigator';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
 import { useId } from 'react';
@@ -51,7 +51,7 @@ const EventCardList = ({
             onPress={handleShowPopularEvent}
           >
             <Text variant="body3" color="grey">
-              {MENT_HOME.MAIN.SHOW_ALL}
+              {i18n.t('personal_event_commend')}
             </Text>
             <Icon name="IconArrowRight" size={10} fill="grey" />
           </TouchableOpacity>

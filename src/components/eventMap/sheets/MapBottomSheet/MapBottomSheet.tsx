@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import BottomSheet, {
   BottomSheetFlatList,
   BottomSheetScrollView,
@@ -96,8 +97,8 @@ const MapBottomSheet = ({
                   >
                     <Text variant="body2" color="white">
                       {sort.value === 'distance'
-                        ? MENT_EVENT_MAP.MAIN.SORT.DISTANCE
-                        : MENT_EVENT_MAP.MAIN.SORT.DATE}
+                        ? i18n.t('event_map.distance')
+                        : i18n.t('event_map.date')}
                     </Text>
                     <Icon name="IconArrowDown" size={12} />
                   </TouchableOpacity>
@@ -108,7 +109,7 @@ const MapBottomSheet = ({
               <View>
                 <EmptyScreen
                   style={mapBottomSheetStyles.bottomEmptyScreenStyle}
-                  content={MENT_EVENT_MAP.MAIN.EMPTY_EVENT}
+                  content={i18n.t('event_map.empty_event')}
                 />
               </View>
             ) : (

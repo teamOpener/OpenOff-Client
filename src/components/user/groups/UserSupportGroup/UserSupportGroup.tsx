@@ -1,7 +1,6 @@
+import i18n from 'locales';
 import Divider from 'components/common/Divider/Divider';
 import Text from 'components/common/Text/Text';
-import MENT_DIALOG from 'constants/common/dialogMessage';
-import MENT_USER from 'constants/user/userMessage';
 import useDialog from 'hooks/app/useDialog';
 import { useLogout } from 'hooks/queries/user';
 import {
@@ -21,9 +20,9 @@ const UserSupportGroup = () => {
   const handleLogout = async () => {
     openDialog({
       type: 'warning',
-      text: MENT_USER.SUPPORT.LOGOUT_CONFIRM,
-      applyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      text: i18n.t('logout_confirm'),
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       apply: async () => {
         await logout();
       },
@@ -78,39 +77,39 @@ const UserSupportGroup = () => {
       contentContainerStyle={userSupportGroupStyles.userControllerContainer}
     >
       <Text variant="bodySB" color="darkGrey">
-        {MENT_USER.MAIN.CUSTOMER_SERVICE_CENTER}
+        {i18n.t('customer_service_center')}
       </Text>
       <Pressable onPress={handleShowFAQ}>
-        <Text variant="body2">{MENT_USER.MAIN.FAQ}</Text>
+        <Text variant="body2">{i18n.t('faq')}</Text>
       </Pressable>
       <Pressable onPress={handleShowAnnoincement}>
-        <Text variant="body2">{MENT_USER.MAIN.ANNOUNCEMENT}</Text>
+        <Text variant="body2">{i18n.t('announcement')}</Text>
       </Pressable>
       <Pressable onPress={handleShowInquiry}>
-        <Text variant="body2">{MENT_USER.MAIN.INQUIRY}</Text>
+        <Text variant="body2">{i18n.t('inquiry')}</Text>
       </Pressable>
       <Divider height={1} color="darkGrey" />
       <Text variant="bodySB" color="darkGrey">
-        {MENT_USER.MAIN.TERM}
+        {i18n.t('term')}
       </Text>
       <Pressable onPress={handleShowTermToUse}>
-        <Text variant="body2">{MENT_USER.MAIN.TERM_TO_USE}</Text>
+        <Text variant="body2">{i18n.t('term_to_use')}</Text>
       </Pressable>
       <Pressable onPress={handleShowTermToPrivacy}>
-        <Text variant="body2">{MENT_USER.MAIN.TERM_TO_PRIVACY}</Text>
+        <Text variant="body2">{i18n.t('term_to_privacy')}</Text>
       </Pressable>
       <Pressable onPress={handleShowTermToMarketing}>
-        <Text variant="body2">{MENT_USER.MAIN.TERM_TO_MARKETING}</Text>
+        <Text variant="body2">{i18n.t('term_to_marketing')}</Text>
       </Pressable>
       <Divider height={1} color="darkGrey" />
       <Text variant="bodySB" color="darkGrey">
-        {MENT_USER.MAIN.SETTING}
+        {i18n.t('setting')}
       </Text>
       <Pressable onPress={handleShowSettingScreen}>
-        <Text variant="body2">{MENT_USER.MAIN.SERVICE_SETTING}</Text>
+        <Text variant="body2">{i18n.t('service_setting')}</Text>
       </Pressable>
       <Pressable onPress={handleLogout}>
-        <Text variant="body2">{MENT_USER.MAIN.LOGOUT}</Text>
+        <Text variant="body2">{i18n.t('logout')}</Text>
       </Pressable>
     </ScrollView>
   );

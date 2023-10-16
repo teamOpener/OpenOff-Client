@@ -6,6 +6,7 @@ import { AuthorizeMenu } from 'constants/app/menu';
 import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import { useEmailCheck, useNormalSignUp } from 'hooks/queries/auth';
+import i18n from 'locales';
 import { Dispatch, useState } from 'react';
 import { colors } from 'styles/theme';
 import { AuthStackParamList } from 'types/apps/menu';
@@ -63,18 +64,18 @@ const EmailPasswordScreen = ({ dispatch }: Props) => {
         label: '확인',
         isActive,
       }}
-      titleElements={['이메일과 비밀번호를', '입력해주세요.']}
+      titleElements={[i18n.t('email_and_password'), i18n.t('enter')]}
     >
       <EssentialInput
         validation={validateEmail}
-        label="이메일 주소"
+        label={i18n.t('email')}
         value={email}
         setValue={setEmail}
         type="email"
       />
       <EssentialInput
         validation={validatePassword}
-        label="비밀번호"
+        label={i18n.t('password')}
         value={password}
         setValue={setPassword}
         type="password"

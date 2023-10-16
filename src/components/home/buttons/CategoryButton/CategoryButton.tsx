@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { FieldCode } from 'constants/interest/interest';
@@ -21,7 +22,9 @@ const iconMapping: Record<FieldCode, IconName> = {
 };
 
 const CategoryButton = ({ fieldData, ...rest }: Props) => {
-  const names = fieldData.interestValue.split('/');
+  const code = fieldData.interestConstName as keyof typeof FieldCode;
+  const translatedCode = i18n.t(code);
+  const names = translatedCode.split('/');
   const selectedIcon =
     iconMapping[fieldData.interestConstName] ?? 'IconTicketStar';
 

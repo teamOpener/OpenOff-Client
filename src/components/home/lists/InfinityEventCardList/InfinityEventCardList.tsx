@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import { InfiniteData } from '@tanstack/react-query';
 import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import EventCard from 'components/home/cards/EventCard/EventCard';
 import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
-import MENT_HOME from 'constants/home/homeMessage';
 import useNavigator from 'hooks/navigator/useNavigator';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
 import { FlatList, View } from 'react-native';
@@ -43,7 +43,7 @@ const InfinityEventCardList = ({
   return (
     <View style={infinityEventCardList.container}>
       {flatEventList?.length === 0 ? (
-        <EmptyScreen content={MENT_HOME.MAIN.EMPTY_EVENT} />
+        <EmptyScreen content={i18n.t('empty_event')} />
       ) : (
         <FlatList
           nestedScrollEnabled

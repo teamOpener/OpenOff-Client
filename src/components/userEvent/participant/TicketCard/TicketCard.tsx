@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import dayjs from 'dayjs';
 import { colors } from 'styles/theme';
 import { TouchableOpacity, View, ViewProps } from 'react-native';
 import Text from 'components/common/Text/Text';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
 import Icon from 'components/common/Icon/Icon';
 import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
 import TicketType from 'models/ledger/entity/TicketType';
@@ -66,7 +66,7 @@ const TicketCard = ({ ticketInfo, style, ...rest }: Props) => {
         <Text
           color={textColor}
           style={ticketCardStyles.reservationNumber}
-        >{`${MENT_PARTICIPANT.MAIN.RESERVATION_NUMBER}: ${ticketInfo.ticketIndex}`}</Text>
+        >{`${i18n.t('reservation_number')}: ${ticketInfo.ticketIndex}`}</Text>
       </View>
 
       <View style={ticketCardStyles.iconContainer}>
@@ -94,7 +94,7 @@ const TicketCard = ({ ticketInfo, style, ...rest }: Props) => {
       <View style={ticketCardStyles.eventSubInfo}>
         <View>
           <Text color={textColor} style={ticketCardStyles.dateTitle}>
-            {MENT_PARTICIPANT.MAIN.DATE_TIME}
+            {i18n.t('date_time')}
           </Text>
           <View style={ticketCardStyles.dateContainer}>
             <Text color={textColor} style={ticketCardStyles.date}>
@@ -115,7 +115,7 @@ const TicketCard = ({ ticketInfo, style, ...rest }: Props) => {
           onPress={() => handlePressDetail(ticketInfo.eventInfoId)}
         >
           <Text color="main" style={ticketCardStyles.btnText}>
-            {MENT_PARTICIPANT.MAIN.EVENT_DETAIL}
+            {i18n.t('view_event_detail')}
           </Text>
         </TouchableOpacity>
       </View>

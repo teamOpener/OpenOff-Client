@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { useFocusEffect } from '@react-navigation/native';
 import Icon from 'components/common/Icon/Icon';
 import { StackMenu } from 'constants/app/menu';
@@ -68,24 +69,24 @@ const EventSearchInput = ({ handleSearch }: Props) => {
             if (isSearched) setIsSearched(false);
           }}
           style={eventSearchInput.searchInput}
-          placeholder={MENT_EVENT_MAP.MAIN.SEARCH.PLACEHOLDER}
+          placeholder={i18n.t('event_map.placeholder')}
           placeholderTextColor={colors.grey}
         />
 
         {startEndDate.endDay && startEndDate.startDay && (
           <View style={eventSearchInput.textContainer}>
             <Text style={eventSearchInput.calendarText}>
-              {MENT_EVENT_MAP.MAIN.SEARCH.DATE_FORMAT(
-                parseInt(startEndDate.startDay.substring(6, 8), 10),
-                parseInt(startEndDate.startDay.substring(8, 10), 10),
-              )}
+              {i18n.t('event_map.date_format', {
+                month: parseInt(startEndDate.startDay.substring(5, 8), 10),
+                day: parseInt(startEndDate.startDay.substring(8, 10), 10),
+              })}
             </Text>
             <Text style={eventSearchInput.calendarText}>-</Text>
             <Text style={eventSearchInput.calendarText}>
-              {MENT_EVENT_MAP.MAIN.SEARCH.DATE_FORMAT(
-                parseInt(startEndDate.endDay.substring(6, 8), 10),
-                parseInt(startEndDate.endDay.substring(8, 10), 10),
-              )}
+              {i18n.t('event_map.date_format', {
+                month: parseInt(startEndDate.endDay.substring(5, 8), 10),
+                day: parseInt(startEndDate.endDay.substring(8, 10), 10),
+              })}
             </Text>
           </View>
         )}

@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Dispatch, SetStateAction, useState } from 'react';
 import {
   GestureResponderEvent,
@@ -67,7 +67,7 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
       </View>
       <DatePicker
         modal
-        title={MENT_AUTHORIZE.USER_INFO.SELECT_DATE}
+        title={i18n.t('select_date')}
         mode="date"
         textColor="white"
         theme="dark"
@@ -75,8 +75,8 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
         minimumDate={new Date('1910-01-01')}
         maximumDate={new Date()}
         date={new Date(value)}
-        confirmText={MENT_AUTHORIZE.USER_INFO.APPLY}
-        cancelText={MENT_AUTHORIZE.USER_INFO.CANCEL}
+        confirmText={i18n.t('apply')}
+        cancelText={i18n.t('cancel')}
         onConfirm={(date) => {
           setValue(() => {
             return dateFormatter(date);

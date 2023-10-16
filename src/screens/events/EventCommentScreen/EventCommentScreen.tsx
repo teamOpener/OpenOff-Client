@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Spacing from 'components/common/Spacing/Spacing';
 import { EventDetail } from 'components/eventDetail';
@@ -10,7 +11,6 @@ import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScre
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import CommentRowSkeleton from 'components/suspense/skeleton/CommentRowSkeleton/CommentRowSkeleton';
 import { StackMenu } from 'constants/app/menu';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
 import useStackRoute from 'hooks/navigator/useStackRoute';
@@ -59,7 +59,7 @@ const EventCommentScreen = () => {
   return (
     <KeyboardAvoidingScreenLayout>
       {!filterData && (
-        <EventEmptyLayout helpText={MENT_EVENT_DETAIL.ERROR.EMPTY_COMMENT} />
+        <EventEmptyLayout helpText={i18n.t('event_detail.not_found_comment')} />
       )}
 
       {filterData && (

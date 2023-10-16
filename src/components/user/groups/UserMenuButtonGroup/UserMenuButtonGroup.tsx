@@ -1,6 +1,6 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
-import MENT_USER from 'constants/user/userMessage';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { Pressable, View } from 'react-native';
@@ -33,7 +33,7 @@ const UserMenuButtonGroup = () => {
       >
         <Icon name="IconVoidTicket" size={30} fill="white" />
         <Text variant="bodySB" color="white">
-          {MENT_USER.MAIN.MY_TICKET}
+          {i18n.t('my_ticket')}
         </Text>
       </Pressable>
       <Pressable
@@ -42,7 +42,7 @@ const UserMenuButtonGroup = () => {
       >
         <Icon name="IconBookmark" size={30} fill="white" />
         <Text variant="bodySB" color="white">
-          {MENT_USER.MAIN.MY_BOOKMARK}
+          {i18n.t('my_bookmark')}
         </Text>
       </Pressable>
       <Pressable
@@ -51,7 +51,7 @@ const UserMenuButtonGroup = () => {
       >
         <Icon name="IconCongrates" size={30} fill="white" />
         <Text variant="bodySB" color="white">
-          {MENT_USER.MAIN.HOST_EVENT}
+          {i18n.t('host_event')}
         </Text>
       </Pressable>
       {/* <Pressable style={userMenuButtonGroupStyles.menuButton}>

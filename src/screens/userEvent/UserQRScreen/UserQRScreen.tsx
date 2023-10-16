@@ -1,14 +1,13 @@
+import i18n from 'locales';
 import Text from 'components/common/Text/Text';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import { TicketQR } from 'components/userEvent/participant';
-import API_ERROR_MESSAGE from 'constants/app/errorMessage';
 import { BottomTabMenu, StackMenu } from 'constants/app/menu';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
 import {
   UserEventTabItem,
   UserTicketStatus,
 } from 'constants/userEvent/participant/participantConstants';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
 import useDialog from 'hooks/app/useDialog';
 import useTicketStatus from 'hooks/event/useTicketStatus';
 import useNavigator from 'hooks/navigator/useNavigator';
@@ -22,7 +21,6 @@ import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResp
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import MENT_DIALOG from 'constants/common/dialogMessage';
 import userQRScreenStyles from './UserQRScreen.style';
 
 const UserQRScreen = () => {
@@ -60,8 +58,8 @@ const UserQRScreen = () => {
   const handleSuccessCancel = () => {
     openDialog({
       type: 'success',
-      text: MENT_PARTICIPANT.TICKET.CANCEL_SUCCESS,
-      closeText: MENT_PARTICIPANT.TICKET.BACK_TO_HOME,
+      text: i18n.t('cancel_success'),
+      closeText: i18n.t('back_to_home'),
       callback: resetTickets,
     });
   };
@@ -69,8 +67,8 @@ const UserQRScreen = () => {
   const handleErrorCancel = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
-      closeText: MENT_PARTICIPANT.TICKET.BACK_TO_HOME,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
+      closeText: i18n.t('back_to_home'),
     });
   };
 
@@ -84,9 +82,9 @@ const UserQRScreen = () => {
 
     openDialog({
       type: 'confirm',
-      text: MENT_PARTICIPANT.TICKET.CANCEL,
-      applyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      text: i18n.t('cancel_confirmation'),
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       apply: async () => {
         await cancelApplicationEvent({ ledgerId: currentTicket.ladgerId });
       },
@@ -109,7 +107,7 @@ const UserQRScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text={MENT_PARTICIPANT.TICKET.CANCEL_PROGRESS}
+          text={i18n.t('cancel_in_progress')}
         />
       )}
       {helpText && (
@@ -133,11 +131,11 @@ const UserQRScreen = () => {
             style={userQRScreenStyles.cancelBtn}
             onPress={handleCancel}
           >
-            <Text variant="body3">{MENT_PARTICIPANT.MAIN.CANCEL_BTN}</Text>
+            <Text variant="body3">{i18n.t('cancel_reservation_button')}</Text>
           </TouchableOpacity>
           <View style={userQRScreenStyles.bottomInfo}>
             <Text variant="body3" style={userQRScreenStyles.bottomInfoText}>
-              {MENT_PARTICIPANT.MAIN.ADMISSION_INFO}
+              {i18n.t('admission_info')}
             </Text>
           </View>
         </>

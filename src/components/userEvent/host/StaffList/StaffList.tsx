@@ -1,10 +1,9 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import API_ERROR_MESSAGE from 'constants/app/errorMessage';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import useDialog from 'hooks/app/useDialog';
 import useUniqueName from 'hooks/ledger/useUniqueName';
@@ -24,8 +23,6 @@ import {
 } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import MENT_DIALOG from 'constants/common/dialogMessage';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import staffListStyles from './StaffList.style';
 
 interface Props extends TextInputProps {
@@ -57,7 +54,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
   const handleSuccess = () => {
     openDialog({
       type: 'success',
-      text: MENT_HOST.SUCCESS.ADD_STAFF,
+      text: i18n.t('add_staff'),
       callback: () => {
         queryClient.invalidateQueries(
           queryKeys.ledgerKeys.staffByEventInfoId(eventInfoId),
@@ -71,7 +68,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
   const handleError = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
@@ -87,9 +84,9 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
 
     openDialog({
       type: 'warning',
-      text: MENT_HOST.STAFF.DELETE_CONFIRM,
-      applyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      text: i18n.t('delete_confirm'),
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       apply: async () => {
         await minusStaff({ eventInfoId, staffName: nickName });
       },
@@ -103,9 +100,9 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
 
     openDialog({
       type: 'success',
-      text: MENT_HOST.STAFF.ADD_CONFIRM,
-      applyText: MENT_DIALOG.DIALOG.YES,
-      closeText: MENT_DIALOG.DIALOG.NO,
+      text: i18n.t('confirm'),
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       apply: async () => {
         await plusStaff({ eventInfoId, nickname: searchText.slice(1) });
       },
@@ -141,7 +138,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
               staffListStyles.text,
               !searchText.startsWith('@') && staffListStyles.inActiveText,
             ]}
-            placeholder={MENT_HOST.STAFF.NICKNAME_PLACEHOLDER}
+            placeholder={i18n.t('nickname_placeholder')}
             placeholderTextColor={colors.grey}
             {...rest}
           />
@@ -200,7 +197,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
               ))}
 
           {others && !others.length && (
-            <Text variant="body2">{MENT_OPEN_EVENT.MAIN.EMPTY_NICKNAME}</Text>
+            <Text variant="body2">{i18n.t('empty_nickname')}</Text>
           )}
           <Spacing height={30} />
         </ScrollView>

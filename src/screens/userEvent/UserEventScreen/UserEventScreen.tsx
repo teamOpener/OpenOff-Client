@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
 import {
@@ -8,9 +9,7 @@ import {
 } from 'components/userEvent/participant';
 import { BottomTabMenu } from 'constants/app/menu';
 import resetQueryKeys from 'constants/queries/resetQueryKey';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
 import useDialog from 'hooks/app/useDialog';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
 import useInterestFields from 'hooks/interest/useInterestFields';
@@ -103,7 +102,7 @@ const UserEventScreen = () => {
     if (!event.isApproved) {
       openDialog({
         type: 'validate',
-        text: MENT_PARTICIPANT.MAIN.NOT_APPROVE,
+        text: i18n.t('not_approved_event'),
       });
       return;
     }
@@ -138,12 +137,12 @@ const UserEventScreen = () => {
     <View style={userEventScreenStyles.container}>
       <Tab>
         <TabItem
-          label={UserEventTabItem.PARTICIPANT}
+          label={i18n.t('participation_event')}
           isActive={activeTabName === UserEventTabItem.PARTICIPANT}
           onPress={() => handleTab(UserEventTabItem.PARTICIPANT)}
         />
         <TabItem
-          label={UserEventTabItem.HOST}
+          label={i18n.t('hosted_event')}
           isActive={activeTabName === UserEventTabItem.HOST}
           onPress={() => handleTab(UserEventTabItem.HOST)}
         />
@@ -164,7 +163,7 @@ const UserEventScreen = () => {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
           >
-            <EmptyLayout helpText={MENT_PARTICIPANT.MAIN.EMPTY} />
+            <EmptyLayout helpText={i18n.t('empty_tickets')} />
           </ScrollView>
         ) : (
           <View style={userEventScreenStyles.scrollContainer}>
@@ -205,7 +204,7 @@ const UserEventScreen = () => {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
           >
-            <EmptyLayout helpText={MENT_HOST.MAIN.EMPTY} />
+            <EmptyLayout helpText={i18n.t('empty_host_event')} />
           </ScrollView>
         ) : (
           <View style={userEventScreenStyles.scrollContainer}>

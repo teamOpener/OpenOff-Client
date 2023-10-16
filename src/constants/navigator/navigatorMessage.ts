@@ -1,24 +1,26 @@
-const MENT_NAVIGATOR = Object.freeze({
+import i18n from 'locales';
+
+const MENT_NAVIGATOR = {
   HEADER_TITLE: {
-    CATEGORY_EVENT: '카테고리',
-    BOOKMARK_EVENT: '찜한 이벤트',
-    SEARCH_ADDRESS: '주소를 검색해주세요.',
-    ALERT: '알림',
-    POPULAR_EVENT: '인기 이벤트',
-    DATE_PICK: '날짜 선택',
-    EVENT_COMMENT: '댓글',
-    HOST_CONSOLE: '주최 이벤트 관리',
-    HOST_QR: '스캔',
-    STAFF_MANAGEMENT: '스태프 관리',
-    USER_PROFILE_EDIT: '회원 정보 수정',
-    SCRAP: '찜한 목록',
+    CATEGORY_EVENT: i18n.t('category_event'),
+    BOOKMARK_EVENT: i18n.t('bookmark_event'),
+    SEARCH_ADDRESS: i18n.t('search_address'),
+    ALERT: i18n.t('alert'),
+    POPULAR_EVENT: i18n.t('popular_event'),
+    DATE_PICK: i18n.t('date_pick'),
+    EVENT_COMMENT: i18n.t('comment'),
+    HOST_CONSOLE: i18n.t('host_console'),
+    HOST_QR: i18n.t('host_qr'),
+    STAFF_MANAGEMENT: i18n.t('staff_management'),
+    USER_PROFILE_EDIT: i18n.t('user_profile_edit'),
+    SCRAP: i18n.t('scrap'),
   },
   BOTTOM_TAB_HEADER_TITLE: {
-    HOME: '홈',
-    EVENT_MAP: '이벤트맵',
-    USER_EVENT: '내 이벤트',
-    USER: '마이페이지',
+    HOME: i18n.t('home'),
+    EVENT_MAP: i18n.t('map_of_event'),
+    USER_EVENT: i18n.t('user_event'),
+    USER: i18n.t('user'),
   },
-});
+};
 
 export default MENT_NAVIGATOR;
