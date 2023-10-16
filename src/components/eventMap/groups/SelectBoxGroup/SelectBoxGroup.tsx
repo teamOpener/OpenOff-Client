@@ -10,7 +10,7 @@ import {
   payOptions,
 } from 'data/selectData';
 import { Dispatch } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import { Action, Option, SelectBox } from 'types/apps/selectbox';
 import selectBoxGroup from './SelectBoxGroup.style';
 
@@ -27,7 +27,11 @@ const SelectBoxGroup = ({
 }: Props) => {
   const queryClient = useQueryClient();
   return (
-    <View style={selectBoxGroup.selectContainer}>
+    <ScrollView
+      horizontal
+      style={selectBoxGroup.selectContainer}
+      contentContainerStyle={selectBoxGroup.selectContentContainer}
+    >
       <TouchableOpacity
         onPress={openDetailGroup}
         style={selectBoxGroup.buttonContainer}
@@ -70,7 +74,7 @@ const SelectBoxGroup = ({
           queryClient.removeQueries(queryKeys.eventKeys.mapList);
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 

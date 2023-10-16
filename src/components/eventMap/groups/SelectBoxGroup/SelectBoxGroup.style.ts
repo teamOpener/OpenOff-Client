@@ -3,8 +3,11 @@ import { colors } from 'styles/theme';
 
 const selectBoxGroup = StyleSheet.create({
   selectContainer: {
-    flexDirection: 'row',
     zIndex: 1,
+    overflow: 'visible',
+  },
+  selectContentContainer: {
+    paddingRight: 18,
   },
   buttonContainer: {
     borderColor: colors.white,
