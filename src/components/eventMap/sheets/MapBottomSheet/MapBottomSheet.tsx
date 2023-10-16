@@ -13,7 +13,6 @@ import SelectBoxGroup from 'components/eventMap/groups/SelectBoxGroup/SelectBoxG
 import SelectDetailGroup from 'components/eventMap/groups/SelectDetailGroup/SelectDetailGroup';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import MapEventCardSkeleton from 'components/suspense/skeleton/MapEventCardSkeleton/MapEventCardSkeleton';
-import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
