@@ -1,10 +1,10 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import BaseInfoInput from 'components/authorize/inputs/BaseInfoInput/BaseInfoInput';
 import BirthSettingInput from 'components/authorize/inputs/BirthSettingInput/BirthSettingInput';
 import GenderInput from 'components/authorize/inputs/GenderInput/GenderInput';
 import { AuthorizeMenu } from 'constants/app/menu';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { UserInfoStatus } from 'constants/authorize/join';
 import { Dispatch, useState } from 'react';
 import { View } from 'react-native';
@@ -41,16 +41,16 @@ const UserInfoScreen = ({ state, dispatch }: Props) => {
 
   return (
     <ScreenCover
-      titleElements={MENT_AUTHORIZE.USER_INFO.TITLE}
+      titleElements={[i18n.t('to_open_off_usage'), i18n.t('input_information')]}
       authorizeButton={{
         handlePress: handleAuthorizeFlow,
-        label: MENT_AUTHORIZE.USER_INFO.CONFIRM,
+        label: i18n.t('confirm'),
         isActive,
       }}
     >
       {!state.username && (
         <BaseInfoInput
-          label={MENT_AUTHORIZE.USER_INFO.NAME}
+          label={i18n.t('name')}
           value={username}
           setValue={setUsername}
           validation={validateName}
@@ -58,7 +58,7 @@ const UserInfoScreen = ({ state, dispatch }: Props) => {
       )}
       <View style={userInfoScreenStyles.detailUserInfo}>
         <BirthSettingInput
-          label={MENT_AUTHORIZE.USER_INFO.BIRTH}
+          label={i18n.t('birth')}
           value={birth}
           setValue={setBirth}
           validation={validateBirthday}

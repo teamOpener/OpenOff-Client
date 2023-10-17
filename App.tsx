@@ -20,12 +20,7 @@ import ErrorBoundary from 'react-native-error-boundary';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { MyTheme, colors } from 'styles/theme';
-// dayjs setting
 import DialogPortalProvider from 'components/common/dialogs/DialogPortalProvider';
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-
-dayjs.locale('ko');
 
 const appStyles = StyleSheet.create({
   gestureContainer: {

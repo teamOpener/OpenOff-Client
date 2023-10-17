@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import React, { useCallback, useMemo, useRef } from 'react';
 import { View } from 'react-native';
 import {
@@ -9,7 +10,6 @@ import {
 import Text from 'components/common/Text/Text';
 import SortType from 'models/ledger/entity/SortType';
 import { colors } from 'styles/theme';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import selectBottomSheetStyles from './SelectBottomSheet.style';
 import SortOption from './SortOption';
 
@@ -67,17 +67,17 @@ const SelectBottomSheet = React.forwardRef<BottomSheetModal, Props>(
           <View style={selectBottomSheetStyles.bottomModalContainer}>
             <View style={selectBottomSheetStyles.modalTitleContainer}>
               <Text style={selectBottomSheetStyles.modalTitleText}>
-                {MENT_HOST.MAIN.SORT.TITLE}
+                {i18n.t('sort_title')}
               </Text>
             </View>
 
             <SortOption
-              label={MENT_HOST.MAIN.SORT.DATE}
+              label={i18n.t('sort_date')}
               isSelected={selectedSortType === SortType.DATE}
               onPress={() => handleSortType(SortType.DATE)}
             />
             <SortOption
-              label={MENT_HOST.MAIN.SORT.NAME}
+              label={i18n.t('sort_name')}
               isSelected={selectedSortType === SortType.NAME}
               onPress={() => handleSortType(SortType.NAME)}
             />

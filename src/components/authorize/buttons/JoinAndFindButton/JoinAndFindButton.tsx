@@ -1,6 +1,6 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { AuthorizeMenu } from 'constants/app/menu';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthStackParamList } from 'types/apps/menu';
@@ -17,18 +17,16 @@ const JoinAndFindButton = () => {
         onPress={() => navigation.navigate(AuthorizeMenu.EmailPassword)}
       >
         <Text style={joinAndFindButtonStyle.text}>
-          {MENT_AUTHORIZE.LOGIN.JOIN_THE_MEMBERSHIP}
+          {i18n.t('authorize.join_the_membership')}
         </Text>
       </TouchableOpacity>
-      <Text style={joinAndFindButtonStyle.text}>
-        {MENT_AUTHORIZE.LOGIN.EMPTY_BAR}
-      </Text>
+      <Text style={joinAndFindButtonStyle.text}>{i18n.t('empty_bar')}</Text>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => navigation.navigate(AuthorizeMenu.EmailPasswordFind)}
       >
         <Text style={joinAndFindButtonStyle.text}>
-          {MENT_AUTHORIZE.LOGIN.FIND_ID_PASSWORD}
+          {i18n.t('authorize.find_id_password')}
         </Text>
       </TouchableOpacity>
     </View>

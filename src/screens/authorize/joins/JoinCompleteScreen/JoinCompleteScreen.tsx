@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import { useFocusEffect } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { useCallback } from 'react';
 import { BackHandler, View } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
@@ -33,13 +33,16 @@ const JoinCompleteScreen = ({ state }: Props) => {
         handlePress: () => {
           setIsLogin(true);
         },
-        label: MENT_AUTHORIZE.JOIN_COMPLETE.START,
+        label: i18n.t('start'),
         isActive: true,
       }}
-      titleElements={MENT_AUTHORIZE.JOIN_COMPLETE.TITLE(state.nickname)}
+      titleElements={[
+        i18n.t('user_nickname', { nickname: state.nickname }),
+        i18n.t('congrats_sign_up'),
+      ]}
     >
       <Text style={joinCompleteScreenStyles.myFieldTitle}>
-        {MENT_AUTHORIZE.JOIN_COMPLETE.MY_FIELD_TITLE}
+        {i18n.t('my_field_title')}
       </Text>
       <View style={joinCompleteScreenStyles.myFieldContainer}>
         {state.interestField.map((field) =>

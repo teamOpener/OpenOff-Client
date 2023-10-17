@@ -3,58 +3,58 @@ import {
   ParticipantValue,
   PayValue,
 } from 'constants/app/selectBox';
-import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
+import i18n from 'locales';
 import { Option } from 'types/apps/selectbox';
 
 const payOptions: Option[] = [
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
+    label: i18n.t('event_map.all'),
     value: PayValue.ALL,
   },
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PAY.PAY,
+    label: i18n.t('event_map.pay'),
     value: PayValue.PAY,
   },
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PAY.FREE,
+    label: i18n.t('event_map.free'),
     value: PayValue.FREE,
   },
 ];
 
 const participantOptions: Option[] = [
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
+    label: i18n.t('event_map.all'),
     value: ParticipantValue.ALL,
   },
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.SMALL,
+    label: i18n.t('event_map.small'),
     value: ParticipantValue.SMALL,
   },
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.MEDIUM,
+    label: i18n.t('event_map.medium'),
     value: ParticipantValue.MEDIUM,
   },
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.LARGE,
+    label: i18n.t('event_map.large'),
     value: ParticipantValue.LARGE,
   },
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.HUGE,
+    label: i18n.t('event_map.huge'),
     value: ParticipantValue.HUGE,
   },
 ];
 
 const applicationAbleOptions: Option[] = [
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
+    label: i18n.t('event_map.all'),
     value: ApplicationAbleValue.ALL,
   },
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.APPLICATION_ABLE.APPLYING,
+    label: i18n.t('event_map.applying'),
     value: ApplicationAbleValue.APPLYING,
   },
   {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.APPLICATION_ABLE.DEADLINE,
+    label: i18n.t('event_map.deadline'),
     value: ApplicationAbleValue.DEADLINE,
   },
 ];

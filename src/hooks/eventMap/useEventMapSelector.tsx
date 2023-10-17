@@ -5,6 +5,7 @@ import {
   SelectStatus,
 } from 'constants/app/selectBox';
 import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
+import i18n from 'locales';
 import EventSearchRequestDto from 'models/event/request/EventSearchRequestDto';
 import { Reducer, useReducer, useState } from 'react';
 import { useEventMapStore } from 'stores/EventMap';
@@ -19,15 +20,15 @@ interface SortInfo {
 
 const initSelect: SelectBox = {
   payOption: {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
+    label: i18n.t('event_map.all'),
     value: 'all',
   },
   participantOption: {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
+    label: i18n.t('event_map.all'),
     value: 'all',
   },
   applicationAbleOption: {
-    label: MENT_EVENT_MAP.MAIN.SELECT_BOX.ALL,
+    label: i18n.t('event_map.all'),
     value: 'all',
   },
 };

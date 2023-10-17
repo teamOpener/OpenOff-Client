@@ -1,6 +1,6 @@
+import i18n from 'locales';
 import { View } from 'react-native';
 import Text from 'components/common/Text/Text';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
 import Icon from 'components/common/Icon/Icon';
 import { UserTicketStatus } from 'constants/userEvent/participant/participantConstants';
 import Image from 'components/common/Image/Image';
@@ -33,7 +33,7 @@ const TicketQR = ({ status, ticket }: Props) => {
         <Text
           color={status === UserTicketStatus.ATTENDED ? 'black' : 'white'}
           style={ticketQRStyles.ticketIndex}
-        >{`${MENT_PARTICIPANT.MAIN.RESERVATION_NUMBER} : ${ticket.ticketIndex}`}</Text>
+        >{`${i18n.t('reservation_number')} : ${ticket.ticketIndex}`}</Text>
       </View>
 
       <View style={ticketQRStyles.qrWrapper}>

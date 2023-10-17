@@ -1,10 +1,9 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import API_ERROR_MESSAGE from 'constants/app/errorMessage';
 import { StackMenu } from 'constants/app/menu';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import dayjs from 'dayjs';
 import useDialog from 'hooks/app/useDialog';
 import useNavigator from 'hooks/navigator/useNavigator';
@@ -49,14 +48,14 @@ const ParentCommentListItem = ({
     setShowDeclarationButton(false);
     openDialog({
       type: 'success',
-      text: MENT_EVENT_DETAIL.COMMENT.COMMENT_REPORT,
+      text: i18n.t('event_detail.comment_report'),
     });
   };
 
   const handleErrorReport = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
@@ -97,7 +96,7 @@ const ParentCommentListItem = ({
                 { color: comment.isStaff ? colors.main : colors.white },
               ]}
             >
-              {comment.isStaff ? MENT_EVENT_DETAIL.MAIN.HOST : comment.nickname}
+              {comment.isStaff ? i18n.t('host') : comment.nickname}
             </Text>
             <Text style={parentCommentListItemStyles.content}>
               {comment.content}
@@ -122,7 +121,7 @@ const ParentCommentListItem = ({
                   color="grey"
                   style={parentCommentListItemStyles.replyButtonText}
                 >
-                  {MENT_EVENT_DETAIL.COMMENT.POSTING_REPLY}
+                  {i18n.t('event_detail.posting_reply')}
                 </Text>
               </TouchableOpacity>
             )}
@@ -149,7 +148,9 @@ const ParentCommentListItem = ({
             style={parentCommentListItemStyles.replyCountText}
             onPress={handleChildComment}
           >
-            {MENT_EVENT_DETAIL.COMMENT.READ_MORE_REPLIES(comment.childCount)}
+            {i18n.t('event_detail.read_more_replies', {
+              childCount: comment.childCount,
+            })}
           </Text>
         </TouchableOpacity>
       )}

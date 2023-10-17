@@ -3,10 +3,10 @@ import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { AuthorizeMenu } from 'constants/app/menu';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import { useNicknameCheck } from 'hooks/queries/auth';
+import i18n from 'locales';
 import { Dispatch, useState } from 'react';
 import { colors } from 'styles/theme';
 import { AuthStackParamList } from 'types/apps/menu';
@@ -31,7 +31,7 @@ const NickNameScreen = ({ dispatch }: Props) => {
     if (checkInfo.data?.isExist) {
       openDialog({
         type: 'validate',
-        text: MENT_AUTHORIZE.NICKNAME.DUPLICATED_NICKNAME,
+        text: i18n.t('duplicated_nickname'),
       });
       return;
     }
@@ -44,16 +44,16 @@ const NickNameScreen = ({ dispatch }: Props) => {
 
   return (
     <ScreenCover
-      titleElements={MENT_AUTHORIZE.NICKNAME.TITLE}
+      titleElements={[i18n.t('to_use_open_off'), i18n.t('input_nickname')]}
       authorizeButton={{
         handlePress: handleAuthorize,
-        label: MENT_AUTHORIZE.NICKNAME.CONFIRM,
+        label: i18n.t('confirm'),
         isActive,
       }}
     >
       <EssentialInput
         validation={validateNickname}
-        label={MENT_AUTHORIZE.NICKNAME.NICKNAME}
+        label={i18n.t('nickname')}
         value={nickname}
         setValue={setNickname}
         type="nickname"

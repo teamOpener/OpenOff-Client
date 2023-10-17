@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import AlertCode from 'constants/app/alertCode';
-import MENT_HOME from 'constants/home/homeMessage';
 import { SelectUserAlertResponse } from 'models/alert/response/SelectUserAlertResponse.Dto';
 import { View } from 'react-native';
 import alertCardStyles from './AlertCard.style';
@@ -17,12 +17,16 @@ const AlertCard = ({ alert }: Props) => {
     const diffDate = currentDate.getTime() - newRegDate.getTime();
     const calcDiffDate = Math.abs(diffDate / (1000 * 60 * 60 * 24));
     if (calcDiffDate > 1) {
-      return MENT_HOME.ALERT.TODAY;
+      return i18n.t('today');
     }
     if (calcDiffDate === 1) {
-      return MENT_HOME.ALERT.YESTERDAY;
+      return i18n.t('yesterday');
     }
-    return MENT_HOME.ALERT.ALERT_DIFF_DAY(newRegDate);
+    const date = i18n.t('date_format', {
+      month: newRegDate.getMonth() + 1,
+      day: newRegDate.getDate(),
+    });
+    return date;
   };
   return (
     <View style={alertCardStyles.container}>

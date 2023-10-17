@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/app/status';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { useEffect } from 'react';
 import { View } from 'react-native';
@@ -53,7 +53,7 @@ const Address = () => {
   return (
     <View>
       <View style={addressStyles.horizontalView}>
-        <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.EVENT_PLACE} />
+        <OpenEvent.Label content={i18n.t('event_place')} />
         <OpenEvent.FindButton onPress={handleSearch} />
       </View>
 
@@ -61,14 +61,14 @@ const Address = () => {
         <OpenEvent.Input
           value={openEvent.address.roadAddress ?? ''}
           editable={false}
-          placeholder={MENT_OPEN_EVENT.PLACEHOLDER.ADDRESS}
+          placeholder={i18n.t('find_your_address')}
           status={hasError ? StatusType.error : StatusType.default}
         />
 
         <OpenEvent.Input
           value={address.detailAddress ?? ''}
           onChangeText={handleChangeText}
-          placeholder={MENT_OPEN_EVENT.PLACEHOLDER.DETAIL_ADDRESS}
+          placeholder={i18n.t('address_detail_placeholder')}
           status={hasError ? StatusType.error : StatusType.default}
           editable={!!openEvent.address.roadAddress}
           disabled={!openEvent.address.roadAddress}

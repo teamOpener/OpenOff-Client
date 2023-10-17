@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import BottomSheet, {
   BottomSheetFlatList,
   BottomSheetScrollView,
@@ -12,7 +13,6 @@ import SelectBoxGroup from 'components/eventMap/groups/SelectBoxGroup/SelectBoxG
 import SelectDetailGroup from 'components/eventMap/groups/SelectDetailGroup/SelectDetailGroup';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import MapEventCardSkeleton from 'components/suspense/skeleton/MapEventCardSkeleton/MapEventCardSkeleton';
-import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
@@ -96,8 +96,8 @@ const MapBottomSheet = ({
                   >
                     <Text variant="body2" color="white">
                       {sort.value === 'distance'
-                        ? MENT_EVENT_MAP.MAIN.SORT.DISTANCE
-                        : MENT_EVENT_MAP.MAIN.SORT.DATE}
+                        ? String(i18n.t('event_map.distance'))
+                        : String(i18n.t('event_map.date'))}
                     </Text>
                     <Icon name="IconArrowDown" size={12} />
                   </TouchableOpacity>
@@ -108,7 +108,7 @@ const MapBottomSheet = ({
               <View>
                 <EmptyScreen
                   style={mapBottomSheetStyles.bottomEmptyScreenStyle}
-                  content={MENT_EVENT_MAP.MAIN.EMPTY_EVENT}
+                  content={i18n.t('event_map.empty_event')}
                 />
               </View>
             ) : (

@@ -1,6 +1,6 @@
+import i18n from 'locales';
 import * as Icons from 'assets/icons';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import MENT_DIALOG from 'constants/common/dialogMessage';
 import useDialog from 'hooks/app/useDialog';
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import { Modal } from 'react-native-paper';
@@ -80,7 +80,7 @@ const Dialog = () => {
           </View>
 
           <SpaceLayout direction="row" size={10}>
-            {dialog.applyText !== MENT_DIALOG.DIALOG.APPLY && (
+            {dialog.applyText !== i18n.t('apply') && (
               <TouchableOpacity
                 style={dialogStyles.buttonContainer}
                 onPress={handleConfirm}

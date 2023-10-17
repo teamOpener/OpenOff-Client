@@ -1,5 +1,5 @@
 import { UserTicketStatus } from 'constants/userEvent/participant/participantConstants';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
+import i18n from 'locales';
 import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
 
 const useTicketStatus = () => {
@@ -23,9 +23,9 @@ const useTicketStatus = () => {
   ): string | null => {
     switch (status) {
       case UserTicketStatus.ENDED:
-        return MENT_PARTICIPANT.MAIN.ENDED_INFO;
+        return i18n.t('ended_event_info');
       case UserTicketStatus.ATTENDED:
-        return MENT_PARTICIPANT.MAIN.ATTENDED_INFO;
+        return i18n.t('used_ticket_info');
       default:
         return null;
     }

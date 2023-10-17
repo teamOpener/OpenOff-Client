@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import queryKeys from 'constants/queries/queryKeys';
-import MENT_USER from 'constants/user/userMessage';
 import useDialog from 'hooks/app/useDialog';
 import {
   useMyInfo,
@@ -30,7 +30,7 @@ const UserProfileImageButton = () => {
   const handleImageUploadErrorCallback = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? MENT_USER.ERROR.SERVER_IMAGE_ERROR,
+      text: error.response?.data.message ?? i18n.t('server_image_error'),
     });
     setProfileImage(undefined);
   };
@@ -49,7 +49,7 @@ const UserProfileImageButton = () => {
     if (selectedImages.length > 1 && Platform.OS === 'android') {
       openDialog({
         type: 'validate',
-        text: MENT_USER.ERROR.IMAGE_OVERFLOW,
+        text: i18n.t('image_overflow'),
       });
       return;
     }

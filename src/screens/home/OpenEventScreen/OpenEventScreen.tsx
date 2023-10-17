@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Divider from 'components/common/Divider/Divider';
 import FixedButton from 'components/common/FixedButton/FixedButton';
@@ -8,7 +9,6 @@ import BackButton from 'components/navigator/BackButton';
 import BackEventButton from 'components/navigator/BackEventButton';
 import { OpenEventForm } from 'components/openEvent';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import useDialog from 'hooks/app/useDialog';
 import useExitConfirmation from 'hooks/app/useExitConfirmation';
@@ -44,7 +44,7 @@ const OpenEventScreen = () => {
   const handleUploadImageError = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? MENT_OPEN_EVENT.ERROR.UPLOAD_IMAGE,
+      text: error.response?.data.message ?? i18n.t('fail_updload_image'),
     });
   };
 
@@ -60,8 +60,8 @@ const OpenEventScreen = () => {
   const handleCreateEventSuccess = () => {
     openDialog({
       type: 'success',
-      text: MENT_OPEN_EVENT.SUCCESS.CREATE_EVENT_TITLE,
-      contents: MENT_OPEN_EVENT.SUCCESS.CREATE_EVENT_CONTENT,
+      text: i18n.t('create_event_title'),
+      contents: i18n.t('create_event_content'),
       callback: () => {
         stackNavigation.goBack();
         queryClient.invalidateQueries(queryKeys.hostKeys.list);
@@ -72,14 +72,14 @@ const OpenEventScreen = () => {
   const handleCreateEventError = (error?: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error?.response?.data.message ?? MENT_OPEN_EVENT.ERROR.CREATE_EVENT,
+      text: error?.response?.data.message ?? i18n.t('fail_create_event'),
     });
   };
 
   const handleCreateEventTypeError = () => {
     openDialog({
       type: 'validate',
-      text: MENT_OPEN_EVENT.ERROR.UPLOAD_TYPE,
+      text: i18n.t('fail_upload_type'),
     });
   };
 
@@ -148,7 +148,7 @@ const OpenEventScreen = () => {
   const backEventCallback = () => {
     openDialog({
       type: 'validate',
-      text: MENT_OPEN_EVENT.LOADING.CREATE,
+      text: i18n.t('creating_event'),
     });
   };
 
@@ -179,7 +179,7 @@ const OpenEventScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text={MENT_OPEN_EVENT.LOADING.CREATE}
+          text={i18n.t('creating_event')}
         />
       )}
 
@@ -188,7 +188,7 @@ const OpenEventScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={openEventScreenStyles.containerContent}
       >
-        <HeadText title={MENT_OPEN_EVENT.INFO} />
+        <HeadText title={i18n.t('info')} />
 
         <OpenEventForm.Field />
         <OpenEventForm.Title />
@@ -204,7 +204,7 @@ const OpenEventScreen = () => {
 
         <Divider height={1} color="darkGrey" />
 
-        <HeadText title={MENT_OPEN_EVENT.INFO} />
+        <HeadText title={i18n.t('info')} />
 
         <OpenEventForm.HostName />
         {/* TODO 본인은 staff로 추가 못하게 */}
@@ -222,7 +222,7 @@ const OpenEventScreen = () => {
       </ScrollView>
 
       <FixedButton
-        label={MENT_OPEN_EVENT.MAIN.SUBMIT}
+        label={i18n.t('open_a_event')}
         onPress={handleCreateEventPress}
       />
     </KeyboardAvoidingScreenLayout>

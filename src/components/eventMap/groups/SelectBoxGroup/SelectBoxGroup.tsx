@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import SingleSelectBox from 'components/eventMap/selectboxes/SingleSelectBox/SingleSelectBox';
 import { SelectStatus } from 'constants/app/selectBox';
-import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import {
   applicationAbleOptions,
@@ -10,7 +10,7 @@ import {
   payOptions,
 } from 'data/selectData';
 import { Dispatch } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import { Action, Option, SelectBox } from 'types/apps/selectbox';
 import selectBoxGroup from './SelectBoxGroup.style';
 
@@ -27,7 +27,11 @@ const SelectBoxGroup = ({
 }: Props) => {
   const queryClient = useQueryClient();
   return (
-    <View style={selectBoxGroup.selectContainer}>
+    <ScrollView
+      horizontal
+      style={selectBoxGroup.selectContainer}
+      contentContainerStyle={selectBoxGroup.selectContentContainer}
+    >
       <TouchableOpacity
         onPress={openDetailGroup}
         style={selectBoxGroup.buttonContainer}
@@ -37,7 +41,7 @@ const SelectBoxGroup = ({
       <SingleSelectBox
         currentOption={selectState.payOption}
         options={payOptions}
-        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.PAY.LABEL}
+        label={i18n.t('event_map.label_cost')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_PAY_OPTION,
@@ -49,7 +53,7 @@ const SelectBoxGroup = ({
       <SingleSelectBox
         currentOption={selectState.participantOption}
         options={participantOptions}
-        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.PARTICIPANT.LABEL}
+        label={i18n.t('event_map.label_participants')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_PARTICIPANT_OPTION,
@@ -61,7 +65,7 @@ const SelectBoxGroup = ({
       <SingleSelectBox
         currentOption={selectState.applicationAbleOption}
         options={applicationAbleOptions}
-        label={MENT_EVENT_MAP.MAIN.SELECT_BOX.APPLICATION_ABLE.LABEL}
+        label={i18n.t('event_map.label_application_status')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_APPLICATION_ABLE_OPTION,
@@ -70,7 +74,7 @@ const SelectBoxGroup = ({
           queryClient.removeQueries(queryKeys.eventKeys.mapList);
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 

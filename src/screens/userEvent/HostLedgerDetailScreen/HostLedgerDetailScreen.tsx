@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
 import { QnAItem, UserHeader } from 'components/userEvent/host';
@@ -8,7 +9,6 @@ import useStackRoute from 'hooks/navigator/useStackRoute';
 import { useApplicantQnA } from 'hooks/queries/ledger';
 import { useEffect } from 'react';
 import { FlatList, View } from 'react-native';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import hostLedgerDetailScreenStyles from './HostLedgerDetailScreen.style';
 
 const HostLedgerDetailScreen = () => {
@@ -34,7 +34,7 @@ const HostLedgerDetailScreen = () => {
     <LedgerScreenLayout>
       <UserHeader userInfo={qna} ledgerId={params.ledgerId} />
       {qna.qnAInfoList.length === 0 ? (
-        <EmptyLayout helpText={MENT_HOST.MAIN.EMPTY_QNA} />
+        <EmptyLayout helpText={i18n.t('empty_qna')} />
       ) : (
         <View style={hostLedgerDetailScreenStyles.scrollContainer}>
           <FlatList

@@ -1,5 +1,5 @@
+import i18n from 'locales';
 import Text from 'components/common/Text/Text';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
 import timerTextStyles from './TimerText.style';
 
@@ -55,7 +55,7 @@ const TimerText = memo(({ setTimerTrigger, timerTrigger, setRetry }: Props) => {
 
   return (
     <Text variant="body3" color="error" style={timerTextStyles.textContainer}>
-      {MENT_AUTHORIZE.PHONE_CERTIFICATION.REMAINING_TIME} {minutes} : {second}
+      {i18n.t('remaining_time')} {minutes} : {second}
     </Text>
   );
 });

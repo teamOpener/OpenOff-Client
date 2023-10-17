@@ -1,7 +1,6 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Text from 'components/common/Text/Text';
-import API_ERROR_MESSAGE from 'constants/app/errorMessage';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import useDialog from 'hooks/app/useDialog';
 import {
@@ -38,14 +37,14 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
     setComment('');
     openDialog({
       type: 'success',
-      text: MENT_EVENT_DETAIL.COMMENT.COMMENT_SUCCESS,
+      text: i18n.t('event_detail.comment_success'),
     });
   };
 
   const handleErrorPostComment = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
@@ -94,8 +93,8 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
         style={commentInputStyles.inputText}
         placeholder={
           mode === 'child'
-            ? MENT_EVENT_DETAIL.COMMENT.CHILD_COMMENT_INPUT
-            : MENT_EVENT_DETAIL.COMMENT.COMMENT_INPUT
+            ? i18n.t('event_detail.child_comment_input')
+            : i18n.t('event_detail.comment_input')
         }
         placeholderTextColor={colors.grey}
         value={comment}
@@ -115,7 +114,7 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
           color={comment ? 'white' : 'grey'}
           style={commentInputStyles.buttonText}
         >
-          {MENT_EVENT_DETAIL.COMMENT.SUBMIT}
+          {i18n.t('submit')}
         </Text>
       </TouchableOpacity>
     </View>

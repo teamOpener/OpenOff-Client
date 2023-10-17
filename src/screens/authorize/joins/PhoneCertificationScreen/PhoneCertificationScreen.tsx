@@ -2,11 +2,11 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import { AuthorizeMenu } from 'constants/app/menu';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckSms, useSendSms } from 'hooks/queries/user';
+import i18n from 'locales';
 import { Dispatch } from 'react';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import { AuthStackParamList } from 'types/apps/menu';
@@ -41,7 +41,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
     if (error.response?.data.code === 1003) {
       openDialog({
         type: 'validate',
-        text: MENT_AUTHORIZE.PHONE_CERTIFICATION.DUPLICATED_USER_INFO,
+        text: i18n.t('duplicated_user_info'),
       });
       return;
     }
@@ -54,8 +54,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
   const handleSendSmsSuccess = () => {
     openDialog({
       type: 'success',
-      text: MENT_AUTHORIZE.PHONE_CERTIFICATION
-        .SEND_CERTIFICATION_NUMBER_MESSAGE,
+      text: i18n.t('send_certification_number_message'),
     });
   };
 
@@ -81,10 +80,10 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
             phoneNum: phonenumber.replaceAll('-', ''),
             checkNum: authnumber,
           }),
-        label: MENT_AUTHORIZE.MAIN.NEXT,
+        label: i18n.t('next'),
         isActive,
       }}
-      titleElements={MENT_AUTHORIZE.PHONE_CERTIFICATION.TITLE}
+      titleElements={[i18n.t('phone_title')]}
     >
       <PhoneCertificationForm
         retry={retry}

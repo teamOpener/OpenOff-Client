@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import AdvertisementCarousel from 'components/home/carousels/AdvertisementCarousel/AdvertisementCarousel';
@@ -5,7 +6,6 @@ import FloatingButton from 'components/home/floatingbutton/FloatingButton';
 import CategoryButtonGroup from 'components/home/groups/CategoryButtonGroup/CategoryButtonGroup';
 import EventCardList from 'components/home/lists/EventCardList/EventCardList';
 import { StackMenu } from 'constants/app/menu';
-import MENT_HOME from 'constants/home/homeMessage';
 import useInterestFields from 'hooks/interest/useInterestFields';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { usePersonalEventLists, useVogueEventLists } from 'hooks/queries/event';
@@ -90,14 +90,14 @@ const HomeScreen = () => {
         <EventCardList
           isLoading={isPersonalLoading}
           events={personalEventLists}
-          title={MENT_HOME.MAIN.PERSONAL_EVENT_COMMEND}
+          title={i18n.t('personal_event_commend')}
           subTitle={userInterest?.join('') ?? ''}
         />
         <EventCardList
           isLoading={isVogueLoading}
           events={vogueEventLists?.content}
-          title={MENT_HOME.MAIN.POPULAR_EVENT}
-          subTitle={MENT_HOME.MAIN.POPULAR_EVENT_SUB_TITLE}
+          title={i18n.t('popular_event')}
+          subTitle={i18n.t('popular_event_sub_title')}
           type="popular"
         />
         <Spacing height={20} />

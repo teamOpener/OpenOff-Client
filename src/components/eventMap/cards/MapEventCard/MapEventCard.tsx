@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
-import { getFieldName } from 'constants/interest/interest';
 import dayjs from 'dayjs';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { memo } from 'react';
@@ -58,7 +58,7 @@ const MapEventCard = ({ event, distance }: Props) => {
           color="grey"
           style={mapEventCardStyles.eventFieldContainer}
         >
-          {event.fieldTypeList?.map((field) => getFieldName(field)).join('  ')}
+          {event.fieldTypeList?.map((field) => i18n.t(field)).join('  ')}
         </Text>
       </View>
       <Spacing height={5} />

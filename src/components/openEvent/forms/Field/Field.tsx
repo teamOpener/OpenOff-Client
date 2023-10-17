@@ -1,9 +1,9 @@
 import Spacing from 'components/common/Spacing/Spacing';
 import { OpenEvent } from 'components/openEvent';
 import StatusType from 'constants/app/status';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import useInterestFields from 'hooks/interest/useInterestFields';
 import useField from 'hooks/openEvent/useField';
+import i18n from 'locales';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -33,7 +33,7 @@ const Field = () => {
     if (!field.isActive && getActiveFieldCodes().length === 3) {
       setOpenEventErrorMessage({
         ...openEventErrorMessage,
-        field: MENT_OPEN_EVENT.ERROR.MAX_FIELD,
+        field: i18n.t('max_field'),
       });
       return;
     }
@@ -49,11 +49,11 @@ const Field = () => {
 
   return (
     <View>
-      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.FIELD} />
+      <OpenEvent.Label content={i18n.t('field')} />
       <OpenEvent.HelpText
         content={
           openEventErrorMessage.field === null
-            ? MENT_OPEN_EVENT.FIELD_HELP_TEXT
+            ? i18n.t('field_help_text')
             : openEventErrorMessage.field
         }
         status={

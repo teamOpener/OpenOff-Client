@@ -1,6 +1,6 @@
 import { OpenEvent } from 'components/openEvent';
 import StatusType from 'constants/app/status';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
+import i18n from 'locales';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 
@@ -24,11 +24,11 @@ const Title = () => {
 
   return (
     <View>
-      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.TITLE} />
+      <OpenEvent.Label content={i18n.t('event_title')} />
       <OpenEvent.Input
         value={title ?? ''}
         onChangeText={handleChangeText}
-        placeholder={MENT_OPEN_EVENT.PLACEHOLDER.TITLE}
+        placeholder={i18n.t('title')}
         status={
           openEventErrorMessage.title == null
             ? StatusType.default

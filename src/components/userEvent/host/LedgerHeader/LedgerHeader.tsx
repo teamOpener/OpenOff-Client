@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import Text from 'components/common/Text/Text';
 import dayjs from 'dayjs';
 import { View } from 'react-native';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import ledgerHeaderStyles from './LedgerHeader.style';
 
 interface Props {
@@ -16,7 +16,7 @@ const LedgerHeader = ({ title, date }: Props) => {
         {title}
       </Text>
       <Text style={ledgerHeaderStyles.subTitleText}>
-        {dayjs(date).format(MENT_HOST.MAIN.LEDGER_DATE_FORMAT)}
+        {dayjs(date).format(i18n.t('ledger_date_format'))}
       </Text>
     </View>
   );

@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import MENT_HOME from 'constants/home/homeMessage';
 import fieldData from 'data/lists/fieldData';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
 import {
@@ -87,7 +87,7 @@ const EventCard = ({ event, type = 'default', handlePress }: Props) => {
           <View style={eventCardStyles.iconText}>
             <Icon name="IconUser" size={10} fill="main" />
             <Text variant="body3" numberOfLines={1}>
-              {`${event.totalApplicantCount}${MENT_HOME.MAIN.TOTAL_APPLICANT_MENT}`}
+              {`${event.totalApplicantCount}${i18n.t('total_applicant_ment')}`}
             </Text>
           </View>
         </View>

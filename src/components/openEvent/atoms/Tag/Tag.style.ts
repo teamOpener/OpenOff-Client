@@ -15,6 +15,9 @@ const tagStyles = StyleSheet.create({
   selectedContainer: {
     backgroundColor: colors.main,
   },
+  narrowContainer: {
+    paddingHorizontal: 14,
+  },
 });
 
 export default tagStyles;

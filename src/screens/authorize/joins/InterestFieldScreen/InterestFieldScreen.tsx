@@ -1,10 +1,10 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
 import Spacing from 'components/common/Spacing/Spacing';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import { AuthorizeMenu } from 'constants/app/menu';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { UserInfoStatus } from 'constants/authorize/join';
 import useInterestField from 'hooks/authorize/useInterestField';
 import { useConcludeOnBoarding } from 'hooks/queries/user';
@@ -62,10 +62,10 @@ const InterestFieldScreen = ({ state, dispatch }: Props) => {
 
   return (
     <ScreenCover
-      titleElements={MENT_AUTHORIZE.INTEREST_FIELD.TITLE}
+      titleElements={[i18n.t('interests_title')]}
       authorizeButton={{
         handlePress: handleAuthorize,
-        label: MENT_AUTHORIZE.MAIN.NEXT,
+        label: i18n.t('next'),
         isActive: computedCount() >= 1,
       }}
     >

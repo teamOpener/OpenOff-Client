@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
 import { AuthorizeMenu } from 'constants/app/menu';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { Image, View } from 'react-native';
 import { AuthStackParamList } from 'types/apps/menu';
 import emailFindCompleteScreenStyles from './EmailFindCompleteScreen.style';
@@ -17,7 +17,7 @@ const EmailFindCompleteScreen = ({ email }: Props) => {
     <ScreenCover
       authorizeButton={{
         handlePress: () => navigation.navigate(AuthorizeMenu.Login),
-        label: MENT_AUTHORIZE.FIND.BACK_TO_LOGIN,
+        label: i18n.t('authorize.back_to_login'),
         isActive: true,
       }}
     >
@@ -27,7 +27,7 @@ const EmailFindCompleteScreen = ({ email }: Props) => {
           source={require('../../../../assets/images/check.png')}
         />
         <Text variant="h4" color="main">
-          {MENT_AUTHORIZE.FIND.FIND_ID_RESULT}
+          {i18n.t('authorize.find_id_result')}
         </Text>
         <Text variant="h3" color="white">
           {email}

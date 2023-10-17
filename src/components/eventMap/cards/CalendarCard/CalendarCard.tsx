@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import moment from 'moment';
 import { Dispatch, SetStateAction } from 'react';
@@ -16,12 +17,19 @@ interface Props {
 }
 LocaleConfig.locales.kr = {
   monthNames: MENT_EVENT_MAP.DATE_PICKER.MONTH_NAMES,
-  monthNamesShort: MENT_EVENT_MAP.DATE_PICKER.MONTH_NAMES_SHORT,
+  monthNamesShort: MENT_EVENT_MAP.DATE_PICKER.MONTH_NAMES,
   dayNames: MENT_EVENT_MAP.DATE_PICKER.DAY_NAMES,
   dayNamesShort: MENT_EVENT_MAP.DATE_PICKER.DAY_NAMES_SHORT,
   today: 'Today',
 };
-LocaleConfig.defaultLocale = 'kr';
+LocaleConfig.locales.en = {
+  monthNames: MENT_EVENT_MAP.DATE_PICKER.MONTH_NAMES_EN,
+  monthNamesShort: MENT_EVENT_MAP.DATE_PICKER.MONTH_NAMES_EN,
+  dayNames: MENT_EVENT_MAP.DATE_PICKER.DAY_NAMES_EN,
+  dayNamesShort: MENT_EVENT_MAP.DATE_PICKER.DAY_NAMES_SHORT_EN,
+  today: 'Today',
+};
+LocaleConfig.defaultLocale = i18n.language === 'ko' ? 'kr' : 'en';
 interface DayForm {
   [key: string]: any;
 }

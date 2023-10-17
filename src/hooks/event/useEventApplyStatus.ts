@@ -1,4 +1,4 @@
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
+import i18n from 'locales';
 import { DetailEventInfoResponseDto } from 'models/event/response/DetailEventInfoResponseDto';
 import EventApplyStatus from 'types/event/eventApplyStatus';
 
@@ -12,20 +12,20 @@ const useEventApplyStatus = () => {
     event: DetailEventInfoResponseDto,
   ): EventApplyStatus => {
     if (event?.isEnded) {
-      return createDisabledObject(MENT_EVENT_DETAIL.MAIN.ENDED_EVENT);
+      return createDisabledObject(i18n.t('event_detail.ended_event'));
     }
     if (new Date(event?.eventApplyStartDate ?? '') > new Date()) {
-      return createDisabledObject(MENT_EVENT_DETAIL.MAIN.BE_OPENED);
+      return createDisabledObject(i18n.t('event_detail.be_opened'));
     }
     if (new Date(event?.eventApplyEndDate ?? '') < new Date()) {
-      return createDisabledObject(MENT_EVENT_DETAIL.MAIN.CLOSED_EVENT);
+      return createDisabledObject(i18n.t('event_detail.closed_event'));
     }
     if (!event?.isApplyPermit) {
-      return createDisabledObject(MENT_EVENT_DETAIL.MAIN.APPLICATION_CLOSES);
+      return createDisabledObject(i18n.t('event_detail.application_closes'));
     }
     return {
       disabled: false,
-      label: MENT_EVENT_DETAIL.MAIN.APPLY_PARTICIPATION,
+      label: i18n.t('event_detail.apply_participation'),
     };
   };
 

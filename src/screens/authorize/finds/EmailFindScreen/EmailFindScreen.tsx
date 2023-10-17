@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import useDialog from 'hooks/app/useDialog';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckAuthSms, useSendAuthSms } from 'hooks/queries/auth';
@@ -30,7 +30,7 @@ const EmailFindScreen = () => {
     if (error.response?.data.code === 800) {
       openDialog({
         type: 'validate',
-        text: MENT_AUTHORIZE.FIND.CANNOT_FIND_ID,
+        text: i18n.t('cannot_find_id'),
       });
       return;
     }
@@ -47,8 +47,7 @@ const EmailFindScreen = () => {
   const handleSendSmsSuccess = () => {
     openDialog({
       type: 'success',
-      text: MENT_AUTHORIZE.PHONE_CERTIFICATION
-        .SEND_CERTIFICATION_NUMBER_MESSAGE,
+      text: i18n.t('send_certification_number_message'),
     });
   };
 
@@ -83,7 +82,7 @@ const EmailFindScreen = () => {
           <ScreenCover
             authorizeButton={{
               handlePress: handleAuthorizeFlow,
-              label: MENT_AUTHORIZE.MAIN.NEXT,
+              label: i18n.t('next'),
               isActive,
             }}
           >

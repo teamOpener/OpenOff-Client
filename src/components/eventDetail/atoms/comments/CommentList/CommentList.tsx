@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import CommentRowSkeleton from 'components/suspense/skeleton/CommentRowSkeleton/CommentRowSkeleton';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import { useParentComments } from 'hooks/queries/comment';
 import { FlatList, View } from 'react-native';
 import ParentCommentListItem from '../ParentCommentListItem/ParentCommentListItem';
@@ -71,7 +71,7 @@ const CommentList = ({ eventInfoId, isScrolling }: Props) => {
       ) : (
         <View style={commentListStyles.emptyContainer}>
           <Text variant="body2" style={commentListStyles.emptyText}>
-            {MENT_EVENT_DETAIL.COMMENT.EMPTY_COMMENT}
+            {i18n.t('event_detail.empty_comment')}
           </Text>
         </View>
       )}

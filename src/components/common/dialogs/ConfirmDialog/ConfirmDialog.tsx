@@ -1,6 +1,6 @@
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
-import MENT_DIALOG from 'constants/common/dialogMessage';
 import useDialog from 'hooks/app/useDialog';
 import { useState } from 'react';
 import { Pressable, TouchableOpacity, View } from 'react-native';
@@ -53,9 +53,7 @@ const ConfirmDialog = () => {
 
           {confirmDialog.denyText && (
             <View>
-              <Text variant="body2">
-                {MENT_DIALOG.CONFIRM_DIALOG.REASON_SELECTION}
-              </Text>
+              <Text variant="body2">{i18n.t('content_decline')}</Text>
               <Spacing height={10} />
 
               <TouchableOpacity

@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import {
   NavigationProp,
   useFocusEffect,
@@ -6,7 +7,6 @@ import {
 import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import { AuthorizeMenu } from 'constants/app/menu';
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
 import { UserInfoStatus } from 'constants/authorize/join';
 import { Dispatch, useCallback, useEffect, useState } from 'react';
 import { BackHandler, Linking, View } from 'react-native';
@@ -88,10 +88,10 @@ const AgreeToTermScreen = ({ dispatch, state }: Props) => {
     <ScreenCover
       authorizeButton={{
         handlePress: handleAuthorizeFlow,
-        label: MENT_AUTHORIZE.AGREE_TO_TERM.CONFIRM,
+        label: i18n.t('confirm'),
         isActive,
       }}
-      titleElements={MENT_AUTHORIZE.AGREE_TO_TERM.TITLE}
+      titleElements={[i18n.t('to_service_term'), i18n.t('agree')]}
     >
       <View style={agreeToTermScreenStyles.checkButtonContainer}>
         <CheckButton
@@ -106,17 +106,17 @@ const AgreeToTermScreen = ({ dispatch, state }: Props) => {
             });
           }}
           marginBottom={17}
-          label={MENT_AUTHORIZE.AGREE_TO_TERM.ALL_AGREE}
+          label={i18n.t('all_agree')}
         />
         <CheckButton
           value={term.termToTeenager}
           handlePress={() => handleSingleTerm('termToTeenager')}
-          label={MENT_AUTHORIZE.AGREE_TO_TERM.TERM_TO_TEENAGER}
+          label={i18n.t('term_to_teenager')}
         />
         <CheckButton
           value={term.termToUse}
           handlePress={() => handleSingleTerm('termToUse')}
-          label={MENT_AUTHORIZE.AGREE_TO_TERM.TERM_TO_USE}
+          label={i18n.t('auth_term_to_use')}
           handleDetailPress={() => {
             Linking.openURL(
               'https://navy-web.notion.site/fa8cb5d161d143409c331f4e3e7f30b1?pvs=4',
@@ -126,7 +126,7 @@ const AgreeToTermScreen = ({ dispatch, state }: Props) => {
         <CheckButton
           value={term.termToPrivacy}
           handlePress={() => handleSingleTerm('termToPrivacy')}
-          label={MENT_AUTHORIZE.AGREE_TO_TERM.TERM_TO_PRIVACY}
+          label={i18n.t('auth_term_to_privacy')}
           handleDetailPress={() => {
             Linking.openURL(
               'https://navy-web.notion.site/efa559e8c07e40f484705b2fdca06524?pvs=4',
@@ -136,7 +136,7 @@ const AgreeToTermScreen = ({ dispatch, state }: Props) => {
         <CheckButton
           value={term.termToMarketing}
           handlePress={() => handleSingleTerm('termToMarketing')}
-          label={MENT_AUTHORIZE.AGREE_TO_TERM.TERM_TO_MARKETING}
+          label={i18n.t('auth_term_to_marketing')}
           handleDetailPress={() => {
             Linking.openURL(
               'https://navy-web.notion.site/4da0a8c248094ce9ba3faf76d96466ab?pvs=4',

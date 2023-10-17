@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Spacing from 'components/common/Spacing/Spacing';
@@ -9,7 +10,6 @@ import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScre
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { StackMenu } from 'constants/app/menu';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import queryKeys from 'constants/queries/queryKeys';
 import dayjs from 'dayjs';
 import usePullToRefresh from 'hooks/app/usePullToRefresh';
@@ -111,7 +111,7 @@ const EventDetailScreen = () => {
 
             <SpaceLayout size={10}>
               <EventDetail.SmallSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
+                title={i18n.t('event_detail.address')}
                 description={`${event.streetLoadAddress} ${event.detailAddress}`}
                 // TODO
                 // action={
@@ -122,13 +122,15 @@ const EventDetailScreen = () => {
                 // }
               />
               <EventDetail.SmallSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.COST}
-                description={`입장료 ${event.eventFee.toLocaleString()}${
-                  MENT_EVENT_DETAIL.MAIN.WON
-                }`}
+                title={i18n.t('cost')}
+                description={`${i18n.t(
+                  'event_detail.admission_fees',
+                )} ${event.eventFee.toLocaleString()}${i18n.t(
+                  'event_detail.won',
+                )}`}
               />
               <EventDetail.SmallSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.APPLICATION_DATE}
+                title={i18n.t('event_detail.application_date')}
                 description={`${dayjs(event.eventApplyStartDate).format(
                   'YYYY.MM.DD HH:mm',
                 )} - ${dayjs(event.eventApplyEndDate).format(
@@ -149,12 +151,12 @@ const EventDetailScreen = () => {
 
             <EventDetail.Tab>
               <EventDetail.TabItem
-                label={MENT_EVENT_DETAIL.MAIN.INTRODUCTION_EVENT}
+                label={i18n.t('event_detail.introduction_event')}
                 isActive={activeTabName === EventDetailTabItem.DESCRIPTION}
                 onPress={() => handleTab(EventDetailTabItem.DESCRIPTION)}
               />
               <EventDetail.TabItem
-                label={MENT_EVENT_DETAIL.MAIN.COMMENTS}
+                label={i18n.t('event_detail.comments')}
                 isActive={activeTabName === EventDetailTabItem.COMMENTS}
                 onPress={() => handleTab(EventDetailTabItem.COMMENTS)}
               />

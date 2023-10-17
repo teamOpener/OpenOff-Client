@@ -1,4 +1,4 @@
-import MENT_AUTHORIZE from 'constants/authorize/authorizeMessage';
+import i18n from 'locales';
 import { TouchableOpacity } from 'react-native';
 import { colors } from 'styles/theme';
 import Text from '../../../common/Text/Text';
@@ -20,7 +20,7 @@ const LoginButton = ({ handlePress, isActive }: Props) => {
       }}
     >
       <Text color={isActive ? 'white' : 'grey'} variant="h4">
-        {MENT_AUTHORIZE.LOGIN.LOGIN}
+        {i18n.t('authorize.login')}
       </Text>
     </TouchableOpacity>
   );

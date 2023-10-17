@@ -1,12 +1,11 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import QRResultView from 'components/userEvent/host/QRResultView/QRResultView';
-import API_ERROR_MESSAGE from 'constants/app/errorMessage';
 import { StackMenu } from 'constants/app/menu';
 import queryKeys from 'constants/queries/queryKeys';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
 import useStackRoute from 'hooks/navigator/useStackRoute';
 import { useCheckQR } from 'hooks/queries/ledger';
 import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
@@ -58,7 +57,7 @@ const HostQRScanScreen = () => {
   };
 
   const handleErrorQRCheck = (error: ApiErrorResponse) => {
-    setText(error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT);
+    setText(error.response?.data.message ?? i18n.t('default_error_message'));
     setQRCheckType('error');
     showQRCheckType();
   };
@@ -112,7 +111,7 @@ const HostQRScanScreen = () => {
           <WithIconLoading isActive backgroundColor={colors.background} />
         )}
         <Text style={hostQRScanScreenStyles.mainText}>
-          {MENT_HOST.MAIN.QR_SCAN_MAIN_INFO}
+          {i18n.t('qr_scan_main_info')}
         </Text>
 
         <View style={cameraWrapperStyles}>
@@ -127,7 +126,7 @@ const HostQRScanScreen = () => {
         </View>
 
         <Text style={hostQRScanScreenStyles.subText}>
-          {MENT_HOST.MAIN.QR_SCAN_SUB_INFO}
+          {i18n.t('qr_scan_sub_info')}
         </Text>
 
         <QRResultView qrCheckType={qrCheckType} text={text} />
@@ -140,7 +139,7 @@ const HostQRScanScreen = () => {
         style={hostQRScanScreenStyles.noPermissionContainer}
         onPress={handleSetting}
       >
-        <Text variant="body2">{MENT_HOST.MAIN.NO_PERMISSION}</Text>
+        <Text variant="body2">{i18n.t('no_camera_permission')}</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,8 +1,8 @@
+import i18n from 'locales';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import { OpenEvent } from 'components/openEvent';
 import { HelpText } from 'components/openEvent/atoms';
 import StatusType from 'constants/app/status';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventMessage';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
@@ -63,16 +63,16 @@ const Cost = () => {
 
   return (
     <View>
-      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.PARTICIPATE_COST} />
+      <OpenEvent.Label content={i18n.t('participate_cost')} />
       <SpaceLayout size={10}>
         <View style={costStyles.horizontalView}>
           <OpenEvent.Tag
-            label={MENT_OPEN_EVENT.MAIN.FREE}
+            label={i18n.t('free')}
             isSelected={isFree}
             onPress={() => handleIsFree(true)}
           />
           <OpenEvent.Tag
-            label={MENT_OPEN_EVENT.MAIN.PAY}
+            label={i18n.t('pay')}
             isSelected={!isFree}
             onPress={() => handleIsFree(false)}
           />
@@ -93,7 +93,7 @@ const Cost = () => {
             {hasError && (
               <HelpText
                 status={StatusType.error}
-                content={MENT_OPEN_EVENT.ERROR.COST}
+                content={i18n.t('input_cost')}
               />
             )}
           </View>

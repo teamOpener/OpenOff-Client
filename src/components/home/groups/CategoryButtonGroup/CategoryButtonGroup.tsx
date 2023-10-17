@@ -1,7 +1,7 @@
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import CategoryButton from 'components/home/buttons/CategoryButton/CategoryButton';
-import MENT_HOME from 'constants/home/homeMessage';
 import { useInterestFieldLists } from 'hooks/queries/interest';
 import { ScrollView, View } from 'react-native';
 import categoryButtonGroupStyles from './CategoryButtonGroup.style';
@@ -20,7 +20,7 @@ const CategoryButtonGroup = ({ handlePress }: Props) => {
         color="white"
         style={categoryButtonGroupStyles.titleContainer}
       >
-        {MENT_HOME.CATEGORY.LABEL}
+        {i18n.t('category_event')}
       </Text>
       <Spacing height={10} />
 
