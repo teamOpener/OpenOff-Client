@@ -295,6 +295,7 @@
   "question": "질문",
   "sort_title": "정렬 기준",
   "sort_date": "신청순",
+  "sort_distance": "거리순",
   "sort_name": "이름순",
   "add_confirm": "추가하시겠습니까?",
   "delete_confirm": "정말 삭제하시겠습니까?",

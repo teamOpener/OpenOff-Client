@@ -96,8 +96,8 @@ const MapBottomSheet = ({
                   >
                     <Text variant="body2" color="white">
                       {sort.value === 'distance'
-                        ? i18n.t('event_map.distance')
-                        : i18n.t('event_map.date')}
+                        ? String(i18n.t('event_map.distance'))
+                        : String(i18n.t('event_map.date'))}
                     </Text>
                     <Icon name="IconArrowDown" size={12} />
                   </TouchableOpacity>

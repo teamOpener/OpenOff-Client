@@ -295,6 +295,7 @@
   "question": "Question",
   "sort_title": "Sort by",
   "sort_date": "By Application Date",
+  "sort_distance": "By Application Distance",
   "sort_name": "By Name",
   "add_confirm": "Do you want to add it?",
   "delete_confirm": "Are you sure you want to delete it?",
