@@ -14,7 +14,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "commit": "./node_modules/cz-customizable/standalone.js",
-    "postinstall": "react-native setup-ios-permissions && pod-install",
+    "postinstall": "react-native setup-ios-permissions && patch-package && pod-install",
     "lint-fix": "eslint '**/*.{ts,tsx,js,jsx}' --ext .ts,.tsx --fix",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
