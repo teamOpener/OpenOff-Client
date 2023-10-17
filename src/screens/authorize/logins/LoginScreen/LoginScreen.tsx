@@ -82,7 +82,9 @@ const LoginScreen = ({ state, dispatch }: Props) => {
     userInfo?: UserTotalInfoResponseDto['userInfo'],
     socialInfo?: SocialType,
   ) => {
-    const previousKakao = userInfo?.nickname && state.accountType === 'KAKAO';
+    const previousSocial =
+      userInfo?.nickname &&
+      (state.accountType === 'KAKAO' || state.accountType === 'APPLE');
     const previousNormal =
       userInfo?.phoneNumber && state.accountType === 'NORMAL';
     if (userInfo?.userName) {
@@ -90,7 +92,7 @@ const LoginScreen = ({ state, dispatch }: Props) => {
       setIsLogin(true);
       return;
     }
-    if (previousKakao || previousNormal) {
+    if (previousSocial || previousNormal) {
       navigation.navigate('UserInfo');
       return;
     }
@@ -126,6 +128,10 @@ const LoginScreen = ({ state, dispatch }: Props) => {
         const socialLoginResult = await socialLogin({
           socialType: 'apple',
           token: appleAuthRequestResponse.identityToken ?? '',
+        });
+        dispatch({
+          type: UserInfoStatus.SET_ACCOUNT_TYPE,
+          accountType: 'APPLE',
         });
         divergeAuthorizeFlow(socialLoginResult.data?.userInfo, 'APPLE');
       }
