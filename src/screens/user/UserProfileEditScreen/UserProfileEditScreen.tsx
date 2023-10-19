@@ -4,7 +4,7 @@ import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIco
 import UserProfileImageButton from 'components/user/buttons/UserProfileImageButton/UserProfileImageButton';
 import UserInfoText from 'components/user/texts/UserInfoText/UserInfoText';
 import useDialog from 'hooks/app/useDialog';
-import { useLogout, useMyInfo } from 'hooks/queries/user';
+import { useMyInfo, useWithdrawal } from 'hooks/queries/user';
 import { Pressable, ScrollView, View } from 'react-native';
 import { colors } from 'styles/theme';
 import userProfileEditScreenStyles from './UserProfileEditScreen.style';
@@ -12,7 +12,8 @@ import userProfileEditScreenStyles from './UserProfileEditScreen.style';
 const UserProfileEditScreen = () => {
   const { data: userInfo } = useMyInfo();
   const { openDialog } = useDialog();
-  const { mutateAsync: logout, isLoading: isWithdrawalLoading } = useLogout();
+  const { mutateAsync: withdrawal, isLoading: isWithdrawalLoading } =
+    useWithdrawal();
 
   const handleWithdrawal = async () => {
     openDialog({
@@ -21,7 +22,7 @@ const UserProfileEditScreen = () => {
       applyText: i18n.t('yes'),
       closeText: i18n.t('no'),
       apply: async () => {
-        await logout();
+        await withdrawal();
       },
     });
   };
