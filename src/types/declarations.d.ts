@@ -8,6 +8,7 @@ declare module '*.svg' {
 
 declare module 'react-native-config' {
   export interface NativeConfig {
+    OPENOFF_NON_AUTHENTICATION_TOKEN: string;
     OPENOFF_PROD_SERVER?: string;
   }
 
