@@ -8,7 +8,7 @@ import { AuthorizeMenu } from 'constants/app/menu';
 import { UserInfoStatus } from 'constants/authorize/join';
 import { Dispatch, useState } from 'react';
 import { View } from 'react-native';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action, Gender, JoinInfo } from 'types/join';
 import { validateBirthday, validateName } from 'utils/validate';
 import userInfoScreenStyles from './UserInfoScreen.style';
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const UserInfoScreen = ({ state, dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [username, setUsername] = useState<string>('');
   const [birth, setBirth] = useState<string>('2000-00-00');
   const [gender, setGender] = useState<Gender>('MAN');
