@@ -7,7 +7,7 @@ import { ApiErrorResponse } from 'types/ApiResponse';
 import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
 import { refresh } from './auth';
 
-const { token, setIsLogin, resetToken, setToken } =
+const { token, isLogin, setIsLogin, resetToken, setToken } =
   useAuthorizeStore.getState();
 
 const baseURL = Config.OPENOFF_PROD_SERVER;
@@ -24,6 +24,8 @@ const fetcher = axios.create({
 // TODO 사용안하면 지우기
 fetcher.interceptors.request.use(async (config) => {
   const value = await AsyncStorage.getItem('authorize');
+  // eslint-disable-next-line no-param-reassign
+  config.headers.Authorization = `Bearer ${Config.OPENOFF_NON_AUTHENTICATION_TOKEN}`;
   const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
   if (authorizeStore.state.token.refreshToken) {
     // eslint-disable-next-line no-param-reassign
