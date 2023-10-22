@@ -11,7 +11,7 @@ import { useConcludeOnBoarding } from 'hooks/queries/user';
 import { Dispatch, useEffect } from 'react';
 import { Image } from 'react-native';
 import { colors } from 'styles/theme';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action, JoinInfo } from 'types/join';
 import interestFieldScreenStyles from './InterestFieldScreen.style';
 
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const InterestFieldScreen = ({ state, dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { computedCount, setInterestField, interestField } = useInterestField();
   const { mutateAsync: concludeOnBoarding, isLoading } =
     useConcludeOnBoarding();

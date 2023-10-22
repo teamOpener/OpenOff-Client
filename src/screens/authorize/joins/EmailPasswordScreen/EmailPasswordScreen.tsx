@@ -9,7 +9,7 @@ import { useEmailCheck, useNormalSignUp } from 'hooks/queries/auth';
 import i18n from 'locales';
 import { Dispatch, useState } from 'react';
 import { colors } from 'styles/theme';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateEmail, validatePassword } from 'utils/validate';
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const EmailPasswordScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { openDialog } = useDialog();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

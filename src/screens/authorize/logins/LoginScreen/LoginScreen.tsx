@@ -26,7 +26,10 @@ import {
 import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
-import { AuthStackParamList } from 'types/apps/menu';
+import {
+  BottomTabNavigationScreenParams,
+  RootStackParamList,
+} from 'types/apps/menu';
 import { Action, JoinInfo } from 'types/join';
 import { SocialType } from 'types/user';
 import { validateEmail, validatePassword } from 'utils/validate';
@@ -38,7 +41,7 @@ interface Props {
 }
 
 const LoginScreen = ({ state, dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [firstLoginShow, setFirstLoginShow] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('');
@@ -89,6 +92,10 @@ const LoginScreen = ({ state, dispatch }: Props) => {
       userInfo?.phoneNumber && state.accountType === 'NORMAL';
     if (userInfo?.userName) {
       setRecentLogin(!socialInfo ? recentLogin : socialInfo);
+      navigation.navigate(
+        'BottomTabNavigator',
+        undefined as unknown as BottomTabNavigationScreenParams,
+      );
       setIsLogin(true);
       return;
     }
