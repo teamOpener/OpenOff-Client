@@ -32,7 +32,7 @@ const HomeScreen = () => {
   const handleShowBookmarkEvent = () => {
     if (!isLogin) {
       openDialog({
-        type: 'confirm',
+        type: 'warning',
         text: i18n.t('need_to_login'),
         apply: () => {
           stackNavigation.navigate('Login');
