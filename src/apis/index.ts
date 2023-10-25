@@ -26,10 +26,14 @@ fetcher.interceptors.request.use(async (config) => {
   const value = await AsyncStorage.getItem('authorize');
   // eslint-disable-next-line no-param-reassign
   config.headers.Authorization = `Bearer ${Config.OPENOFF_NON_AUTHENTICATION_TOKEN}`;
+  // eslint-disable-next-line no-param-reassign
+  config.headers.openoff = 'openoff';
   const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
   if (authorizeStore.state.token.refreshToken) {
     // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${authorizeStore.state.token.accessToken}`;
+    // eslint-disable-next-line no-param-reassign
+    config.headers.openoff = undefined;
   }
   return config;
 });
