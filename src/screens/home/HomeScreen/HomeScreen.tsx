@@ -56,8 +56,10 @@ const HomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    requestAlarmPermission();
-    foregroundListenerCallback();
+    if (isLogin) {
+      requestAlarmPermission();
+      foregroundListenerCallback();
+    }
   }, []);
 
   return (
