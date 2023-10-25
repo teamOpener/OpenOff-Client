@@ -116,12 +116,12 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
         activeOpacity={0.8}
         style={[
           commentInputStyles.button,
-          (!!comment || isLogin) && commentInputStyles.activeButton,
+          !!comment && isLogin && commentInputStyles.activeButton,
         ]}
         onPress={handleRegisterComment}
       >
         <Text
-          color={comment ? 'white' : 'grey'}
+          color={comment && isLogin ? 'white' : 'grey'}
           style={commentInputStyles.buttonText}
         >
           {i18n.t('submit')}

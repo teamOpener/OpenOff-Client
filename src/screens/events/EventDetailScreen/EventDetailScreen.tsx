@@ -20,10 +20,14 @@ import useStackRoute from 'hooks/navigator/useStackRoute';
 import { useEventDetail } from 'hooks/queries/event';
 import { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
+import { useAuthorizeStore } from 'stores/Authorize';
+import useDialog from 'hooks/app/useDialog';
 import eventDetailScreenStyles from './EventDetailScreen.style';
 
 const EventDetailScreen = () => {
   const queryClient = useQueryClient();
+  const { isLogin } = useAuthorizeStore();
+  const { openDialog } = useDialog();
   const { params } = useStackRoute<StackMenu.EventDetail>();
   const { stackNavigation } = useNavigator();
 
@@ -49,6 +53,18 @@ const EventDetailScreen = () => {
   const { disabledEvent } = useEventApplyStatus();
 
   const handleApply = () => {
+    if (!isLogin) {
+      openDialog({
+        type: 'confirm',
+        text: i18n.t('need_to_login'),
+        apply: () => {
+          stackNavigation.navigate('Login');
+        },
+        applyText: i18n.t('yes'),
+        closeText: i18n.t('no'),
+      });
+      return;
+    }
     // TODO: 얼마 안남았을 경우 timer 걸기
     if (!event) {
       return;
