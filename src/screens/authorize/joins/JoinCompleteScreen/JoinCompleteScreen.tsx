@@ -47,6 +47,10 @@ const JoinCompleteScreen = ({ state }: Props) => {
       authorizeButton={{
         handlePress: () => {
           setIsLogin(true);
+          navigation.navigate(
+            'BottomTabNavigator',
+            undefined as unknown as BottomTabNavigationScreenParams,
+          );
         },
         label: i18n.t('start'),
         isActive: true,
