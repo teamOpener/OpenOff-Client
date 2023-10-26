@@ -1,16 +1,17 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import Config from 'react-native-config';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { ApiErrorResponse } from 'types/ApiResponse';
 import AsyncAuthorizeStorage from 'types/apps/asyncAuthorizeStorage';
 import { refresh } from './auth';
 
-const { token, isLogin, setIsLogin, resetToken, setToken } =
-  useAuthorizeStore.getState();
+const { setIsLogin, resetToken, setToken } = useAuthorizeStore.getState();
 
 const baseURL = Config.OPENOFF_PROD_SERVER;
+const nonAuthenticationToken = `Bearer ${Config.OPENOFF_NON_AUTHENTICATION_TOKEN}`;
 
 const fetcher = axios.create({
   baseURL,
@@ -21,24 +22,19 @@ const fetcher = axios.create({
   },
 });
 
-// TODO 사용안하면 지우기
 fetcher.interceptors.request.use(async (config) => {
   const value = await AsyncStorage.getItem('authorize');
-  // eslint-disable-next-line no-param-reassign
-  config.headers.Authorization = `Bearer ${Config.OPENOFF_NON_AUTHENTICATION_TOKEN}`;
-  // eslint-disable-next-line no-param-reassign
+  config.headers.Authorization = nonAuthenticationToken;
   config.headers.openoff = 'openoff';
   const authorizeStore: AsyncAuthorizeStorage = JSON.parse(value ?? '');
   if (authorizeStore.state.token.refreshToken) {
-    // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${authorizeStore.state.token.accessToken}`;
-    // eslint-disable-next-line no-param-reassign
     config.headers.openoff = undefined;
   }
+
   return config;
 });
 
-// TODO 사용안하면 지우기
 const onFulfilled = (res: AxiosResponse) => {
   return res;
 };
