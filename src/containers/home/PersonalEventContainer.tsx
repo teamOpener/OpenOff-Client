@@ -9,7 +9,7 @@ const PersonalEventContainer = () => {
   const { data: personalEventLists, isLoading: isPersonalLoading } =
     usePersonalEventLists();
 
-  const { data: userInfo } = useMyInfo();
+  const { data: userInfo } = useMyInfo({ isLogin: true });
 
   const { generateInterestFieldTags } = useInterestFields();
 

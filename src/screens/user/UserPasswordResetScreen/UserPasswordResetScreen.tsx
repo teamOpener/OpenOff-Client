@@ -18,7 +18,7 @@ import userPasswordResetScreenStyles from './UserPasswordResetScreen.style';
 const UserPasswordResetScreen = () => {
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
-  const { data: userInfo } = useMyInfo();
+  const { data: userInfo } = useMyInfo({ isLogin: true });
 
   const handleSuccessCallback = () => {
     openDialog({

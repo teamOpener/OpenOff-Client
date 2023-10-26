@@ -16,7 +16,7 @@ import { ApiErrorResponse } from 'types/ApiResponse';
 import userProfileImageButtonStyles from './UserProfileImageButton.style';
 
 const UserProfileImageButton = () => {
-  const { data: userInfo } = useMyInfo();
+  const { data: userInfo } = useMyInfo({ isLogin: true });
   const { openDialog } = useDialog();
   const queryClient = useQueryClient();
   const PROFILE_IMAGE_COUNT = 1;

@@ -12,7 +12,7 @@ import useInterestFields from 'hooks/interest/useInterestFields';
 import userInfoContainerStyles from './UserInfoContainer.style';
 
 const UserInfoContainer = () => {
-  const { data: userInfo } = useMyInfo();
+  const { data: userInfo } = useMyInfo({ isLogin: true });
 
   const { stackNavigation } = useNavigator();
 
