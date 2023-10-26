@@ -64,7 +64,7 @@ const UserEventScreen = () => {
       <Spacing height={9} />
 
       {/* 참여 이벤트 */}
-      {activeTabName === UserEventTabItem.HOST &&
+      {activeTabName === UserEventTabItem.PARTICIPANT &&
         (isLogin ? (
           <ParticipationEventContainer
             activeTabName={activeTabName}
@@ -74,7 +74,7 @@ const UserEventScreen = () => {
           <ParticipationNeedToLoginContainer />
         ))}
       {/* 주최 이벤트 */}
-      {activeTabName === UserEventTabItem.PARTICIPANT &&
+      {activeTabName === UserEventTabItem.HOST &&
         (isLogin ? (
           <HostEventContainer
             activeTabName={activeTabName}
