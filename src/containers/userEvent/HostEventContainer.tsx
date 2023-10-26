@@ -10,7 +10,6 @@ import { useHostEventLists } from 'hooks/queries/ledger';
 import useResetQueries from 'hooks/queries/useResetQueries';
 import i18n from 'locales';
 import { HostEventInfoResponseDto } from 'models/ledger/response/HostEventInfoResponseDto';
-import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -72,7 +71,7 @@ const HostEventContainer = ({ activeTabName, activeField }: Props) => {
   const ItemSeparatorComponent = () => <Spacing height={15} />;
 
   return (
-    <View>
+    <View style={userEventScreenStyles.flexContainer}>
       {flatHostEventList?.length === 0 ? (
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -104,11 +103,17 @@ const HostEventContainer = ({ activeTabName, activeField }: Props) => {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
             onEndReachedThreshold={0.5}
-            onEndReached={() => fetchNextPageHostTicket()}
+            onEndReached={() => {
+              if (hasHostTicketNextPage && !isHostTicketLoading) {
+                fetchNextPageHostTicket();
+              }
+            }}
             ListFooterComponent={
-              hasHostTicketNextPage || isHostTicketLoading
-                ? ticketLoading
-                : null
+              hasHostTicketNextPage || isHostTicketLoading ? (
+                ticketLoading
+              ) : (
+                <Spacing height={200} />
+              )
             }
           />
         </View>

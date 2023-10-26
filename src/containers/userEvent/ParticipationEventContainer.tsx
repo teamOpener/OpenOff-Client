@@ -8,7 +8,6 @@ import useNavigator from 'hooks/navigator/useNavigator';
 import { useUserTicketLists } from 'hooks/queries/ledger';
 import useResetQueries from 'hooks/queries/useResetQueries';
 import i18n from 'locales';
-import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -17,9 +16,7 @@ import {
   View,
 } from 'react-native';
 import userEventScreenStyles from 'screens/userEvent/UserEventScreen/UserEventScreen.style';
-import { useAuthorizeStore } from 'stores/Authorize';
 import { Field } from 'types/interest';
-import ParticipationNeedToLoginContainer from './ParticipationNeedToLoginContainer/ParticipationNeedToLoginContainer';
 
 interface Props {
   activeTabName: UserEventTabItem;
@@ -67,7 +64,7 @@ const ParticipationEventContainer = ({ activeTabName, activeField }: Props) => {
   };
 
   return (
-    <View>
+    <View style={userEventScreenStyles.flexContainer}>
       {flatUserTicketList?.length === 0 ? (
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -82,7 +79,6 @@ const ParticipationEventContainer = ({ activeTabName, activeField }: Props) => {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={flatUserTicketList}
-            contentContainerStyle={userEventScreenStyles.flatListContentStyle}
             ItemSeparatorComponent={ItemSeparatorComponent}
             renderItem={({ item }) => (
               <TicketList
@@ -97,11 +93,17 @@ const ParticipationEventContainer = ({ activeTabName, activeField }: Props) => {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
             onEndReachedThreshold={0.5}
-            onEndReached={() => fetchNextPageUserTicket()}
+            onEndReached={() => {
+              if (hasUserTicketNextPage && !isUserTicketLoading) {
+                fetchNextPageUserTicket();
+              }
+            }}
             ListFooterComponent={
-              hasUserTicketNextPage || isUserTicketLoading
-                ? ticketLoading
-                : null
+              hasUserTicketNextPage || isUserTicketLoading ? (
+                ticketLoading
+              ) : (
+                <Spacing height={200} />
+              )
             }
           />
         </View>
