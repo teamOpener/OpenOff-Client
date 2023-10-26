@@ -1,7 +1,6 @@
 import Icon from 'components/common/Icon/Icon';
 import { StackMenu } from 'constants/app/menu';
 import useNavigator from 'hooks/navigator/useNavigator';
-import { useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import useDialog from 'hooks/app/useDialog';
@@ -13,7 +12,7 @@ const FloatingButton = () => {
   const { isLogin } = useAuthorizeStore();
   const { openDialog } = useDialog();
 
-  const handlePress = useCallback(() => {
+  const handlePress = () => {
     if (!isLogin) {
       openDialog({
         type: 'warning',
@@ -27,7 +26,7 @@ const FloatingButton = () => {
       return;
     }
     stackNavigation.navigate(StackMenu.OpenEvent);
-  }, [stackNavigation]);
+  };
 
   return (
     <TouchableOpacity
