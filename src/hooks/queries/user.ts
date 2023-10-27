@@ -63,9 +63,10 @@ export const useConcludeOnBoarding = () => {
   );
 };
 
-export const useMyInfo = () => {
+export const useMyInfo = ({ isLogin }: { isLogin?: boolean }) => {
   return useQuery([...queryKeys.userKeys.myInfo], () => getMyInfo(), {
     select: (data) => data.data,
+    enabled: !!isLogin,
   });
 };
 
@@ -133,7 +134,7 @@ export const useLogout = () => {
   return useMutation(() => logout());
 };
 
-export const useWithdrawal = () => {
+export const useWithdrawal = (successCallback?: () => void) => {
   const queryClient = useQueryClient();
   const { resetToken, resetFcmToken, setIsLogin } = useAuthorizeStore();
 
@@ -146,5 +147,7 @@ export const useWithdrawal = () => {
     setIsLogin(false);
   };
 
-  return useMutation(() => withdrawalAndLogout());
+  return useMutation(() => withdrawalAndLogout(), {
+    onSuccess: successCallback,
+  });
 };

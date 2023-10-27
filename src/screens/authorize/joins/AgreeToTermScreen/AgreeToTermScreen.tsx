@@ -10,7 +10,7 @@ import { AuthorizeMenu } from 'constants/app/menu';
 import { UserInfoStatus } from 'constants/authorize/join';
 import { Dispatch, useCallback, useEffect, useState } from 'react';
 import { BackHandler, Linking, View } from 'react-native';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action, JoinInfo } from 'types/join';
 import agreeToTermScreenStyles from './AgreeToTermScreen.style';
 
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const AgreeToTermScreen = ({ dispatch, state }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [term, setTerm] = useState<AgreeList>({
     allAgree: false,
     termToTeenager: false,

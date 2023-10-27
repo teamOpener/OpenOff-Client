@@ -11,11 +11,15 @@ import {
   ScrollView,
 } from 'react-native';
 import { openSettings } from 'react-native-permissions';
+import { useAuthorizeStore } from 'stores/Authorize';
+import useNavigator from 'hooks/navigator/useNavigator';
 import userSupportGroupStyles from './UserSupportGroup.style';
 
 const UserSupportGroup = () => {
   const { mutateAsync: logout } = useLogout();
   const { openDialog } = useDialog();
+  const { isLogin } = useAuthorizeStore();
+  const { stackNavigation } = useNavigator();
 
   const handleLogout = async () => {
     openDialog({
@@ -27,6 +31,10 @@ const UserSupportGroup = () => {
         await logout();
       },
     });
+  };
+
+  const handleLogin = () => {
+    stackNavigation.navigate('Login');
   };
 
   const handleShowFAQ = () => {
@@ -108,9 +116,15 @@ const UserSupportGroup = () => {
       <Pressable onPress={handleShowSettingScreen}>
         <Text variant="body2">{i18n.t('service_setting')}</Text>
       </Pressable>
-      <Pressable onPress={handleLogout}>
-        <Text variant="body2">{i18n.t('logout')}</Text>
-      </Pressable>
+      {isLogin ? (
+        <Pressable onPress={handleLogout}>
+          <Text variant="body2">{i18n.t('logout')}</Text>
+        </Pressable>
+      ) : (
+        <Pressable onPress={handleLogin}>
+          <Text variant="body2">{i18n.t('authorize.login')}</Text>
+        </Pressable>
+      )}
     </ScrollView>
   );
 };

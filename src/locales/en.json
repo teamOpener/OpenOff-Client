@@ -348,5 +348,9 @@
   "auth_number_validator": "The verification code format is incorrect.",
   "password_check_validator": "The password does not match the confirmation. Please enter them again.",
   "email_and_password": "Enter",
-  "enter": "your email and password"
+  "enter": "your email and password",
+  "need_to_login": "Login is required. Would you like to go to the login page?",
+  "participation_need_to_login": "Please log in to view my events and tickets",
+  "host_need_to_login": "Please log in to view hosted events",
+  "user_need_to_login": "Please log in."
 }

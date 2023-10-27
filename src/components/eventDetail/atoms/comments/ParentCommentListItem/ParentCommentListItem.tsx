@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import { useAuthorizeStore } from 'stores/Authorize';
 import DeclarationButton from '../DeclarationButton/DeclarationButton';
 import parentCommentListItemStyles from './ParentCommentListItem.style';
 
@@ -33,11 +34,24 @@ const ParentCommentListItem = ({
 }: Props) => {
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
+  const { isLogin } = useAuthorizeStore();
 
   const [showDeclarationButton, setShowDeclarationButton] =
     useState<boolean>(false);
 
   const handleChildComment = () => {
+    if (!isLogin) {
+      openDialog({
+        type: 'confirm',
+        text: i18n.t('need_to_login'),
+        apply: () => {
+          stackNavigation.navigate('Login');
+        },
+        applyText: i18n.t('yes'),
+        closeText: i18n.t('no'),
+      });
+      return;
+    }
     stackNavigation.navigate(StackMenu.EventComment, {
       infoId: eventInfoId,
       commentId: comment.commentId,
@@ -65,6 +79,18 @@ const ParentCommentListItem = ({
   );
 
   const handleDeclaration = async () => {
+    if (!isLogin) {
+      openDialog({
+        type: 'warning',
+        text: i18n.t('need_to_login'),
+        apply: () => {
+          stackNavigation.navigate('Login');
+        },
+        applyText: i18n.t('yes'),
+        closeText: i18n.t('no'),
+      });
+      return;
+    }
     await reportComment({ commentId: comment.commentId });
   };
 

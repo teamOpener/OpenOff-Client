@@ -9,7 +9,7 @@ import { useNicknameCheck } from 'hooks/queries/auth';
 import i18n from 'locales';
 import { Dispatch, useState } from 'react';
 import { colors } from 'styles/theme';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 import { validateNickname } from 'utils/validate';
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const NickNameScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [nickname, setNickname] = useState<string>('');
   const isActive = !validateNickname(nickname) && nickname.length > 1;
   const { openDialog } = useDialog();

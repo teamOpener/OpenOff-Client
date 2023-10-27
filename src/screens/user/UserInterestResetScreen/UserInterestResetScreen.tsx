@@ -40,7 +40,7 @@ const UserInterestResetScreen = () => {
   };
 
   const { computedCount, setInterestField, interestField } = useInterestField();
-  const { data: userInfo } = useMyInfo();
+  const { data: userInfo } = useMyInfo({ isLogin: true });
   const { mutateAsync: updateInterestField, isLoading } =
     useUpdateInterestField(handleSuccessUpdateField, handleErrorUpdateField);
 

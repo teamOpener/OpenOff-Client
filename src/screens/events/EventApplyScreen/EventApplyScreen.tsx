@@ -36,7 +36,7 @@ const EventApplyScreen = () => {
   const { resetQueries } = useResetQueries();
 
   const { data: event } = useEventDetail(params.id);
-  const { data: user } = useMyInfo();
+  const { data: user } = useMyInfo({ isLogin: true });
 
   const { getEventDateByIndexId } = useEventIndexList({
     eventIndexList: event?.indexList,

@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { Keyboard, TextInput, TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import { useAuthorizeStore } from 'stores/Authorize';
 import commentInputStyles from './CommentInput.style';
 
 type CommentInputType = 'parent' | 'child';
@@ -25,6 +26,7 @@ interface Props {
 
 const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
   const { openDialog } = useDialog();
+  const { isLogin } = useAuthorizeStore();
   const queryClient = useQueryClient();
 
   const [comment, setComment] = useState<string>('');
@@ -80,6 +82,9 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
   };
 
   const handleRegisterComment = async () => {
+    if (!isLogin) {
+      return;
+    }
     if (mode === 'parent') {
       await handleRegisterParentComment();
       return;
@@ -87,15 +92,20 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
     await handleRegisterChildComment();
   };
 
+  const childDiscriminator =
+    mode === 'child'
+      ? i18n.t('event_detail.child_comment_input')
+      : i18n.t('event_detail.comment_input');
+
+  const loginDiscriminator = !isLogin
+    ? i18n.t('user_need_to_login')
+    : childDiscriminator;
+
   return (
     <View style={commentInputStyles.inputWrapper}>
       <TextInput
         style={commentInputStyles.inputText}
-        placeholder={
-          mode === 'child'
-            ? i18n.t('event_detail.child_comment_input')
-            : i18n.t('event_detail.comment_input')
-        }
+        placeholder={loginDiscriminator}
         placeholderTextColor={colors.grey}
         value={comment}
         onChangeText={setComment}
@@ -106,12 +116,12 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
         activeOpacity={0.8}
         style={[
           commentInputStyles.button,
-          !!comment && commentInputStyles.activeButton,
+          !!comment && isLogin && commentInputStyles.activeButton,
         ]}
         onPress={handleRegisterComment}
       >
         <Text
-          color={comment ? 'white' : 'grey'}
+          color={comment && isLogin ? 'white' : 'grey'}
           style={commentInputStyles.buttonText}
         >
           {i18n.t('submit')}

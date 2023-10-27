@@ -348,5 +348,9 @@
   "auth_number_validator": "인증번호 형식에 맞지않습니다.",
   "password_check_validator": "비밀번호가 확인값과 다릅니다. 다시입력 해주세요.",
   "email_and_password": "이메일과 비밀번호를",
-  "enter": "입력해주세요"
+  "enter": "입력해주세요",
+  "need_to_login": "로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?",
+  "participation_need_to_login": "내 이벤트 및 티켓을 보려면 로그인을 해주세요",
+  "host_need_to_login": "주최한 이벤트를 보려면 로그인을 해주세요",
+  "user_need_to_login": "로그인을 해주세요."
 }

@@ -9,7 +9,7 @@ import { useCheckSms, useSendSms } from 'hooks/queries/user';
 import i18n from 'locales';
 import { Dispatch } from 'react';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
 
 const PhoneCertificationScreen = ({ dispatch }: Props) => {
   const { openDialog } = useDialog();
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const {
     phonenumber,
     setPhonenumber,

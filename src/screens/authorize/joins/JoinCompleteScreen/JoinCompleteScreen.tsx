@@ -1,11 +1,19 @@
 import i18n from 'locales';
-import { useFocusEffect } from '@react-navigation/native';
+import {
+  NavigationProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
 import { useCallback } from 'react';
 import { BackHandler, View } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { JoinInfo } from 'types/join';
+import {
+  BottomTabNavigationScreenParams,
+  RootStackParamList,
+} from 'types/apps/menu';
 import joinCompleteScreenStyles from './JoinCompleteScreen.style';
 
 interface Props {
@@ -13,10 +21,16 @@ interface Props {
 }
 
 const JoinCompleteScreen = ({ state }: Props) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { setIsLogin } = useAuthorizeStore();
+
   useFocusEffect(
     useCallback(() => {
       const backAction = () => {
+        navigation.navigate(
+          'BottomTabNavigator',
+          undefined as unknown as BottomTabNavigationScreenParams,
+        );
         setIsLogin(true);
         return true;
       };
@@ -27,11 +41,16 @@ const JoinCompleteScreen = ({ state }: Props) => {
       return () => backHandler.remove();
     }, []),
   );
+
   return (
     <ScreenCover
       authorizeButton={{
         handlePress: () => {
           setIsLogin(true);
+          navigation.navigate(
+            'BottomTabNavigator',
+            undefined as unknown as BottomTabNavigationScreenParams,
+          );
         },
         label: i18n.t('start'),
         isActive: true,

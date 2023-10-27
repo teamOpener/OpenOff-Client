@@ -7,18 +7,18 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
 
-export type AuthStackParamList = {
-  Login: undefined;
-  AgreeToTerm: undefined;
-  JoinComplete: undefined;
-  PhoneCertification: undefined;
-  EmailPassword: undefined;
-  EmailPasswordFind: undefined;
-  Nickname: undefined;
-  UserInfo: undefined;
-  BirthDay: undefined;
-  InterestField: undefined;
-};
+// export type AuthStackParamList = {
+//   Login: undefined;
+//   AgreeToTerm: undefined;
+//   JoinComplete: undefined;
+//   PhoneCertification: undefined;
+//   EmailPassword: undefined;
+//   EmailPasswordFind: undefined;
+//   Nickname: undefined;
+//   UserInfo: undefined;
+//   BirthDay: undefined;
+//   InterestField: undefined;
+// };
 
 export type BottomTabParamList = {
   Home: undefined;
@@ -90,6 +90,16 @@ export type RootStackParamList = {
   UserComment: undefined;
   UserPasswordReset: undefined;
   Scrap: undefined;
+  Login: undefined;
+  AgreeToTerm: undefined;
+  JoinComplete: undefined;
+  PhoneCertification: undefined;
+  EmailPassword: undefined;
+  EmailPasswordFind: undefined;
+  Nickname: undefined;
+  UserInfo: undefined;
+  BirthDay: undefined;
+  InterestField: undefined;
 };
 
 export type RootStackNavigationProp =
