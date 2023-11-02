@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
@@ -26,7 +27,7 @@ const ChildCommentListItem = ({ comment }: Props) => {
             style={childCommentListItemStyles.nickName}
             color={comment.isStaff ? 'main' : 'white'}
           >
-            {comment.isStaff ? '주최자' : comment.nickname}
+            {comment.isStaff ? i18n.t('host') : comment.nickname}
           </Text>
           <Text style={childCommentListItemStyles.dateText} color="grey">
             {dayjs(comment.createdAt).format('YYYY.MM.DD')}

@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { ScrollView } from 'react-native';
 import Text from 'components/common/Text/Text';
 import { QnAInfo } from 'models/ledger/entity/QnAInfo';
@@ -12,7 +13,9 @@ interface Props {
 const QnAItem = ({ index, qnaInfo }: Props) => {
   return (
     <SpaceLayout direction="row" size={10} style={qnAItemStyles.full}>
-      <Text color="main" style={qnAItemStyles.text}>{`질문${index + 1}`}</Text>
+      <Text color="main" style={qnAItemStyles.text}>
+        {`${i18n.t('question')}${index + 1}`}
+      </Text>
 
       <SpaceLayout size={9} style={qnAItemStyles.full}>
         <Text style={qnAItemStyles.text}>{qnaInfo.question}</Text>

@@ -1,14 +1,15 @@
+import i18n from 'locales';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import EssentialInput from 'components/authorize/inputs/EssentialInput/EssentialInput';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import useDialog from 'hooks/app/useDialog';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckAuthSms, useSendAuthSms } from 'hooks/queries/auth';
 import { useState } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import useDialog from 'hooks/app/useDialog';
 import {
   validateAuthNumber,
   validateEmail,
@@ -29,7 +30,7 @@ const PasswordFindScreen = () => {
     if (error.response?.data.code === 800) {
       openDialog({
         type: 'validate',
-        text: '해당 핸드폰으로 등록된 아이디가 존재하지 않습니다!',
+        text: i18n.t('cannot_find_id'),
       });
       return;
     }
@@ -46,7 +47,7 @@ const PasswordFindScreen = () => {
   const handleSendSmsSuccess = () => {
     openDialog({
       type: 'success',
-      text: '인증번호를 발송하였습니다.',
+      text: i18n.t('send_certification_number_message'),
     });
   };
 
@@ -82,7 +83,7 @@ const PasswordFindScreen = () => {
     } else {
       openDialog({
         type: 'validate',
-        text: '회원정보가 일치하지 않습니다. 이메일과 핸드폰 번호를 확인해주세요.',
+        text: i18n.t('not_matched_user_info'),
       });
     }
   };
@@ -97,13 +98,13 @@ const PasswordFindScreen = () => {
           <ScreenCover
             authorizeButton={{
               handlePress: handleAuthorizeFlow,
-              label: '다음',
+              label: i18n.t('next'),
               isActive: isResetButtonActive,
             }}
           >
             <EssentialInput
               validation={validateEmail}
-              label="이메일"
+              label={i18n.t('email')}
               keyboardType="default"
               value={emailAddress}
               setValue={setEmailAddress}

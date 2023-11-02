@@ -1,17 +1,18 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
+import Spacing from 'components/common/Spacing/Spacing';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
-import { UserInfoStatus } from 'constants/join';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import { UserInfoStatus } from 'constants/authorize/join';
+import useInterestField from 'hooks/authorize/useInterestField';
 import { useConcludeOnBoarding } from 'hooks/queries/user';
 import { Dispatch, useEffect } from 'react';
 import { Image } from 'react-native';
 import { colors } from 'styles/theme';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action, JoinInfo } from 'types/join';
-import Spacing from 'components/common/Spacing/Spacing';
-import useInterestField from 'hooks/authorize/useInterestField';
 import interestFieldScreenStyles from './InterestFieldScreen.style';
 
 interface Props {
@@ -20,7 +21,7 @@ interface Props {
 }
 
 const InterestFieldScreen = ({ state, dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { computedCount, setInterestField, interestField } = useInterestField();
   const { mutateAsync: concludeOnBoarding, isLoading } =
     useConcludeOnBoarding();
@@ -61,10 +62,10 @@ const InterestFieldScreen = ({ state, dispatch }: Props) => {
 
   return (
     <ScreenCover
-      titleElements={['관심 분야를 설정해주세요.']}
+      titleElements={[i18n.t('interests_title')]}
       authorizeButton={{
         handlePress: handleAuthorize,
-        label: '다음',
+        label: i18n.t('next'),
         isActive: computedCount() >= 1,
       }}
     >

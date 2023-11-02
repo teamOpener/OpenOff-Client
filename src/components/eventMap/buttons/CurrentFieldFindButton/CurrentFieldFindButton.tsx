@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import { Pressable, View } from 'react-native';
 import Text from '../../../common/Text/Text';
@@ -18,7 +19,7 @@ const CurrentFieldFindButton = ({ isFindActive, handlePress }: Props) => {
         >
           <Icon name="IconSend" fill="black" size={20} />
           <Text color="black" style={currentFieldFindButtonStyles.label}>
-            현 지도에서 검색
+            {i18n.t('event_map.current_field_find')}
           </Text>
         </Pressable>
       </View>

@@ -1,9 +1,9 @@
+import i18n from 'locales';
 import { OpenEvent } from 'components/openEvent';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import { HelpText } from 'components/openEvent/atoms';
-import StatusType from 'constants/status';
 import openEventFormStyles from '../OpenEventForm.style';
 
 const HostPhoneNumber = () => {
@@ -28,10 +28,10 @@ const HostPhoneNumber = () => {
 
   return (
     <View>
-      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.HOST_PHONE} />
+      <OpenEvent.Label content={i18n.t('host_phone')} />
       <View style={openEventFormStyles.inputWithHelpText}>
         <OpenEvent.Input
-          placeholder={MENT_OPEN_EVENT.PLACEHOLDER.HOST_PHONE}
+          placeholder={i18n.t('host_name_input')}
           status={errMsg ? StatusType.error : StatusType.default}
           value={hostPhoneNumber ?? ''}
           onChangeText={handleChangeText}

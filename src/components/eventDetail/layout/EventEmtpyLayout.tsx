@@ -1,6 +1,6 @@
+import i18n from 'locales';
 import { View } from 'react-native';
 import Text from 'components/common/Text/Text';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
 import eventEmptyLayoutStyles from './EventEmptyLayout.style';
 
 interface Props {
@@ -11,7 +11,7 @@ const EventEmptyLayout = ({ helpText }: Props) => {
   return (
     <View style={eventEmptyLayoutStyles.container}>
       <Text variant="body2">
-        {helpText ?? MENT_EVENT_DETAIL.ERROR.EMPTY_EVENT}
+        {helpText ?? i18n.t('event_detail.empty_event')}
       </Text>
     </View>
   );

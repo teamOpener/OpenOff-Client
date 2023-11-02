@@ -1,8 +1,9 @@
+import i18n from 'locales';
+import Divider from 'components/common/Divider/Divider';
 import Icon from 'components/common/Icon/Icon';
+import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import { Modal, Pressable, TouchableOpacity, View } from 'react-native';
-import Divider from 'components/common/Divider/Divider';
-import Spacing from 'components/common/Spacing/Spacing';
 import sortDialogStyles from './SortDialog.style';
 
 interface Props {
@@ -30,7 +31,7 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
       >
         <View style={sortDialogStyles.modalContainer}>
           <Text style={sortDialogStyles.title} color="white" variant="h3">
-            정렬 기준
+            {i18n.t('reason_selection')}
           </Text>
 
           <TouchableOpacity
@@ -42,7 +43,7 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
               color={value === 'date' ? 'main' : 'white'}
               variant="body1"
             >
-              날짜순
+              {i18n.t('sort_date')}
             </Text>
             {value === 'date' && (
               <Icon size={15} name="IconCheck" fill="main" />
@@ -60,7 +61,7 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
               color={value === 'distance' ? 'main' : 'white'}
               variant="body1"
             >
-              거리순
+              {i18n.t('sort_distance')}
             </Text>
             {value === 'distance' && (
               <Icon size={15} name="IconCheck" fill="main" />
@@ -73,7 +74,7 @@ const SortDialog = ({ dialogShow, value, setValue, handleDialog }: Props) => {
           <View style={sortDialogStyles.cancelContainer}>
             <TouchableOpacity onPress={handleDialog}>
               <Text color="grey" style={sortDialogStyles.cancelText}>
-                취소
+                {i18n.t('cancel')}
               </Text>
             </TouchableOpacity>
           </View>

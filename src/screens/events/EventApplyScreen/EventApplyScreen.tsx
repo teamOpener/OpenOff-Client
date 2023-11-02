@@ -1,32 +1,32 @@
-import dayjs from 'dayjs';
-import { useState } from 'react';
+import i18n from 'locales';
+import Divider from 'components/common/Divider/Divider';
 import Text from 'components/common/Text/Text';
-import { useEventDetail } from 'hooks/queries/event';
 import { EventDetail } from 'components/eventDetail';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import Divider from 'components/common/Divider/Divider';
+import dayjs from 'dayjs';
+import { useEventDetail } from 'hooks/queries/event';
+import { useState } from 'react';
 // import HeadText from 'components/common/HeadText/HeadText';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
-import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
-import resetQueryKeys from 'constants/queries/resetQueryKey';
-import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
-import { ScrollView } from 'react-native';
 import FixedButton from 'components/common/FixedButton/FixedButton';
 import Spacing from 'components/common/Spacing/Spacing';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useResetQueries from 'hooks/queries/useResetQueries';
-import useEventIndexList from 'hooks/event/useEventIndexList';
-import useStackRoute from 'hooks/navigator/useStackRoute';
+import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
+import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { BottomTabMenu, StackMenu } from 'constants/app/menu';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
+import { UserEventTabItem } from 'constants/userEvent/participant/participantConstants';
 import useDialog from 'hooks/app/useDialog';
-import { useMyInfo } from 'hooks/queries/user';
-import { useApplyEvent } from 'hooks/queries/ledger';
+import useEventIndexList from 'hooks/event/useEventIndexList';
 import useQnaList from 'hooks/event/useQnaList';
-import { BottomTabMenu, StackMenu } from 'constants/menu';
-import { QnaTuple } from 'types/event/QnaTuple';
-import { ApiErrorResponse } from 'types/ApiResponse';
+import useNavigator from 'hooks/navigator/useNavigator';
+import useStackRoute from 'hooks/navigator/useStackRoute';
+import { useApplyEvent } from 'hooks/queries/ledger';
+import useResetQueries from 'hooks/queries/useResetQueries';
+import { useMyInfo } from 'hooks/queries/user';
+import { ScrollView } from 'react-native';
 import { colors } from 'styles/theme';
+import { ApiErrorResponse } from 'types/ApiResponse';
+import { QnaTuple } from 'types/event/QnaTuple';
 import eventApplyScreenStyles from './EventApplyScreen.style';
 
 const EventApplyScreen = () => {
@@ -36,7 +36,7 @@ const EventApplyScreen = () => {
   const { resetQueries } = useResetQueries();
 
   const { data: event } = useEventDetail(params.id);
-  const { data: user } = useMyInfo();
+  const { data: user } = useMyInfo({ isLogin: true });
 
   const { getEventDateByIndexId } = useEventIndexList({
     eventIndexList: event?.indexList,
@@ -50,8 +50,8 @@ const EventApplyScreen = () => {
   const handleApplySuccess = () => {
     openDialog({
       type: 'success',
-      text: MENT_EVENT_DETAIL.SUCCESS.APPLICATION,
-      contents: MENT_EVENT_DETAIL.SUCCESS.APPLICATION_DETAIL,
+      text: i18n.t('event_detail.application_success'),
+      contents: i18n.t('event_detail.application_detail'),
       callback: () => {
         tabNavigation.navigate(BottomTabMenu.UserEvent, {
           tab: UserEventTabItem.PARTICIPANT,
@@ -65,7 +65,8 @@ const EventApplyScreen = () => {
     openDialog({
       type: 'validate',
       text:
-        error?.response?.data.message ?? MENT_EVENT_DETAIL.ERROR.APPLICATION,
+        error?.response?.data.message ??
+        i18n.t('event_detail.application_failed'),
     });
   };
 
@@ -82,7 +83,7 @@ const EventApplyScreen = () => {
     if (isEmptyAnswer(qnaList)) {
       openDialog({
         type: 'validate',
-        text: MENT_EVENT_DETAIL.ERROR.ADDITIONAL_INFORMATION,
+        text: i18n.t('event_detail.input_additional_information'),
       });
       return;
     }
@@ -98,7 +99,7 @@ const EventApplyScreen = () => {
         <WithIconLoading
           backgroundColor={colors.background}
           isActive
-          text={MENT_EVENT_DETAIL.MAIN.APPLICATION_LOADING}
+          text={i18n.t('event_detail.application_loading')}
         />
       )}
 
@@ -111,22 +112,22 @@ const EventApplyScreen = () => {
             <SpaceLayout size={20}>
               <SpaceLayout size={10}>
                 <EventDetail.DefaultSimpleList
-                  title={MENT_EVENT_DETAIL.MAIN.DATE}
+                  title={i18n.t('date_time')}
                   description={dayjs(getEventDateByIndexId(params.idx)).format(
                     'YYYY.MM.DD(ddd) HH:mm',
                   )}
                 />
                 <EventDetail.DefaultSimpleList
-                  title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
+                  title={i18n.t('event_detail.address')}
                   description={`${event.streetLoadAddress} ${event.detailAddress}`}
                 />
                 <EventDetail.DefaultSimpleList
-                  title={MENT_EVENT_DETAIL.MAIN.COST}
-                  description={`${
-                    MENT_EVENT_DETAIL.MAIN.ADMISSION_FEES
-                  } ${event.eventFee.toLocaleString()}${
-                    MENT_EVENT_DETAIL.MAIN.WON
-                  }`}
+                  title={i18n.t('cost')}
+                  description={`${i18n.t(
+                    'event_detail.admission_fees',
+                  )} ${event.eventFee.toLocaleString()}${i18n.t(
+                    'event_detail.won',
+                  )}`}
                 />
               </SpaceLayout>
               <Divider height={1} color="darkGrey" />
@@ -134,16 +135,16 @@ const EventApplyScreen = () => {
               {/* 신청자 정보 */}
               <SpaceLayout size={15}>
                 <Text style={eventApplyScreenStyles.subTitle}>
-                  {MENT_EVENT_DETAIL.MAIN.USER_INFO}
+                  {i18n.t('event_detail.user_info')}
                 </Text>
 
                 <SpaceLayout size={10}>
                   <EventDetail.DefaultSimpleList
-                    title={MENT_EVENT_DETAIL.MAIN.NAME}
+                    title={i18n.t('name')}
                     description={user?.userInfo.userName ?? ''}
                   />
                   <EventDetail.DefaultSimpleList
-                    title={MENT_EVENT_DETAIL.MAIN.BIRTH}
+                    title={i18n.t('birth')}
                     description={
                       user?.userInfo
                         ? `${user.userInfo.birth.year}.${user.userInfo.birth.month}.${user.userInfo.birth.day}`
@@ -151,7 +152,7 @@ const EventApplyScreen = () => {
                     }
                   />
                   <EventDetail.DefaultSimpleList
-                    title={MENT_EVENT_DETAIL.MAIN.GENDER}
+                    title={i18n.t('gender')}
                     description={user?.userInfo.gender === 'MAN' ? '남' : '여'}
                   />
                 </SpaceLayout>
@@ -163,7 +164,7 @@ const EventApplyScreen = () => {
                   <Divider height={1} color="darkGrey" />
                   <SpaceLayout size={15}>
                     <Text style={eventApplyScreenStyles.subTitle}>
-                      {MENT_EVENT_DETAIL.MAIN.ADDITIONAL_INFORMATION}
+                      {i18n.t('event_detail.additional_information')}
                     </Text>
 
                     <EventDetail.QuestionInput
@@ -184,7 +185,7 @@ const EventApplyScreen = () => {
           </ScrollView>
 
           <FixedButton
-            label={MENT_EVENT_DETAIL.MAIN.APPLICATION}
+            label={i18n.t('event_detail.application')}
             onPress={handleApply}
           />
         </>

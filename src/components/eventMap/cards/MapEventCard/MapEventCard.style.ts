@@ -42,7 +42,7 @@ const mapEventCardStyles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   eventImage: {
-    width: '100%',
+    width: 124,
     height: 114,
     borderRadius: 3,
   },

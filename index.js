@@ -6,6 +6,7 @@ import { AppRegistry } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import App from './App';
 import { name as appName } from './app.json';
+import 'locales';
 
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
   // 백그라운드 메시지를 수신할 때 호출되는 콜백 함수

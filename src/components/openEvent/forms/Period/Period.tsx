@@ -1,10 +1,11 @@
+import i18n from 'locales';
+import { OpenEvent } from 'components/openEvent';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { OpenEvent } from 'components/openEvent';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { serverDateFormatter } from 'utils/date';
-import { HelpText } from 'components/openEvent/atoms';
-import StatusType from 'constants/status';
 import periodStyles from './Period.style';
 
 const Period = () => {
@@ -36,7 +37,7 @@ const Period = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="이벤트 일시" />
+      <OpenEvent.Label content={i18n.t('period')} />
 
       <View style={periodStyles.inputContainer}>
         <ScrollView

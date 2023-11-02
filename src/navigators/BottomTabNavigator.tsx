@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'components/common/Icon/Icon';
-import { BottomTabMenu } from 'constants/menu';
+import { BottomTabMenu } from 'constants/app/menu';
+import MENT_NAVIGATOR from 'constants/navigator/navigatorMessage';
 import EventMapScreen from 'screens/eventMap/EventMapScreen/EventMapScreen';
 import HomeScreen from 'screens/home/HomeScreen/HomeScreen';
 import UserScreen from 'screens/user/UserScreen/UserScreen';
@@ -40,7 +41,7 @@ const BottomTabNavigator = () => {
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBarLabel: '홈',
+          tabBarLabel: MENT_NAVIGATOR.BOTTOM_TAB_HEADER_TITLE.HOME,
           tabBarLabelStyle: {
             ...textStyles.caption,
           },
@@ -57,7 +58,7 @@ const BottomTabNavigator = () => {
         component={EventMapScreen}
         options={{
           headerShown: false,
-          tabBarLabel: '이벤트맵',
+          tabBarLabel: MENT_NAVIGATOR.BOTTOM_TAB_HEADER_TITLE.EVENT_MAP,
           tabBarLabelStyle: {
             ...textStyles.caption,
           },
@@ -76,9 +77,9 @@ const BottomTabNavigator = () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerTitle: '내 이벤트',
+          headerTitle: MENT_NAVIGATOR.BOTTOM_TAB_HEADER_TITLE.USER_EVENT,
           headerTintColor: colors.white,
-          tabBarLabel: '내 이벤트',
+          tabBarLabel: MENT_NAVIGATOR.BOTTOM_TAB_HEADER_TITLE.USER_EVENT,
           tabBarLabelStyle: {
             ...textStyles.caption,
           },
@@ -95,7 +96,7 @@ const BottomTabNavigator = () => {
         component={UserScreen}
         options={{
           headerShown: false,
-          tabBarLabel: '마이페이지',
+          tabBarLabel: MENT_NAVIGATOR.BOTTOM_TAB_HEADER_TITLE.USER,
           tabBarLabelStyle: {
             ...textStyles.caption,
           },

@@ -1,3 +1,18 @@
+import i18n from 'locales';
+import { useQueryClient } from '@tanstack/react-query';
+import Icon from 'components/common/Icon/Icon';
+import Spacing from 'components/common/Spacing/Spacing';
+import Text from 'components/common/Text/Text';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import queryKeys from 'constants/queries/queryKeys';
+import useDialog from 'hooks/app/useDialog';
+import useUniqueName from 'hooks/ledger/useUniqueName';
+import {
+  useMinusStaff,
+  usePlusStaff,
+  useStaffLists,
+} from 'hooks/queries/ledger';
+import { useFindUserByNickname } from 'hooks/queries/user';
 import { useEffect, useState } from 'react';
 import {
   ScrollView,
@@ -6,24 +21,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Icon from 'components/common/Icon/Icon';
-import Text from 'components/common/Text/Text';
-import Spacing from 'components/common/Spacing/Spacing';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import { colors } from 'styles/theme';
-import { useFindUserByNickname } from 'hooks/queries/user';
-import {
-  useMinusStaff,
-  usePlusStaff,
-  useStaffLists,
-} from 'hooks/queries/ledger';
-import useDialog from 'hooks/app/useDialog';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import useUniqueName from 'hooks/ledger/useUniqueName';
-import { useQueryClient } from '@tanstack/react-query';
-import queryKeys from 'constants/queries/queryKeys';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
 import staffListStyles from './StaffList.style';
 
 interface Props extends TextInputProps {
@@ -55,7 +54,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
   const handleSuccess = () => {
     openDialog({
       type: 'success',
-      text: '성공적으로 처리됐습니다!',
+      text: i18n.t('add_staff'),
       callback: () => {
         queryClient.invalidateQueries(
           queryKeys.ledgerKeys.staffByEventInfoId(eventInfoId),
@@ -69,7 +68,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
   const handleError = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
@@ -85,9 +84,9 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
 
     openDialog({
       type: 'warning',
-      text: '정말 삭제하시겠습니까?',
-      applyText: '예',
-      closeText: '아니오',
+      text: i18n.t('delete_confirm'),
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       apply: async () => {
         await minusStaff({ eventInfoId, staffName: nickName });
       },
@@ -101,9 +100,9 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
 
     openDialog({
       type: 'success',
-      text: '추가하시겠습니까?',
-      applyText: '예',
-      closeText: '아니오',
+      text: i18n.t('confirm'),
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       apply: async () => {
         await plusStaff({ eventInfoId, nickname: searchText.slice(1) });
       },
@@ -139,7 +138,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
               staffListStyles.text,
               !searchText.startsWith('@') && staffListStyles.inActiveText,
             ]}
-            placeholder="@닉네임을 입력해주세요."
+            placeholder={i18n.t('nickname_placeholder')}
             placeholderTextColor={colors.grey}
             {...rest}
           />
@@ -198,7 +197,7 @@ const StaffList = ({ nickName, eventInfoId, mode, ...rest }: Props) => {
               ))}
 
           {others && !others.length && (
-            <Text variant="body2">{MENT_OPEN_EVENT.MAIN.EMPTY_NICKNAME}</Text>
+            <Text variant="body2">{i18n.t('empty_nickname')}</Text>
           )}
           <Spacing height={30} />
         </ScrollView>

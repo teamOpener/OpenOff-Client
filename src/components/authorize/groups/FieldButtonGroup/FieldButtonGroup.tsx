@@ -1,5 +1,6 @@
-import Text from 'components/common/Text/Text';
+import i18n from 'locales';
 import FieldButton from 'components/authorize/buttons/FieldButton/FieldButton';
+import Text from 'components/common/Text/Text';
 import { Dispatch, SetStateAction } from 'react';
 import { View } from 'react-native';
 import { Field } from 'types/interest';
@@ -25,7 +26,9 @@ const FieldButtonGroup = ({ fields, setFields, computedCount }: Props) => {
   };
   return (
     <View style={fieldButtonGroupStyles.container}>
-      <Text style={fieldButtonGroupStyles.title}>최대 3가지 선택 가능</Text>
+      <Text style={fieldButtonGroupStyles.title}>
+        {i18n.t('up_to_three_can_be_selected')}
+      </Text>
       <View style={fieldButtonGroupStyles.fieldContainer}>
         {fields.map((field) => (
           <FieldButton

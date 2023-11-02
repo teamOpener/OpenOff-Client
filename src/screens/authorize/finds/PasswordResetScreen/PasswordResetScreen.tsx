@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FormPasswordInput from 'components/authorize/inputs/FormPasswordInput/FormPasswordInput';
 import Text from 'components/common/Text/Text';
@@ -64,33 +65,33 @@ const PasswordResetScreen = ({
                   newPassword: data.passwordCheck,
                 });
               }),
-              label: '다음',
+              label: i18n.t('next'),
               isActive: true,
             }}
           >
             <View style={passwordResetScreenStyles.passwordResetTitle}>
               <Text variant="h3" color="white">
-                비밀번호를 재설정해주세요.
+                {i18n.t('authorize.reset_password')}
               </Text>
             </View>
             <FormPasswordInput
               control={control}
               errors={errors}
               name="password"
-              label="새 비밀번호"
+              label={i18n.t('authorize.new_password')}
               validate={(value: string) => validatePassword(value)}
-              requiredMessage="비밀번호를 입력해주세요"
+              requiredMessage={i18n.t('authorize.input_password')}
             />
             <FormPasswordInput
               control={control}
               errors={errors}
               name="passwordCheck"
-              label="새 비밀번호 확인"
+              label={i18n.t('authorize.new_password')}
               validate={(check: string) => {
                 const changedPassword = watch('password');
                 return validatePasswordCheck(changedPassword, check);
               }}
-              requiredMessage="비밀번호 확인을 입력해주세요"
+              requiredMessage={i18n.t('authorize.input_password_check')}
             />
           </ScreenCover>
         ) : (

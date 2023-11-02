@@ -1,14 +1,15 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
-import { UserInfoStatus } from 'constants/join';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckSms, useSendSms } from 'hooks/queries/user';
+import i18n from 'locales';
 import { Dispatch } from 'react';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action } from 'types/join';
 
 interface Props {
@@ -17,7 +18,7 @@ interface Props {
 
 const PhoneCertificationScreen = ({ dispatch }: Props) => {
   const { openDialog } = useDialog();
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const {
     phonenumber,
     setPhonenumber,
@@ -40,7 +41,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
     if (error.response?.data.code === 1003) {
       openDialog({
         type: 'validate',
-        text: '이미 회원정보가 있는 핸드폰 번호입니다.',
+        text: i18n.t('duplicated_user_info'),
       });
       return;
     }
@@ -53,7 +54,7 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
   const handleSendSmsSuccess = () => {
     openDialog({
       type: 'success',
-      text: '인증번호를 발송하였습니다.',
+      text: i18n.t('send_certification_number_message'),
     });
   };
 
@@ -79,10 +80,10 @@ const PhoneCertificationScreen = ({ dispatch }: Props) => {
             phoneNum: phonenumber.replaceAll('-', ''),
             checkNum: authnumber,
           }),
-        label: '다음',
+        label: i18n.t('next'),
         isActive,
       }}
-      titleElements={['휴대폰 인증을 해주세요.']}
+      titleElements={[i18n.t('phone_title')]}
     >
       <PhoneCertificationForm
         retry={retry}

@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import { Keyboard, TextInput, TouchableOpacity, View } from 'react-native';
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
-import { colors } from 'styles/theme';
 import Text from 'components/common/Text/Text';
+import queryKeys from 'constants/queries/queryKeys';
+import useDialog from 'hooks/app/useDialog';
 import {
   usePostChildComment,
   usePostParentComment,
 } from 'hooks/queries/comment';
 import { ChildCommentWriteRequestDto } from 'models/comment/request/ChildCommentWriteRequestDto';
 import { ParentCommentWriteRequestDto } from 'models/comment/request/ParentCommentWriteRequestDto';
-import useDialog from 'hooks/app/useDialog';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import queryKeys from 'constants/queries/queryKeys';
+import { useState } from 'react';
+import { Keyboard, TextInput, TouchableOpacity, View } from 'react-native';
+import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
+import { useAuthorizeStore } from 'stores/Authorize';
 import commentInputStyles from './CommentInput.style';
 
 type CommentInputType = 'parent' | 'child';
@@ -25,6 +26,7 @@ interface Props {
 
 const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
   const { openDialog } = useDialog();
+  const { isLogin } = useAuthorizeStore();
   const queryClient = useQueryClient();
 
   const [comment, setComment] = useState<string>('');
@@ -37,14 +39,14 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
     setComment('');
     openDialog({
       type: 'success',
-      text: '댓글을 등록했습니다!',
+      text: i18n.t('event_detail.comment_success'),
     });
   };
 
   const handleErrorPostComment = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
@@ -80,6 +82,9 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
   };
 
   const handleRegisterComment = async () => {
+    if (!isLogin) {
+      return;
+    }
     if (mode === 'parent') {
       await handleRegisterParentComment();
       return;
@@ -87,13 +92,20 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
     await handleRegisterChildComment();
   };
 
+  const childDiscriminator =
+    mode === 'child'
+      ? i18n.t('event_detail.child_comment_input')
+      : i18n.t('event_detail.comment_input');
+
+  const loginDiscriminator = !isLogin
+    ? i18n.t('user_need_to_login')
+    : childDiscriminator;
+
   return (
     <View style={commentInputStyles.inputWrapper}>
       <TextInput
         style={commentInputStyles.inputText}
-        placeholder={
-          mode === 'child' ? '대댓글을 남겨보세요.' : '댓글을 남겨보세요.'
-        }
+        placeholder={loginDiscriminator}
         placeholderTextColor={colors.grey}
         value={comment}
         onChangeText={setComment}
@@ -104,15 +116,15 @@ const CommentInput = ({ eventInfoId, mode = 'parent', parentId }: Props) => {
         activeOpacity={0.8}
         style={[
           commentInputStyles.button,
-          !!comment && commentInputStyles.activeButton,
+          !!comment && isLogin && commentInputStyles.activeButton,
         ]}
         onPress={handleRegisterComment}
       >
         <Text
-          color={comment ? 'white' : 'grey'}
+          color={comment && isLogin ? 'white' : 'grey'}
           style={commentInputStyles.buttonText}
         >
-          등록
+          {i18n.t('submit')}
         </Text>
       </TouchableOpacity>
     </View>

@@ -15,8 +15,8 @@ import CurrentMarker from 'components/eventMap/maps/CurrentMarker/CurrentMarker'
 import EventMarker from 'components/eventMap/maps/EventMarker/EventMarker';
 import MapBottomSheet from 'components/eventMap/sheets/MapBottomSheet/MapBottomSheet';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { SelectStatus } from 'constants/app/selectBox';
 import queryKeys from 'constants/queries/queryKeys';
-import { SelectStatus } from 'constants/selectBox';
 import useEventListFormatter from 'hooks/eventMap/useEventListFormatter';
 import useEventMapSelector from 'hooks/eventMap/useEventMapSelector';
 import useMapCoordinateInfo from 'hooks/eventMap/useMapCoordinateInfo';
@@ -26,10 +26,10 @@ import { BackHandler, Dimensions, Pressable, View } from 'react-native';
 import NaverMapView from 'react-native-nmap';
 import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
-import { Field } from 'types/interest';
 import NaverMapEvent from 'types/apps/map';
 import { BottomTabParamList, RootStackParamList } from 'types/apps/menu';
 import { Coordinate } from 'types/event';
+import { Field } from 'types/interest';
 import getDistanceCoordinate from 'utils/coordinate';
 import {
   defaultTabBarStyles,

@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
+import i18n from 'locales';
 import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
+import { useEffect, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
 import { serverDateFormatter } from 'utils/date';
-import { HelpText } from 'components/openEvent/atoms';
-import StatusType from 'constants/status';
 import applicationPeriodStyles from './ApplicationPeriod.style';
 
 const ApplicationPeriod = () => {
@@ -59,7 +60,7 @@ const ApplicationPeriod = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="이벤트 신청 기간" />
+      <OpenEvent.Label content={i18n.t('application_period')} />
 
       <View style={applicationPeriodStyles.inputContainer}>
         <ScrollView
@@ -76,7 +77,7 @@ const ApplicationPeriod = () => {
               isEmpty={openEvent.applicationStartDate === null}
               hasError={hasError}
             />
-            <Text style={applicationPeriodStyles.text}>부터</Text>
+            <Text style={applicationPeriodStyles.text}>{i18n.t('to')}</Text>
           </View>
 
           <View style={applicationPeriodStyles.dateTimePickerWrapper}>
@@ -88,7 +89,7 @@ const ApplicationPeriod = () => {
               minimumDate={startDate}
               hasError={hasError}
             />
-            <Text style={applicationPeriodStyles.text}>까지</Text>
+            <Text style={applicationPeriodStyles.text}>{i18n.t('from')}</Text>
           </View>
         </ScrollView>
 

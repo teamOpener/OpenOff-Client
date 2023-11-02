@@ -1,22 +1,23 @@
+import i18n from 'locales';
 import BottomSheet, {
   BottomSheetFlatList,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
-import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
-import Text from 'components/common/Text/Text';
 import Divider from 'components/common/Divider/Divider';
+import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
+import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
 import MapEventCard from 'components/eventMap/cards/MapEventCard/MapEventCard';
 import SortDialog from 'components/eventMap/dialogs/SortDialog/SortDialog';
 import SelectBoxGroup from 'components/eventMap/groups/SelectBoxGroup/SelectBoxGroup';
 import SelectDetailGroup from 'components/eventMap/groups/SelectDetailGroup/SelectDetailGroup';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import MapEventCardSkeleton from 'components/suspense/skeleton/MapEventCardSkeleton/MapEventCardSkeleton';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
 import { Action, SelectBox } from 'types/apps/selectbox';
 import { Coordinate, MapEvent } from 'types/event';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import Icon from 'components/common/Icon/Icon';
 import mapBottomSheetStyles from './MapBottomSheet.style';
 
 interface SortInfo {
@@ -94,7 +95,9 @@ const MapBottomSheet = ({
                     onPress={() => setSort({ ...sort, dialog: true })}
                   >
                     <Text variant="body2" color="white">
-                      {sort.value === 'distance' ? '거리순' : '날짜순'}
+                      {sort.value === 'distance'
+                        ? String(i18n.t('event_map.distance'))
+                        : String(i18n.t('event_map.date'))}
                     </Text>
                     <Icon name="IconArrowDown" size={12} />
                   </TouchableOpacity>
@@ -105,7 +108,7 @@ const MapBottomSheet = ({
               <View>
                 <EmptyScreen
                   style={mapBottomSheetStyles.bottomEmptyScreenStyle}
-                  content="이벤트 검색결과가 없습니다!"
+                  content={i18n.t('event_map.empty_event')}
                 />
               </View>
             ) : (

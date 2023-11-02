@@ -1,10 +1,12 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SelectControlButton from 'components/eventMap/buttons/SelectControlButton/SelectControlButton';
 import SelectDetailBox from 'components/eventMap/selectboxes/SelectDetailBox/SelectDetailBox';
+import { SelectStatus } from 'constants/app/selectBox';
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import queryKeys from 'constants/queries/queryKeys';
-import { SelectStatus } from 'constants/selectBox';
 import {
   applicationAbleOptions,
   participantOptions,
@@ -48,7 +50,7 @@ const SelectDetailGroup = ({
     <View style={selectDetailGroupStyles.container}>
       <View style={selectDetailGroupStyles.detailTitle}>
         <Text variant="h2" color="white">
-          필터
+          {i18n.t('event_map.filter')}
         </Text>
         <View />
         <TouchableOpacity onPress={closeDetailGroup}>
@@ -58,7 +60,7 @@ const SelectDetailGroup = ({
       <SelectDetailBox
         currentOption={selectState.payOption}
         options={payOptions}
-        label="비용"
+        label={i18n.t('event_map.label_cost')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_PAY_OPTION,
@@ -70,7 +72,7 @@ const SelectDetailGroup = ({
       <SelectDetailBox
         currentOption={selectState.participantOption}
         options={participantOptions}
-        label="참여 인원"
+        label={i18n.t('event_map.label_participants')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_PARTICIPANT_OPTION,
@@ -82,7 +84,7 @@ const SelectDetailGroup = ({
       <SelectDetailBox
         currentOption={selectState.applicationAbleOption}
         options={applicationAbleOptions}
-        label="신청 현황"
+        label={i18n.t('event_map.label_application_status')}
         select={(option: Option) => {
           selectDispatch({
             type: SelectStatus.SET_APPLICATION_ABLE_OPTION,
@@ -94,14 +96,14 @@ const SelectDetailGroup = ({
         <SelectControlButton
           handlePress={initializeSelect}
           borderColor={colors.grey}
-          label="초기화"
+          label={i18n.t('event_map.reset')}
           color="grey"
         />
         <SelectControlButton
           handlePress={applySelect}
           borderColor={colors.main}
           backgroundColor={colors.main}
-          label="적용"
+          label={i18n.t('event_map.apply')}
           color="white"
         />
       </View>

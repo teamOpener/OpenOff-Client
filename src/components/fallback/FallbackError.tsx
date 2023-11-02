@@ -1,11 +1,12 @@
-import { ApiErrorResponse } from 'types/ApiResponse';
-import { TouchableOpacity, View } from 'react-native';
+import i18n from 'locales';
 import {
   useQueryClient,
   useQueryErrorResetBoundary,
 } from '@tanstack/react-query';
-import Text from 'components/common/Text/Text';
 import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
+import { TouchableOpacity, View } from 'react-native';
+import { ApiErrorResponse } from 'types/ApiResponse';
 import fallbackErrorStyles from './FallbackError.style';
 
 const FallbackError = ({
@@ -34,7 +35,7 @@ const FallbackError = ({
         <Icon name="IconExit" fill="white" />
       </View>
       <Text variant="h4" style={fallbackErrorStyles.errorText}>
-        {errorMessage ?? '에러가 발생했습니다.'}
+        {errorMessage ?? i18n.t('default_error_message')}
       </Text>
 
       <TouchableOpacity
@@ -42,7 +43,7 @@ const FallbackError = ({
         style={fallbackErrorStyles.button}
         onPress={resetErrors}
       >
-        <Text variant="h4">홈으로</Text>
+        <Text variant="h4">{i18n.t('back_to_home')}</Text>
       </TouchableOpacity>
     </View>
   );

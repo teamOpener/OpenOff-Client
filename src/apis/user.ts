@@ -83,3 +83,8 @@ export const findUserByNickname = async (
   const response = await fetcher.get(`/user/search/nickname`, { params });
   return response.data;
 };
+
+export const withdrawal = async (): Promise<ApiResponse> => {
+  const response = await fetcher.delete('/user/withdrawal');
+  return response.data;
+};

@@ -1,20 +1,12 @@
-import { useEffect, useState } from 'react';
-import {
-  FlatList,
-  TouchableOpacity,
-  View,
-  RefreshControl,
-  ScrollView,
-} from 'react-native';
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
-import { colors } from 'styles/theme';
-import { StackMenu } from 'constants/menu';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
-import Text from 'components/common/Text/Text';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
-import { LedgerScreenLayout } from 'components/userEvent/host/layout';
+import Text from 'components/common/Text/Text';
+import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import ListLoading from 'components/suspense/loading/ListLoading/ListLoading';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
 import {
   ActionButton,
   IconText,
@@ -23,25 +15,32 @@ import {
   SelectBottomSheet,
   UserCard,
 } from 'components/userEvent/host';
-import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
+import { LedgerScreenLayout } from 'components/userEvent/host/layout';
+import { StackMenu } from 'constants/app/menu';
+import queryKeys from 'constants/queries/queryKeys';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
+import useDialog from 'hooks/app/useDialog';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import useBottomSheet from 'hooks/ledger/useBottomSheet';
+import useNavigator from 'hooks/navigator/useNavigator';
+import useStackRoute from 'hooks/navigator/useStackRoute';
 import {
   useLedgerStatus,
   useLedgerUserList,
   usePermitAllApplicant,
 } from 'hooks/queries/ledger';
 import useResetQueries from 'hooks/queries/useResetQueries';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useBottomSheet from 'hooks/ledger/useBottomSheet';
-import useDialog from 'hooks/app/useDialog';
-import usePullToRefresh from 'hooks/app/usePullToRefresh';
-import useStackRoute from 'hooks/navigator/useStackRoute';
 import SortType from 'models/ledger/entity/SortType';
+import { useEffect, useState } from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { colors } from 'styles/theme';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import queryKeys from 'constants/queries/queryKeys';
-import resetQueryKeys from 'constants/queries/resetQueryKey';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import ListLoading from 'components/suspense/loading/ListLoading/ListLoading';
 import hostLedgerScreenStyles from './HostLedgerScreen.style';
 
 const HostLedgerScreen = () => {
@@ -103,8 +102,8 @@ const HostLedgerScreen = () => {
   const handlePermitSuccess = () => {
     openDialog({
       type: 'success',
-      text: MENT_HOST.SUCCESS.PERMIT_ALL,
-      closeText: '확인',
+      text: i18n.t('permit_all'),
+      closeText: i18n.t('confirm'),
     });
     queryClient.invalidateQueries(queryKeys.hostKeys.ledgerList);
     queryClient.invalidateQueries(
@@ -115,7 +114,7 @@ const HostLedgerScreen = () => {
   const handlePermitError = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
@@ -133,10 +132,10 @@ const HostLedgerScreen = () => {
 
     openDialog({
       type: 'confirm',
-      text: MENT_HOST.MAIN.PERMIT_ALL,
+      text: i18n.t('permit_all'),
       apply: handlePermitAll,
-      applyText: '예',
-      closeText: '아니오',
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
     });
   };
 
@@ -162,25 +161,29 @@ const HostLedgerScreen = () => {
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <IconText
             iconName="IconUser"
-            label={`승인완료 ${eventStatus?.approvedCount ?? 0}/${
-              eventStatus?.maxCount ?? 0
-            }`}
+            label={i18n.t('approve_with_count', {
+              approvedCount: eventStatus?.approvedCount ?? 0,
+              maxCount: eventStatus?.maxCount ?? 0,
+            })}
           />
           <IconText
             iconName="IconUser"
-            label={`입장완료 ${eventStatus?.joinedCount ?? 0}/${
-              eventStatus?.maxCount ?? 0
-            }`}
+            label={i18n.t('admission_with_count', {
+              joinedCount: eventStatus?.joinedCount ?? 0,
+              maxCount: eventStatus?.maxCount ?? 0,
+            })}
           />
         </View>
 
         <View style={hostLedgerScreenStyles.spaceBetween}>
           <Text color="main" style={hostLedgerScreenStyles.approveText}>
-            {`${eventStatus?.notApprovedCount ?? 0}명 승인 대기중`}
+            {i18n.t('not_approve_count', {
+              notApprovedCount: eventStatus?.notApprovedCount ?? 0,
+            })}
           </Text>
           <ActionButton
             disabled={eventStatus?.notApprovedCount === 0}
-            label="일괄 승인"
+            label={i18n.t('all_approve')}
             style={hostLedgerScreenStyles.totalApproveBtn}
             onPress={handlePermitAllButtonPress}
           />
@@ -197,7 +200,9 @@ const HostLedgerScreen = () => {
             onPress={presentModal}
           >
             <Text style={hostLedgerScreenStyles.sortBtnText}>
-              {selectedSortType === SortType.DATE ? '신청순' : '이름순'}
+              {selectedSortType === SortType.DATE
+                ? i18n.t('sort_date')
+                : i18n.t('sort_name')}
             </Text>
             <Icon
               name={openBottomSheet ? 'IconArrowUp' : 'IconArrowDown'}
@@ -220,7 +225,7 @@ const HostLedgerScreen = () => {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         >
-          <EmptyLayout helpText={MENT_HOST.MAIN.EMPTY_LEDGER} />
+          <EmptyLayout helpText={i18n.t('empty_ledger')} />
         </ScrollView>
       ) : (
         <View style={hostLedgerScreenStyles.scrollContainer}>

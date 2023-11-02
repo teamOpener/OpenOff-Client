@@ -1,10 +1,10 @@
+import i18n from 'locales';
 import { colors } from 'styles/theme';
 import { TouchableOpacity, View } from 'react-native';
 import TicketType from 'models/ledger/entity/TicketType';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import { UserTicketStatus } from 'constants/userEvent/participant/participantConstants';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
 import statusButtonStyles from './StatusButton.style';
 
 interface Props {
@@ -28,11 +28,11 @@ const StatusButton = ({ status, ticketType, onPress }: Props) => {
   const getMessage = (ticketStatus: UserTicketStatus): string => {
     switch (ticketStatus) {
       case UserTicketStatus.CANCELED:
-        return MENT_PARTICIPANT.MAIN.CANCELED;
+        return i18n.t('application_canceled');
       case UserTicketStatus.DENIED:
-        return MENT_PARTICIPANT.MAIN.DENIED;
+        return i18n.t('approval_declined');
       default:
-        return MENT_PARTICIPANT.MAIN.WAITING;
+        return i18n.t('waiting_approval');
     }
   };
 
@@ -61,7 +61,7 @@ const StatusButton = ({ status, ticketType, onPress }: Props) => {
           color={getColorType(ticketType)}
           style={statusButtonStyles.qrText}
         >
-          {MENT_PARTICIPANT.MAIN.QR}
+          {i18n.t('view_qr')}
         </Text>
       </TouchableOpacity>
     );

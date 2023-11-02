@@ -1,10 +1,19 @@
-import { useFocusEffect } from '@react-navigation/native';
+import i18n from 'locales';
+import {
+  NavigationProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import Text from 'components/common/Text/Text';
 import { useCallback } from 'react';
 import { BackHandler, View } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { JoinInfo } from 'types/join';
+import {
+  BottomTabNavigationScreenParams,
+  RootStackParamList,
+} from 'types/apps/menu';
 import joinCompleteScreenStyles from './JoinCompleteScreen.style';
 
 interface Props {
@@ -12,10 +21,16 @@ interface Props {
 }
 
 const JoinCompleteScreen = ({ state }: Props) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { setIsLogin } = useAuthorizeStore();
+
   useFocusEffect(
     useCallback(() => {
       const backAction = () => {
+        navigation.navigate(
+          'BottomTabNavigator',
+          undefined as unknown as BottomTabNavigationScreenParams,
+        );
         setIsLogin(true);
         return true;
       };
@@ -26,18 +41,28 @@ const JoinCompleteScreen = ({ state }: Props) => {
       return () => backHandler.remove();
     }, []),
   );
+
   return (
     <ScreenCover
       authorizeButton={{
         handlePress: () => {
           setIsLogin(true);
+          navigation.navigate(
+            'BottomTabNavigator',
+            undefined as unknown as BottomTabNavigationScreenParams,
+          );
         },
-        label: '시작하기',
+        label: i18n.t('start'),
         isActive: true,
       }}
-      titleElements={[`'${state.nickname}'님`, '회원가입을 축하합니다!']}
+      titleElements={[
+        i18n.t('user_nickname', { nickname: state.nickname }),
+        i18n.t('congrats_sign_up'),
+      ]}
     >
-      <Text style={joinCompleteScreenStyles.myFieldTitle}>나의 관심사는</Text>
+      <Text style={joinCompleteScreenStyles.myFieldTitle}>
+        {i18n.t('my_field_title')}
+      </Text>
       <View style={joinCompleteScreenStyles.myFieldContainer}>
         {state.interestField.map((field) =>
           field ? (

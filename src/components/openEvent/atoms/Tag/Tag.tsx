@@ -1,3 +1,4 @@
+import { getLocale } from 'services/locale';
 import Text from 'components/common/Text/Text';
 import { TouchableOpacity } from 'react-native';
 import tagStyles from './Tag.style';
@@ -9,9 +10,16 @@ interface Props {
 }
 
 const Tag = ({ label, isSelected, onPress }: Props) => {
+  const locale = getLocale();
+  const isKo = locale.startsWith('ko');
+
   return (
     <TouchableOpacity
-      style={[tagStyles.container, isSelected && tagStyles.selectedContainer]}
+      style={[
+        tagStyles.container,
+        isSelected && tagStyles.selectedContainer,
+        !isKo && tagStyles.narrowContainer,
+      ]}
       activeOpacity={0.9}
       onPress={onPress}
     >

@@ -1,21 +1,22 @@
+import i18n from 'locales';
+import { useQueryClient } from '@tanstack/react-query';
 import Icon from 'components/common/Icon/Icon';
 import Text from 'components/common/Text/Text';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import { View } from 'react-native';
-import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import { useQueryClient } from '@tanstack/react-query';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useDialog from 'hooks/app/useDialog';
 import queryKeys from 'constants/queries/queryKeys';
-import { ApiErrorResponse } from 'types/ApiResponse';
+import useDialog from 'hooks/app/useDialog';
+import useNavigator from 'hooks/navigator/useNavigator';
 import {
   useCancelPermittedApplicant,
   useDenyApplicationUser,
   usePermitApplicant,
 } from 'hooks/queries/ledger';
-import userHeaderStyles from './UserHeader.style';
+import { ApplicantApplyDetailResponseDto } from 'models/ledger/response/ApplicantApplyDetailResponseDto';
+import { View } from 'react-native';
+import { ApiErrorResponse } from 'types/ApiResponse';
+import getPartOfUserName from 'utils/text';
 import ActionButton from '../buttons/ActionButton/ActionButton';
+import userHeaderStyles from './UserHeader.style';
 
 interface Props {
   userInfo: ApplicantApplyDetailResponseDto;
@@ -48,7 +49,7 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
     openDialog({
       type: 'success',
       text,
-      closeText: '신청명단으로 이동',
+      closeText: i18n.t('back_to_applicant'),
       callback: () => {
         stackNavigation.goBack();
       },
@@ -58,12 +59,12 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
   const handlePermitError = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
   const { mutateAsync: permitApplicant } = usePermitApplicant(
-    () => successCallback('성공적으로 승인되었습니다!'),
+    () => successCallback(i18n.t('success_approve')),
     handlePermitError,
   );
 
@@ -72,43 +73,46 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
   };
 
   const { mutateAsync: denyApplicationUser } = useDenyApplicationUser(
-    () => successCallback('승인이 거부되었습니다'),
+    () => successCallback(i18n.t('success_decline')),
     handlePermitError,
   );
 
   const handleDeny = async () => {
     openDialog({
       type: 'confirm',
-      text: '승인을 거부하시겠습니까?',
+      text: i18n.t('title_decline'),
       apply: async () => {
-        await denyApplicationUser({ ledgerId });
+        await denyApplicationUser({
+          ledgerId,
+          rejectReason: '',
+        });
       },
-      applyText: '예',
-      closeText: '아니오',
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
     });
   };
 
   const { mutateAsync: cancelPermittedApplicant } = useCancelPermittedApplicant(
-    () => successCallback('승인이 취소되었습니다'),
+    () => successCallback(i18n.t('success_cancel_approval')),
     handlePermitError,
   );
 
   const handleCancel = async () => {
     openDialog({
       type: 'confirm',
-      text: '승인을 취소하시겠습니까?',
+      text: i18n.t('title_cancel_approval'),
       apply: async () => {
         await cancelPermittedApplicant({ ladgerId: ledgerId });
       },
-      applyText: '예',
-      closeText: '아니오',
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
     });
   };
 
   return (
     <View style={userHeaderStyles.container}>
       <SpaceLayout direction="row" size={5} style={userHeaderStyles.userInfo}>
-        <Text>{userInfo.username}</Text>
+        <Text>{getPartOfUserName(userInfo.username)}</Text>
         <Text>{userInfo.birth}</Text>
         <Icon
           name={userInfo.genderType === 'MAN' ? 'IconMale' : 'IconFemale'}
@@ -121,22 +125,22 @@ const UserHeader = ({ userInfo, ledgerId }: Props) => {
         {userInfo.isJoined && (
           <View style={userHeaderStyles.admissionTextWrapper}>
             <Text color="lightGreen" style={userHeaderStyles.admissionText}>
-              입장완료
+              {i18n.t('admission')}
             </Text>
           </View>
         )}
         {!userInfo.isJoined && userInfo.isAccepted && (
           <ActionButton
-            label="승인 취소"
+            label={i18n.t('label_cancel_approval')}
             style={userHeaderStyles.approveBtn}
             onPress={handleCancel}
           />
         )}
         {!userInfo.isJoined && !userInfo.isAccepted && (
           <>
-            <ActionButton label="거절" onPress={handleDeny} />
+            <ActionButton label={i18n.t('deny')} onPress={handleDeny} />
             <ActionButton
-              label="승인"
+              label={i18n.t('label_approve')}
               style={userHeaderStyles.approveBtn}
               onPress={handleApprove}
             />

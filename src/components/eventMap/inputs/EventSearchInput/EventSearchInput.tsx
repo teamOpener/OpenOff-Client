@@ -1,11 +1,13 @@
+import i18n from 'locales';
+import { useFocusEffect } from '@react-navigation/native';
 import Icon from 'components/common/Icon/Icon';
-import { StackMenu } from 'constants/menu';
+import { StackMenu } from 'constants/app/menu';
+import MENT_EVENT_MAP from 'constants/eventMap/eventMapMessage';
 import useNavigator from 'hooks/navigator/useNavigator';
 import { memo, useCallback, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useEventMapStore } from 'stores/EventMap';
 import { colors } from 'styles/theme';
-import { useFocusEffect } from '@react-navigation/native';
 import eventSearchInput from './EventSearchInput.style';
 
 interface Props {
@@ -67,27 +69,25 @@ const EventSearchInput = ({ handleSearch }: Props) => {
             if (isSearched) setIsSearched(false);
           }}
           style={eventSearchInput.searchInput}
-          placeholder="지역, 이벤트 이름, 주최자 검색"
+          placeholder={i18n.t('event_map.placeholder')}
           placeholderTextColor={colors.grey}
         />
 
         {startEndDate.endDay && startEndDate.startDay && (
           <View style={eventSearchInput.textContainer}>
-            <Text style={eventSearchInput.calendarText}>{`${parseInt(
-              startEndDate.startDay.substring(6, 8),
-              10,
-            )}월 ${parseInt(
-              startEndDate.startDay.substring(8, 10),
-              10,
-            )}일`}</Text>
+            <Text style={eventSearchInput.calendarText}>
+              {i18n.t('event_map.date_format', {
+                month: parseInt(startEndDate.startDay.substring(5, 8), 10),
+                day: parseInt(startEndDate.startDay.substring(8, 10), 10),
+              })}
+            </Text>
             <Text style={eventSearchInput.calendarText}>-</Text>
-            <Text style={eventSearchInput.calendarText}>{`${parseInt(
-              startEndDate.endDay.substring(6, 8),
-              10,
-            )}월 ${parseInt(
-              startEndDate.endDay.substring(8, 10),
-              10,
-            )}일`}</Text>
+            <Text style={eventSearchInput.calendarText}>
+              {i18n.t('event_map.date_format', {
+                month: parseInt(startEndDate.endDay.substring(5, 8), 10),
+                day: parseInt(startEndDate.endDay.substring(8, 10), 10),
+              })}
+            </Text>
           </View>
         )}
 

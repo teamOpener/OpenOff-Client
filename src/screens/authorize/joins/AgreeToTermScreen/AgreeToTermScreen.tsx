@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import {
   NavigationProp,
   useFocusEffect,
@@ -5,12 +6,12 @@ import {
 } from '@react-navigation/native';
 import CheckButton from 'components/authorize/buttons/CheckButton/CheckButton';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
-import { UserInfoStatus } from 'constants/join';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import { UserInfoStatus } from 'constants/authorize/join';
 import { Dispatch, useCallback, useEffect, useState } from 'react';
 import { BackHandler, Linking, View } from 'react-native';
-import { AuthStackParamList } from 'types/apps/menu';
-import { Action } from 'types/join';
+import { RootStackParamList } from 'types/apps/menu';
+import { Action, JoinInfo } from 'types/join';
 import agreeToTermScreenStyles from './AgreeToTermScreen.style';
 
 interface AgreeList {
@@ -18,11 +19,12 @@ interface AgreeList {
 }
 
 interface Props {
+  state: JoinInfo;
   dispatch: Dispatch<Action>;
 }
 
-const AgreeToTermScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+const AgreeToTermScreen = ({ dispatch, state }: Props) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [term, setTerm] = useState<AgreeList>({
     allAgree: false,
     termToTeenager: false,
@@ -35,6 +37,15 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
     setTerm((checkTerm) => {
       return { ...checkTerm, [key]: !checkTerm[key] };
     });
+  };
+
+  const handleAuthorizeFlow = () => {
+    dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
+    if (state.accountType === 'NORMAL') {
+      navigation.navigate(AuthorizeMenu.PhoneCertification);
+      return;
+    }
+    navigation.navigate(AuthorizeMenu.Nickname);
   };
 
   useFocusEffect(
@@ -76,14 +87,11 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
   return (
     <ScreenCover
       authorizeButton={{
-        handlePress: () => {
-          dispatch({ type: UserInfoStatus.SET_AGREE_TO_TERM, term: 'Y' });
-          navigation.navigate(AuthorizeMenu.PhoneCertification);
-        },
-        label: '확인',
+        handlePress: handleAuthorizeFlow,
+        label: i18n.t('confirm'),
         isActive,
       }}
-      titleElements={['서비스 이용 약관에', '동의해 주세요.']}
+      titleElements={[i18n.t('to_service_term'), i18n.t('agree')]}
     >
       <View style={agreeToTermScreenStyles.checkButtonContainer}>
         <CheckButton
@@ -98,17 +106,17 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
             });
           }}
           marginBottom={17}
-          label="네, 모두 동의합니다."
+          label={i18n.t('all_agree')}
         />
         <CheckButton
           value={term.termToTeenager}
           handlePress={() => handleSingleTerm('termToTeenager')}
-          label="(필수) 만 14세 이상입니다."
+          label={i18n.t('term_to_teenager')}
         />
         <CheckButton
           value={term.termToUse}
           handlePress={() => handleSingleTerm('termToUse')}
-          label="(필수) 서비스 이용약관"
+          label={i18n.t('auth_term_to_use')}
           handleDetailPress={() => {
             Linking.openURL(
               'https://navy-web.notion.site/fa8cb5d161d143409c331f4e3e7f30b1?pvs=4',
@@ -118,7 +126,7 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
         <CheckButton
           value={term.termToPrivacy}
           handlePress={() => handleSingleTerm('termToPrivacy')}
-          label="(필수) 개인정보 수집 이용"
+          label={i18n.t('auth_term_to_privacy')}
           handleDetailPress={() => {
             Linking.openURL(
               'https://navy-web.notion.site/efa559e8c07e40f484705b2fdca06524?pvs=4',
@@ -128,7 +136,7 @@ const AgreeToTermScreen = ({ dispatch }: Props) => {
         <CheckButton
           value={term.termToMarketing}
           handlePress={() => handleSingleTerm('termToMarketing')}
-          label="(선택) 마케팅 정보 수신동의"
+          label={i18n.t('auth_term_to_marketing')}
           handleDetailPress={() => {
             Linking.openURL(
               'https://navy-web.notion.site/4da0a8c248094ce9ba3faf76d96466ab?pvs=4',

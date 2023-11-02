@@ -1,11 +1,12 @@
+import i18n from 'locales';
 import { InfiniteData } from '@tanstack/react-query';
 import EmptyScreen from 'components/common/EmptyScreen/EmptyScreen';
 import EventCard from 'components/home/cards/EventCard/EventCard';
 import EventCardSkeleton from 'components/suspense/skeleton/EventCardSkeleton/EventCardSkeleton';
-import { FlatList, View } from 'react-native';
-import { InfiniteScrollApiResponse } from 'types/ApiResponse';
 import useNavigator from 'hooks/navigator/useNavigator';
 import MainTapEventInfoResponseDto from 'models/event/response/MainTapEventInfoResponseDto';
+import { FlatList, View } from 'react-native';
+import { InfiniteScrollApiResponse } from 'types/ApiResponse';
 import infinityEventCardList from './InfinityEventCardList.style';
 
 interface Props {
@@ -42,7 +43,7 @@ const InfinityEventCardList = ({
   return (
     <View style={infinityEventCardList.container}>
       {flatEventList?.length === 0 ? (
-        <EmptyScreen content="이런! 아직 이벤트가 존재하지 않아요!" />
+        <EmptyScreen content={i18n.t('empty_event')} />
       ) : (
         <FlatList
           nestedScrollEnabled

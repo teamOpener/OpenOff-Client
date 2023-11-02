@@ -1,7 +1,8 @@
+import i18n from 'locales';
+import { OpenEvent } from 'components/openEvent';
+import StatusType from 'constants/app/status';
 import { View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import { OpenEvent } from 'components/openEvent';
-import StatusType from 'constants/status';
 import recruitmentNumberStyles from './RecruitmentNumber.style';
 
 const RecruitmentNumber = () => {
@@ -41,7 +42,7 @@ const RecruitmentNumber = () => {
 
   return (
     <View>
-      <OpenEvent.Label content="모집 인원" />
+      <OpenEvent.Label content={i18n.t('recruitment_number')} />
 
       <View style={recruitmentNumberStyles.inputWithHelpText}>
         <OpenEvent.Input

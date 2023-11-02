@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
@@ -50,7 +51,7 @@ const EventCardList = ({
             onPress={handleShowPopularEvent}
           >
             <Text variant="body3" color="grey">
-              전체보기
+              {i18n.t('personal_event_commend')}
             </Text>
             <Icon name="IconArrowRight" size={10} fill="grey" />
           </TouchableOpacity>

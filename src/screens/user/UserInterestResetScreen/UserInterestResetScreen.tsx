@@ -1,10 +1,10 @@
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import FieldButtonGroup from 'components/authorize/groups/FieldButtonGroup/FieldButtonGroup';
 import Spacing from 'components/common/Spacing/Spacing';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
 import queryKeys from 'constants/queries/queryKeys';
-import MENT_USER from 'constants/user/userConstants';
 import useDialog from 'hooks/app/useDialog';
 import useInterestField from 'hooks/authorize/useInterestField';
 import useNavigator from 'hooks/navigator/useNavigator';
@@ -27,7 +27,7 @@ const UserInterestResetScreen = () => {
     queryClient.invalidateQueries(queryKeys.eventKeys.all);
     openDialog({
       type: 'success',
-      text: MENT_USER.SUCCESS.INTEREST_SETTING_SUCCESS,
+      text: i18n.t('interest_setting_success'),
       callback: () => stackNavigation.goBack(),
     });
   };
@@ -35,12 +35,12 @@ const UserInterestResetScreen = () => {
   const handleErrorUpdateField = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? MENT_USER.ERROR.SERVER,
+      text: error.response?.data.message ?? i18n.t('server'),
     });
   };
 
   const { computedCount, setInterestField, interestField } = useInterestField();
-  const { data: userInfo } = useMyInfo();
+  const { data: userInfo } = useMyInfo({ isLogin: true });
   const { mutateAsync: updateInterestField, isLoading } =
     useUpdateInterestField(handleSuccessUpdateField, handleErrorUpdateField);
 
@@ -71,10 +71,10 @@ const UserInterestResetScreen = () => {
 
   return (
     <ScreenCover
-      titleElements={MENT_USER.INTEREST_RESET.COMMENTS_ON_SETTING_INTERESTS}
+      titleElements={[i18n.t('interests_title')]}
       authorizeButton={{
         handlePress: handleAuthorize,
-        label: MENT_USER.AUTHORIZE_BUTTON_TEXT,
+        label: i18n.t('confirm'),
         isActive: computedCount() >= 1,
       }}
     >

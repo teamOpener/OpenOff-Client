@@ -1,8 +1,8 @@
-import { TouchableOpacity, View } from 'react-native';
-import { OpenEvent } from 'components/openEvent';
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
+import { OpenEvent } from 'components/openEvent';
+import { TouchableOpacity, View } from 'react-native';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
 import additionalInfoStyles from './AdditionalInfo.style';
 
 const AdditionalInfo = () => {
@@ -29,7 +29,7 @@ const AdditionalInfo = () => {
   return (
     <View>
       <View style={additionalInfoStyles.rowContainer}>
-        <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.ADDITIONAL_INFO} />
+        <OpenEvent.Label content={i18n.t('additional_info')} />
         <TouchableOpacity
           activeOpacity={0.6}
           style={additionalInfoStyles.iconContainer}
@@ -49,7 +49,7 @@ const AdditionalInfo = () => {
               ]}
             >
               <OpenEvent.Input
-                placeholder={MENT_OPEN_EVENT.PLACEHOLDER.ADDITIONAL_INFO}
+                placeholder={i18n.t('additional_placeholder')}
                 value={info}
                 onChangeText={(value) => handleChangeText(value, idx)}
               />

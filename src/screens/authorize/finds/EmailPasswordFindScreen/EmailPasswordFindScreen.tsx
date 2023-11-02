@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Text from 'components/common/Text/Text';
 import { useEffect, useState } from 'react';
@@ -16,7 +17,7 @@ const EmailPasswordFindScreen = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: screenMode === 'id' ? '아이디 찾기' : '비밀번호 찾기',
+      title: screenMode === 'id' ? i18n.t('find_id') : i18n.t('find_password'),
     });
   }, [navigation, screenMode]);
 
@@ -32,7 +33,9 @@ const EmailPasswordFindScreen = () => {
           onPress={() => setScreenMode('id')}
         >
           <View style={emailPasswordFindScreenStyles.buttonTextContainer}>
-            <Text style={emailPasswordFindScreenStyles.tabText}>아이디</Text>
+            <Text style={emailPasswordFindScreenStyles.tabText}>
+              {i18n.t('id')}
+            </Text>
           </View>
         </TouchableOpacity>
 
@@ -46,7 +49,9 @@ const EmailPasswordFindScreen = () => {
           onPress={() => setScreenMode('password')}
         >
           <View style={emailPasswordFindScreenStyles.buttonTextContainer}>
-            <Text style={emailPasswordFindScreenStyles.tabText}>비밀번호</Text>
+            <Text style={emailPasswordFindScreenStyles.tabText}>
+              {i18n.t('password')}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>

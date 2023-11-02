@@ -1,13 +1,14 @@
+import i18n from 'locales';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import BaseInfoInput from 'components/authorize/inputs/BaseInfoInput/BaseInfoInput';
 import BirthSettingInput from 'components/authorize/inputs/BirthSettingInput/BirthSettingInput';
 import GenderInput from 'components/authorize/inputs/GenderInput/GenderInput';
-import { UserInfoStatus } from 'constants/join';
-import { AuthorizeMenu } from 'constants/menu';
+import { AuthorizeMenu } from 'constants/app/menu';
+import { UserInfoStatus } from 'constants/authorize/join';
 import { Dispatch, useState } from 'react';
 import { View } from 'react-native';
-import { AuthStackParamList } from 'types/apps/menu';
+import { RootStackParamList } from 'types/apps/menu';
 import { Action, Gender, JoinInfo } from 'types/join';
 import { validateBirthday, validateName } from 'utils/validate';
 import userInfoScreenStyles from './UserInfoScreen.style';
@@ -18,7 +19,7 @@ interface Props {
 }
 
 const UserInfoScreen = ({ state, dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [username, setUsername] = useState<string>('');
   const [birth, setBirth] = useState<string>('2000-00-00');
   const [gender, setGender] = useState<Gender>('MAN');
@@ -40,16 +41,16 @@ const UserInfoScreen = ({ state, dispatch }: Props) => {
 
   return (
     <ScreenCover
-      titleElements={['오픈오프 이용을 위해', '정보를 입력해주세요.']}
+      titleElements={[i18n.t('to_open_off_usage'), i18n.t('input_information')]}
       authorizeButton={{
         handlePress: handleAuthorizeFlow,
-        label: '확인',
+        label: i18n.t('confirm'),
         isActive,
       }}
     >
       {!state.username && (
         <BaseInfoInput
-          label="이름"
+          label={i18n.t('name')}
           value={username}
           setValue={setUsername}
           validation={validateName}
@@ -57,7 +58,7 @@ const UserInfoScreen = ({ state, dispatch }: Props) => {
       )}
       <View style={userInfoScreenStyles.detailUserInfo}>
         <BirthSettingInput
-          label="생일"
+          label={i18n.t('birth')}
           value={birth}
           setValue={setBirth}
           validation={validateBirthday}

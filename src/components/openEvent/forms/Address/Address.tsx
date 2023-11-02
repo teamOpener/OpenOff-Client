@@ -1,10 +1,11 @@
+import i18n from 'locales';
+import { OpenEvent } from 'components/openEvent';
+import { HelpText } from 'components/openEvent/atoms';
+import StatusType from 'constants/app/status';
+import useNavigator from 'hooks/navigator/useNavigator';
 import { useEffect } from 'react';
 import { View } from 'react-native';
-import { OpenEvent } from 'components/openEvent';
-import useNavigator from 'hooks/navigator/useNavigator';
 import { useOpenEventStore } from 'stores/OpenEventStore';
-import StatusType from 'constants/status';
-import { HelpText } from 'components/openEvent/atoms';
 import addressStyles from './Address.style';
 
 const Address = () => {
@@ -52,7 +53,7 @@ const Address = () => {
   return (
     <View>
       <View style={addressStyles.horizontalView}>
-        <OpenEvent.Label content="이벤트 장소" />
+        <OpenEvent.Label content={i18n.t('event_place')} />
         <OpenEvent.FindButton onPress={handleSearch} />
       </View>
 
@@ -60,14 +61,14 @@ const Address = () => {
         <OpenEvent.Input
           value={openEvent.address.roadAddress ?? ''}
           editable={false}
-          placeholder="주소를 검색해주세요."
+          placeholder={i18n.t('find_your_address')}
           status={hasError ? StatusType.error : StatusType.default}
         />
 
         <OpenEvent.Input
           value={address.detailAddress ?? ''}
           onChangeText={handleChangeText}
-          placeholder="상세 주소를 입력해주세요."
+          placeholder={i18n.t('address_detail_placeholder')}
           status={hasError ? StatusType.error : StatusType.default}
           editable={!!openEvent.address.roadAddress}
           disabled={!openEvent.address.roadAddress}

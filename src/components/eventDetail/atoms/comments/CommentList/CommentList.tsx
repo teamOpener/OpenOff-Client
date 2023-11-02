@@ -1,11 +1,12 @@
-import { FlatList, View } from 'react-native';
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
-import { useParentComments } from 'hooks/queries/comment';
 import SpaceLayout from 'components/layout/Space/SpaceLayout';
 import CommentRowSkeleton from 'components/suspense/skeleton/CommentRowSkeleton/CommentRowSkeleton';
-import commentListStyles from './CommentList.style';
+import { useParentComments } from 'hooks/queries/comment';
+import { FlatList, View } from 'react-native';
 import ParentCommentListItem from '../ParentCommentListItem/ParentCommentListItem';
+import commentListStyles from './CommentList.style';
 
 interface Props {
   eventInfoId: number;
@@ -70,7 +71,7 @@ const CommentList = ({ eventInfoId, isScrolling }: Props) => {
       ) : (
         <View style={commentListStyles.emptyContainer}>
           <Text variant="body2" style={commentListStyles.emptyText}>
-            문의사항이나 댓글을 남겨주세요!
+            {i18n.t('event_detail.empty_comment')}
           </Text>
         </View>
       )}

@@ -1,9 +1,10 @@
+import i18n from 'locales';
 import ScreenCover from 'components/authorize/covers/ScreenCover/ScreenCover';
 import PhoneCertificationForm from 'components/authorize/forms/PhoneCertificationForm/PhoneCertificationForm';
 import CommonLoading from 'components/suspense/loading/CommonLoading/CommonLoading';
+import useDialog from 'hooks/app/useDialog';
 import usePhoneCertificate from 'hooks/authorize/usePhoneCertificate';
 import { useCheckAuthSms, useSendAuthSms } from 'hooks/queries/auth';
-import useDialog from 'hooks/app/useDialog';
 import { useState } from 'react';
 import { View } from 'react-native';
 import { colors } from 'styles/theme';
@@ -29,7 +30,7 @@ const EmailFindScreen = () => {
     if (error.response?.data.code === 800) {
       openDialog({
         type: 'validate',
-        text: '해당 핸드폰으로 등록된 아이디가 존재하지 않습니다!',
+        text: i18n.t('cannot_find_id'),
       });
       return;
     }
@@ -46,7 +47,7 @@ const EmailFindScreen = () => {
   const handleSendSmsSuccess = () => {
     openDialog({
       type: 'success',
-      text: '인증번호를 발송하였습니다.',
+      text: i18n.t('send_certification_number_message'),
     });
   };
 
@@ -81,7 +82,7 @@ const EmailFindScreen = () => {
           <ScreenCover
             authorizeButton={{
               handlePress: handleAuthorizeFlow,
-              label: '다음',
+              label: i18n.t('next'),
               isActive,
             }}
           >

@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
@@ -66,7 +67,7 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
       </View>
       <DatePicker
         modal
-        title="날짜를 선택해주세요."
+        title={i18n.t('select_date')}
         mode="date"
         textColor="white"
         theme="dark"
@@ -74,8 +75,8 @@ const BirthSettingInput = ({ label, value, setValue, validation }: Props) => {
         minimumDate={new Date('1910-01-01')}
         maximumDate={new Date()}
         date={new Date(value)}
-        confirmText="적용"
-        cancelText="닫기"
+        confirmText={i18n.t('apply')}
+        cancelText={i18n.t('cancel')}
         onConfirm={(date) => {
           setValue(() => {
             return dateFormatter(date);

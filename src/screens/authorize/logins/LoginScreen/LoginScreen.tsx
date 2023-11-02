@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { loginWithKakaoAccount } from '@react-native-seoul/kakao-login';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -9,6 +10,7 @@ import SocialLoginButtonGroup from 'components/authorize/groups/SocialLoginButto
 import LoginInput from 'components/authorize/inputs/LoginInput/LoginInput';
 import Text from 'components/common/Text/Text';
 import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { UserInfoStatus } from 'constants/authorize/join';
 import useDialog from 'hooks/app/useDialog';
 import { useNormalLogin, useSocialLogin } from 'hooks/queries/auth';
 import UserTotalInfoResponseDto from 'models/user/response/UserTotalInfoResponseDto';
@@ -18,30 +20,33 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  View,
   StyleSheet,
+  View,
 } from 'react-native';
 import { useAuthorizeStore } from 'stores/Authorize';
 import { colors } from 'styles/theme';
 import { ApiResponse } from 'types/ApiResponse';
-import { AuthStackParamList } from 'types/apps/menu';
+import {
+  BottomTabNavigationScreenParams,
+  RootStackParamList,
+} from 'types/apps/menu';
+import { Action, JoinInfo } from 'types/join';
 import { SocialType } from 'types/user';
 import { validateEmail, validatePassword } from 'utils/validate';
-import { Action } from 'types/join';
-import { UserInfoStatus } from 'constants/join';
 import loginScreenStyles from './LoginScreen.style';
 
 interface Props {
+  state: JoinInfo;
   dispatch: Dispatch<Action>;
 }
 
-const LoginScreen = ({ dispatch }: Props) => {
-  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+const LoginScreen = ({ state, dispatch }: Props) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [firstLoginShow, setFirstLoginShow] = useState<boolean>(true);
   const [password, setPassword] = useState<string>('');
 
-  const { setIsLogin, resetToken, setFcmToken, setRecentLogin, recentLogin } =
+  const { setIsLogin, resetToken, setRecentLogin, recentLogin } =
     useAuthorizeStore();
 
   const { openDialog } = useDialog();
@@ -49,14 +54,14 @@ const LoginScreen = ({ dispatch }: Props) => {
   const handleLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? '서버에 오류가 발생했습니다.',
+      text: error.response?.data.message ?? i18n.t('server_error'),
     });
   };
 
   const handleSocialLoginError = (error: AxiosError<ApiResponse>) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? '서버에 오류가 발생했습니다.',
+      text: error.response?.data.message ?? i18n.t('server_error'),
     });
   };
 
@@ -80,13 +85,22 @@ const LoginScreen = ({ dispatch }: Props) => {
     userInfo?: UserTotalInfoResponseDto['userInfo'],
     socialInfo?: SocialType,
   ) => {
+    const previousSocial =
+      userInfo?.nickname &&
+      (state.accountType === 'KAKAO' || state.accountType === 'APPLE');
+    const previousNormal =
+      userInfo?.phoneNumber && state.accountType === 'NORMAL';
     if (userInfo?.userName) {
       setRecentLogin(!socialInfo ? recentLogin : socialInfo);
+      navigation.navigate(
+        'BottomTabNavigator',
+        undefined as unknown as BottomTabNavigationScreenParams,
+      );
       setIsLogin(true);
       return;
     }
-    if (userInfo?.phoneNumber) {
-      navigation.navigate('Nickname');
+    if (previousSocial || previousNormal) {
+      navigation.navigate('UserInfo');
       return;
     }
     navigation.navigate('AgreeToTerm');
@@ -98,6 +112,7 @@ const LoginScreen = ({ dispatch }: Props) => {
       socialType: 'kakao',
       token: kakaoResult.idToken,
     });
+    dispatch({ type: UserInfoStatus.SET_ACCOUNT_TYPE, accountType: 'KAKAO' });
     divergeAuthorizeFlow(socialLoginResult.data?.userInfo, 'KAKAO');
   };
 
@@ -121,6 +136,10 @@ const LoginScreen = ({ dispatch }: Props) => {
           socialType: 'apple',
           token: appleAuthRequestResponse.identityToken ?? '',
         });
+        dispatch({
+          type: UserInfoStatus.SET_ACCOUNT_TYPE,
+          accountType: 'APPLE',
+        });
         divergeAuthorizeFlow(socialLoginResult.data?.userInfo, 'APPLE');
       }
     } catch (error) {
@@ -138,6 +157,7 @@ const LoginScreen = ({ dispatch }: Props) => {
       email: emailAddress,
       password,
     });
+    dispatch({ type: UserInfoStatus.SET_ACCOUNT_TYPE, accountType: 'NORMAL' });
     divergeAuthorizeFlow(normalLoginResult.data?.userInfo);
   };
 
@@ -156,7 +176,7 @@ const LoginScreen = ({ dispatch }: Props) => {
       <WithIconLoading
         isActive
         backgroundColor={colors.background}
-        text="로그인 중입니다."
+        text={i18n.t('authorize.loading')}
       />
     );
   }
@@ -171,7 +191,6 @@ const LoginScreen = ({ dispatch }: Props) => {
           style={[StyleSheet.absoluteFill, loginScreenStyles.loadingContainer]}
         />
       )}
-
       <ScrollView contentContainerStyle={loginScreenStyles.contentContainer}>
         <Image
           style={loginScreenStyles.logo}
@@ -180,21 +199,21 @@ const LoginScreen = ({ dispatch }: Props) => {
 
         <View style={loginScreenStyles.mainContainer}>
           <LoginInput
-            label="이메일"
+            label={i18n.t('email')}
             value={emailAddress}
             type="emailAddress"
             validation={validateEmail}
             setValue={setEmailAddress}
           />
           <LoginInput
-            label="비밀번호"
+            label={i18n.t('password')}
             value={password}
             type="password"
             setValue={setPassword}
             validation={validatePassword}
           />
           <LoginButton isActive={isActive} handlePress={handleCommonLogin} />
-          <Text style={loginScreenStyles.middleText}>또는</Text>
+          <Text style={loginScreenStyles.middleText}>{i18n.t('or')}</Text>
           <SocialLoginButtonGroup
             kakaoLogin={handleKakaoLogin}
             naverLogin={() => {

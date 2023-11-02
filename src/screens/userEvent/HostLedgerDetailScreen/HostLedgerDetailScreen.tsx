@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
-import { View, FlatList } from 'react-native';
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import EmptyLayout from 'components/layout/EmptyLayout/EmptyLayout';
 import { QnAItem, UserHeader } from 'components/userEvent/host';
 import { LedgerScreenLayout } from 'components/userEvent/host/layout';
-import { StackMenu } from 'constants/menu';
+import { StackMenu } from 'constants/app/menu';
+import useNavigator from 'hooks/navigator/useNavigator';
 import useStackRoute from 'hooks/navigator/useStackRoute';
 import { useApplicantQnA } from 'hooks/queries/ledger';
-import useNavigator from 'hooks/navigator/useNavigator';
+import { useEffect } from 'react';
+import { FlatList, View } from 'react-native';
 import hostLedgerDetailScreenStyles from './HostLedgerDetailScreen.style';
 
 const HostLedgerDetailScreen = () => {
@@ -33,7 +34,7 @@ const HostLedgerDetailScreen = () => {
     <LedgerScreenLayout>
       <UserHeader userInfo={qna} ledgerId={params.ledgerId} />
       {qna.qnAInfoList.length === 0 ? (
-        <EmptyLayout helpText="추가질문이 없습니다." />
+        <EmptyLayout helpText={i18n.t('empty_qna')} />
       ) : (
         <View style={hostLedgerDetailScreenStyles.scrollContainer}>
           <FlatList

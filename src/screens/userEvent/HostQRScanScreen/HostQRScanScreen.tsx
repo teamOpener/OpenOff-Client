@@ -1,23 +1,22 @@
+import i18n from 'locales';
+import { useQueryClient } from '@tanstack/react-query';
+import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import QRResultView from 'components/userEvent/host/QRResultView/QRResultView';
+import { StackMenu } from 'constants/app/menu';
+import queryKeys from 'constants/queries/queryKeys';
+import useStackRoute from 'hooks/navigator/useStackRoute';
+import { useCheckQR } from 'hooks/queries/ledger';
+import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
 import { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useQueryClient } from '@tanstack/react-query';
 import { openSettings } from 'react-native-permissions';
-import { useCameraDevices, Camera } from 'react-native-vision-camera';
-import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
-import Text from 'components/common/Text/Text';
-import Icon from 'components/common/Icon/Icon';
-import QRResultView from 'components/userEvent/host/QRResultView/QRResultView';
-import MENT_HOST from 'constants/userEvent/host/hostMessage';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import { StackMenu } from 'constants/menu';
-import { useCheckQR } from 'hooks/queries/ledger';
-import queryKeys from 'constants/queries/queryKeys';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import { QRCheckResponseDto } from 'models/ledger/response/QRCheckResponseDto';
+import { Camera, useCameraDevices } from 'react-native-vision-camera';
 import { colors } from 'styles/theme';
 import { ApiErrorResponse, ApiResponse } from 'types/ApiResponse';
 import { QRCheckType } from 'types/hostQr/QRCheck';
-import useStackRoute from 'hooks/navigator/useStackRoute';
+import { BarcodeFormat, useScanBarcodes } from 'vision-camera-code-scanner';
 import hostQRScanScreenStyles from './HostQRScanScreen.style';
 
 const HostQRScanScreen = () => {
@@ -58,7 +57,7 @@ const HostQRScanScreen = () => {
   };
 
   const handleErrorQRCheck = (error: ApiErrorResponse) => {
-    setText(error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT);
+    setText(error.response?.data.message ?? i18n.t('default_error_message'));
     setQRCheckType('error');
     showQRCheckType();
   };
@@ -112,7 +111,7 @@ const HostQRScanScreen = () => {
           <WithIconLoading isActive backgroundColor={colors.background} />
         )}
         <Text style={hostQRScanScreenStyles.mainText}>
-          {MENT_HOST.MAIN.QR_SCAN_MAIN_INFO}
+          {i18n.t('qr_scan_main_info')}
         </Text>
 
         <View style={cameraWrapperStyles}>
@@ -127,7 +126,7 @@ const HostQRScanScreen = () => {
         </View>
 
         <Text style={hostQRScanScreenStyles.subText}>
-          {MENT_HOST.MAIN.QR_SCAN_SUB_INFO}
+          {i18n.t('qr_scan_sub_info')}
         </Text>
 
         <QRResultView qrCheckType={qrCheckType} text={text} />
@@ -140,7 +139,7 @@ const HostQRScanScreen = () => {
         style={hostQRScanScreenStyles.noPermissionContainer}
         onPress={handleSetting}
       >
-        <Text variant="body2">{MENT_HOST.MAIN.NO_PERMISSION}</Text>
+        <Text variant="body2">{i18n.t('no_camera_permission')}</Text>
       </TouchableOpacity>
     </View>
   );

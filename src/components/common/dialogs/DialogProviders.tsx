@@ -1,3 +1,4 @@
+import i18n from 'locales';
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { PropsWithChildren, useMemo, useState } from 'react';
 import {
@@ -30,7 +31,7 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
         isShow: false,
         contents: '',
         callback: () => {},
-        closeText: '닫기',
+        closeText: i18n.t('close'),
         apply: () => {},
         applyText: '',
       });
@@ -47,8 +48,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
         isShow: false,
         text: '',
         apply: () => {},
-        applyText: '적용',
-        closeText: '닫기',
+        applyText: i18n.t('apply'),
+        closeText: i18n.t('close'),
         deny: () => {},
         denyText: '',
       });
@@ -61,8 +62,8 @@ const DialogProviders = ({ children }: PropsWithChildren) => {
     callback = () => {},
     apply = () => {},
     contents = '',
-    applyText = '적용',
-    closeText = '닫기',
+    applyText = i18n.t('apply'),
+    closeText = i18n.t('close'),
     deny = () => {},
     denyText = '',
   }: OpenDialog) => {

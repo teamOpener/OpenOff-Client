@@ -1,8 +1,8 @@
-import { View, TextInput, TextInputProps } from 'react-native';
-import StatusType from 'constants/status';
-import inputStyles from './Input.style';
-import openEventStyles from '../OpenEvent.style';
+import StatusType from 'constants/app/status';
+import { TextInput, TextInputProps, View } from 'react-native';
 import HelpText from '../HelpText/HelpText';
+import openEventStyles from '../OpenEvent.style';
+import inputStyles from './Input.style';
 
 interface Props extends TextInputProps {
   status?: StatusType;

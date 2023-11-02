@@ -1,27 +1,26 @@
-import { TouchableOpacity, View } from 'react-native';
-import MENT_PARTICIPANT from 'constants/userEvent/participant/participantMessage';
+import i18n from 'locales';
+import Text from 'components/common/Text/Text';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { TicketQR } from 'components/userEvent/participant';
+import { BottomTabMenu, StackMenu } from 'constants/app/menu';
+import resetQueryKeys from 'constants/queries/resetQueryKey';
 import {
   UserEventTabItem,
   UserTicketStatus,
 } from 'constants/userEvent/participant/participantConstants';
-import { BottomTabMenu, StackMenu } from 'constants/menu';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import Text from 'components/common/Text/Text';
-import { TicketQR } from 'components/userEvent/participant';
-import useStackRoute from 'hooks/navigator/useStackRoute';
 import useDialog from 'hooks/app/useDialog';
-import useNavigator from 'hooks/navigator/useNavigator';
 import useTicketStatus from 'hooks/event/useTicketStatus';
+import useNavigator from 'hooks/navigator/useNavigator';
+import useStackRoute from 'hooks/navigator/useStackRoute';
 import {
   useCancelApplicationEvent,
   useUserTickets,
 } from 'hooks/queries/ledger';
-import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
-import { ApiErrorResponse } from 'types/ApiResponse';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import { colors } from 'styles/theme';
 import useResetQueries from 'hooks/queries/useResetQueries';
-import resetQueryKeys from 'constants/queries/resetQueryKey';
+import { MyTicketInfoResponseDto } from 'models/ledger/response/MyTicketInfoResponseDto';
+import { TouchableOpacity, View } from 'react-native';
+import { colors } from 'styles/theme';
+import { ApiErrorResponse } from 'types/ApiResponse';
 import userQRScreenStyles from './UserQRScreen.style';
 
 const UserQRScreen = () => {
@@ -59,8 +58,8 @@ const UserQRScreen = () => {
   const handleSuccessCancel = () => {
     openDialog({
       type: 'success',
-      text: '예매가 성공적으로 취소되었습니다.',
-      closeText: '홈으로',
+      text: i18n.t('cancel_success'),
+      closeText: i18n.t('back_to_home'),
       callback: resetTickets,
     });
   };
@@ -68,8 +67,8 @@ const UserQRScreen = () => {
   const handleErrorCancel = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
-      closeText: '홈으로',
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
+      closeText: i18n.t('back_to_home'),
     });
   };
 
@@ -83,9 +82,9 @@ const UserQRScreen = () => {
 
     openDialog({
       type: 'confirm',
-      text: '예매를 취소하시겠습니까?',
-      applyText: '예',
-      closeText: '아니오',
+      text: i18n.t('cancel_confirmation'),
+      applyText: i18n.t('yes'),
+      closeText: i18n.t('no'),
       apply: async () => {
         await cancelApplicationEvent({ ledgerId: currentTicket.ladgerId });
       },
@@ -108,7 +107,7 @@ const UserQRScreen = () => {
         <WithIconLoading
           isActive
           backgroundColor={colors.background}
-          text="예매를 취소중입니다."
+          text={i18n.t('cancel_in_progress')}
         />
       )}
       {helpText && (
@@ -132,11 +131,11 @@ const UserQRScreen = () => {
             style={userQRScreenStyles.cancelBtn}
             onPress={handleCancel}
           >
-            <Text variant="body3">{MENT_PARTICIPANT.MAIN.CANCEL_BTN}</Text>
+            <Text variant="body3">{i18n.t('cancel_reservation_button')}</Text>
           </TouchableOpacity>
           <View style={userQRScreenStyles.bottomInfo}>
             <Text variant="body3" style={userQRScreenStyles.bottomInfoText}>
-              {MENT_PARTICIPANT.MAIN.ADMISSION_INFO}
+              {i18n.t('admission_info')}
             </Text>
           </View>
         </>

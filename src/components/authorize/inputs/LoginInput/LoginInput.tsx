@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Text from 'components/common/Text/Text';
 import { Dispatch, SetStateAction } from 'react';
 import { TextInput, View } from 'react-native';
@@ -13,8 +14,8 @@ interface Props {
 }
 
 const LoginInput = ({ label, value, setValue, type, validation }: Props) => {
-  const PASSWORD = '비밀번호를';
-  const EMAIL = '이메일을';
+  const PASSWORD = i18n.t('authorize.input_password');
+  const EMAIL = i18n.t('authorize.input_email');
   return (
     <View>
       <Text variant="h4" style={loginInputStyles.inputTitle}>
@@ -23,9 +24,9 @@ const LoginInput = ({ label, value, setValue, type, validation }: Props) => {
       <View>
         <TextInput
           value={value}
-          placeholder={`${
-            type === 'password' ? PASSWORD : EMAIL
-          } 입력해주세요.`}
+          placeholder={`${type === 'password' ? PASSWORD : EMAIL} ${i18n.t(
+            'authorize.request_input',
+          )}`}
           placeholderTextColor={colors.grey}
           style={{
             ...loginInputStyles.input,

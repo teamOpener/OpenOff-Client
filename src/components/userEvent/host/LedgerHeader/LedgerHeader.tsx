@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import Text from 'components/common/Text/Text';
 import dayjs from 'dayjs';
 import { View } from 'react-native';
@@ -15,7 +16,7 @@ const LedgerHeader = ({ title, date }: Props) => {
         {title}
       </Text>
       <Text style={ledgerHeaderStyles.subTitleText}>
-        {dayjs(date).format('M/DD ddd요일 HH:MM')}
+        {dayjs(date).format(i18n.t('ledger_date_format'))}
       </Text>
     </View>
   );

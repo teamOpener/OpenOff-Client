@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import dayjs from 'dayjs';
@@ -41,7 +42,7 @@ const DateSelector = ({
       >
         <Text style={dateSelectorStyles.dateText} color="main">
           {dayjs(selectedEventIndexInfo.eventDate).format(
-            'YYYY.MM.DD (ddd) HH시 mm분',
+            i18n.t('date_selector_format'),
           )}
         </Text>
         <Icon
@@ -71,7 +72,9 @@ const DateSelector = ({
                     : 'grey'
                 }
               >
-                {dayjs(dateList.eventDate).format('YYYY.MM.DD (ddd) HH시 mm분')}
+                {dayjs(dateList.eventDate).format(
+                  i18n.t('date_selector_format'),
+                )}
               </Text>
             </TouchableOpacity>
           ))}

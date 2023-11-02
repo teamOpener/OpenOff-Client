@@ -1,29 +1,33 @@
-import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import i18n from 'locales';
 import { useQueryClient } from '@tanstack/react-query';
-import { useEventDetail } from 'hooks/queries/event';
-import useStackRoute from 'hooks/navigator/useStackRoute';
-import queryKeys from 'constants/queries/queryKeys';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import { EventDetail } from 'components/eventDetail';
-import MENT_EVENT_DETAIL from 'constants/eventDetail/eventDetailMessage';
-import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
-import Spacing from 'components/common/Spacing/Spacing';
-import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
 import FixedButton from 'components/common/FixedButton/FixedButton';
-import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
-import { RefreshControl, ScrollView, View } from 'react-native';
-import useNavigator from 'hooks/navigator/useNavigator';
-import useEventIndexList from 'hooks/event/useEventIndexList';
-import useEventApplyStatus from 'hooks/event/useEventApplyStatus';
-import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
+import { EventDetail } from 'components/eventDetail';
+import EventEmptyLayout from 'components/eventDetail/layout/EventEmtpyLayout';
+import BookmarkButton from 'components/home/buttons/BookmarkButton/BookmarkButton';
+import KeyboardAvoidingScreenLayout from 'components/layout/KeyboardAvoidingScreenLayout/KeyboardAvoidingScreenLayout';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import { StackMenu } from 'constants/app/menu';
 import { EventDetailTabItem } from 'constants/eventDetail/eventDetailConstants';
-import { StackMenu } from 'constants/menu';
+import queryKeys from 'constants/queries/queryKeys';
+import dayjs from 'dayjs';
+import usePullToRefresh from 'hooks/app/usePullToRefresh';
+import useEventApplyStatus from 'hooks/event/useEventApplyStatus';
+import useEventIndexList from 'hooks/event/useEventIndexList';
+import useNavigator from 'hooks/navigator/useNavigator';
+import useStackRoute from 'hooks/navigator/useStackRoute';
+import { useEventDetail } from 'hooks/queries/event';
+import { useEffect, useState } from 'react';
+import { RefreshControl, ScrollView, View } from 'react-native';
+import { useAuthorizeStore } from 'stores/Authorize';
+import useDialog from 'hooks/app/useDialog';
 import eventDetailScreenStyles from './EventDetailScreen.style';
 
 const EventDetailScreen = () => {
   const queryClient = useQueryClient();
+  const { isLogin } = useAuthorizeStore();
+  const { openDialog } = useDialog();
   const { params } = useStackRoute<StackMenu.EventDetail>();
   const { stackNavigation } = useNavigator();
 
@@ -49,6 +53,18 @@ const EventDetailScreen = () => {
   const { disabledEvent } = useEventApplyStatus();
 
   const handleApply = () => {
+    if (!isLogin) {
+      openDialog({
+        type: 'warning',
+        text: i18n.t('need_to_login'),
+        apply: () => {
+          stackNavigation.navigate('Login');
+        },
+        applyText: i18n.t('yes'),
+        closeText: i18n.t('no'),
+      });
+      return;
+    }
     // TODO: 얼마 안남았을 경우 timer 걸기
     if (!event) {
       return;
@@ -111,7 +127,7 @@ const EventDetailScreen = () => {
 
             <SpaceLayout size={10}>
               <EventDetail.SmallSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.ADDRESS}
+                title={i18n.t('event_detail.address')}
                 description={`${event.streetLoadAddress} ${event.detailAddress}`}
                 // TODO
                 // action={
@@ -122,13 +138,15 @@ const EventDetailScreen = () => {
                 // }
               />
               <EventDetail.SmallSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.COST}
-                description={`입장료 ${event.eventFee.toLocaleString()}${
-                  MENT_EVENT_DETAIL.MAIN.WON
-                }`}
+                title={i18n.t('cost')}
+                description={`${i18n.t(
+                  'event_detail.admission_fees',
+                )} ${event.eventFee.toLocaleString()}${i18n.t(
+                  'event_detail.won',
+                )}`}
               />
               <EventDetail.SmallSimpleList
-                title={MENT_EVENT_DETAIL.MAIN.APPLICATION_DATE}
+                title={i18n.t('event_detail.application_date')}
                 description={`${dayjs(event.eventApplyStartDate).format(
                   'YYYY.MM.DD HH:mm',
                 )} - ${dayjs(event.eventApplyEndDate).format(
@@ -149,12 +167,12 @@ const EventDetailScreen = () => {
 
             <EventDetail.Tab>
               <EventDetail.TabItem
-                label={MENT_EVENT_DETAIL.MAIN.INTRODUCTION_EVENT}
+                label={i18n.t('event_detail.introduction_event')}
                 isActive={activeTabName === EventDetailTabItem.DESCRIPTION}
                 onPress={() => handleTab(EventDetailTabItem.DESCRIPTION)}
               />
               <EventDetail.TabItem
-                label={MENT_EVENT_DETAIL.MAIN.COMMENTS}
+                label={i18n.t('event_detail.comments')}
                 isActive={activeTabName === EventDetailTabItem.COMMENTS}
                 onPress={() => handleTab(EventDetailTabItem.COMMENTS)}
               />

@@ -1,4 +1,4 @@
-import { FieldCode } from 'constants/interest';
+import { FieldCode } from 'constants/interest/interest';
 
 interface AddInterestRequestDto {
   fieldTypeList: FieldCode[];

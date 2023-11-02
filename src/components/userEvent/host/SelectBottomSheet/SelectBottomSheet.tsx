@@ -1,3 +1,4 @@
+import i18n from 'locales';
 import React, { useCallback, useMemo, useRef } from 'react';
 import { View } from 'react-native';
 import {
@@ -66,17 +67,17 @@ const SelectBottomSheet = React.forwardRef<BottomSheetModal, Props>(
           <View style={selectBottomSheetStyles.bottomModalContainer}>
             <View style={selectBottomSheetStyles.modalTitleContainer}>
               <Text style={selectBottomSheetStyles.modalTitleText}>
-                정렬 기준
+                {i18n.t('sort_title')}
               </Text>
             </View>
 
             <SortOption
-              label="신청순"
+              label={i18n.t('sort_date')}
               isSelected={selectedSortType === SortType.DATE}
               onPress={() => handleSortType(SortType.DATE)}
             />
             <SortOption
-              label="이름순"
+              label={i18n.t('sort_name')}
               isSelected={selectedSortType === SortType.NAME}
               onPress={() => handleSortType(SortType.NAME)}
             />

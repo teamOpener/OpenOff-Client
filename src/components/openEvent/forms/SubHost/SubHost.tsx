@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { View, ScrollView, TextInput } from 'react-native';
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
 import Text from 'components/common/Text/Text';
 import { OpenEvent } from 'components/openEvent';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import { useOpenEventStore } from 'stores/OpenEventStore';
 import { useFindUserByNickname } from 'hooks/queries/user';
 import { SearchNicknameResponseDto } from 'models/user/response/SearchNicknameResponseDto';
+import { useEffect, useState } from 'react';
+import { ScrollView, TextInput, View } from 'react-native';
+import { useOpenEventStore } from 'stores/OpenEventStore';
 import subHostStyles from './SubHost.style';
 
 const SubHost = () => {
@@ -53,7 +53,7 @@ const SubHost = () => {
 
   return (
     <View>
-      <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.STAFF} />
+      <OpenEvent.Label content={i18n.t('staff')} />
       <View
         style={[
           subHostStyles.container,
@@ -76,7 +76,7 @@ const SubHost = () => {
             placeholderTextColor="#A4A4A4"
             value={nickName}
             onChangeText={handleChangeText}
-            placeholder={MENT_OPEN_EVENT.PLACEHOLDER.STAFF}
+            placeholder={i18n.t('nickname_placeholder')}
           />
         </ScrollView>
       </View>
@@ -92,7 +92,7 @@ const SubHost = () => {
             ))}
           {others && !others.length && (
             <Text style={subHostStyles.inputText}>
-              {MENT_OPEN_EVENT.MAIN.EMPTY_NICKNAME}
+              {i18n.t('empty_nickname')}
             </Text>
           )}
           <Spacing height={30} />

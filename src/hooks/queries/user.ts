@@ -9,6 +9,7 @@ import {
   uploadImage,
   uploadImages,
   uploadProfileImage,
+  withdrawal,
 } from 'apis/user';
 import queryKeys from 'constants/queries/queryKeys';
 import AddInterestRequestDto from 'models/field/request/AddInterestRequestDto';
@@ -62,9 +63,10 @@ export const useConcludeOnBoarding = () => {
   );
 };
 
-export const useMyInfo = () => {
+export const useMyInfo = ({ isLogin }: { isLogin?: boolean }) => {
   return useQuery([...queryKeys.userKeys.myInfo], () => getMyInfo(), {
     select: (data) => data.data,
+    enabled: !!isLogin,
   });
 };
 
@@ -130,4 +132,22 @@ export const useLogout = () => {
   };
 
   return useMutation(() => logout());
+};
+
+export const useWithdrawal = (successCallback?: () => void) => {
+  const queryClient = useQueryClient();
+  const { resetToken, resetFcmToken, setIsLogin } = useAuthorizeStore();
+
+  const withdrawalAndLogout = async () => {
+    await withdrawal();
+    resetToken();
+    resetFcmToken();
+    await removeToken();
+    queryClient.clear();
+    setIsLogin(false);
+  };
+
+  return useMutation(() => withdrawalAndLogout(), {
+    onSuccess: successCallback,
+  });
 };

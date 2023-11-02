@@ -1,20 +1,21 @@
+import i18n from 'locales';
+import Icon from 'components/common/Icon/Icon';
+import Text from 'components/common/Text/Text';
+import SpaceLayout from 'components/layout/Space/SpaceLayout';
+import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
+import { StackMenu } from 'constants/app/menu';
 import dayjs from 'dayjs';
+import useDialog from 'hooks/app/useDialog';
+import useNavigator from 'hooks/navigator/useNavigator';
+import { useReportComment } from 'hooks/queries/comment';
+import { ParentCommentInfoResponseDto } from 'models/comment/response/ParentCommentInfoResponseDto';
 import { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { colors } from 'styles/theme';
-import Text from 'components/common/Text/Text';
-import WithIconLoading from 'components/suspense/loading/WithIconLoading/WithIconLoading';
-import { ParentCommentInfoResponseDto } from 'models/comment/response/ParentCommentInfoResponseDto';
-import useNavigator from 'hooks/navigator/useNavigator';
-import { StackMenu } from 'constants/menu';
-import Icon from 'components/common/Icon/Icon';
-import SpaceLayout from 'components/layout/Space/SpaceLayout';
-import { useReportComment } from 'hooks/queries/comment';
-import useDialog from 'hooks/app/useDialog';
 import { ApiErrorResponse } from 'types/ApiResponse';
-import API_ERROR_MESSAGE from 'constants/errorMessage';
-import parentCommentListItemStyles from './ParentCommentListItem.style';
+import { useAuthorizeStore } from 'stores/Authorize';
 import DeclarationButton from '../DeclarationButton/DeclarationButton';
+import parentCommentListItemStyles from './ParentCommentListItem.style';
 
 type ParentCommentMode = 'count' | 'detail';
 
@@ -33,11 +34,24 @@ const ParentCommentListItem = ({
 }: Props) => {
   const { stackNavigation } = useNavigator();
   const { openDialog } = useDialog();
+  const { isLogin } = useAuthorizeStore();
 
   const [showDeclarationButton, setShowDeclarationButton] =
     useState<boolean>(false);
 
   const handleChildComment = () => {
+    if (!isLogin) {
+      openDialog({
+        type: 'confirm',
+        text: i18n.t('need_to_login'),
+        apply: () => {
+          stackNavigation.navigate('Login');
+        },
+        applyText: i18n.t('yes'),
+        closeText: i18n.t('no'),
+      });
+      return;
+    }
     stackNavigation.navigate(StackMenu.EventComment, {
       infoId: eventInfoId,
       commentId: comment.commentId,
@@ -48,14 +62,14 @@ const ParentCommentListItem = ({
     setShowDeclarationButton(false);
     openDialog({
       type: 'success',
-      text: '댓글을 신고했습니다!',
+      text: i18n.t('event_detail.comment_report'),
     });
   };
 
   const handleErrorReport = (error: ApiErrorResponse) => {
     openDialog({
       type: 'validate',
-      text: error.response?.data.message ?? API_ERROR_MESSAGE.DEFAULT,
+      text: error.response?.data.message ?? i18n.t('default_error_message'),
     });
   };
 
@@ -65,6 +79,18 @@ const ParentCommentListItem = ({
   );
 
   const handleDeclaration = async () => {
+    if (!isLogin) {
+      openDialog({
+        type: 'warning',
+        text: i18n.t('need_to_login'),
+        apply: () => {
+          stackNavigation.navigate('Login');
+        },
+        applyText: i18n.t('yes'),
+        closeText: i18n.t('no'),
+      });
+      return;
+    }
     await reportComment({ commentId: comment.commentId });
   };
 
@@ -96,7 +122,7 @@ const ParentCommentListItem = ({
                 { color: comment.isStaff ? colors.main : colors.white },
               ]}
             >
-              {comment.isStaff ? '주최자' : comment.nickname}
+              {comment.isStaff ? i18n.t('host') : comment.nickname}
             </Text>
             <Text style={parentCommentListItemStyles.content}>
               {comment.content}
@@ -121,7 +147,7 @@ const ParentCommentListItem = ({
                   color="grey"
                   style={parentCommentListItemStyles.replyButtonText}
                 >
-                  답글달기
+                  {i18n.t('event_detail.posting_reply')}
                 </Text>
               </TouchableOpacity>
             )}
@@ -147,7 +173,11 @@ const ParentCommentListItem = ({
             color="point"
             style={parentCommentListItemStyles.replyCountText}
             onPress={handleChildComment}
-          >{`- 답글 ${comment.childCount}개 더 보기`}</Text>
+          >
+            {i18n.t('event_detail.read_more_replies', {
+              childCount: comment.childCount,
+            })}
+          </Text>
         </TouchableOpacity>
       )}
     </SpaceLayout>

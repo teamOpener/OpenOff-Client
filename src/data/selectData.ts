@@ -2,58 +2,59 @@ import {
   ApplicationAbleValue,
   ParticipantValue,
   PayValue,
-} from 'constants/selectBox';
+} from 'constants/app/selectBox';
+import i18n from 'locales';
 import { Option } from 'types/apps/selectbox';
 
 const payOptions: Option[] = [
   {
-    label: '전체',
+    label: i18n.t('event_map.all'),
     value: PayValue.ALL,
   },
   {
-    label: '유료',
+    label: i18n.t('event_map.pay'),
     value: PayValue.PAY,
   },
   {
-    label: '무료',
+    label: i18n.t('event_map.free'),
     value: PayValue.FREE,
   },
 ];
 
 const participantOptions: Option[] = [
   {
-    label: '전체',
+    label: i18n.t('event_map.all'),
     value: ParticipantValue.ALL,
   },
   {
-    label: '20인 미만',
+    label: i18n.t('event_map.small'),
     value: ParticipantValue.SMALL,
   },
   {
-    label: '20인 ~ 50인',
+    label: i18n.t('event_map.medium'),
     value: ParticipantValue.MEDIUM,
   },
   {
-    label: '50인 ~ 100인',
+    label: i18n.t('event_map.large'),
     value: ParticipantValue.LARGE,
   },
   {
-    label: '100인 이상',
+    label: i18n.t('event_map.huge'),
     value: ParticipantValue.HUGE,
   },
 ];
 
 const applicationAbleOptions: Option[] = [
   {
-    label: '전체',
+    label: i18n.t('event_map.all'),
     value: ApplicationAbleValue.ALL,
   },
   {
-    label: '신청중',
+    label: i18n.t('event_map.applying'),
     value: ApplicationAbleValue.APPLYING,
   },
   {
-    label: '신청마감',
+    label: i18n.t('event_map.deadline'),
     value: ApplicationAbleValue.DEADLINE,
   },
 ];

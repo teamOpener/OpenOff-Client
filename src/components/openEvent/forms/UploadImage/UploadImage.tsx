@@ -1,12 +1,12 @@
-import { OpenEvent } from 'components/openEvent';
-import MENT_OPEN_EVENT from 'constants/openEvent/openEventConstants';
-import { ScrollView, View } from 'react-native';
+import i18n from 'locales';
 import Icon from 'components/common/Icon/Icon';
-import { useOpenEventStore } from 'stores/OpenEventStore';
+import { OpenEvent } from 'components/openEvent';
+import StatusType from 'constants/app/status';
+import MAX_POSTER from 'constants/event/event';
+import { ScrollView, View } from 'react-native';
 import { openImagePicker } from 'services/ImageCropPicker';
+import { useOpenEventStore } from 'stores/OpenEventStore';
 import { ImageBuilder } from 'types/openEvent/EventForm';
-import StatusType from 'constants/status';
-import MAX_POSTER from 'constants/event';
 import uploadImageStyles from './UploadImage.style';
 
 const UploadImage = () => {
@@ -35,7 +35,9 @@ const UploadImage = () => {
     if (totalLength > MAX_POSTER) {
       setOpenEventErrorMessage({
         ...openEventErrorMessage,
-        imageUrls: MENT_OPEN_EVENT.ERROR.MAX_IMAGE,
+        imageUrls: i18n.t('max_image', {
+          max_poster: MAX_POSTER,
+        }),
       });
       return;
     }
@@ -71,13 +73,16 @@ const UploadImage = () => {
   return (
     <View>
       <View style={uploadImageStyles.titleWithIcon}>
-        <OpenEvent.Label content={MENT_OPEN_EVENT.MAIN.IMAGE} />
+        <OpenEvent.Label content={i18n.t('image')} />
         <Icon name="IconCamera" size={17} fill="grey" />
       </View>
       <OpenEvent.HelpText
         status={hasError ? StatusType.error : StatusType.default}
         content={
-          openEventErrorMessage.imageUrls ?? MENT_OPEN_EVENT.HELP_TEXT.IMAGE
+          openEventErrorMessage.imageUrls ??
+          i18n.t('image_upload', {
+            max_poster: MAX_POSTER,
+          })
         }
       />
 

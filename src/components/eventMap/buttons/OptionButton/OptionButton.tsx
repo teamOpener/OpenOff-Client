@@ -14,7 +14,7 @@ const OptionButton = ({ select, option }: Props) => {
       style={optionButtonStyles.container}
       onPress={() => select(option)}
     >
-      <Text variant="body2" color="white">
+      <Text variant="body3" color="white">
         {option.label}
       </Text>
     </TouchableOpacity>

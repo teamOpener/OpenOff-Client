@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import Text from 'components/common/Text/Text';
-import DenyEventReason from 'types/event/DenyEventReason';
-import { Pressable, TouchableOpacity, View } from 'react-native';
-import { DialogEnumType } from 'types/apps/dialog';
-import useDialog from 'hooks/app/useDialog';
-import { Modal } from 'react-native-paper';
+import i18n from 'locales';
 import Spacing from 'components/common/Spacing/Spacing';
+import Text from 'components/common/Text/Text';
+import useDialog from 'hooks/app/useDialog';
+import { useState } from 'react';
+import { Pressable, TouchableOpacity, View } from 'react-native';
+import { Modal } from 'react-native-paper';
+import { DialogEnumType } from 'types/apps/dialog';
+import DenyEventReason from 'types/event/DenyEventReason';
 import confirmDialogStyles from './ConfirmDialog.style';
 
 const ConfirmDialog = () => {
@@ -52,7 +53,7 @@ const ConfirmDialog = () => {
 
           {confirmDialog.denyText && (
             <View>
-              <Text variant="body2">사유를 선택해주세요.</Text>
+              <Text variant="body2">{i18n.t('content_decline')}</Text>
               <Spacing height={10} />
 
               <TouchableOpacity
