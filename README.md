@@ -13,6 +13,10 @@
 <br />
 <br />
 
+Go to [changelog.md](./CHANGELOG.md)
+
+<br />
+
 ## 🎪 Features
 
 ### _👀 오프라인 이벤트 추천_
